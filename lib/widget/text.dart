@@ -93,3 +93,68 @@ class NearByShopslocation extends StatelessWidget {
                 fontWeight: FontWeight.w400)));
   }
 }
+
+///////////////////////////////
+////////////////////////////////ShopOwner////////////////////
+class ShopDashBoard extends StatelessWidget {
+  final String text;
+
+  ShopDashBoard({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Colors.white,
+            // letterSpacing: .5,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}
+
+//////////////////DashBoard Side Heading//////////
+class DashBoardSideHeading extends StatelessWidget {
+  final String text;
+
+  DashBoardSideHeading({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Black1,
+            // letterSpacing: .5,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}
+
+//////////////////DashBoard Count//////////////
+class DashBoardCount extends StatelessWidget {
+  final String text;
+
+  DashBoardCount({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Colors.white,
+            // letterSpacing: .5,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}

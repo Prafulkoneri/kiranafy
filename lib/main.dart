@@ -270,6 +270,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
         ChangeNotifierProvider(create: (_) => SShopReviewListController()),
+        // ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],
       child: MyApp(),
     ),
@@ -395,40 +396,47 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return ScreenUtilInit(
-        useInheritedMediaQuery: true,
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return Container(
-              alignment: Alignment.center,
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: LoadingOverlay(
-                  child: MaterialApp(
-                    builder: (context, child) {
-                      return MediaQuery(
-                        data: MediaQuery.of(context)
-                            .copyWith(textScaleFactor: 0.9.sp),
-                        child: child!,
-                      );
-                    },
-                    title: 'Local Supermart',
-                    theme: ThemeData(
-                      primarySwatch: Colors.blue,
-                      fontFamily: 'dm_sans_regular',
-                    ),
-                    debugShowCheckedModeBanner: false,
-                    home: SplashScreen(),
-                    // initialRoute: '/',
-                    //   routes: {
-                    //       '/':(context)=>SplashScreen(),
 
-                    //   },
-                  ),
-                ),
-              ));
-        });
+    return
+        //  ChangeNotifierProvider(
+        //     create: (context) => ConnectivityProvider(),
+        //     child:
+        ScreenUtilInit(
+            useInheritedMediaQuery: true,
+            designSize: const Size(360, 690),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) {
+              return Container(
+                  alignment: Alignment.center,
+                  child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: LoadingOverlay(
+                      child: MaterialApp(
+                        builder: (context, child) {
+                          return MediaQuery(
+                            data: MediaQuery.of(context)
+                                .copyWith(textScaleFactor: 0.9.sp),
+                            child: child!,
+                          );
+                        },
+                        title: 'Local Supermart',
+                        theme: ThemeData(
+                          primarySwatch: Colors.blue,
+                          fontFamily: 'dm_sans_regular',
+                        ),
+                        debugShowCheckedModeBanner: false,
+                        home: SplashScreen(),
+                        // initialRoute: '/',
+                        //   routes: {
+                        //       '/':(context)=>SplashScreen(),
+
+                        //   },
+                      ),
+                    ),
+                  ));
+            }
+            // )
+            );
   }
 }    // ShopOrderStatusView()

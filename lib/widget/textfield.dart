@@ -2,12 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class PrimaryCTextFormField extends StatelessWidget {
   final String? titleHeader;
@@ -26,7 +21,7 @@ class PrimaryCTextFormField extends StatelessWidget {
   final void Function()? onTap;
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
-  final TextInputType ? textInputType;
+  final TextInputType? textInputType;
 
   PrimaryCTextFormField(
       {Key? key,
@@ -43,7 +38,7 @@ class PrimaryCTextFormField extends StatelessWidget {
       this.controller,
       this.titleHeader,
       this.readOnly,
-        this.textInputType,
+      this.textInputType,
       this.onChanged,
       this.lengthLimitingTextInputFormatter,
       this.hintText})

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
@@ -15,13 +14,13 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_v
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/shop_review/view/shop_review_list_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class ShopDashBoardView extends StatefulWidget {
@@ -78,7 +77,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           ),
                           GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(0,NotificationsScreenView(route: "dashboard"),context);
+                                readMain.onNavigation(
+                                    0,
+                                    NotificationsScreenView(route: "dashboard"),
+                                    context);
                                 readMain.hideBottomNavigationBar();
                                 // Navigator.push(
                                 //     context,
@@ -197,10 +199,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      readMain.onNavigation(0, ShopReviewScreenView(
-                                        fromDashBoard: true,
-                                      ),context);
-
+                                      readMain.onNavigation(
+                                          0,
+                                          ShopReviewScreenView(
+                                            fromDashBoard: true,
+                                          ),
+                                          context);
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(right: 15.w),
@@ -321,9 +325,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           Container(
                             child: GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(0,SEditProfileView(
-                                  fromDashBoard: true,
-                                ),context);
+                                readMain.onNavigation(
+                                    0,
+                                    SEditProfileView(
+                                      fromDashBoard: true,
+                                    ),
+                                    context);
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -350,15 +357,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 20.w, bottom: 10.w),
-                      child: Text(
-                        "Customer",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Customer',
                       ),
                     ),
                     Row(
@@ -370,10 +370,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              readMain.onNavigation(0,CustomerListView(
-                                isRefresh: true,
-                                fromPage: "dashboardProduct",
-                              ),context);
+                              readMain.onNavigation(
+                                  0,
+                                  CustomerListView(
+                                    isRefresh: true,
+                                    fromPage: "dashboardProduct",
+                                  ),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -397,27 +400,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   borderRadius: BorderRadius.circular(8)),
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.totalCustomersOrderedCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.totalCustomersOrderedCount}',
                                   ),
-                                  Text(
-                                    "Total Customer Ordered",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Total Customer Ordered',
                                   ),
                                 ],
                               ),
@@ -430,10 +418,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              readMain.onNavigation(0,CustomerListView(
-                                isRefresh: true,
-                                fromPage: "dashboardFavCustomer",
-                              ),context);
+                              readMain.onNavigation(
+                                  0,
+                                  CustomerListView(
+                                    isRefresh: true,
+                                    fromPage: "dashboardFavCustomer",
+                                  ),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -460,27 +451,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.customersLinkedToShops}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.customersLinkedToShops}',
                                   ),
-                                  Text(
-                                    "Customer Linked to Shop",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Customer Linked to Shop',
                                   ),
                                 ],
                               ),
@@ -497,15 +473,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: Text(
-                        "Active Offer",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Active Offer',
                       ),
                     ),
                     Row(
@@ -527,27 +496,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                             child: Column(
                               children: [
-                                Text(
-                                  "${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                DashBoardCount(
+                                  text:
+                                      '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
                                 ),
-                                Text(
-                                  "Product Offer",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                ShopDashBoard(
+                                  text: 'Product Offer',
                                 ),
                               ],
                             ),
@@ -559,10 +513,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              readMain.onNavigation(3,ShopCouponsView(
-                                isNavFromDashBoard: true,
-                                isRefresh: true,
-                              ),context);
+                              readMain.onNavigation(
+                                  3,
+                                  ShopCouponsView(
+                                    isNavFromDashBoard: true,
+                                    isRefresh: true,
+                                  ),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -589,27 +546,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.shopOwnerActiveCouponsCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.shopOwnerActiveCouponsCount}',
                                   ),
-                                  Text(
-                                    "Coupons",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Coupons',
                                   ),
                                 ],
                               ),
@@ -626,15 +568,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: Text(
-                        "Product",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Product',
                       ),
                     ),
                     Row(
@@ -646,7 +581,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              readMain.onNavigation(0,SSCategoryListView(),context);
+                              readMain.onNavigation(
+                                  0, SSCategoryListView(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -678,27 +614,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.categoriesCount}",
-                                    // watch.dashBoardData.categoriesCount
-                                    // "5",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.categoriesCount}',
                                   ),
-                                  Text(
-                                    "Category",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Category',
                                   ),
                                 ],
                               ),
@@ -712,7 +633,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               // read.onProductSelect(context);
-                              readMain.onNavigation(0,SSCategoryListView(),context);
+                              readMain.onNavigation(
+                                  0, SSCategoryListView(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -743,25 +665,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.productsCount}",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.productsCount}',
                                   ),
-                                  Text(
-                                    "Products",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Products',
                                   ),
                                 ],
                               ),
@@ -788,10 +697,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("seasonal_products")) {
-                                readMain.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
-                                  selectedProduct: "seasonal",
-                                  isRefresh: true,
-                                ),context);
+                                readMain.onNavigation(
+                                    0,
+                                    ShopSeasonalRecommandedOfferProductsView(
+                                      selectedProduct: "seasonal",
+                                      isRefresh: true,
+                                    ),
+                                    context);
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -833,26 +745,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.seasonalProductsCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.seasonalProductsCount}',
                                   ),
-                                  Text(
-                                    "Seasonal",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Seasonal',
                                   ),
                                 ],
                               ),
@@ -880,10 +778,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               // );
                               if (watchDashBoardScreen.specialBenifitlist
                                   .contains("fullfill_craving_products")) {
-                                readMain.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
-                                  selectedProduct: "fullFill",
-                                  isRefresh: true,
-                                ),context);
+                                readMain.onNavigation(
+                                    0,
+                                    ShopSeasonalRecommandedOfferProductsView(
+                                      selectedProduct: "fullFill",
+                                      isRefresh: true,
+                                    ),
+                                    context);
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -924,27 +825,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.fullfillYourCravingsProductsCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.fullfillYourCravingsProductsCount}',
                                   ),
-                                  Text(
-                                    "Fulfil your cravings",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Fulfil your cravings',
                                   ),
                                 ],
                               ),
@@ -961,15 +847,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: Text(
-                        "Orders",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Orders',
                       ),
                     ),
                     Row(
@@ -998,27 +877,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                             child: Column(
                               children: [
-                                Text(
-                                  "${watch.dashBoardData?.totalOrdersCount}",
-                                  // "0",
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                DashBoardCount(
+                                  text:
+                                      '${watch.dashBoardData?.totalOrdersCount}',
                                 ),
-                                Text(
-                                  "Total Orders",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                ShopDashBoard(
+                                  text: 'Total Orders',
                                 ),
                               ],
                             ),
@@ -1031,9 +895,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(0);
-                              readMain.onNavigation(1,SOrderStatusView(
-                                  selectedIndex: 0,
-                                  isFromOrderView: false),context);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 0, isFromOrderView: false),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1057,27 +923,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   borderRadius: BorderRadius.circular(8)),
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.pendingOrdersCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.pendingOrdersCount}',
                                   ),
-                                  Text(
-                                    "Pending",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Pending',
                                   ),
                                 ],
                               ),
@@ -1091,9 +942,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(1);
-                              readMain.onNavigation(1,SOrderStatusView(
-                                  selectedIndex: 1,
-                                  isFromOrderView: false),context);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 1, isFromOrderView: false),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1118,27 +971,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   borderRadius: BorderRadius.circular(8)),
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.confirmedOrdersCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.confirmedOrdersCount}',
                                   ),
-                                  Text(
-                                    "Confirmed",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Confirmed',
                                   ),
                                 ],
                               ),
@@ -1163,9 +1001,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(2);
-                              readMain.onNavigation(1,SOrderStatusView(
-                                  selectedIndex: 2,
-                                  isFromOrderView: false),context);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 2, isFromOrderView: false),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1193,27 +1033,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.inprocessOrdersCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.inprocessOrdersCount}',
                                   ),
-                                  Text(
-                                    "In process",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'In process',
                                   ),
                                 ],
                               ),
@@ -1227,9 +1052,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(3);
-                              readMain.onNavigation(1,SOrderStatusView(
-                                  selectedIndex: 3,
-                                  isFromOrderView: false),context);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 3, isFromOrderView: false),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1264,26 +1091,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.deliveredOrdersCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.deliveredOrdersCount}',
                                   ),
-                                  Text(
-                                    "Delivered",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Delivered',
                                   ),
                                 ],
                               ),
@@ -1297,9 +1110,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readOrderStatus.onTabClicked(4);
-                              readMain.onNavigation(1,SOrderStatusView(
-                                  selectedIndex: 4,
-                                  isFromOrderView: false),context);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 4, isFromOrderView: false),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1334,26 +1149,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    "${watch.dashBoardData?.cancelledOrdersCount}",
-                                    // "0",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.cancelledOrdersCount}',
                                   ),
-                                  Text(
-                                    "Cancelled",
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Cancelled',
                                   ),
                                 ],
                               ),
@@ -1369,15 +1170,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 20.w, bottom: 10.w),
-                      child: Text(
-                        "Refund",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Refund',
                       ),
                     ),
                     Row(
@@ -1391,7 +1185,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("pending");
-                              readMain.onNavigation(0,SPaymentRefundList(),context);
+                              readMain.onNavigation(
+                                  0, SPaymentRefundList(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1417,30 +1212,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    watch.dashBoardData
+                                  DashBoardCount(
+                                    text: watch.dashBoardData
                                             ?.pendingRefundOrdersCount
                                             .toString() ??
                                         "0",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
                                   ),
-                                  Text(
-                                    "Pending Refund",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Pending Refund',
                                   ),
                                 ],
                               ),
@@ -1455,7 +1234,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("completed");
-                              readMain.onNavigation(0,SPaymentRefundList(),context);
+                              readMain.onNavigation(
+                                  0, SPaymentRefundList(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1480,29 +1260,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  Text(
-                                    watch.dashBoardData?.acceptRefundOrdersCount
+                                  DashBoardCount(
+                                    text: watch.dashBoardData
+                                            ?.acceptRefundOrdersCount
                                             .toString() ??
                                         "0",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
                                   ),
-                                  Text(
-                                    "Refunded",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.dmSans(
-                                      textStyle: TextStyle(
-                                          color: Colors.white,
-                                          // letterSpacing: .5,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  ShopDashBoard(
+                                    text: 'Refunded',
                                   ),
                                 ],
                               ),
@@ -1517,16 +1282,19 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 20.w, bottom: 10.w),
-                      child: Text(
-                        "Business",
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Black1,
-                              // letterSpacing: .5,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
+                      child: DashBoardSideHeading(
+                        text: 'Business',
                       ),
+                      //  Text(DashBoardSideHeading
+                      //   "Business",
+                      //   style: GoogleFonts.dmSans(
+                      //     textStyle: TextStyle(
+                      //         color: Black1,
+                      //         // letterSpacing: .5,
+                      //         fontSize: 16.sp,
+                      //         fontWeight: FontWeight.w700),
+                      //   ),
+                      // ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1616,27 +1384,13 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                             child: Column(
                               children: [
-                                Text(
-                                  "\u{20B9} ${watch.dashBoardData?.totalRefund ?? "0"}",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                DashBoardCount(
+                                  text: watch.dashBoardData?.totalRefund
+                                          .toString() ??
+                                      "0",
                                 ),
-                                Text(
-                                  "Total Refund Amount",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                ShopDashBoard(
+                                  text: 'Total Refund Amount',
                                 ),
                               ],
                             ),
@@ -1664,28 +1418,34 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                             child: Column(
                               children: [
-                                Text(
-                                  "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                                DashBoardCount(
+                                    text:
+                                        "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}"),
+                                // Text(
+                                //   "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}",
+                                //   textAlign: TextAlign.center,
+                                //   style: GoogleFonts.dmSans(
+                                //     textStyle: TextStyle(
+                                //         color: Colors.white,
+                                //         // letterSpacing: .5,
+                                //         fontSize: 16.sp,
+                                //         fontWeight: FontWeight.w700),
+                                //   ),
+                                // ),
+                                ShopDashBoard(
+                                  text: 'Total Cancelled Amount',
                                 ),
-                                Text(
-                                  "Total Cancelled Amount",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
+                                // Text(
+                                //   "Total Cancelled Amount",
+                                //   textAlign: TextAlign.center,
+                                //   style: GoogleFonts.dmSans(
+                                //     textStyle: TextStyle(
+                                //         color: Colors.white,
+                                //         // letterSpacing: .5,
+                                //         fontSize: 12.sp,
+                                //         fontWeight: FontWeight.w700),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -1706,9 +1466,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(0,SMySubscriptionView(
-                                  screenName: "dashboard",
-                                ),context);
+                                readMain.onNavigation(
+                                    0,
+                                    SMySubscriptionView(
+                                      screenName: "dashboard",
+                                    ),
+                                    context);
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
                                 //   MaterialPageRoute(
@@ -1876,9 +1639,12 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 bottom: 80.w),
                             child: GestureDetector(
                               onTap: () {
-                                readMain.onNavigation(0,SMySubscriptionView(
-                                  screenName: "dashboard",
-                                ),context);
+                                readMain.onNavigation(
+                                    0,
+                                    SMySubscriptionView(
+                                      screenName: "dashboard",
+                                    ),
+                                    context);
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
                                 //   MaterialPageRoute(
