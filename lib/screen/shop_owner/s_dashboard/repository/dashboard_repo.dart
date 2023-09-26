@@ -7,6 +7,7 @@ class DashBoardRepo {
       return await http.get(Uri.parse(Endpoint.ShopDashBoard),
           headers: {"Authorization": "Bearer $token"});
     } catch (e) {
+      print("exception in api");
       throw Exception(e);
     }
   }

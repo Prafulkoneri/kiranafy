@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:local_supper_market/screen/customer/cart/controller/cart_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/c_place_order_model.dart';
@@ -216,6 +217,8 @@ class OrderPaymentController extends ChangeNotifier {
       if (response.statusCode == 200) {
         transactionIdController.clear();
         final read = Provider.of<MainScreenController>(context, listen: false);
+        final readCart = Provider.of<CartListController>(context, listen: false);
+        readCart.getCartList(context);
         // Navigator.pop(context);
         // Navigator.pop(context);
         // Navigator.pop(context);

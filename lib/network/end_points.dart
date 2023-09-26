@@ -23,7 +23,7 @@ class Endpoint {
   // shop Edit Profile
   static const String getShopEditProfileDetail =
       '${baseUrl}lsm-shop-owner-get-account-details';
-  ////Shop Update Profile
+  //Shop Update Profile
   static const String shopUpdateAccountDetails =
       '${baseUrl}lsm-shop-owner-update-account-details';
 //Shop city List
@@ -56,36 +56,37 @@ class Endpoint {
   static const String updateEditCustomProduct =
       '${baseUrl}lsm-shop-owner-update-custom-product';
 
-  ///Shop Owner get Selected Categories List
+  //Shop Owner get Selected Categories List
   static const String shopownerselectedcategorieslist =
       '${baseUrl}lsm-shop-owner-get-selected-categories';
   // Send KYC Verification Data
   static const String uploadKycVerification =
       '${baseUrl}lsm-shop-owner-kyc-submit';
 
-  ///// shop buy subcription
+  // shop buy subcription
   static const String shopbuyscription =
       '${baseUrl}lsm-shop-owner-buy-subscription';
 
-  ////Shop Configuration
+  //Shop Configuration
   static const String getShopConfiguration =
       '${baseUrl}lsm-shop-owner-get-configuration-details';
-  ////shop Configuration Edit
 
+  //shop Configuration Edit
   static const String shopconfigurationedit =
       '${baseUrl}lsm-shop-owner-update-configuration-details';
 
-  ////add category
+  //add category
   static const String addCategory = '${baseUrl}lsm-shop-owner-add-category';
-  //// shop owner get selected Products
 
+  // shop owner get selected Products
   static const String selectedProducts =
       "${baseUrl}lsm-shop-owner-get-selected-products";
 
-//shop get products list
+  //shop get products list
   static const String getallselectedproductlist =
       '${baseUrl}lsm-shop-owner-products-list';
-  ////selected Products
+
+  //selected Products
   static const String createCustomProduct =
       '${baseUrl}lsm-shop-owner-create-custom-product';
 

@@ -89,8 +89,7 @@ class CustomerSignUpController extends ChangeNotifier {
     signInWithPhoneAuthCred(phoneAuthCredential, context);
   }
 
-  void signInWithPhoneAuthCred(
-      AuthCredential phoneAuthCredential, context) async {
+  void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential, context) async {
     print("gdsgdf");
     try {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
@@ -116,8 +115,7 @@ class CustomerSignUpController extends ChangeNotifier {
     notifyListeners();
   }
 
-  CustomerSignUpRequestModel get customerSignupReqModel =>
-      CustomerSignUpRequestModel(
+  CustomerSignUpRequestModel get customerSignupReqModel => CustomerSignUpRequestModel(
           countryCode: countryCode,
           mobileNo: mobileController.text,
           customerName: nameController.text);
@@ -164,8 +162,7 @@ class CustomerSignUpController extends ChangeNotifier {
   }
 
   /////Mobile Number Check
-  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel =>
-      MobileNumberCheckRequestModel(
+  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel => MobileNumberCheckRequestModel(
         mobileNo: mobileController.text,
         countryCode: countryCode,
       );

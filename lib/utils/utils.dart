@@ -144,6 +144,82 @@ class Utils {
         });
   }
 
+  Widget showNoInternetDialog(context){
+    print("hello");
+   return Scaffold(
+      backgroundColor: Color(0xffFFFFFF),
+      // shape: ,
+
+
+      // scrollable: true,
+      body: Container(
+        height: 205.h,
+        // width: 400.w,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                "Please Connect to internet",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(
+                  textStyle: TextStyle(
+                      color: Color(0xff006F94),
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 37.h,
+            ),
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 19.w,
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      // function();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: 24.w,
+                          right: 24.w,
+                          top: 9.w,
+                          bottom: 9.w),
+                      decoration: BoxDecoration(
+                          color: Color(0xff39C19D),
+                          borderRadius:
+                          BorderRadius.circular(8)),
+                      child: Text(
+                        "Retry",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+                              // letterSpacing: .5,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 19.w,
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   logoutUser(BuildContext context)async{
     SharedPreferences pref=await SharedPreferences.getInstance();
     pref.clear();

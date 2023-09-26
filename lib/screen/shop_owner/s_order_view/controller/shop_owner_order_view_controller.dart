@@ -372,6 +372,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           OrderStatusChangeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (oStatus == "order_cancelled") {
+          print("kkkkkkk");
           await shopOwnerOrderView(context, orId, true);
           // Navigator.pushAndRemoveUntil(
           //   context,

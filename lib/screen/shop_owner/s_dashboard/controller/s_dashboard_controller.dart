@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/repository/get_subscription_history_repo.dart';
+import 'package:local_supper_market/utils/check_internet_connection.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +34,7 @@ class SDashBoardController extends ChangeNotifier {
   CurrentSubscriptionPlan? currentSubscriptionPlan;
   List<SubscriptionHistory>? subscriptionHistory;
   List specialBenifitlist = [];
+  bool isInternetConnected=true;
 
   // void onCategorySelect(context) {
   //   Navigator.push(
@@ -46,6 +48,7 @@ class SDashBoardController extends ChangeNotifier {
 
   Future<void> initState(context, refresh) async {
     if (refresh) {
+      isInternetConnected=true;
       await getDashBoardData(context);
       await getShopEditProfileDetails(context);
       await getSubscriptionPaymentHistory(context);
@@ -58,11 +61,10 @@ class SDashBoardController extends ChangeNotifier {
     notifyListeners();
   }
 
-///////Category Count End
   Future<void> getDashBoardData(context) async {
+    CheckInternetConnection().checkInternet(context);
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-
     print(pref.getString("successToken"));
     dashBoardRepo
         .getDashboardData(pref.getString("successToken"))
@@ -94,12 +96,17 @@ class SDashBoardController extends ChangeNotifier {
         Utils().logoutUser(context);
       }
       else {
-print("this is it");
+        print("this is it");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      isInternetConnected=false;
+      // print("exception in controller");
+      Utils.showPrimarySnackbar(context, "Please Connect to Internet", type: SnackType.debugError);
+
+      // Utils().showNoInternetDialog(context);
+
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -111,11 +118,7 @@ print("this is it");
     );
   }
 
-  //////////////////Category Count End
-
-  /////////////Display Name IN Dash Board
   Future<void> getShopEditProfileDetails(context) async {
-    print("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopEditProfileRepo
@@ -139,7 +142,8 @@ print("this is it");
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      isInternetConnected=false;
+      Utils.showPrimarySnackbar(context, "Please Connect to Internet", type: SnackType.debugError);
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -151,8 +155,8 @@ print("this is it");
     );
   }
 
-  /////////////////////////////////SubScription in Dash BOard/////////////////////
   SubscriptionHistoryRepo subscriptionHistoryRepo = SubscriptionHistoryRepo();
+
   Future<void> getSubscriptionPaymentHistory(context) async {
     showLoader(true);
     print("loading");
@@ -181,7 +185,9 @@ print("this is it");
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      isInternetConnected=false;
+      Utils.showPrimarySnackbar(context, "Please Connect to Internet", type: SnackType.debugError);
+  notifyListeners();
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
