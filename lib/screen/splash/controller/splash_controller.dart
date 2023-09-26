@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -38,6 +39,8 @@ class SplashController extends ChangeNotifier {
     initPackageInfo();
 
     await appVersionCheck(context);
+    // final isOnline =
+    //     Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
     Timer(Duration(seconds: 3), () async {
       if (isUpdateRequired) {
         Navigator.pushReplacement(
@@ -46,6 +49,10 @@ class SplashController extends ChangeNotifier {
         );
         return;
       }
+      // if (isOnline) {
+      //   NoInternetOage();
+      //   return;
+      // }
       SharedPreferences pref = await SharedPreferences.getInstance();
       print("BearerToken${pref.getString("token")}");
       print(pref.getString("status"));
@@ -61,8 +68,10 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SSubscriptionScreenView(loggedIn: false,routeName: "kyc",)));
+                builder: (context) => SSubscriptionScreenView(
+                      loggedIn: false,
+                      routeName: "kyc",
+                    )));
       }
       if (pref.getString("status") == "subscriptionCompleted") {
         Navigator.pushReplacement(
@@ -72,10 +81,13 @@ class SplashController extends ChangeNotifier {
                     SShopConfigurationView(initialShopConfigration: true)));
       }
       if (pref.getString("status") == "customerLoggedIn") {
-        final read=Provider.of<MainScreenController>(context,listen: false);
-        read.onNavigation(0, HomeScreenView(
-          refreshPage: true,
-        ), context);
+        final read = Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(
+            0,
+            HomeScreenView(
+              refreshPage: true,
+            ),
+            context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -101,7 +113,7 @@ class SplashController extends ChangeNotifier {
       } else {
         SharedPreferences pref = await SharedPreferences.getInstance();
         print(pref.getString("status"));
-        if(pref.getString("status")=="guestLoggedIn"){
+        if (pref.getString("status") == "guestLoggedIn") {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -110,7 +122,7 @@ class SplashController extends ChangeNotifier {
                     screenName: HomeScreenView(
                       refreshPage: true,
                     ))),
-                (Route<dynamic> route) => false,
+            (Route<dynamic> route) => false,
           );
         }
         if (pref.getString("status") == "numberRegistered") {
@@ -125,8 +137,10 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SSubscriptionScreenView(loggedIn: false,routeName: "kyc",)));
+                  builder: (context) => SSubscriptionScreenView(
+                        loggedIn: false,
+                        routeName: "kyc",
+                      )));
         }
         if (pref.getString("status") == "subscriptionCompleted") {
           Navigator.pushReplacement(
