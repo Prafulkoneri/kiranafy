@@ -72,7 +72,11 @@ class AddAddressController extends ChangeNotifier {
     pincode="";
     nameController.clear();
     mobNoController.clear();
-
+    countryList?.clear();
+    stateList?.clear();
+    cityList?.clear();
+    areaList?.clear();
+    pincodeList?.clear();
     apartmentNameController.clear();
     houseNoController.clear();
     streetController.clear();
@@ -101,6 +105,9 @@ class AddAddressController extends ChangeNotifier {
   void onCountrySelected(value) async {
     countryId = int.parse(value.toString());
     stateId=0;
+    cityId=0;
+    areaId=0;
+    pincode="";
     print("nhjvwuriuiwbytiuywi");
     print(countryId);
     notifyListeners();
@@ -169,6 +176,8 @@ class AddAddressController extends ChangeNotifier {
   Future<void> onStateSelected(value) async {
     stateId = int.parse(value.toString());
     cityId=0;
+    areaId=0;
+    pincode="";
     notifyListeners();
   }
 
@@ -212,6 +221,7 @@ class AddAddressController extends ChangeNotifier {
   Future<void> onCitySelected(value) async {
     cityId = int.parse(value.toString());
     areaId=0;
+    pincode="";
     notifyListeners();
   }
 

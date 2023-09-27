@@ -79,6 +79,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   bool rejectPayment = false;
   bool isRefundByCash = false;
   bool isRefundByUpi = false;
+  bool canShopOwnerCancel=true;
   TextEditingController upiIdController = TextEditingController();
   TextEditingController rejectReasonController = TextEditingController();
   TextEditingController refundPayableAmount = TextEditingController();
@@ -313,6 +314,28 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         'Download complete.',
         platform,
         payload: '$savePath');
+  }
+
+  void checkIfAllProductsSelected(context){
+    List checkDataList = [];
+    for (int i = 0; i < selectedProductList.length; i++) {
+      print(selectedProductList);
+      if (selectedProductList[i] == true) {
+        checkDataList.add(selectedProductList[i]);
+      }
+      print(checkDataList);
+    }
+    if(checkDataList.length!=selectedProductList.length){
+      canShopOwnerCancel=false;
+      Utils.showPrimarySnackbar(context, "Select all product before cancelling",
+          type: SnackType.error);
+      notifyListeners();
+      return;
+    }
+    else{
+      canShopOwnerCancel=true;
+      notifyListeners();
+    }
   }
 
   Future<void> shopOrderStatus(

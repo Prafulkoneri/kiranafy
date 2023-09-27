@@ -720,12 +720,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         // width: 15.w,
                                                         // height: 19.h,
                                                       )
-                                                    : Row(
+                                                    :
+                                                Row(
                                                         children: [
                                                           GestureDetector(
                                                             onTap: () {
-                                                              if (watch
-                                                                  .isQuanityBtnPressed) {
+                                                              if (watch.isQuanityBtnPressed) {
                                                                 return;
                                                               }
                                                               read.subtractItemQuantity(
@@ -770,6 +770,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                             onTap: () {
                                                               print(watch
                                                                   .isQuanityBtnPressed);
+                                                              // return;
                                                               if (watch
                                                                   .isQuanityBtnPressed) {
                                                                 return;

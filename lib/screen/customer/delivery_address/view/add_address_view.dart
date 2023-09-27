@@ -432,8 +432,7 @@ class _AddAddressViewState extends State<AddAddressView> {
                             width: 20.w,
                           ),
                           Expanded(
-                            child: watch.pincode == "" ||
-                                    !watch.showPincodeValueField
+                            child: watch.pincode == ""
                                 ? CDropDownField(
                                     onChanged: (value) async {
                                       print(value);

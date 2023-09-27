@@ -142,7 +142,9 @@ class ProductViewController extends ChangeNotifier {
     print(quantityList[index]);
     print("*********");
     quantityAction = "subtract";
+    print(cartItemIdList);
     cartItemId = cartItemIdList[index].toString();
+    print(cartItemId);
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
         .cartItemQuantity(
@@ -152,6 +154,9 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        if(result.status==200){
+
+
         int value = quantityList[index];
         quantityList.removeAt(index);
         print("${value}valueeeeeeeee");
@@ -163,6 +168,12 @@ class ProductViewController extends ChangeNotifier {
         }
         quantityBtnPressed(false);
         notifyListeners();
+        }
+        else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -192,16 +203,24 @@ class ProductViewController extends ChangeNotifier {
         .cartItemQuantity(
             cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) {
+          print("hello");
       dev.log("response.body${response.body}");
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        int value = quantityList[index];
-        quantityList.removeAt(index);
-        quantityList.insert(index, value + 1);
-        quantityBtnPressed(false);
+        if(result.status==200) {
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          quantityList.insert(index, value + 1);
+          quantityBtnPressed(false);
 
-        notifyListeners();
+          notifyListeners();
+        }
+        else{
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -242,16 +261,26 @@ class ProductViewController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        if(result.status==200){
+
+
         cartItemId = result.cartItemId.toString();
         print("quantityList2${quantityList}");
         // quantityList.removeAt(index);
         // quantityList.insert(index,1);
         print("quantityList3${quantityList}");
+        cartItemIdList.removeAt(index);
         cartItemIdList.insert(index, result.cartItemId);
+        print(cartItemIdList);
         isSimilarProductAdded[index] = true;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         notifyListeners();
+        }
+        else{
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -305,6 +334,7 @@ class ProductViewController extends ChangeNotifier {
         int unitDetailLength = productViewData?.productUnitDetails?.length ?? 0;
         for (int i = 0; i < unitDetailLength; i++) {
           quantityList.add(productViewData?.productUnitDetails?[i].quantity);
+          print(cartItemIdList);
           cartItemIdList
               .add(productViewData?.productUnitDetails?[i].cartItemId);
         }
@@ -823,6 +853,7 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        cartItemIdList.removeAt(index);
         cartItemIdList.insert(index, 0);
         isSimilarProductAdded[index] = false;
         // await getAllOfferes(context, sId);

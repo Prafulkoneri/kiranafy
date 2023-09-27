@@ -14,8 +14,9 @@ class CheckInternetConnection{
       }
     } on SocketException catch (_) {
       print("not connected");
-      // final read=Provider.of<SMainScreenController>(context,listen: false);
-      // read.onNavigation(0,Utils().showNoInternetDialog(context), context);
+      final read=Provider.of<SMainScreenController>(context,listen: false);
+      read.onNavigation(0,Utils().showNoInternetDialog(context), context);
+      read.hideBottomNavigationBar();
     }
   }
 }

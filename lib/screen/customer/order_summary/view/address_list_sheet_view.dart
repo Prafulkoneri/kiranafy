@@ -45,7 +45,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                           color: Color(0xff006F94)),
-                    )
+                    ),
                   ],
                 ),
                 Divider(
@@ -115,6 +115,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      Navigator.pop(context);
                                       readMain.onNavigation(1,AddAddressView(
                                         isEditAdress: true,
                                         route: "orderAddress",

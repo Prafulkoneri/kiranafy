@@ -1168,6 +1168,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             child: Expanded(
                                               child: InkWell(
                                                 onTap: () {
+                                                  read.checkIfAllProductsSelected(context);
+                                                  if(!watch.canShopOwnerCancel){
+                                                    return;
+                                                  }
                                                   // read.shopOrderStatus(
                                                   //     context,
                                                   //     watch.orderDetails?.id.toString(),
