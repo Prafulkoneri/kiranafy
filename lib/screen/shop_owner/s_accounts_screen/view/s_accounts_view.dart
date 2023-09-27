@@ -15,7 +15,6 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_v
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/view/s_edit_profile_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/view/s_setting_view.dart';
@@ -23,6 +22,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 import '../../promotion_request/view/promotion_request_view.dart';
@@ -64,11 +64,12 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
-        onWillPop: ()async{
-          readMainScreen.onNavigation(0, ShopDashBoardView(refresh: false), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMainScreen.onNavigation(
+                    0, ShopDashBoardView(refresh: false), context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -137,15 +138,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                                     color: Black1,
                                                     // letterSpacing: .5,
                                                     fontSize: 18.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              readMainScreen.onNavigation(4, SEditProfileView(
-                                                fromDashBoard: false,
-                                              ), context);
+                                              readMainScreen.onNavigation(
+                                                  4,
+                                                  SEditProfileView(
+                                                    fromDashBoard: false,
+                                                  ),
+                                                  context);
                                               // Navigator.pushAndRemoveUntil(
                                               //   context,
                                               //   MaterialPageRoute(
@@ -205,7 +210,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                                 textStyle: TextStyle(
                                                     color: Black,
                                                     fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ),
                                           ),
@@ -284,9 +290,12 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, SShopConfigurationView(
-                          initialShopConfigration: false,
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            SShopConfigurationView(
+                              initialShopConfigration: false,
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -300,7 +309,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                         // read.onShopConfigurationClicked(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 27.w, top: 20, right: 28.w),
+                        margin:
+                            EdgeInsets.only(left: 27.w, top: 20, right: 28.w),
                         padding: EdgeInsets.only(bottom: 15.w),
                         decoration: BoxDecoration(
                           border: Border(
@@ -330,16 +340,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             // ),
                             // ),
                             Flexible(
-                              child: Text(
-                                "Shop Configuration Setting",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Shop Configuration Setting',
                               ),
+                              //  Text(
+                              //   "Shop Configuration Setting",
+                              //   // "Rachel Green",
+                              //   style: GoogleFonts.dmSans(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         fontSize: 14.sp,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
@@ -348,10 +361,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ////////////////////////
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, CustomerListView(
-                          isRefresh: true,
-                          fromPage: "account",
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            CustomerListView(
+                              isRefresh: true,
+                              fromPage: "account",
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -390,15 +406,18 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                'Customers List',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Customers List',
                               ),
+                              //  Text(
+                              //   'Customers List',
+                              //   style: GoogleFonts.dmSans(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         fontSize: 14.sp,
+                              //         fontWeight: FontWeight.w400),
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
@@ -407,10 +426,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ///////////////////////
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, ShopCouponsView(
-                          isRefresh: true,
-                          isNavFromDashBoard: false,
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            ShopCouponsView(
+                              isRefresh: true,
+                              isNavFromDashBoard: false,
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -449,26 +471,11 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            // Text(
-                            //   'Coupons & Offers',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                             Flexible(
-                              child: Text(
-                                "Coupons & Offers",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Coupons & Offers',
                               ),
+                              //
                             ),
                           ],
                         ),
@@ -477,10 +484,13 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ////////////////////
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, ShopSeasonalRecommandedOfferProductsView(
-                          selectedProduct: "recommended",
-                          isRefresh: true,
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            ShopSeasonalRecommandedOfferProductsView(
+                              selectedProduct: "recommended",
+                              isRefresh: true,
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -520,26 +530,10 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "Recommended & Seasonal Products",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Recommended & Seasonal Products',
                               ),
                             ),
-                            // Text(
-                            //   'Recommended & Seasonal Products',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -547,7 +541,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     /////////////////////
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, shopPromotionRequestView(), context);
+                        readMainScreen.onNavigation(
+                            4, shopPromotionRequestView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -583,35 +578,22 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "Ads & Promotions",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Ads & Promotions',
                               ),
                             ),
-                            // Text(
-                            //   'Ads & Promotions',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4,SMySubscriptionView(
-                          screenName: "accounts",
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            SMySubscriptionView(
+                              screenName: "accounts",
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -649,33 +631,18 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "My Subscription",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'My Subscription',
                               ),
                             ),
-                            // Text(
-                            //   'My Subscription',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, ShopBankAccountDetailsView(), context);
+                        readMainScreen.onNavigation(
+                            4, ShopBankAccountDetailsView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -711,35 +678,22 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "Bank A/C Details",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Bank A/C Details',
                               ),
                             ),
-                            // Text(
-                            //   'Bank A/C Details',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, SPaymentsView(
-                          isNavFromAccounts: true,
-                        ), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            SPaymentsView(
+                              isNavFromAccounts: true,
+                            ),
+                            context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -777,81 +731,19 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "Payments",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Payments',
                               ),
                             ),
-                            // Text(
-                            //   'Payments',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
-                    // Container(
-                    //   margin: EdgeInsets.only(left: 29.w, right: 28.w, top: 16.w),
-                    //   padding: EdgeInsets.only(bottom: 15.w),
-                    //   decoration: BoxDecoration(
-                    //     border: Border(
-                    //       bottom: BorderSide(width: 1, color: grey10),
-                    //     ),
-                    //     // color: Colors.white,
-                    //   ),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.start,
-                    //     crossAxisAlignment: CrossAxisAlignment.end,
-                    //     children: [
-                    //       SizedBox(
-                    //         width: 5,
-                    //       ),
-                    //       SvgPicture.asset(
-                    //         'assets/icons/support.svg',
-                    //         // width: 14.w,
-                    //         // height: 13.h,
-                    //       ),
-                    //       SizedBox(
-                    //         width: 18.w,
-                    //       ),
-                    //       Flexible(
-                    //         child: Text(
-                    //           "Reports",
-                    //           // "Rachel Green",
-                    //           style: GoogleFonts.dmSans(
-                    //             textStyle: TextStyle(
-                    //                 color: Black,
-                    //                 fontSize: 14.sp,
-                    //                 fontWeight: FontWeight.w400),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       // Text(
-                    //       //   'Reports',
-                    //       //   style: GoogleFonts.dmSans(
-                    //       //     textStyle: TextStyle(
-                    //       //         color: Black,
-                    //       //         fontSize: 14.sp,
-                    //       //         fontWeight: FontWeight.w400),
-                    //       //   ),
-                    //       // ),
-                    //     ],
-                    //   ),
-                    // ),
+
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, SHelpCenterView(), context);
+                        readMainScreen.onNavigation(
+                            4, SHelpCenterView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -886,35 +778,21 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                "Help & Support",
-                                // "Rachel Green",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Help & Support',
                               ),
                             ),
-                            // Text(
-                            //   'Help & Support',
-                            //   style: GoogleFonts.dmSans(
-                            //     textStyle: TextStyle(
-                            //         color: Black,
-                            //         fontSize: 14.sp,
-                            //         fontWeight: FontWeight.w400),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, NotificationsScreenView(route: "accounts"), context);
+                        readMainScreen.onNavigation(
+                            4,
+                            NotificationsScreenView(route: "accounts"),
+                            context);
                         readMainScreen.hideBottomNavigationBar();
-
 
                         // Navigator.push(
                         //     context,
@@ -955,14 +833,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                'Notification',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Notification',
                               ),
                             ),
                           ],
@@ -971,7 +843,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4, SAccountCmsPagesView(), context);
+                        readMainScreen.onNavigation(
+                            4, SAccountCmsPagesView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -1005,14 +878,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 SizedBox(
                                   width: 18.w,
                                 ),
-                                Text(
-                                  'Local Supermart',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
+                                AccountScreen(
+                                  text: 'Local Supermart',
                                 ),
                               ],
                             ),
@@ -1028,7 +895,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     // ShopSettingView
                     GestureDetector(
                       onTap: () {
-                        readMainScreen.onNavigation(4,ShopSettingView(), context);
+                        readMainScreen.onNavigation(
+                            4, ShopSettingView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -1063,14 +931,8 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                               width: 18.w,
                             ),
                             Flexible(
-                              child: Text(
-                                'Settings',
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
+                              child: AccountScreen(
+                                text: 'Settings',
                               ),
                             ),
                           ],
@@ -1128,7 +990,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

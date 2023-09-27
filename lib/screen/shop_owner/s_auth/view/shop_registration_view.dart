@@ -9,7 +9,9 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/textfield.dart';
+import 'package:otp_text_field/otp_text_field.dart';
 import 'package:provider/provider.dart';
+import 'package:telephony/telephony.dart';
 
 class ShopRegistrationView extends StatefulWidget {
   ShopRegistrationView({super.key});
@@ -21,11 +23,42 @@ class ShopRegistrationView extends StatefulWidget {
 
 class _ShopRegistrationViewState extends State<ShopRegistrationView> {
   // String? selectedValue;
+  Telephony telephony = Telephony.instance;
+  OtpFieldController otpboxshop = OtpFieldController();
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ShopRegistrationController>().initState(context);
     });
+    telephony.listenIncomingSms(
+      onNewMessage: (SmsMessage message) {
+        print(message.address); // +977981******67, sender nubmer
+        print(message.body); // Your OTP code is 34567
+        print(message.date); // 1659690242000, timestampy
+
+        // get the message
+        String sms = message.body.toString();
+        print("44444444444444444444");
+        print(sms);
+        print("44444444444444444444");
+        if (message.body!.contains('lsm-0001.firebaseapp.com')) {
+          // verify SMS is sent for OTP with sender number
+          String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
+          // prase code from the OTP sms
+          otpboxshop.set(otpcode.split(""));
+          // split otp code to list of number
+          // and populate to otb boxes
+          setState(() {
+            print("object");
+            otpboxshop.set(otpcode.split(""));
+            // refresh UI
+          });
+        } else {
+          print("Normal message.");
+        }
+      },
+      listenInBackground: false,
+    );
   }
 
   @override

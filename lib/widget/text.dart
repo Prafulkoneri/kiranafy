@@ -158,3 +158,63 @@ class DashBoardCount extends StatelessWidget {
     );
   }
 }
+
+//////////////////////////Shop Name/////////////
+class DashBoardShopName extends StatelessWidget {
+  final String text;
+
+  DashBoardShopName({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}
+
+//////////////////Rating///////////////
+class ShopRating extends StatelessWidget {
+  final String text;
+
+  ShopRating({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Black,
+            // letterSpacing: .5,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+}
+
+/////////////////////ShopAddress///////////
+class ShopAddress extends StatelessWidget {
+  final String text;
+
+  ShopAddress({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Black,
+            // letterSpacing: .5,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+}

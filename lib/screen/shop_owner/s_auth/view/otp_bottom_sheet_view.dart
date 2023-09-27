@@ -18,7 +18,7 @@ class OtpShopBottomSheetView extends StatefulWidget {
 
 class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
   Telephony telephony = Telephony.instance;
-  OtpFieldController otpbox = OtpFieldController();
+  OtpFieldController otpboxshop = OtpFieldController();
   @override
   void initState() {
     telephony.listenIncomingSms(
@@ -29,15 +29,19 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
 
         // get the message
         String sms = message.body.toString();
-
-        if (message.body!.contains('yourFirebaseProjectName.firebaseapp.com')) {
+        print("44444444444444444444");
+        print(sms);
+        print("44444444444444444444");
+        if (message.body!.contains('lsm-0001.firebaseapp.com')) {
           // verify SMS is sent for OTP with sender number
           String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
           // prase code from the OTP sms
-          otpbox.set(otpcode.split(""));
+          otpboxshop.set(otpcode.split(""));
           // split otp code to list of number
           // and populate to otb boxes
           setState(() {
+            print("object");
+            otpboxshop.set(otpcode.split(""));
             // refresh UI
           });
         } else {
@@ -49,6 +53,36 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
 
     super.initState();
   }
+  // @override
+  // void initState() {
+  //   telephony.listenIncomingSms(
+  //     onNewMessage: (SmsMessage message) {
+  //       print(message.address); // +977981******67, sender nubmer
+  //       print(message.body); // Your OTP code is 34567
+  //       print(message.date); // 1659690242000, timestamp
+
+  //       // get the message
+  //       String sms = message.body.toString();
+
+  //       if (message.body!.contains('yourFirebaseProjectName.firebaseapp.com')) {
+  //         // verify SMS is sent for OTP with sender number
+  //         String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
+  //         // prase code from the OTP sms
+  //         otpboxshop.set(otpcode.split(""));
+  //         // split otp code to list of number
+  //         // and populate to otb boxes
+  //         setState(() {
+  //           // refresh UI
+  //         });
+  //       } else {
+  //         print("Normal message.");
+  //       }
+  //     },
+  //     listenInBackground: false,
+  //   );
+
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +132,7 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                       ),
                       OTPTextField(
                         outlineBorderRadius: 10,
-                        controller: otpbox,
+                        controller: otpboxshop,
                         length: 6,
                         width: MediaQuery.of(context).size.width,
                         fieldWidth: 50,
@@ -114,6 +148,24 @@ class _OtpShopBottomSheetViewState extends State<OtpShopBottomSheetView> {
                           read.onOtpEntered(verificationCode);
                         },
                       ),
+                      // OTPTextField(
+                      //   outlineBorderRadius: 10,
+                      //   controller: otpbox,
+                      //   length: 6,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   fieldWidth: 50,
+                      //   style: TextStyle(fontSize: 17),
+                      //   textFieldAlignment: MainAxisAlignment.spaceAround,
+                      //   fieldStyle: FieldStyle.underline,
+                      //   onChanged: (String code) {
+                      //     print(code);
+                      //     //handle validation or checks here
+                      //   },
+                      //   onCompleted: (String verificationCode) {
+                      //     print(verificationCode);
+                      //     read.onOtpEntered(verificationCode);
+                      //   },
+                      // ),
                       const SizedBox(
                         height: 20,
                       ),
