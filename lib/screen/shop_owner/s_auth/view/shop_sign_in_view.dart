@@ -22,7 +22,7 @@ class ShopSignInView extends StatefulWidget {
 class _ShopSignInViewState extends State<ShopSignInView> {
   bool isVisible = false;
   Telephony telephony = Telephony.instance;
-  OtpFieldController otpbox = OtpFieldController();
+  OtpFieldController otpboxshop = OtpFieldController();
   @override
   void initState() {
     telephony.listenIncomingSms(
@@ -33,15 +33,19 @@ class _ShopSignInViewState extends State<ShopSignInView> {
 
         // get the message
         String sms = message.body.toString();
-
-        if (message.body!.contains('yourFirebaseProjectName.firebaseapp.com')) {
+        print("44444444444444444444");
+        print(sms);
+        print("44444444444444444444");
+        if (message.body!.contains('lsm-0001.firebaseapp.com')) {
           // verify SMS is sent for OTP with sender number
           String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
           // prase code from the OTP sms
-          otpbox.set(otpcode.split(""));
+          otpboxshop.set(otpcode.split(""));
           // split otp code to list of number
           // and populate to otb boxes
           setState(() {
+            print("object");
+            otpboxshop.set(otpcode.split(""));
             // refresh UI
           });
         } else {

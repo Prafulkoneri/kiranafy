@@ -186,16 +186,19 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
-                                    child: Text(
-                                      "${watch.shopName}",
-                                      // "New Balaji Trading Company",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w700),
-                                      ),
+                                    child: DashBoardShopName(
+                                      text: '${watch.shopName}',
                                     ),
+                                    // Text(
+                                    //   "${watch.shopName}",
+                                    //   // "New Balaji Trading Company",
+                                    //   style: GoogleFonts.dmSans(
+                                    //     textStyle: TextStyle(
+                                    //         color: Colors.white,
+                                    //         fontSize: 18.sp,
+                                    //         fontWeight: FontWeight.w700),
+                                    //   ),
+                                    // ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -232,8 +235,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                           SizedBox(
                                             width: 4.3.w,
                                           ),
-                                          Text(
-                                            watch.dashBoardData?.bannerImages
+                                          ShopRating(
+                                            text: watch
+                                                        .dashBoardData
+                                                        ?.bannerImages
                                                         ?.isNotEmpty ==
                                                     true
                                                 ? double.parse(watch
@@ -244,18 +249,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                         "0.0")
                                                     .toStringAsFixed(1)
                                                 : "0.0",
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -294,27 +292,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "${watch.address} ",
-                                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              // letterSpacing: .5,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                      ShopAddress(
+                                        text: '${watch.address} ',
                                       ),
-                                      Text(
-                                        "${watch.pincode}",
-                                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              // letterSpacing: .5,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                      ShopAddress(
+                                        text: '${watch.pincode}',
                                       ),
                                     ],
                                   ),

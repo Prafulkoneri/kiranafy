@@ -89,14 +89,14 @@ class CustomerSignUpController extends ChangeNotifier {
     signInWithPhoneAuthCred(phoneAuthCredential, context);
   }
 
-  void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential, context) async {
+  void signInWithPhoneAuthCred(
+      AuthCredential phoneAuthCredential, context) async {
     print("gdsgdf");
     try {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
       print(authCred.user);
       if (authCred.user != null) {
-          onsignUp(context);
-
+        onsignUp(context);
       } else {
         showOtpErrorMsg();
         notifyListeners();
@@ -115,7 +115,8 @@ class CustomerSignUpController extends ChangeNotifier {
     notifyListeners();
   }
 
-  CustomerSignUpRequestModel get customerSignupReqModel => CustomerSignUpRequestModel(
+  CustomerSignUpRequestModel get customerSignupReqModel =>
+      CustomerSignUpRequestModel(
           countryCode: countryCode,
           mobileNo: mobileController.text,
           customerName: nameController.text);
@@ -130,20 +131,20 @@ class CustomerSignUpController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "customerLoggedIn");
-        final read=Provider.of<MainScreenController>(context,listen: false);
-        read.onNavigation(0, HomeScreenView(
-          refreshPage: true,
-        ), context);
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => MainScreenView(
-        //           index: 0,
-        //           screenName: HomeScreenView(
-        //             refreshPage: true,
-        //           ))),
-        //       (Route<dynamic> route) => false,
-        // );
+        final read = Provider.of<MainScreenController>(context, listen: false);
+        // read.onNavigation(0, HomeScreenView(
+        //   refreshPage: true,
+        // ), context);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 0,
+                  screenName: HomeScreenView(
+                    refreshPage: true,
+                  ))),
+          (Route<dynamic> route) => false,
+        );
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -162,7 +163,8 @@ class CustomerSignUpController extends ChangeNotifier {
   }
 
   /////Mobile Number Check
-  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel => MobileNumberCheckRequestModel(
+  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel =>
+      MobileNumberCheckRequestModel(
         mobileNo: mobileController.text,
         countryCode: countryCode,
       );
