@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class ShopFAQView extends StatefulWidget {
@@ -48,9 +49,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(4, SAccountCmsPagesView(), context);

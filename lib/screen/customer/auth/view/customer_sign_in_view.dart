@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,32 +25,33 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
   OtpFieldController otpbox = OtpFieldController();
   @override
   void initState() {
-    telephony.listenIncomingSms(
-      onNewMessage: (SmsMessage message) {
-        print(message.address); // +977981******67, sender nubmer
-        print(message.body); // Your OTP code is 34567
-        print(message.date); // 1659690242000, timestamp
+  if(Platform.isAndroid){
+  telephony.listenIncomingSms(
+  onNewMessage: (SmsMessage message) {
+  print(message.address); // +977981******67, sender nubmer
+  print(message.body); // Your OTP code is 34567
+  print(message.date); // 1659690242000, timestamp
 
-        // get the message
-        String sms = message.body.toString();
+  // get the message
+  String sms = message.body.toString();
 
-        if (message.body!.contains('yourFirebaseProjectName.firebaseapp.com')) {
-          // verify SMS is sent for OTP with sender number
-          String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
-          // prase code from the OTP sms
-          otpbox.set(otpcode.split(""));
-          // split otp code to list of number
-          // and populate to otb boxes
-          setState(() {
-            // refresh UI
-          });
-        } else {
-          print("Normal message.");
-        }
-      },
-      listenInBackground: false,
-    );
-
+  if (message.body!.contains('yourFirebaseProjectName.firebaseapp.com')) {
+  // verify SMS is sent for OTP with sender number
+  String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
+  // prase code from the OTP sms
+  otpbox.set(otpcode.split(""));
+  // split otp code to list of number
+  // and populate to otb boxes
+  setState(() {
+  // refresh UI
+  });
+  } else {
+  print("Normal message.");
+  }
+  },
+  listenInBackground: false,
+  );
+  }
     super.initState();
   }
 

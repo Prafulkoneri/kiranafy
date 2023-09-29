@@ -25,7 +25,7 @@ import 'package:local_supper_market/screen/customer/review/repository/customer_r
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:local_supper_market/widget/Loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -14,7 +14,7 @@ import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_v
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:local_supper_market/widget/Loaderoverlay.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,8 +22,7 @@ class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
   CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
-  CustomerGuestLoginInRepo customerGuestLoginInRepo =
-      CustomerGuestLoginInRepo();
+  CustomerGuestLoginInRepo customerGuestLoginInRepo = CustomerGuestLoginInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isOtpErrorVisible = false;
@@ -51,8 +50,7 @@ class CustomerSignInController extends ChangeNotifier {
     countryCode = value.toString();
   }
 
-  CustomerGuestLoginReqModel get customerGuestLoginReqModel =>
-      CustomerGuestLoginReqModel(loginType: "guest");
+  CustomerGuestLoginReqModel get customerGuestLoginReqModel => CustomerGuestLoginReqModel(loginType: "guest");
 
   Future<void> guestLogin(context) async {
     LoadingOverlay.of(context).show();
@@ -99,10 +97,7 @@ class CustomerSignInController extends ChangeNotifier {
     );
   }
 
-  //mobile Number Check
-
-  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel =>
-      MobileNumberCheckRequestModel(
+  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel => MobileNumberCheckRequestModel(
         mobileNo: mobileController.text,
         countryCode: countryCode,
       );
@@ -197,13 +192,17 @@ class CustomerSignInController extends ChangeNotifier {
         pref.setString("status", "customerLoggedIn");
         print("token ${pref.getString("successToken")}");
         isLoginBtnEnabled = false;
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
                 builder: (context) => MainScreenView(
                       index: 0,
                       screenName: HomeScreenView(refreshPage: true),
-                    )));
+
+                    )),
+              (Route<dynamic> route) => false,
+
+        );
         mobileController.clear();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -222,8 +221,7 @@ class CustomerSignInController extends ChangeNotifier {
     );
   }
 
-  void signInWithPhoneAuthCred(
-      AuthCredential phoneAuthCredential, context) async {
+  void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential, context) async {
     try {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
       if (authCred.user != null) {

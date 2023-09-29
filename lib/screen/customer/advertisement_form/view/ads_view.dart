@@ -15,7 +15,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
-import 'package:local_supper_market/widget/stack_loader.dart';
+import 'package:local_supper_market/widget/stack_Loader.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 

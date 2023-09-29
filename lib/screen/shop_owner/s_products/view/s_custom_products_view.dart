@@ -25,6 +25,7 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
@@ -72,9 +73,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(0, SSelectedProductView(

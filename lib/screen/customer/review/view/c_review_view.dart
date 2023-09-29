@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/review/controller/customer_r
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 
 import 'package:provider/provider.dart';
@@ -64,9 +65,8 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(1, ShopProfileView(refreshPage:false), context);

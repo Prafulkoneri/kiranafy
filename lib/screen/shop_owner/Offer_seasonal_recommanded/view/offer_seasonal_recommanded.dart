@@ -17,6 +17,7 @@ import 'package:local_supper_market/utils/utils.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -91,9 +92,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                     : "Fulfil your cravings\nProducts"),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
           widget.selectedProduct == "recommended"

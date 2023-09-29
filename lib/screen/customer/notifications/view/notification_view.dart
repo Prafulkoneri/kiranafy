@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class CustomerNotificationsScreenView extends StatefulWidget {
@@ -187,9 +188,8 @@ class _CustomerNotificationsScreenViewState
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Loader()
+
             : WillPopScope(
           onWillPop: ()async{
             readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);

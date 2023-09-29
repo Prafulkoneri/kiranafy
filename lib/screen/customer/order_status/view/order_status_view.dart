@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class OrderStatusView extends StatefulWidget {
@@ -105,9 +106,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 widget.screenName == "orderSummary"

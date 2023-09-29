@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_in_p
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_pending_orders_view.dart';
 import 'package:local_supper_market/utils/inidcator.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class SOrderStatusView extends StatefulWidget {
@@ -32,20 +33,13 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
       context
           .read<SOrderStatusController>()
           .initState(context, widget.selectedIndex);
-      setState(() {
-        tabController = TabController(
-            length: 5,
-            vsync: this,
-            initialIndex:
-                context.watch<SOrderStatusController>().selectedIndex);
-      });
+
     });
     print("gudiyaaaaa");
     print(widget.selectedIndex);
     print(widget.isFromOrderView);
   }
 
-  TabController? tabController;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +59,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const Loader()
             : WillPopScope(
           onWillPop: ()async{
             print("hello");

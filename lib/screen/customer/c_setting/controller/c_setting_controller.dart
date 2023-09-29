@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_setting/model/change_set
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/delete_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/get_setting_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:local_supper_market/widget/Loaderoverlay.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

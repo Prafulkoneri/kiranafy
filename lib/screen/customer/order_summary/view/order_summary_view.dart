@@ -16,8 +16,9 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
-import 'package:local_supper_market/widget/stack_loader.dart';
+import 'package:local_supper_market/widget/stack_Loader.dart';
 import 'package:provider/provider.dart';
 
 import '../order_products.dart';
@@ -108,9 +109,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

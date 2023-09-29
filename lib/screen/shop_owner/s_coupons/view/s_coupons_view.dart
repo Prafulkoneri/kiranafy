@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class ShopCouponsView extends StatefulWidget {
@@ -108,9 +109,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
             }),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
           widget.isNavFromDashBoard == true? readMain.onNavigation(0,ShopDashBoardView(refresh: false), context):            readMain.onNavigation(4, SAccountScreenView(

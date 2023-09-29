@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/near_shops/controller/all_sh
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,9 +63,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(0,HomeScreenView(

@@ -13,6 +13,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -93,9 +94,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const  Loader()
+
           : //  onWillPop: () async {
           // Navigator.pushAndRemoveUntil(
           //   context,

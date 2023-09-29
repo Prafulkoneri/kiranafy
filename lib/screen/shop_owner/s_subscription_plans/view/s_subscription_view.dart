@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/contr
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -70,9 +71,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 print(widget.routeName);

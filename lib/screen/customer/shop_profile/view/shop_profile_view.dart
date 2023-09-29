@@ -22,6 +22,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/controller/shop
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
@@ -68,10 +69,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : WillPopScope(
+          ? const Loader() :
+      WillPopScope(
               onWillPop: () async {
                 print("widget.routeName ${widget.routeName}");
                 // read.onBackPressed(
@@ -972,9 +971,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ),
                         ),
                       ),
-                      //  Container(),
 
-                      watch.seasonalProduct?.isNotEmpty ?? false
+
+                      watch.seasonalProduct?.isNotEmpty == true
                           ? Column(
                               children: [
                                 Padding(
@@ -1042,7 +1041,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
 
                       Padding(
                         padding: EdgeInsets.only(top: 15.w),
-                        child: watch.seasonalProduct?.isNotEmpty ?? false
+                        child: watch.seasonalProduct?.isNotEmpty == true
                             ? SizedBox(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -1496,6 +1495,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ],
                         ),
                       ),
+
                       SizedBox(
                         child: SingleChildScrollView(
                           physics: BouncingScrollPhysics(),
@@ -1684,17 +1684,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ),
                         ),
                       ),
+
                       watch.shopCouponsList?.isNotEmpty == true
                           ? Padding(
                               padding: EdgeInsets.only(top: 17.w),
                               child: const CShopCouponsView(),
                             )
                           : Container(
-                              // color: Colors.red,
-                              // height: 100,
-                              // width: 100,
                               ),
-                      watch.recommandedProduct?.isNotEmpty ?? false
+                      watch.recommandedProduct?.isNotEmpty==true
                           ? Container(
                               width: 352.w,
                               child: Padding(
@@ -2115,6 +2113,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                             )
                           : Container(),
+
                       watchHome.placeAd.isNotEmpty==true ? Container(
                         padding: EdgeInsets.only(
                           right: 19.0.w,

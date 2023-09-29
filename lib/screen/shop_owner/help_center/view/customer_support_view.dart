@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/help_center/view/help_cent
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -61,9 +62,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const Loader()
             : Column(
                 children: [
                   Expanded(
