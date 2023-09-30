@@ -283,13 +283,13 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               /////Rate Us////
               GestureDetector(
                 onTap: () async {
-                  if (await canLaunch(
-                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                    await launch(
-                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-                  } else {
-                    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                  }
+                  // if (await canLaunch(
+                  //     "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+                  //   await launch(
+                  //       "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+                  // } else {
+                  //   throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+                  // }
                   LaunchReview.launch(
                       androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
                       iOSAppId: "585027354");

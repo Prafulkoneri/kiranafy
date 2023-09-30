@@ -126,7 +126,7 @@ class Endpoint {
   ////Customer Sign Up
   static const String customerSignIn = "${baseUrl}lsm-customer-login";
   ////Customer Guest Login
-  static const String customerGuestLogin= "${baseUrl}lsm-guest-login";
+  static const String customerGuestLogin = "${baseUrl}lsm-guest-login";
 //Customer Profile
   static const String customerProfile = "${baseUrl}lsm-customer-profile";
   ////Edit Customer Profile
@@ -463,6 +463,7 @@ class Endpoint {
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
   static const String removeCartItem = "${baseUrl}lsm-customer-remove-cart";
+
   static const String shopReviewList =
       "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =
@@ -471,4 +472,6 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-category-and-shop-list";
   static const String paymentRefundList =
       "${baseUrl}lsm-shop-owner-refund-list";
+  static const String getShopAreaList =
+      "${baseUrl}get-area-list-for-shop-filter";
 }

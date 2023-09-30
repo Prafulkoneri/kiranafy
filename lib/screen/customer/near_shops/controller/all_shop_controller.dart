@@ -10,6 +10,8 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/add_fa
 import 'package:local_supper_market/screen/customer/near_shops/repository/customer_view_all_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/search_shop_repo.dart';
+import 'package:local_supper_market/screen/customer/near_shops/repository/shop_area_list_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,11 +27,15 @@ class AllShopController extends ChangeNotifier {
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
   SearchShopRepo searchShopRepo = SearchShopRepo();
+  ShopAreaListRepo shopAreaListRepo = ShopAreaListRepo();
   List<bool> favNearByShop = [];
   List<bool> favAllShop = [];
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   int offset = 0;
+  String areaId = "";
+  String rating = "";
+  List<AreaData>? areaList;
 
   bool showPaginationLoader = false;
   SearchShopData? searchshopData;
@@ -42,7 +48,11 @@ class AllShopController extends ChangeNotifier {
 
   CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
       CustomerViewAllShopReqModel(
-          pincode: pincode, offset: offset.toString(), limit: "10");
+          pincode: pincode,
+          offset: offset.toString(),
+          limit: "10",
+          rating: "",
+          areaId: "");
 
   Future<void> initState(context, refresh) async {
     searchController.clear();
@@ -54,6 +64,7 @@ class AllShopController extends ChangeNotifier {
     } else {
       isLoading = false;
     }
+    getAreaList(context);
     notifyListeners();
   }
 
@@ -370,5 +381,43 @@ class AllShopController extends ChangeNotifier {
       await getAllShops(context);
       notifyListeners();
     }
+  }
+  ///////////////////////////////////
+
+  Future<void> onAreaSelected(value) async {
+    areaId = int.parse(value.toString()).toString();
+
+    notifyListeners();
+  }
+
+  Future<void> getAreaList(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    shopAreaListRepo
+        .getShopAreaList(pref.getString("successToken"))
+        .then((response) {
+      final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        log(response.body);
+        areaList = result.areaData;
+        // if (result.areaData!.isEmpty) {
+        //   Utils.showPrimarySnackbar(context, "No Area Found",
+        //       type: SnackType.error);
+        // }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }

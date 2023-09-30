@@ -2,16 +2,22 @@ class CustomerViewAllShopReqModel {
   String? pincode;
   String? limit;
   String? offset;
+  String ? areaId;
+  String ? rating;
   CustomerViewAllShopReqModel({
     this.pincode,
     this.limit,
     this.offset,
+    required this.areaId,
+    required this.rating,
   });
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data["pincode"] = pincode;
     data["limit"] = limit;
     data["offset"] = offset;
+    data["areaId"] = areaId;
+    data["rating"] = rating;
     return data;
   }
 }

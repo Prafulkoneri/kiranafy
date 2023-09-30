@@ -23,7 +23,6 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_r
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
-import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_offer_products.dart';
@@ -412,9 +411,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       ),
                       Container(
                           margin: EdgeInsets.only(
-                              left: 19.w, top: 10.w, right: 15.w),
+                              left: 19.w, top: 10.w, right: 19.w),
                           padding: EdgeInsets.only(
-                              left: 10.w, right: 5.w, top: 6.w, bottom: 6.w),
+                              left: 10.w, right: 20.w, top: 6.w, bottom: 6.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border:
@@ -1832,23 +1831,19 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                               element?.offerPrice !=
                                                                   element
                                                                       ?.mrpPrice
-                                                          ? OfferPrice(
-                                                              text:
-                                                                  '\u{20B9}${element?.offerPrice}',
+                                                          ? Text(
+                                                              '\u{20B9}${element?.offerPrice}',
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    // decoration:
+                                                                    // TextDecoration.lineThrough,
+                                                                    color: Black,
+                                                                    letterSpacing: .5,
+                                                                    fontSize: 13.sp,
+                                                                    fontWeight: FontWeight.w500),
+                                                              ),
                                                             )
-                                                          // Text(
-                                                          //     '\u{20B9}${element?.offerPrice}',
-                                                          //     style: GoogleFonts
-                                                          //         .dmSans(
-                                                          //       textStyle: TextStyle(
-                                                          //           // decoration:
-                                                          //           // TextDecoration.lineThrough,
-                                                          //           color: Black,
-                                                          //           letterSpacing: .5,
-                                                          //           fontSize: 13.sp,
-                                                          //           fontWeight: FontWeight.w500),
-                                                          //     ),
-                                                          //   )
                                                           : Text(""),
                                                     ),
                                                   ],
@@ -2056,11 +2051,13 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                             .spaceBetween,
                                                                     children: [
                                                                       Flexible(
-                                                                          child:
-                                                                              ProductName(
-                                                                        text:
+                                                                        child: Text(
                                                                             "${element?.productName}",
-                                                                      )),
+                                                                            style:
+                                                                                GoogleFonts.dmSans(
+                                                                              textStyle: TextStyle(color: Black, letterSpacing: .5, fontSize: 14.sp, fontWeight: FontWeight.w700),
+                                                                            )),
+                                                                      ),
                                                                       element?.discountPercentage !=
                                                                               ""
                                                                           ? Container(
@@ -2068,9 +2065,12 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               height: 20.h,
                                                                               decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
                                                                               child: Center(
-                                                                                  child: PlaceYourAdd(
-                                                                                text: "${element?.discountPercentage} off",
-                                                                              )),
+                                                                                child: Text("${element?.discountPercentage} off",
+                                                                                    // textAlign: TextAlign.center,
+                                                                                    style: GoogleFonts.dmSans(
+                                                                                      textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
+                                                                                    )),
+                                                                              ),
                                                                             )
                                                                           : Container(),
                                                                     ],
@@ -2078,10 +2078,25 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   SizedBox(
                                                                     height: 6.h,
                                                                   ),
-                                                                  UnitAndWeight(
-                                                                    text:
-                                                                        "${element?.weight}${element?.unit}",
+                                                                  Text(
+                                                                    "${element?.weight}${element?.unit}",
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
+                                                                      textStyle: TextStyle(
+                                                                          color:
+                                                                              Grey,
+                                                                          letterSpacing:
+                                                                              .5,
+                                                                          fontSize: 12
+                                                                              .sp,
+                                                                          fontWeight:
+                                                                              FontWeight.w500),
+                                                                    ),
                                                                   ),
+                                                                  //
+                                                                  // SizedBox(
+                                                                  //   height: 10.h,
+                                                                  // ),
                                                                   row,
                                                                 ],
                                                               ),
@@ -2185,9 +2200,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 14.w, vertical: 2.w),
                               child: Center(
-                                  child: PlaceYourAdd(
-                                text: "Place Your Ad",
-                              )),
+                                child: Text(
+                                  "Place Your Ad",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
                             ),
                           ),
                         ],

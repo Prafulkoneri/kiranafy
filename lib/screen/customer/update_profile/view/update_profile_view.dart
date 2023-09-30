@@ -61,8 +61,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
-
+          ? Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
