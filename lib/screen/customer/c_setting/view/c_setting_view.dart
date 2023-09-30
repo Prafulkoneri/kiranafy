@@ -62,20 +62,19 @@ class _CustomerSettingState extends State<CustomerSetting> {
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
-
+          ? Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(
-              4,
-              ProfileScreenView(
-                isRefreshed: false,
-                // refresh: false,
-              ),
-              context);
-          return false;
-        },
-            child: Padding(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    4,
+                    ProfileScreenView(
+                      isRefreshed: false,
+                      // refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: Padding(
                 padding: EdgeInsets.only(left: 19.w, top: 20.w, right: 19.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +164,8 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 SizedBox(
                                                   width: 19.w,
@@ -193,9 +193,11 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                                         "Yes",
                                                         textAlign:
                                                             TextAlign.center,
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               // letterSpacing: .5,
                                                               fontSize: 20.sp,
                                                               fontWeight:
@@ -226,13 +228,14 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                                           // border: Border.all(width: 1, color: Black),
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(10)),
+                                                                  .circular(
+                                                                      10)),
                                                       child: Column(
                                                         children: [
                                                           Text(
                                                             "No",
-                                                            textAlign:
-                                                                TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle:
@@ -292,7 +295,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

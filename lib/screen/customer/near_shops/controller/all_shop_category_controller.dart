@@ -54,6 +54,7 @@ class AllCategoryShopController extends ChangeNotifier {
     searchController.clear();
     if (refresh) {
       areaId = "";
+      rating = "";
       print(id);
       allShops.clear();
       offset = 0;

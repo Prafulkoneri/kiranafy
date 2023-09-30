@@ -61,7 +61,7 @@ class AllShopController extends ChangeNotifier {
 
     if (refresh) {
       areaId = "";
-      // rating = "";
+      rating = "";
       isLoading = true;
       allShops.clear();
       offset = 0;
@@ -475,7 +475,7 @@ class AllShopController extends ChangeNotifier {
 
   Future<void> applyFilter(context) async {
     showLoader(true);
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopAreaListRepo
@@ -486,6 +486,7 @@ class AllShopController extends ChangeNotifier {
       if (response.statusCode == 200) {
         // areaList = result.areaList;
         // showLoader(false);
+        LoadingOverlay.of(context).hide();
         Navigator.pop(context);
         getAllShops(context);
         notifyListeners();

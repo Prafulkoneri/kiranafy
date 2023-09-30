@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class LoadingOverlay extends StatefulWidget {
-  final Widget  child;
-  const LoadingOverlay({Key? key,required this.child}) : super(key: key);
+  final Widget child;
+  const LoadingOverlay({Key? key, required this.child}) : super(key: key);
   static _LoadingOverlayState of(BuildContext context) {
     return context.findAncestorStateOfType<_LoadingOverlayState>()!;
   }
+
   @override
   _LoadingOverlayState createState() => _LoadingOverlayState();
 }
 
 class _LoadingOverlayState extends State<LoadingOverlay> {
-
   bool _isLoading = false;
 
   void show() {
@@ -26,6 +25,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
       _isLoading = false;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,7 +34,7 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
         if (_isLoading)
           const Opacity(
             opacity: 0.5,
-            child: ModalBarrier(dismissible: false, color: Colors.black),
+            child: ModalBarrier(dismissible: false, color: Colors.red),
           ),
         if (_isLoading)
           const Center(
@@ -44,5 +44,3 @@ class _LoadingOverlayState extends State<LoadingOverlay> {
     );
   }
 }
-
-
