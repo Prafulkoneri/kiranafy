@@ -39,7 +39,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                 ),
                 // height: MediaQuery.of(context).size.height * 0.50,
                 // height: 563.h,
-                // width: 390.w,/
+                // width: 390.w,
                 decoration: new BoxDecoration(
                   color: Colors.white,
                   borderRadius: new BorderRadius.only(

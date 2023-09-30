@@ -412,9 +412,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       ),
                       Container(
                           margin: EdgeInsets.only(
-                              left: 19.w, top: 10.w, right: 19.w),
+                              left: 19.w, top: 10.w, right: 15.w),
                           padding: EdgeInsets.only(
-                              left: 10.w, right: 20.w, top: 6.w, bottom: 6.w),
+                              left: 10.w, right: 5.w, top: 6.w, bottom: 6.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border:

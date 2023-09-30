@@ -175,8 +175,6 @@ class _AllCouponsState extends State<AllCoupons> {
                                     //
                                   ),
                                 ),
-
-                                //
                               ],
                             ),
                           );
@@ -195,7 +193,6 @@ class _AllCouponsState extends State<AllCoupons> {
                                 physics: BouncingScrollPhysics(),
                                 // physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                // itemCount: watch.shopEnquiriesDetails?.length??0,
                                 itemCount: watch.allCouponlistdata
                                         ?.shopEnquiriesDetails?.length ??
                                     0,
@@ -460,9 +457,6 @@ class _AllCouponsState extends State<AllCoupons> {
                             ),
                           ),
                         )
-                  // SizedBox(
-                  //   height: 80.h,
-                  // )
                 ],
               ),
             ),

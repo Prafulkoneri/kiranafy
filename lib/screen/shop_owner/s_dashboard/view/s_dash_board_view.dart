@@ -188,16 +188,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     child: DashBoardShopName(
                                       text: '${watch.shopName}',
                                     ),
-                                    // Text(
-                                    //   "${watch.shopName}",
-                                    //   // "New Balaji Trading Company",
-                                    //   style: GoogleFonts.dmSans(
-                                    //     textStyle: TextStyle(
-                                    //         color: Colors.white,
-                                    //         fontSize: 18.sp,
-                                    //         fontWeight: FontWeight.w700),
-                                    //   ),
-                                    // ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
