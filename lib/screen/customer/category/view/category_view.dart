@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import '../../products/views/product_screen_view.dart';
@@ -248,7 +249,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
             watch.isLoading
                 ? Container(
                     padding: EdgeInsets.only(top: 200.w),
-                    child: CircularProgressIndicator(),
+                    child: Loader(),
                   )
                 : Expanded(
                     child: watch.productList?.isNotEmpty == true ||

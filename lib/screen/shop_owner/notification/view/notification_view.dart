@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s
 import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/s_order_Status_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class NotificationsScreenView extends StatefulWidget {
@@ -185,9 +186,7 @@ class _NotificationsScreenViewState extends State<NotificationsScreenView> {
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const Loader()
             : WillPopScope(
           onWillPop: ()async{
             if(widget.route=="accounts"){

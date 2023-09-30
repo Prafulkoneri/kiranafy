@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class HelpCenterView extends StatefulWidget {
@@ -65,9 +66,8 @@ class _HelpCenterViewState extends State<HelpCenterView> {
             },
           ),
         ),
-        body:watch.isLoading?Center(
-          child: CircularProgressIndicator(),
-        ): watch.ticketList?.isNotEmpty == true
+        body:watch.isLoading? Loader()
+        : watch.ticketList?.isNotEmpty == true
             ? WillPopScope(
           onWillPop: ()async{
             readMain.onNavigation(

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:flutter_downloader/flutter_downloader.dart';
+
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -41,82 +42,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     // print(context.read<SubscriptionHistoryController>().currentSubscriptionPlan);
   }
 
-  String? file;
-  String fileurl =
-      "https://localsupermart.com/testing/storage/subscription_pdf_invoice/LSMSUBS000054-2023-08-0810:50:38.pdf";
 
-  void download(String url) async {
-    final status = await Permission.storage.request();
-
-    if (status.isGranted) {
-      final id = await FlutterDownloader.enqueue(
-        url: url,
-        savedDir: "/storage/emulated/0/Download",
-        showNotification: true,
-        openFileFromNotification: true,
-        fileName: "file.pdf",
-      ).then((value) {
-        print("complated");
-      });
-    } else {
-      setState(() {
-        print("faild");
-      });
-      print('Permission Denied');
-    }
-  }
-
-  downloadFile(String url, {filename}) async {
-    var httpClient = http.Client();
-    var request = new http.Request('GET', Uri.parse(url));
-    var response = httpClient.send(request);
-    String dir = (await getApplicationDocumentsDirectory()).path;
-
-    List<List<int>> chunks = [];
-    int downloaded = 0;
-
-    response.asStream().listen((http.StreamedResponse r) {
-      r.stream.listen((List<int> chunk) {
-        // Display percentage of completion
-        // debugPrint('downloadPercentage: ${downloaded / r.contentLength * 100}');
-
-        chunks.add(chunk);
-        downloaded += chunk.length;
-      }, onDone: () async {
-        // Display percentage of completion
-        // debugPrint('downloadPercentage: ${downloaded / r.contentLength * 100}');
-
-        // Save the file
-        File file = new File('$dir/$filename');
-        final Uint8List bytes = Uint8List(r.contentLength ?? 0);
-        int offset = 0;
-        for (List<int> chunk in chunks) {
-          bytes.setRange(offset, offset + chunk.length, chunk);
-          offset += chunk.length;
-        }
-        await file.writeAsBytes(bytes);
-        return;
-      });
-    });
-  }
-
-  Future<void> initPlatformState() async {
-    _setPath();
-    if (!mounted) return;
-  }
-
-  String path = "";
-
-  void _setPath() async {
-    Directory _path = await getApplicationDocumentsDirectory();
-    String _localPath = _path.path + Platform.pathSeparator + 'Download';
-    final savedDir = Directory(_localPath);
-    bool hasExisted = await savedDir.exists();
-    if (!hasExisted) {
-      savedDir.create();
-    }
-    path = _localPath;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,9 +78,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?const Loader()
           : WillPopScope(
         onWillPop: ()async{
           widget.screenName == "accounts" ?

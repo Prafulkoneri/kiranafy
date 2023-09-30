@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'cart_detail_view.dart';
@@ -170,9 +171,7 @@ class _CartScreenViewState extends State<CartScreenView> {
       ),
       backgroundColor: backgroundColor,
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Loader()
           : watch.cartList!.isEmpty
               ? WillPopScope(
         onWillPop: () async {

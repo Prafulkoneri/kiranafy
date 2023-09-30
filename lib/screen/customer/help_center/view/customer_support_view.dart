@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -62,9 +63,8 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Loader()
+
             : Column(
                 children: [
                   Expanded(

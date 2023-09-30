@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/update_profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/text.dart';
@@ -60,9 +61,8 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -190,9 +191,7 @@ class _CartDetailViewState extends State<CartDetailView> {
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Loader()
             : watch.shopDetailData == null
                 ? Container()
                 : WillPopScope(

@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/near_shops/view/all_near_sho
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 
@@ -70,9 +71,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? Loader()
+
             : WillPopScope(
           onWillPop: ()async{
             SystemNavigator.pop();

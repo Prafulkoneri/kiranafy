@@ -5,13 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/shop_review/controller/shop_review_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class ShopReviewScreenView extends StatefulWidget {
@@ -65,10 +63,9 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : WillPopScope(
+          ? const Loader()
+          :
+      WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(0, ShopDashBoardView(
             refresh: false,

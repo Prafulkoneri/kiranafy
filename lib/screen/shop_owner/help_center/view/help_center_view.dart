@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class SHelpCenterView extends StatefulWidget {
@@ -48,9 +49,7 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
             },
           ),
         ),
-        body:watch.isLoading?Center(
-          child: CircularProgressIndicator(),
-        ):
+        body:watch.isLoading?const Loader():
 WillPopScope(
   onWillPop: ()async{
     readMainScreen.onNavigation(4, SAccountScreenView(

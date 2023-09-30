@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/c_setting/controller/c_setti
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class CustomerSetting extends StatefulWidget {
@@ -61,9 +62,8 @@ class _CustomerSettingState extends State<CustomerSetting> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(

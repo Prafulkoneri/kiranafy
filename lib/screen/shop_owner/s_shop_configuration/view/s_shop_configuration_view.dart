@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
@@ -81,9 +82,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : WillPopScope(
             onWillPop: ()async{
               widget.initialShopConfigration == false

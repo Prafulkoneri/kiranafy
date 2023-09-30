@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/products/views/product_scree
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -58,9 +59,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Loader()
+
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);

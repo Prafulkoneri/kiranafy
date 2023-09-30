@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_ad
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -88,9 +89,7 @@ class _AddProductViewState extends State<AddProductView> {
           ),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const Loader()
             : WillPopScope(
           onWillPop: ()async{
             readMainScreen.onNavigation(0, SSelectedProductView(

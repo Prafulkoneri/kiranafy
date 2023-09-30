@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/shop_owner/s_products/view/add_unit_v
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
@@ -99,9 +100,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
               }),
         ),
         body: watch.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
+            ? const Loader()
             : WillPopScope(
           onWillPop: ()async{
             readMainScreen.onNavigation(0, SSelectedProductView(

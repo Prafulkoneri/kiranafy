@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/customer/account/controller/profile_c
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 class CustomerFAQView extends StatefulWidget {
@@ -53,9 +54,8 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         ),
       ),
       body: watch.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

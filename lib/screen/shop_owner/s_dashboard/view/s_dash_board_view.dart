@@ -19,6 +19,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_status/controller/
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/shop_review/view/shop_review_list_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +51,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Loader()
           : SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(

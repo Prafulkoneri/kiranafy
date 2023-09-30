@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/main_screen/views/main_scree
 import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/order_filtter_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
 
 import '../../main_screen/controllers/main_screen_controller.dart';
@@ -83,9 +84,8 @@ class _MyOrderViewState extends State<MyOrderView> {
         ),
       ),
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ?  Loader()
+
           : WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(

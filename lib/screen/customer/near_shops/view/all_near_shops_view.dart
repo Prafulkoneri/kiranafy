@@ -12,6 +12,7 @@ import 'package:local_supper_market/screen/customer/near_shops/controller/all_sh
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
@@ -60,9 +61,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
 
     return Scaffold(
       body: watch.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Loader()
+
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
