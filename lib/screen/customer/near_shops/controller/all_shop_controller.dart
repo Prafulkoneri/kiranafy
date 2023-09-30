@@ -64,7 +64,7 @@ class AllShopController extends ChangeNotifier {
     } else {
       isLoading = false;
     }
-    getAreaList(context);
+
     notifyListeners();
   }
 
@@ -111,6 +111,7 @@ class AllShopController extends ChangeNotifier {
         }
         isLoading = false;
         showPaginationLoader = false;
+        getAreaList(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -399,10 +400,6 @@ class AllShopController extends ChangeNotifier {
       if (response.statusCode == 200) {
         log(response.body);
         areaList = result.areaData;
-        // if (result.areaData!.isEmpty) {
-        //   Utils.showPrimarySnackbar(context, "No Area Found",
-        //       type: SnackType.error);
-        // }
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

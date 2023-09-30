@@ -126,7 +126,8 @@ class CustomerSettingController extends ChangeNotifier {
 
   /////////////////////////SHOP DELETE///////////////////
   Future<void> CustomerAccountDelete(context) async {
-    LoadingOverlay.of(context).show();
+    print("hello");
+    // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     cdeleteAccountRepo
@@ -136,6 +137,7 @@ class CustomerSettingController extends ChangeNotifier {
         jsonDecode(response.body),
       );
       if (response.statusCode == 200) {
+
         pref.clear();
         Navigator.push(
           context,

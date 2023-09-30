@@ -9,6 +9,7 @@ class MobileNumberCheckRepo {
       MobileNumberCheckRequestModel reqModel) async {
     print(Uri.parse(Endpoint.mobileNumberChecks));
     try {
+      print(reqModel.toJson());
       return await http.post(Uri.parse(Endpoint.mobileNumberChecks),
           body: reqModel.toJson());
     } catch (e) {

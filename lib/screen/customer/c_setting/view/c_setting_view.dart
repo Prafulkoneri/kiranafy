@@ -61,10 +61,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
           },
         ),
       ),
-      body: watch.isLoading
-          ?  Loader()
-
-          : WillPopScope(
+      body:  WillPopScope(
         onWillPop: ()async{
           readMain.onNavigation(
               4,
