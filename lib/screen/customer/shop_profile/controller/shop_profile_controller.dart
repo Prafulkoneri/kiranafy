@@ -53,7 +53,6 @@ class ShopProfileViewController extends ChangeNotifier {
   int _currentPage = 0;
   bool? deliveryAddressStatus;
   List<bool> isSeasonalProductAdded = [];
-
   List<bool> isRecommendedProductAdded = [];
   List<bool> isOfferProductAdded = [];
 
@@ -260,6 +259,8 @@ class ShopProfileViewController extends ChangeNotifier {
   AddFavReqModel get addFavReqModel => AddFavReqModel(
         shopId: shopId.toString(),
       );
+
+
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if(pref.getString("status")=="guestLoggedIn"){

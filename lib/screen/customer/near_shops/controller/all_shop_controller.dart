@@ -30,6 +30,8 @@ class AllShopController extends ChangeNotifier {
   bool isLoading = true;
   ScrollController scrollController = ScrollController();
   int offset = 0;
+  String areaId="";
+  String rating="";
 
   bool showPaginationLoader = false;
   SearchShopData? searchshopData;
@@ -42,7 +44,7 @@ class AllShopController extends ChangeNotifier {
 
   CustomerViewAllShopReqModel get customerViewAllShopReqModel =>
       CustomerViewAllShopReqModel(
-          pincode: pincode, offset: offset.toString(), limit: "10");
+          pincode: pincode, offset: offset.toString(), limit: "10",rating: "",areaId: "");
 
   Future<void> initState(context, refresh) async {
     searchController.clear();

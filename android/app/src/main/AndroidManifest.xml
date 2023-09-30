@@ -53,16 +53,6 @@
        <meta-data
            android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY"/>
-        <provider
-            android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-            android:authorities="com.lsm.local_supper_market.contentprovider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            android:requestLegacyExternalStorage="true">
-        <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/provider_paths"/>
-</provider>
         <receiver android:name="com.shounakmulay.telephony.sms.IncomingSmsReceiver"
             android:permission="android.permission.BROADCAST_SMS" android:exported="true">
             <intent-filter>

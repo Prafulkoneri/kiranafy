@@ -11,6 +11,8 @@ import 'package:local_supper_market/screen/customer/coupons/view/coupon_filtter_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class AllCoupons extends StatefulWidget {

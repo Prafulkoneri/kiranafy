@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/shop_filter_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -82,54 +83,90 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                           areaName: watchMain.areaName,
                           cityName: watchMain.cityName,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            right: 19.0.w,
-                            left: 19.0.w,
-                            top: 13.h,
-                          ),
-                          child: SizedBox(
-                            width: 351.w,
-                            height: 36.h,
-                            child: TextField(
-                              onChanged: (value) {
-                                read.shopSearchList(context);
-                              },
-                              autofocus: widget.isSearchFocus ?? true,
-                              controller: watch.searchController,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 1, color: splashnone),
-                                    borderRadius: BorderRadius.circular(8.w)),
-                                hintText: 'Search your shop.......',
-                                hintStyle: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Grey,
-                                        // letterSpacing: .5,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w400)),
-
-                                // Add a clear button to the search bar
-
-                                // Add a search icon or button to the search bar
-                                prefixIcon: IconButton(
-                                  icon: SvgPicture.asset(
-                                    'assets/images/search.svg',
-                                    width: 15.w,
-                                    height: 15.h,
-                                  ),
-                                  onPressed: () {
-                                    // Perform the search here
-                                  },
+                        SizedBox(
+                          height: 12.w,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  // right: 19.0.w,
+                                  left: 19.0.w,
+                                  // top: 13.h,
                                 ),
+                                child: SizedBox(
+                                  height: 36.h,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      read.shopSearchList(context);
+                                    },
+                                    autofocus: widget.isSearchFocus ?? true,
+                                    controller: watch.searchController,
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(width: 1, color: splashnone),
+                                          borderRadius: BorderRadius.circular(8.w)),
+                                      hintText: 'Search your shop.......',
+                                      hintStyle: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Grey,
+                                              // letterSpacing: .5,
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400)),
 
-                                // border: OutlineInputBorder(
-                                //   borderRadius: BorderRadius.circular(15.w),
-                                // ),
+                                      // Add a clear button to the search bar
+
+                                      // Add a search icon or button to the search bar
+                                      prefixIcon: IconButton(
+                                        icon: SvgPicture.asset(
+                                          'assets/images/search.svg',
+                                          width: 15.w,
+                                          height: 15.h,
+                                        ),
+                                        onPressed: () {
+                                          // Perform the search here
+                                        },
+                                      ),
+
+                                      // border: OutlineInputBorder(
+                                      //   borderRadius: BorderRadius.circular(15.w),
+                                      // ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30))),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return StatefulBuilder(builder: (context, setState) {
+                                      return ShopFilterView();
+                                    });
+                                  },
+                                );
+                              },
+                              child: SvgPicture.asset(
+                                'assets/images/filter.svg',
+                                width: 20.w,
+                                height: 18.h,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                          ],
                         ),
                         Padding(
                           padding: EdgeInsets.only(
