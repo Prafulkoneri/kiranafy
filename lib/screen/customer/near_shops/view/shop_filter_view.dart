@@ -145,110 +145,212 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    // watch.orderStatus == ""
-                    //     ?
-                    CDropDownField(
-                      onChanged: (value) {
-                        // read.onStatusSelected(value);
-                      },
-                      items: [
-                        DropdownMenuItem(
-                            value: "1",
-                            child: Row(
-                              children: [
-                                Text(
-                                  "1",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellowAccent,
-                                )
-                              ],
-                            )),
-                        DropdownMenuItem(
-                            value: "2",
-                            child: Row(
-                              children: [
-                                Text(
-                                  "2",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellowAccent,
-                                )
-                              ],
-                            )),
-                        DropdownMenuItem(
-                            value: "3",
-                            child: Row(
-                              children: [
-                                Text(
-                                  "3",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellowAccent,
-                                )
-                              ],
-                            )),
-                        DropdownMenuItem(
-                            value: "4",
-                            child: Row(
-                              children: [
-                                Text(
-                                  "4",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellowAccent,
-                                )
-                              ],
-                            )),
-                        DropdownMenuItem(
-                            value: "5",
-                            child: Row(
-                              children: [
-                                Text(
-                                  "5",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellowAccent,
-                                )
-                              ],
-                            )),
-                      ],
-                    )
+                    watch.rating == ""
+                        ? CDropDownField(
+                            onChanged: (value) {
+                              read.onRatingSelected(value);
+                            },
+                            items: [
+                              DropdownMenuItem(
+                                  value: "1",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "1",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "2",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "2",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "3",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "3",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "4",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "4",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "5",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "5",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          )
+                        : CDropDownField(
+                            value: watch.rating,
+                            onChanged: (value) {
+                              read.onRatingSelected(value);
+                            },
+                            items: [
+                              DropdownMenuItem(
+                                  value: "1",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "1",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "2",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "2",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "3",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "3",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "4",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "4",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "5",
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "5",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.yellowAccent,
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          )
                   ],
                 ),
               ),
@@ -269,9 +371,9 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                     ),
                     // style: style,
                     onPressed: () {
-                      // read.clearFilter(
-                      //   context,
-                      // );
+                      read.clearFilter(
+                        context,
+                      );
                     },
                     child: Text(
                       'Clear Filter',
@@ -304,9 +406,9 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                     ),
                     // style: style,
                     onPressed: () {
-                      // read.applyFilter(
-                      //   context,
-                      // );
+                      read.applyFilter(
+                        context,
+                      );
                     },
                     child: Text(
                       'Filter',

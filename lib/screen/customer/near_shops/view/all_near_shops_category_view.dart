@@ -8,8 +8,8 @@ import 'package:local_supper_market/screen/customer/advertisement_form/view/ads_
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/shop_filter_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -64,12 +64,14 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
     return Scaffold(
       body: watch.isLoading
           ? Loader()
-
           : WillPopScope(
               onWillPop: () async {
-                readMain.onNavigation(0,HomeScreenView(
-                  refreshPage: false,
-                ), context);
+                readMain.onNavigation(
+                    0,
+                    HomeScreenView(
+                      refreshPage: false,
+                    ),
+                    context);
                 // Navigator.pushAndRemoveUntil(
                 //   context,
                 //   MaterialPageRoute(
@@ -95,54 +97,135 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                           areaName: watchMain.areaName,
                           cityName: watchMain.cityName,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            right: 19.0.w,
-                            left: 19.0.w,
-                            top: 13.h,
-                          ),
-                          child: SizedBox(
-                            width: 351.w,
-                            height: 36.h,
-                            child: TextField(
-                              onChanged: (value) {
-                                read.shopSearchList(context);
-                              },
-                              controller: watch.searchController,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 1, color: splashnone),
-                                    borderRadius: BorderRadius.circular(8.w)),
-                                hintText: 'Search your shop...',
-                                hintStyle: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Grey,
-                                        // letterSpacing: .5,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w400)),
-
-                                // Add a clear button to the search bar
-
-                                // Add a search icon or button to the search bar
-                                prefixIcon: IconButton(
-                                  icon: SvgPicture.asset(
-                                    'assets/images/search.svg',
-                                    width: 15.w,
-                                    height: 15.h,
-                                  ),
-                                  onPressed: () {
-                                    // Perform the search here
-                                  },
+                        SizedBox(
+                          height: 12.w,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  // right: 19.0.w,
+                                  left: 19.0.w,
+                                  // top: 13.h,
                                 ),
+                                child: SizedBox(
+                                  height: 36.h,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      read.shopSearchList(context);
+                                    },
+                                    // autofocus: widget.isSearchFocus ?? true,
+                                    controller: watch.searchController,
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1, color: splashnone),
+                                          borderRadius:
+                                              BorderRadius.circular(8.w)),
+                                      hintText: 'Search your shop.......',
+                                      hintStyle: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Grey,
+                                              // letterSpacing: .5,
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400)),
 
-                                // border: OutlineInputBorder(
-                                //   borderRadius: BorderRadius.circular(15.w),
-                                // ),
+                                      // Add a clear button to the search bar
+
+                                      // Add a search icon or button to the search bar
+                                      prefixIcon: IconButton(
+                                        icon: SvgPicture.asset(
+                                          'assets/images/search.svg',
+                                          width: 15.w,
+                                          height: 15.h,
+                                        ),
+                                        onPressed: () {
+                                          // Perform the search here
+                                        },
+                                      ),
+
+                                      // border: OutlineInputBorder(
+                                      //   borderRadius: BorderRadius.circular(15.w),
+                                      // ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30))),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return StatefulBuilder(
+                                        builder: (context, setState) {
+                                      return ShopFilterView();
+                                    });
+                                  },
+                                );
+                              },
+                              child: SvgPicture.asset(
+                                'assets/images/filter.svg',
+                                width: 20.w,
+                                height: 18.h,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                          ],
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(
+                        //     right: 19.0.w,
+                        //     left: 19.0.w,
+                        //     top: 13.h,
+                        //   ),
+                        //   child:
+                        //    SizedBox(
+                        //     width: 351.w,
+                        //     height: 36.h,
+                        //     child: TextField(
+                        //       onChanged: (value) {
+                        //         read.shopSearchList(context);
+                        //       },
+                        //       controller: watch.searchController,
+                        //       decoration: InputDecoration(
+                        //         enabledBorder: OutlineInputBorder(
+                        //             borderSide:
+                        //                 BorderSide(width: 1, color: splashnone),
+                        //             borderRadius: BorderRadius.circular(8.w)),
+                        //         hintText: 'Search your shop...',
+                        //         hintStyle: GoogleFonts.dmSans(
+                        //             textStyle: TextStyle(
+                        //                 color: Grey,
+                        //                 // letterSpacing: .5,
+                        //                 fontSize: 11,
+                        //                 fontWeight: FontWeight.w400)),
+
+                        //         prefixIcon: IconButton(
+                        //           icon: SvgPicture.asset(
+                        //             'assets/images/search.svg',
+                        //             width: 15.w,
+                        //             height: 15.h,
+                        //           ),
+                        //           onPressed: () {
+                        //             // Perform the search here
+                        //           },
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
                           padding: EdgeInsets.only(
                               top: 20.w, left: 19.0.w, bottom: 15.w),
@@ -168,15 +251,15 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                   final element = watch.nearByShop?[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      readMain.onNavigation(1,ShopProfileView(
-                                        shopId: element?.id
-                                            .toString(),
-                                        routeName:
-                                        "nearShopsCategory",
-                                        categoryId:
-                                        widget.categoryId,
-                                        refreshPage: true,
-                                      ), context);
+                                      readMain.onNavigation(
+                                          1,
+                                          ShopProfileView(
+                                            shopId: element?.id.toString(),
+                                            routeName: "nearShopsCategory",
+                                            categoryId: widget.categoryId,
+                                            refreshPage: true,
+                                          ),
+                                          context);
                                       // Navigator.pushAndRemoveUntil(
                                       //   context,
                                       //   MaterialPageRoute(
@@ -346,15 +429,17 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                         final element = watch.allShops[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            readMain.onNavigation(1,ShopProfileView(
-                                              shopId: element?.id
-                                                  .toString(),
-                                              routeName:
-                                              "nearShopsCategory",
-                                              categoryId: widget
-                                                  .categoryId,
-                                              refreshPage: true,
-                                            ), context);
+                                            readMain.onNavigation(
+                                                1,
+                                                ShopProfileView(
+                                                  shopId:
+                                                      element?.id.toString(),
+                                                  routeName:
+                                                      "nearShopsCategory",
+                                                  categoryId: widget.categoryId,
+                                                  refreshPage: true,
+                                                ),
+                                                context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -597,28 +682,40 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                           ),
                                           width: ScreenUtil().screenWidth,
                                           // height: 100.h,
-                                          child:  (watchHome.placeAd.toList()
-                                            ..shuffle())
-                                              .first!=""?AppNetworkImages(
-                                            showShopImage: true,
-                                            imageUrl:
-                                                (watchHome.placeAd.toList()
-                                                      ..shuffle())
-                                                    .first,
-                                            height: 163.h,
-                                            width: 352.w,
-                                            fit: BoxFit.cover,
-                                          ):Image.asset("assets/images/shop_image.png",width: ScreenUtil().screenWidth,  height: 163.h,),
+                                          child: (watchHome.placeAd.toList()
+                                                        ..shuffle())
+                                                      .first !=
+                                                  ""
+                                              ? AppNetworkImages(
+                                                  showShopImage: true,
+                                                  imageUrl: (watchHome.placeAd
+                                                          .toList()
+                                                        ..shuffle())
+                                                      .first,
+                                                  height: 163.h,
+                                                  width: 352.w,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.asset(
+                                                  "assets/images/shop_image.png",
+                                                  width:
+                                                      ScreenUtil().screenWidth,
+                                                  height: 163.h,
+                                                ),
                                         )
                                       : Container(
-                                    padding: EdgeInsets.only(
-                                      right: 19.0.w,
-                                      left: 19.0.w,
-                                    ),
-                                    width: ScreenUtil().screenWidth,
-                                    // height: 100.h,
-                                    child:Image.asset("assets/images/shop_image.png",width: ScreenUtil().screenWidth,  height: 163.h,),
-                                  ),
+                                          padding: EdgeInsets.only(
+                                            right: 19.0.w,
+                                            left: 19.0.w,
+                                          ),
+                                          width: ScreenUtil().screenWidth,
+                                          // height: 100.h,
+                                          child: Image.asset(
+                                            "assets/images/shop_image.png",
+                                            width: ScreenUtil().screenWidth,
+                                            height: 163.h,
+                                          ),
+                                        ),
 
                                   SizedBox(
                                     height: 10.h,
@@ -628,13 +725,21 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       InkWell(
-                                        onTap: () async{
-                                          SharedPreferences pref = await SharedPreferences.getInstance();
-                                          if(pref.getString("status")=="guestLoggedIn"){
-                                            Utils().showLoginDialog(context,"Please Login to continue");
+                                        onTap: () async {
+                                          SharedPreferences pref =
+                                              await SharedPreferences
+                                                  .getInstance();
+                                          if (pref.getString("status") ==
+                                              "guestLoggedIn") {
+                                            Utils().showLoginDialog(context,
+                                                "Please Login to continue");
                                             return;
                                           }
-                                          readMain.onNavigation(0,CustomerAdsView(route: "categoryShops"), context);
+                                          readMain.onNavigation(
+                                              0,
+                                              CustomerAdsView(
+                                                  route: "categoryShops"),
+                                              context);
                                           // Navigator.pushAndRemoveUntil(
                                           //   context,
                                           //   MaterialPageRoute(
