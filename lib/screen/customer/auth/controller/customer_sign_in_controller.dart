@@ -14,7 +14,7 @@ import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_v
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/widget/Loaderoverlay.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

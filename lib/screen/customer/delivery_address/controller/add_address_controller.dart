@@ -23,7 +23,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/model/pincode_model
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/repository/registration_data_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/Loaderoverlay.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

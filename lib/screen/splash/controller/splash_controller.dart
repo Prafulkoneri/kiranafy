@@ -82,22 +82,17 @@ class SplashController extends ChangeNotifier {
       }
       if (pref.getString("status") == "customerLoggedIn") {
         final read = Provider.of<MainScreenController>(context, listen: false);
-        read.onNavigation(
-            0,
-            HomeScreenView(
-              refreshPage: true,
-            ),
-            context);
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => MainScreenView(
-        //           index: 0,
-        //           screenName: HomeScreenView(
-        //             refreshPage: true,
-        //           ))),
-        //   (Route<dynamic> route) => false,
-        // );
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                  index: 0,
+                  screenName: HomeScreenView(
+                    refreshPage: true,
+                  ))),
+          // (Route<dynamic> route) => false,
+        );
       }
       if (pref.getString("status") == null) {
         Navigator.pushReplacement(context,
@@ -114,7 +109,7 @@ class SplashController extends ChangeNotifier {
         SharedPreferences pref = await SharedPreferences.getInstance();
         print(pref.getString("status"));
         if (pref.getString("status") == "guestLoggedIn") {
-          Navigator.pushAndRemoveUntil(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => MainScreenView(
@@ -122,7 +117,7 @@ class SplashController extends ChangeNotifier {
                     screenName: HomeScreenView(
                       refreshPage: true,
                     ))),
-            (Route<dynamic> route) => false,
+            // (Route<dynamic> route) => false,
           );
         }
         if (pref.getString("status") == "numberRegistered") {
@@ -150,7 +145,7 @@ class SplashController extends ChangeNotifier {
                       SShopConfigurationView(initialShopConfigration: true)));
         }
         if (pref.getString("status") == "loggedIn") {
-          Navigator.pushAndRemoveUntil(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => SMainScreenView(
@@ -158,12 +153,12 @@ class SplashController extends ChangeNotifier {
                     screenName: ShopDashBoardView(
                       refresh: true,
                     ))),
-            (Route<dynamic> route) => false,
+            // (Route<dynamic> route) => false,
           );
           // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavigationBarScreen()));
         }
         if (pref.getString("status") == "customerLoggedIn") {
-          Navigator.pushAndRemoveUntil(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => MainScreenView(
@@ -171,7 +166,7 @@ class SplashController extends ChangeNotifier {
                     screenName: HomeScreenView(
                       refreshPage: true,
                     ))),
-            (Route<dynamic> route) => false,
+            // (Route<dynamic> route) => false,
           );
         }
         if (pref.getString("status") == null) {

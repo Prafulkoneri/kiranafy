@@ -169,7 +169,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       pageSnapping: true,
                       scrollDirection: Axis.horizontal,
                       allowImplicitScrolling: true,
-                      controller: watch.pageController,
+                      // controller: watch.pageController,
                       onPageChanged: (page) {
                         setState(() {
                           activePage = page;

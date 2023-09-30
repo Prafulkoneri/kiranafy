@@ -77,11 +77,11 @@ class HomeScreenController extends ChangeNotifier {
             } else {
               _currentPage = 0;
             }
-            pageController.animateToPage(
-              _currentPage,
-              duration: Duration(milliseconds: 350),
-              curve: Curves.easeIn,
-            );
+            // pageController.animateToPage(
+            //   _currentPage,
+            //   duration: Duration(milliseconds: 350),
+            //   curve: Curves.easeIn,
+            // );
           });
         }
         notifyListeners();

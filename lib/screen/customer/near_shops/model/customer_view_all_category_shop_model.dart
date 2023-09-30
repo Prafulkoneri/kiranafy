@@ -4,10 +4,14 @@ class CustomerViewAllCategoryShopReqModel {
   String? limit;
   String? offset;
   String? categoryId;
+  String? areaId;
+  String? rating;
   CustomerViewAllCategoryShopReqModel({
     this.limit,
     this.offset,
     this.categoryId,
+    required this.areaId,
+    required this.rating,
   });
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -15,6 +19,8 @@ class CustomerViewAllCategoryShopReqModel {
     data["limit"] = limit;
     data["offset"] = offset;
     data["category_id"] = categoryId;
+    data["areaId"] = areaId;
+    data["rating"] = rating;
     return data;
   }
 }
@@ -35,9 +41,3 @@ class CustomerViewAllCategoryShopResModel {
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 }
-
-
-
-
-
-
