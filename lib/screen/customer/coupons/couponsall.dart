@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/coupons/view/coupon_filtter_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class AllCoupons extends StatefulWidget {
@@ -74,11 +75,12 @@ class _AllCouponsState extends State<AllCoupons> {
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(0,HomeScreenView(refreshPage: false), context);
-          return false;
-        },
-            child: Column(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    0, HomeScreenView(refreshPage: false), context);
+                return false;
+              },
+              child: Column(
                 children: [
                   Container(
                     height: 50.h,
@@ -113,13 +115,15 @@ class _AllCouponsState extends State<AllCoupons> {
                                     style: ButtonStyle(
                                       elevation: MaterialStateProperty.all(0),
                                       // backgroundColor: ,
-                                      backgroundColor: MaterialStateProperty.all(
-                                          watch.selectedIndex == index
-                                              ? pink
-                                              : Colors.white),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              watch.selectedIndex == index
+                                                  ? pink
+                                                  : Colors.white),
                                       shape: MaterialStateProperty.all(
                                         RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           side: BorderSide(
                                             color: watch.selectedIndex == index
                                                 ? Colors.transparent
@@ -204,10 +208,12 @@ class _AllCouponsState extends State<AllCoupons> {
                                     padding: EdgeInsets.only(
                                         left: 19.0.w, right: 19.w, top: 15.0.w),
                                     child: Stack(
-                                      alignment: AlignmentDirectional.centerStart,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                       children: <Widget>[
                                         Padding(
-                                          padding: EdgeInsets.only(bottom: 12.h),
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
                                           child: Image.asset(
                                             'assets/images/Coupons.png',
                                             // height: 125.h, width: 352.w
@@ -257,15 +263,9 @@ class _AllCouponsState extends State<AllCoupons> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
-                                                    Text(
-                                                      "${element?.shopName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black,
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight.w700),
-                                                      ),
+                                                    CouponsOneText(
+                                                      text:
+                                                          "${element?.shopName}",
                                                     ),
                                                     InkWell(
                                                       onTap: () {
@@ -321,16 +321,9 @@ class _AllCouponsState extends State<AllCoupons> {
                                                     padding: EdgeInsets.only(
                                                       left: 19.w,
                                                     ),
-                                                    child: Text(
-                                                      "Valid until ${element?.couponToDate}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Black,
-                                                            letterSpacing: .5,
-                                                            fontSize: 10.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400),
-                                                      ),
+                                                    child: CouponsTwoText(
+                                                      text:
+                                                          "Valid until ${element?.couponToDate}",
                                                     ),
                                                   )
                                                 ],
@@ -345,31 +338,18 @@ class _AllCouponsState extends State<AllCoupons> {
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 18.0.h),
-                                                    child: Text(
-                                                        "${element?.couponDiscountPercentage} %OFF",
-                                                        style: GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Black,
-                                                              letterSpacing: .5,
-                                                              fontSize: 15.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                        )),
+                                                    child: CouponsThreeText(
+                                                      text:
+                                                          "${element?.couponDiscountPercentage} %OFF",
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     width: 12.w,
                                                   ),
-                                                  Text(
-                                                      "UPTO ₹${element?.couponDiscountMaxAmount}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Grey,
-                                                            letterSpacing: .5,
-                                                            fontSize: 10.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400),
-                                                      ))
+                                                  CouponsFourText(
+                                                    text:
+                                                        "UPTO ₹${element?.couponDiscountMaxAmount}",
+                                                  ),
                                                 ],
                                               ),
                                               SizedBox(
@@ -380,15 +360,8 @@ class _AllCouponsState extends State<AllCoupons> {
                                                   left: 18.0.h,
                                                 ),
                                                 child: SizedBox(
-                                                  width: 115.w,
                                                   height: 30.h,
                                                   child: ElevatedButton(
-                                                    // style: ElevatedButton.styleFrom(
-                                                    //   //<-- SEE HERE
-                                                    //   side: BorderSide(
-                                                    //     width: 3.0,
-                                                    //   ),
-                                                    // ),
                                                     style: ButtonStyle(
                                                       elevation:
                                                           MaterialStateProperty
@@ -397,16 +370,20 @@ class _AllCouponsState extends State<AllCoupons> {
                                                       // backgroundColor: ,
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.white),
-                                                      shape: MaterialStateProperty
-                                                          .all(
+                                                              .all(
+                                                                  Colors.white),
+                                                      shape:
+                                                          MaterialStateProperty
+                                                              .all(
                                                         RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(10.0),
+                                                                  .circular(
+                                                                      10.0),
                                                           side: BorderSide(
                                                               width: 1,
-                                                              color: SplashText),
+                                                              color:
+                                                                  SplashText),
                                                         ),
                                                       ),
                                                     ),
@@ -419,28 +396,19 @@ class _AllCouponsState extends State<AllCoupons> {
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Flexible(
-                                                          child: Text(
-                                                            "${element?.couponCode}",
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              textStyle:
-                                                                  TextStyle(
-                                                                      color:
-                                                                          SplashText,
-                                                                      // letterSpacing:
-                                                                      //     .5,
-                                                                      fontSize:
-                                                                          11.5.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700),
-                                                            ),
+                                                          child:
+                                                              CouponsFiveText(
+                                                            text:
+                                                                "${element?.couponCode}",
                                                           ),
                                                         ), // <-- Text
                                                         SizedBox(
-                                                          width: 19.w,
+                                                          width: 9.w,
                                                         ),
                                                         SvgPicture.asset(
                                                           'assets/images/svg2.svg',
@@ -449,8 +417,7 @@ class _AllCouponsState extends State<AllCoupons> {
                                                         ),
                                                       ],
                                                     ),
-
-                                                    //
+                                                    /////
                                                   ),
                                                 ),
                                               ),
@@ -499,7 +466,7 @@ class _AllCouponsState extends State<AllCoupons> {
                   // )
                 ],
               ),
-          ),
+            ),
     );
   }
 }

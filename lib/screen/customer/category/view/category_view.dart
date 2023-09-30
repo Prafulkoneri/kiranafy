@@ -57,11 +57,14 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(1, ShopProfileView(
-              shopId: widget.shopId.toString(),
-              routeName: "categoryView",
-              refreshPage: true,
-            ), context);
+            readMain.onNavigation(
+                1,
+                ShopProfileView(
+                  shopId: widget.shopId.toString(),
+                  routeName: "categoryView",
+                  refreshPage: true,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -102,11 +105,14 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          readMain.onNavigation(1, ShopProfileView(
-            shopId: widget.shopId.toString(),
-            routeName: "categoryView",
-            refreshPage: true,
-          ), context);
+          readMain.onNavigation(
+              1,
+              ShopProfileView(
+                shopId: widget.shopId.toString(),
+                routeName: "categoryView",
+                refreshPage: true,
+              ),
+              context);
           return false;
         },
         child: Column(
@@ -268,21 +274,23 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                           onTap: () {
                                             readProductViewController
                                                 .updateProductId(
-                                              element?.id.toString(),context,false
-                                            );
-                                            readMain.onNavigation(1, ProductScreenView(
-                                                selectedUnitId: element
-                                                    ?.productUnitId
-                                                    .toString(),
-                                                categoryId: watch
-                                                    .categoryId,
-                                                productId: element
-                                                    ?.id
-                                                    .toString(),
-                                                shopId:
-                                                widget.shopId,
-                                                productType: element
-                                                    ?.productType), context);
+                                                    element?.id.toString(),
+                                                    context,
+                                                    false);
+                                            readMain.onNavigation(
+                                                1,
+                                                ProductScreenView(
+                                                    selectedUnitId: element
+                                                        ?.productUnitId
+                                                        .toString(),
+                                                    categoryId:
+                                                        watch.categoryId,
+                                                    productId:
+                                                        element?.id.toString(),
+                                                    shopId: widget.shopId,
+                                                    productType:
+                                                        element?.productType),
+                                                context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -538,22 +546,24 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                 onTap: () {
                                                   readProductViewController
                                                       .updateProductId(
-                                                    element?.id.toString(),context,false
-                                                  );
-                                                  readMain.onNavigation(1, ProductScreenView(
-                                                      selectedUnitId: element
-                                                          ?.productUnitId
-                                                          .toString(),
-                                                      categoryId: watch
-                                                          .categoryId,
-                                                      productId: element
-                                                          ?.id
-                                                          .toString(),
-                                                      shopId: widget
-                                                          .shopId,
-                                                      productType:
-                                                      element
-                                                          ?.productType), context);
+                                                          element?.id
+                                                              .toString(),
+                                                          context,
+                                                          false);
+                                                  readMain.onNavigation(
+                                                      1,
+                                                      ProductScreenView(
+                                                          selectedUnitId: element
+                                                              ?.productUnitId
+                                                              .toString(),
+                                                          categoryId:
+                                                              watch.categoryId,
+                                                          productId: element?.id
+                                                              .toString(),
+                                                          shopId: widget.shopId,
+                                                          productType: element
+                                                              ?.productType),
+                                                      context);
                                                   // Navigator.pushAndRemoveUntil(
                                                   //   context,
                                                   //   MaterialPageRoute(

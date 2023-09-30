@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/coupons/controller/coupon_all_controler.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class CCouponsDetailView extends StatefulWidget {
@@ -76,30 +76,15 @@ class _CCouponsDetailViewState extends State<CCouponsDetailView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 18.0.h),
-                        child: Text(
-                          "${widget.shopName}",
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                                color: Black,
-                                letterSpacing: .5,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      ),
+                          padding: EdgeInsets.only(top: 18.0.h),
+                          child: CouponsTitleText(
+                            text: "${widget.shopName}",
+                          )),
                       SizedBox(
                         height: 10.w,
                       ),
-                      Text(
-                        "Valid until ${widget.startDate}",
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                              color: Black,
-                              letterSpacing: .5,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      CouponsTwoText(
+                        text: "Valid until ${widget.startDate}",
                       ),
                     ],
                   ),
@@ -113,29 +98,13 @@ class _CCouponsDetailViewState extends State<CCouponsDetailView> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                            "${widget.disscountPerscentage}%"
-                            // "${watch.couponViewData?.couponDiscountPercentage} "
-                            " OFF",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Black,
-                                  letterSpacing: .5,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w700),
-                            )),
+                        CouponsOff(
+                            text: "${widget.disscountPerscentage}%" " OFF"),
                         SizedBox(
                           width: 10.w,
                         ),
-                        Text("UPTO ₹${widget.disscountPerscentage}",
-                            // " ₹"${widget.disscountPerscentage}"",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  color: Grey,
-                                  letterSpacing: .5,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400),
-                            )),
+                        CouponsUpto(
+                            text: "UPTO ₹${widget.disscountPerscentage}")
                       ],
                     ),
                     Padding(
@@ -155,13 +124,8 @@ class _CCouponsDetailViewState extends State<CCouponsDetailView> {
                               child: Center(
                                 child: Row(
                                   children: [
-                                    Text(
-                                      "${widget.CounponCode}",
-                                      // "${watch.couponViewData?.couponCode}",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16.sp,
-                                          color: SplashText),
+                                    Couponsode(
+                                      text: "${widget.CounponCode}",
                                     ),
                                     SizedBox(
                                       width: 19.w,
@@ -208,20 +172,7 @@ class _CCouponsDetailViewState extends State<CCouponsDetailView> {
                           width: 6.27,
                         ),
                         Flexible(
-                          child: Text(
-                            "${widget.termCondition}",
-                            // "${watch.couponViewData?.couponTermsAndConditions}",
-                            // "Lorem ipsum dolor sit amet, consectetur",
-                            style: GoogleFonts.dmSans(
-                              textStyle: TextStyle(
-                                  height: 1.5,
-                                  color: black,
-                                  letterSpacing: .5,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        )
+                            child: ShopRating(text: "${widget.termCondition}"))
                       ],
                     ),
                   ),

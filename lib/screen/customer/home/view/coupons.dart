@@ -48,7 +48,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  readMainScreen.onNavigation(0,AllCoupons(), context);
+                  readMainScreen.onNavigation(0, AllCoupons(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -258,7 +258,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                   height: 6.w,
                                 ),
                                 SizedBox(
-                                  width: 115.w,
+                                  // width: 115.w,
                                   height: 30.h,
                                   child: ElevatedButton(
                                     // style: ElevatedButton.styleFrom(
@@ -292,14 +292,14 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
                                                   color: SplashText,
-                                                  letterSpacing: .5,
+                                                  // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w700),
                                             ),
                                           ),
                                         ), // <-- Text
                                         SizedBox(
-                                          width: 19.w,
+                                          width: 9.w,
                                         ),
                                         SvgPicture.asset(
                                           'assets/images/svg2.svg',

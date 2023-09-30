@@ -23,6 +23,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_r
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/network_image.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_offer_products.dart';
@@ -84,8 +85,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         refreshPage: false,
                       ),
                       context);
-                }
-               else if (widget.routeName == "nearShopsCategory") {
+                } else if (widget.routeName == "nearShopsCategory") {
                   readMain.onNavigation(
                       1,
                       AllNearCategoryShopsView(
@@ -93,23 +93,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         refresh: false,
                       ),
                       context);
-                }
-                else if (widget.routeName == "homeNearbyShop") {
+                } else if (widget.routeName == "homeNearbyShop") {
                   readMain.onNavigation(
                       0,
                       HomeScreenView(
                         refreshPage: false,
                       ),
                       context);
-                }
-                else if( widget.routeName=="favouriteView"){
+                } else if (widget.routeName == "favouriteView") {
                   readMain.onNavigation(
-                      4,
-                      CFavouritesView(selectedIndex: 0),
-                      context);
-                }
-
-                else {
+                      4, CFavouritesView(selectedIndex: 0), context);
+                } else {
                   readMain.onNavigation(
                       0, HomeScreenView(refreshPage: false), context);
                   // Navigator.pushAndRemoveUntil(
@@ -1189,19 +1183,31 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   MainAxisAlignment
                                                                       .center,
                                                               children: [
-                                                                element?.productImagePath == ""
-                                                                    ? Container(height: 89.w,
-                                                                        width: 89.w,
-                                                                        child: Image.asset("assets/images/profile_image.png",
-                                                                          fit: BoxFit.cover,
+                                                                element?.productImagePath ==
+                                                                        ""
+                                                                    ? Container(
+                                                                        height:
+                                                                            89.w,
+                                                                        width:
+                                                                            89.w,
+                                                                        child: Image
+                                                                            .asset(
+                                                                          "assets/images/profile_image.png",
+                                                                          fit: BoxFit
+                                                                              .cover,
                                                                         ),
                                                                       )
-                                                                    :
-                                                                Container(height: 89.w,
-                                                                        width: 89.w,
-                                                                        child: AppNetworkImages(imageUrl: "${element?.productImagePath}",
-                                                                          fit: BoxFit.cover,
-
+                                                                    : Container(
+                                                                        height:
+                                                                            89.w,
+                                                                        width:
+                                                                            89.w,
+                                                                        child:
+                                                                            AppNetworkImages(
+                                                                          imageUrl:
+                                                                              "${element?.productImagePath}",
+                                                                          fit: BoxFit
+                                                                              .cover,
                                                                         ),
                                                                       ),
                                                               ],
@@ -1826,19 +1832,23 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                               element?.offerPrice !=
                                                                   element
                                                                       ?.mrpPrice
-                                                          ? Text(
-                                                              '\u{20B9}${element?.offerPrice}',
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    // decoration:
-                                                                    // TextDecoration.lineThrough,
-                                                                    color: Black,
-                                                                    letterSpacing: .5,
-                                                                    fontSize: 13.sp,
-                                                                    fontWeight: FontWeight.w500),
-                                                              ),
+                                                          ? OfferPrice(
+                                                              text:
+                                                                  '\u{20B9}${element?.offerPrice}',
                                                             )
+                                                          // Text(
+                                                          //     '\u{20B9}${element?.offerPrice}',
+                                                          //     style: GoogleFonts
+                                                          //         .dmSans(
+                                                          //       textStyle: TextStyle(
+                                                          //           // decoration:
+                                                          //           // TextDecoration.lineThrough,
+                                                          //           color: Black,
+                                                          //           letterSpacing: .5,
+                                                          //           fontSize: 13.sp,
+                                                          //           fontWeight: FontWeight.w500),
+                                                          //     ),
+                                                          //   )
                                                           : Text(""),
                                                     ),
                                                   ],
@@ -2046,13 +2056,11 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                             .spaceBetween,
                                                                     children: [
                                                                       Flexible(
-                                                                        child: Text(
+                                                                          child:
+                                                                              ProductName(
+                                                                        text:
                                                                             "${element?.productName}",
-                                                                            style:
-                                                                                GoogleFonts.dmSans(
-                                                                              textStyle: TextStyle(color: Black, letterSpacing: .5, fontSize: 14.sp, fontWeight: FontWeight.w700),
-                                                                            )),
-                                                                      ),
+                                                                      )),
                                                                       element?.discountPercentage !=
                                                                               ""
                                                                           ? Container(
@@ -2060,12 +2068,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               height: 20.h,
                                                                               decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
                                                                               child: Center(
-                                                                                child: Text("${element?.discountPercentage} off",
-                                                                                    // textAlign: TextAlign.center,
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
-                                                                                    )),
-                                                                              ),
+                                                                                  child: PlaceYourAdd(
+                                                                                text: "${element?.discountPercentage} off",
+                                                                              )),
                                                                             )
                                                                           : Container(),
                                                                     ],
@@ -2073,25 +2078,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   SizedBox(
                                                                     height: 6.h,
                                                                   ),
-                                                                  Text(
-                                                                    "${element?.weight}${element?.unit}",
-                                                                    style: GoogleFonts
-                                                                        .dmSans(
-                                                                      textStyle: TextStyle(
-                                                                          color:
-                                                                              Grey,
-                                                                          letterSpacing:
-                                                                              .5,
-                                                                          fontSize: 12
-                                                                              .sp,
-                                                                          fontWeight:
-                                                                              FontWeight.w500),
-                                                                    ),
+                                                                  UnitAndWeight(
+                                                                    text:
+                                                                        "${element?.weight}${element?.unit}",
                                                                   ),
-                                                                  //
-                                                                  // SizedBox(
-                                                                  //   height: 10.h,
-                                                                  // ),
                                                                   row,
                                                                 ],
                                                               ),
@@ -2115,47 +2105,49 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                             )
                           : Container(),
-                      watchHome.placeAd.isNotEmpty==true ? Container(
-                        padding: EdgeInsets.only(
-                          right: 19.0.w,
-                          left: 19.0.w,
-                        ),
-                        width: ScreenUtil().screenWidth,
-                        // height: 100.h,
-                        child:  (watchHome.placeAd.toList()
-                          ..shuffle())
-                            .first!=""
-                            ? AppNetworkImages(
-                          showShopImage: true,
-                                imageUrl: (watchHome.placeAd.toList()
-                                      ..shuffle())
-                                    .first,
-                                height: 163.h,
-                                width: 352.w,
+                      watchHome.placeAd.isNotEmpty == true
+                          ? Container(
+                              padding: EdgeInsets.only(
+                                right: 19.0.w,
+                                left: 19.0.w,
+                              ),
+                              width: ScreenUtil().screenWidth,
+                              // height: 100.h,
+                              child: (watchHome.placeAd.toList()..shuffle())
+                                          .first !=
+                                      ""
+                                  ? AppNetworkImages(
+                                      showShopImage: true,
+                                      imageUrl: (watchHome.placeAd.toList()
+                                            ..shuffle())
+                                          .first,
+                                      height: 163.h,
+                                      width: 352.w,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "assets/images/profile_image.png",
+                                      height: 170.w,
+                                      // width: 340.w,
+                                      // scale: 0.5,
+                                      fit: BoxFit.cover,
+                                    ),
+                            )
+                          : Container(
+                              padding: EdgeInsets.only(
+                                right: 19.0.w,
+                                left: 19.0.w,
+                              ),
+                              width: ScreenUtil().screenWidth,
+                              // height: 100.h,
+                              child: Image.asset(
+                                "assets/images/profile_image.png",
+                                height: 170.w,
+                                // width: 340.w,
+                                // scale: 0.5,
                                 fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                          "assets/images/profile_image.png",
-                          height: 170.w,
-                          // width: 340.w,
-                          // scale: 0.5,
-                          fit: BoxFit.cover,
-                        ),
-                      ):Container(
-                        padding: EdgeInsets.only(
-                          right: 19.0.w,
-                          left: 19.0.w,
-                        ),
-                        width: ScreenUtil().screenWidth,
-                        // height: 100.h,
-                        child:   Image.asset(
-                          "assets/images/profile_image.png",
-                          height: 170.w,
-                          // width: 340.w,
-                          // scale: 0.5,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                              ),
+                            ),
 
                       SizedBox(
                         height: 20.h,
@@ -2165,14 +2157,18 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: () async{
-                              SharedPreferences pref = await SharedPreferences.getInstance();
-                              if(pref.getString("status")=="guestLoggedIn"){
-                                Utils().showLoginDialog(context,"Please Login to continue");
+                            onTap: () async {
+                              SharedPreferences pref =
+                                  await SharedPreferences.getInstance();
+                              if (pref.getString("status") == "guestLoggedIn") {
+                                Utils().showLoginDialog(
+                                    context, "Please Login to continue");
                                 return;
                               }
                               readMain.onNavigation(
-                                  1, CustomerAdsView(route: "shopProfile"), context);
+                                  1,
+                                  CustomerAdsView(route: "shopProfile"),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -2189,14 +2185,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 14.w, vertical: 2.w),
                               child: Center(
-                                child: Text(
-                                  "Place Your Ad",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
+                                  child: PlaceYourAdd(
+                                text: "Place Your Ad",
+                              )),
                             ),
                           ),
                         ],
