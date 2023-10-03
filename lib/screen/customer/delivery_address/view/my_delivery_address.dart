@@ -50,13 +50,6 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                   isRefreshed: false,
                 ),
                 context);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => MainScreenView(
-            //           index: 4, screenName: ProfileScreenView(isRefreshed: false,))),
-            //   (Route<dynamic> route) => false,
-            // );
           },
           title: "My Addresses",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),

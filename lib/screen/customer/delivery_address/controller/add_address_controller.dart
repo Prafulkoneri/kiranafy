@@ -51,8 +51,7 @@ class AddAddressController extends ChangeNotifier {
   String deliveryAddressId = "";
   String? countryCode = "+91";
   AddDeliverAddressRepo newAddDeliveryAddressRepo = AddDeliverAddressRepo();
-  UpdateDeliveryAddressRepo updateDeliveryAddressRepo =
-      UpdateDeliveryAddressRepo();
+  UpdateDeliveryAddressRepo updateDeliveryAddressRepo = UpdateDeliveryAddressRepo();
   bool isEditingAddress = false;
   String pageRoute = "";
 
@@ -117,60 +116,25 @@ class AddAddressController extends ChangeNotifier {
     print(pageRoute);
     print("shopidddddddddddddd");
     if (pageRoute == "addressView") {
-      print("hello");
-
-      print("hellos");
-      // Navigator.pop(context);
       read.onNavigation(4, MyDeliveryAddressView(isRefresh: false), context);
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => MainScreenView(
-      //           index: 4, screenName: MyDeliveryAddressView(isRefresh: false))),
-      //   (Route<dynamic> route) => false,
-      // );
     }
     if (pageRoute == "orderAddress") {
-      read.onNavigation(
-          4,
-          OrderSummaryView(
+      read.onNavigation(4, OrderSummaryView(
             isRefresh: false,
             route: "editAddress",
             cartId: cId,
             shopId: sId,
-          ),
-          context);
+          ),context);
       read.hideBottomNavigationBar();
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => OrderSummaryView(
-      //               isRefresh: false,
-      //               route: "editAddress",
-      //               cartId: cId,
-      //               shopId: sId,
-      //             )));
     }
     if (pageRoute == "orderAddAddress") {
-      read.onNavigation(
-          4,
-          OrderSummaryView(
+      read.onNavigation(4,OrderSummaryView(
             isRefresh: false,
             route: "addAddress",
             cartId: cId,
             shopId: sId,
-          ),
-          context);
+          ), context);
       read.hideBottomNavigationBar();
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => OrderSummaryView(
-      //               isRefresh: false,
-      //               route: "addAddress",
-      //               cartId: cId,
-      //               shopId: sId,
-      //             )));
     }
   }
 
@@ -182,9 +146,7 @@ class AddAddressController extends ChangeNotifier {
     notifyListeners();
   }
 
-  GetCityListReqModel get _cityListReqModel => GetCityListReqModel(
-        stateId: stateId.toString(),
-      );
+  GetCityListReqModel get _cityListReqModel => GetCityListReqModel(stateId: stateId.toString(),);
 
   Future<void> getCityList(context) async {
     LoadingOverlay.of(context).show();
