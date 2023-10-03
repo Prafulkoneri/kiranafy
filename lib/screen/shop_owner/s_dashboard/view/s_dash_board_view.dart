@@ -159,17 +159,17 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             decoration: BoxDecoration(
                                 // borderRadius: BorderRadius.circular(13.w),
                                 gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  stops: [
-                                    0.1,
-                                    0.9,
-                                  ],
-                                  colors: [
-                                    Colors.white.withOpacity(0),
-                                    Colors.black.withOpacity(0.15),
-                                  ],
-                                )),
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [
+                                0.1,
+                                0.9,
+                              ],
+                              colors: [
+                                Colors.white.withOpacity(0),
+                                Colors.black.withOpacity(0.15),
+                              ],
+                            )),
                           )),
                           Positioned(
                             top: 145.w,
@@ -372,7 +372,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         '${watch.dashBoardData?.totalCustomersOrderedCount}',
                                   ),
                                   ShopDashBoard(
-                                    text: 'Total Customer Ordered',
+                                    text: 'Total Customer\n Ordered',
                                   ),
                                 ],
                               ),

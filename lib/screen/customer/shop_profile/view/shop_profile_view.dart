@@ -157,10 +157,12 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                               element?.imagesPath == ""
                                                   ? Container(
                                                       height: 190.w,
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
                                                       child: Image.asset(
                                                         "assets/images/shop_image.png",
                                                         height: 191.w,
-                                                        fit: BoxFit.fill,
+                                                        fit: BoxFit.cover,
                                                       ))
                                                   : Container(
                                                       height: 180.w,
@@ -187,17 +189,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             decoration: BoxDecoration(
                                 // borderRadius: BorderRadius.circular(13.w),
                                 gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  stops: [
-                                    0.1,
-                                    0.9,
-                                  ],
-                                  colors: [
-                                    Colors.white.withOpacity(0),
-                                    Colors.black.withOpacity(0.15),
-                                  ],
-                                )),
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [
+                                0.1,
+                                0.9,
+                              ],
+                              colors: [
+                                Colors.white.withOpacity(0),
+                                Colors.black.withOpacity(0.15),
+                              ],
+                            )),
                           )),
                           Positioned(
                             //<-- SEE HERE
