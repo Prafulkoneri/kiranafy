@@ -3,19 +3,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
-
 import 'package:local_supper_market/screen/customer/delivery_address/model/edit_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/edit_address_repo.dart';
-
 import 'package:local_supper_market/screen/customer/delivery_address/model/add_delivery_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/model/update_address_model.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/add_delivery_address_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/repository/update_delivery_address_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
-
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/city_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/country_model.dart';
@@ -191,32 +187,32 @@ class AddAddressController extends ChangeNotifier {
       );
 
   Future<void> getCityList(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         cityList = result.cityData;
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);
         }
         notifyListeners();
       } else {
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      // LoadingOverlay.of(context).hide();
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -241,24 +237,24 @@ class AddAddressController extends ChangeNotifier {
   }
 
   Future<void> getAreaList(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
       final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         areaList = result.areaData;
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         if (result.areaData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Area Found",
               type: SnackType.error);
         }
         notifyListeners();
       } else {
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      // LoadingOverlay.of(context).hide();
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {

@@ -156,29 +156,29 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            InkWell(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          topRight: Radius.circular(30))),
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return StatefulBuilder(
-                                        builder: (context, setState) {
-                                      return ShopFilterView();
-                                    });
-                                  },
-                                );
-                              },
-                              child: SvgPicture.asset(
-                                'assets/images/filter.svg',
-                                width: 20.w,
-                                height: 18.h,
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     showModalBottomSheet(
+                            //       isScrollControlled: true,
+                            //       shape: const RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.only(
+                            //               topLeft: Radius.circular(30),
+                            //               topRight: Radius.circular(30))),
+                            //       context: context,
+                            //       builder: (BuildContext context) {
+                            //         return StatefulBuilder(
+                            //             builder: (context, setState) {
+                            //           return ShopFilterView();
+                            //         });
+                            //       },
+                            //     );
+                            //   },
+                            //   child: SvgPicture.asset(
+                            //     'assets/images/filter.svg',
+                            //     width: 20.w,
+                            //     height: 18.h,
+                            //   ),
+                            // ),
                             SizedBox(
                               width: 8.w,
                             ),

@@ -392,7 +392,6 @@ class AllShopController extends ChangeNotifier {
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString()).toString();
-
     notifyListeners();
   }
 

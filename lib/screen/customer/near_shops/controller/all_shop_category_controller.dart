@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/search
 import 'package:local_supper_market/screen/customer/near_shops/repository/shop_area_list_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_auth/model/area_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AllCategoryShopController extends ChangeNotifier {
@@ -55,6 +56,7 @@ class AllCategoryShopController extends ChangeNotifier {
     if (refresh) {
       areaId = "";
       rating = "";
+      isLoading = true;
       print(id);
       allShops.clear();
       offset = 0;
@@ -377,7 +379,6 @@ class AllCategoryShopController extends ChangeNotifier {
   ////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////
-
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString()).toString();
     notifyListeners();
@@ -392,7 +393,7 @@ class AllCategoryShopController extends ChangeNotifier {
   Future<void> clearFilter(context, id) async {
     areaId = "";
     rating = "";
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopAreaListRepo
@@ -407,6 +408,7 @@ class AllCategoryShopController extends ChangeNotifier {
         Navigator.pop(context);
         areaId = "";
         rating = "";
+        LoadingOverlay.of(context).hide();
         getAllShops(context, id);
         notifyListeners();
       } else {
@@ -460,8 +462,7 @@ class AllCategoryShopController extends ChangeNotifier {
   //////////////////////////////////////
 
   Future<void> applyFilter(context, id) async {
-    // showLoader(true);
-
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     shopAreaListRepo
@@ -472,6 +473,7 @@ class AllCategoryShopController extends ChangeNotifier {
       if (response.statusCode == 200) {
         // areaList = result.areaList;
         // showLoader(false);
+        LoadingOverlay.of(context).hide();
         Navigator.pop(context);
         getAllShops(context, id);
         notifyListeners();

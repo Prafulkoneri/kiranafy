@@ -90,7 +90,7 @@ class CustomerSettingController extends ChangeNotifier {
           appNotification: isAppNotificationEnable ? "on" : "off");
 
   Future<void> changeSettings(context, value) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     isAppNotificationEnable = value;
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
@@ -102,12 +102,18 @@ class CustomerSettingController extends ChangeNotifier {
           ChangeSettingsResponseModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        // LoadingOverlay.of(context).hide();
-        // Utils.showPrimarySnackbar(context, result.message,
-        //     type: SnackType.success);
-        notifyListeners();
+        if (result.status == 200) {
+          LoadingOverlay.of(context).hide();
+          // Utils.showPrimarySnackbar(context, result.message,
+          //     type: SnackType.success);
+          notifyListeners();
+        } else {
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -126,7 +132,7 @@ class CustomerSettingController extends ChangeNotifier {
 
   /////////////////////////SHOP DELETE///////////////////
   Future<void> CustomerAccountDelete(context) async {
-    // LoadingOverlay.of(context).show();/
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     cdeleteAccountRepo
@@ -141,7 +147,7 @@ class CustomerSettingController extends ChangeNotifier {
           context,
           MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
         );
-        // LoadingOverlay.of(context).hide();
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
