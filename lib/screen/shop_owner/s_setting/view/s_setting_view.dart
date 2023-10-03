@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/controller/setting_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -38,24 +37,32 @@ class _ShopSettingViewState extends State<ShopSettingView> {
         child: PrimaryAppBar(
           title: "Settings",
           onBackBtnPressed: () {
-            final read =Provider.of<SMainScreenController>(context,listen: false);
-            read.onNavigation(0,SAccountScreenView(
-              refresh: false,
-            ), context);
+            final read =
+                Provider.of<SMainScreenController>(context, listen: false);
+            read.onNavigation(
+                0,
+                SAccountScreenView(
+                  refresh: false,
+                ),
+                context);
           },
         ),
       ),
       body: watch.isLoading
           ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          final read =Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(0,SAccountScreenView(
-            refresh: false,
-          ), context);
-          return false;
-        },
-            child: Padding(
+              onWillPop: () async {
+                final read =
+                    Provider.of<SMainScreenController>(context, listen: false);
+                read.onNavigation(
+                    0,
+                    SAccountScreenView(
+                      refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: Padding(
                 padding: EdgeInsets.only(left: 19.w, top: 20.w, right: 19.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +152,8 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 SizedBox(
                                                   width: 19.w,
@@ -173,9 +181,11 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                         "Yes",
                                                         textAlign:
                                                             TextAlign.center,
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               // letterSpacing: .5,
                                                               fontSize: 20.sp,
                                                               fontWeight:
@@ -206,13 +216,14 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                           // border: Border.all(width: 1, color: Black),
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(10)),
+                                                                  .circular(
+                                                                      10)),
                                                       child: Column(
                                                         children: [
                                                           Text(
                                                             "No",
-                                                            textAlign:
-                                                                TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle:
@@ -272,7 +283,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

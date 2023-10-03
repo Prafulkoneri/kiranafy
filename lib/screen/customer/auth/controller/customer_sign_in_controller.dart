@@ -22,7 +22,8 @@ class CustomerSignInController extends ChangeNotifier {
   TextEditingController mobileController = TextEditingController();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
   CustomerSignInRepo customerSignInRepo = CustomerSignInRepo();
-  CustomerGuestLoginInRepo customerGuestLoginInRepo = CustomerGuestLoginInRepo();
+  CustomerGuestLoginInRepo customerGuestLoginInRepo =
+      CustomerGuestLoginInRepo();
   String countryCode = "+91";
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool isOtpErrorVisible = false;
@@ -50,10 +51,11 @@ class CustomerSignInController extends ChangeNotifier {
     countryCode = value.toString();
   }
 
-  CustomerGuestLoginReqModel get customerGuestLoginReqModel => CustomerGuestLoginReqModel(loginType: "guest");
+  CustomerGuestLoginReqModel get customerGuestLoginReqModel =>
+      CustomerGuestLoginReqModel(loginType: "guest");
 
   Future<void> guestLogin(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     await customerGuestLoginInRepo
         .customerGuestLoginIn(customerGuestLoginReqModel)
         .then((response) async {
@@ -74,30 +76,31 @@ class CustomerSignInController extends ChangeNotifier {
                   ))),
           (Route<dynamic> route) => false,
         );
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      LoadingOverlay.of(context).hide();
+      // LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
     );
   }
 
-  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel => MobileNumberCheckRequestModel(
+  MobileNumberCheckRequestModel get mobileNumberCheckRequestModel =>
+      MobileNumberCheckRequestModel(
         mobileNo: mobileController.text,
         countryCode: countryCode,
       );
@@ -193,15 +196,13 @@ class CustomerSignInController extends ChangeNotifier {
         print("token ${pref.getString("successToken")}");
         isLoginBtnEnabled = false;
         Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainScreenView(
-                      index: 0,
-                      screenName: HomeScreenView(refreshPage: true),
-
-                    )),
-              (Route<dynamic> route) => false,
-
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenView(
+                    index: 0,
+                    screenName: HomeScreenView(refreshPage: true),
+                  )),
+          (Route<dynamic> route) => false,
         );
         mobileController.clear();
       } else {
@@ -221,7 +222,8 @@ class CustomerSignInController extends ChangeNotifier {
     );
   }
 
-  void signInWithPhoneAuthCred(AuthCredential phoneAuthCredential, context) async {
+  void signInWithPhoneAuthCred(
+      AuthCredential phoneAuthCredential, context) async {
     try {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
       if (authCred.user != null) {
