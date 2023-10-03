@@ -123,12 +123,12 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                     ),
                     PrimarySTextFormField(
                       controller: watch.descriptionController,
-                      height: 150.w,
+                      height: 130.w,
                       maxLines: 10,
                       // hintText: "Address",/
                     ),
                     SizedBox(
-                      height: 37.h,
+                      height: 27.h,
                     ),
                     PrimaryButton(
                       fontSize: 20.sp,
@@ -140,7 +140,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                       },
                     ),
                     SizedBox(
-                      height: 37.h,
+                      height: 27.h,
                     ),
                     // SizedBox(
                     //   height: 500.h,

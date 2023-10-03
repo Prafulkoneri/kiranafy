@@ -135,11 +135,11 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                     height: 188.w,
                                     child: Image.asset(
                                       "assets/images/shop_image.png",
-                                      height: 191.w,
+                                      height: 190.w,
                                       fit: BoxFit.fill,
                                     ))
                                 : SizedBox(
-                                    height: 188.0.h,
+                                    height: 190.0.h,
                                     child: PageView.builder(
                                         allowImplicitScrolling: true,
                                         physics: NeverScrollableScrollPhysics(),
@@ -163,7 +163,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         fit: BoxFit.fill,
                                                       ))
                                                   : Container(
-                                                      height: 190.w,
+                                                      height: 180.w,
                                                       child: AppNetworkImages(
                                                           imageUrl: element
                                                                   ?.imagesPath ??
@@ -182,10 +182,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             // margin: EdgeInsets.only(
                             //     left: index == 0 ? 19.w : 0,
                             //     right: index == 2 ? 19.w : 5.w),
-                            height: 191.w,
+                            height: 180.w,
                             width: ScreenUtil().screenWidth,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13.w),
+                                // borderRadius: BorderRadius.circular(13.w),
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -203,7 +203,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             //<-- SEE HERE
                             // right: 15.w,
                             // left: 0.w,
-                            top: 155.w,
+                            top: 145.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 15.w, right: 15.w),
                               width: ScreenUtil().screenWidth,

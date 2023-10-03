@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:launch_review/launch_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -240,10 +242,14 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
               GestureDetector(
                 onTap: () {
-                  // Share.shareFiles(['assets/icons/share.svg'], text: 'Great picture');
-
-                  Share.share(
-                      'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                  if(Platform.isAndroid){
+                    Share.share(
+                        'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                  }
+                  else{
+                    Share.share(
+                        'hey! check out this new app https://apps.apple.com/us/app/local-supermart/id6451146831');
+                  }
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
@@ -283,20 +289,9 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               /////Rate Us////
               GestureDetector(
                 onTap: () async {
-                  // if (await canLaunch(
-                  //     "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                  //   await launch(
-                  //       "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-                  // } else {
-                  //   throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                  // }
                   LaunchReview.launch(
                       androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                      iOSAppId: "585027354");
-                  // StoreRedirect.redirect(
-                  //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                  //   iOSAppId: "585027354",
-                  // );
+                      iOSAppId: "6451146831");
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),

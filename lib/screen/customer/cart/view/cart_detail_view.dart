@@ -924,19 +924,11 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   children: <Widget>[
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w, top: 5.w),
+                                                          left: 6.w, top: 5.w,right: 6.w),
                                                       child: Row(
+                                                        crossAxisAlignment:CrossAxisAlignment.start,
                                                         children: [
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      bottom:
-                                                                          18.w),
-                                                              child: Icon(
-                                                                Icons
-                                                                    .circle_rounded,
-                                                                size: 5.w,
-                                                              )),
+                                                          Text("•",style: TextStyle(fontSize: 20.sp),),
                                                           SizedBox(
                                                             width: 10,
                                                           ),
@@ -966,19 +958,11 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w, top: 5.w),
+                                                          left: 6.w, top: 5.w,right: 6.w),
                                                       child: Row(
+                                                        crossAxisAlignment:CrossAxisAlignment.start,
                                                         children: [
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      bottom:
-                                                                          60.w),
-                                                              child: Icon(
-                                                                Icons
-                                                                    .circle_rounded,
-                                                                size: 5.w,
-                                                              )),
+                                                          Text("•",style: TextStyle(fontSize: 20.sp),),
                                                           SizedBox(
                                                             width: 10,
                                                           ),
@@ -1007,49 +991,57 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   ],
                                                 ),
                                                 actions: [
-                                                  ElevatedButton(
-                                                      child: Text("Continue"),
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                        readMain.onNavigation(
-                                                            2,
-                                                            OrderSummaryView(
-                                                              route:
-                                                                  "cartDetail",
-                                                              isRefresh: true,
-                                                              cartId: watch
-                                                                  .orderCartId
-                                                                  .toString(),
-                                                              shopId: watch
-                                                                  .shopDetailData
-                                                                  ?.id
-                                                                  .toString(),
-                                                            ),
-                                                            context);
-                                                        //
-                                                        // readMain.hideBottomNavigationBar();
+                                                  Row(
+                                                    mainAxisAlignment:MainAxisAlignment.end,
+                                                    children: [
+                                                      ElevatedButton(
+                                                          child: Text("Continue"),
+                                                          onPressed: () {
+                                                            Navigator.pop(context);
+                                                            readMain.onNavigation(
+                                                                2,
+                                                                OrderSummaryView(
+                                                                  route:
+                                                                      "cartDetail",
+                                                                  isRefresh: true,
+                                                                  cartId: watch
+                                                                      .orderCartId
+                                                                      .toString(),
+                                                                  shopId: watch
+                                                                      .shopDetailData
+                                                                      ?.id
+                                                                      .toString(),
+                                                                ),
+                                                                context);
+                                                            //
+                                                            // readMain.hideBottomNavigationBar();
 
-                                                        // Navigator.pop(context);
-                                                        // Navigator.push(
-                                                        //   context,
-                                                        //   MaterialPageRoute(
-                                                        //       builder: (context) =>
-                                                        //           OrderSummaryView(
-                                                        //             route:
-                                                        //                 "cartDetail",
-                                                        //             isRefresh:
-                                                        //                 true,
-                                                        //             cartId: watch
-                                                        //                 .orderCartId
-                                                        //                 .toString(),
-                                                        //             shopId: watch
-                                                        //                 .shopDetailData
-                                                        //                 ?.id
-                                                        //                 .toString(),
-                                                        //           )),
-                                                        // );
-                                                        // your code
-                                                      })
+                                                            // Navigator.pop(context);
+                                                            // Navigator.push(
+                                                            //   context,
+                                                            //   MaterialPageRoute(
+                                                            //       builder: (context) =>
+                                                            //           OrderSummaryView(
+                                                            //             route:
+                                                            //                 "cartDetail",
+                                                            //             isRefresh:
+                                                            //                 true,
+                                                            //             cartId: watch
+                                                            //                 .orderCartId
+                                                            //                 .toString(),
+                                                            //             shopId: watch
+                                                            //                 .shopDetailData
+                                                            //                 ?.id
+                                                            //                 .toString(),
+                                                            //           )),
+                                                            // );
+                                                            // your code
+                                                          }),
+                                                      SizedBox(
+                                                        width: 5.w,
+                                                      ),
+                                                    ],
+                                                  )
                                                 ],
                                               );
                                             });

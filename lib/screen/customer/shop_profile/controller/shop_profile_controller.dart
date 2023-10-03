@@ -153,16 +153,26 @@ class ShopProfileViewController extends ChangeNotifier {
         int imageLength = bannerImageData?.length ?? 0;
         if (bannerImageData!.isNotEmpty) {
           Timer.periodic(Duration(seconds: 5), (Timer timer) {
+            print(_currentPage);
             if (_currentPage < imageLength - 1) {
               _currentPage++;
+              pageController.nextPage(
+                // _currentPage,
+                duration: Duration(milliseconds: 350),
+                curve: Curves.easeIn,
+              );
+              print("still going");
             } else {
               _currentPage = 0;
+              pageController.animateToPage(
+                // _currentPage,
+                _currentPage,
+                duration: Duration(milliseconds: 350),
+                curve: Curves.easeIn,
+              );
+              print("should stop");
             }
-            pageController.nextPage(
-              // _currentPage,
-              duration: Duration(milliseconds: 350),
-              curve: Curves.easeIn,
-            );
+
           });
         }
         if (refresh) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -341,15 +343,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                         text: 'My Orders',
                       ),
 
-                      // Text(
-                      //   'My Orders',
-                      //   style: GoogleFonts.dmSans(
-                      //     textStyle: TextStyle(
-                      //         color: Black,
-                      //         fontSize: 14.sp,
-                      //         fontWeight: FontWeight.w400),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -482,13 +475,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     return;
                   }
                   readMain.onNavigation(4, const HelpCenterView(), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4, screenName: HelpCenterView())),
-                  //   (Route<dynamic> route) => false,
-                  // );
+
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -521,13 +508,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   readMain.onNavigation(4, const CAboutUsView(), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4, screenName: CAboutUsView())),
-                  //   (Route<dynamic> route) => false,
-                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -560,13 +540,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   readMain.onNavigation(4, const CustomerFAQView(), context);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => MainScreenView(
-                  //           index: 4, screenName: CustomerFAQView())),
-                  //   (Route<dynamic> route) => false,
-                  // );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -592,23 +565,21 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       AccountScreen(
                         text: 'FAQ',
                       ),
-                      // Text(
-                      //   'FAQ',
-                      //   style: GoogleFonts.dmSans(
-                      //     textStyle: TextStyle(
-                      //         color: Black,
-                      //         fontSize: 14.sp,
-                      //         fontWeight: FontWeight.w400),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  Share.share(
-                      'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                  if(Platform.isAndroid){
+                    Share.share(
+                        'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                  }
+                  else{
+                    Share.share(
+                        'hey! check out this new app https://apps.apple.com/us/app/local-supermart/id6451146831');
+                  }
+
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -680,20 +651,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if (await canLaunch(
-                      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                    await launch(
-                        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-                  } else {
-                    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                  }
                   LaunchReview.launch(
                       androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                      iOSAppId: "585027354");
-                  // StoreRedirect.redirect(
-                  //   androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
-                  //   iOSAppId: "585027354",
-                  // );
+                      iOSAppId: "6451146831");
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

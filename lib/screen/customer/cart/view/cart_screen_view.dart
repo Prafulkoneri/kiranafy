@@ -67,17 +67,27 @@ class _CartScreenViewState extends State<CartScreenView> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Flexible(
-                            child: Text(
-                              "Do you really want to Delete Your Cart ? ",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Color(0xff006F94),
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w700),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 10.w,
                               ),
-                            ),
+                              Flexible(
+                                child: Text(
+                                  "Do you really want to Delete Your Cart ? ",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Color(0xff006F94),
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 37.h,

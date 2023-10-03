@@ -410,26 +410,37 @@ class _MyAppState extends State<MyApp> {
                   child: Directionality(
                     textDirection: TextDirection.ltr,
                     child: LoadingOverlay(
-                      child: MaterialApp(
-                        builder: (context, child) {
-                          return MediaQuery(
-                            data: MediaQuery.of(context)
-                                .copyWith(textScaleFactor: 0.87.sp),
-                            child: child!,
-                          );
-                        },
-                        title: 'Local Supermart',
-                        theme: ThemeData(
-                          primarySwatch: Colors.blue,
-                          fontFamily: 'dm_sans_regular',
-                        ),
-                        debugShowCheckedModeBanner: false,
-                        home: SplashScreen(),
-                        // initialRoute: '/',
-                        //   routes: {
-                        //       '/':(context)=>SplashScreen(),
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: (){
+                          FocusScopeNode currentFocus = FocusScope.of(context);
 
-                        //   },
+                          if (!currentFocus.hasPrimaryFocus &&
+                              currentFocus.focusedChild != null) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          }
+                        },
+                        child: MaterialApp(
+                          builder: (context, child) {
+                            return MediaQuery(
+                              data: MediaQuery.of(context)
+                                  .copyWith(textScaleFactor: 0.87.sp),
+                              child: child!,
+                            );
+                          },
+                          title: 'Local Supermart',
+                          theme: ThemeData(
+                            primarySwatch: Colors.blue,
+                            fontFamily: 'dm_sans_regular',
+                          ),
+                          debugShowCheckedModeBanner: false,
+                          home: SplashScreen(),
+                          // initialRoute: '/',
+                          //   routes: {
+                          //       '/':(context)=>SplashScreen(),
+
+                          //   },
+                        ),
                       ),
                     ),
                   ));

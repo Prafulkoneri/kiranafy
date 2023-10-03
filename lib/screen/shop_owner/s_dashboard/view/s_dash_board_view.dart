@@ -110,7 +110,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                       fit: BoxFit.fill,
                                     ))
                                 : SizedBox(
-                                    height: 188.0.h,
+                                    height: 190.0.h,
                                     child: PageView.builder(
                                         controller: watch.pageController,
                                         allowImplicitScrolling: true,
@@ -128,14 +128,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             children: [
                                               element?.imagesPath == ""
                                                   ? Container(
-                                                      height: 190.w,
+                                                      height: 180.w,
                                                       child: Image.asset(
                                                         "assets/images/shop_image.png",
-                                                        height: 191.w,
+                                                        height: 180.w,
                                                         fit: BoxFit.fill,
                                                       ))
                                                   : Container(
-                                                      height: 190.w,
+                                                      height: 180.w,
                                                       child: AppNetworkImages(
                                                           imageUrl: element
                                                                   ?.imagesPath ??
@@ -154,10 +154,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             // margin: EdgeInsets.only(
                             //     left: index == 0 ? 19.w : 0,
                             //     right: index == 2 ? 19.w : 5.w),
-                            height: 191.w,
+                            height: 180.w,
                             width: ScreenUtil().screenWidth,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13.w),
+                                // borderRadius: BorderRadius.circular(13.w),
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -172,11 +172,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 )),
                           )),
                           Positioned(
-                            //<-- SEE HERE
-                            // right: 15.w,
-                            // left: 0.w,
-                            top: 155.w,
-                            // bottom: 20.w,
+                            top: 145.w,
                             child: Container(
                               padding: EdgeInsets.only(left: 16.w),
                               width: ScreenUtil().screenWidth,
