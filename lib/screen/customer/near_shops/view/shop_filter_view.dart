@@ -152,6 +152,19 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                             },
                             items: [
                               DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "No Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              DropdownMenuItem(
                                   value: "1",
                                   child: Row(
                                     children: [
@@ -162,11 +175,11 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 2.w,
+                                        width: 4.w,
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -185,7 +198,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -204,7 +217,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -223,7 +236,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -242,7 +255,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -255,6 +268,19 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                             },
                             items: [
                               DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "No Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              DropdownMenuItem(
                                   value: "1",
                                   child: Row(
                                     children: [
@@ -265,11 +291,11 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 2.w,
+                                        width: 4.w,
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -288,7 +314,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -307,7 +333,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -326,7 +352,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color:Color(0xffFFC000),
                                       )
                                     ],
                                   )),
@@ -345,7 +371,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       ),
                                       Icon(
                                         Icons.star,
-                                        color: Colors.yellowAccent,
+                                        color: Color(0xffFFC000),
                                       )
                                     ],
                                   )),

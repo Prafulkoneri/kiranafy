@@ -19,7 +19,7 @@ class CustomerViewAllCategoryShopReqModel {
     data["limit"] = limit;
     data["offset"] = offset;
     data["category_id"] = categoryId;
-    data["areaId"] = areaId;
+    data["area_id"] = areaId;
     data["rating"] = rating;
     return data;
   }

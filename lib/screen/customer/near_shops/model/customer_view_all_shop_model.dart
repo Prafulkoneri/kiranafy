@@ -16,7 +16,7 @@ class CustomerViewAllShopReqModel {
     data["pincode"] = pincode;
     data["limit"] = limit;
     data["offset"] = offset;
-    data["areaId"] = areaId;
+    data["area_id"] = areaId;
     data["rating"] = rating;
     return data;
   }

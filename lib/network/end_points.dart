@@ -23,6 +23,7 @@ class Endpoint {
   // shop Edit Profile
   static const String getShopEditProfileDetail =
       '${baseUrl}lsm-shop-owner-get-account-details';
+
   //Shop Update Profile
   static const String shopUpdateAccountDetails =
       '${baseUrl}lsm-shop-owner-update-account-details';
@@ -158,8 +159,7 @@ class Endpoint {
       "${baseUrl}lsm-customer-get-all-favourite-shops";
 
   ///Remove Fvrt Shops
-  static const String removeFrvtShops =
-      "${baseUrl}lsm-customer-remove-shop-from-favourite";
+  static const String removeFrvtShops = "${baseUrl}lsm-customer-remove-shop-from-favourite";
 
   ///Remove Fvrt Shops
   static const String customerCreateTicket =
@@ -190,15 +190,12 @@ class Endpoint {
   static const String customerProductListAsPerCategory =
       "${baseUrl}lsm-customer-product-list-as-per-category";
   //////////Customer Product List As Per Search
-
   static const String customerProductListAsPerSearch =
       "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   //////////Customer Product List As Per Filter
-
   static const String customerProductListAsPerFilter =
       "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   //////////Customer Add Admin Product To Fav
-
   static const String addAdminProductToFav =
       "${baseUrl}lsm-customer-add-admin-product-to-favourite";
   //////////Customer Add Custom Product To Fav
@@ -206,17 +203,13 @@ class Endpoint {
   static const String addCustomProductToFav =
       "${baseUrl}lsm-customer-add-custom-product-to-favourite";
   //////////////Seasonal Products
-
   static const String AllSeasonalProducts =
       "${baseUrl}lsm-customer-view-all-seasonal-products-of-shop";
   //////////////recommandation
-
   static const String AllRecommandedProducts =
       "${baseUrl}lsm-customer-view-all-recommendation-products-of-shop";
-
   //////////////////Products View/////////////////////////
-  static const String ProductView =
-      "${baseUrl}lsm-customer-shop-category-product-view";
+  static const String ProductView = "${baseUrl}lsm-customer-shop-category-product-view";
   //////////////Product Unit Image
   static const String ProductUnitImage =
       "${baseUrl}lsm-customer-get-unit-images-of-product";
@@ -293,11 +286,9 @@ class Endpoint {
 
   static const String cartDetailDelete = "${baseUrl}lsm-customer-delete-cart";
 
-  static const String cartItemQuantity =
-      "${baseUrl}lsm-customer-update-cart-item-quantity";
+  static const String cartItemQuantity = "${baseUrl}lsm-customer-update-cart-item-quantity";
 
-  static const String shopCartDelete =
-      "${baseUrl}lsm-customer-delete-all-carts";
+  static const String shopCartDelete ="${baseUrl}lsm-customer-delete-all-carts";
 
   static const String customerOrderSummery =
       "${baseUrl}lsm-customer-order-summary-screen";
