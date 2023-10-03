@@ -500,6 +500,8 @@ class OrderSummaryController extends ChangeNotifier {
           true,
           "orderSummary",
         );
+        offerGroupValue="";
+        notifyListeners();
         // isFulFilProductAdded[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

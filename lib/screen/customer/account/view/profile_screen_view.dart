@@ -774,6 +774,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   SharedPreferences pref =
                       await SharedPreferences.getInstance();
                   pref.clear();
+                  readMain.onSignOut();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

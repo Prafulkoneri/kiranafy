@@ -65,7 +65,7 @@ class MainScreenController extends ChangeNotifier {
     currentTab = 0;
     isFirstLoad = true;
     currentScreen = HomeScreenView(refreshPage: false);
-    notifyListeners();
+    // notifyListeners();
   }
 
   void onBottomNavChanged(index) {
