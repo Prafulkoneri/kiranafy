@@ -261,7 +261,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                   )
                 : Center(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
@@ -272,14 +272,18 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                             width: 151.w,
                           ),
                         ),
-                        Text(
-                          "No Records Found",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black1,
-                                letterSpacing: .5,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w600),
+                        Padding(
+                          padding:  EdgeInsets.only(left: 15.w),
+                          child: Text(
+                            "No Records Found",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  letterSpacing: .5,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                       ],
