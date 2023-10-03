@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/help_center/model/get_tick
 import 'package:local_supper_market/screen/shop_owner/help_center/model/ticket_type_model.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/repository/ticket_type_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/Loaderoverlay.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GetTicketListController extends ChangeNotifier {

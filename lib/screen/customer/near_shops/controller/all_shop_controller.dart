@@ -474,7 +474,7 @@ class AllShopController extends ChangeNotifier {
   //////////////////////////////////////
 
   Future<void> applyFilter(context) async {
-    showLoader(true);
+    // showLoader(true);
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));

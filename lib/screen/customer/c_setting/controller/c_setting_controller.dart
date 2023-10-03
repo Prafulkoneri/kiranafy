@@ -9,7 +9,7 @@ import 'package:local_supper_market/screen/shop_owner/s_setting/model/change_set
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/delete_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/model/get_setting_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/Loaderoverlay.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,7 +66,7 @@ class CustomerSettingController extends ChangeNotifier {
         showLoader(false);
         notifyListeners();
       } else {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -90,7 +90,7 @@ class CustomerSettingController extends ChangeNotifier {
           appNotification: isAppNotificationEnable ? "on" : "off");
 
   Future<void> changeSettings(context, value) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     isAppNotificationEnable = value;
     SharedPreferences pref = await SharedPreferences.getInstance();
     changeSettingRepo
@@ -102,12 +102,12 @@ class CustomerSettingController extends ChangeNotifier {
           ChangeSettingsResponseModel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
         notifyListeners();
       } else {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -126,7 +126,7 @@ class CustomerSettingController extends ChangeNotifier {
 
   /////////////////////////SHOP DELETE///////////////////
   Future<void> CustomerAccountDelete(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();/
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     cdeleteAccountRepo
@@ -141,7 +141,7 @@ class CustomerSettingController extends ChangeNotifier {
           context,
           MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
         );
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();

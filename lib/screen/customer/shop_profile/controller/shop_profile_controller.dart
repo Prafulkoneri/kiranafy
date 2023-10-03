@@ -25,7 +25,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/remo
 import 'package:local_supper_market/screen/customer/shop_profile/repository/shop_profile_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/Loaderoverlay.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -69,7 +69,7 @@ class AddAddressController extends ChangeNotifier {
     cityId = 0;
     areaId = 0;
     shopId = 0;
-    pincode="";
+    pincode = "";
     nameController.clear();
     mobNoController.clear();
     countryList?.clear();
@@ -104,18 +104,17 @@ class AddAddressController extends ChangeNotifier {
 
   void onCountrySelected(value) async {
     countryId = int.parse(value.toString());
-    stateId=0;
-    cityId=0;
-    areaId=0;
-    pincode="";
+    stateId = 0;
+    cityId = 0;
+    areaId = 0;
+    pincode = "";
     print("nhjvwuriuiwbytiuywi");
     print(countryId);
     notifyListeners();
   }
 
   void onBackBtnPressed(context, cId, sId) {
-    final read =
-    Provider.of<MainScreenController>(context, listen: false);
+    final read = Provider.of<MainScreenController>(context, listen: false);
     print("shopidddddddddddddd");
     print(cId);
     print(sId);
@@ -136,12 +135,15 @@ class AddAddressController extends ChangeNotifier {
       // );
     }
     if (pageRoute == "orderAddress") {
-      read.onNavigation(4, OrderSummaryView(
-        isRefresh: false,
-        route: "editAddress",
-        cartId: cId,
-        shopId: sId,
-      ), context);
+      read.onNavigation(
+          4,
+          OrderSummaryView(
+            isRefresh: false,
+            route: "editAddress",
+            cartId: cId,
+            shopId: sId,
+          ),
+          context);
       read.hideBottomNavigationBar();
       // Navigator.push(
       //     context,
@@ -154,12 +156,15 @@ class AddAddressController extends ChangeNotifier {
       //             )));
     }
     if (pageRoute == "orderAddAddress") {
-      read.onNavigation(4, OrderSummaryView(
-        isRefresh: false,
-        route: "addAddress",
-        cartId: cId,
-        shopId: sId,
-      ), context);
+      read.onNavigation(
+          4,
+          OrderSummaryView(
+            isRefresh: false,
+            route: "addAddress",
+            cartId: cId,
+            shopId: sId,
+          ),
+          context);
       read.hideBottomNavigationBar();
       // Navigator.push(
       //     context,
@@ -175,9 +180,9 @@ class AddAddressController extends ChangeNotifier {
 
   Future<void> onStateSelected(value) async {
     stateId = int.parse(value.toString());
-    cityId=0;
-    areaId=0;
-    pincode="";
+    cityId = 0;
+    areaId = 0;
+    pincode = "";
     notifyListeners();
   }
 
@@ -186,32 +191,32 @@ class AddAddressController extends ChangeNotifier {
       );
 
   Future<void> getCityList(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     registrationDataRepo.getCityList(_cityListReqModel).then((response) {
       final result = GetCityListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         cityList = result.cityData;
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         if (result.cityData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No City Found",
               type: SnackType.error);
         }
         notifyListeners();
       } else {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      LoadingOverlay.of(context).hide();
+      // LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -220,8 +225,8 @@ class AddAddressController extends ChangeNotifier {
 
   Future<void> onCitySelected(value) async {
     cityId = int.parse(value.toString());
-    areaId=0;
-    pincode="";
+    areaId = 0;
+    pincode = "";
     notifyListeners();
   }
 
@@ -231,29 +236,29 @@ class AddAddressController extends ChangeNotifier {
 
   Future<void> onAreaSelected(value) async {
     areaId = int.parse(value.toString());
-    pincode="";
+    pincode = "";
     notifyListeners();
   }
 
   Future<void> getAreaList(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     registrationDataRepo.getAreaList(_areaListReqModel).then((response) {
       final result = GetAreaListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         areaList = result.areaData;
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         if (result.areaData!.isEmpty) {
           Utils.showPrimarySnackbar(context, "No Area Found",
               type: SnackType.error);
         }
         notifyListeners();
       } else {
-        LoadingOverlay.of(context).hide();
+        // LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
-      LoadingOverlay.of(context).hide();
+      // LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
@@ -277,10 +282,9 @@ class AddAddressController extends ChangeNotifier {
     registrationDataRepo.getPincodeList(_pincodeListReqModel).then((response) {
       final result = GetPincodeResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.pincodeData?.isNotEmpty==true){
+        if (result.pincodeData?.isNotEmpty == true) {
           pincodeList = result.pincodeData;
-        }
-        else{
+        } else {
           pincodeList?.clear();
           Utils.showPrimarySnackbar(context, "No Pincode Found",
               type: SnackType.error);
@@ -332,7 +336,7 @@ class AddAddressController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("${response.body}");
         countryList = result.countryData;
-        if(!isEditingAddress){
+        if (!isEditingAddress) {
           showLoader(false);
         }
 
@@ -549,11 +553,11 @@ class AddAddressController extends ChangeNotifier {
         final read = Provider.of<MainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
         if (pageRoute == "addressView") {
-
-          final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
+          final readDeliveryAddressController =
+              Provider.of<DeliveryAddressController>(context, listen: false);
 
           read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
-          readDeliveryAddressController.initState(context,true);
+          readDeliveryAddressController.initState(context, true);
 
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -565,12 +569,15 @@ class AddAddressController extends ChangeNotifier {
           // );
         }
         if (pageRoute == "orderAddAddress") {
-          read.onNavigation(4, OrderSummaryView(
-            isRefresh: true,
-            route: "addAddress",
-            cartId: cId,
-            shopId: sId,
-          ), context);
+          read.onNavigation(
+              4,
+              OrderSummaryView(
+                isRefresh: true,
+                route: "addAddress",
+                cartId: cId,
+                shopId: sId,
+              ),
+              context);
           read.hideBottomNavigationBar();
           // Navigator.push(
           //     context,
@@ -641,14 +648,13 @@ class AddAddressController extends ChangeNotifier {
       print(response.body);
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        final read =
-        Provider.of<MainScreenController>(context, listen: false);
+        final read = Provider.of<MainScreenController>(context, listen: false);
         if (pageRoute == "addressView") {
-
-          final readDeliveryAddressController = Provider.of<DeliveryAddressController>(context, listen: false);
+          final readDeliveryAddressController =
+              Provider.of<DeliveryAddressController>(context, listen: false);
 
           read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
-          readDeliveryAddressController.initState(context,true);
+          readDeliveryAddressController.initState(context, true);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -659,12 +665,15 @@ class AddAddressController extends ChangeNotifier {
           // );
         }
         if (pageRoute == "orderAddress") {
-          read.onNavigation(4, OrderSummaryView(
-            isRefresh: true,
-            route: "editAddress",
-            cartId: cId,
-            shopId: sId,
-          ), context);
+          read.onNavigation(
+              4,
+              OrderSummaryView(
+                isRefresh: true,
+                route: "editAddress",
+                cartId: cId,
+                shopId: sId,
+              ),
+              context);
           read.hideBottomNavigationBar();
           // Navigator.push(
           //     context,
