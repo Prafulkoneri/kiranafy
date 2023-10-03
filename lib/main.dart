@@ -214,7 +214,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UpdateProfileController()),
         ChangeNotifierProvider(create: (_) => HomeScreenController()),
         ChangeNotifierProvider(create: (_) => FavouritesController()),
-        ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
+        // ChangeNotifierProvider(create: (_) => AllNearShopsAsPerPincode()),
         ChangeNotifierProvider(create: (_) => ShopProfileViewController()),
         ChangeNotifierProvider(create: (_) => AllShopController()),
         ChangeNotifierProvider(create: (_) => AllCategoryShopController()),
@@ -414,7 +414,7 @@ class _MyAppState extends State<MyApp> {
                         builder: (context, child) {
                           return MediaQuery(
                             data: MediaQuery.of(context)
-                                .copyWith(textScaleFactor: 0.9.sp),
+                                .copyWith(textScaleFactor: 0.87.sp),
                             child: child!,
                           );
                         },

@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/controller/order_payment_controller.dart';
 
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
@@ -112,8 +109,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           ),
         ),
         body: watch.isLoading
-            ?  Loader()
-
+            ? Loader()
             : WillPopScope(
                 onWillPop: () async {
                   readMain.onNavigation(
@@ -144,6 +140,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                               .toString(),
                                         ),
                                         context);
+                                    readMain.showBottomNavigationBar();
                                     // Navigator.pushAndRemoveUntil(
                                     //   context,
                                     //   MaterialPageRoute(

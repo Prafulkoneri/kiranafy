@@ -8,8 +8,6 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
-import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -123,9 +121,7 @@ class ProductViewController extends ChangeNotifier {
     print("kirannnnnn");
   }
 
-  onBackPressed(context) {
-
-  }
+  onBackPressed(context) {}
 
   CartItemQuantityReqModel get cartItemQuantityRequestModel =>
       CartItemQuantityReqModel(
@@ -154,22 +150,19 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
+        if (result.status == 200) {
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          print("${value}valueeeeeeeee");
+          quantityList.insert(index, value - 1);
 
-
-        int value = quantityList[index];
-        quantityList.removeAt(index);
-        print("${value}valueeeeeeeee");
-        quantityList.insert(index, value - 1);
-
-        if (quantityList[index] == 0) {
-          removeFromCart(pType, pUnitId, shopDetails?.id, index, context);
-          isUnitImagesAdded[index] = false;
-        }
-        quantityBtnPressed(false);
-        notifyListeners();
-        }
-        else {
+          if (quantityList[index] == 0) {
+            removeFromCart(pType, pUnitId, shopDetails?.id, index, context);
+            isUnitImagesAdded[index] = false;
+          }
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
           quantityBtnPressed(false);
@@ -203,20 +196,19 @@ class ProductViewController extends ChangeNotifier {
         .cartItemQuantity(
             cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) {
-          print("hello");
+      print("hello");
       dev.log("response.body${response.body}");
       final result =
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200) {
+        if (result.status == 200) {
           int value = quantityList[index];
           quantityList.removeAt(index);
           quantityList.insert(index, value + 1);
           quantityBtnPressed(false);
 
           notifyListeners();
-        }
-        else{
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
           quantityBtnPressed(false);
@@ -244,8 +236,8 @@ class ProductViewController extends ChangeNotifier {
   Future<void> addToCart(pType, pId, sId, index, context) async {
     print("quantityList1${quantityList}");
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add product to cart");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to add product to cart");
       return;
     }
     addProductToCartRepo
@@ -261,23 +253,20 @@ class ProductViewController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
-
-
-        cartItemId = result.cartItemId.toString();
-        print("quantityList2${quantityList}");
-        // quantityList.removeAt(index);
-        // quantityList.insert(index,1);
-        print("quantityList3${quantityList}");
-        cartItemIdList.removeAt(index);
-        cartItemIdList.insert(index, result.cartItemId);
-        print(cartItemIdList);
-        isSimilarProductAdded[index] = true;
-        // Utils.showPrimarySnackbar(context, result.message,
-        //     type: SnackType.success);
-        notifyListeners();
-        }
-        else{
+        if (result.status == 200) {
+          cartItemId = result.cartItemId.toString();
+          print("quantityList2${quantityList}");
+          // quantityList.removeAt(index);
+          // quantityList.insert(index,1);
+          print("quantityList3${quantityList}");
+          cartItemIdList.removeAt(index);
+          cartItemIdList.insert(index, result.cartItemId);
+          print(cartItemIdList);
+          isSimilarProductAdded[index] = true;
+          // Utils.showPrimarySnackbar(context, result.message,
+          //     type: SnackType.success);
+          notifyListeners();
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -484,8 +473,9 @@ class ProductViewController extends ChangeNotifier {
 
   Future addToFavProduct(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add product to favourite");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils()
+          .showLoginDialog(context, "Please Login to add product to favourite");
       return;
     }
     if (productType == "admin_product") {
@@ -638,8 +628,8 @@ class ProductViewController extends ChangeNotifier {
       );
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add shop to favourite");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to add shop to favourite");
       return;
     }
     shopId = id.toString();
@@ -777,12 +767,11 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  void updateProductId(
-    pId,context,refresh
-  ) {
+  void updateProductId(pId, context, refresh) {
     productId = pId;
-    if(refresh){
-      initState(context, shopId, categoryId, pId, selectedUnitId, productType,"");
+    if (refresh) {
+      initState(
+          context, shopId, categoryId, pId, selectedUnitId, productType, "");
     }
 
     notifyListeners();

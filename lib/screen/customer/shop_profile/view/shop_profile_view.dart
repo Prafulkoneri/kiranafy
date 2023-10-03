@@ -231,10 +231,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                       readMain.onNavigation(
                                           1,
                                           CReviewScreenView(
-                                            shopId: watch.shopDetails?.id
-                                                .toString(),
-                                            fromDashBoard: true,
-                                          ),
+                                              shopId: watch.shopDetails?.id
+                                                  .toString(),
+                                              fromDashBoard: true,
+                                              refreshPage: true),
                                           context);
 
                                       // Navigator.pushAndRemoveUntil(

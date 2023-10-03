@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/c_setting/controller/c_setting_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
@@ -97,13 +94,6 @@ class _CustomerSettingState extends State<CustomerSetting> {
               ),
               ShopAddress(
                   text: "Enable or disable the notifications coming up."),
-              // Text(
-              //   "Enable or disable the notifications coming up.",
-              //   style: TextStyle(
-              //       fontSize: 13.sp,
-              //       fontWeight: FontWeight.w400,
-              //       color: Black1),
-              // ),
               SizedBox(
                 height: 41.h,
               ),

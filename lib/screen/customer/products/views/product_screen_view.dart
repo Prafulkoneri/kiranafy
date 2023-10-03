@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +8,6 @@ import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.d
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -94,8 +92,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
-          ? const  Loader()
-
+          ? const Loader()
           : //  onWillPop: () async {
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -109,10 +106,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
           WillPopScope(
               onWillPop: () async {
                 if (widget.routeName == "cart_details") {
-                  readMain.onNavigation(2,  CartDetailView(
-                      isRefresh: true,
-                      shopId: watch.shopDetails?.id.toString(),
-                      cartId: watch.cartId), context);
+                  readMain.onNavigation(
+                      2,
+                      CartDetailView(
+                          isRefresh: true,
+                          shopId: watch.shopDetails?.id.toString(),
+                          cartId: watch.cartId),
+                      context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(
                   //     context,
@@ -121,19 +121,21 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   //             isRefresh: true,
                   //             shopId: watch.shopDetails?.id.toString(),
                   //             cartId: watch.cartId)));
-                }
-                else if(widget.routeName == "homeScreen"){
-                  readMain.onNavigation(0,HomeScreenView(refreshPage: false), context);
-                }
-                else if(widget.routeName=="favouriteProduct"){
-                  readMain.onNavigation(4,CFavouritesView(selectedIndex: 1), context);
-                }
-                else {
-                  readMain.onNavigation(1,  ShopProfileView(
-                                  refreshPage: true,
-                                  routeName: '',
-                                  shopId: watch.shopDetails?.id.toString(),
-                                ), context);
+                } else if (widget.routeName == "homeScreen") {
+                  readMain.onNavigation(
+                      0, HomeScreenView(refreshPage: false), context);
+                } else if (widget.routeName == "favouriteProduct") {
+                  readMain.onNavigation(
+                      4, CFavouritesView(selectedIndex: 1), context);
+                } else {
+                  readMain.onNavigation(
+                      1,
+                      ShopProfileView(
+                        refreshPage: true,
+                        routeName: '',
+                        shopId: watch.shopDetails?.id.toString(),
+                      ),
+                      context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -168,14 +170,17 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                       child: Column(
                         children: [
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               print(watch.shopDetails?.id.toString());
-                              readMain.onNavigation(1,  ShopProfileView(
-                                refreshPage: true,
-                                routeName: 'homeNearbyShop',
-                                // categoryId: watch.shopDetails?..toString(),
-                                shopId: watch.shopDetails?.id.toString(),
-                              ), context);
+                              readMain.onNavigation(
+                                  1,
+                                  ShopProfileView(
+                                    refreshPage: true,
+                                    routeName: 'homeNearbyShop',
+                                    // categoryId: watch.shopDetails?..toString(),
+                                    shopId: watch.shopDetails?.id.toString(),
+                                  ),
+                                  context);
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -491,11 +496,14 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                     child: Container(
                                       margin: EdgeInsets.only(bottom: 18.w),
                                       decoration: BoxDecoration(
-                                          color: watch.isUnitImagesAdded[
-                                          index]? Color(0xffEAFFF1):Colors.white,
+                                          color: watch.isUnitImagesAdded[index]
+                                              ? Color(0xffEAFFF1)
+                                              : Colors.white,
                                           border: Border.all(
-                                              color: watch.isUnitImagesAdded[
-                                              index]? Color(0xff69BB86):Color(0xffB3B3B3)),
+                                              color:
+                                                  watch.isUnitImagesAdded[index]
+                                                      ? Color(0xff69BB86)
+                                                      : Color(0xffB3B3B3)),
                                           borderRadius:
                                               BorderRadius.circular(10.w)),
                                       padding: EdgeInsets.symmetric(
@@ -692,10 +700,16 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                               //   ),
                                               // ),
                                               GestureDetector(
-                                                onTap: () async{
-                                                  SharedPreferences pref = await SharedPreferences.getInstance();
-                                                  if(pref.getString("status")=="guestLoggedIn"){
-                                                    Utils().showLoginDialog(context,"Please Login to add product to cart");
+                                                onTap: () async {
+                                                  SharedPreferences pref =
+                                                      await SharedPreferences
+                                                          .getInstance();
+                                                  if (pref.getString(
+                                                          "status") ==
+                                                      "guestLoggedIn") {
+                                                    Utils().showLoginDialog(
+                                                        context,
+                                                        "Please Login to add product to cart");
                                                     return;
                                                   }
                                                   //  read.addToCart(watch.productDetails?.id,
@@ -720,12 +734,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         // width: 15.w,
                                                         // height: 19.h,
                                                       )
-                                                    :
-                                                Row(
+                                                    : Row(
                                                         children: [
                                                           GestureDetector(
                                                             onTap: () {
-                                                              if (watch.isQuanityBtnPressed) {
+                                                              if (watch
+                                                                  .isQuanityBtnPressed) {
                                                                 return;
                                                               }
                                                               read.subtractItemQuantity(
@@ -874,8 +888,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                   onTap: () {
                                                     print(element?.id);
                                                     watch.updateProductId(
-                                                      element?.id.toString(),context,true
-                                                    );
+                                                        element?.id.toString(),
+                                                        context,
+                                                        true);
                                                     // Navigator.push(context,MaterialPageRoute(builder: (context)=>MainScreenView(index: 1,screenName: ProductScreenView(
                                                     //     selectedUnitId: element
                                                     //         ?.productUnitId
@@ -895,8 +910,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                     //     // widget.shopId,
                                                     //     productType:
                                                     //     element?.productType),)));
-
-
 
                                                     // readMain.onNavigation(1,   ProductScreenView(
                                                     //     selectedUnitId: element
@@ -1174,7 +1187,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                     ? GestureDetector(
                                                                         onTap:
                                                                             () {
-
                                                                           read.addToCart(
                                                                               element?.productType.toString(),
                                                                               // element

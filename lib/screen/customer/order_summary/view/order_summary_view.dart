@@ -109,8 +109,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
-
+          ? Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -216,7 +215,21 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   ),
                                   Row(
                                     children: [
-                                      GestureDetector(
+                                      // GestureDetector(
+                                      //   onTap: () {
+                                      //     read.launchPhone(
+                                      // watch.shopDetailData
+                                      //         ?.shopOwnerSupportNumber ??
+                                      //     "",
+                                      //         context);
+                                      //   },
+                                      //   child: SvgPicture.asset(
+                                      //     'assets/images/call.svg',
+                                      //     // width: 15.w,
+                                      //     // height: 19.h,
+                                      //   ),
+                                      // ),
+                                      InkWell(
                                         onTap: () {
                                           read.launchPhone(
                                               watch.shopDetailData
@@ -224,23 +237,26 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   "",
                                               context);
                                         },
-                                        child: SvgPicture.asset(
-                                          'assets/images/call.svg',
-                                          // width: 15.w,
-                                          // height: 19.h,
-                                        ),
+                                        child: Container(
+                                            padding: EdgeInsets.only(
+                                                left: 13.w,
+                                                right: 13.w,
+                                                top: 14.w,
+                                                bottom: 14.w),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xff23AA49),
+                                            ),
+                                            child: SvgPicture.asset(
+                                              "assets/icons/new_call.svg",
+                                              // width: 26.w,
+                                              // height: 14.h,
+                                            )),
                                       ),
                                       SizedBox(
                                         width: 13.w,
                                       ),
                                       InkWell(
-                                        // onTap: () {
-                                        //   watch.favAllShop
-                                        //       ? read.removeAllShopFavList(
-                                        //           context, watch.shopDetailData?.id)
-                                        //       : read.updateAllShopFavList(
-                                        //           context, watch.shopDetailData?.id);
-                                        // },
                                         onTap: () {
                                           watch.favAllShop
                                               ? read.removeAllShopFavList(
@@ -252,10 +268,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         },
                                         child: Container(
                                           padding: EdgeInsets.only(
-                                              left: 11.w,
-                                              right: 11.w,
-                                              top: 13.w,
-                                              bottom: 13.w),
+                                              left: 13.w,
+                                              right: 13.w,
+                                              top: 14.w,
+                                              bottom: 14.w),
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Color(0xff4689EC),
@@ -273,6 +289,46 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                 ),
                                         ),
                                       )
+                                      // InkWell(
+                                      //   // onTap: () {
+                                      //   //   watch.favAllShop
+                                      //   //       ? read.removeAllShopFavList(
+                                      //   //           context, watch.shopDetailData?.id)
+                                      //   //       : read.updateAllShopFavList(
+                                      //   //           context, watch.shopDetailData?.id);
+                                      //   // },
+                                      // onTap: () {
+                                      //   watch.favAllShop
+                                      //       ? read.removeAllShopFavList(
+                                      //           context,
+                                      //           watch.shopDetailData?.id)
+                                      //       : read.updateAllShopFavList(
+                                      //           context,
+                                      //           watch.shopDetailData?.id);
+                                      // },
+                                      //   child: Container(
+                                      //     padding: EdgeInsets.only(
+                                      //         left: 11.w,
+                                      //         right: 11.w,
+                                      //         top: 13.w,
+                                      //         bottom: 13.w),
+                                      //     decoration: BoxDecoration(
+                                      //       shape: BoxShape.circle,
+                                      //       color: Color(0xff4689EC),
+                                      //     ),
+                                      //     child: watch.favAllShop
+                                      //         ? SvgPicture.asset(
+                                      //             "assets/icons/fav_selected.svg",
+                                      //             width: 26.w,
+                                      //             height: 14.h,
+                                      //           )
+                                      //         : SvgPicture.asset(
+                                      //             "assets/images/favorite.svg",
+                                      //             width: 26.w,
+                                      //             height: 14.h,
+                                      //           ),
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                 ],

@@ -7,9 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
 import 'package:local_supper_market/screen/customer/delivery_address/controller/add_address_controller.dart';
-import 'package:local_supper_market/screen/customer/delivery_address/view/my_delivery_address.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -91,8 +89,7 @@ class _AddAddressViewState extends State<AddAddressView> {
             //             shopId: widget.shopId,
             //           )));
             // }
-            read.onBackBtnPressed(
-                context, widget.cartId, widget.shopId);
+            read.onBackBtnPressed(context, widget.cartId, widget.shopId);
           },
           title: widget.isEditAdress == false ? "Add Address" : "Edit Address",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -107,12 +104,11 @@ class _AddAddressViewState extends State<AddAddressView> {
       body: watch.isLoading
           ? Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          read.onBackBtnPressed(
-              context, widget.cartId, widget.shopId);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                read.onBackBtnPressed(context, widget.cartId, widget.shopId);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Container(
                   width: ScreenUtil().screenWidth,
@@ -246,15 +242,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       await read.getStateList(context);
                                     },
                                     items: watch.countryList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.id.toString(),
-                                              child: Text(
-                                                item.countryName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.countryName ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
                                         .toList(),
                                     hint: "Country",
                                     titleHeader: "Country",
@@ -266,15 +263,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       await read.getStateList(context);
                                     },
                                     items: watch.countryList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.id.toString(),
-                                              child: Text(
-                                                item.countryName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item.id.toString(),
+                                                  child: Text(
+                                                    item.countryName ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
                                         .toList(),
                                     hint: "Country",
                                     titleHeader: "Country",
@@ -291,16 +289,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         await read.getCityList(context);
                                       },
                                       items: watch.stateList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.stateName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.stateName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "State",
                                       titleHeader: "State",
@@ -312,16 +310,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         await read.getCityList(context);
                                       },
                                       items: watch.stateList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.stateName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.stateName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "State",
                                       titleHeader: "State",
@@ -341,16 +339,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         await read.getAreaList(context);
                                       },
                                       items: watch.cityList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.cityName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.cityName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "City",
                                       titleHeader: "City",
@@ -362,16 +360,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         await read.getAreaList(context);
                                       },
                                       items: watch.cityList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.cityName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.cityName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "City",
                                       titleHeader: "City",
@@ -392,16 +390,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         read.getPinCodeList(context);
                                       },
                                       items: watch.areaList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.areaName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.areaName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "Area",
                                       titleHeader: "Area",
@@ -413,16 +411,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                         read.getPinCodeList(context);
                                       },
                                       items: watch.areaList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.areaName ?? "",
-                                                      style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.areaName ?? "",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       hint: "Area",
                                       titleHeader: "Area",
@@ -438,15 +436,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       read.onPincodeSelected(value);
                                     },
                                     items: watch.pincodeList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item,
-                                              child: Text(
-                                                item ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
                                         .toList(),
                                     hint: "Pincode",
                                     titleHeader: "Pincode",
@@ -458,15 +457,16 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       read.onPincodeSelected(value);
                                     },
                                     items: watch.pincodeList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item,
-                                              child: Text(
-                                                item ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
+                                        ?.map(
+                                            (item) => DropdownMenuItem<String>(
+                                                  value: item,
+                                                  child: Text(
+                                                    item ?? "",
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                    ),
+                                                  ),
+                                                ))
                                         .toList(),
                                     hint: "Pincode",
                                     titleHeader: "Pincode",
@@ -544,7 +544,7 @@ class _AddAddressViewState extends State<AddAddressView> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

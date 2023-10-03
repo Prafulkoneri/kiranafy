@@ -44,8 +44,16 @@ class CustomerReviewListControler extends ChangeNotifier {
   bool isLoading = true;
   //////////////
 
-  Future<void> initState(context, sId) async {
-    ShopReviewList(context, sId);
+  Future<void> initState(context, sId, refresh) async {
+    if (refresh) {
+      showLoader(true);
+      print("kkkkkkkk");
+      await ShopReviewList(context, sId, refresh);
+    } else {
+      showLoader(false);
+    }
+
+    // ShopReviewList(context, sId);
     notifyListeners();
   }
 
@@ -59,7 +67,7 @@ class CustomerReviewListControler extends ChangeNotifier {
       CustomerShopReviewListRequestModel(
         shopId: shopId.toString(),
       );
-  Future<void> ShopReviewList(context, sId) async {
+  Future<void> ShopReviewList(context, sId, refresh) async {
     print("object");
     print(sId);
     print("object1111111111111111111111");
@@ -77,7 +85,10 @@ class CustomerReviewListControler extends ChangeNotifier {
         reviewlistData = result.reviewlistData;
         print(reviewlistData?.shopDetails);
         reviewList = reviewlistData?.reviewList;
+
+        print("fall all shops${favAllShop}");
         shopDetails = reviewlistData?.shopDetails;
+        favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
         print(shopDetails?.shopAddress);
 
         print("22222222222222222222222222222");
@@ -118,8 +129,8 @@ class CustomerReviewListControler extends ChangeNotifier {
       );
   Future<void> removeAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to continue");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to continue");
       return;
     }
     removeFavShopRepo
@@ -152,8 +163,8 @@ class CustomerReviewListControler extends ChangeNotifier {
 
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to continue");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to continue");
       return;
     }
     print(pref.getString("successToken"));
