@@ -80,23 +80,6 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                       .toString(),
                   productUnitId: "",
                 ), context);
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => SMainScreenView(
-                //           index: 0,
-                //           screenName: AddUnitView(
-                //             isEdit: false,
-                //             categoryId: widget.categoryId,
-                //             productId: widget.productId,
-                //             productType: widget.productType,
-                //             productName: watch.getproductunitlistdata
-                //                 ?.productDetails?.productName
-                //                 .toString(),
-                //             productUnitId: "",
-                //           ))),
-                //   (Route<dynamic> route) => false,
-                // );
               }),
         ),
         body: watch.isLoading
@@ -304,51 +287,17 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                             onTap: () {
 
                                                               readMainScreen.onNavigation(0,AddUnitView(
-                                                                categoryId:
-                                                                widget.categoryId,
-                                                                productType:
-                                                                watch.getproductunitlistdata?.productDetails?.productType ?? "",
-                                                                productId:
-                                                                watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
-                                                                productName:
-                                                                watch.getproductunitlistdata?.productDetails?.productName.toString(),
-                                                                productUnitId:
-                                                                element?.id.toString(),
-                                                                isEdit:
-                                                                true,
+                                                                categoryId: widget.categoryId,
+                                                                productType: watch.getproductunitlistdata?.productDetails?.productType ?? "",
+                                                                productId: watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
+                                                                productName: watch.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                                productUnitId: element?.id.toString(),
+                                                                isEdit: true,
                                                               ), context);
-                                                              // Navigator
-                                                              //     .pushAndRemoveUntil(
-                                                              //   context,
-                                                              //   MaterialPageRoute(
-                                                              //       builder: (context) =>
-                                                              //           SMainScreenView(
-                                                              //               index:
-                                                              //                   0,
-                                                              //               screenName:
-                                                              //                   AddUnitView(
-                                                              //                 categoryId:
-                                                              //                     widget.categoryId,
-                                                              //                 productType:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productType ?? "",
-                                                              //                 productId:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
-                                                              //                 productName:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productName.toString(),
-                                                              //                 productUnitId:
-                                                              //                     element?.id.toString(),
-                                                              //                 isEdit:
-                                                              //                     true,
-                                                              //               ))),
-                                                              //   (Route<dynamic>
-                                                              //           route) =>
-                                                              //       false,
-                                                              // );
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets.all(
-                                                                      8),
+                                                                  EdgeInsets.all(8.w),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
                                                                     BoxShadow(
