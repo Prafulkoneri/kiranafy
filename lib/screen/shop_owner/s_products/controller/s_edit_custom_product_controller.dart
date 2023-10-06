@@ -352,6 +352,7 @@ class EditCustomProductController extends ChangeNotifier {
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
+          LoadingOverlay.of(context).hide();
           if (isNavFromAccount) {
             final read=Provider.of<SMainScreenController>(context,listen: false);
             read.onNavigation(0, ShopSeasonalRecommandedOfferProductsView(
@@ -394,7 +395,7 @@ class EditCustomProductController extends ChangeNotifier {
           }
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
-          LoadingOverlay.of(context).hide();
+
           notifyListeners();
         } else {
           LoadingOverlay.of(context).hide();
@@ -407,12 +408,15 @@ class EditCustomProductController extends ChangeNotifier {
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },

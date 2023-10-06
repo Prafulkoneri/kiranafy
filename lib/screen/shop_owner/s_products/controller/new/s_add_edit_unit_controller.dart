@@ -119,6 +119,8 @@ class AddEditUnitController extends ChangeNotifier{
     productUnitId:productUnitId,
     productType: producttype,
   );
+
+
   EditCustomProductUnitCategoryRequestModel get editCustomProductUnitCategoryRequestModel=>EditCustomProductUnitCategoryRequestModel(
     productId:productId,
     productType: producttype,
@@ -212,6 +214,7 @@ class AddEditUnitController extends ChangeNotifier{
     notifyListeners();
     // Navigator.pop(context);
   }
+
   void openGallery2(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -248,6 +251,7 @@ class AddEditUnitController extends ChangeNotifier{
 
     // Navigator.pop(context);
   }
+
   void openGallery3(context) async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
@@ -411,6 +415,7 @@ class AddEditUnitController extends ChangeNotifier{
   );
 
   Future<void> updateEditUnitDetails(context)async{
+    LoadingOverlay.of(context).show();
     if(valueController.text==""){
       Utils.showPrimarySnackbar(context, "Enter Value",
           type: SnackType.error);
@@ -449,6 +454,7 @@ class AddEditUnitController extends ChangeNotifier{
       log(response.body);
       print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         final read=Provider.of<SMainScreenController>(context,listen: false);
         read.onNavigation(0,  UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,), context);
         // Navigator.pushAndRemoveUntil(
@@ -464,24 +470,25 @@ class AddEditUnitController extends ChangeNotifier{
         showLoader(false);
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
           (Object e) {
+            LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
     );
   }
-
-
-
 
   Future addUnit(context,actionType) async {
     if(valueController.text==""){
@@ -514,13 +521,13 @@ class AddEditUnitController extends ChangeNotifier{
           type: SnackType.error);
       return;
     }
-    if(networkImage1==""&&networkImage2==""&&networkImage3==""){
-      if(fileImage1.path==""&&fileImage2.path==""&&fileImage3.path==""){
-        Utils.showPrimarySnackbar(context, "Select atleast 1 image",
-            type: SnackType.error);
-        return;
-      }
-    }
+    // if(networkImage1==""&&networkImage2==""&&networkImage3==""){
+    //   if(fileImage1.path==""&&fileImage2.path==""&&fileImage3.path==""){
+    //     Utils.showPrimarySnackbar(context, "Select atleast 1 image",
+    //         type: SnackType.error);
+    //     return;
+    //   }
+    // }
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();

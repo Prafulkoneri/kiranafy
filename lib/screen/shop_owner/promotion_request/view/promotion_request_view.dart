@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +24,13 @@ class shopPromotionRequestView extends StatefulWidget {
 }
 
 class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
+
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<shopPromotionController>().initState();
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<shopPromotionController>();
@@ -205,6 +213,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                         Row(
                           children: [
                             FilterRadioButton(
+
                                 value: "15",
                                 groupValue: read.groupValue,
                                 onChanged: (value) {
@@ -310,7 +319,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                             fontSize: 20.sp,
                             height: 50.w,
                             text: "Submit",
-                            color: Color(0xff4689EC),
+                            color: Color(0xff4689ec),
                             onTap: () {
                               watch.promotionRequestForm(context);
                             }),
@@ -368,183 +377,127 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                         Column(
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(left: 6.w, top: 5.w),
+                              padding: EdgeInsets.only(left: 6.w,),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                      padding: EdgeInsets.only(bottom: 18.w),
-                                      child: Icon(
-                                        Icons.circle_rounded,
-                                        size: 5.w,
-                                      )),
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
-                                    child: Text(
-                                      // softWrap: true,
-                                      // maxLines: 3,//
-                                      "For pricing and further details,Local Supermart will contact you within 48 hours.",
-                                      textAlign: TextAlign.justify,
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: Black1,
-                                            // height: 1.5,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
 
-                                            // letterSpacing: .05,
-                                            // overflow: TextOverflow.ellipsis,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w400),
+                                        // softWrap: true,
+                                        // maxLines: 3,//
+                                        "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              // height: 1.5,
+
+                                              // letterSpacing: .05,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(left: 6.w, top: 5.w),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 18.w),
-                                          child: Icon(
-                                            Icons.circle_rounded,
-                                            size: 5.w,
-                                          )),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Flexible(
-                                        child: Text(
-                                          // softWrap: true,
-                                          // maxLines: 3,//
-                                          "Regarding product delivery please contact to shop owner.",
-                                          textAlign: TextAlign.justify,
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                // height: 1.5,
-
-                                                // letterSpacing: .05,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w,),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
+                                        // softWrap: true,
+                                        // maxLines: 3,//
+                                        "Regarding product delivery please contact to shop owner.",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 6.w, top: 5.w),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 60.w),
-                                          child: Icon(
-                                            Icons.circle_rounded,
-                                            size: 5.w,
-                                          )),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Flexible(
-                                        child: Text(
-                                          "You are directly transferring payment to shop owner, any issue related to payment transfer please contact to shop owner",
-                                          textAlign: TextAlign.justify,
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                height: 1.5,
-
-                                                // letterSpacing: .05,
-                                                // overflow: TextOverflow.ellipsis,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                            // Padding(
-                            //   padding: EdgeInsets.only(left: 6.w, top: 5.w),
-                            //   child: Row(
-                            //     children: [
-                            //       Padding(
-                            //           padding: EdgeInsets.only(bottom: 60.w),
-                            //           child: Icon(
-                            //             Icons.circle_rounded,
-                            //             size: 5.w,
-                            //           )),
-                            //       SizedBox(
-                            //         width: 10,
-                            //       ),
-                            //       Flexible(
-                            //         child: Text(
-                            //           "You are directly transferring payment to shop owner, any issue related to payment transfer please contact to shop owner.",
-                            //           textAlign: TextAlign.justify,
-                            //           style: GoogleFonts.dmSans(
-                            //             textStyle: TextStyle(
-                            //                 color: Black1,
-                            //                 height: 1.5,
-
-                            //                 // letterSpacing: .05,
-                            //                 // overflow: TextOverflow.ellipsis,
-                            //                 fontSize: 14.sp,
-                            //                 fontWeight: FontWeight.w400),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w,),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
+                                        "You are directly transferring payment to shop owner, any issue related to payment transfer please contact to shop owner",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
+                                        "For advertisement advance payment is required.",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // For advertisement advance payment is required.
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 6.w),
-                          child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(bottom: 0.w),
-                                  child: Icon(
-                                    Icons.circle_rounded,
-                                    size: 5.w,
-                                  )),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "For advertisement advance payment is required.",
-                                  // softWrap: true,
-                                  // maxLines: 3,//
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
 
-                                        // letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ),
-                              // For advertisement advance payment is required.
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),

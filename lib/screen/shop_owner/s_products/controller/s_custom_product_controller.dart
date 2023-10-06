@@ -79,7 +79,7 @@ class CustomProductController extends ChangeNotifier {
       );
 
   Future<void> uploadCustomProduct(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     await uploadCustomProductRepo
         .uploadCustomProduct(
@@ -89,6 +89,7 @@ class CustomProductController extends ChangeNotifier {
       final result =
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         final read=Provider.of<SMainScreenController>(context,listen: false);
         read.onNavigation(0, SSelectedProductView(
           isRefresh: true,
@@ -105,7 +106,7 @@ class CustomProductController extends ChangeNotifier {
         //           ))),
         //   (Route<dynamic> route) => false,
         // );
-        LoadingOverlay.of(context).hide();
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -249,7 +250,7 @@ class CustomProductController extends ChangeNotifier {
   }
 
   Future uploadImage(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     var uri = Uri.parse("${Endpoint.submitCustomProduct}");
@@ -286,6 +287,7 @@ class CustomProductController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("sucesss");
         if(res["status"]==200){
+          LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, res["message"],
               type: SnackType.success);
           final read=Provider.of<SMainScreenController>(context,listen: false);
@@ -304,7 +306,7 @@ class CustomProductController extends ChangeNotifier {
           //           ))),
           //       (Route<dynamic> route) => false,
           // );
-          LoadingOverlay.of(context).hide();
+
         }
         else{
           LoadingOverlay.of(context).hide();

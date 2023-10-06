@@ -157,7 +157,7 @@ class ProductViewController extends ChangeNotifier {
           quantityList.insert(index, value - 1);
 
           if (quantityList[index] == 0) {
-            removeFromCart(pType, pUnitId, shopDetails?.id, index, context);
+            removeFromCart(pType, pUnitId, shopDetails?.id, index, context,false);
             isUnitImagesAdded[index] = false;
           }
           quantityBtnPressed(false);
@@ -233,7 +233,7 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, index, context) async {
+  Future<void> addToCart(pType, pId, sId, index, context,isSimilarProduct) async {
     print("quantityList1${quantityList}");
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
@@ -259,12 +259,14 @@ class ProductViewController extends ChangeNotifier {
           // quantityList.removeAt(index);
           // quantityList.insert(index,1);
           print("quantityList3${quantityList}");
-          cartItemIdList.removeAt(index);
-          cartItemIdList.insert(index, result.cartItemId);
-          print(cartItemIdList);
+          if(!isSimilarProduct) {
+            cartItemIdList.removeAt(index);
+            cartItemIdList.insert(index, result.cartItemId);
+          }
+
+          else {
           isSimilarProductAdded[index] = true;
-          // Utils.showPrimarySnackbar(context, result.message,
-          //     type: SnackType.success);
+        }
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -335,6 +337,7 @@ class ProductViewController extends ChangeNotifier {
         /////////////Similar Products////////////////
         similarProduct = productViewData?.similarProducts;
         int similarProductLength = similarProduct?.length ?? 0;
+        print("similarproductlength ${similarProductLength}");
         isSimilarProductAdded =
             List<bool>.filled(similarProductLength, false, growable: true);
         for (int i = 0; i < similarProductLength; i++) {
@@ -827,7 +830,7 @@ class ProductViewController extends ChangeNotifier {
   // }
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
 
-  Future<void> removeFromCart(pType, puId, sId, index, context) async {
+  Future<void> removeFromCart(pType, puId, sId, index, context,isSimilarProduct) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeCartItemRepo
         .removeCartItem(
@@ -842,9 +845,14 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        cartItemIdList.removeAt(index);
+        if(!isSimilarProduct){
+          cartItemIdList.removeAt(index);
         cartItemIdList.insert(index, 0);
-        isSimilarProductAdded[index] = false;
+        }
+        else{
+          isSimilarProductAdded[index] = false;
+        }
+
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

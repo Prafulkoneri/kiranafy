@@ -20,6 +20,14 @@ class shopPromotionController extends ChangeNotifier {
   TextEditingController adsContentController = TextEditingController(); //
   PraqmotionRequestRepo pramotionRequestRepo = PraqmotionRequestRepo();
 
+  void initState(){
+    promotionSubjectController.clear();
+    planToStartController.clear();
+    adsContentController.clear();
+    planToStartController.clear();
+    groupValue="7";
+  }
+
   void showStackLoader(value) {
     isStackLoading = value;
     notifyListeners();

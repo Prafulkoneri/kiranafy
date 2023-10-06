@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,6 +29,11 @@ class CustomerAdsView extends StatefulWidget {
 }
 
 class _CustomerAdsViewState extends State<CustomerAdsView> {
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<customerAdscontroller>().initState();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<customerAdscontroller>();

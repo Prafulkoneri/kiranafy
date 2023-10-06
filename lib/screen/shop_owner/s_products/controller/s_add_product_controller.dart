@@ -60,7 +60,7 @@ class SAddProductsController extends ChangeNotifier {
 
 //////to dlectect Ptroducts
   void onProductsSelected(index, id) {
-    customerSelectedClicked=false;
+    // customerSelectedClicked=false;
     selectedProduct[index] = !selectedProduct[index];
     if (selectedProduct[index]) {
       selectedProductsId.removeWhere((item) => item == int.parse(id));
@@ -187,7 +187,9 @@ class SAddProductsController extends ChangeNotifier {
         allAdminProductList.addAll(productDetails ?? []);
         categoryName = result.data?.categoryName ?? "";
         allProductsCount = productData?.allProductsCount ?? 0;
+        print("isSelectAll");
         print(isSelectAll);
+        print("isSelectAll");
         if (isSelectAll) {
           selectedProduct = List<bool>.filled(
               allAdminProductList.length ?? 0, true,
@@ -196,16 +198,17 @@ class SAddProductsController extends ChangeNotifier {
           int length = allAdminProductList.length ?? 0;
           for (int i = 0; i < length; i++) {
             if (allAdminProductList[i].selectedByShopOwner == "yes") {
-              // selectedProduct.insert(i, true);
               selectedProductsId.add(allAdminProductList[i].id);
             }
           }
         } else {
+          print("isCustomerClicked");
+          print(customerSelectedClicked);
+          print("isCustomerClicked");
           if (customerSelectedClicked) {
             for(int i=0;i<allAdminProductList.length;i++){
               selectedProduct.add(false);
             }
-
           }
           else {
             for(int i=0;i<allAdminProductList.length;i++){
@@ -216,8 +219,6 @@ class SAddProductsController extends ChangeNotifier {
               if (allAdminProductList[i].selectedByShopOwner == "yes") {
                 selectedProduct.removeAt(i);
                 selectedProduct.insert(i, true);
-
-                // selectedProductsId.add(allAdminProductList[i].id);
               }
             }
             // int productlength = productDetails?.length ?? 0;
@@ -283,6 +284,7 @@ class SAddProductsController extends ChangeNotifier {
     uploadSuccess = true;
 
     if (selectedProductsId.isEmpty) {
+      print(isSelectAll);
       Utils.showPrimarySnackbar(context, "Select Product",
           type: SnackType.error);
     } else {
@@ -303,6 +305,7 @@ class SAddProductsController extends ChangeNotifier {
             UploadAddProductResponseModel.fromJson(jsonDecode(response.body));
 
         if (response.statusCode == 200) {
+          LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
           final read=Provider.of<SMainScreenController>(context,listen: false);
@@ -321,7 +324,7 @@ class SAddProductsController extends ChangeNotifier {
 
           notifyListeners();
           uploadSuccess = false;
-          LoadingOverlay.of(context).hide();
+
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);

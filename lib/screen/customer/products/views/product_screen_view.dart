@@ -724,7 +724,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       watch.shopDetails?.id
                                                           .toString(),
                                                       index,
-                                                      context);
+                                                      context,false);
                                                 },
                                                 child: watch.isUnitImagesAdded[
                                                             index] ==
@@ -891,76 +891,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                         element?.id.toString(),
                                                         context,
                                                         true);
-                                                    // Navigator.push(context,MaterialPageRoute(builder: (context)=>MainScreenView(index: 1,screenName: ProductScreenView(
-                                                    //     selectedUnitId: element
-                                                    //         ?.productUnitId
-                                                    //         .toString(),
-                                                    //     categoryId: element
-                                                    //         ?.categoryId
-                                                    //         .toString(),
-                                                    //     // categoryId: watch.categoryId,
-                                                    //     productId: element
-                                                    //         ?.id
-                                                    //         .toString(),
-                                                    //     shopId: element
-                                                    //         ?.shopId
-                                                    //         .toString(),
-                                                    //     routeName:
-                                                    //     "",
-                                                    //     // widget.shopId,
-                                                    //     productType:
-                                                    //     element?.productType),)));
-
-                                                    // readMain.onNavigation(1,   ProductScreenView(
-                                                    //     selectedUnitId: element
-                                                    //         ?.productUnitId
-                                                    //         .toString(),
-                                                    //     categoryId: element
-                                                    //         ?.categoryId
-                                                    //         .toString(),
-                                                    //     // categoryId: watch.categoryId,
-                                                    //     productId: element
-                                                    //         ?.id
-                                                    //         .toString(),
-                                                    //     shopId: element
-                                                    //         ?.shopId
-                                                    //         .toString(),
-                                                    //     routeName:
-                                                    //     "",
-                                                    //     // widget.shopId,
-                                                    //     productType:
-                                                    //     element?.productType), context);
-                                                    // Navigator
-                                                    //     .pushAndRemoveUntil(
-                                                    //   context,
-                                                    //   MaterialPageRoute(
-                                                    //       builder: (context) =>
-                                                    //           MainScreenView(
-                                                    //             index: 1,
-                                                    //             screenName:
-                                                    //                 ProductScreenView(
-                                                    //                     selectedUnitId: element
-                                                    //                         ?.productUnitId
-                                                    //                         .toString(),
-                                                    //                     categoryId: element
-                                                    //                         ?.categoryId
-                                                    //                         .toString(),
-                                                    //                     // categoryId: watch.categoryId,
-                                                    //                     productId: element
-                                                    //                         ?.id
-                                                    //                         .toString(),
-                                                    //                     shopId: element
-                                                    //                         ?.shopId
-                                                    //                         .toString(),
-                                                    //                     routeName:
-                                                    //                         "",
-                                                    //                     // widget.shopId,
-                                                    //                     productType:
-                                                    //                         element?.productType),
-                                                    //           )),
-                                                    //   (Route<dynamic> route) =>
-                                                    //       false,
-                                                    // );
                                                   },
                                                   child: Container(
                                                     decoration: BoxDecoration(
@@ -1194,7 +1124,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               element?.productUnitId,
                                                                               element?.shopId,
                                                                               index,
-                                                                              context);
+                                                                              context,true);
                                                                           // watch
                                                                           //     .onOfferSelected(
                                                                           //         index);
@@ -1213,7 +1143,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               element?.productUnitId,
                                                                               element?.shopId,
                                                                               index,
-                                                                              context);
+                                                                              context,true);
                                                                         },
                                                                         child: SvgPicture.asset(
                                                                             "assets/icons/tick_green_bg.svg"),

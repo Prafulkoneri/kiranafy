@@ -153,9 +153,7 @@ class SplashController extends ChangeNotifier {
                     screenName: ShopDashBoardView(
                       refresh: true,
                     ))),
-            // (Route<dynamic> route) => false,
           );
-          // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavigationBarScreen()));
         }
         if (pref.getString("status") == "customerLoggedIn") {
           Navigator.pushReplacement(
@@ -199,10 +197,6 @@ class SplashController extends ChangeNotifier {
           isUpdateRequired = true;
           notifyListeners();
         }
-        // isAppNotificationEnable =
-        //     result.settingData?.appNotification == "on" ? true : false;
-        // Utils.showPrimarySnackbar(context, result.message,
-        //     type: SnackType.success);
         else {
           isUpdateRequired = false;
         }

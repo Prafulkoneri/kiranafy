@@ -44,8 +44,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-            isBackButtonEnabled:
-                widget.isNavFromAccounts == true ? true : false,
+            isBackButtonEnabled: widget.isNavFromAccounts == true ? true : false,
             onBackBtnPressed: () {
               readMainScreen.onNavigation(4, SAccountScreenView(refresh: true), context);
             },
@@ -265,7 +264,6 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                           ),
                           watch.ordersList?.isNotEmpty ?? false
                               ? ListView.builder(
-                                  // padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                                   itemCount: watch.ordersList?.length ?? 0,
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
@@ -349,10 +347,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                         ],
                                       ),
                                     );
-                                  })
-                              : Column(
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
-                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  }):Column(
                                   children: [
                                     SizedBox(
                                       height: 50.h,
@@ -382,6 +377,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                     ),
                   ),
                 ),
-            ));
+            )
+    );
   }
 }

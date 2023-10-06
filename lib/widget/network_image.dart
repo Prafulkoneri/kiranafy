@@ -15,8 +15,7 @@ class AppNetworkImages extends StatelessWidget {
       width: width,
       child: Image.network(imageUrl??"",fit:fit, errorBuilder: (context,exception, stackTrace){
         print("hello");
-        return
-          showShopImage==true?Image.asset("assets/images/shop_image.png"):
+        return showShopImage==true?Image.asset("assets/images/shop_image.png"):
           Image.asset("assets/images/profile_image.png",
           fit: BoxFit.cover,
         );

@@ -54,23 +54,12 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
           title: widget.isEditCoupon == false ? "Add Coupon" : "Edit Coupon",
           onBackBtnPressed: () {
             if (widget.isNavFromDashboard == true) {
-
               readMain.onNavigation(3, ShopCouponsView(
                 isRefresh: false,
                 isNavFromDashBoard: true,
               ), context);
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //           index: 3,
-              //           screenName: ShopCouponsView(
-              //             isRefresh: false,
-              //             isNavFromDashBoard: true,
-              //           ))),
-              //   (Route<dynamic> route) => false,
-              // );
-            } else {
+            }
+            else {
               readMain.onNavigation(4, ShopCouponsView(
                 isRefresh: false,
                 isNavFromDashBoard: false,
@@ -84,22 +73,10 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
           : WillPopScope(
         onWillPop: ()async{
           if (widget.isNavFromDashboard == true) {
-
             readMain.onNavigation(3, ShopCouponsView(
               isRefresh: false,
               isNavFromDashBoard: true,
             ), context);
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => SMainScreenView(
-            //           index: 3,
-            //           screenName: ShopCouponsView(
-            //             isRefresh: false,
-            //             isNavFromDashBoard: true,
-            //           ))),
-            //   (Route<dynamic> route) => false,
-            // );
           } else {
             readMain.onNavigation(4, ShopCouponsView(
               isRefresh: false,

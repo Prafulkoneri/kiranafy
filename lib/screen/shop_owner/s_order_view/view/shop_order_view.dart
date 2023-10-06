@@ -78,33 +78,6 @@ class _ShopOrderViewState extends State<ShopOrderView> {
               readMainScreen.showBottomNavigationBar();
             }
 
-            // widget.fromOrderStatus == true
-            //     ? readMainScreen.onNavigation(1, SOrderStatusView(
-            //     selectedIndex: widget.selectedIndex), context)
-            // // Navigator.pushAndRemoveUntil(
-            // //         context,
-            // //         MaterialPageRoute(
-            // //             builder: (context) => SMainScreenView(
-            // //                 index: 0,
-            // //                 screenName: SOrderStatusView(
-            // //                     selectedIndex: widget.selectedIndex))),
-            // //         (Route<dynamic> route) => false,
-            // //       )
-            //     :
-            // readMainScreen.onNavigation(1, SPaymentRefundList(
-            //   isNavFromAccounts: false,
-            // ), context);
-            // Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => SMainScreenView(
-            //                 index: 0,
-            //                 screenName: SPaymentRefundList(
-            //                   isNavFromAccounts: false,
-            //                 ))),
-            //         (Route<dynamic> route) => false,
-            //       );
-
           },
           title: "Order",
           onActionTap: () {},
@@ -113,7 +86,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
       body: watch.isLoading
           ? const Loader()
           : watch.isDetailsAvailable
-              ? WillPopScope(
+              ?
+      WillPopScope(
           onWillPop: ()async{
             if(widget.route=="notification"){
               readMainScreen.onNavigation(0, NotificationsScreenView(route:""),context);
@@ -131,7 +105,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             }
             return false;
           },
-                child: SingleChildScrollView(
+             child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -876,7 +850,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           left: 20.w,
                                                           top: 9.w,
                                                           bottom: 7.w,
-                                                          right: 34.w),
+                                                          right: 40.w),
                                                       decoration: BoxDecoration(
                                                           color: SplashText,
                                                           borderRadius:
@@ -1197,7 +1171,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       left: 20.w,
                                                       top: 9.w,
                                                       bottom: 9.w,
-                                                      right: 34.w),
+                                                      right: 40.w),
                                                   decoration: BoxDecoration(
                                                       color: Color(0xffEC7074),
                                                       borderRadius:
@@ -3832,8 +3806,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     //   ],
                     // ),
                   ),
-              )
-              : Column(
+      ) : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

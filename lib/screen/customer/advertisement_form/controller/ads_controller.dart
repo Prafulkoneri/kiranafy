@@ -22,6 +22,16 @@ class customerAdscontroller extends ChangeNotifier {
   TextEditingController adsContentController = TextEditingController(); //
   CPraqmotionRequestRepo cadsRequestRepo = CPraqmotionRequestRepo();
 
+  void initState(){
+    adsNameController.clear();
+    adsMobileNumberController.clear();
+    adsShopNamecontroller.clear();
+    planToStartController.clear();
+    planToStartController.clear();
+    adsShopNamecontroller.clear();
+    groupValue="7";
+  }
+
   void showStackLoader(value) {
     isStackLoading = value;
     notifyListeners();
