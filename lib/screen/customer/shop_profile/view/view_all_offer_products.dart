@@ -58,11 +58,14 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(1,  ShopProfileView(
-                shopId: widget.shopId.toString(),
-                routeName: "viewAllOfferProduct",
-                refreshPage: true,
-              ), context);
+              readMain.onNavigation(
+                  1,
+                  ShopProfileView(
+                    shopId: widget.shopId.toString(),
+                    routeName: "viewAllOfferProduct",
+                    refreshPage: true,
+                  ),
+                  context);
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(
@@ -80,18 +83,20 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
           ),
         ),
         body: watch.isLoading
-            ?  Loader()
-
+            ? Loader()
             : WillPopScope(
-          onWillPop: ()async{
-            readMain.onNavigation(1,  ShopProfileView(
-              shopId: widget.shopId.toString(),
-              routeName: "viewAllOfferProduct",
-              refreshPage: true,
-            ), context);
-            return false;
-          },
-              child: SingleChildScrollView(
+                onWillPop: () async {
+                  readMain.onNavigation(
+                      1,
+                      ShopProfileView(
+                        shopId: widget.shopId.toString(),
+                        routeName: "viewAllOfferProduct",
+                        refreshPage: true,
+                      ),
+                      context);
+                  return false;
+                },
+                child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   controller: scrollController,
                   child: Stack(
@@ -126,23 +131,25 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                           onTap: () {
                                             readProductViewController
                                                 .updateProductId(
-                                              element.id.toString(),context,false
-                                            );
-                                            readMain.onNavigation(1, ProductScreenView(
-                                                selectedUnitId: element
-                                                    .productUnitId
-                                                    .toString(),
-                                                categoryId: element
-                                                    .categoryId
-                                                    .toString(),
-                                                // categoryId: watch.categoryId,
-                                                productId: element
-                                                    .id
-                                                    .toString(),
-                                                shopId:
-                                                widget.shopId,
-                                                productType: element
-                                                    .productType), context);
+                                                    element.id.toString(),
+                                                    context,
+                                                    false);
+                                            readMain.onNavigation(
+                                                1,
+                                                ProductScreenView(
+                                                    selectedUnitId: element
+                                                        .productUnitId
+                                                        .toString(),
+                                                    categoryId: element
+                                                        .categoryId
+                                                        .toString(),
+                                                    // categoryId: watch.categoryId,
+                                                    productId:
+                                                        element.id.toString(),
+                                                    shopId: widget.shopId,
+                                                    productType:
+                                                        element.productType),
+                                                context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -201,8 +208,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                         lightgreen,
                                                                     borderRadius:
                                                                         BorderRadius.all(
-                                                                            Radius.circular(
-                                                                                5.w))),
+                                                                            Radius.circular(5.w))),
                                                                 child: Center(
                                                                   child: Text(
                                                                       "${element.discountPercentage} off",
@@ -213,10 +219,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                                 .white,
                                                                             letterSpacing:
                                                                                 .5,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w500),
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w500),
                                                                       )),
                                                                 ),
                                                               )
@@ -229,16 +234,19 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                   ),
                                                   Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       element.productImagePath ==
                                                               ""
                                                           ? Container(
                                                               height: 68.w,
                                                               width: 68.w,
-                                                              child: Image.asset(
-                                                                "assets/images/profile_image.png",
-                                                                fit: BoxFit.cover,
+                                                              child:
+                                                                  Image.asset(
+                                                                "assets/images/image_not_found.png",
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                             )
                                                           : Container(
@@ -248,7 +256,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                   AppNetworkImages(
                                                                 imageUrl:
                                                                     "${element.productImagePath}",
-                                                                fit: BoxFit.cover,
+                                                                fit: BoxFit
+                                                                    .cover,
                                                               ),
                                                             ),
                                                     ],
@@ -262,9 +271,10 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                         child: Text(
                                                           "${element.productName}",
                                                           maxLines: 1,
-                                                          style:
-                                                              GoogleFonts.roboto(
-                                                            textStyle: TextStyle(
+                                                          style: GoogleFonts
+                                                              .roboto(
+                                                            textStyle:
+                                                                TextStyle(
                                                               color: Black1,
                                                               overflow:
                                                                   TextOverflow
@@ -273,7 +283,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                               fontSize: 16.sp,
 
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                             ),
                                                           ),
                                                         ),
@@ -287,7 +298,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                     children: [
                                                       Text(
                                                         "${element.weight}${element.unit}",
-                                                        style: GoogleFonts.roboto(
+                                                        style:
+                                                            GoogleFonts.roboto(
                                                           textStyle: TextStyle(
                                                               color: Black1,
                                                               // letterSpacing: .5,
@@ -304,7 +316,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(
-                                                        right: 0.w, bottom: 0.w),
+                                                        right: 0.w,
+                                                        bottom: 0.w),
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -312,27 +325,19 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            element.mrpPrice != ""
+                                                            element.mrpPrice !=
+                                                                    ""
                                                                 ? Text(
                                                                     '\u{20B9}${element.mrpPrice}',
                                                                     style: GoogleFonts.dmSans(
                                                                         textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice
                                                                             ? TextStyle(
-                                                                                decoration: TextDecoration
-                                                                                    .lineThrough,
-                                                                                color:
-                                                                                    Black1,
-                                                                                letterSpacing:
-                                                                                    .5,
-                                                                                fontSize: 12
-                                                                                    .sp,
-                                                                                fontWeight: FontWeight
-                                                                                    .w400)
-                                                                            : TextStyle(
+                                                                                decoration: TextDecoration.lineThrough,
                                                                                 color: Black1,
                                                                                 letterSpacing: .5,
                                                                                 fontSize: 12.sp,
-                                                                                fontWeight: FontWeight.w400)))
+                                                                                fontWeight: FontWeight.w400)
+                                                                            : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
                                                                 : Text(""),
                                                             SizedBox(
                                                               width: 5.w,
@@ -344,9 +349,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                             .mrpPrice
                                                                 ? Text(
                                                                     '\u{20B9}${element.offerPrice}',
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           // decoration:
                                                                           // TextDecoration.lineThrough,
@@ -399,8 +403,9 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                   //     .onOfferSelected(
                                                                   //         index);
                                                                 },
-                                                                child: SvgPicture
-                                                                    .asset(
+                                                                child:
+                                                                    SvgPicture
+                                                                        .asset(
                                                                   'assets/images/add.svg',
                                                                   // width: 15.w,
                                                                   // height: 19.h,
@@ -464,6 +469,6 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                     ],
                   ),
                 ),
-            ));
+              ));
   }
 }

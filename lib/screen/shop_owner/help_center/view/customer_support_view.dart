@@ -320,24 +320,27 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                       ),
                     ),
                   ),
-                  watch.ticketDetails?.ticketStatus!="Closed"?Container(
-                    child: PrimarySTextFormField(
-                      controller: watch.remarkController,
-                      height: 65.h,
-                      maxLines: 5,
-                      hintText: "Please text a message..",
-                      hintFontSize: 13,
-                      suffix: Padding(
-                        padding: EdgeInsets.only(right: 14.w),
-                        child: GestureDetector(
-                            onTap: () {
-                              read.ticketReply(context);
-                            },
-                            child: SvgPicture.asset("assets/icons/send.svg")),
-                      ),
-                      enableBorder: false,
-                    ),
-                  ):Container(),
+                  watch.ticketDetails?.ticketStatus != "Closed"
+                      ? Container(
+                          child: PrimarySTextFormField(
+                            controller: watch.remarkController,
+                            height: 65.h,
+                            maxLines: 5,
+                            hintText: "Please text a message..",
+                            hintFontSize: 13,
+                            suffix: Padding(
+                              padding: EdgeInsets.only(right: 14.w),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    read.ticketReply(context);
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/icons/send.svg")),
+                            ),
+                            enableBorder: false,
+                          ),
+                        )
+                      : Container(),
                 ],
               ));
   }

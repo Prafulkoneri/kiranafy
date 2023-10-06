@@ -105,7 +105,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 ? Container(
                                     height: 190.w,
                                     child: Image.asset(
-                                      "assets/images/shop_image.png",
+                                      "assets/images/nearshop2.png",
                                       height: 190.w,
                                       fit: BoxFit.fill,
                                     ))
@@ -130,7 +130,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                   ? Container(
                                                       height: 180.w,
                                                       child: Image.asset(
-                                                        "assets/images/shop_image.png",
+                                                        "assets/images/nearshop2.png",
                                                         height: 180.w,
                                                         fit: BoxFit.fill,
                                                       ))
@@ -423,7 +423,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         '${watch.dashBoardData?.customersLinkedToShops}',
                                   ),
                                   ShopDashBoard(
-                                    text: 'Customer Linked to Shop',
+                                    text: 'Customer Linked to\nShop',
                                   ),
                                 ],
                               ),

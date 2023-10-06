@@ -68,8 +68,11 @@ class _AddProductViewState extends State<AddProductView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMainScreen.onNavigation(0, SSelectedProductView(
-                  isRefresh: false, categoryId: widget.categoryId), context);
+              readMainScreen.onNavigation(
+                  0,
+                  SSelectedProductView(
+                      isRefresh: false, categoryId: widget.categoryId),
+                  context);
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(
@@ -91,12 +94,15 @@ class _AddProductViewState extends State<AddProductView> {
         body: watch.isLoading
             ? const Loader()
             : WillPopScope(
-          onWillPop: ()async{
-            readMainScreen.onNavigation(0, SSelectedProductView(
-                isRefresh: false, categoryId: widget.categoryId), context);
-            return false;
-          },
-              child: SingleChildScrollView(
+                onWillPop: () async {
+                  readMainScreen.onNavigation(
+                      0,
+                      SSelectedProductView(
+                          isRefresh: false, categoryId: widget.categoryId),
+                      context);
+                  return false;
+                },
+                child: SingleChildScrollView(
                   controller: scrollController,
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Stack(
@@ -110,7 +116,8 @@ class _AddProductViewState extends State<AddProductView> {
                                 top: 20.w,
                                 bottom: 20.w,
                               ),
-                              child: watch.allAdminProductList.isNotEmpty == true
+                              child: watch.allAdminProductList.isNotEmpty ==
+                                      true
                                   ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -156,8 +163,8 @@ class _AddProductViewState extends State<AddProductView> {
                                           children: [
                                             GestureDetector(
                                               onTap: () {
-                                                read.onProductsSelected(
-                                                    index, element.id.toString());
+                                                read.onProductsSelected(index,
+                                                    element.id.toString());
                                               },
                                               child: Container(
                                                 padding: EdgeInsets.only(
@@ -170,7 +177,8 @@ class _AddProductViewState extends State<AddProductView> {
                                                   boxShadow: [
                                                     BoxShadow(
                                                         color: Colors.black
-                                                            .withOpacity(0.03.w),
+                                                            .withOpacity(
+                                                                0.03.w),
                                                         blurRadius: 5,
                                                         spreadRadius: 0,
                                                         offset: Offset(5, 6)),
@@ -179,13 +187,15 @@ class _AddProductViewState extends State<AddProductView> {
                                                       color: Colors.black
                                                           .withOpacity(0.07)),
                                                   borderRadius:
-                                                      BorderRadius.circular(7.w),
+                                                      BorderRadius.circular(
+                                                          7.w),
                                                 ),
                                                 child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    element.productImagePath != ""
+                                                    element.productImagePath !=
+                                                            ""
                                                         ? AppNetworkImages(
                                                             imageUrl:
                                                                 "${element.productImagePath}",
@@ -195,7 +205,7 @@ class _AddProductViewState extends State<AddProductView> {
                                                           )
                                                         : Image(
                                                             image: AssetImage(
-                                                              "assets/images/profile_image.png",
+                                                              "assets/images/image_not_found.png",
                                                             ),
                                                             height: 60.h,
                                                             width: 60.w,
@@ -259,9 +269,9 @@ class _AddProductViewState extends State<AddProductView> {
                                                               element.id
                                                                   .toString());
                                                         },
-                                                        value:
-                                                            watch.selectedProduct[
-                                                                index],
+                                                        value: watch
+                                                                .selectedProduct[
+                                                            index],
                                                       ),
                                                     ),
                                                   ],
@@ -334,6 +344,6 @@ class _AddProductViewState extends State<AddProductView> {
                     ],
                   ),
                 ),
-            ));
+              ));
   }
 }

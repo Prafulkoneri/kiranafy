@@ -414,7 +414,6 @@ class _MyAppState extends State<MyApp> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
                           FocusScopeNode currentFocus = FocusScope.of(context);
-
                           if (!currentFocus.hasPrimaryFocus &&
                               currentFocus.focusedChild != null) {
                             FocusManager.instance.primaryFocus?.unfocus();
@@ -448,4 +447,4 @@ class _MyAppState extends State<MyApp> {
             // )
             );
   }
-}    // ShopOrderStatusView()
+}

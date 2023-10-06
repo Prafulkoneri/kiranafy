@@ -806,7 +806,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         ?.shopOwnerQrCodeImage ==
                                                     ""
                                                 ? Image.asset(
-                                                    "assets/images/shop_image.png",
+                                                    "assets/images/nearshop2.png",
                                                     width: 165.w,
                                                     height: 150.h,
                                                     fit: BoxFit.cover,

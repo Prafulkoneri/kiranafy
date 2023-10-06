@@ -390,7 +390,7 @@ class AllCategoryShopController extends ChangeNotifier {
   }
 ////////////////////////////////////////////
 
-  Future<void> clearFilter(context, id) async {
+  Future<void> clearFilter(context) async {
     areaId = "";
     rating = "";
     LoadingOverlay.of(context).show();
@@ -409,7 +409,7 @@ class AllCategoryShopController extends ChangeNotifier {
         areaId = "";
         rating = "";
         LoadingOverlay.of(context).hide();
-        getAllShops(context, id);
+        getAllShops(context, categoryId);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -461,7 +461,7 @@ class AllCategoryShopController extends ChangeNotifier {
   }
   //////////////////////////////////////
 
-  Future<void> applyFilter(context, id) async {
+  Future<void> applyFilter(context) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -475,7 +475,7 @@ class AllCategoryShopController extends ChangeNotifier {
         // showLoader(false);
         LoadingOverlay.of(context).hide();
         Navigator.pop(context);
-        getAllShops(context, id);
+        getAllShops(context, categoryId);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

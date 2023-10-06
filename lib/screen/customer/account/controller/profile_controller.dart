@@ -22,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends ChangeNotifier {
   CustomerData? customerData;
+  bool isGuestLogin = false;
   CustomerSignOutRepo customerSignOutRepo = CustomerSignOutRepo();
   CustomerFAQDataRepo customerFaqRepo = CustomerFAQDataRepo();
   bool isLoading = true;
@@ -31,13 +32,19 @@ class ProfileController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> initState(
-    context,isRefreshed
-  ) async {
-    if(isRefreshed){
+  Future<void> initState(context, isRefreshed) async {
+    // isGuestLogin = false;
+    // SharedPreferences pref = await SharedPreferences.getInstance();
+    // if (pref.getString("status") == "guestLoggedIn") {
+    //   isGuestLogin = true;
+    // } else {
+    //   isGuestLogin = false;
+    // }
+    // notifyListeners();
+
+    if (isRefreshed) {
       await getCustomerProfileDetails(context);
     }
-
   }
 
   CustomerProfileRepo customerProfileRepo = CustomerProfileRepo(); ////;
@@ -72,7 +79,11 @@ class ProfileController extends ChangeNotifier {
 
   void onFavouritesClicked(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CFavouritesView(selectedIndex: 0,)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => CFavouritesView(
+                  selectedIndex: 0,
+                )));
   }
 
 ////Detail Profile
@@ -119,14 +130,13 @@ class ProfileController extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         print("result.message");
-        final read=Provider.of<MainScreenController>(context,listen: false);
+        final read = Provider.of<MainScreenController>(context, listen: false);
         read.onSignOut();
 
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const OnBoardingScreenView()),
         );
-
 
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);

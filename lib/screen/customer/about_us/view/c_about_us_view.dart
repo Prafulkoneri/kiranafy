@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
 import 'package:local_supper_market/screen/customer/about_us/controller/cms_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -54,7 +52,7 @@ class _CAboutUsViewState extends State<CAboutUsView> {
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
+          ? Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

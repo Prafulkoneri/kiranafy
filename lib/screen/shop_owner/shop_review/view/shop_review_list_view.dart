@@ -44,9 +44,12 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(0, ShopDashBoardView(
-              refresh: true,
-            ), context);
+            readMain.onNavigation(
+                0,
+                ShopDashBoardView(
+                  refresh: true,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -64,21 +67,24 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
       ),
       body: watch.isLoading
           ? const Loader()
-          :
-      WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(0, ShopDashBoardView(
-            refresh: false,
-          ), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+          : WillPopScope(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    0,
+                    ShopDashBoardView(
+                      refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 19.w, top: 10, right: 19.w),
+                      padding:
+                          EdgeInsets.only(left: 19.w, top: 10, right: 19.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -127,7 +133,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                       image: DecorationImage(
                                                         fit: BoxFit.cover,
                                                         image: AssetImage(
-                                                            'assets/images/shop_image.png'),
+                                                            'assets/images/nearshop2.png'),
                                                       ),
                                                     ),
                                                   )
@@ -158,8 +164,8 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                       children: [
                                                         Text(
                                                           "${element?.customerName}",
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black,
                                                                 fontSize: 16.sp,
@@ -183,7 +189,8 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black,
+                                                                    color:
+                                                                        Black,
                                                                     fontSize:
                                                                         14.sp,
                                                                     fontWeight:
@@ -202,22 +209,24 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                       "${element?.cityName} ${element?.stateName}",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
-                                                            color:
-                                                                Color(0xff7C7C7C),
+                                                            color: Color(
+                                                                0xff7C7C7C),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     ),
                                                     Text(
                                                       "${element?.createdAt}",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
-                                                            color:
-                                                                Color(0xff7C7C7C),
+                                                            color: Color(
+                                                                0xff7C7C7C),
                                                             fontSize: 11.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     )
                                                   ],
@@ -263,7 +272,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

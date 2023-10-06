@@ -488,3 +488,63 @@ class OfferPrice extends StatelessWidget {
         ));
   }
 }
+///////////////////////////////////////////////////////////////
+
+class OrderSummery extends StatelessWidget {
+  final String text;
+
+  OrderSummery({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: Black1,
+            letterSpacing: .5,
+            fontSize: 18,
+            fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+///////////////////////////////////////////////////////////
+
+class CReview extends StatelessWidget {
+  final String text;
+
+  CReview({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+          textStyle: TextStyle(
+              color: Black, fontSize: 16.sp, fontWeight: FontWeight.w800)),
+    );
+  }
+}
+///////////////////////////////////////////////////////////
+
+class CReviewone extends StatelessWidget {
+  final String text;
+  final double? fontSize;
+
+  CReviewone({required this.text, required this.fontSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.dmSans(
+        textStyle: TextStyle(
+            color: grey5,
+            //  fontSize: 12.sp,
+            fontSize: fontSize ?? 12.sp,
+            fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+}

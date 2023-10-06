@@ -55,24 +55,29 @@ class _ShopSeasonalRecommandedOfferProductsViewState
         child: PrimaryAppBar(
             onBackBtnPressed: () {
               widget.selectedProduct == "recommended"
-                  ?
-              readMainScreen.onNavigation(4, SAccountScreenView(
-                refresh: false,
-              ), context)
-              // Navigator.pushAndRemoveUntil(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => SMainScreenView(
-              //                   index: 4,
-              //                   screenName: SAccountScreenView(
-              //                     refresh: false,
-              //                   ),
-              //                 )),
-              //         (Route<dynamic> route) => false,
-              //       )
-                  : readMainScreen.onNavigation(0, ShopDashBoardView(
-                refresh: true,
-              ), context);
+                  ? readMainScreen.onNavigation(
+                      4,
+                      SAccountScreenView(
+                        refresh: false,
+                      ),
+                      context)
+                  // Navigator.pushAndRemoveUntil(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => SMainScreenView(
+                  //                   index: 4,
+                  //                   screenName: SAccountScreenView(
+                  //                     refresh: false,
+                  //                   ),
+                  //                 )),
+                  //         (Route<dynamic> route) => false,
+                  //       )
+                  : readMainScreen.onNavigation(
+                      0,
+                      ShopDashBoardView(
+                        refresh: true,
+                      ),
+                      context);
               // Navigator.pushAndRemoveUntil(
               //         context,
               //         MaterialPageRoute(
@@ -94,40 +99,45 @@ class _ShopSeasonalRecommandedOfferProductsViewState
       body: watch.isLoading
           ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          widget.selectedProduct == "recommended"
-              ?
-          readMainScreen.onNavigation(4, SAccountScreenView(
-            refresh: false,
-          ), context)
-          // Navigator.pushAndRemoveUntil(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => SMainScreenView(
-          //                   index: 4,
-          //                   screenName: SAccountScreenView(
-          //                     refresh: false,
-          //                   ),
-          //                 )),
-          //         (Route<dynamic> route) => false,
-          //       )
-              : readMainScreen.onNavigation(0, ShopDashBoardView(
-            refresh: true,
-          ), context);
-          // Navigator.pushAndRemoveUntil(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => SMainScreenView(
-          //                   index: 0,
-          //                   screenName: ShopDashBoardView(
-          //                     refresh: false,
-          //                   ),
-          //                 )),
-          //         (Route<dynamic> route) => false,
-          //       );
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                widget.selectedProduct == "recommended"
+                    ? readMainScreen.onNavigation(
+                        4,
+                        SAccountScreenView(
+                          refresh: false,
+                        ),
+                        context)
+                    // Navigator.pushAndRemoveUntil(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => SMainScreenView(
+                    //                   index: 4,
+                    //                   screenName: SAccountScreenView(
+                    //                     refresh: false,
+                    //                   ),
+                    //                 )),
+                    //         (Route<dynamic> route) => false,
+                    //       )
+                    : readMainScreen.onNavigation(
+                        0,
+                        ShopDashBoardView(
+                          refresh: true,
+                        ),
+                        context);
+                // Navigator.pushAndRemoveUntil(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => SMainScreenView(
+                //                   index: 0,
+                //                   screenName: ShopDashBoardView(
+                //                     refresh: false,
+                //                   ),
+                //                 )),
+                //         (Route<dynamic> route) => false,
+                //       );
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(children: [
                   Container(
@@ -140,37 +150,33 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                             child: Container(
                           padding: EdgeInsets.only(bottom: 0.w, top: 0.w),
                           child: GestureDetector(
-                              onTap: () {
-                                read.onRecommendedTapped();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(4.w),
-                                height: 45.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.w),
-                                    color: Colors.transparent,
-                                    border: Border.all(
-
-                                        color: watch.isRecommadedPressed
-                                            ? Color(0xff39C19D)
-                                            : Colors.transparent),
-                                    ),
-
-                                child: Center(
-                                  child: Text(
-                                    "Recommended",
-                                    style: TextStyle(
-                                        color: watch.isRecommadedPressed
-                                            ? Color(0xff39C19D)
-                                            : Black1,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                                ),
-
+                            onTap: () {
+                              read.onRecommendedTapped();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(4.w),
+                              height: 45.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.w),
+                                color: Colors.transparent,
+                                border: Border.all(
+                                    color: watch.isRecommadedPressed
+                                        ? Color(0xff39C19D)
+                                        : Colors.transparent),
                               ),
-
+                              child: Center(
+                                child: Text(
+                                  "Recommended",
+                                  style: TextStyle(
+                                      color: watch.isRecommadedPressed
+                                          ? Color(0xff39C19D)
+                                          : Black1,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
                         )),
                         Expanded(
                             child: Container(
@@ -204,7 +210,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                         )),
                         Expanded(
                             child: Container(
-                          padding: EdgeInsets.only(right: 7.w, bottom: 6.w, top: 6.w),
+                          padding: EdgeInsets.only(
+                              right: 7.w, bottom: 6.w, top: 6.w),
                           child: PrimaryButton(
                               onTap: () {
                                 // read.onFullFilProductTapped();
@@ -277,8 +284,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
-                                    final element = watch
-                                        .allproducts?.recommendedProducts?[index];
+                                    final element = watch.allproducts
+                                        ?.recommendedProducts?[index];
                                     return Column(
                                       children: [
                                         Container(
@@ -298,7 +305,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                   width: 1, color: grey1)),
                                           child: Theme(
                                             data: ThemeData().copyWith(
-                                                dividerColor: Colors.transparent),
+                                                dividerColor:
+                                                    Colors.transparent),
                                             child: ListTileTheme(
                                               contentPadding: EdgeInsets.all(0),
                                               dense: true,
@@ -308,15 +316,17 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                 trailing: SizedBox.shrink(),
 
                                                 title: Container(
-                                                  width: ScreenUtil().screenWidth,
+                                                  width:
+                                                      ScreenUtil().screenWidth,
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
                                                       Container(
-                                                        padding: EdgeInsets.only(
-                                                            left: 5.w),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 5.w),
                                                         child: Row(
                                                           children: [
                                                             element?.productImagePath !=
@@ -324,18 +334,22 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 ? AppNetworkImages(
                                                                     imageUrl:
                                                                         "${element?.productImagePath}",
-                                                                    height: 60.h,
+                                                                    height:
+                                                                        60.h,
                                                                     width: 60.w,
-                                                                    fit: BoxFit.cover,
+                                                                    fit: BoxFit
+                                                                        .cover,
                                                                   )
                                                                 : Image(
                                                                     image:
                                                                         AssetImage(
-                                                                      "assets/images/profile_image.png",
+                                                                      "assets/images/image_not_found.png",
                                                                     ),
-                                                                    height: 60.h,
+                                                                    height:
+                                                                        60.h,
                                                                     width: 60.w,
-                                                                    fit: BoxFit.fill,
+                                                                    fit: BoxFit
+                                                                        .fill,
                                                                   ),
                                                             SizedBox(
                                                               width: 8.w,
@@ -346,13 +360,17 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 "${element?.productName}",
                                                                 // "${element?.productName}",
                                                                 // "${element?.productName}",
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       color:
                                                                           Black1,
-                                                                      fontSize: 16.sp,
-                                                                      fontWeight: FontWeight.w700),
+                                                                      fontSize:
+                                                                          16.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700),
                                                                 ),
                                                               ),
                                                             ),
@@ -366,11 +384,19 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               if (element
                                                                       ?.productType ==
                                                                   "admin_product") {
-                                                                readMainScreen.onNavigation(0, SEditAdminProductView(
-                                                                    selectedIndex: 0,
-                                                                    productId: element?.id.toString(),
-                                                                    isFromAccountScreen: true,
-                                                                    categoryId: ""), context);
+                                                                readMainScreen.onNavigation(
+                                                                    0,
+                                                                    SEditAdminProductView(
+                                                                        selectedIndex:
+                                                                            0,
+                                                                        productId: element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                        isFromAccountScreen:
+                                                                            true,
+                                                                        categoryId:
+                                                                            ""),
+                                                                    context);
                                                                 // Navigator
                                                                 //     .pushAndRemoveUntil(
                                                                 //   context,
@@ -392,15 +418,19 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 //       false,
                                                                 // );
                                                               } else {
-                                                                readMainScreen.onNavigation(0, SEditCustomProductView(
-                                                                    selectedIndex:
+                                                                readMainScreen.onNavigation(
                                                                     0,
-                                                                    productId: element?.id
-                                                                        .toString(),
-                                                                    isFromAccountScreen:
-                                                                    true,
-                                                                    categoryId:
-                                                                    ""), context);
+                                                                    SEditCustomProductView(
+                                                                        selectedIndex:
+                                                                            0,
+                                                                        productId: element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                        isFromAccountScreen:
+                                                                            true,
+                                                                        categoryId:
+                                                                            ""),
+                                                                    context);
                                                                 // Navigator
                                                                 //     .pushAndRemoveUntil(
                                                                 //   context,
@@ -425,8 +455,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets.all(
-                                                                      6),
+                                                                  EdgeInsets
+                                                                      .all(6),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
                                                                     BoxShadow(
@@ -449,8 +479,9 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       BorderRadius
                                                                           .circular(
                                                                               15)),
-                                                              child: SvgPicture.asset(
-                                                                  'assets/icons/e1.svg'),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      'assets/icons/e1.svg'),
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -468,8 +499,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets.all(
-                                                                      6),
+                                                                  EdgeInsets
+                                                                      .all(6),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
                                                                     BoxShadow(
@@ -492,8 +523,9 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       BorderRadius
                                                                           .circular(
                                                                               15)),
-                                                              child: SvgPicture.asset(
-                                                                  'assets/icons/delete3.svg'),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      'assets/icons/delete3.svg'),
                                                             ),
                                                           )
                                                         ],
@@ -520,9 +552,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 children: [
                                                                   Text(
                                                                     "Product Unit",
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color:
                                                                               Black1,
@@ -552,10 +583,9 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                         textStyle: TextStyle(
                                                                             color:
                                                                                 Black1,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w400),
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w400),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -573,10 +603,9 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                         textStyle: TextStyle(
                                                                             color:
                                                                                 Black1,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w400),
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w400),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -609,19 +638,20 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 .unitDetails?[int];
 
                                                             return Container(
-                                                              padding:
-                                                                  EdgeInsets.only(
-                                                                      left: 12.w,
-                                                                      right: 20.w,
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left:
+                                                                          12.w,
+                                                                      right:
+                                                                          20.w,
                                                                       top: 7.w,
                                                                       bottom:
                                                                           8.w),
                                                               decoration:
                                                                   BoxDecoration(
                                                                       borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                                  5),
+                                                                          BorderRadius.circular(
+                                                                              5),
                                                                       // color: Black1,
                                                                       border: Border.all(
                                                                           width:
@@ -638,8 +668,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       children: [
                                                                         Text(
                                                                           "${element?.weightAndUnit}",
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black1,
                                                                                 fontSize: 14.sp,
@@ -664,11 +694,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                                 TextAlign.end,
                                                                             style:
                                                                                 GoogleFonts.dmSans(
-                                                                              textStyle: TextStyle(
-                                                                                  decoration: TextDecoration.lineThrough,
-                                                                                  color: Black1,
-                                                                                  fontSize: 14.sp,
-                                                                                  fontWeight: FontWeight.w400),
+                                                                              textStyle: TextStyle(decoration: TextDecoration.lineThrough, color: Black1, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -684,10 +710,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                                 TextAlign.end,
                                                                             style:
                                                                                 GoogleFonts.dmSans(
-                                                                              textStyle: TextStyle(
-                                                                                  color: Black1,
-                                                                                  fontSize: 14.sp,
-                                                                                  fontWeight: FontWeight.w400),
+                                                                              textStyle: TextStyle(color: Black1, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -773,7 +796,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         color: Colors.black
                                                             .withOpacity(0.09),
                                                         blurRadius: 5,
-                                                        offset: Offset(-.0, 5.0),
+                                                        offset:
+                                                            Offset(-.0, 5.0),
                                                         spreadRadius: 0),
                                                   ],
                                                   borderRadius:
@@ -824,7 +848,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     : Image(
                                                                         image:
                                                                             AssetImage(
-                                                                          "assets/images/profile_image.png",
+                                                                          "assets/images/image_not_found.png",
                                                                         ),
                                                                         height:
                                                                             60.h,
@@ -842,9 +866,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     "${element?.productName}",
                                                                     // "${element?.productName}",
                                                                     // "${element?.productName}",
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color:
                                                                               Black1,
@@ -865,12 +888,16 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   if (element
                                                                           ?.productType ==
                                                                       "admin_product") {
-                                                                    readMainScreen.onNavigation(0, SEditAdminProductView(
-                                                                      selectedIndex: 1,
-                                                                      productId: element?.id.toString(),
-                                                                      categoryId: "",
-                                                                      isFromAccountScreen: true,
-                                                                    ), context);
+                                                                    readMainScreen
+                                                                        .onNavigation(
+                                                                            0,
+                                                                            SEditAdminProductView(
+                                                                              selectedIndex: 1,
+                                                                              productId: element?.id.toString(),
+                                                                              categoryId: "",
+                                                                              isFromAccountScreen: true,
+                                                                            ),
+                                                                            context);
                                                                     // Navigator
                                                                     //     .pushAndRemoveUntil(
                                                                     //   context,
@@ -888,12 +915,16 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     //       false,
                                                                     // );
                                                                   } else {
-                                                                    readMainScreen.onNavigation(0, SEditCustomProductView(
-                                                                      selectedIndex: 1,
-                                                                      productId: element?.id.toString(),
-                                                                      categoryId: "",
-                                                                      isFromAccountScreen: true,
-                                                                    ), context);
+                                                                    readMainScreen
+                                                                        .onNavigation(
+                                                                            0,
+                                                                            SEditCustomProductView(
+                                                                              selectedIndex: 1,
+                                                                              productId: element?.id.toString(),
+                                                                              categoryId: "",
+                                                                              isFromAccountScreen: true,
+                                                                            ),
+                                                                            context);
                                                                     // Navigator
                                                                     //     .pushAndRemoveUntil(
                                                                     //   context,
@@ -912,10 +943,12 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     // );
                                                                   }
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
-                                                                          .all(6),
+                                                                          .all(
+                                                                              6),
                                                                   decoration: BoxDecoration(
                                                                       boxShadow: [
                                                                         BoxShadow(
@@ -950,15 +983,18 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   read.removeSRFProducts(
                                                                       context,
                                                                       index,
-                                                                      element?.id,
+                                                                      element
+                                                                          ?.id,
                                                                       element
                                                                           ?.productType,
                                                                       "seasonal_product");
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
-                                                                          .all(6),
+                                                                          .all(
+                                                                              6),
                                                                   decoration: BoxDecoration(
                                                                       boxShadow: [
                                                                         BoxShadow(
@@ -992,10 +1028,11 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     ),
                                                     children: [
                                                       Container(
-                                                        padding: EdgeInsets.only(
-                                                            left: 11.w,
-                                                            bottom: 11.w,
-                                                            right: 11.w),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 11.w,
+                                                                bottom: 11.w,
+                                                                right: 11.w),
                                                         child: Column(
                                                           children: [
                                                             Divider(),
@@ -1012,10 +1049,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(
-                                                                              color:
-                                                                                  Black1,
-                                                                              fontSize:
-                                                                                  12.sp,
+                                                                              color: Black1,
+                                                                              fontSize: 12.sp,
                                                                               fontWeight: FontWeight.w400),
                                                                         ),
                                                                       ),
@@ -1034,8 +1069,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           "MRP",
                                                                           textAlign:
                                                                               TextAlign.end,
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black1,
                                                                                 fontSize: 12.sp,
@@ -1053,8 +1088,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           "Offer price",
                                                                           textAlign:
                                                                               TextAlign.end,
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black1,
                                                                                 fontSize: 12.sp,
@@ -1072,7 +1107,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             ),
                                                             ListView.builder(
                                                               padding:
-                                                                  EdgeInsets.zero,
+                                                                  EdgeInsets
+                                                                      .zero,
                                                               itemCount: watch
                                                                       .allproducts
                                                                       ?.seasonalProducts?[
@@ -1084,34 +1120,30 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               physics:
                                                                   NeverScrollableScrollPhysics(),
                                                               itemBuilder:
-                                                                  (context, int) {
+                                                                  (context,
+                                                                      int) {
                                                                 final element = watch
                                                                     .seasonalProducts?[
                                                                         index]
                                                                     .unitDetails?[int];
 
                                                                 return Container(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          left: 12
-                                                                              .w,
-                                                                          right: 20
-                                                                              .w,
-                                                                          top:
-                                                                              7.w,
-                                                                          bottom:
-                                                                              8.w),
+                                                                  padding: EdgeInsets.only(
+                                                                      left:
+                                                                          12.w,
+                                                                      right:
+                                                                          20.w,
+                                                                      top: 7.w,
+                                                                      bottom:
+                                                                          8.w),
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(
-                                                                                  5),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              5),
                                                                           // color: Black1,
                                                                           border: Border.all(
-                                                                              width:
-                                                                                  1,
-                                                                              color:
-                                                                                  grey6)),
+                                                                              width: 1,
+                                                                              color: grey6)),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1123,8 +1155,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           children: [
                                                                             Text(
                                                                               "${element?.weightAndUnit}",
-                                                                              style:
-                                                                                  GoogleFonts.dmSans(
+                                                                              style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(color: Black1, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                               ),
                                                                             ),
@@ -1138,8 +1169,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               MainAxisAlignment.end,
                                                                           children: [
                                                                             Expanded(
-                                                                              child:
-                                                                                  Text(
+                                                                              child: Text(
                                                                                 // "",
                                                                                 "${element?.mrpPrice}",
                                                                                 textAlign: TextAlign.end,
@@ -1152,8 +1182,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                             //   width: 45.w,
                                                                             // ),
                                                                             Expanded(
-                                                                              child:
-                                                                                  Text(
+                                                                              child: Text(
                                                                                 // "",
                                                                                 "\u{20B9}${element?.offerPrice}",
                                                                                 textAlign: TextAlign.end,
@@ -1246,7 +1275,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         color: Colors.black
                                                             .withOpacity(0.09),
                                                         blurRadius: 5,
-                                                        offset: Offset(-.0, 5.0),
+                                                        offset:
+                                                            Offset(-.0, 5.0),
                                                         spreadRadius: 0),
                                                   ],
                                                   borderRadius:
@@ -1297,7 +1327,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     : Image(
                                                                         image:
                                                                             AssetImage(
-                                                                          "assets/images/profile_image.png",
+                                                                          "assets/images/image_not_found.png",
                                                                         ),
                                                                         height:
                                                                             60.h,
@@ -1322,9 +1352,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     "${element?.productName}",
                                                                     // "${element?.productName}",
                                                                     // "${element?.productName}",
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color:
                                                                               Black1,
@@ -1345,12 +1374,16 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   if (element
                                                                           ?.productType ==
                                                                       "admin_product") {
-                                                                    readMainScreen.onNavigation(0, SEditAdminProductView(
-                                                                      selectedIndex: 2,
-                                                                      productId: element?.id.toString(),
-                                                                      categoryId: "",
-                                                                      isFromAccountScreen: true,
-                                                                    ), context);
+                                                                    readMainScreen
+                                                                        .onNavigation(
+                                                                            0,
+                                                                            SEditAdminProductView(
+                                                                              selectedIndex: 2,
+                                                                              productId: element?.id.toString(),
+                                                                              categoryId: "",
+                                                                              isFromAccountScreen: true,
+                                                                            ),
+                                                                            context);
                                                                     // Navigator
                                                                     //     .pushAndRemoveUntil(
                                                                     //   context,
@@ -1368,34 +1401,40 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                     //       false,
                                                                     // );
                                                                   } else {
-                                                                    readMainScreen.onNavigation(0, SEditCustomProductView(
-                                                                    selectedIndex: 2,
-                                                                    productId: element?.id.toString(),
-                                                                  categoryId: "",
-                                                                  isFromAccountScreen: true,
-                                                                  ), context);
-                                                              //       Navigator
-                                                              //           .pushAndRemoveUntil(
-                                                              //         context,
-                                                              // 0        MaterialPageRoute(
-                                                              //             builder: (context) => SMainScreenView(
-                                                              //                 index: 0,
-                                                              //                 screenName: SEditCustomProductView(
-                                                              //                   selectedIndex: 2,
-                                                              //                   productId: element?.id.toString(),
-                                                              //                   categoryId: "",
-                                                              //                   isFromAccountScreen: true,
-                                                              //                 ))),
-                                                              //         (Route<dynamic>
-                                                              //                 route) =>
-                                                              //             false,
-                                                              //       );
+                                                                    readMainScreen
+                                                                        .onNavigation(
+                                                                            0,
+                                                                            SEditCustomProductView(
+                                                                              selectedIndex: 2,
+                                                                              productId: element?.id.toString(),
+                                                                              categoryId: "",
+                                                                              isFromAccountScreen: true,
+                                                                            ),
+                                                                            context);
+                                                                    //       Navigator
+                                                                    //           .pushAndRemoveUntil(
+                                                                    //         context,
+                                                                    // 0        MaterialPageRoute(
+                                                                    //             builder: (context) => SMainScreenView(
+                                                                    //                 index: 0,
+                                                                    //                 screenName: SEditCustomProductView(
+                                                                    //                   selectedIndex: 2,
+                                                                    //                   productId: element?.id.toString(),
+                                                                    //                   categoryId: "",
+                                                                    //                   isFromAccountScreen: true,
+                                                                    //                 ))),
+                                                                    //         (Route<dynamic>
+                                                                    //                 route) =>
+                                                                    //             false,
+                                                                    //       );
                                                                   }
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
-                                                                          .all(6),
+                                                                          .all(
+                                                                              6),
                                                                   decoration: BoxDecoration(
                                                                       boxShadow: [
                                                                         BoxShadow(
@@ -1430,15 +1469,18 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   read.removeSRFProducts(
                                                                       context,
                                                                       index,
-                                                                      element?.id,
+                                                                      element
+                                                                          ?.id,
                                                                       element
                                                                           ?.productType,
                                                                       "fullfill_your_cravings");
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       EdgeInsets
-                                                                          .all(6),
+                                                                          .all(
+                                                                              6),
                                                                   decoration: BoxDecoration(
                                                                       boxShadow: [
                                                                         BoxShadow(
@@ -1472,10 +1514,11 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     ),
                                                     children: [
                                                       Container(
-                                                        padding: EdgeInsets.only(
-                                                            left: 11.w,
-                                                            bottom: 11.w,
-                                                            right: 11.w),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 11.w,
+                                                                bottom: 11.w,
+                                                                right: 11.w),
                                                         child: Column(
                                                           children: [
                                                             Divider(),
@@ -1492,10 +1535,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(
-                                                                              color:
-                                                                                  Black1,
-                                                                              fontSize:
-                                                                                  12.sp,
+                                                                              color: Black1,
+                                                                              fontSize: 12.sp,
                                                                               fontWeight: FontWeight.w400),
                                                                         ),
                                                                       ),
@@ -1514,8 +1555,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           "MRP",
                                                                           textAlign:
                                                                               TextAlign.end,
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black1,
                                                                                 fontSize: 12.sp,
@@ -1533,8 +1574,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           "Offer price",
                                                                           textAlign:
                                                                               TextAlign.end,
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Black1,
                                                                                 fontSize: 12.sp,
@@ -1552,7 +1593,8 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             ),
                                                             ListView.builder(
                                                               padding:
-                                                                  EdgeInsets.zero,
+                                                                  EdgeInsets
+                                                                      .zero,
                                                               itemCount: watch
                                                                       .allproducts
                                                                       ?.fullfillYourCravingsProducts?[
@@ -1564,34 +1606,30 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               physics:
                                                                   NeverScrollableScrollPhysics(),
                                                               itemBuilder:
-                                                                  (context, int) {
+                                                                  (context,
+                                                                      int) {
                                                                 final element = watch
                                                                     .fullfillYourCravingsProducts?[
                                                                         index]
                                                                     .unitDetails?[int];
 
                                                                 return Container(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          left: 12
-                                                                              .w,
-                                                                          right: 20
-                                                                              .w,
-                                                                          top:
-                                                                              7.w,
-                                                                          bottom:
-                                                                              8.w),
+                                                                  padding: EdgeInsets.only(
+                                                                      left:
+                                                                          12.w,
+                                                                      right:
+                                                                          20.w,
+                                                                      top: 7.w,
+                                                                      bottom:
+                                                                          8.w),
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(
-                                                                                  5),
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              5),
                                                                           // color: Black1,
                                                                           border: Border.all(
-                                                                              width:
-                                                                                  1,
-                                                                              color:
-                                                                                  grey6)),
+                                                                              width: 1,
+                                                                              color: grey6)),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1603,8 +1641,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                           children: [
                                                                             Text(
                                                                               "${element?.weightAndUnit}",
-                                                                              style:
-                                                                                  GoogleFonts.dmSans(
+                                                                              style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(color: Black1, fontSize: 14.sp, fontWeight: FontWeight.w400),
                                                                               ),
                                                                             ),
@@ -1618,8 +1655,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                               MainAxisAlignment.end,
                                                                           children: [
                                                                             Expanded(
-                                                                              child:
-                                                                                  Text(
+                                                                              child: Text(
                                                                                 // "",
                                                                                 "${element?.mrpPrice}",
                                                                                 textAlign: TextAlign.end,
@@ -1632,8 +1668,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                             //   width: 45.w,
                                                                             // ),
                                                                             Expanded(
-                                                                              child:
-                                                                                  Text(
+                                                                              child: Text(
                                                                                 // "",
                                                                                 "\u{20B9}${element?.offerPrice}",
                                                                                 textAlign: TextAlign.end,
@@ -1673,7 +1708,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                   ),
                 ]),
               ),
-          ),
+            ),
     );
   }
 }

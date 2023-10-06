@@ -1,7 +1,5 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +8,7 @@ class PrimaryAppBar extends StatelessWidget {
   final String? title;
   final Widget? action;
   final bool? isBackButtonEnabled;
-  final EdgeInsets ? titlePadding;
+  final EdgeInsets? titlePadding;
   void Function()? onActionTap;
   final void Function()? onBackBtnPressed;
   PrimaryAppBar(
@@ -33,11 +31,11 @@ class PrimaryAppBar extends StatelessWidget {
       // backgroundColor: kappbar,
       leading: isBackButtonEnabled ?? true
           ? Container(
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                  onPressed: onBackBtnPressed,
-                ),
-              )
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                onPressed: onBackBtnPressed,
+              ),
+            )
           : Container(),
       title: Container(
         padding: titlePadding,

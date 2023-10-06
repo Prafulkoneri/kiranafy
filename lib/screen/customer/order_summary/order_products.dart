@@ -39,10 +39,10 @@ class _OrderProductsState extends State<OrderProducts> {
                     children: [
                       element?.productImagePath == ""
                           ? Container(
-                        height: 69.w,
-                        width: 69.w,
+                              height: 69.w,
+                              width: 69.w,
                               child: Image.asset(
-                                "assets/images/profile_image.png",
+                                "assets/images/image_not_found.png",
                                 fit: BoxFit.cover,
                               ),
                             )

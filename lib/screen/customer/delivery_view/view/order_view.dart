@@ -83,26 +83,30 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             // },
             onBackBtnPressed: () {
               widget.screenName == "notification"
-                  ?
-              readMain.onNavigation(4, CustomerNotificationsScreenView(
-                isRefresh: false,
-              ), context):
-              readMain.onNavigation(4,MyOrderView(), context);
+                  ? readMain.onNavigation(
+                      4,
+                      CustomerNotificationsScreenView(
+                        isRefresh: false,
+                      ),
+                      context)
+                  : readMain.onNavigation(4, MyOrderView(), context);
               readMain.showBottomNavigationBar();
             },
             title: "Order",
           ),
         ),
         body: watch.isLoading
-            ?  Loader()
-
+            ? Loader()
             : WillPopScope(
                 onWillPop: () async {
-                  widget.screenName == "notification"?
-                  readMain.onNavigation(4, CustomerNotificationsScreenView(
-                    isRefresh: false,
-                  ), context):
-                  readMain.onNavigation(4,MyOrderView(), context);
+                  widget.screenName == "notification"
+                      ? readMain.onNavigation(
+                          4,
+                          CustomerNotificationsScreenView(
+                            isRefresh: false,
+                          ),
+                          context)
+                      : readMain.onNavigation(4, MyOrderView(), context);
                   readMain.showBottomNavigationBar();
                   return false;
                 },
@@ -112,26 +116,29 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
-                           onTap: (){
-                             readMain.onNavigation(1, ShopProfileView(
-                               refreshPage: true,
-                               routeName: '',
-                               shopId: watch.shopDetails?.id.toString(),
-                             ), context);
-                             readMain.showBottomNavigationBar();
-                             // Navigator.pushAndRemoveUntil(
-                             //   context,
-                             //   MaterialPageRoute(
-                             //       builder: (context) => MainScreenView(
-                             //           index: 1,
-                             //           screenName: ShopProfileView(
-                             //             refreshPage: true,
-                             //             routeName: '',
-                             //             shopId: watch.shopDetails?.id.toString(),
-                             //           ))),
-                             //       (Route<dynamic> route) => false,
-                             // );
-                           },
+                            onTap: () {
+                              readMain.onNavigation(
+                                  1,
+                                  ShopProfileView(
+                                    refreshPage: true,
+                                    routeName: '',
+                                    shopId: watch.shopDetails?.id.toString(),
+                                  ),
+                                  context);
+                              readMain.showBottomNavigationBar();
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => MainScreenView(
+                              //           index: 1,
+                              //           screenName: ShopProfileView(
+                              //             refreshPage: true,
+                              //             routeName: '',
+                              //             shopId: watch.shopDetails?.id.toString(),
+                              //           ))),
+                              //       (Route<dynamic> route) => false,
+                              // );
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               child: Column(
@@ -688,7 +695,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       ),
                                                       onPressed: () {},
                                                       child: Text(
-                                                        "${watch.deliveryAddressDetails?.deliveryAddressType}".capitalize(),
+                                                        "${watch.deliveryAddressDetails?.deliveryAddressType}"
+                                                            .capitalize(),
                                                         // "${element.deliveryAddressType}",
                                                         // "Home",
                                                         style:
@@ -995,10 +1003,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      readMain.onNavigation(4, OrderStatusView(
-                                        orderId: watch.orderId,
-                                        screenName: "orderView",
-                                      ), context);
+                                      readMain.onNavigation(
+                                          4,
+                                          OrderStatusView(
+                                            orderId: watch.orderId,
+                                            screenName: "orderView",
+                                          ),
+                                          context);
                                       readMain.showBottomNavigationBar();
                                       // Navigator.pushAndRemoveUntil(
                                       //   context,
@@ -1340,9 +1351,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     child: PrimaryButton(
                                       color: Color(0xffD1D1D1),
                                       onTap: () {
-                                        readMain.onNavigation(0,      CustomerProductReturnView(
-                                            orderId: watch.orderId
-                                                .toString()), context);
+                                        readMain.onNavigation(
+                                            0,
+                                            CustomerProductReturnView(
+                                                orderId:
+                                                    watch.orderId.toString()),
+                                            context);
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(
@@ -1388,9 +1402,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     child: PrimaryButton(
                                       color: Color(0xffD1D1D1),
                                       onTap: () {
-                                        readMain.onNavigation(0,      CustomerProductReturnView(
-                                            orderId: watch.orderId
-                                                .toString()), context);
+                                        readMain.onNavigation(
+                                            0,
+                                            CustomerProductReturnView(
+                                                orderId:
+                                                    watch.orderId.toString()),
+                                            context);
                                         // Navigator.push(
                                         //   context,
                                         //   MaterialPageRoute(
@@ -1703,7 +1720,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                 fit: BoxFit
                                                                     .cover,
                                                                 image: AssetImage(
-                                                                    'assets/images/shop_image.png'),
+                                                                    'assets/images/nearshop2.png'),
                                                               ),
                                                             ),
                                                           )

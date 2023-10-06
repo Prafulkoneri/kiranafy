@@ -19,8 +19,8 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 
 class CFavouritesView extends StatefulWidget {
-  final int ? selectedIndex;
-  const CFavouritesView({super.key,required this.selectedIndex});
+  final int? selectedIndex;
+  const CFavouritesView({super.key, required this.selectedIndex});
 
   @override
   State<CFavouritesView> createState() => _CFavouritesViewState();
@@ -29,7 +29,9 @@ class CFavouritesView extends StatefulWidget {
 class _CFavouritesViewState extends State<CFavouritesView> {
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<FavouritesController>().initState(context,widget.selectedIndex);
+      context
+          .read<FavouritesController>()
+          .initState(context, widget.selectedIndex);
     });
   }
 
@@ -44,7 +46,12 @@ class _CFavouritesViewState extends State<CFavouritesView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
+            readMain.onNavigation(
+                4,
+                ProfileScreenView(
+                  isRefreshed: false,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -60,13 +67,17 @@ class _CFavouritesViewState extends State<CFavouritesView> {
       ),
       body: watch.isLoading
           ? Loader()
-
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(4, ProfileScreenView(isRefreshed: false,), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    4,
+                    ProfileScreenView(
+                      isRefreshed: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -128,7 +139,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 120.w),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     // mainAxisAlignment: MainAxisAlignment.center,/
                                     children: [
                                       Image.asset(
@@ -159,16 +171,19 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       shrinkWrap: true,
                                       itemCount: watch.favShopList?.length ?? 0,
                                       itemBuilder: (BuildContext, index) {
-                                        final element = watch.favShopList?[index];
+                                        final element =
+                                            watch.favShopList?[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            readMain.onNavigation(1, ShopProfileView(
-                                              shopId: element?.id
-                                                  .toString(),
-                                              routeName:
-                                              "favouriteView",
-                                              refreshPage: true,
-                                            ), context);
+                                            readMain.onNavigation(
+                                                1,
+                                                ShopProfileView(
+                                                  shopId:
+                                                      element?.id.toString(),
+                                                  routeName: "favouriteView",
+                                                  refreshPage: true,
+                                                ),
+                                                context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
                                             //   MaterialPageRoute(
@@ -216,7 +231,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                           : DecorationImage(
                                                               image: AssetImage(
                                                                   "assets/images/nearshop2.png"),
-                                                              fit: BoxFit.cover)),
+                                                              fit: BoxFit
+                                                                  .cover)),
                                                 ),
                                               ),
                                               Positioned(
@@ -239,8 +255,10 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                         BorderRadius.circular(
                                                             13.w),
                                                     gradient: LinearGradient(
-                                                      begin: Alignment.topCenter,
-                                                      end: Alignment.bottomCenter,
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
                                                       stops: [
                                                         0.1,
                                                         0.9,
@@ -256,14 +274,16 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   padding: EdgeInsets.zero,
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
                                                       Row(
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment.end,
+                                                            MainAxisAlignment
+                                                                .end,
                                                         children: [],
                                                       ),
                                                       Column(
@@ -289,14 +309,14 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                 children: [
                                                                   SvgPicture.asset(
                                                                       "assets/icons/location1.svg",
-                                                                      width: 12.w,
+                                                                      width:
+                                                                          12.w,
                                                                       height:
                                                                           16.h),
                                                                   Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                            left:
-                                                                                8.w),
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 8
+                                                                            .w),
                                                                     child: Text(
                                                                         "${element?.areaName} ${element?.cityName}",
                                                                         style: GoogleFonts.roboto(
@@ -315,9 +335,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   color: yellow,
-                                                                  borderRadius: BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
                                                                               15)),
                                                                 ),
                                                                 child: Row(
@@ -330,7 +350,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                       "assets/images/star.svg",
                                                                       height:
                                                                           12.h,
-                                                                      width: 12.w,
+                                                                      width:
+                                                                          12.w,
                                                                     ),
                                                                     SizedBox(
                                                                       width:
@@ -349,10 +370,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                                 Black,
                                                                             letterSpacing:
                                                                                 .5,
-                                                                            fontSize: 12
-                                                                                .sp,
-                                                                            fontWeight:
-                                                                                FontWeight.w400),
+                                                                            fontSize:
+                                                                                12.sp,
+                                                                            fontWeight: FontWeight.w400),
                                                                       ),
                                                                     ),
                                                                   ],
@@ -405,7 +425,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 120.w),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     // mainAxisAlignment: MainAxisAlignment.center,/
                                     children: [
                                       Image.asset(
@@ -440,7 +461,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                     children: [
                                       GridView.builder(
                                           padding: EdgeInsets.zero,
-                                          physics: NeverScrollableScrollPhysics(),
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: watch.allProduct.length,
                                           gridDelegate:
@@ -455,27 +477,29 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                               onTap: () {
                                                 readProductViewController
                                                     .updateProductId(
-                                                  element.id.toString(),context,false
-                                                );
-                                                readMain.onNavigation(1, ProductScreenView(
-                                                  routeName: "favouriteProduct",
-                                                  selectedUnitId:
-                                                  element
-                                                      .productUnitId
-                                                      .toString(),
-                                                  categoryId: element
-                                                      .categoryId
-                                                      .toString(),
-                                                  productId: element
-                                                      .id
-                                                      .toString(),
-                                                  shopId: element
-                                                      .shopId
-                                                      .toString(),
-                                                  productType: element
-                                                      .productType
-                                                      .toString(),
-                                                ), context);
+                                                        element.id.toString(),
+                                                        context,
+                                                        false);
+                                                readMain.onNavigation(
+                                                    1,
+                                                    ProductScreenView(
+                                                      routeName:
+                                                          "favouriteProduct",
+                                                      selectedUnitId: element
+                                                          .productUnitId
+                                                          .toString(),
+                                                      categoryId: element
+                                                          .categoryId
+                                                          .toString(),
+                                                      productId:
+                                                          element.id.toString(),
+                                                      shopId: element.shopId
+                                                          .toString(),
+                                                      productType: element
+                                                          .productType
+                                                          .toString(),
+                                                    ),
+                                                    context);
                                                 // Navigator.pushAndRemoveUntil(
                                                 //   context,
                                                 //   MaterialPageRoute(
@@ -524,7 +548,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                   ),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
                                                         mainAxisAlignment:
@@ -536,9 +561,9 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                               ? Container(
                                                                   height: 68.w,
                                                                   width: 68.w,
-                                                                  child:
-                                                                      Image.asset(
-                                                                    "assets/images/profile_image.png",
+                                                                  child: Image
+                                                                      .asset(
+                                                                    "assets/images/image_not_found.png",
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
@@ -563,8 +588,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                         child: Text(
                                                           "${element.productName}",
                                                           // "Red Label",
-                                                          style:
-                                                              GoogleFonts.dmSans(
+                                                          style: GoogleFonts
+                                                              .dmSans(
                                                             textStyle: TextStyle(
                                                                 color: Black1,
                                                                 fontSize: 16.sp,
@@ -615,7 +640,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Black1,
+                                                                    color:
+                                                                        Black1,
                                                                     fontSize:
                                                                         12.sp,
                                                                     fontWeight:
@@ -632,17 +658,19 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                       context,
                                                                       element
                                                                           .shopId,
-                                                                      element.id,
+                                                                      element
+                                                                          .id,
                                                                       index)
                                                                   : read.removeAdminFavProduct(
                                                                       context,
                                                                       element
                                                                           .shopId,
-                                                                      element.id,
+                                                                      element
+                                                                          .id,
                                                                       index);
                                                             },
-                                                            child:
-                                                                SvgPicture.asset(
+                                                            child: SvgPicture
+                                                                .asset(
                                                               'assets/icons/fvrt_products.svg',
                                                             ),
                                                           ),
@@ -658,7 +686,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                             color: Black1,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w600),
+                                                                FontWeight
+                                                                    .w600),
                                                       ),
 
                                                       SizedBox(
@@ -679,7 +708,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }
