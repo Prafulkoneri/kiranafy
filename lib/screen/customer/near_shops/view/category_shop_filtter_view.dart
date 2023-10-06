@@ -151,19 +151,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                               read.onRatingSelected(value);
                             },
                             items: [
-                              DropdownMenuItem(
-                                  value: "0",
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "No Rating",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+
                               DropdownMenuItem(
                                   value: "1",
                                   child: Row(
@@ -257,6 +245,19 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "All Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
                                     ],
                                   )),
                             ],
@@ -267,19 +268,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                               read.onRatingSelected(value);
                             },
                             items: [
-                              DropdownMenuItem(
-                                  value: "0",
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "No Rating",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+
                               DropdownMenuItem(
                                   value: "1",
                                   child: Row(
@@ -373,6 +362,19 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "All Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
                                     ],
                                   )),
                             ],

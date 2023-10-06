@@ -151,19 +151,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                               read.onRatingSelected(value);
                             },
                             items: [
-                              DropdownMenuItem(
-                                  value: "0",
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "No Rating",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+
                               DropdownMenuItem(
                                   value: "1",
                                   child: Row(
@@ -259,6 +247,19 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       )
                                     ],
                                   )),
+                              DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "All Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                             ],
                           )
                         : CDropDownField(
@@ -267,19 +268,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                               read.onRatingSelected(value);
                             },
                             items: [
-                              DropdownMenuItem(
-                                  value: "0",
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "No Rating",
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+
                               DropdownMenuItem(
                                   value: "1",
                                   child: Row(
@@ -373,6 +362,19 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
+                                    ],
+                                  )),
+                              DropdownMenuItem(
+                                  value: "0",
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "All Rating",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
                                     ],
                                   )),
                             ],
