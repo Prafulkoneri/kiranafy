@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/account/view/profile_screen_
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class CustomerFAQView extends StatefulWidget {
@@ -54,8 +55,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
-
+          ? Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -166,16 +166,19 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                // "gfgheryhjyurt",
-                                                "${element?.answer}",
-                                                textAlign: TextAlign.start,
-                                                style: const TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
+                                              ShopAddress(
+                                                text: "${element?.answer}",
+                                              )
+                                              // Text(
+                                              //   // "gfgheryhjyurt",
+                                              //   "${element?.answer}",
+                                              //   textAlign: TextAlign.start,
+                                              //   style: const TextStyle(
+                                              //       fontSize: 13,
+                                              //       color: Colors.black,
+                                              //       fontWeight:
+                                              //           FontWeight.w400),
+                                              // ),
                                             ],
                                           ),
                                         ),

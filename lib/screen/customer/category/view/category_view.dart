@@ -341,7 +341,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                           element?.productImagePath ==
                                                                   ""
                                                               ? Image.asset(
-                                                                  'assets/images/profile_image.png',
+                                                                  'assets/images/image_not_found.png',
                                                                   width: 80.w,
                                                                   height: 80.h,
                                                                   fit: BoxFit
@@ -615,7 +615,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                         ""
                                                                     ? Image
                                                                         .asset(
-                                                                        'assets/images/profile_image.png',
+                                                                        'assets/images/image_not_found.png',
                                                                         width:
                                                                             39.w,
                                                                         height:

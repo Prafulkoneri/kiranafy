@@ -66,7 +66,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          readMain.onNavigation(0,HomeScreenView(refreshPage: false), context);
+          readMain.onNavigation(0, HomeScreenView(refreshPage: false), context);
           return false;
         },
         child: SingleChildScrollView(
@@ -342,7 +342,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       AccountScreen(
                         text: 'My Orders',
                       ),
-
                     ],
                   ),
                 ),
@@ -392,7 +391,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                         .showLoginDialog(context, "Please Login to continue");
                     return;
                   }
-                  readMain.onNavigation(4, const CFavouritesView(selectedIndex: 0), context);
+                  readMain.onNavigation(
+                      4, const CFavouritesView(selectedIndex: 0), context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -475,7 +475,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     return;
                   }
                   readMain.onNavigation(4, const HelpCenterView(), context);
-
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -571,15 +570,13 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ),
               GestureDetector(
                 onTap: () {
-                  if(Platform.isAndroid){
+                  if (Platform.isAndroid) {
                     Share.share(
                         'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
-                  }
-                  else{
+                  } else {
                     Share.share(
                         'hey! check out this new app https://apps.apple.com/us/app/local-supermart/id6451146831');
                   }
-
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -729,6 +726,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   ),
                 ),
               ),
+              // watch.isGuestLogin
+              //     ? Container()
+              //     :
               GestureDetector(
                 onTap: () async {
                   SharedPreferences pref =

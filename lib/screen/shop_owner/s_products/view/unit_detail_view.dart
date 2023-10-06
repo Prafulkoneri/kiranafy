@@ -53,9 +53,12 @@ class _UnitDetailViewState extends State<UnitDetailView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
               onBackBtnPressed: () {
-                readMainScreen.onNavigation(0, SSelectedProductView(
-                    isRefresh: true, //
-                    categoryId: widget.categoryId), context);
+                readMainScreen.onNavigation(
+                    0,
+                    SSelectedProductView(
+                        isRefresh: true, //
+                        categoryId: widget.categoryId),
+                    context);
                 // Navigator.pushAndRemoveUntil(
                 //   context,
                 //   MaterialPageRoute(
@@ -70,45 +73,34 @@ class _UnitDetailViewState extends State<UnitDetailView> {
               title: "Unit Details",
               action: SvgPicture.asset("assets/icons/addressadd.svg"),
               onActionTap: () {
-                readMainScreen.onNavigation(0, AddUnitView(
-                  isEdit: false,
-                  categoryId: widget.categoryId,
-                  productId: widget.productId,
-                  productType: widget.productType,
-                  productName: watch.getproductunitlistdata
-                      ?.productDetails?.productName
-                      .toString(),
-                  productUnitId: "",
-                ), context);
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => SMainScreenView(
-                //           index: 0,
-                //           screenName: AddUnitView(
-                //             isEdit: false,
-                //             categoryId: widget.categoryId,
-                //             productId: widget.productId,
-                //             productType: widget.productType,
-                //             productName: watch.getproductunitlistdata
-                //                 ?.productDetails?.productName
-                //                 .toString(),
-                //             productUnitId: "",
-                //           ))),
-                //   (Route<dynamic> route) => false,
-                // );
+                readMainScreen.onNavigation(
+                    0,
+                    AddUnitView(
+                      isEdit: false,
+                      categoryId: widget.categoryId,
+                      productId: widget.productId,
+                      productType: widget.productType,
+                      productName: watch
+                          .getproductunitlistdata?.productDetails?.productName
+                          .toString(),
+                      productUnitId: "",
+                    ),
+                    context);
               }),
         ),
         body: watch.isLoading
             ? const Loader()
             : WillPopScope(
-          onWillPop: ()async{
-            readMainScreen.onNavigation(0, SSelectedProductView(
-                isRefresh: true, //
-                categoryId: widget.categoryId), context);
-            return false;
-          },
-              child: SingleChildScrollView(
+                onWillPop: () async {
+                  readMainScreen.onNavigation(
+                      0,
+                      SSelectedProductView(
+                          isRefresh: true, //
+                          categoryId: widget.categoryId),
+                      context);
+                  return false;
+                },
+                child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,8 +120,10 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                     children: [
                                       Flexible(
                                         child: Text(
-                                          watch.getproductunitlistdata
-                                                  ?.productDetails?.productName ??
+                                          watch
+                                                  .getproductunitlistdata
+                                                  ?.productDetails
+                                                  ?.productName ??
                                               "",
                                           // "Product Name",
                                           // "${watch.categoryName} -  ${watch.allProductsCount}",
@@ -175,8 +169,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                 offset: Offset(5, 6)),
                                           ],
                                           border: Border.all(
-                                              color:
-                                                  Colors.black.withOpacity(0.07)),
+                                              color: Colors.black
+                                                  .withOpacity(0.07)),
                                           borderRadius:
                                               BorderRadius.circular(7.w),
                                         ),
@@ -197,7 +191,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                   )
                                                 : Image(
                                                     image: AssetImage(
-                                                      "assets/images/profile_image.png",
+                                                      "assets/images/image_not_found.png",
                                                     ),
                                                     height: 60.h,
                                                     width: 60.w,
@@ -302,53 +296,35 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                         children: [
                                                           InkWell(
                                                             onTap: () {
-
-                                                              readMainScreen.onNavigation(0,AddUnitView(
-                                                                categoryId:
-                                                                widget.categoryId,
-                                                                productType:
-                                                                watch.getproductunitlistdata?.productDetails?.productType ?? "",
-                                                                productId:
-                                                                watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
-                                                                productName:
-                                                                watch.getproductunitlistdata?.productDetails?.productName.toString(),
-                                                                productUnitId:
-                                                                element?.id.toString(),
-                                                                isEdit:
-                                                                true,
-                                                              ), context);
-                                                              // Navigator
-                                                              //     .pushAndRemoveUntil(
-                                                              //   context,
-                                                              //   MaterialPageRoute(
-                                                              //       builder: (context) =>
-                                                              //           SMainScreenView(
-                                                              //               index:
-                                                              //                   0,
-                                                              //               screenName:
-                                                              //                   AddUnitView(
-                                                              //                 categoryId:
-                                                              //                     widget.categoryId,
-                                                              //                 productType:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productType ?? "",
-                                                              //                 productId:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productId.toString() ?? "",
-                                                              //                 productName:
-                                                              //                     watch.getproductunitlistdata?.productDetails?.productName.toString(),
-                                                              //                 productUnitId:
-                                                              //                     element?.id.toString(),
-                                                              //                 isEdit:
-                                                              //                     true,
-                                                              //               ))),
-                                                              //   (Route<dynamic>
-                                                              //           route) =>
-                                                              //       false,
-                                                              // );
+                                                              readMainScreen
+                                                                  .onNavigation(
+                                                                      0,
+                                                                      AddUnitView(
+                                                                        categoryId:
+                                                                            widget.categoryId,
+                                                                        productType:
+                                                                            watch.getproductunitlistdata?.productDetails?.productType ??
+                                                                                "",
+                                                                        productId:
+                                                                            watch.getproductunitlistdata?.productDetails?.productId.toString() ??
+                                                                                "",
+                                                                        productName: watch
+                                                                            .getproductunitlistdata
+                                                                            ?.productDetails
+                                                                            ?.productName
+                                                                            .toString(),
+                                                                        productUnitId: element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                        isEdit:
+                                                                            true,
+                                                                      ),
+                                                                      context);
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets.all(
-                                                                      8),
+                                                                  EdgeInsets
+                                                                      .all(8.w),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
                                                                     BoxShadow(
@@ -371,8 +347,9 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               15)),
-                                                              child: SvgPicture.asset(
-                                                                  'assets/icons/e1.svg'),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      'assets/icons/e1.svg'),
                                                             ),
                                                           ),
                                                           SizedBox(
@@ -388,8 +365,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets.all(
-                                                                      8),
+                                                                  EdgeInsets
+                                                                      .all(8),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
                                                                     BoxShadow(
@@ -412,8 +389,9 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               15)),
-                                                              child: SvgPicture.asset(
-                                                                  'assets/icons/delete2.svg'),
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                      'assets/icons/delete2.svg'),
                                                             ),
                                                           )
                                                         ],
@@ -461,6 +439,6 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                         ),
                       ]),
                 ),
-            ));
+              ));
   }
 }

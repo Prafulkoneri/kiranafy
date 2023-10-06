@@ -340,6 +340,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                         return Container(
                                           child: Center(
                                             child: AppNetworkImages(
+                                              showShopImage: true,
                                               imageUrl: '${element}',
                                               height: 241.w,
                                               // width: 102.w,
@@ -359,6 +360,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       })
                                   : Container(
                                       child: AppNetworkImages(
+                                        showShopImage: true,
                                         // '${element}',
                                         imageUrl:
                                             "${watch.productDetails?.productImagePath}",
@@ -976,7 +978,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                             89.w,
                                                                         child: Image
                                                                             .asset(
-                                                                          "assets/images/profile_image.png",
+                                                                          "assets/images/image_not_found.png",
                                                                           fit: BoxFit
                                                                               .cover,
                                                                         ),

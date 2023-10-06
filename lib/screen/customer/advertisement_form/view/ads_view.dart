@@ -9,7 +9,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/advertisement_form/controller/ads_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -17,12 +16,13 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/stack_Loader.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class CustomerAdsView extends StatefulWidget {
-  final String ? route;
-  const CustomerAdsView({super.key,required this.route});
+  final String? route;
+  const CustomerAdsView({super.key, required this.route});
 
   @override
   State<CustomerAdsView> createState() => _CustomerAdsViewState();
@@ -47,22 +47,32 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
             child: PrimaryAppBar(
               title: "Advertisement Request\nForm",
               onBackBtnPressed: () {
-                if(widget.route=="allShops"){
-                  readMain.onNavigation(1,AllNearShopsView(refreshPage: false, isSearchFocus: false), context);
+                if (widget.route == "allShops") {
+                  readMain.onNavigation(
+                      1,
+                      const AllNearShopsView(
+                          refreshPage: false, isSearchFocus: false),
+                      context);
                 }
-                if(widget.route=="categoryShops"){
-                  readMain.onNavigation(1,AllNearCategoryShopsView(categoryId: "1", refresh:false), context);
+                if (widget.route == "categoryShops") {
+                  readMain.onNavigation(
+                      1,
+                      const AllNearCategoryShopsView(
+                          categoryId: "1", refresh: false),
+                      context);
                 }
-                if(widget.route=="home"){
-                  readMain.onNavigation(0, HomeScreenView(
-                    refreshPage: false,
-                  ), context);
+                if (widget.route == "home") {
+                  readMain.onNavigation(
+                      0,
+                      const HomeScreenView(
+                        refreshPage: false,
+                      ),
+                      context);
                 }
-                if(widget.route=="shopProfile"){
-                  readMain.onNavigation(1,ShopProfileView(refreshPage: false), context);
+                if (widget.route == "shopProfile") {
+                  readMain.onNavigation(
+                      1, const ShopProfileView(refreshPage: false), context);
                 }
-
-
               },
             ),
           ),
@@ -71,25 +81,37 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
         body: StackLoader(
           showLoader: watch.isStackLoading,
           child: WillPopScope(
-            onWillPop: ()async{
-              if(widget.route=="allShops"){
-                readMain.onNavigation(1,AllNearShopsView(refreshPage: false, isSearchFocus: false), context);
+            onWillPop: () async {
+              if (widget.route == "allShops") {
+                readMain.onNavigation(
+                    1,
+                    const AllNearShopsView(
+                        refreshPage: false, isSearchFocus: false),
+                    context);
               }
-              if(widget.route=="categoryShops"){
-                readMain.onNavigation(1,AllNearCategoryShopsView(categoryId: "1", refresh:false), context);
+              if (widget.route == "categoryShops") {
+                readMain.onNavigation(
+                    1,
+                    const AllNearCategoryShopsView(
+                        categoryId: "1", refresh: false),
+                    context);
               }
-              if(widget.route=="home"){
-                readMain.onNavigation(0, HomeScreenView(
-                  refreshPage: false,
-                ), context);
+              if (widget.route == "home") {
+                readMain.onNavigation(
+                    0,
+                    const HomeScreenView(
+                      refreshPage: false,
+                    ),
+                    context);
               }
-              if(widget.route=="shopProfile"){
-                readMain.onNavigation(1,ShopProfileView(refreshPage: false), context);
+              if (widget.route == "shopProfile") {
+                readMain.onNavigation(
+                    1, const ShopProfileView(refreshPage: false), context);
               }
               return false;
             },
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Container(
@@ -112,7 +134,8 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                           controller: watch.adsMobileNumberController,
                           titleHeader: "Contact No",
                           textInputType: TextInputType.number,
-                          lengthLimitingTextInputFormatter: LengthLimitingTextInputFormatter(10),
+                          lengthLimitingTextInputFormatter:
+                              LengthLimitingTextInputFormatter(10),
                         ),
                         SizedBox(
                           height: 20.w,
@@ -133,7 +156,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                               builder: (BuildContext, child) {
                                 return Theme(
                                   data: Theme.of(context).copyWith(
-                                    colorScheme: ColorScheme.light(
+                                    colorScheme: const ColorScheme.light(
                                       primary: Color(0xff1767B1),
                                       // <-- SEE HERE
                                       onPrimary: Colors.white,
@@ -142,7 +165,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                     ),
                                     textButtonTheme: TextButtonThemeData(
                                       style: TextButton.styleFrom(
-                                        primary: Color(
+                                        primary: const Color(
                                             0xff1767B1), // button text color
                                       ),
                                     ),
@@ -167,7 +190,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                 builder: (BuildContext, child) {
                                   return Theme(
                                     data: Theme.of(context).copyWith(
-                                      colorScheme: ColorScheme.light(
+                                      colorScheme: const ColorScheme.light(
                                         primary: Color(0xff1767B1),
                                         // <-- SEE HERE
                                         onPrimary: Colors.white,
@@ -176,7 +199,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                       ),
                                       textButtonTheme: TextButtonThemeData(
                                         style: TextButton.styleFrom(
-                                          primary: Color(
+                                          primary: const Color(
                                               0xff1767B1), // button text color
                                         ),
                                       ),
@@ -210,16 +233,17 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Text(
-                          "Ads Plan",
-                          style: GoogleFonts.dmSans(
-                            textStyle: const TextStyle(
-                                color: Black,
-                                letterSpacing: .5,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                        UpdateProfile(text: "Ads Plan"),
+                        // Text(
+                        //   "Ads Plan",
+                        //   style: GoogleFonts.dmSans(
+                        //     textStyle: const TextStyle(
+                        //         color: Black,
+                        //         letterSpacing: .5,
+                        //         fontSize: 14,
+                        //         fontWeight: FontWeight.w500),
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 12.h,
                         ),
@@ -235,16 +259,17 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Text(
-                              '7 days',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
+                            AccountScreen(text: '7 days')
+                            // Text(
+                            //   '7 days',
+                            //   style: GoogleFonts.dmSans(
+                            //     textStyle: TextStyle(
+                            //         color: Black,
+                            //         // letterSpacing: .5,
+                            //         fontSize: 14.sp,
+                            //         fontWeight: FontWeight.w400),
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(
@@ -262,16 +287,17 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Text(
-                              '15 days',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
+                            AccountScreen(text: '15 days')
+                            // Text(
+                            //   '15 days',
+                            //   style: GoogleFonts.dmSans(
+                            //     textStyle: TextStyle(
+                            //         color: Black,
+                            //         // letterSpacing: .5,
+                            //         fontSize: 14.sp,
+                            //         fontWeight: FontWeight.w400),
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(
@@ -289,16 +315,17 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Text(
-                              '30 days',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
+                            AccountScreen(text: '30 days')
+                            // Text(
+                            //   '30 days',
+                            //   style: GoogleFonts.dmSans(
+                            //     textStyle: TextStyle(
+                            //         color: Black,
+                            //         // letterSpacing: .5,
+                            //         fontSize: 14.sp,
+                            //         fontWeight: FontWeight.w400),
+                            //   ),
+                            // ),
                           ],
                         ),
                         SizedBox(
@@ -316,31 +343,23 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Text(
-                              '60 days',
-                              style: GoogleFonts.dmSans(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
+                            AccountScreen(text: '60 days')
                           ],
                         ),
                         SizedBox(
                           height: 19.h,
                         ),
-                        Text(
-                          "Ads Content",
-                          style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
-                                color: Black,
-                                // letterSpacing: .5,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                        UpdateProfile(text: "Ads Content"),
+                        // Text(
+                        //   "Ads Content",
+                        //   style: GoogleFonts.dmSans(
+                        //     textStyle: const TextStyle(
+                        //         color: Black,
+                        //         // letterSpacing: .5,
+                        //         fontSize: 14,
+                        //         fontWeight: FontWeight.w500),
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 10.h,
                         ),
@@ -358,7 +377,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             fontSize: 20.sp,
                             height: 50.w,
                             text: "Submit",
-                            color: Color(0xff4689EC),
+                            color: const Color(0xff4689EC),
                             onTap: () {
                               watch.customerAdsForm(context);
                             }),
@@ -389,26 +408,30 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                     Icons.circle_rounded,
                                     size: 5.w,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Flexible(
-                                child: Text(
-                                  // softWrap: true,
-                                  // maxLines: 3,//
-                                  "For pricing and further details, Local Supermart will contact you within 48 hours.",
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
+                                  child: AccountScreen(
+                                text:
+                                    "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                              )
+                                  //  Text(
+                                  //   // softWrap: true,
+                                  //   // maxLines: 3,//
+                                  //   "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                                  //   textAlign: TextAlign.justify,
+                                  //   style: GoogleFonts.dmSans(
+                                  //     textStyle: TextStyle(
+                                  //         color: Black1,
 
-                                        // letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
+                                  //         // letterSpacing: .05,
+                                  //         // overflow: TextOverflow.ellipsis,
+                                  //         fontSize: 14.sp,
+                                  //         fontWeight: FontWeight.w400),
+                                  //   ),
+                                  // ),
                                   ),
-                                ),
-                              ),
                               // For advertisement advance payment is required.
                             ],
                           ),
@@ -427,26 +450,30 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                     Icons.circle_rounded,
                                     size: 5.w,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Flexible(
-                                child: Text(
-                                  "For advertisement advance payment is required.",
-                                  // softWrap: true,
-                                  // maxLines: 3,//
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black1,
+                                  child: AccountScreen(
+                                text:
+                                    "For advertisement advance payment is required.",
+                              )
+                                  //  Text(
+                                  //   "For advertisement advance payment is required.",
+                                  //   // softWrap: true,
+                                  //   // maxLines: 3,//
+                                  //   textAlign: TextAlign.justify,
+                                  //   style: GoogleFonts.dmSans(
+                                  //     textStyle: TextStyle(
+                                  //         color: Black1,
 
-                                        // letterSpacing: .05,
-                                        // overflow: TextOverflow.ellipsis,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400),
+                                  //         // letterSpacing: .05,
+                                  //         // overflow: TextOverflow.ellipsis,
+                                  //         fontSize: 14.sp,
+                                  //         fontWeight: FontWeight.w400),
+                                  //   ),
+                                  // ),
                                   ),
-                                ),
-                              ),
                               // For advertisement advance payment is required.
                             ],
                           ),

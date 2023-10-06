@@ -124,13 +124,16 @@ class OrderSummaryController extends ChangeNotifier {
   void onRadioButtonSelected(value, context) {
     groupValue = value;
     if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
-      final read=Provider.of<MainScreenController>(context,listen: false);
-      read.onNavigation(2, AddAddressView(
-        shopId: shopDetailData?.id.toString(),
-        cartId: cartId,
-        route: "orderAddAddress",
-        isEditAdress: false,
-      ), context);
+      final read = Provider.of<MainScreenController>(context, listen: false);
+      read.onNavigation(
+          2,
+          AddAddressView(
+            shopId: shopDetailData?.id.toString(),
+            cartId: cartId,
+            route: "orderAddAddress",
+            isEditAdress: false,
+          ),
+          context);
       // Navigator.pushAndRemoveUntil(
       //   context,
       //   MaterialPageRoute(
@@ -234,30 +237,29 @@ class OrderSummaryController extends ChangeNotifier {
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
         totalAmount = orderFinalTotals?.total.toString() ?? "";
         // if (route != "orderSummary") {
-          if (groupValue != "") {
-            if (result.orderSummaryData?.shopDeliveryTypes
-                    ?.shopOwnerCustomerPickup ==
-                "active") {
-              if(route != "orderSummary"){
-                groupValue = "self_pickup";
-              }
+        if (groupValue != "") {
+          if (result.orderSummaryData?.shopDeliveryTypes
+                  ?.shopOwnerCustomerPickup ==
+              "active") {
+            if (route != "orderSummary") {
+              groupValue = "self_pickup";
+            }
 
-              print("heloo");
-              print(totalAmount.toString());
-              print((int.parse(totalAmount.toString()) -
-                  int.parse(deliveryCharges.toString())));
-              selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
-                      int.parse(deliveryCharges.toString()))
-                  .toString();
-              print("selfPickupTotalAmount${selfPickupTotalAmount}");
-              selfPickupDeliveryCharges = "0";
-            } else {
-              if(route != "orderSummary"){
-                groupValue = "delivery_to";
-              }
-
+            print("heloo");
+            print(totalAmount.toString());
+            print((int.parse(totalAmount.toString()) -
+                int.parse(deliveryCharges.toString())));
+            selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
+                    int.parse(deliveryCharges.toString()))
+                .toString();
+            print("selfPickupTotalAmount${selfPickupTotalAmount}");
+            selfPickupDeliveryCharges = "0";
+          } else {
+            if (route != "orderSummary") {
+              groupValue = "delivery_to";
             }
           }
+        }
         // }
 
         productTotalDiscount =
@@ -314,13 +316,17 @@ class OrderSummaryController extends ChangeNotifier {
         int deliverySlotLength = shopDeliverySlots?.length ?? 0;
 
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
-          final read=Provider.of<MainScreenController>(context,listen: false);
-          read.onNavigation(2, AddAddressView(
-            shopId: shopDetailData?.id.toString(),
-            cartId: cartId,
-            route: "orderAddAddress",
-            isEditAdress: false,
-          ), context);
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
+          read.onNavigation(
+              2,
+              AddAddressView(
+                shopId: shopDetailData?.id.toString(),
+                cartId: cartId,
+                route: "orderAddAddress",
+                isEditAdress: false,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -500,7 +506,7 @@ class OrderSummaryController extends ChangeNotifier {
           true,
           "orderSummary",
         );
-        offerGroupValue="";
+        offerGroupValue = "";
         notifyListeners();
         // isFulFilProductAdded[index] = false;
         Utils.showPrimarySnackbar(context, result.message,
@@ -580,12 +586,13 @@ class OrderSummaryController extends ChangeNotifier {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
         } else {
+          offerGroupValue = "";
           showOnPageLoader(false);
           showLoader(false);
           Navigator.pop(context);
           couponDiscount = "0";
           removeCoupon(context, false);
-
+          notifyListeners();
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -694,28 +701,30 @@ class OrderSummaryController extends ChangeNotifier {
       return;
     }
     showOnPageLoader(true);
-    final read=Provider.of<MainScreenController>(context,listen: false);
-    read.onNavigation(2, OrderPaymentView(
-      cartId: cartId.toString(),
-      shopId: shopId.toString(),
-      couponId: offerGroupValue.toString(),
-      customerDeliveryAddressId: addressGroupValue,
-      customerDeliveryDate: expectedDateController.text,
-      customerDeliverySlot: slotGroupValue,
-      customerDeliveryType: groupValue,
-      finalDeliveryCharges: groupValue == "self_pickup"
-          ? selfPickupDeliveryCharges
-          : deliveryCharges == ""
-          ? "0"
-          : deliveryCharges,
-      finalSubTotal: subTotal,
-      finalTotalAmount: groupValue == "self_pickup"
-          ? selfPickupTotalAmount
-          : totalAmount,
-      finalTotalDiscount: totalDiscount,
-      totalItems: orderFinalTotals?.itemCount.toString(),
-      couponDiscountAmount: couponDiscount,
-    ), context);
+    final read = Provider.of<MainScreenController>(context, listen: false);
+    read.onNavigation(
+        2,
+        OrderPaymentView(
+          cartId: cartId.toString(),
+          shopId: shopId.toString(),
+          couponId: offerGroupValue.toString(),
+          customerDeliveryAddressId: addressGroupValue,
+          customerDeliveryDate: expectedDateController.text,
+          customerDeliverySlot: slotGroupValue,
+          customerDeliveryType: groupValue,
+          finalDeliveryCharges: groupValue == "self_pickup"
+              ? selfPickupDeliveryCharges
+              : deliveryCharges == ""
+                  ? "0"
+                  : deliveryCharges,
+          finalSubTotal: subTotal,
+          finalTotalAmount:
+              groupValue == "self_pickup" ? selfPickupTotalAmount : totalAmount,
+          finalTotalDiscount: totalDiscount,
+          totalItems: orderFinalTotals?.itemCount.toString(),
+          couponDiscountAmount: couponDiscount,
+        ),
+        context);
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(

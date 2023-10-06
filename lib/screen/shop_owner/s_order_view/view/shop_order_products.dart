@@ -47,7 +47,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                     height: 89.w,
                                     width: 89.w,
                                     child: Image.asset(
-                                      "assets/images/profile_image.png",
+                                      "assets/images/image_not_found.png",
                                       fit: BoxFit.cover,
                                     ),
                                   )
@@ -244,7 +244,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                         height: 89.w,
                                         width: 89.w,
                                         child: Image.asset(
-                                          "assets/images/profile_image.png",
+                                          "assets/images/image_not_found.png",
                                           fit: BoxFit.cover,
                                         ),
                                       )
@@ -451,7 +451,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                         height: 89.w,
                                         width: 89.w,
                                         child: Image.asset(
-                                          "assets/images/profile_image.png",
+                                          "assets/images/image_not_found.png",
                                           fit: BoxFit.cover,
                                         ),
                                       )

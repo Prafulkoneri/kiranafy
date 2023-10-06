@@ -19,6 +19,7 @@ import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/stack_Loader.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 import '../order_products.dart';
@@ -157,21 +158,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: EdgeInsets.only(left: 17.w, top: 20.w),
-                              child: Text(
-                                "${watch.shopDetailData?.shopName}",
-
-                                // "${watch.shopDetailData?.shopName}",
-
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: Black1,
-                                      letterSpacing: .5,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ),
+                                padding: EdgeInsets.only(left: 17.w, top: 20.w),
+                                child: OrderSummery(
+                                  text: "${watch.shopDetailData?.shopName}",
+                                )),
                             Container(
                               padding: EdgeInsets.all(12.w),
                               // height: 70.h,
@@ -198,19 +188,23 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                         width: 8.w,
                                       ),
                                       Container(
-                                        width: 200.w,
-                                        child: Text(
-                                          // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                          "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                          style: GoogleFonts.roboto(
-                                            textStyle: TextStyle(
-                                                color: Black,
-                                                // letterSpacing: .5,
-                                                fontSize: 13.sp,
-                                                fontWeight: FontWeight.w400),
+                                          width: 200.w,
+                                          child: ShopAddress(
+                                            text:
+                                                "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                          )
+                                          //  Text(
+                                          //   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                          //   "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                          //   style: GoogleFonts.roboto(
+                                          //     textStyle: TextStyle(
+                                          //         color: Black,
+                                          //         // letterSpacing: .5,
+                                          //         fontSize: 13.sp,
+                                          //         fontWeight: FontWeight.w400),
+                                          //   ),
+                                          // ),
                                           ),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                   Row(
@@ -1196,7 +1190,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                       height: 55.w,
                                                                                       width: 55.w,
                                                                                       child: Image.asset(
-                                                                                        "assets/images/profile_image.png",
+                                                                                        "assets/images/image_not_found.png",
                                                                                         fit: BoxFit.cover,
                                                                                       ),
                                                                                     )
@@ -1508,7 +1502,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                       height: 55.w,
                                                                                       width: 55.w,
                                                                                       child: Image.asset(
-                                                                                        "assets/images/profile_image.png",
+                                                                                        "assets/images/image_not_found.png",
                                                                                         fit: BoxFit.cover,
                                                                                       ),
                                                                                     )

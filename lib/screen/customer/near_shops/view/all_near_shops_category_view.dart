@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
+import 'package:local_supper_market/screen/customer/near_shops/view/category_shop_filtter_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/shop_filter_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
@@ -156,29 +157,29 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                             SizedBox(
                               width: 5.w,
                             ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     showModalBottomSheet(
-                            //       isScrollControlled: true,
-                            //       shape: const RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.only(
-                            //               topLeft: Radius.circular(30),
-                            //               topRight: Radius.circular(30))),
-                            //       context: context,
-                            //       builder: (BuildContext context) {
-                            //         return StatefulBuilder(
-                            //             builder: (context, setState) {
-                            //           return ShopFilterView();
-                            //         });
-                            //       },
-                            //     );
-                            //   },
-                            //   child: SvgPicture.asset(
-                            //     'assets/images/filter.svg',
-                            //     width: 20.w,
-                            //     height: 18.h,
-                            //   ),
-                            // ),
+                            InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30))),
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return StatefulBuilder(
+                                        builder: (context, setState) {
+                                      return ShopCategoryFiltterView();
+                                    });
+                                  },
+                                );
+                              },
+                              child: SvgPicture.asset(
+                                'assets/images/filter.svg',
+                                width: 20.w,
+                                height: 18.h,
+                              ),
+                            ),
                             SizedBox(
                               width: 8.w,
                             ),
@@ -697,7 +698,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                   fit: BoxFit.cover,
                                                 )
                                               : Image.asset(
-                                                  "assets/images/shop_image.png",
+                                                  "assets/images/nearshop2.png",
                                                   width:
                                                       ScreenUtil().screenWidth,
                                                   height: 163.h,
@@ -711,7 +712,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                           width: ScreenUtil().screenWidth,
                                           // height: 100.h,
                                           child: Image.asset(
-                                            "assets/images/shop_image.png",
+                                            "assets/images/nearshop2.png",
                                             width: ScreenUtil().screenWidth,
                                             height: 163.h,
                                           ),

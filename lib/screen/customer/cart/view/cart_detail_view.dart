@@ -543,7 +543,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                           80.h,
                                                                       child: Image
                                                                           .asset(
-                                                                        "assets/images/profile_image.png",
+                                                                        "assets/images/image_not_found.png",
                                                                         fit: BoxFit
                                                                             .cover,
                                                                       ),
@@ -924,11 +924,20 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   children: <Widget>[
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w, top: 5.w,right: 6.w),
+                                                          left: 6.w,
+                                                          top: 5.w,
+                                                          right: 6.w),
                                                       child: Row(
-                                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          Text("•",style: TextStyle(fontSize: 20.sp),),
+                                                          Text(
+                                                            "•",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    20.sp),
+                                                          ),
                                                           SizedBox(
                                                             width: 10,
                                                           ),
@@ -958,11 +967,20 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w, top: 5.w,right: 6.w),
+                                                          left: 6.w,
+                                                          top: 5.w,
+                                                          right: 6.w),
                                                       child: Row(
-                                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          Text("•",style: TextStyle(fontSize: 20.sp),),
+                                                          Text(
+                                                            "•",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    20.sp),
+                                                          ),
                                                           SizedBox(
                                                             width: 10,
                                                           ),
@@ -992,18 +1010,22 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                 ),
                                                 actions: [
                                                   Row(
-                                                    mainAxisAlignment:MainAxisAlignment.end,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
                                                     children: [
                                                       ElevatedButton(
-                                                          child: Text("Continue"),
+                                                          child:
+                                                              Text("Continue"),
                                                           onPressed: () {
-                                                            Navigator.pop(context);
+                                                            Navigator.pop(
+                                                                context);
                                                             readMain.onNavigation(
                                                                 2,
                                                                 OrderSummaryView(
                                                                   route:
                                                                       "cartDetail",
-                                                                  isRefresh: true,
+                                                                  isRefresh:
+                                                                      true,
                                                                   cartId: watch
                                                                       .orderCartId
                                                                       .toString(),

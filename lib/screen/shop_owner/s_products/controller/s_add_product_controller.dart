@@ -221,33 +221,7 @@ class SAddProductsController extends ChangeNotifier {
                 selectedProduct.insert(i, true);
               }
             }
-            // int productlength = productDetails?.length ?? 0;
-            // for (int i = 0; i < productlength; i++) {
-            //   if (productDetails?[i].selectedByShopOwner == "yes") {
-            //     selectedProduct.insert(i, true);
-            //     selectedProductsId.add(productDetails?[i].id);
-            //   }
-            // }
-
             print("isCustomerSelectedNotClicked");
-            // selectedProduct = List<bool>.filled(
-            //     allAdminProductList.length ?? 0, false,
-            //     growable: true);
-            // int length = allAdminProductList.length ?? 0;
-            // int productlength = productDetails?.length ?? 0;
-            // for (int i = 0; i < length; i++) {
-            //   if (allAdminProductList[i].selectedByShopOwner == "yes") {
-            //     if (!selectedProduct[i]) {
-            //       selectedProduct.insert(i, true);
-            //     }
-            //   }
-            // }
-            // print(selectedProduct);
-            // for (int i = 0; i < productlength; i++) {
-            //   if (productDetails?[i].selectedByShopOwner == "yes") {
-            //     selectedProductsId.add(productDetails?[i].id);
-            //   }
-            // }
           }
         }
 

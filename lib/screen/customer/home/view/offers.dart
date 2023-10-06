@@ -102,18 +102,20 @@ class _OfferPageState extends State<OfferPage> {
                                   element?.productType.toString(),
                                 );
                                 watchProductView.updateProductId(
-                                  element?.id.toString(),context,false
-                                );
+                                    element?.id.toString(), context, false);
                                 print("22222222222222222222222222222");
-                                readMainScreen.onNavigation(0,ProductScreenView(
-                                  routeName: "homeScreen",
-                                  categoryId:
-                                  element?.categoryId.toString(),
-                                  productId: element?.id.toString(),
-                                  shopId: element?.shopId.toString(),
-                                  productType:
-                                  element?.productType.toString(),
-                                ), context);
+                                readMainScreen.onNavigation(
+                                    0,
+                                    ProductScreenView(
+                                      routeName: "homeScreen",
+                                      categoryId:
+                                          element?.categoryId.toString(),
+                                      productId: element?.id.toString(),
+                                      shopId: element?.shopId.toString(),
+                                      productType:
+                                          element?.productType.toString(),
+                                    ),
+                                    context);
 
                                 // Navigator.pushAndRemoveUntil(
                                 //   context,
@@ -152,7 +154,7 @@ class _OfferPageState extends State<OfferPage> {
                                             height: 68.w,
                                             width: 68.w,
                                             child: Image.asset(
-                                              "assets/images/profile_image.png",
+                                              "assets/images/image_not_found.png",
                                               // fit:
                                               //     BoxFit.cover,
                                             ),
@@ -161,7 +163,8 @@ class _OfferPageState extends State<OfferPage> {
                                             height: 68.w,
                                             width: 68.w,
                                             child: AppNetworkImages(
-                                              imageUrl: "${element?.productImagePath}",
+                                              imageUrl:
+                                                  "${element?.productImagePath}",
                                               fit: BoxFit.cover,
                                             ),
                                           ),

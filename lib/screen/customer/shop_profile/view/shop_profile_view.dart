@@ -134,7 +134,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 ? Container(
                                     height: 188.w,
                                     child: Image.asset(
-                                      "assets/images/shop_image.png",
+                                      "assets/images/nearshop2.png",
                                       height: 190.w,
                                       fit: BoxFit.fill,
                                     ))
@@ -157,10 +157,12 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                               element?.imagesPath == ""
                                                   ? Container(
                                                       height: 190.w,
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
                                                       child: Image.asset(
-                                                        "assets/images/shop_image.png",
+                                                        "assets/images/nearshop2.png",
                                                         height: 191.w,
-                                                        fit: BoxFit.fill,
+                                                        fit: BoxFit.cover,
                                                       ))
                                                   : Container(
                                                       height: 180.w,
@@ -187,17 +189,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             decoration: BoxDecoration(
                                 // borderRadius: BorderRadius.circular(13.w),
                                 gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  stops: [
-                                    0.1,
-                                    0.9,
-                                  ],
-                                  colors: [
-                                    Colors.white.withOpacity(0),
-                                    Colors.black.withOpacity(0.15),
-                                  ],
-                                )),
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [
+                                0.1,
+                                0.9,
+                              ],
+                              colors: [
+                                Colors.white.withOpacity(0),
+                                Colors.black.withOpacity(0.15),
+                              ],
+                            )),
                           )),
                           Positioned(
                             //<-- SEE HERE
@@ -799,7 +801,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     width: 89.w,
                                                                     child: Image
                                                                         .asset(
-                                                                      "assets/images/profile_image.png",
+                                                                      "assets/images/image_not_found.png",
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     ),
@@ -808,12 +810,19 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     height:
                                                                         89.w,
                                                                     width: 89.w,
-                                                                    child: Image
-                                                                        .network(
-                                                                      "${element?.productImagePath}",
+                                                                    child:
+                                                                        AppNetworkImages(
+                                                                      imageUrl:
+                                                                          "${element?.productImagePath}",
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     ),
+                                                                    //  Image
+                                                                    //     .network(
+                                                                    //   "${element?.productImagePath}",
+                                                                    //   fit: BoxFit
+                                                                    //       .cover,
+                                                                    // ),
                                                                   ),
                                                           ],
                                                         ),
@@ -1191,7 +1200,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                             89.w,
                                                                         child: Image
                                                                             .asset(
-                                                                          "assets/images/profile_image.png",
+                                                                          "assets/images/image_not_found.png",
                                                                           fit: BoxFit
                                                                               .cover,
                                                                         ),
@@ -2004,7 +2013,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                           ?.productImagePath ==
                                                                       ""
                                                                   ? Image.asset(
-                                                                      "assets/images/profile_image.png",
+                                                                      "assets/images/image_not_found.png",
                                                                       height:
                                                                           68.h,
                                                                       width:
@@ -2141,7 +2150,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
-                                      "assets/images/profile_image.png",
+                                      "assets/images/image_not_found.png",
                                       height: 170.w,
                                       // width: 340.w,
                                       // scale: 0.5,
@@ -2156,7 +2165,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               width: ScreenUtil().screenWidth,
                               // height: 100.h,
                               child: Image.asset(
-                                "assets/images/profile_image.png",
+                                "assets/images/image_not_found.png",
                                 height: 170.w,
                                 // width: 340.w,
                                 // scale: 0.5,

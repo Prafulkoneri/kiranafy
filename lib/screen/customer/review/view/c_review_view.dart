@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/customer/review/controller/customer_r
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
+import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 
 class CReviewScreenView extends StatefulWidget {
@@ -112,22 +113,24 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
-                              left: 15.w,
-                              top: 15.w,
-                            ),
-                            child: Text(
-                              "${watch.shopDetails?.shopName}",
-                              // "New Balaji Trading Company",
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Black,
-                                    // letterSpacing: .5,
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.w600),
+                              padding: EdgeInsets.only(
+                                left: 15.w,
+                                top: 15.w,
                               ),
-                            ),
-                          ),
+                              child: OrderSummery(
+                                  text: "${watch.shopDetails?.shopName}")
+                              //  Text(
+                              //   "${watch.shopDetails?.shopName}",
+                              //   // "New Balaji Trading Company",
+                              //   style: GoogleFonts.roboto(
+                              //     textStyle: TextStyle(
+                              //         color: Black,
+                              //         // letterSpacing: .5,
+                              //         fontSize: 18.sp,
+                              //         fontWeight: FontWeight.w600),
+                              //   ),
+                              // ),
+                              ),
                           Container(
                             padding: EdgeInsets.all(12.w),
                             height: 70.h,
@@ -151,20 +154,24 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                       width: 8.w,
                                     ),
                                     Container(
-                                      width: 200.w,
-                                      child: Text(
-                                        "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                        width: 200.w,
+                                        child: ShopAddress(
+                                          text:
+                                              "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
+                                        )
+                                        // Text(
+                                        //   "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
 
-                                        // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                        style: GoogleFonts.roboto(
-                                          textStyle: TextStyle(
-                                              color: Black,
-                                              // letterSpacing: .5,
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.w400),
+                                        //   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                        //   style: GoogleFonts.roboto(
+                                        //     textStyle: TextStyle(
+                                        //         color: Black,
+                                        //         // letterSpacing: .5,
+                                        //         fontSize: 13.sp,
+                                        //         fontWeight: FontWeight.w400),
+                                        //   ),
+                                        // ),
                                         ),
-                                      ),
-                                    ),
                                   ],
                                 ),
                                 Row(
@@ -243,11 +250,9 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("All Reviews",
-                              style: TextStyle(
-                                  color: Black,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w800)),
+                          CReview(
+                            text: "All Reviews",
+                          ),
                           SizedBox(
                             height: 10.h,
                           ),
@@ -288,7 +293,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                       image: DecorationImage(
                                                         fit: BoxFit.cover,
                                                         image: AssetImage(
-                                                            'assets/images/shop_image.png'),
+                                                            'assets/images/nearshop2.png'),
                                                       ),
                                                     ),
                                                   )
@@ -317,18 +322,21 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                           MainAxisAlignment
                                                               .spaceBetween,
                                                       children: [
-                                                        Text(
-                                                          "${element?.customerName}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                fontSize: 16.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                          ),
-                                                        ),
+                                                        DashBoardSideHeading(
+                                                            text:
+                                                                "${element?.customerName}"),
+                                                        // Text(
+                                                        //   "${element?.customerName}",
+                                                        //   style: GoogleFonts
+                                                        //       .dmSans(
+                                                        //     textStyle: TextStyle(
+                                                        //         color: Black,
+                                                        //         fontSize: 16.sp,
+                                                        //         fontWeight:
+                                                        //             FontWeight
+                                                        //                 .w700),
+                                                        //   ),
+                                                        // ),
                                                         Row(
                                                           children: [
                                                             SvgPicture.asset(
@@ -339,26 +347,30 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                             SizedBox(
                                                               width: 7.w,
                                                             ),
-                                                            Text(
-                                                              "${element?.ratings}.0",
-                                                              // double.parse(element
-                                                              //             ?.ratings
-                                                              //             .toString() ??
-                                                              //         "0.0")
-                                                              //     .toStringAsFixed(
-                                                              //         1),
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    color:
-                                                                        Black,
-                                                                    fontSize:
-                                                                        14.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                            ),
+                                                            UpdateProfile(
+                                                              text:
+                                                                  "${element?.ratings}.0",
+                                                            )
+                                                            // Text(
+                                                            //   "${element?.ratings}.0",
+                                                            //   // double.parse(element
+                                                            //   //             ?.ratings
+                                                            //   //             .toString() ??
+                                                            //   //         "0.0")
+                                                            //   //     .toStringAsFixed(
+                                                            //   //         1),
+                                                            //   style: GoogleFonts
+                                                            //       .dmSans(
+                                                            //     textStyle: TextStyle(
+                                                            //         color:
+                                                            //             Black,
+                                                            //         fontSize:
+                                                            //             14.sp,
+                                                            //         fontWeight:
+                                                            //             FontWeight
+                                                            //                 .w500),
+                                                            //   ),
+                                                            // ),
                                                           ],
                                                         ),
                                                       ],
@@ -366,30 +378,39 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                     SizedBox(
                                                       height: 4.h,
                                                     ),
-                                                    Text(
-                                                      "${element?.cityName} ${element?.stateName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Color(
-                                                                0xff7C7C7C),
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
+                                                    CReviewone(
+                                                      fontSize: 12,
+                                                      text:
+                                                          "${element?.cityName} ${element?.stateName}",
                                                     ),
-                                                    Text(
-                                                      "${element?.createdAt}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Color(
-                                                                0xff7C7C7C),
-                                                            fontSize: 11.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
+                                                    // Text(
+                                                    //   "${element?.cityName} ${element?.stateName}",
+                                                    //   style: GoogleFonts.dmSans(
+                                                    //     textStyle: TextStyle(
+                                                    //         color: grey5,
+                                                    //         fontSize: 12.sp,
+                                                    //         fontWeight:
+                                                    //             FontWeight
+                                                    //                 .w400),
+                                                    //   ),
+                                                    // ),
+                                                    CReviewone(
+                                                      text:
+                                                          "${element?.createdAt}",
+                                                      fontSize: 11,
                                                     )
+                                                    // Text(
+                                                    //   "${element?.createdAt}",
+                                                    //   style: GoogleFonts.dmSans(
+                                                    //     textStyle: TextStyle(
+                                                    //         color: Color(
+                                                    //             0xff7C7C7C),
+                                                    //         fontSize: 11.sp,
+                                                    //         fontWeight:
+                                                    //             FontWeight
+                                                    //                 .w400),
+                                                    //   ),
+                                                    // )
                                                   ],
                                                 ),
                                               ),
@@ -406,17 +427,21 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                         SizedBox(
                                           height: 10.h,
                                         ),
-                                        Text(
-                                          "${element?.review}",
-                                          // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Color(0xff7C7C7C),
-                                                // letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
+                                        CReviewone(
+                                          text: "${element?.review}",
+                                          fontSize: 14,
+                                        )
+                                        // Text(
+                                        //   "${element?.review}",
+                                        //   // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
+                                        //   style: GoogleFonts.dmSans(
+                                        //     textStyle: TextStyle(
+                                        //         color: Color(0xff7C7C7C),
+                                        //         // letterSpacing: .5,
+                                        //         fontSize: 14.sp,
+                                        //         fontWeight: FontWeight.w400),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),

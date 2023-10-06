@@ -412,9 +412,8 @@ class _MyAppState extends State<MyApp> {
                     child: LoadingOverlay(
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
-                        onTap: (){
+                        onTap: () {
                           FocusScopeNode currentFocus = FocusScope.of(context);
-
                           if (!currentFocus.hasPrimaryFocus &&
                               currentFocus.focusedChild != null) {
                             FocusManager.instance.primaryFocus?.unfocus();
@@ -424,7 +423,7 @@ class _MyAppState extends State<MyApp> {
                           builder: (context, child) {
                             return MediaQuery(
                               data: MediaQuery.of(context)
-                                  .copyWith(textScaleFactor: 0.87.sp),
+                                  .copyWith(textScaleFactor: 0.81.sp),
                               child: child!,
                             );
                           },
@@ -448,4 +447,4 @@ class _MyAppState extends State<MyApp> {
             // )
             );
   }
-}    // ShopOrderStatusView()
+}

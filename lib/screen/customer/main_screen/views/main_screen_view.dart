@@ -54,7 +54,7 @@ class _MainScreenViewState extends State<MainScreenView> {
         bottomNavigationBar: Visibility(
           visible: !watch.hideBottomNavigation ? true : false,
           child: Container(
-              height: 81.w,
+              height: 85.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(30.w),
