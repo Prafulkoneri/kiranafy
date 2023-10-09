@@ -184,7 +184,7 @@ class AllCategoryShopController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favAllShop[index] = false;
+        favAllShop[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -249,7 +249,7 @@ class AllCategoryShopController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        favAllShop[index] = true;
+        favAllShop[index] = false;
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -350,6 +350,19 @@ class AllCategoryShopController extends ChangeNotifier {
           searchshopData = result.searchshopData;
           nearByShop = searchshopData?.nearByShops;
           allShops = searchshopData?.allShops ?? [];
+          favAllShop.clear();
+          favAllShop =
+          List<bool>.filled(allShops.length ?? 0, false, growable: true);
+
+          int length = allShops.length ?? 0;
+          for (int i = 0; i < length; i++) {
+            if (allShops[i].isFavourite == "yes") {
+              favAllShop.insert(i, true);
+            }
+            else{
+              favAllShop.insert(i, false);
+            }
+          }
           // if (productList!.isEmpty) {
           //   Utils.showPrimarySnackbar(context, "no product found",
           //       type: SnackType.error);
