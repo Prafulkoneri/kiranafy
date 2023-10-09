@@ -160,6 +160,7 @@ class OrderDetails {
   String? shopDeliveredPayableType;
   String? shopDeliveredTransactionId;
   String? shopDeliveredCustomerPaymentStatus;
+  String? returnButtonStatus;
 
   OrderDetails(
       {required this.id,
@@ -196,7 +197,8 @@ class OrderDetails {
       required this.shopDeliveredRefundStatus,
       required this.shopDeliveredTransactionId,
       required this.shopCancelledStatus,
-      this.customerCancelledStatus});
+      this.customerCancelledStatus,
+      this.returnButtonStatus});
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     createdAt = json["created_at"];
@@ -234,6 +236,7 @@ class OrderDetails {
     shopDeliveredRefundStatus = json["shop_de_refund_status"];
     shopDeliveredTransactionId = json["shop_de_transaction_id"];
     shopCancelledStatus = json["shop_owner_cancelled_status"];
+    returnButtonStatus = json["refund_button_status"];
   }
 }
 

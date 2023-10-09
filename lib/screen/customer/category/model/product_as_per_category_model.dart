@@ -39,6 +39,7 @@ class CategoryProductData {
   List<AllCategoryList>? allCategoryList;
   List<CustomerProductData>? productList;
   List<CustomerProductData>? customProductList;
+  List<CustomerProductData>? finalFiltterProductList;
   int? totalSelectedAndCustomProducts;
 
   CategoryProductData({
@@ -66,6 +67,14 @@ class CategoryProductData {
         allCategoryList!.add(AllCategoryList.fromJson(v));
       });
     }
+    /////////
+    ///////////////////////////////////////////
+    if (json["final_details_list"] != null) {
+      finalFiltterProductList = <CustomerProductData>[];
+      json["final_details_list"].forEach((v) {
+        finalFiltterProductList!.add(CustomerProductData.fromJson(v));
+      });
+    }
     totalSelectedAndCustomProducts = json['total_selected_and_custom_products'];
   }
 }
@@ -86,5 +95,3 @@ class AllCategoryList {
     selectedCategory = json["selected_category"];
   }
 }
-
-

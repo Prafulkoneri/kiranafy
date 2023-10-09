@@ -25,6 +25,7 @@ class ProductCategoryController extends ChangeNotifier {
   List<AllCategoryList>? allCategoryList;
   List<CustomerProductData>? productList;
   List<CustomerProductData>? customProductList;
+  List<CustomerProductData>? finalFiltterProductList;
   bool isLoading = true;
   TextEditingController searchController = TextEditingController();
   String searchedProductName = "";
@@ -72,6 +73,7 @@ class ProductCategoryController extends ChangeNotifier {
         allCategoryList = categoryProductData?.allCategoryList;
         productList = categoryProductData?.productList;
         customProductList = categoryProductData?.customProductList;
+
 ///////////////////////////
         int productListLength = productList?.length ?? 0;
         int customproductListLength = customProductList?.length ?? 0;
@@ -214,9 +216,11 @@ class ProductCategoryController extends ChangeNotifier {
       if (response.statusCode == 200) {
         allCategoryList = result.data?.allCategoryList;
         productList = result.data?.productList;
-        customProductList=result.data?.customProductList;
+        customProductList = result.data?.customProductList;
+        finalFiltterProductList = result.data?.finalFiltterProductList;
         Navigator.pop(context);
-        if (productList?.isEmpty==true && customProductList?.isEmpty==true) {
+        if (productList?.isEmpty == true &&
+            customProductList?.isEmpty == true) {
           Utils.showPrimarySnackbar(context, "No Product Found",
               type: SnackType.error);
         }
@@ -241,8 +245,8 @@ class ProductCategoryController extends ChangeNotifier {
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add product to cart");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to add product to cart");
       return;
     }
     addProductToCartRepo
