@@ -1,28 +1,15 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_custom_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/controller/s_shop_configuration_controller.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -60,10 +47,13 @@ class _SCustomProductViewState extends State<SCustomProductView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(0, SSelectedProductView(
-              isRefresh: false,
-              categoryId: widget.categoryId,
-            ), context);
+            readMain.onNavigation(
+                0,
+                SSelectedProductView(
+                  isRefresh: false,
+                  categoryId: widget.categoryId,
+                ),
+                context);
           },
           title: "Custom Products",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -75,14 +65,17 @@ class _SCustomProductViewState extends State<SCustomProductView> {
       body: watch.isLoading
           ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(0, SSelectedProductView(
-            isRefresh: false,
-            categoryId: widget.categoryId,
-          ), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    0,
+                    SSelectedProductView(
+                      isRefresh: false,
+                      categoryId: widget.categoryId,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -98,18 +91,18 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                             onChanged: (value) {
                               read.onCategorySelected(value);
                             },
-                            items:
-                                selectedCategoryListWatch.selectedCategoriesList!
-                                    .map((item) => DropdownMenuItem<String>(
-                                          value: item.categoryId.toString(),
-                                          child: Text(
-                                            item.categoryName ?? "",
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                            ),
-                                          ),
-                                        ))
-                                    .toList(),
+                            items: selectedCategoryListWatch
+                                .selectedCategoriesList!
+                                .map((item) => DropdownMenuItem<String>(
+                                      value: item.categoryId.toString(),
+                                      child: Text(
+                                        item.categoryName ?? "",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
                             hint: "Select Category ",
                           ),
                           SizedBox(
@@ -202,7 +195,8 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                   PrimaryCheckBox(
                                     onChanged: (value) {
                                       // read.onUnderSeasonalProductSelected(value);
-                                      if (watchDashBoardScreen.specialBenifitlist
+                                      if (watchDashBoardScreen
+                                          .specialBenifitlist
                                           .contains("seasonal_products")) {
                                         read.onUnderSeasonalProductSelected(
                                             value);
@@ -234,7 +228,8 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                   PrimaryCheckBox(
                                     onChanged: (value) {
                                       // read.onFullFillCraving(value);
-                                      if (watchDashBoardScreen.specialBenifitlist
+                                      if (watchDashBoardScreen
+                                          .specialBenifitlist
                                           .contains(
                                               "fullfill_craving_products")) {
                                         read.onFullFillCraving(value);
@@ -375,7 +370,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

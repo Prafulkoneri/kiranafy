@@ -2,9 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,12 +10,9 @@ import 'package:local_supper_market/screen/customer/delivery_view/controller/cus
 import 'package:local_supper_market/screen/customer/delivery_view/view/cancel_order_view_bottom_sheet.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
-import 'package:local_supper_market/screen/customer/order_payment/view/check_status_and_home_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
-import 'package:local_supper_market/screen/customer/order_summary/order_products.dart';
 import 'package:local_supper_market/screen/customer/return/view/return_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
@@ -1337,8 +1331,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                           ),
                           /////Product Return Request start////
                           watch.orderDetails?.orderStatus == "Delivered" &&
-                                  watch.orderData?.orderRefundStatus == false
-                              ? Container(
+                                  watch.orderData?.orderRefundStatus == false &&
+                                  watch.orderDetails?.returnButtonStatus ==
+                                      "active"
+                              ?
+                              // watch
+                              Container(
                                   padding:
                                       EdgeInsets.only(left: 19.w, right: 19.w),
                                   margin: EdgeInsets.only(bottom: 10.w),
@@ -1388,7 +1386,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           "0" ||
                                       watch.orderDetails
                                               ?.shopDeliveredCustomerPaymentStatus ==
-                                          "received")
+                                          "received") &&
+                                  watch.orderDetails?.returnButtonStatus ==
+                                      "active"
                               ? Container(
                                   padding:
                                       EdgeInsets.only(left: 19.w, right: 19.w),

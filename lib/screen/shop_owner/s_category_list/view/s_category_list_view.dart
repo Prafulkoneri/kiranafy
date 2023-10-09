@@ -6,7 +6,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/controller/s_category_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_select_category_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -40,9 +39,12 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(0, ShopDashBoardView(
-              refresh: true,
-            ), context);
+            readMainScreen.onNavigation(
+                0,
+                ShopDashBoardView(
+                  refresh: true,
+                ),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -72,9 +74,12 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           ? const Loader()
           : WillPopScope(
               onWillPop: () async {
-                readMainScreen.onNavigation(0, ShopDashBoardView(
-                  refresh: true,
-                ), context);
+                readMainScreen.onNavigation(
+                    0,
+                    ShopDashBoardView(
+                      refresh: true,
+                    ),
+                    context);
                 return false;
               },
               child: SingleChildScrollView(
@@ -102,11 +107,13 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    readMainScreen.onNavigation(0, SSelectedProductView(
-                                        isRefresh: true,
-                                        categoryId: element
-                                            ?.categoryId
-                                            .toString()), context);
+                                    readMainScreen.onNavigation(
+                                        0,
+                                        SSelectedProductView(
+                                            isRefresh: true,
+                                            categoryId:
+                                                element?.categoryId.toString()),
+                                        context);
                                     // Navigator.pushAndRemoveUntil(
                                     //   context,
                                     //   MaterialPageRoute(
