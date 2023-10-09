@@ -1331,8 +1331,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                           ),
                           /////Product Return Request start////
                           watch.orderDetails?.orderStatus == "Delivered" &&
-                                  watch.orderData?.orderRefundStatus == false && watch.orderDetails?.returnButtonStatus=="active"
-                              ? 
+                                  watch.orderData?.orderRefundStatus == false &&
+                                  watch.orderDetails?.returnButtonStatus ==
+                                      "active"
+                              ?
                               // watch
                               Container(
                                   padding:
@@ -1385,8 +1387,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       watch.orderDetails
                                               ?.shopDeliveredCustomerPaymentStatus ==
                                           "received") &&
-                                          watch.orderDetails?.returnButtonStatus=="active"
-
+                                  watch.orderDetails?.returnButtonStatus ==
+                                      "active"
                               ? Container(
                                   padding:
                                       EdgeInsets.only(left: 19.w, right: 19.w),
