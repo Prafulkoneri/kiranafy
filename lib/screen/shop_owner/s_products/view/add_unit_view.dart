@@ -28,6 +28,7 @@ class AddUnitView extends StatefulWidget {
   final String? productName;
   final String? productUnitId;
   final bool? isEdit;
+  final String? routeName;
   const AddUnitView(
       {super.key,
       required this.categoryId,
@@ -35,7 +36,8 @@ class AddUnitView extends StatefulWidget {
       required this.productId,
       required this.productName,
       required this.productUnitId,
-      required this.isEdit});
+      required this.isEdit,
+      required this.routeName});
 
   @override
   State<AddUnitView> createState() => _AddUnitViewState();
@@ -66,12 +68,33 @@ class _AddUnitViewState extends State<AddUnitView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(0, UnitDetailView(
-                refresh: false, //
-                categoryId: widget.categoryId,
-                productType: widget.productType,
-                productId: widget.productId,
-              ), context);
+              if (widget.routeName == "selectedProductView") {
+                // readMain.onNavigation(0, UnitDetailView(
+                //   refresh: false, //
+                //   categoryId: widget.categoryId,
+                //   productType: widget.productType,
+                //   productId: widget.productId,
+                // ), context);
+                readMain.onNavigation(
+                    0,
+                    SSelectedProductView(
+                      // refresh: false, //
+                      categoryId: widget.categoryId,
+                      productType: widget.productType,
+                      productId: widget.productId, isRefresh: false,
+                    ),
+                    context);
+              } else {
+                readMain.onNavigation(
+                    0,
+                    UnitDetailView(
+                      refresh: false, //
+                      categoryId: widget.categoryId,
+                      productType: widget.productType,
+                      productId: widget.productId,
+                    ),
+                    context);
+              }
             },
             title: "Add Unit",
             action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -92,16 +115,19 @@ class _AddUnitViewState extends State<AddUnitView> {
       body: watch.isLoading
           ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(0, UnitDetailView(
-            refresh: false, //
-            categoryId: widget.categoryId,
-            productType: widget.productType,
-            productId: widget.productId,
-          ), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    0,
+                    UnitDetailView(
+                      refresh: false, //
+                      categoryId: widget.categoryId,
+                      productType: widget.productType,
+                      productId: widget.productId,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
@@ -166,16 +192,16 @@ class _AddUnitViewState extends State<AddUnitView> {
                               child: watch.unitId == ""
                                   ? SDropDownField(
                                       items: watch.unitList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.unit ?? "",
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.unit ?? "",
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       titleHeader: "Unit",
                                       onChanged: (value) async {
@@ -186,16 +212,16 @@ class _AddUnitViewState extends State<AddUnitView> {
                                   : SDropDownField(
                                       value: watch.unitId,
                                       items: watch.unitList
-                                          ?.map(
-                                              (item) => DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
-                                                    child: Text(
-                                                      item.unit ?? "",
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ))
+                                          ?.map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item.id.toString(),
+                                                child: Text(
+                                                  item.unit ?? "",
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ))
                                           .toList(),
                                       titleHeader: "Unit",
                                       onChanged: (value) async {
@@ -499,7 +525,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

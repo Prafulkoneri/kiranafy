@@ -15,7 +15,6 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/produ
 import 'package:local_supper_market/screen/shop_owner/s_coupons/repository/update_coupons_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +71,10 @@ class SAddCouponsController extends ChangeNotifier {
       categoryId = "";
       productId = "";
       termsAndConditionController.clear();
+      // termsAndConditionController.text =
+      //     "hbfjhhf dhbihiurenihyubyreiuwgniuynhiurt";
       await getCategoriesList(context);
+      notifyListeners();
     }
   }
 
@@ -129,11 +131,9 @@ class SAddCouponsController extends ChangeNotifier {
         selectedcategorydata = result.selectedcategorydata;
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -301,11 +301,15 @@ class SAddCouponsController extends ChangeNotifier {
       final result = AddCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (isNavFromDashBoard) {
-          final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(3, ShopCouponsView(
-            isRefresh: true,
-            isNavFromDashBoard: true,
-          ), context);
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              3,
+              ShopCouponsView(
+                isRefresh: true,
+                isNavFromDashBoard: true,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -318,12 +322,15 @@ class SAddCouponsController extends ChangeNotifier {
           //   (Route<dynamic> route) => false,
           // );
         } else {
-
-          final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(4, ShopCouponsView(
-            isRefresh: true,
-            isNavFromDashBoard: false,
-          ), context);
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              4,
+              ShopCouponsView(
+                isRefresh: true,
+                isNavFromDashBoard: false,
+              ),
+              context);
 
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -490,12 +497,15 @@ class SAddCouponsController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("isNavFromDashBoard${isNavFromDashBoard}");
         if (isNavFromDashBoard) {
-
-          final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(3, ShopCouponsView(
-            isRefresh: true,
-            isNavFromDashBoard: true,
-          ), context);
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              3,
+              ShopCouponsView(
+                isRefresh: true,
+                isNavFromDashBoard: true,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -508,11 +518,15 @@ class SAddCouponsController extends ChangeNotifier {
           //   (Route<dynamic> route) => false,
           // );
         } else {
-          final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(4, ShopCouponsView(
-            isRefresh: true,
-            isNavFromDashBoard: false,
-          ), context);
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              4,
+              ShopCouponsView(
+                isRefresh: true,
+                isNavFromDashBoard: false,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(

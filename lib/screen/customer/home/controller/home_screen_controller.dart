@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
@@ -35,7 +36,11 @@ class HomeScreenController extends ChangeNotifier {
   List placeAd = [];
   // String pincode = "111111";
 
-  Future<void> initState(context, refresh) async {
+  Future<void> initState(
+    context,
+    refresh,
+  ) async {
+    // Utils().CheckUserConnection(context, initState(context, true));
     if (refresh) {
       placeAd.clear();
       final a = await getBannerImage(context);
@@ -56,6 +61,9 @@ class HomeScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////
   Future<void> getBannerImage(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -85,11 +93,9 @@ class HomeScreenController extends ChangeNotifier {
           });
         }
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

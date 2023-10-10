@@ -1,4 +1,4 @@
-
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +22,143 @@ enum SnackType {
 }
 
 class Utils {
+// /////////////////////////////////////////.
+//   bool ActiveConnection = false;
+//   String T = "";
+//   Future CheckUserConnection(context, function) async {
+//     try {
+//       final result = await InternetAddress.lookup('google.com');
+//       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+//         ActiveConnection = true;
+//         T = "Turn off the data and repress again";
+//       }
+//     } on SocketException catch (_) {
+//       ActiveConnection = false;
+//       print("not connected");
 
-  showLoginDialog(BuildContext context,message){
+//       Utils().showInternetConnectionDailog(context, function);
+//       return;
+//     }
+//   }
+
+//   showInternetConnectionDailog(BuildContext context, function) {
+//     showDialog(
+//         context: context,
+//         builder: (BuildContext context) {
+//           return Dialog(
+//             backgroundColor: Color(0xffFFFFFF),
+//             // shape: ,
+//             shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.all(Radius.circular(10))),
+
+//             // scrollable: true,
+//             child: Container(
+//               height: 205.h,
+//               // width: 400.w,
+//               child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: <Widget>[
+//                   Flexible(
+//                     child: Text(
+//                       "Please Connect to the internet",
+//                       textAlign: TextAlign.center,
+//                       style: GoogleFonts.dmSans(
+//                         textStyle: TextStyle(
+//                             color: Color(0xff006F94),
+//                             fontSize: 18.sp,
+//                             fontWeight: FontWeight.w700),
+//                       ),
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     height: 37.h,
+//                   ),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       SizedBox(
+//                         width: 19.w,
+//                       ),
+//                       Expanded(
+//                         child: GestureDetector(
+//                           onTap: () async {
+//                             SharedPreferences pref =
+//                                 await SharedPreferences.getInstance();
+//                             function;
+//                             // pref.clear();
+//                             // Navigator.push(
+//                             //     context,
+//                             //     MaterialPageRoute(
+//                             //         builder: (context) =>
+//                             //             CustomerSignInView()));
+//                           },
+//                           child: Container(
+//                             padding: EdgeInsets.only(
+//                                 left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
+//                             decoration: BoxDecoration(
+//                                 color: Color(0xff39C19D),
+//                                 borderRadius: BorderRadius.circular(8)),
+//                             child: Text(
+//                               "Go",
+//                               textAlign: TextAlign.center,
+//                               style: GoogleFonts.dmSans(
+//                                 textStyle: TextStyle(
+//                                     color: Colors.white,
+//                                     // letterSpacing: .5,
+//                                     fontSize: 20.sp,
+//                                     fontWeight: FontWeight.w700),
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                       SizedBox(
+//                         width: 10.w,
+//                       ),
+//                       Expanded(
+//                         child: GestureDetector(
+//                           onTap: () {
+//                             Navigator.pop(context);
+//                           },
+//                           child: Container(
+//                             padding: EdgeInsets.only(
+//                                 left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+//                             decoration: BoxDecoration(
+//                                 color: Color(0xffEC7074),
+//                                 // border: Border.all(width: 1, color: Black),
+//                                 borderRadius: BorderRadius.circular(10)),
+//                             child: Column(
+//                               children: [
+//                                 Text(
+//                                   "Cancel",
+//                                   textAlign: TextAlign.center,
+//                                   style: GoogleFonts.dmSans(
+//                                     textStyle: TextStyle(
+//                                         color: Colors.white,
+//                                         // letterSpacing: .5,
+//                                         fontSize: 20.sp,
+//                                         fontWeight: FontWeight.w700),
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                       SizedBox(
+//                         width: 10.w,
+//                       ),
+//                     ],
+//                   )
+//                 ],
+//               ),
+//             ),
+//           );
+//         });
+//   }
+
+/////////////////////////////////////////
+  showLoginDialog(BuildContext context, message) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -31,8 +166,7 @@ class Utils {
             backgroundColor: Color(0xffFFFFFF),
             // shape: ,
             shape: RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.all(Radius.circular(10))),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
 
             // scrollable: true,
             child: Container(
@@ -57,8 +191,7 @@ class Utils {
                     height: 37.h,
                   ),
                   Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
                         width: 19.w,
@@ -66,20 +199,21 @@ class Utils {
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                            SharedPreferences pref=await SharedPreferences.getInstance();
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
                             // pref.clear();
-                           Navigator.push(context,MaterialPageRoute(builder: (context)=>CustomerSignInView()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CustomerSignInView()));
                           },
                           child: Container(
                             padding: EdgeInsets.only(
-                                left: 24.w,
-                                right: 24.w,
-                                top: 9.w,
-                                bottom: 9.w),
+                                left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
                             decoration: BoxDecoration(
                                 color: Color(0xff39C19D),
-                                borderRadius:
-                                BorderRadius.circular(8)),
+                                borderRadius: BorderRadius.circular(8)),
                             child: Text(
                               "Go",
                               textAlign: TextAlign.center,
@@ -104,15 +238,11 @@ class Utils {
                           },
                           child: Container(
                             padding: EdgeInsets.only(
-                                left: 14.w,
-                                right: 15.w,
-                                top: 9.w,
-                                bottom: 9.w),
+                                left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
                             decoration: BoxDecoration(
                                 color: Color(0xffEC7074),
                                 // border: Border.all(width: 1, color: Black),
-                                borderRadius:
-                                BorderRadius.circular(10)),
+                                borderRadius: BorderRadius.circular(10)),
                             child: Column(
                               children: [
                                 Text(
@@ -123,8 +253,7 @@ class Utils {
                                         color: Colors.white,
                                         // letterSpacing: .5,
                                         fontSize: 20.sp,
-                                        fontWeight:
-                                        FontWeight.w700),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -144,89 +273,82 @@ class Utils {
         });
   }
 
-  Widget showNoInternetDialog(context){
-    print("hello");
-   return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
-      // shape: ,
+  // Widget showNoInternetDialog(context) {
+  //   print("hello");
+  //   return Scaffold(
+  //     backgroundColor: Color(0xffFFFFFF),
+  //     // shape: ,
 
+  //     // scrollable: true,
+  //     body: Container(
+  //       height: 205.h,
+  //       // width: 400.w,
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           Flexible(
+  //             child: Text(
+  //               "Please Connect to internet",
+  //               textAlign: TextAlign.center,
+  //               style: GoogleFonts.dmSans(
+  //                 textStyle: TextStyle(
+  //                     color: Color(0xff006F94),
+  //                     fontSize: 18.sp,
+  //                     fontWeight: FontWeight.w700),
+  //               ),
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 37.h,
+  //           ),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               SizedBox(
+  //                 width: 19.w,
+  //               ),
+  //               Expanded(
+  //                 child: GestureDetector(
+  //                   onTap: () async {
+  //                     // function();
+  //                   },
+  //                   child: Container(
+  //                     padding: EdgeInsets.only(
+  //                         left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
+  //                     decoration: BoxDecoration(
+  //                         color: Color(0xff39C19D),
+  //                         borderRadius: BorderRadius.circular(8)),
+  //                     child: Text(
+  //                       "Retry",
+  //                       textAlign: TextAlign.center,
+  //                       style: GoogleFonts.dmSans(
+  //                         textStyle: TextStyle(
+  //                             color: Colors.white,
+  //                             // letterSpacing: .5,
+  //                             fontSize: 20.sp,
+  //                             fontWeight: FontWeight.w700),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               SizedBox(
+  //                 width: 19.w,
+  //               ),
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-      // scrollable: true,
-      body: Container(
-        height: 205.h,
-        // width: 400.w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Flexible(
-              child: Text(
-                "Please Connect to internet",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.dmSans(
-                  textStyle: TextStyle(
-                      color: Color(0xff006F94),
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 37.h,
-            ),
-            Row(
-              mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 19.w,
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async {
-                      // function();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          left: 24.w,
-                          right: 24.w,
-                          top: 9.w,
-                          bottom: 9.w),
-                      decoration: BoxDecoration(
-                          color: Color(0xff39C19D),
-                          borderRadius:
-                          BorderRadius.circular(8)),
-                      child: Text(
-                        "Retry",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.dmSans(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              // letterSpacing: .5,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 19.w,
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  logoutUser(BuildContext context)async{
-    SharedPreferences pref=await SharedPreferences.getInstance();
+  logoutUser(BuildContext context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>OnBoardingScreenView()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
   }
-
-
 
   static ScaffoldFeatureController showPrimarySnackbar(
       BuildContext context, text,

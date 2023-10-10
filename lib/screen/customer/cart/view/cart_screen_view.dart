@@ -7,7 +7,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/controller/cart_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -184,13 +183,16 @@ class _CartScreenViewState extends State<CartScreenView> {
           ? Loader()
           : watch.cartList!.isEmpty
               ? WillPopScope(
-        onWillPop: () async {
-          readMain.onNavigation(0, HomeScreenView(
-            refreshPage: false,
-          ), context);
-          return false;
-        },
-                child: Center(
+                  onWillPop: () async {
+                    readMain.onNavigation(
+                        0,
+                        HomeScreenView(
+                          refreshPage: false,
+                        ),
+                        context);
+                    return false;
+                  },
+                  child: Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: 120.w),
                       child: Column(
@@ -252,16 +254,21 @@ class _CartScreenViewState extends State<CartScreenView> {
                               minimumSize: const Size(100, 40), //////// HERE
                             ),
                             // style: style,
-                            onPressed: () async{
-                              SharedPreferences pref = await SharedPreferences.getInstance();
-                              if(pref.getString("status")=="guestLoggedIn"){
-                                Utils().showLoginDialog(context,"Please Login to add product to favourite");
+                            onPressed: () async {
+                              SharedPreferences pref =
+                                  await SharedPreferences.getInstance();
+                              if (pref.getString("status") == "guestLoggedIn") {
+                                Utils().showLoginDialog(context,
+                                    "Please Login to add product to favourite");
                                 return;
                               }
-                              readMain.onNavigation(1, AllNearShopsView(
-                                isSearchFocus: false,
-                                refreshPage: true,
-                              ), context);
+                              readMain.onNavigation(
+                                  1,
+                                  AllNearShopsView(
+                                    isSearchFocus: false,
+                                    refreshPage: true,
+                                  ),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -289,12 +296,15 @@ class _CartScreenViewState extends State<CartScreenView> {
                       ),
                     ),
                   ),
-              )
+                )
               : WillPopScope(
                   onWillPop: () async {
-                    readMain.onNavigation(0, HomeScreenView(
-                      refreshPage: false,
-                    ), context);
+                    readMain.onNavigation(
+                        0,
+                        HomeScreenView(
+                          refreshPage: false,
+                        ),
+                        context);
                     return false;
                   },
                   child: SingleChildScrollView(
@@ -310,12 +320,14 @@ class _CartScreenViewState extends State<CartScreenView> {
                               final element = watch.cartList?[index];
                               return GestureDetector(
                                 onTap: () {
-                                  readMain.onNavigation(1, CartDetailView(
-                                    isRefresh: true,
-                                    cartId: element?.id.toString(),
-                                    shopId:
-                                    element?.shopId.toString(),
-                                  ), context);
+                                  readMain.onNavigation(
+                                      1,
+                                      CartDetailView(
+                                        isRefresh: true,
+                                        cartId: element?.id.toString(),
+                                        shopId: element?.shopId.toString(),
+                                      ),
+                                      context);
                                   readMain.hideBottomNavigationBar();
                                   // Navigator.push(
                                   //   context,
@@ -432,16 +444,18 @@ class _CartScreenViewState extends State<CartScreenView> {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  readMain.onNavigation(1, CartDetailView(
-                                                    isRefresh: true,
-                                                    cartId: element
-                                                        ?.id
-                                                        .toString(),
-                                                    shopId: element
-                                                        ?.shopId
-                                                        .toString(),
-                                                  ), context);
-                                                  readMain.hideBottomNavigationBar();
+                                                  readMain.onNavigation(
+                                                      1,
+                                                      CartDetailView(
+                                                        isRefresh: true,
+                                                        cartId: element?.id
+                                                            .toString(),
+                                                        shopId: element?.shopId
+                                                            .toString(),
+                                                      ),
+                                                      context);
+                                                  readMain
+                                                      .hideBottomNavigationBar();
                                                   // Navigator.push(
                                                   //   context,
                                                   //   MaterialPageRoute(

@@ -74,6 +74,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   List<bool> isSelectedReason = [];
   List<CustomerCancelReasonList>? cancelReasondata;
   TextEditingController reasonController = TextEditingController();
+
   List<ReviewList>? reviewList;
   OReviewlistData? oreviewlistdata;
   String? selectedRefundStatus;
@@ -91,13 +92,14 @@ class CustomerOrderViewController extends ChangeNotifier {
   GetCustomerCancelOrderRepo getcustomerCancelOrderRepo =
       GetCustomerCancelOrderRepo();
   CustomerCancelOrderRepo customerCancelOrderRepo = CustomerCancelOrderRepo();
-  UpdateDeliveredRefundStatusRepo updateDeliveredRefundStatusRepo = UpdateDeliveredRefundStatusRepo();
+  UpdateDeliveredRefundStatusRepo updateDeliveredRefundStatusRepo =
+      UpdateDeliveredRefundStatusRepo();
 
   Future<void> initState(
     context,
     orId,
   ) async {
-    final read =Provider.of<MainScreenController>(context,listen: false);
+    final read = Provider.of<MainScreenController>(context, listen: false);
     read.hideBottomNavigationBar();
     orderId = "";
     orderCancelledReason = "";
@@ -123,8 +125,8 @@ class CustomerOrderViewController extends ChangeNotifier {
     orderViewRepo
         .showOrderView(
             customerOrderViewRequestModel, pref.getString("successToken"))
-        .then((response) async{
-          print("hello");
+        .then((response) async {
+      print("hello");
       log(response.body);
       final result =
           CustomerOrderViewResponseModel.fromJson(jsonDecode(response.body));
@@ -199,11 +201,12 @@ class CustomerOrderViewController extends ChangeNotifier {
     );
   }
 
-  CustomerDeliveredRefundStatusUpdateReqModel get customerDeliveredRefundStatusUpdateReqModel =>
-      CustomerDeliveredRefundStatusUpdateReqModel(
-        orderId: orderId,
-        paymentStatus: selectedRefundStatus,
-      );
+  CustomerDeliveredRefundStatusUpdateReqModel
+      get customerDeliveredRefundStatusUpdateReqModel =>
+          CustomerDeliveredRefundStatusUpdateReqModel(
+            orderId: orderId,
+            paymentStatus: selectedRefundStatus,
+          );
 
   Future<void> updateDeliveredRefundStatus(value, context) async {
     selectedRefundStatus = value;
@@ -211,11 +214,12 @@ class CustomerOrderViewController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     updateDeliveredRefundStatusRepo
         .updateDeliveredRefundStatus(
-        customerDeliveredRefundStatusUpdateReqModel, pref.getString("successToken"))
+            customerDeliveredRefundStatusUpdateReqModel,
+            pref.getString("successToken"))
         .then((response) async {
       log(response.body);
-      final result =
-      CustomerDeliveredRefundStatusUpdateResModel.fromJson(jsonDecode(response.body));
+      final result = CustomerDeliveredRefundStatusUpdateResModel.fromJson(
+          jsonDecode(response.body));
       if (response.statusCode == 200) {
         await customerOrderView(context, orderId);
         showLoader(false);
@@ -327,7 +331,7 @@ class CustomerOrderViewController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     getcustomerCancelOrderRepo
         .cOrderCancelReason(pref.getString("successToken"))
-        .then((response) async{
+        .then((response) async {
       log(response.body);
       final result =
           CustomerCancelOrderModel.fromJson(jsonDecode(response.body));
@@ -335,7 +339,7 @@ class CustomerOrderViewController extends ChangeNotifier {
         cancelReasondata = result.cancelReasondata;
         int cancelOrderLength = cancelReasondata?.length ?? 0;
         isSelectedReason = List<bool>.filled(cancelOrderLength, false);
-        await  OReviewList(context);
+        await OReviewList(context);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -443,17 +447,17 @@ class CustomerOrderViewController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(result.status==200){
-          final read=Provider.of<MainScreenController>(context,listen: false);
+        if (result.status == 200) {
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
           Navigator.pop(context);
-          read.onNavigation(4,MyOrderView(), context);
+          read.onNavigation(4, MyOrderView(), context);
           print("hello");
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
           read.showBottomNavigationBar();
           notifyListeners();
-        }
-        else{
+        } else {
           Navigator.pop(context);
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
@@ -466,8 +470,6 @@ class CustomerOrderViewController extends ChangeNotifier {
         //           MainScreenView(index: 4, screenName: MyOrderView())),
         //   // (Route<dynamic> route) => false,
         // );
-
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -502,7 +504,7 @@ class CustomerOrderViewController extends ChangeNotifier {
       final result =
           CustomerReorderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final read=Provider.of<MainScreenController>(context,listen: false);
+        final read = Provider.of<MainScreenController>(context, listen: false);
         read.onNavigation(2, CartScreenView(), context);
         read.showBottomNavigationBar();
         // Navigator.pushAndRemoveUntil(

@@ -67,8 +67,10 @@ dependencies:
   # firebase_messaging
   firebase_messaging: ^14.6.1
   path_provider: ^2.0.15
-  connectivity_plus:
   connectivity_widget: ^1.0.0
+  connectivity: ^3.0.3
+  fluttertoast: ^8.0.6
+
 
 
   # Check permission_handler:
@@ -92,6 +94,8 @@ dependencies:
   win32: ^3.1.4
   wakelock: ^0.6.2
   wakelock_windows: ^0.2.1
+  pull_to_refresh_flutter3: ^2.0.1
+ 
  
 dev_dependencies:
   flutter_test:
