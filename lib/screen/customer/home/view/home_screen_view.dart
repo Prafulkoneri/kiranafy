@@ -64,31 +64,31 @@ class _HomeScreenViewState extends State<HomeScreenView> {
           .read<HomeScreenController>()
           .initState(context, widget.refreshPage);
     });
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
+    Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) async {
       if (result == ConnectivityResult.none) {
         // No internet connection, show toast message
         showToast("No internet connection");
       }
-      if(result==ConnectivityResult.mobile){
+      if (result == ConnectivityResult.mobile) {
         try {
           final res = await InternetAddress.lookup('example.com');
           if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
             print('connected');
           }
+        } on SocketException catch (_) {
+          showToast("No internet connection");
         }
-      on SocketException catch (_) {
-        showToast("No internet connection");
-      }
       }
 
-      if(result==ConnectivityResult.wifi){
+      if (result == ConnectivityResult.wifi) {
         try {
-          final res = await InternetAddress.lookup('example.com');
+          final res = await InternetAddress.lookup('www.google.com');
           if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
             print('connected');
           }
-        }
-        on SocketException catch (_) {
+        } on SocketException catch (_) {
           showToast("No internet connection");
         }
       }
