@@ -1,19 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/get_product_unit_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_selected_product_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_products/view/add_unit_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
@@ -28,9 +23,15 @@ import '../../../../widget/app_bar.dart';
 class SSelectedProductView extends StatefulWidget {
   final String? categoryId;
   final bool? isRefresh;
+  final String? productId;
+  final String? productType;
 
   const SSelectedProductView(
-      {super.key, required this.categoryId, required this.isRefresh});
+      {super.key,
+      required this.categoryId,
+      required this.isRefresh,
+      this.productId,
+      this.productType});
 
   @override
   State<SSelectedProductView> createState() => _SSelectedProductViewState();
@@ -69,6 +70,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
     final read = context.read<SSelectedProductsController>();
     final readMain = context.read<SMainScreenController>();
     final watch = context.watch<SSelectedProductsController>();
+    final readMainScreen = context.watch<SMainScreenController>();
+    final readUnitList = context.read<SGetProductUnitListController>();
+    final watchUnitList = context.watch<SGetProductUnitListController>();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -333,9 +337,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                             width: ScreenUtil()
                                                                 .screenWidth,
                                                             child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
+                                                              // mainAxisAlignment:
+                                                              //     MainAxisAlignment
+                                                              //         .spaceBetween,
                                                               children: [
                                                                 Expanded(
                                                                   child: Row(
@@ -391,62 +395,103 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       height:
                                                                           7.w,
                                                                     ),
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        readMain.onNavigation(
-                                                                            0,
-                                                                            UnitDetailView(
-                                                                              categoryId: widget.categoryId,
-                                                                              productId: element.id.toString(),
-                                                                              productType: element.productType,
-                                                                              refresh: true,
-                                                                            ),
-                                                                            context);
-                                                                        // Navigator
-                                                                        //     .pushAndRemoveUntil(
-                                                                        //   context,
-                                                                        //   MaterialPageRoute(
-                                                                        //       builder: (context) => SMainScreenView(
-                                                                        //           index: 0,
-                                                                        //           screenName: UnitDetailView(
-                                                                        //             categoryId: widget.categoryId,
-                                                                        //             productId: element.id.toString(),
-                                                                        //             productType: element.productType,
-                                                                        //             refresh: true,
-                                                                        //           ))),
-                                                                        //   (Route<dynamic>
-                                                                        //           route) =>
-                                                                        //       false,
-                                                                        // );
-                                                                      },
-                                                                      child:
-                                                                          Container(
-                                                                        padding: EdgeInsets.only(
-                                                                            left:
-                                                                                17.w,
-                                                                            right: 15.w,
-                                                                            top: 4.w,
-                                                                            bottom: 5.w),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xff39C19D),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(50),
-                                                                        ),
-                                                                        child:
-                                                                            Text(
-                                                                          "${element.unitCount} Unit",
-                                                                          style:
-                                                                              GoogleFonts.dmSans(
-                                                                            textStyle: TextStyle(
-                                                                                color: Colors.white,
-                                                                                fontSize: 12.sp,
-                                                                                fontWeight: FontWeight.w400),
+                                                                    Row(
+                                                                      children: [
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            print("vjkmbhgrngiunviuh");
+                                                                            print(
+                                                                              element.id.toString(),
+                                                                            );
+                                                                            print(
+                                                                              widget.categoryId,
+                                                                            );
+                                                                            print(
+                                                                              element.productType,
+                                                                            );
+                                                                            print(
+                                                                              element.productName,
+                                                                            );
+                                                                            //                                                                          print(
+                                                                            // productUnitId: "",                                                                            );
+                                                                            // return;
+                                                                            readMainScreen.onNavigation(
+                                                                                0,
+                                                                                AddUnitView(
+                                                                                  routeName: "selectedProductView",
+                                                                                  isEdit: false,
+                                                                                  categoryId: widget.categoryId,
+                                                                                  productId: element.id.toString(),
+                                                                                  productType: element.productType,
+                                                                                  productName: element.productName,
+                                                                                  //  watchUnitList.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                                                  productUnitId: "",
+                                                                                ),
+                                                                                context);
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/addressadd.svg",
+                                                                            width:
+                                                                                22.w,
                                                                           ),
                                                                         ),
-                                                                      ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              8.w,
+                                                                        ),
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            readMain.onNavigation(
+                                                                                0,
+                                                                                UnitDetailView(
+                                                                                  categoryId: widget.categoryId,
+                                                                                  productId: element.id.toString(),
+                                                                                  productType: element.productType,
+                                                                                  refresh: true,
+                                                                                ),
+                                                                                context);
+                                                                            // Navigator
+                                                                            //     .pushAndRemoveUntil(
+                                                                            //   context,
+                                                                            //   MaterialPageRoute(
+                                                                            //       builder: (context) => SMainScreenView(
+                                                                            //           index: 0,
+                                                                            //           screenName: UnitDetailView(
+                                                                            //             categoryId: widget.categoryId,
+                                                                            //             productId: element.id.toString(),
+                                                                            //             productType: element.productType,
+                                                                            //             refresh: true,
+                                                                            //           ))),
+                                                                            //   (Route<dynamic>
+                                                                            //           route) =>
+                                                                            //       false,
+                                                                            // );
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            padding: EdgeInsets.only(
+                                                                                left: 17.w,
+                                                                                right: 15.w,
+                                                                                top: 4.w,
+                                                                                bottom: 5.w),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Color(0xff39C19D),
+                                                                              borderRadius: BorderRadius.circular(50),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              "${element.unitCount} Unit",
+                                                                              style: GoogleFonts.dmSans(
+                                                                                textStyle: TextStyle(color: Colors.white, fontSize: 12.sp, fontWeight: FontWeight.w400),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                     SizedBox(
                                                                       height:
@@ -502,7 +547,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              8.w,
+                                                                              20.w,
                                                                         ),
                                                                         GestureDetector(
                                                                           onTap:
@@ -531,7 +576,11 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                             child:
                                                                                 SvgPicture.asset('assets/icons/delete2.svg'),
                                                                           ),
-                                                                        )
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              16.w,
+                                                                        ),
                                                                         /////////////////
                                                                       ],
                                                                     ),
@@ -830,62 +879,104 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       height:
                                                                           7.w,
                                                                     ),
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        readMain.onNavigation(
-                                                                            0,
-                                                                            UnitDetailView(
-                                                                              categoryId: widget.categoryId,
-                                                                              productId: element.id.toString(),
-                                                                              productType: element.productType,
-                                                                              refresh: true,
-                                                                            ),
-                                                                            context);
-                                                                        // Navigator
-                                                                        //     .pushAndRemoveUntil(
-                                                                        //   context,
-                                                                        //   MaterialPageRoute(
-                                                                        //       builder: (context) => SMainScreenView(
-                                                                        //           index: 0,
-                                                                        //           screenName: UnitDetailView(
-                                                                        //             categoryId: widget.categoryId,
-                                                                        //             productId: element.id.toString(),
-                                                                        //             productType: element.productType,
-                                                                        //             refresh: true,
-                                                                        //           ))),
-                                                                        //   (Route<dynamic>
-                                                                        //           route) =>
-                                                                        //       false,
-                                                                        // );
-                                                                      },
-                                                                      child:
-                                                                          Container(
-                                                                        padding: EdgeInsets.only(
-                                                                            left:
-                                                                                17.w,
-                                                                            right: 15.w,
-                                                                            top: 4.w,
-                                                                            bottom: 5.w),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xff39C19D),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(50),
-                                                                        ),
-                                                                        child:
-                                                                            Text(
-                                                                          "${element.unitCount} Unit",
-                                                                          style:
-                                                                              GoogleFonts.dmSans(
-                                                                            textStyle: TextStyle(
-                                                                                color: Colors.white,
-                                                                                fontSize: 12.sp,
-                                                                                fontWeight: FontWeight.w400),
+                                                                    ///////////////////////new//////////////
+                                                                    Row(
+                                                                      children: [
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            print("vjkmbhgrngiunviuh");
+                                                                            print(
+                                                                              element.id.toString(),
+                                                                            );
+                                                                            print(
+                                                                              widget.categoryId,
+                                                                            );
+                                                                            print(
+                                                                              element.productType,
+                                                                            );
+                                                                            print(
+                                                                              element.productName,
+                                                                            );
+                                                                            //                                                                          print(
+                                                                            // productUnitId: "",                                                                            );
+                                                                            // return;
+                                                                            readMainScreen.onNavigation(
+                                                                                0,
+                                                                                AddUnitView(
+                                                                                  routeName: "selectedProductView",
+                                                                                  isEdit: false,
+                                                                                  categoryId: widget.categoryId,
+                                                                                  productId: element.id.toString(),
+                                                                                  productType: element.productType,
+                                                                                  productName: element.productName,
+                                                                                  //  watchUnitList.getproductunitlistdata?.productDetails?.productName.toString(),
+                                                                                  productUnitId: "",
+                                                                                ),
+                                                                                context);
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/addressadd.svg",
+                                                                            width:
+                                                                                22.w,
                                                                           ),
                                                                         ),
-                                                                      ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              8.w,
+                                                                        ),
+                                                                        GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            readMain.onNavigation(
+                                                                                0,
+                                                                                UnitDetailView(
+                                                                                  categoryId: widget.categoryId,
+                                                                                  productId: element.id.toString(),
+                                                                                  productType: element.productType,
+                                                                                  refresh: true,
+                                                                                ),
+                                                                                context);
+                                                                            // Navigator
+                                                                            //     .pushAndRemoveUntil(
+                                                                            //   context,
+                                                                            //   MaterialPageRoute(
+                                                                            //       builder: (context) => SMainScreenView(
+                                                                            //           index: 0,
+                                                                            //           screenName: UnitDetailView(
+                                                                            //             categoryId: widget.categoryId,
+                                                                            //             productId: element.id.toString(),
+                                                                            //             productType: element.productType,
+                                                                            //             refresh: true,
+                                                                            //           ))),
+                                                                            //   (Route<dynamic>
+                                                                            //           route) =>
+                                                                            //       false,
+                                                                            // );
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            padding: EdgeInsets.only(
+                                                                                left: 17.w,
+                                                                                right: 15.w,
+                                                                                top: 4.w,
+                                                                                bottom: 5.w),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Color(0xff39C19D),
+                                                                              borderRadius: BorderRadius.circular(50),
+                                                                            ),
+                                                                            child:
+                                                                                Text(
+                                                                              "${element.unitCount} Unit",
+                                                                              style: GoogleFonts.dmSans(
+                                                                                textStyle: TextStyle(color: Colors.white, fontSize: 12.sp, fontWeight: FontWeight.w400),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                     SizedBox(
                                                                       height:
@@ -941,7 +1032,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              8.w,
+                                                                              20.w,
                                                                         ),
                                                                         GestureDetector(
                                                                           onTap:
@@ -970,8 +1061,12 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                             child:
                                                                                 SvgPicture.asset('assets/icons/delete2.svg'),
                                                                           ),
-                                                                        )
+                                                                        ),
                                                                         /////////////////
+                                                                        SizedBox(
+                                                                          width:
+                                                                              16.w,
+                                                                        ),
                                                                       ],
                                                                     ),
                                                                     SizedBox(

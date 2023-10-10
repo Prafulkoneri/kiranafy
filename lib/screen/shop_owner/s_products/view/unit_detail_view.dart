@@ -52,41 +52,42 @@ class _UnitDetailViewState extends State<UnitDetailView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-              onBackBtnPressed: () {
-                readMainScreen.onNavigation(
-                    0,
-                    SSelectedProductView(
-                        isRefresh: true, //
-                        categoryId: widget.categoryId),
-                    context);
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => SMainScreenView(
-                //           index: 0,
-                //           screenName: SSelectedProductView(
-                //               isRefresh: true, //
-                //               categoryId: widget.categoryId))),
-                //   (Route<dynamic> route) => false,
-                // );
-              },
-              title: "Unit Details",
-              action: SvgPicture.asset("assets/icons/addressadd.svg"),
-              onActionTap: () {
-                readMainScreen.onNavigation(
-                    0,
-                    AddUnitView(
-                      isEdit: false,
-                      categoryId: widget.categoryId,
-                      productId: widget.productId,
-                      productType: widget.productType,
-                      productName: watch
-                          .getproductunitlistdata?.productDetails?.productName
-                          .toString(),
-                      productUnitId: "",
-                    ),
-                    context);
-              }),
+            onBackBtnPressed: () {
+              readMainScreen.onNavigation(
+                  0,
+                  SSelectedProductView(
+                      isRefresh: true, //
+                      categoryId: widget.categoryId),
+                  context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => SMainScreenView(
+              //           index: 0,
+              //           screenName: SSelectedProductView(
+              //               isRefresh: true, //
+              //               categoryId: widget.categoryId))),
+              //   (Route<dynamic> route) => false,
+              // );
+            },
+            title: "Unit Details",
+            // action: SvgPicture.asset("assets/icons/addressadd.svg"),
+            // onActionTap: () {
+            //   readMainScreen.onNavigation(
+            //       0,
+            //       AddUnitView(
+            //         isEdit: false,
+            //         categoryId: widget.categoryId,
+            //         productId: widget.productId,
+            //         productType: widget.productType,
+            //         productName: watch
+            //             .getproductunitlistdata?.productDetails?.productName
+            //             .toString(),
+            //         productUnitId: "",
+            //       ),
+            //       context);
+            // }
+          ),
         ),
         body: watch.isLoading
             ? const Loader()
@@ -300,6 +301,8 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                   .onNavigation(
                                                                       0,
                                                                       AddUnitView(
+                                                                        routeName:
+                                                                            "unitList",
                                                                         categoryId:
                                                                             widget.categoryId,
                                                                         productType:

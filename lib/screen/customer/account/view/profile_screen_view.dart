@@ -572,10 +572,10 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 onTap: () {
                   if (Platform.isAndroid) {
                     Share.share(
-                        'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                        'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
                   } else {
                     Share.share(
-                        'hey! check out this new app https://apps.apple.com/us/app/local-supermart/id6451146831');
+                        'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://apps.apple.com/us/app/local-supermart/id6451146831');
                   }
                 },
                 child: Container(
