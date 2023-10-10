@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -97,17 +99,26 @@ class _UpdateViewState extends State<UpdateView> {
                       borderRadius: 15,
                       color: Color(0xff4689EC),
                       onTap: () async {
-                        if (await canLaunch(
-                            "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-                          await launch(
-                              "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-                        } else {
-                          throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-                        }
-                        LaunchReview.launch(
-                            androidAppId:
-                                "com.lsm.local_supper_market&hl=en&gl=US",
-                            iOSAppId: "585027354");
+if(Platform.isAndroid){
+  if (await canLaunch(
+      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
+    await launch(
+        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
+  } else {
+    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
+  }
+
+}else{
+  await launch( "https://apps.apple.com/app/id6451146831");
+}
+
+                        // LaunchReview.launch(
+                        //     androidAppId:
+                        //         "com.lsm.local_supper_market&hl=en&gl=US",
+                        //     iOSAppId: "585027354");
+                        // LaunchReview.launch(
+                        //     androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                        //     iOSAppId: "6451146831");
                       },
                       textColor: Colors.white,
                       text: "UPDATE",
