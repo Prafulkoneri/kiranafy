@@ -22,7 +22,8 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
   Widget build(BuildContext context) {
     final read = context.read<GetTicketListController>();
     final watch = context.watch<GetTicketListController>();
-    return SingleChildScrollView(
+    return
+      SingleChildScrollView(
       child: Stack(
         clipBehavior: Clip.none,
         children: [
