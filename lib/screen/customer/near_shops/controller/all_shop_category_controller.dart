@@ -178,8 +178,7 @@ class AllCategoryShopController extends ChangeNotifier {
     }
     shopId = id.toString();
     print(pref.getString("successToken"));
-    addFavShopRepo
-        .updateAddFavShop(addFavReqModel, pref.getString("successToken"))
+    addFavShopRepo.updateAddFavShop(addFavReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
       final result = AddFavResModel.fromJson(jsonDecode(response.body));

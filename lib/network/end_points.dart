@@ -203,8 +203,7 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-request-shop-promotion";
   static const String paymentHistory =
       "${baseUrl}lsm-shop-owner-orders-payment-history";
-  static const String changeSetting =
-      "${baseUrl}lsm-shop-owner-change-settings";
+  static const String changeSetting = "${baseUrl}lsm-shop-owner-change-settings";
   static const String shopSignOut = "${baseUrl}lsm-shop-owner-logout";
   static const String shopDelete = "${baseUrl}lsm-shop-owner-delete-account";
   static const String ticketList = "${baseUrl}lsm-shop-owner-get-tickets";
@@ -268,17 +267,15 @@ class Endpoint {
   static const String customerPlaceAd = "${baseUrl}lsm-shop-owner-banner";
   static const String submitReturn = "${baseUrl}customer_order_refund_submit";
   static const String searchShop = "${baseUrl}lsm-shop-owner-filter-list";
-  static const String shopNotificationDelete =
-      "${baseUrl}lsm-shop-owner-notifications-delete";
+  static const String shopNotificationDelete = "${baseUrl}lsm-shop-owner-notifications-delete";
   static const String customerNotificationDelete =
       "${baseUrl}lsm-customer-notifications-delete";
-  static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
+  static const String sProfileCoupons = "${baseUrl}lsm-customer-remove-cart";
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
   static const String removeCartItem = "${baseUrl}lsm-customer-remove-cart";
-  static const String shopReviewList =
-      "${baseUrl}lsm-shop-owner-review-list-for-shop";
+  static const String shopReviewList = "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =
       "${baseUrl}lsm-shop-owner-get-area-list";
   static const String couponFiltter =

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -63,11 +62,9 @@ import 'screen/customer/cart/controller/cart_detail_controller.dart';
 import 'screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'screen/customer/my_order/controller/my_orders_controller.dart';
-import 'screen/customer/near_shops/controller/all_near_shop_controller.dart';
 import 'screen/customer/order_payment/controller/order_payment_controller.dart';
 import 'screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'screen/customer/products/controller/product_view_controller.dart';
-
 import 'screen/customer/review/controller/customer_review_list_shop_controller.dart';
 import 'screen/customer/shop_profile/controller/all_seasonal_controller.dart';
 import 'screen/shop_owner/Offer_seasonal_recommanded/controller/offer_seasonal_recommanded_controller.dart';
@@ -110,7 +107,6 @@ class ReceivedNotification {
 }
 
 Future<void> initNotification(context) async {
-// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
@@ -298,9 +294,7 @@ class _MyAppState extends State<MyApp> {
       print(message.data["notification_type"]);
       if (message.data["notification_type"] == "custom") {
         if (message.data["user_type"] == "customer") {
-          context
-              .read<MainScreenController>()
-              .onCustomTypeNotification(context);
+          context.read<MainScreenController>().onCustomTypeNotification(context);
         } else {
           context
               .read<SMainScreenController>()
