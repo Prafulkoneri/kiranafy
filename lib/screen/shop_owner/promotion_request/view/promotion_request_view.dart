@@ -502,7 +502,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                     ),
                   ),
                   SizedBox(
-                    height: 100.h,
+                    height: 110.h,
                   )
                 ],
               ),

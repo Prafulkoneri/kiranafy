@@ -67,8 +67,8 @@ dependencies:
   # firebase_messaging
   firebase_messaging: ^14.6.1
   path_provider: ^2.0.15
-  connectivity_widget: ^1.0.0
-  connectivity: ^3.0.3
+#  connectivity_widget: ^1.0.0
+#  connectivity: ^3.0.3
   fluttertoast: ^8.0.6
 
 
