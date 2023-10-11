@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+// import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,23 +41,23 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SDashBoardController>().initState(context, widget.refresh);
     });
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        // No internet connection, show toast message
-        showToast("No internet connection");
-      }
-    });
+    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     // No internet connection, show toast message
+    //     showToast("No internet connection");
+    //   }
+    // });
   }
-
-  void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-    );
-  }
+  //
+  // void showToast(String message) {
+  //   Fluttertoast.showToast(
+  //     msg: message,
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.red,
+  //     textColor: Colors.white,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

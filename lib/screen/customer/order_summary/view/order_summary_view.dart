@@ -1003,7 +1003,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                       SizedBox(
                         height: 30.w,
                       ),
-                      watch.fullFillYourCravings?.isNotEmpty == true
+                      watch.fullFillYourCravingsAdmin?.isNotEmpty == true
                           ? Container(
                               // height: 203.h,
                               width: ScreenUtil().screenWidth,
@@ -1036,13 +1036,13 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: List.generate(
-                                                watch.fullFillYourCravings
+                                                watch.fullFillYourCravingsAdmin
                                                         ?.length ??
                                                     0, (index) {
                                               final element = watch
-                                                  .fullFillYourCravings?[index];
+                                                  .fullFillYourCravingsAdmin?[index];
                                               return watch
-                                                              .fullFillYourCravings?[
+                                                              .fullFillYourCravingsAdmin?[
                                                                   index]
                                                               .mrpPrice !=
                                                           "" &&
@@ -1897,7 +1897,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
 
                           //
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

@@ -6,9 +6,9 @@ class Endpoint {
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
       // 'https://localsupermart.com/testing++++++++   /api/';
-      'https://localsupermart.com/testing/api/';
+      // 'https://localsupermart.com/testing/api/';
   // 'http://lsm.mplussoft.org/api/';
-  // 'https://localsupermart.com/live/api/';
+  'https://localsupermart.com/live/api/';
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
   static const String getCountryList = '${baseUrl}lsm-country-list';
@@ -214,6 +214,7 @@ class Endpoint {
   static const String getBankAccount =
       "${baseUrl}lsm-shop-owner-get-bank-details";
   static const String updateBankDetail =
+
       "${baseUrl}lsm-shop-owner-add-update-bank-details";
   static const String sRFProductsList =
       "${baseUrl}lsm-shop-owner-get-recommended-seasonal-and-fullfill-your-cravings-products";
@@ -284,4 +285,6 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-refund-list";
   static const String getShopAreaList =
       "${baseUrl}get-area-list-for-shop-filter";
+  static const String  getFullFillCravingList=
+      "${baseUrl}lsm-customer-get-fullfill-cravings-product-list";
 }

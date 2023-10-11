@@ -397,92 +397,210 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 6.w),
-                          child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(bottom: 20.w),
-                                  child: Icon(
-                                    Icons.circle_rounded,
-                                    size: 5.w,
-                                  )),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                  child: AccountScreen(
-                                text:
-                                    "For pricing and further details, Local Supermart will contact you within 48 hours.",
-                              )
-                                  //  Text(
-                                  //   // softWrap: true,
-                                  //   // maxLines: 3,//
-                                  //   "For pricing and further details, Local Supermart will contact you within 48 hours.",
-                                  //   textAlign: TextAlign.justify,
-                                  //   style: GoogleFonts.dmSans(
-                                  //     textStyle: TextStyle(
-                                  //         color: Black1,
-
-                                  //         // letterSpacing: .05,
-                                  //         // overflow: TextOverflow.ellipsis,
-                                  //         fontSize: 14.sp,
-                                  //         fontWeight: FontWeight.w400),
-                                  //   ),
-                                  // ),
+                        Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w,),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                              // For advertisement advance payment is required.
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 6.w),
-                          child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(bottom: 0.w),
-                                  child: Icon(
-                                    Icons.circle_rounded,
-                                    size: 5.w,
-                                  )),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                  child: AccountScreen(
-                                text:
-                                    "For advertisement advance payment is required.",
-                              )
-                                  //  Text(
-                                  //   "For advertisement advance payment is required.",
-                                  //   // softWrap: true,
-                                  //   // maxLines: 3,//
-                                  //   textAlign: TextAlign.justify,
-                                  //   style: GoogleFonts.dmSans(
-                                  //     textStyle: TextStyle(
-                                  //         color: Black1,
+                                  Flexible(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
 
-                                  //         // letterSpacing: .05,
-                                  //         // overflow: TextOverflow.ellipsis,
-                                  //         fontSize: 14.sp,
-                                  //         fontWeight: FontWeight.w400),
-                                  //   ),
-                                  // ),
+                                        // softWrap: true,
+                                        // maxLines: 3,//
+                                        "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              // height: 1.5,
+
+                                              // letterSpacing: .05,
+                                              // overflow: TextOverflow.ellipsis,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                              // For advertisement advance payment is required.
-                            ],
-                          ),
+                                ],
+                              ),
+                            ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(left: 6.w,),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       Text("•",style: TextStyle(fontSize: 20.sp),),
+                            //       SizedBox(
+                            //         width: 10,
+                            //       ),
+                            //       Flexible(
+                            //         child: Container(
+                            //           padding: EdgeInsets.only(top: 5.w),
+                            //           child: Text(
+                            //             // softWrap: true,
+                            //             // maxLines: 3,//
+                            //             "Regarding product delivery please contact to shop owner.",
+                            //             textAlign: TextAlign.justify,
+                            //             style: GoogleFonts.dmSans(
+                            //               textStyle: TextStyle(
+                            //                   color: Black1,
+                            //                   fontSize: 14.sp,
+                            //                   fontWeight: FontWeight.w400),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(left: 6.w,),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       Text("•",style: TextStyle(fontSize: 20.sp),),
+                            //       SizedBox(
+                            //         width: 10,
+                            //       ),
+                            //       Flexible(
+                            //         child: Container(
+                            //           padding: EdgeInsets.only(top: 5.w),
+                            //           child: Text(
+                            //             "You are directly transferring payment to shop owner, any issue related to payment transfer please contact to shop owner",
+                            //             textAlign: TextAlign.justify,
+                            //             style: GoogleFonts.dmSans(
+                            //               textStyle: TextStyle(
+                            //                   color: Black1,
+                            //                   fontSize: 14.sp,
+                            //                   fontWeight: FontWeight.w400),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("•",style: TextStyle(fontSize: 20.sp),),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 5.w),
+                                      child: Text(
+                                        "For advertisement advance payment is required.",
+                                        textAlign: TextAlign.justify,
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: Black1,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // For advertisement advance payment is required.
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(left: 6.w),
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Text("•",style: TextStyle(fontSize: 20.sp),),
+                        //       const SizedBox(
+                        //         width: 10,
+                        //       ),
+                        //       Flexible(
+                        //           child: AccountScreen(
+                        //         text:
+                        //             "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                        //       )
+                        //           //  Text(
+                        //           //   // softWrap: true,
+                        //           //   // maxLines: 3,//
+                        //           //   "For pricing and further details, Local Supermart will contact you within 48 hours.",
+                        //           //   textAlign: TextAlign.justify,
+                        //           //   style: GoogleFonts.dmSans(
+                        //           //     textStyle: TextStyle(
+                        //           //         color: Black1,
+                        //
+                        //           //         // letterSpacing: .05,
+                        //           //         // overflow: TextOverflow.ellipsis,
+                        //           //         fontSize: 14.sp,
+                        //           //         fontWeight: FontWeight.w400),
+                        //           //   ),
+                        //           // ),
+                        //           ),
+                        //       // For advertisement advance payment is required.
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 5.h,
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(left: 6.w),
+                        //   child: Row(
+                        //     // crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Padding(
+                        //           padding: EdgeInsets.only(bottom: 0.w),
+                        //           child: Icon(
+                        //             Icons.circle_rounded,
+                        //             size: 5.w,
+                        //           )),
+                        //       const SizedBox(
+                        //         width: 10,
+                        //       ),
+                        //       Flexible(
+                        //           child: AccountScreen(
+                        //         text:
+                        //             "For advertisement advance payment is required.",
+                        //       )
+                        //           //  Text(
+                        //           //   "For advertisement advance payment is required.",
+                        //           //   // softWrap: true,
+                        //           //   // maxLines: 3,//
+                        //           //   textAlign: TextAlign.justify,
+                        //           //   style: GoogleFonts.dmSans(
+                        //           //     textStyle: TextStyle(
+                        //           //         color: Black1,
+                        //
+                        //           //         // letterSpacing: .05,
+                        //           //         // overflow: TextOverflow.ellipsis,
+                        //           //         fontSize: 14.sp,
+                        //           //         fontWeight: FontWeight.w400),
+                        //           //   ),
+                        //           // ),
+                        //           ),
+                        //       // For advertisement advance payment is required.
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 100.h,
+                    height: 110.h,
                   )
                 ],
               ),
