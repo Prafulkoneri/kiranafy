@@ -14,9 +14,11 @@ import 'package:local_supper_market/screen/customer/near_shops/repository/add_fa
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/order_payment/view/order_payment_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/c_apply_coupon_model.dart';
+import 'package:local_supper_market/screen/customer/order_summary/model/fullfill_cravings_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/order_summary_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/model/remove_coupon_model.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/apply_coupon_repo.dart';
+import 'package:local_supper_market/screen/customer/order_summary/repository/fullfill_your_cravings_repo.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/order_summary_repo.dart';
 import 'package:local_supper_market/screen/customer/order_summary/repository/remove_coupon_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
@@ -54,7 +56,7 @@ class OrderSummaryController extends ChangeNotifier {
   List<CustomerAddress>? customerAddress;
   List<CartItemList>? cartItemList;
   List<FinalCouponList>? finalCouponList;
-  List<FullFillYourCraving>? fullFillYourCravings;
+  List<FullFillYourCraving>? fullFillYourCravingsAdmin;
   List<FullFillYourCraving>? fullFillYourCravingsCustom;
   bool isLoading = true;
   bool isStackLoaderVisible = false;
@@ -71,6 +73,7 @@ class OrderSummaryController extends ChangeNotifier {
   String subTotal = "";
   String totalAmount = "";
   String selfPickupTotalAmount = "";
+  int offset=0;
   String selfPickupDeliveryCharges = "";
   String totalDiscount = "";
   String customerPickup = "";
@@ -78,6 +81,7 @@ class OrderSummaryController extends ChangeNotifier {
   int selectedAddressId = 0;
   List<bool> isFulFilProductAdded = [];
   List<bool> isFulFilProductAddedCustome = [];
+  FullFillYourCravingsRepo fullFillYourCravingsRepo=FullFillYourCravingsRepo();
   Future<void> initState(
     context,
     cId,
@@ -99,8 +103,8 @@ class OrderSummaryController extends ChangeNotifier {
           groupValue = "delivery_to";
         }
       }
-
       await getOrderSummary(context, cId, id, route);
+      await getFullFillYourCravingsList(context);
     }
 
     notifyListeners();
@@ -175,8 +179,59 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  OrderSummaryReqModel get orderSummeryRequestModel =>
-      OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+  OrderSummaryReqModel get orderSummeryRequestModel => OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+
+  FullFillCravingsReqModel get fullFillCravingsReqModel=>FullFillCravingsReqModel(
+    offset: offset.toString(),
+    limit: "10",
+    shopId: shopId
+  );
+
+  Future<void> getFullFillYourCravingsList(context)async{
+    print("comeonnn");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    fullFillYourCravingsRepo.getFullYourCravingsList(fullFillCravingsReqModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result = FullFillCravingsResModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        fullFillYourCravingsAdmin=result.data?.fullFillYourCravingsAdminProduct;
+        fullFillYourCravingsCustom=result.data?.fullFillYourCravingsCustomProduct;
+        int fulfilcravingListLength = fullFillYourCravingsAdmin?.length ?? 0;
+        isFulFilProductAdded = List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        for (int i = 0; i < fulfilcravingListLength; i++) {
+          if (fullFillYourCravingsAdmin?[i].addToCartCheck == "yes") {
+            isFulFilProductAdded.insert(i, true);
+          } else {
+            isFulFilProductAdded.insert(i, false);
+          }
+        }
+        int fulfilcravingListCustomeLength = fullFillYourCravingsCustom?.length ?? 0;
+        isFulFilProductAddedCustome = List<bool>.filled(fulfilcravingListCustomeLength, false,growable: true);
+        for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
+          if (fullFillYourCravingsCustom?[i].addToCartCheck == "yes") {
+            isFulFilProductAddedCustome.insert(i, true);
+          } else {
+            isFulFilProductAddedCustome.insert(i, false);
+          }
+        }
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+          (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 
   Future<void> getOrderSummary(context, id, cId, route) async {
     print(route);
@@ -196,7 +251,7 @@ class OrderSummaryController extends ChangeNotifier {
     orderSummaryRepo
         .viewOrderSummery(
             orderSummeryRequestModel, pref.getString("successToken"))
-        .then((response) {
+        .then((response)async{
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -216,7 +271,6 @@ class OrderSummaryController extends ChangeNotifier {
           expectedDateController.text =
               DateFormat('dd-MM-yyy').format(DateTime.now());
         }
-
         // if(slotGroupValue==""){
         //   slotGroupValue=shopDeliverySlots?[0];
         // }
@@ -232,7 +286,6 @@ class OrderSummaryController extends ChangeNotifier {
         //   if(currentHour<21){
         //     slotGroupValue = shopDeliverySlots?[3];
         //   }
-
         orderFinalTotals = result.orderSummaryData?.orderFinalTotals;
         deliveryCharges = orderFinalTotals?.deliveryCharges ?? "";
         totalAmount = orderFinalTotals?.total.toString() ?? "";
@@ -277,69 +330,23 @@ class OrderSummaryController extends ChangeNotifier {
             }
           }
         }
-
         cartItemList = result.orderSummaryData?.cartItemList;
         finalCouponList = result.orderSummaryData?.finalCouponList;
         int couponListLength = finalCouponList?.length ?? 0;
         viewMore = List<bool>.filled(couponListLength, false);
         couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
-        fullFillYourCravings = result.orderSummaryData?.fullFillYourCravings;
-        //////////////////
-        int fulfilcravingListLength = fullFillYourCravings?.length ?? 0;
-        isFulFilProductAdded =
-            List<bool>.filled(fulfilcravingListLength, false, growable: true);
-        for (int i = 0; i < fulfilcravingListLength; i++) {
-          if (fullFillYourCravings?[i].addToCartCheck == "yes") {
-            isFulFilProductAdded.insert(i, true);
-          } else {
-            isFulFilProductAdded.insert(i, false);
-          }
-        }
-        //////////////////////////////////////////////
-        fullFillYourCravingsCustom =
-            result.orderSummaryData?.fullFillYourCravingsCustom;
-        //////////////
-        int fulfilcravingListCustomeLength =
-            fullFillYourCravingsCustom?.length ?? 0;
-        isFulFilProductAddedCustome = List<bool>.filled(
-            fulfilcravingListCustomeLength, false,
-            growable: true);
-        for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
-          if (fullFillYourCravingsCustom?[i].addToCartCheck == "yes") {
-            isFulFilProductAddedCustome.insert(i, true);
-          } else {
-            isFulFilProductAddedCustome.insert(i, false);
-          }
-        }
         showLoader(false);
-
         int deliverySlotLength = shopDeliverySlots?.length ?? 0;
-
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(
-              2,
-              AddAddressView(
+          read.onNavigation(2, AddAddressView(
                 shopId: shopDetailData?.id.toString(),
                 cartId: cartId,
                 route: "orderAddAddress",
                 isEditAdress: false,
               ),
               context);
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => MainScreenView(
-          //           index: 4,
-          //           screenName: AddAddressView(
-          //             shopId: shopDetailData?.id.toString(),
-          //             cartId: cartId,
-          //             route: "orderAddAddress",
-          //             isEditAdress: false,
-          //           ))),
-          //   (Route<dynamic> route) => false,
-          // );
         }
         if (route == "addAddress" || route == "editAddress") {
           print("fsfsdfsfsfsdfdsfdfsdfsdfs");
@@ -400,14 +407,11 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /////////////////////
-
   void onFulFilCarvingsSelected(index) {
     isFulFilProductAdded[index] = true;
     notifyListeners();
   }
 
-  ////////////////
   void onFulFilCarvingsCustomeSelected(index) {
     isFulFilProductAddedCustome[index] = true;
     notifyListeners();
@@ -453,7 +457,6 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-//
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
