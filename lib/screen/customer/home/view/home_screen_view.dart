@@ -17,6 +17,7 @@ import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
@@ -113,6 +114,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final watch = context.watch<HomeScreenController>();
     final mainScreenWatch = context.watch<MainScreenController>();
     final readMain = context.read<MainScreenController>();
+    final readProductScreen = context.read<ProductViewController>();
     return Scaffold(
       body: watch.isLoading
           ? Loader()
@@ -240,6 +242,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                           print(element?.categoryId);
                                           print(element?.shopId);
                                           print(element?.productType);
+                                          readProductScreen.updateProductId(element?.productId.toString(), context,false);
                                           // return;
                                           readMain.onNavigation(
                                               0,
@@ -248,9 +251,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                                     element?.shopId.toString(),
                                                 categoryId: element?.categoryId
                                                     .toString(),
-                                                productId: watch.productId,
-                                                productType:
-                                                    element?.productType,
+                                                productId: element?.productId.toString(),
+                                                productType: element?.productType,
                                                 routeName: "homeScreen",
                                               ),
                                               context);
@@ -416,6 +418,15 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       watch.placeAd.isNotEmpty == true
                           ? GestureDetector(
                               onTap: () {
+                                print((watch.customerplacead?.toList()
+                                  ?..shuffle())
+                                    ?.first
+                                    .redirectToShop);
+                                print((watch.customerplacead?.toList()
+                                  ?..shuffle())
+                                    ?.first
+                                    .redirectToProduct);
+
                                 if ((watch.customerplacead?.toList()
                                           ?..shuffle())
                                         ?.first
@@ -469,6 +480,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                         .toString(),
                                   );
                                   // return;
+                                  readProductScreen.updateProductId((watch.customerplacead?.toList()
+                                    ?..shuffle())
+                                      ?.first
+                                      .productId
+                                      .toString(), context,false);
                                   readMain.onNavigation(
                                       0,
                                       ProductScreenView(
