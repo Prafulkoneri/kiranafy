@@ -6,9 +6,9 @@ class Endpoint {
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
       // 'https://localsupermart.com/testing++++++++   /api/';
-      // 'https://localsupermart.com/testing/api/';
+      'https://localsupermart.com/testing/api/';
   // 'http://lsm.mplussoft.org/api/';
-  'https://localsupermart.com/live/api/';
+  // 'https://localsupermart.com/live/api/';
   static const String checkMobNoExist =
       '${baseUrl}lsm-shop-owner-mobile-number-exists';
   static const String getCountryList = '${baseUrl}lsm-country-list';
@@ -271,7 +271,7 @@ class Endpoint {
   static const String shopNotificationDelete = "${baseUrl}lsm-shop-owner-notifications-delete";
   static const String customerNotificationDelete =
       "${baseUrl}lsm-customer-notifications-delete";
-  static const String sProfileCoupons = "${baseUrl}lsm-customer-remove-cart";
+  static const String sProfileCoupons = "${baseUrl}lsm-shop-owner-coupons";
   static const String customerFaqData = "${baseUrl}lsm-customer-feq-get";
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
