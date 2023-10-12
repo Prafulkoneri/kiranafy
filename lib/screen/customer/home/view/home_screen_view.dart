@@ -17,6 +17,8 @@ import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -219,32 +221,65 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                   itemBuilder: (context, pagePosition) {
                                     final element =
                                         watch.bannerData?[pagePosition];
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.only(right: 14.w),
-                                      child: element?.bannerImagePath == ""
-                                          ? Image.asset(
-                                              "assets/images/caurosal.png",
-                                              height: 170.w,
-                                              // width: 340.w,
-                                              // scale: 0.5,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : AppNetworkImages(
-                                              imageUrl:
-                                                  element?.bannerImagePath ??
-                                                      "",
-                                              height: 170.w,
-                                              // width: 340.w,
-                                              // scale: 0.5,
-                                              fit: BoxFit.cover,
-                                            ),
-                                      // margin: EdgeInsets.only(
-                                      //     left: pagePosition == 0 ? 19.w : 0,
-                                      //     // top: 15.w,
-                                      //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
-                                      //         ? 19.w
-                                      //         : 10.w),
+                                    return GestureDetector(
+                                      onTap: () {
+                                        if (element?.redirectToShop == "yes") {
+                                          readMain.onNavigation(
+                                              1,
+                                              ShopProfileView(
+                                                  shopId: element?.shopId
+                                                      .toString(),
+                                                  refreshPage: true,
+                                                  routeName: "homeScreen"),
+                                              context);
+                                        }
+                                        if (element?.redirectToProduct ==
+                                            "yes") {
+                                          readMain.onNavigation(
+                                              0,
+                                              ProductScreenView(
+                                                routeName: "homeScreen",
+                                                categoryId: element?.categoryId
+                                                    .toString(),
+                                                productId: element?.productId
+                                                    .toString(),
+                                                shopId:
+                                                    element?.shopId.toString(),
+                                                productType: element
+                                                    ?.productType
+                                                    .toString(),
+                                              ),
+                                              context);
+                                        }
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(right: 14.w),
+                                        child: element?.bannerImagePath == ""
+                                            ? Image.asset(
+                                                "assets/images/caurosal.png",
+                                                height: 170.w,
+                                                // width: 340.w,
+                                                // scale: 0.5,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : AppNetworkImages(
+                                                imageUrl:
+                                                    element?.bannerImagePath ??
+                                                        "",
+                                                height: 170.w,
+                                                // width: 340.w,
+                                                // scale: 0.5,
+                                                fit: BoxFit.cover,
+                                              ),
+                                        // margin: EdgeInsets.only(
+                                        //     left: pagePosition == 0 ? 19.w : 0,
+                                        //     // top: 15.w,
+                                        //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
+                                        //         ? 19.w
+                                        //         : 10.w),
+                                      ),
                                     );
                                   }),
                             )

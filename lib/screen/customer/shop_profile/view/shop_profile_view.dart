@@ -304,8 +304,13 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         ],
                         // child:
                       ),
+
                       Container(
-                        padding: EdgeInsets.all(12.w),
+                        padding: EdgeInsets.only(
+                          left: 12.w,
+                          right: 12.w,
+                          bottom: 12.w,
+                        ),
                         // height: 70.h,
                         decoration: BoxDecoration(
                           border: Border(
@@ -408,9 +413,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 10.w,
-                      ),
+                      // SizedBox(
+                      //   height: 5.w,
+                      // ),
                       Container(
                           margin: EdgeInsets.only(
                               left: 19.w, top: 10.w, right: 19.w),
@@ -494,9 +499,9 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             ],
                           )),
 
-                      SizedBox(
-                        height: 10.w,
-                      ),
+                      // SizedBox(
+                      //   height: 5.w,
+                      // ),
                       Container(
                           margin: EdgeInsets.only(
                               left: 19.w, top: 10.w, right: 19.w),
@@ -563,7 +568,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       //   ],
                       // )),
                       SizedBox(
-                        height: 10.w,
+                        height: 5.w,
                       ),
                       watch.offerProduct?.isNotEmpty == true
                           ? Column(

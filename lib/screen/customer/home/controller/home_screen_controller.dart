@@ -63,18 +63,20 @@ class HomeScreenController extends ChangeNotifier {
 
 ////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////
+///////////////////////////////Up///////////////////////////////////
   Future<void> getBannerImage(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("sdbbbghnjnjnjnjnjnjnjnjnjnjnjnjnjnjnjnj");
     print(pref.getString("successToken"));
     bannerRepo.getBannerImage(pref.getString("successToken")).then((response) {
+      print("777777777777777777777777777777");
       print(response.statusCode);
       print(response.body);
+      print("777777777777777777777777777777");
       final result = BannerAds.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        log("${response.body}");
+        log("ggggggggggggggggggggggggggggggggggg${response.body}");
 
         bannerData = result.data;
         int imageLength = bannerData?.length ?? 0;
@@ -203,7 +205,7 @@ class HomeScreenController extends ChangeNotifier {
     print(pref.getString("successToken"));
     placeAdRepo.placeAd(pref.getString("successToken")).then((response) {
       print(response.statusCode);
-      print(response.body);
+      log("bottommmmmmmmmmmmmmmmmmmmmmmm${response.body}");
       final result = PlaceAdBannerModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         log("placed ad${response.body}");

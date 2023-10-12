@@ -844,9 +844,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       ),
                                     ),
 
-                              SizedBox(
-                                height: 20.h,
-                              ),
+                              // SizedBox(
+                              //   height: 20.h,
+                              // ),
                               watch.orderDetails?.orderStatus == "Delivered"
                                   ? Row(
                                       mainAxisAlignment:
