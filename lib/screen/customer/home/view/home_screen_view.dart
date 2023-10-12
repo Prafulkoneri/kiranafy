@@ -17,6 +17,8 @@ import 'package:local_supper_market/screen/customer/home/view/nearby_shop.dart';
 import 'package:local_supper_market/screen/customer/home/view/offers.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
+import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
+import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -27,7 +29,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenView extends StatefulWidget {
   final bool? refreshPage;
-  const HomeScreenView({super.key, required this.refreshPage});
+  final String? productId;
+  const HomeScreenView({super.key, required this.refreshPage, this.productId});
 
   @override
   State<HomeScreenView> createState() => _HomeScreenViewState();
@@ -219,32 +222,68 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                   itemBuilder: (context, pagePosition) {
                                     final element =
                                         watch.bannerData?[pagePosition];
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.only(right: 14.w),
-                                      child: element?.bannerImagePath == ""
-                                          ? Image.asset(
-                                              "assets/images/caurosal.png",
-                                              height: 170.w,
-                                              // width: 340.w,
-                                              // scale: 0.5,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : AppNetworkImages(
-                                              imageUrl:
-                                                  element?.bannerImagePath ??
-                                                      "",
-                                              height: 170.w,
-                                              // width: 340.w,
-                                              // scale: 0.5,
-                                              fit: BoxFit.cover,
-                                            ),
-                                      // margin: EdgeInsets.only(
-                                      //     left: pagePosition == 0 ? 19.w : 0,
-                                      //     // top: 15.w,
-                                      //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
-                                      //         ? 19.w
-                                      //         : 10.w),
+                                    return GestureDetector(
+                                      onTap: () {
+                                        if (element?.redirectToShop == "yes") {
+                                          readMain.onNavigation(
+                                              1,
+                                              ShopProfileView(
+                                                  shopId: element?.shopId
+                                                      .toString(),
+                                                  refreshPage: true,
+                                                  routeName: "homeScreen"),
+                                              context);
+                                        }
+                                        if (element?.redirectToProduct ==
+                                            "yes") {
+                                          print(element?.productId);
+                                          print(element?.categoryId);
+                                          print(element?.shopId);
+                                          print(element?.productType);
+                                          // return;
+                                          readMain.onNavigation(
+                                              0,
+                                              ProductScreenView(
+                                                shopId:
+                                                    element?.shopId.toString(),
+                                                categoryId: element?.categoryId
+                                                    .toString(),
+                                                productId: watch.productId,
+                                                productType:
+                                                    element?.productType,
+                                                routeName: "homeScreen",
+                                              ),
+                                              context);
+                                        }
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        margin: EdgeInsets.only(right: 14.w),
+                                        child: element?.bannerImagePath == ""
+                                            ? Image.asset(
+                                                "assets/images/caurosal.png",
+                                                height: 170.w,
+                                                // width: 340.w,
+                                                // scale: 0.5,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : AppNetworkImages(
+                                                imageUrl:
+                                                    element?.bannerImagePath ??
+                                                        "",
+                                                height: 170.w,
+                                                // width: 340.w,
+                                                // scale: 0.5,
+                                                fit: BoxFit.cover,
+                                              ),
+                                        // margin: EdgeInsets.only(
+                                        //     left: pagePosition == 0 ? 19.w : 0,
+                                        //     // top: 15.w,
+                                        //     right: pagePosition == int.parse(watch.bannerData?.length.toString()??"0") - 1
+                                        //         ? 19.w
+                                        //         : 10.w),
+                                      ),
                                     );
                                   }),
                             )
@@ -375,21 +414,110 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       ),
 
                       watch.placeAd.isNotEmpty == true
-                          ? Container(
-                              padding: EdgeInsets.only(
-                                right: 19.0.w,
-                                left: 19.0.w,
-                              ),
-                              width: ScreenUtil().screenWidth,
-                              // height: 100.h,
-                              child:
-                                  (watch.placeAd.toList()..shuffle()).first !=
+                          ? GestureDetector(
+                              onTap: () {
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToShop ==
+                                    "yes") {
+                                  readMain.onNavigation(
+                                      1,
+                                      ShopProfileView(
+                                          shopId:
+                                              (watch.customerplacead?.toList()
+                                                    ?..shuffle())
+                                                  ?.first
+                                                  .shopId
+                                                  .toString(),
+                                          refreshPage: true,
+                                          routeName: "homeScreen"),
+                                      context);
+                                }
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToProduct
+                                        .toString() ==
+                                    "yes") {
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .shopId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .categoryId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .productId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .productType
+                                        .toString(),
+                                  );
+                                  // return;
+                                  readMain.onNavigation(
+                                      0,
+                                      ProductScreenView(
+                                        shopId: (watch.customerplacead?.toList()
+                                              ?..shuffle())
+                                            ?.first
+                                            .shopId
+                                            .toString(),
+                                        categoryId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .categoryId
+                                                .toString(),
+                                        productId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productId
+                                                .toString(),
+                                        productType:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productType,
+                                        routeName: "homeScreen",
+                                      ),
+                                      context);
+                                }
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.only(
+                                    right: 19.0.w,
+                                    left: 19.0.w,
+                                  ),
+                                  width: ScreenUtil().screenWidth,
+                                  // height: 100.h,
+                                  child: (watch.customerplacead?.toList()
+                                                ?..shuffle())
+                                              ?.first
+                                              .shopBannerImagePath !=
                                           ""
                                       ? AppNetworkImages(
                                           showShopImage: true,
-                                          imageUrl: (watch.placeAd.toList()
-                                                ..shuffle())
-                                              .first,
+                                          imageUrl:
+                                              (watch.customerplacead?.toList()
+                                                    ?..shuffle())
+                                                  ?.first
+                                                  .shopBannerImagePath,
                                           height: 163.h,
                                           width: 352.w,
                                           fit: BoxFit.cover,
@@ -400,7 +528,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                           // width: 340.w,
                                           // scale: 0.5,
                                           fit: BoxFit.cover,
-                                        ))
+                                        )),
+                            )
                           : Container(
                               padding: EdgeInsets.only(
                                 right: 19.0.w,

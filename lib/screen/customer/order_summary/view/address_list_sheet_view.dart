@@ -38,6 +38,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Set Delivery Address",
@@ -45,6 +46,26 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                           color: Color(0xff006F94)),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 20.w,
+                        width: 20.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                        ),
+                        child: Center(
+                          child: SvgPicture.asset(
+                            'assets/images/Cross.svg',
+                            width: 8.w,
+                            height: 8.h,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -64,7 +85,8 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${element?.deliveryAddressType.toString()}".capitalize(),
+                            "${element?.deliveryAddressType.toString()}"
+                                .capitalize(),
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17.sp,
@@ -116,17 +138,18 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.pop(context);
-                                      readMain.onNavigation(1,AddAddressView(
-                                        isEditAdress: true,
-                                        route: "orderAddress",
-                                        shopId: watch
-                                            .shopDetailData?.id
-                                            .toString(),
-                                        cartId: watch.cartId,
-                                        addressId: element
-                                            ?.addressId
-                                            .toString(),
-                                      ), context);
+                                      readMain.onNavigation(
+                                          1,
+                                          AddAddressView(
+                                            isEditAdress: true,
+                                            route: "orderAddress",
+                                            shopId: watch.shopDetailData?.id
+                                                .toString(),
+                                            cartId: watch.cartId,
+                                            addressId:
+                                                element?.addressId.toString(),
+                                          ),
+                                          context);
                                       // Navigator.pushAndRemoveUntil(
                                       //   context,
                                       //   MaterialPageRoute(

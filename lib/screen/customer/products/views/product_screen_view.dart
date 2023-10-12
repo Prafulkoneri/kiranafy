@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -91,6 +92,62 @@ class _ProductScreenViewState extends State<ProductScreenView> {
     final read = context.read<ProductViewController>();
     final readMain = context.read<MainScreenController>();
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.w),
+        child: PrimaryAppBar(
+          onBackBtnPressed: () {
+            if (widget.routeName == "cart_details") {
+              readMain.onNavigation(
+                  2,
+                  CartDetailView(
+                      isRefresh: true,
+                      shopId: watch.shopDetails?.id.toString(),
+                      cartId: watch.cartId),
+                  context);
+              readMain.hideBottomNavigationBar();
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => CartDetailView(
+              //             isRefresh: true,
+              //             shopId: watch.shopDetails?.id.toString(),
+              //             cartId: watch.cartId)));
+            } else if (widget.routeName == "homeScreen") {
+              readMain.onNavigation(
+                  0, HomeScreenView(refreshPage: false), context);
+            } else if (widget.routeName == "favouriteProduct") {
+              readMain.onNavigation(
+                  4, CFavouritesView(selectedIndex: 1), context);
+            } else {
+              readMain.onNavigation(
+                  1,
+                  ShopProfileView(
+                    refreshPage: true,
+                    routeName: '',
+                    shopId: watch.shopDetails?.id.toString(),
+                  ),
+                  context);
+              // Navigator.pushAndRemoveUntil(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => MainScreenView(
+              //           index: 1,
+              //           screenName: ShopProfileView(
+              //             refreshPage: true,
+              //             routeName: '',
+              //             shopId: watch.shopDetails?.id.toString(),
+              //           ))),
+              //       (Route<dynamic> route) => false,
+              // );
+            }
+          },
+
+          title: "Product View",
+          // "Cold Drinks & Juices - 2",
+          // action: SvgPicture.asset("assets/icons/forward.svg"),
+          onActionTap: () {},
+        ),
+      ),
       body: watch.isLoading
           ? const Loader()
           : //  onWillPop: () async {
@@ -159,7 +216,11 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(30.w),
+                        // borderRadius: BorderRadius.circular(30.w),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                        ),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.20),
@@ -188,7 +249,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: 54.w,
+                                    height: 20.w,
                                   ),
                                   Text("${watch.shopDetails?.shopName}",
                                       style: GoogleFonts.roboto(
@@ -726,7 +787,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                       watch.shopDetails?.id
                                                           .toString(),
                                                       index,
-                                                      context,false);
+                                                      context,
+                                                      false);
                                                 },
                                                 child: watch.isUnitImagesAdded[
                                                             index] ==
@@ -1126,7 +1188,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               element?.productUnitId,
                                                                               element?.shopId,
                                                                               index,
-                                                                              context,true);
+                                                                              context,
+                                                                              true);
                                                                           // watch
                                                                           //     .onOfferSelected(
                                                                           //         index);
@@ -1145,7 +1208,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               element?.productUnitId,
                                                                               element?.shopId,
                                                                               index,
-                                                                              context,true);
+                                                                              context,
+                                                                              true);
                                                                         },
                                                                         child: SvgPicture.asset(
                                                                             "assets/icons/tick_green_bg.svg"),

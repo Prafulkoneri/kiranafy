@@ -28,10 +28,14 @@ class Data {
   int? advertisementSequence;
   String? advertisementUrl;
   String? redirectToProduct;
+  String? redirectToShop;
   String? bannerImagePath;
   String? bannerImageName;
   String? status;
-
+  int? categoryId;
+  int? productId;
+  int? shopId;
+  String? productType;
   Data({
     required this.userType,
     required this.fromDate,
@@ -42,6 +46,11 @@ class Data {
     required this.bannerImagePath,
     required this.bannerImageName,
     required this.status,
+    required this.categoryId,
+    required this.productId,
+    required this.shopId,
+    required this.productType,
+    required this.redirectToShop,
   });
   Data.fromJson(Map<String, dynamic> json) {
     userType = json["user_type"];
@@ -53,5 +62,10 @@ class Data {
     bannerImagePath = json["banner_image_path"];
     bannerImageName = json["banner_image_name"];
     status = json["status"];
+    categoryId = json["category_id"];
+    productId = json["product_id"];
+    shopId = json["shop_id"];
+    productType = json["type_of_product"];
+    redirectToShop = json["redirect_to_shop"];
   }
 }
