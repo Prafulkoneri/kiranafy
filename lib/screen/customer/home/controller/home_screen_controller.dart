@@ -67,14 +67,14 @@ class HomeScreenController extends ChangeNotifier {
   Future<void> getBannerImage(context) async {
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-    print("bnvuuiwveuciiutwmibijmiuey");
+    print("sdbbbghnjnjnjnjnjnjnjnjnjnjnjnjnjnjnjnj");
     print(pref.getString("successToken"));
     bannerRepo.getBannerImage(pref.getString("successToken")).then((response) {
       print(response.statusCode);
       print(response.body);
       final result = BannerAds.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        log("${response.body}");
 
         bannerData = result.data;
         int imageLength = bannerData?.length ?? 0;
