@@ -63,9 +63,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<HomeScreenController>()
-          .initState(context, widget.refreshPage);
+      context.read<HomeScreenController>().initState(
+            context,
+            widget.refreshPage,
+          );
     });
     // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
     //   if (result == ConnectivityResult.none) {
@@ -248,7 +249,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                                     element?.shopId.toString(),
                                                 categoryId: element?.categoryId
                                                     .toString(),
-                                                productId: watch.productId,
+                                                productId: element?.productId
+                                                    .toString(),
                                                 productType:
                                                     element?.productType,
                                                 routeName: "homeScreen",
