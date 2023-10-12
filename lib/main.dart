@@ -92,19 +92,21 @@ final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 String? selectedNotificationPayload;
 
-class ReceivedNotification {
-  ReceivedNotification({
-    required this.id,
-    required this.title,
-    required this.body,
-    required this.payload,
-  });
+// class ReceivedNotification {
+//   ReceivedNotification({
+//     required this.id,
+//     required this.title,
+//     required this.body,
+//     required this.image,
+//     required this.payload,
+//   });
 
-  final int id;
-  final String title;
-  final String body;
-  final String payload;
-}
+//   final int id;
+//   final String title;
+//   final String body;
+//   final String image;
+//   final String payload;
+// }
 
 Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
@@ -290,7 +292,9 @@ class _MyAppState extends State<MyApp> {
       print(message.data["notification_type"]);
       if (message.data["notification_type"] == "custom") {
         if (message.data["user_type"] == "customer") {
-          context.read<MainScreenController>().onCustomTypeNotification(context);
+          context
+              .read<MainScreenController>()
+              .onCustomTypeNotification(context);
         } else {
           context
               .read<SMainScreenController>()
@@ -347,6 +351,7 @@ class _MyAppState extends State<MyApp> {
     // fireBaseApi();
   }
 
+/////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
@@ -363,6 +368,7 @@ class _MyAppState extends State<MyApp> {
         payload: '$savePath');
   }
 
+////Invoice/////////////////
   void fireBaseApi() async {
     await firebaseMessaging.requestPermission();
 
