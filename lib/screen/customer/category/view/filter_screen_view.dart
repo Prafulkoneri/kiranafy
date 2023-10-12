@@ -160,7 +160,7 @@ class _FilterScreenViewState extends State<FilterScreenView> {
                   ),
                   // style: style,
                   onPressed: () {
-read.getFilterProductList(context);
+read.getFilterProductList(context,false,watch.categoryId);
                   },
                   child: Text(
                     'Filter',

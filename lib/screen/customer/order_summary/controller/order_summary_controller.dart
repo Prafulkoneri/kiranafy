@@ -56,8 +56,9 @@ class OrderSummaryController extends ChangeNotifier {
   List<CustomerAddress>? customerAddress;
   List<CartItemList>? cartItemList;
   List<FinalCouponList>? finalCouponList;
-  List<FullFillYourCraving>? fullFillYourCravingsAdmin;
-  List<FullFillYourCraving>? fullFillYourCravingsCustom;
+  List<FullFillYourCraving> fullFillYourCravingsAdmin=[];
+  List<FullFillYourCraving> fullFillYourCravingsCustom=[];
+
   bool isLoading = true;
   bool isStackLoaderVisible = false;
   bool favAllShop = true;
@@ -74,6 +75,7 @@ class OrderSummaryController extends ChangeNotifier {
   String totalAmount = "";
   String selfPickupTotalAmount = "";
   int offset=0;
+  bool showPaginationLoader=false;
   String selfPickupDeliveryCharges = "";
   String totalDiscount = "";
   String customerPickup = "";
@@ -109,7 +111,10 @@ class OrderSummaryController extends ChangeNotifier {
 
     notifyListeners();
   }
-
+showPaginationLoaderInApp(value){
+    showPaginationLoader=value;
+    notifyListeners();
+}
   void showLoader(value) {
     isLoading = value;
     notifyListeners();
@@ -195,38 +200,43 @@ class OrderSummaryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = FullFillCravingsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fullFillYourCravingsAdmin=result.data?.fullFillYourCravingsAdminProduct;
-        fullFillYourCravingsCustom=result.data?.fullFillYourCravingsCustomProduct;
+        fullFillYourCravingsAdmin.addAll(result.data?.fullFillYourCravingsAdminProduct??[]);
+        fullFillYourCravingsCustom.addAll(result.data?.fullFillYourCravingsCustomProduct??[]);
         int fulfilcravingListLength = fullFillYourCravingsAdmin?.length ?? 0;
         isFulFilProductAdded = List<bool>.filled(fulfilcravingListLength, false, growable: true);
         for (int i = 0; i < fulfilcravingListLength; i++) {
-          if (fullFillYourCravingsAdmin?[i].addToCartCheck == "yes") {
+          if (fullFillYourCravingsAdmin[i].addToCartCheck == "yes") {
             isFulFilProductAdded.insert(i, true);
           } else {
             isFulFilProductAdded.insert(i, false);
           }
         }
-        int fulfilcravingListCustomeLength = fullFillYourCravingsCustom?.length ?? 0;
+        int fulfilcravingListCustomeLength = fullFillYourCravingsCustom.length ?? 0;
         isFulFilProductAddedCustome = List<bool>.filled(fulfilcravingListCustomeLength, false,growable: true);
         for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
-          if (fullFillYourCravingsCustom?[i].addToCartCheck == "yes") {
+          if (fullFillYourCravingsCustom[i].addToCartCheck == "yes") {
             isFulFilProductAddedCustome.insert(i, true);
           } else {
             isFulFilProductAddedCustome.insert(i, false);
           }
         }
+        showPaginationLoaderInApp(false);
         notifyListeners();
       } else {
+        showPaginationLoaderInApp(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showPaginationLoaderInApp(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
           (Object e) {
+            showPaginationLoaderInApp(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showPaginationLoaderInApp(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -234,6 +244,7 @@ class OrderSummaryController extends ChangeNotifier {
   }
 
   Future<void> getOrderSummary(context, id, cId, route) async {
+    offset=0;
     print(route);
     if (route == 'cartDetail') {
       expectedDateController.clear();
@@ -400,6 +411,16 @@ class OrderSummaryController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  Future<void> onScrollMaxExtent(context)async{
+    showPaginationLoaderInApp(true);
+    print("1234567890");
+    offset=offset+1;
+   getFullFillYourCravingsList(context);
+
+    print(showPaginationLoader);
+    notifyListeners();
   }
 
   void onViewMoreClicked(index) {

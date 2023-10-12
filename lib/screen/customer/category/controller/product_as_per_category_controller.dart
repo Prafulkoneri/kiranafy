@@ -39,8 +39,14 @@ class ProductCategoryController extends ChangeNotifier {
 
   ProductAsPerFilterRepo productAsPerFilterRepo = ProductAsPerFilterRepo();
 
-  Future<void> initState(context, shopId, categoryId) async {
-    await getProductList(context, shopId, categoryId);
+  Future<void> initState(context, sId, cId) async {
+    // await getProductList(context, shopId, categoryId);
+    shopId=sId;
+    categoryId=cId;
+    groupValue="1";
+    isOfferProductSelected=false;
+    notifyListeners();
+    await getFilterProductList(context,true,cId);
   }
 
   void showLoader(value) {
@@ -54,71 +60,71 @@ class ProductCategoryController extends ChangeNotifier {
         shopId: shopId,
       );
 
-  Future<void> getProductList(context, sId, cId) async {
-    shopId = sId;
-    categoryId = cId;
-    searchController.clear();
-    showLoader(true);
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    print(pref.getString("successToken"));
-    productAsPerCategoryRepo
-        .getProductDetails(
-            productAsPerCategoryReqModel, pref.getString("successToken"))
-        .then((response) {
-      log("response.body${response.body}");
-      final result =
-          ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        categoryProductData = result.data;
-        allCategoryList = categoryProductData?.allCategoryList;
-        productList = categoryProductData?.productList;
-        customProductList = categoryProductData?.customProductList;
-
-///////////////////////////
-        int productListLength = productList?.length ?? 0;
-        int customproductListLength = customProductList?.length ?? 0;
-        isCategoryProductAdded =
-            List<bool>.filled(productListLength, false, growable: true);
-        isCustomCategoryProductAdded = List<bool>.filled(
-            customProductList?.length ?? 0, false,
-            growable: true);
-        for (int i = 0; i < productListLength; i++) {
-          if (productList?[i].addToCartCheck == "yes") {
-            isCategoryProductAdded.insert(i, true);
-          } else {
-            isCategoryProductAdded.insert(i, false);
-          }
-        }
-        for (int i = 0; i < customproductListLength; i++) {
-          if (customProductList?[i].addToCartCheck == "yes") {
-            isCustomCategoryProductAdded.insert(i, true);
-          } else {
-            isCustomCategoryProductAdded.insert(i, false);
-          }
-        }
-        if (productList?.isEmpty == true &&
-            customProductList?.isEmpty == true) {
-          Utils.showPrimarySnackbar(context, "No Product Found",
-              type: SnackType.error);
-        }
-        showLoader(false);
-        notifyListeners();
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
+//   Future<void> getProductList(context, sId, cId) async {
+//     shopId = sId;
+//     categoryId = cId;
+//     searchController.clear();
+//     showLoader(true);
+//     SharedPreferences pref = await SharedPreferences.getInstance();
+//     print(pref.getString("successToken"));
+//     productAsPerCategoryRepo
+//         .getProductDetails(
+//             productAsPerCategoryReqModel, pref.getString("successToken"))
+//         .then((response) {
+//       log("response.body${response.body}");
+//       final result =
+//           ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
+//       if (response.statusCode == 200) {
+//         categoryProductData = result.data;
+//         allCategoryList = categoryProductData?.allCategoryList;
+//         productList = categoryProductData?.productList;
+//         customProductList = categoryProductData?.customProductList;
+//
+// ///////////////////////////
+//         int productListLength = productList?.length ?? 0;
+//         int customproductListLength = customProductList?.length ?? 0;
+//         isCategoryProductAdded =
+//             List<bool>.filled(productListLength, false, growable: true);
+//         isCustomCategoryProductAdded = List<bool>.filled(
+//             customProductList?.length ?? 0, false,
+//             growable: true);
+//         for (int i = 0; i < productListLength; i++) {
+//           if (productList?[i].addToCartCheck == "yes") {
+//             isCategoryProductAdded.insert(i, true);
+//           } else {
+//             isCategoryProductAdded.insert(i, false);
+//           }
+//         }
+//         for (int i = 0; i < customproductListLength; i++) {
+//           if (customProductList?[i].addToCartCheck == "yes") {
+//             isCustomCategoryProductAdded.insert(i, true);
+//           } else {
+//             isCustomCategoryProductAdded.insert(i, false);
+//           }
+//         }
+//         if (productList?.isEmpty == true &&
+//             customProductList?.isEmpty == true) {
+//           Utils.showPrimarySnackbar(context, "No Product Found",
+//               type: SnackType.error);
+//         }
+//         showLoader(false);
+//         notifyListeners();
+//       } else {
+//         Utils.showPrimarySnackbar(context, result.message,
+//             type: SnackType.error);
+//       }
+//     }).onError((error, stackTrace) {
+//       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+//     }).catchError(
+//       (Object e) {
+//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+//       },
+//       test: (Object e) {
+//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+//         return false;
+//       },
+//     );
+//   }
 
 ////////////////////////////
 
@@ -180,7 +186,7 @@ class ProductCategoryController extends ChangeNotifier {
         },
       );
     } else {
-      await getProductList(context, sId, cId);
+      await getFilterProductList(context,true,cId);
     }
   }
 
@@ -202,8 +208,9 @@ class ProductCategoryController extends ChangeNotifier {
         priceLowToHigh: groupValue == "1" ? "yes" : "no",
       );
 
-  Future<void> getFilterProductList(context) async {
+  Future<void> getFilterProductList(context,hideFilter,cId) async {
     showLoader(true);
+    categoryId=cId;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     productAsPerFilterRepo
@@ -213,12 +220,24 @@ class ProductCategoryController extends ChangeNotifier {
       log("response.body${response.body}");
       final result =
           ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
+      print(result);
       if (response.statusCode == 200) {
         allCategoryList = result.data?.allCategoryList;
         productList = result.data?.productList;
-        customProductList = result.data?.customProductList;
-        finalFiltterProductList = result.data?.finalFiltterProductList;
-        Navigator.pop(context);
+        int productListLength = productList?.length ?? 0;
+        isCategoryProductAdded = List<bool>.filled(productListLength, false, growable: true);
+        for (int i = 0; i < productListLength; i++) {
+          if (productList?[i].addToCartCheck == "yes") {
+            isCategoryProductAdded.insert(i, true);
+          } else {
+            isCategoryProductAdded.insert(i, false);
+          }
+        }
+        // customProductList = result.data?.customProductList;
+        // finalFiltterProductList = result.data?.finalFiltterProductList;
+        if(!hideFilter) {
+          Navigator.pop(context);
+        }
         if (productList?.isEmpty == true &&
             customProductList?.isEmpty == true) {
           Utils.showPrimarySnackbar(context, "No Product Found",
@@ -262,12 +281,8 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if (pType == "admin_product") {
-          isCategoryProductAdded[index] = true;
-        } else {
-          isCustomCategoryProductAdded[index] = true;
-        }
 
+          isCategoryProductAdded[index] = true;
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -305,11 +320,9 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if (pType == "admin_product") {
+
           isCategoryProductAdded[index] = false;
-        } else {
-          isCustomCategoryProductAdded[index] = false;
-        }
+
 
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
