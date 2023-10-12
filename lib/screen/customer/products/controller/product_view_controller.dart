@@ -86,6 +86,7 @@ class ProductViewController extends ChangeNotifier {
     quantityList.clear();
     unitImages.clear();
     cartItemIdList.clear();
+    quantityList.clear();
     await productsView(context, sId, cId, pId, pType);
     // await productsUnitImage(context, suId);
     print("55555555555555555555555555555555555");

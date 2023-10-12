@@ -52,7 +52,9 @@ class CustomerProductData {
   String? unit;
   String? shopId;
   int? productUnitId;
-  String? addToCartCheck; //No
+  String? addToCartCheck;
+  int ? cartItemId;
+  int ? quantity;
 
   CustomerProductData({
     this.categoryId, //
@@ -72,6 +74,8 @@ class CustomerProductData {
     this.shopId,
     this.productUnitId,
     this.addToCartCheck,
+    this.cartItemId,
+    this.quantity
   });
   CustomerProductData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -91,6 +95,8 @@ class CustomerProductData {
     shopId = json["shop_id"];
     productUnitId = json["product_unit_id"];
     addToCartCheck = json["add_to_cart_check"];
+    quantity = json["quantity"];
+    cartItemId = json["cart_item_id"];
   }
 }
 

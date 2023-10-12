@@ -8,7 +8,8 @@ class ShopCartListRepo {
       return await http.get(Uri.parse(Endpoint.cartList), headers: {
         "Authorization": "Bearer $token",
       });
-    } catch (e) {
+    }
+    catch (e) {
       throw Exception(e);
     }
   }
