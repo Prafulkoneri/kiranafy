@@ -29,7 +29,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenView extends StatefulWidget {
   final bool? refreshPage;
-  const HomeScreenView({super.key, required this.refreshPage});
+  final String? productId;
+  const HomeScreenView({super.key, required this.refreshPage, this.productId});
 
   @override
   State<HomeScreenView> createState() => _HomeScreenViewState();
@@ -235,19 +236,22 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                         }
                                         if (element?.redirectToProduct ==
                                             "yes") {
+                                          print(element?.productId);
+                                          print(element?.categoryId);
+                                          print(element?.shopId);
+                                          print(element?.productType);
+                                          // return;
                                           readMain.onNavigation(
                                               0,
                                               ProductScreenView(
-                                                routeName: "homeScreen",
-                                                categoryId: element?.categoryId
-                                                    .toString(),
-                                                productId: element?.productId
-                                                    .toString(),
                                                 shopId:
                                                     element?.shopId.toString(),
-                                                productType: element
-                                                    ?.productType
+                                                categoryId: element?.categoryId
                                                     .toString(),
+                                                productId: watch.productId,
+                                                productType:
+                                                    element?.productType,
+                                                routeName: "homeScreen",
                                               ),
                                               context);
                                         }
@@ -410,21 +414,110 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       ),
 
                       watch.placeAd.isNotEmpty == true
-                          ? Container(
-                              padding: EdgeInsets.only(
-                                right: 19.0.w,
-                                left: 19.0.w,
-                              ),
-                              width: ScreenUtil().screenWidth,
-                              // height: 100.h,
-                              child:
-                                  (watch.placeAd.toList()..shuffle()).first !=
+                          ? GestureDetector(
+                              onTap: () {
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToShop ==
+                                    "yes") {
+                                  readMain.onNavigation(
+                                      1,
+                                      ShopProfileView(
+                                          shopId:
+                                              (watch.customerplacead?.toList()
+                                                    ?..shuffle())
+                                                  ?.first
+                                                  .shopId
+                                                  .toString(),
+                                          refreshPage: true,
+                                          routeName: "homeScreen"),
+                                      context);
+                                }
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToProduct
+                                        .toString() ==
+                                    "yes") {
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .shopId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .categoryId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .productId
+                                        .toString(),
+                                  );
+                                  print(
+                                    (watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .productType
+                                        .toString(),
+                                  );
+                                  // return;
+                                  readMain.onNavigation(
+                                      0,
+                                      ProductScreenView(
+                                        shopId: (watch.customerplacead?.toList()
+                                              ?..shuffle())
+                                            ?.first
+                                            .shopId
+                                            .toString(),
+                                        categoryId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .categoryId
+                                                .toString(),
+                                        productId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productId
+                                                .toString(),
+                                        productType:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productType,
+                                        routeName: "homeScreen",
+                                      ),
+                                      context);
+                                }
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.only(
+                                    right: 19.0.w,
+                                    left: 19.0.w,
+                                  ),
+                                  width: ScreenUtil().screenWidth,
+                                  // height: 100.h,
+                                  child: (watch.customerplacead?.toList()
+                                                ?..shuffle())
+                                              ?.first
+                                              .shopBannerImagePath !=
                                           ""
                                       ? AppNetworkImages(
                                           showShopImage: true,
-                                          imageUrl: (watch.placeAd.toList()
-                                                ..shuffle())
-                                              .first,
+                                          imageUrl:
+                                              (watch.customerplacead?.toList()
+                                                    ?..shuffle())
+                                                  ?.first
+                                                  .shopBannerImagePath,
                                           height: 163.h,
                                           width: 352.w,
                                           fit: BoxFit.cover,
@@ -435,7 +528,8 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                           // width: 340.w,
                                           // scale: 0.5,
                                           fit: BoxFit.cover,
-                                        ))
+                                        )),
+                            )
                           : Container(
                               padding: EdgeInsets.only(
                                 right: 19.0.w,

@@ -35,7 +35,7 @@ class HomeScreenController extends ChangeNotifier {
   List<CustomerPlaceAd>? customerplacead;
   List placeAd = [];
   // String pincode = "111111";
-
+  String? productId = "";
   Future<void> initState(
     context,
     refresh,
