@@ -349,6 +349,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color: Color(0xff4689EC),
+                                                      // color: Color(0xffFBDFDF),
                                                     ),
                                                     child: watch.favAllShop
                                                         ? SvgPicture.asset(
@@ -2065,12 +2066,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     ?.refundPaymentStatus ==
                                                                 "received"
                                                             ? Colors.green
-                                                            :
-                                                        watch.orderDetails
-                                                            ?.refundOrderStatus ==
-                                                            "reject"?Colors.red:
-                                                        Color(
-                                                                0xff115B7A))),
+                                                            : watch.orderDetails
+                                                                        ?.refundOrderStatus ==
+                                                                    "reject"
+                                                                ? Colors.red
+                                                                : Color(
+                                                                    0xff115B7A))),
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 12.w),
                                                 child: Center(
@@ -2099,11 +2100,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                   ?.refundPaymentStatus ==
                                                               "received"
                                                           ? Colors.green
-                                                          :
-                                                      watch.orderDetails
-                                                          ?.refundOrderStatus ==
-                                                          "reject"?Colors.red:
-                                                      Color(0xff115B7A)),
+                                                          : watch.orderDetails
+                                                                      ?.refundOrderStatus ==
+                                                                  "reject"
+                                                              ? Colors.red
+                                                              : Color(
+                                                                  0xff115B7A)),
                                                 )),
                                               ),
                                             ],
@@ -2460,19 +2462,18 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   ? Container(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 17.w),
-                                      color:
-                                      watch.orderDetails
-                                          ?.shopDeliveredRefundStatus ==
-                                          "YES" &&
-                                          watch.orderDetails
-                                              ?.shopDeliveredCustomerPaymentStatus ==
-                                              "received"?Color(0xffEFFDFF):
-                                      watch.orderDetails
-                                                  ?.refundOrderStatus ==
-                                              "reject"
-                                          ? Color(0xffFFE8E8):
-
-                                      Color(0xffEFFDFF),
+                                      color: watch.orderDetails
+                                                      ?.shopDeliveredRefundStatus ==
+                                                  "YES" &&
+                                              watch.orderDetails
+                                                      ?.shopDeliveredCustomerPaymentStatus ==
+                                                  "received"
+                                          ? Color(0xffEFFDFF)
+                                          : watch.orderDetails
+                                                      ?.refundOrderStatus ==
+                                                  "reject"
+                                              ? Color(0xffFFE8E8)
+                                              : Color(0xffEFFDFF),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -2860,7 +2861,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       : Container(),
                                                 ],
                                               ),
-
                                               watch.orderDetails
                                                           ?.shopDeliveredRefundStatus ==
                                                       "YES"

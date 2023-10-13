@@ -393,6 +393,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         bottom: 14.w),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
+                                      // color: Color(0xffFBDFDF),
                                       color: Color(0xff4689EC),
                                     ),
                                     child: watch.favAllShop
