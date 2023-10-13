@@ -70,7 +70,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             }
             if (widget.route == "customerDetails") {
               readMainScreen.onNavigation(
-                  0, CustomerDetailView(screenName: ""), context);
+                  0, CustomerDetailView(screenName: "",), context);
               readMainScreen.showBottomNavigationBar();
             }
             ////////////////////
@@ -3495,16 +3495,32 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         SizedBox(
                                                           height: 11.w,
                                                         ),
-                                                        Text(
-                                                          "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 18.sp),
+                                                        Row(
+                                                            children: [
+                                                              Text(
+                                                                "\u{20B9} ${watch.totalRefundAmount}  ",
+                                                                style: TextStyle(
+                                                                    decoration: TextDecoration.lineThrough,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                    color:
+                                                                    Colors.black,
+                                                                    fontSize: 18.sp),
+                                                              ),
+                                                              Text(
+                                                                "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                    color:
+                                                                    Colors.black,
+                                                                    fontSize: 18.sp),
+                                                              ),
+                                                            ],
                                                         ),
+
                                                       ],
                                                     ),
                                                     Container(

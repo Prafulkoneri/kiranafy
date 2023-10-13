@@ -123,10 +123,12 @@ class SShopConfigurationController extends ChangeNotifier {
     isLoading = value;
     notifyListeners();
   }
+
   void onOpeningAmPmSelected(value){
     openingAmPm=value;
     notifyListeners();
   }
+
   void onClosingAmPmSelected(value){
     closingAmPm=value;
     notifyListeners();
@@ -164,7 +166,6 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ////////Mode of payment///
   void onOnlinePaymentSelected() {
     isOnlinePaymentSelected = !isOnlinePaymentSelected;
     notifyListeners();

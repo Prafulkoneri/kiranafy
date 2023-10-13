@@ -1995,7 +1995,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     ?.refundPaymentStatus ==
                                                                 "received"
                                                             ? Colors.green
-                                                            : Color(
+                                                            :
+                                                        watch.orderDetails
+                                                            ?.refundOrderStatus ==
+                                                            "reject"?Colors.red:
+                                                        Color(
                                                                 0xff115B7A))),
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 12.w),
@@ -2025,7 +2029,11 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                   ?.refundPaymentStatus ==
                                                               "received"
                                                           ? Colors.green
-                                                          : Color(0xff115B7A)),
+                                                          :
+                                                      watch.orderDetails
+                                                          ?.refundOrderStatus ==
+                                                          "reject"?Colors.red:
+                                                      Color(0xff115B7A)),
                                                 )),
                                               ),
                                             ],
@@ -2378,11 +2386,19 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   ? Container(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 17.w),
-                                      color: watch.orderDetails
+                                      color:
+                                      watch.orderDetails
+                                          ?.shopDeliveredRefundStatus ==
+                                          "YES" &&
+                                          watch.orderDetails
+                                              ?.shopDeliveredCustomerPaymentStatus ==
+                                              "received"?Color(0xffEFFDFF):
+                                      watch.orderDetails
                                                   ?.refundOrderStatus ==
                                               "reject"
-                                          ? Color(0xffFFE8E8)
-                                          : Color(0xffEFFDFF),
+                                          ? Color(0xffFFE8E8):
+
+                                      Color(0xffEFFDFF),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -2507,23 +2523,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                   : Container(),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 35.w,
-                                          // ),
-                                          // Text("Reason",
-                                          //     style: TextStyle(
-                                          //         fontSize: 14.sp,
-                                          //         fontWeight: FontWeight.w700)),
-                                          // SizedBox(
-                                          //   height: 2.w,
-                                          // ),
-                                          // Text(
-                                          //   "${watch.orderDetails?.reason}",
-                                          //   style: TextStyle(
-                                          //     fontWeight: FontWeight.w400,
-                                          //     fontSize: 14.sp,
-                                          //   ),
-                                          // ),
                                           watch.orderDetails
                                                           ?.shopDeliveredRefundStatus ==
                                                       "YES" &&
@@ -2787,23 +2786,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       : Container(),
                                                 ],
                                               ),
-                                              // SizedBox(
-                                              //   height: 35.w,
-                                              // ),
-                                              // Text("Reason",
-                                              //     style: TextStyle(
-                                              //         fontSize: 14.sp,
-                                              //         fontWeight: FontWeight.w700)),
-                                              // SizedBox(
-                                              //   height: 2.w,
-                                              // ),
-                                              // Text(
-                                              //   "${watch.orderDetails?.reason}",
-                                              //   style: TextStyle(
-                                              //     fontWeight: FontWeight.w400,
-                                              //     fontSize: 14.sp,
-                                              //   ),
-                                              // ),
+
                                               watch.orderDetails
                                                           ?.shopDeliveredRefundStatus ==
                                                       "YES"
