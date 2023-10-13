@@ -70,6 +70,8 @@ class SShopConfigurationController extends ChangeNotifier {
   String selectedAreaId = "";
   List<AreaList>? areaList;
   List initialSelectedAreaId = [];
+  String openingAmPm="am";
+  String closingAmPm="pm";
 
   Future<void> initState(context, initialConfiguration) async {
     upiIdController.clear();
@@ -119,6 +121,14 @@ class SShopConfigurationController extends ChangeNotifier {
 
   showLoader(value) {
     isLoading = value;
+    notifyListeners();
+  }
+  void onOpeningAmPmSelected(value){
+    openingAmPm=value;
+    notifyListeners();
+  }
+  void onClosingAmPmSelected(value){
+    closingAmPm=value;
     notifyListeners();
   }
 
@@ -278,6 +288,8 @@ class SShopConfigurationController extends ChangeNotifier {
             data?.shopOwnerAmount4DeliveryCharges ?? "";
         startShopTimeController.text = data?.shopOwnerShopOpeningTime ?? "";
         endShopTimeController.text = data?.shopOwnerShopCloseTime ?? "";
+        openingAmPm=data?.openingAmPm??"";
+        closingAmPm=data?.closingAmPm??"";
         upiIdController.text = result.upiid ?? "";
         minimumDeliveryAmountController.text =
             data?.minimumOrderDeliveryAmount ?? "";
@@ -487,6 +499,8 @@ class SShopConfigurationController extends ChangeNotifier {
   }
 
   ShopConfigRequestModel get shopConfigRequestModel => ShopConfigRequestModel(
+      closingAmPm: closingAmPm,
+      openingAmPm: openingAmPm,
       shopOwnerAmount1DeliveryCharges: firstDeliveryController.text,
       shopOwnerAmount2DeliveryCharges: secondDeliveryController.text,
       shopOwnerAmount3DeliveryCharges: thirdDeliveryController.text,
@@ -591,6 +605,8 @@ class SShopConfigurationController extends ChangeNotifier {
     var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
     http.MultipartRequest request = new http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
+    request.fields["opening_am_pm"]=openingAmPm;
+    request.fields["closing_am_pm"]=closingAmPm;
     request.fields['shop_owner_support_number'] = supportNumberController.text;
     request.fields['shop_owner_shop_opening_time'] =
         startShopTimeController.text;

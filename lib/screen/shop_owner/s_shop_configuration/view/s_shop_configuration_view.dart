@@ -10,6 +10,7 @@ import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
+import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
@@ -276,21 +277,75 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           Expanded(
                             // width: 155.w,
                             child: PrimarySTextFormField(
-                              hintText: "09:00 AM",
+                              hintText: "09:00",
+                              textInputType: TextInputType.datetime,
                               controller: watch.startShopTimeController,
                               // hint: "Opening Time",
                               // hintSize: 15.sp,
                             ),
                           ),
                           SizedBox(
-                            width: 12.w,
+                            width: 5.w,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0,top: 3.0),
+                              child: SDropDownField(
+                                  onChanged: (value){
+                                    read.onOpeningAmPmSelected(value);
+                                  },
+                                value: watch.openingAmPm,
+                                  iconPadding: EdgeInsets.only(right: 6.w),
+                                height: 44.w,
+                                  items:[
+                                  DropdownMenuItem(
+                                  child: Text("AM"),
+                                  value: "am",
+                                ),
+                                    DropdownMenuItem(
+                                      child: Text("PM"),
+                                      value: "pm",
+                                    )
+                                  ]
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5.w,
                           ),
                           Expanded(
                             child: PrimarySTextFormField(
-                              hintText: "08:00 PM",
+                              textInputType: TextInputType.datetime,
+                              hintText: "08:00",
                               controller: watch.endShopTimeController,
                               // hint: "Closing Time",
                               // hintSize: 15.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0,top: 3.0),
+                              child: SDropDownField(
+                                onChanged: (value){
+                                  read.onClosingAmPmSelected(value);
+                                },
+                                value: watch.closingAmPm,
+                                iconPadding: EdgeInsets.only(right: 6.w),
+                                  height: 44.w,
+                                  items:[
+                                    DropdownMenuItem(
+                                      child: Text("AM"),
+                                      value: "am",
+                                    ),
+                                    DropdownMenuItem(
+                                      child: Text("PM"),
+                                      value: "pm",
+                                    )
+                                  ]
+                              ),
                             ),
                           ),
                         ],

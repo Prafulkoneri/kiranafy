@@ -54,6 +54,8 @@ class Data {
   String? shopOwnerSlot6To9;
   String? acceptedPaymentStatus;
   String? minimumOrderDeliveryAmount;
+  String ? openingAmPm;
+  String ? closingAmPm;
 
   Data({
     required this.shopOwnerPaymentQrCodeImagePath,
@@ -74,6 +76,8 @@ class Data {
     required this.shopOwnerSlot6To9,
     required this.acceptedPaymentStatus,
     required this.minimumOrderDeliveryAmount,
+    required this.closingAmPm,
+    required this.openingAmPm,
   });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -102,6 +106,8 @@ class Data {
     shopOwnerSlot6To9 = json['shop_owner_slot_6_to_9'];
     acceptedPaymentStatus = json['accepted_payment_status'];
     minimumOrderDeliveryAmount = json['min_order_amount_for_delivery'];
+    openingAmPm = json['shop_opening_am_pm'];
+    closingAmPm = json['shop_closing_am_pm'];
   }
 }
 
