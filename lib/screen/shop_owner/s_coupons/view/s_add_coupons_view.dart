@@ -24,10 +24,10 @@ class SAddCouponsView extends StatefulWidget {
   final bool? isNavFromDashboard;
 
   const SAddCouponsView(
-      {super.key,
-      required this.isEditCoupon,
-      this.couponId,
-      required this.isNavFromDashboard});
+  {super.key,
+  required this.isEditCoupon,
+  this.couponId,
+  required this.isNavFromDashboard});
 
   @override
   State<SAddCouponsView> createState() => _SAddCouponsViewState();
@@ -85,504 +85,509 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
           }
           return false;
         },
-            child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "From Date",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "To Date",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                        ],
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "From Date",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
                       ),
-                      SizedBox(
-                        height: 5.w,
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "To Date",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              readOnly: true,
-                              onTap: () async {
-                                var pickedDate = await showDatePicker(
-                                  builder: (BuildContext, child) {
-                                    return Theme(
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Color(0xff1767B1),
-                                          // <-- SEE HERE
-                                          onPrimary: Colors.white,
-                                          // <-- SEE HERE
-                                          onSurface: Colors.black, // <-- SEE HERE
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            primary: Color(
-                                                0xff1767B1), // button text color
-                                          ),
-                                        ),
-                                      ),
-                                      child: child!,
-                                    );
-                                  },
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2100),
-                                );
-                                if (pickedDate != null) {
-                                  String date = DateFormat('dd-MM-yyy')
-                                      .format(pickedDate ?? DateTime.now());
-                                  read.onFromDateSelected(date);
-                                }
-                              },
-                              controller: watch.fromDateController,
-                              suffix: Container(
-                                width: 15.h,
-                                height: 17.w,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    "assets/icons/shop_cal.svg",
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        readOnly: true,
+                        onTap: () async {
+                          var pickedDate = await showDatePicker(
+                            builder: (BuildContext, child) {
+                              return Theme(
+                                data: Theme.of(context).copyWith(
+                                  colorScheme: ColorScheme.light(
+                                    primary: Color(0xff1767B1),
+                                    // <-- SEE HERE
+                                    onPrimary: Colors.white,
+                                    // <-- SEE HERE
+                                    onSurface: Colors.black, // <-- SEE HERE
                                   ),
-                                ),
-                              ),
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              readOnly: true,
-                              onTap: () async {
-                                var pickedDate = await showDatePicker(
-                                  builder: (BuildContext, child) {
-                                    return Theme(
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Color(0xff1767B1),
-                                          // <-- SEE HERE
-                                          onPrimary: Colors.white,
-                                          // <-- SEE HERE
-                                          onSurface: Colors.black, // <-- SEE HERE
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            primary: Color(
-                                                0xff1767B1), // button text color
-                                          ),
-                                        ),
-                                      ),
-                                      child: child!,
-                                    );
-                                  },
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2100),
-                                );
-                                if (pickedDate != null) {
-                                  String date = DateFormat('dd-MM-yyy')
-                                      .format(pickedDate ?? DateTime.now());
-                                  read.onToDateSelected(date);
-                                }
-                              },
-                              controller: watch.toDateController,
-                              suffix: GestureDetector(
-                                onTap: () async {
-                                  var pickedDate = await showDatePicker(
-                                    builder: (BuildContext, child) {
-                                      return Theme(
-                                        data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
-                                            primary: Color(0xff1767B1),
-                                            // <-- SEE HERE
-                                            onPrimary: Colors.white,
-                                            // <-- SEE HERE
-                                            onSurface:
-                                                Colors.black, // <-- SEE HERE
-                                          ),
-                                          textButtonTheme: TextButtonThemeData(
-                                            style: TextButton.styleFrom(
-                                              primary: Color(
-                                                  0xff1767B1), // button text color
-                                            ),
-                                          ),
-                                        ),
-                                        child: child!,
-                                      );
-                                    },
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime.now(),
-                                    lastDate: DateTime(2100),
-                                  );
-                                  if (pickedDate != null) {
-                                    String date = DateFormat('dd-MM-yyy')
-                                        .format(pickedDate ?? DateTime.now());
-                                    read.onToDateSelected(date);
-                                  }
-                                },
-                                child: Container(
-                                  width: 15.h,
-                                  height: 17.w,
-                                  child: Center(
-                                    child: SvgPicture.asset(
-                                      "assets/icons/shop_cal.svg",
+                                  textButtonTheme: TextButtonThemeData(
+                                    style: TextButton.styleFrom(
+                                      primary: Color(
+                                          0xff1767B1), // button text color
                                     ),
                                   ),
                                 ),
-                              ),
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.w,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Discount Percentage (%)",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Minimum Order Amount",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.w,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              textInputType: TextInputType.number,
-                              controller: watch.discountPercentageController,
-                              // hintText: "Delivery Charge",
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              textInputType: TextInputType.number,
-                              controller: watch.minOrderAmountController,
-                              // hintText: "Delivery Charge",
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.w,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Discount Max Amount",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Coupon Code",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.w,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              textInputType: TextInputType.number,
-                              controller: watch.maxDiscountAmountController,
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          Expanded(
-                            child: PrimarySTextFormField(
-                              // textInputType: TextInputType.number,
-                              controller: watch.couponCodeController,
-                              onChanged: (value) {
-                                read.checkCouponCodeExist(context);
-                              },
-                              hintFontSize: 15.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(right: 28.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: [
-                                SecondaryRadioButton(
-                                    value: "full_order_amount",
-                                    groupValue: read.groupValue,
-                                    onChanged: (value) {
-                                      read.onRadioBtnToggled(value);
-                                    },
-                                    leading: ""),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  'Full Order Amount',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        // letterSpacing: .5,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SecondaryRadioButton(
-                                    value: "category_and_product",
-                                    groupValue: watch.groupValue,
-                                    onChanged: (value) {
-                                      read.onRadioBtnToggled(value);
-                                    },
-                                    leading: ""),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  'Category & Product',
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Black,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: watch.groupValue == "full_order_amount"
-                            ? false
-                            : true,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 25.h,
-                            ),
-                            widget.isEditCoupon == true &&
-                                    watch.details?.shopOwnerCategoryId != ""
-                                ? SDropDownField(
-                                    value: watch.categoryId.toString(),
-                                    // hintText: "Delivery Charge",
-                                    hintSize: 15.sp,
-                                    onChanged: (value) {
-                                      read.onCategorySelect(value, context);
-                                    },
-                                    items: watch.editCategoryList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.id.toString(),
-                                              child: Text(
-                                                item.categoryName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                                    titleHeader: "Select Category",
-                                    titleSize: 12.sp,
-                                  )
-                                : SDropDownField(
-                                    // hintText: "Delivery Charge",
-                                    hintSize: 15.sp,
-                                    onChanged: (value) {
-                                      read.onCategorySelect(value, context);
-                                    },
-                                    items: watch.selectedcategorydata
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.categoryId.toString(),
-                                              child: Text(
-                                                item.categoryName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                                    titleHeader: "Select Category",
-                                    titleSize: 12.sp,
-                                  ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            widget.isEditCoupon == true && watch.productId != ""
-                                ? SDropDownField(
-                                    value: watch.productId,
-                                    // hintText: "Delivery Charge",
-                                    hintSize: 15.sp,
-                                    onChanged: (value) {
-                                      read.onProductSelect(value, context);
-                                    },
-                                    items: watch.productList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.id.toString(),
-                                              child: Text(
-                                                item.productName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                                    titleHeader: "Select Product",
-                                    titleSize: 12.sp,
-                                  )
-                                : SDropDownField(
-                                    // hintText: "Delivery Charge",
-                                    hintSize: 15.sp,
-                                    onChanged: (value) {
-                                      read.onProductSelect(value, context);
-                                    },
-                                    items: watch.productList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                              value: item.id.toString(),
-                                              child: Text(
-                                                item.productName ?? "",
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                            ))
-                                        .toList(),
-                                    titleHeader: "Select Product",
-                                    titleSize: 12.sp,
-                                  ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Terms and Conditions",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12.sp,
-                                color: Color(0xff3A3A3A)),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      PrimarySTextFormField(
-                        controller: watch.termsAndConditionController,
-                        height: 150.w,
-                        maxLines: 10,
-                        // hintText: "Address",/
-                      ),
-                      SizedBox(
-                        height: 60.h,
-                      ),
-                      PrimaryButton(
-                        fontSize: 20.sp,
-                        height: 50.w,
-                        text: "Submit",
-                        color: Color(0xff4689EC),
-                        onTap: () {
-                          widget.isEditCoupon == true
-                              ? read.uploadEditedCouponDetails(
-                                  context, widget.isNavFromDashboard)
-                              : read.uploadCouponDetails(
-                                  context, widget.isNavFromDashboard);
+                                child: child!,
+                              );
+                            },
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2100),
+                          );
+                          if (pickedDate != null) {
+                            String date = DateFormat('dd-MM-yyy')
+                                .format(pickedDate ?? DateTime.now());
+                            read.onFromDateSelected(date);
+                          }
                         },
+                        controller: watch.fromDateController,
+                        suffix: Container(
+                          width: 15.h,
+                          height: 17.w,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/icons/shop_cal.svg",
+                            ),
+                          ),
+                        ),
+                        hintFontSize: 15.sp,
                       ),
-                      SizedBox(
-                        height: 90.h,
-                      )
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        readOnly: true,
+                        onTap: () async {
+                          var pickedDate = await showDatePicker(
+                            builder: (BuildContext, child) {
+                              return Theme(
+                                data: Theme.of(context).copyWith(
+                                  colorScheme: ColorScheme.light(
+                                    primary: Color(0xff1767B1),
+                                    // <-- SEE HERE
+                                    onPrimary: Colors.white,
+                                    // <-- SEE HERE
+                                    onSurface: Colors.black, // <-- SEE HERE
+                                  ),
+                                  textButtonTheme: TextButtonThemeData(
+                                    style: TextButton.styleFrom(
+                                      primary: Color(
+                                          0xff1767B1), // button text color
+                                    ),
+                                  ),
+                                ),
+                                child: child!,
+                              );
+                            },
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2100),
+                          );
+                          if (pickedDate != null) {
+                            String date = DateFormat('dd-MM-yyy')
+                                .format(pickedDate ?? DateTime.now());
+                            read.onToDateSelected(date);
+                          }
+                        },
+                        controller: watch.toDateController,
+                        suffix: GestureDetector(
+                          onTap: () async {
+                            var pickedDate = await showDatePicker(
+                              builder: (BuildContext, child) {
+                                return Theme(
+                                  data: Theme.of(context).copyWith(
+                                    colorScheme: ColorScheme.light(
+                                      primary: Color(0xff1767B1),
+                                      // <-- SEE HERE
+                                      onPrimary: Colors.white,
+                                      // <-- SEE HERE
+                                      onSurface:
+                                      Colors.black, // <-- SEE HERE
+                                    ),
+                                    textButtonTheme: TextButtonThemeData(
+                                      style: TextButton.styleFrom(
+                                        primary: Color(
+                                            0xff1767B1), // button text color
+                                      ),
+                                    ),
+                                  ),
+                                  child: child!,
+                                );
+                              },
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2100),
+                            );
+                            if (pickedDate != null) {
+                              String date = DateFormat('dd-MM-yyy')
+                                  .format(pickedDate ?? DateTime.now());
+                              read.onToDateSelected(date);
+                            }
+                          },
+                          child: Container(
+                            width: 15.h,
+                            height: 17.w,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/icons/shop_cal.svg",
+                              ),
+                            ),
+                          ),
+                        ),
+                        hintFontSize: 15.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "Discount Percentage (%)",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Minimum Order Amount",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        textInputType: TextInputType.number,
+                        controller: watch.discountPercentageController,
+                        // hintText: "Delivery Charge",
+                        hintFontSize: 15.sp,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        textInputType: TextInputType.number,
+                        controller: watch.minOrderAmountController,
+                        // hintText: "Delivery Charge",
+                        hintFontSize: 15.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "Discount Max Amount",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Coupon Code",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Color(0xff3A3A3A)),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        textInputType: TextInputType.number,
+                        controller: watch.maxDiscountAmountController,
+                        hintFontSize: 15.sp,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 12.w,
+                    ),
+                    Expanded(
+                      child: PrimarySTextFormField(
+                        // textInputType: TextInputType.number,
+                        controller: watch.couponCodeController,
+                        onChanged: (value) {
+                          read.checkCouponCodeExist(context);
+                        },
+                        hintFontSize: 15.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Container(
+                  padding: EdgeInsets.only(right: 28.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          SecondaryRadioButton(
+                              value: "full_order_amount",
+                              groupValue: read.groupValue,
+                              onChanged: (value) {
+                                read.onRadioBtnToggled(value);
+                              },
+                              leading: ""),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Text(
+                            'Full Order Amount',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  // letterSpacing: .5,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SecondaryRadioButton(
+                              value: "category_and_product",
+                              groupValue: watch.groupValue,
+                              onChanged: (value) {
+                                read.onRadioBtnToggled(value);
+                              },
+                              leading: ""),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Text(
+                            'Category & Product',
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
+                Visibility(
+                  visible: watch.groupValue == "full_order_amount"
+                      ? false
+                      : true,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 25.h,
+                      ),
+
+                      watch.categoryId != ""
+                          ? SecondarySDropDownField(
+                        suffixIcon: IconButton(icon: Icon(Icons.clear),onPressed: (){
+                          read.clearCategory();
+                        },),
+                        value: watch.categoryId.toString(),
+                        hintSize: 15.sp,
+                        onChanged: (value) {
+                          read.onCategorySelect(value, context);
+                        },
+                           items: watch.selectedcategorydata
+                          ?.map((item) => DropdownMenuItem<String>(
+                value: item.categoryId.toString(),
+            child: Text(
+              item.categoryName ?? "",
+              style: TextStyle(
+                fontSize: 14.sp,
               ),
+            ),
+          ))
+            .toList(),
+                        titleHeader: "Select Category",
+                        titleSize: 12.sp,
+                      )
+                          : SecondarySDropDownField(
+                        // hintText: "Delivery Charge",
+                        hintSize: 15.sp,
+                        onChanged: (value) {
+                          read.onCategorySelect(value, context);
+                        },
+                        items: watch.selectedcategorydata
+                            ?.map((item) => DropdownMenuItem<String>(
+                          value: item.categoryId.toString(),
+                          child: Text(
+                            item.categoryName ?? "",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ))
+                            .toList(),
+                        titleHeader: "Select Category",
+                        titleSize: 12.sp,
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      watch.productId != ""
+                          ? SecondarySDropDownField(
+                        suffixIcon: IconButton(icon: Icon(Icons.clear),onPressed: (){
+                          read.clearProduct();
+                        },),
+                        value: watch.productId,
+                        // hintText: "Delivery Charge",
+                        hintSize: 15.sp,
+                        onChanged: (value) {
+                          read.onProductSelect(value, context);
+                        },
+                        items: watch.productList
+                            ?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.productName ?? "",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ))
+                            .toList(),
+                        titleHeader: "Select Product",
+                        titleSize: 12.sp,
+                      )
+                          : SecondarySDropDownField(
+
+                        hintSize: 15.sp,
+                        onChanged: (value) {
+                          read.onProductSelect(value, context);
+                        },
+                        items: watch.productList
+                            ?.map((item) => DropdownMenuItem<String>(
+                          value: item.id.toString(),
+                          child: Text(
+                            item.productName ?? "",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ))
+                            .toList(),
+                        titleHeader: "Select Product",
+                        titleSize: 12.sp,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Terms and Conditions",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                          color: Color(0xff3A3A3A)),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                PrimarySTextFormField(
+                  controller: watch.termsAndConditionController,
+                  height: 150.w,
+                  maxLines: 10,
+                  // hintText: "Address",/
+                ),
+                SizedBox(
+                  height: 60.h,
+                ),
+                PrimaryButton(
+                  fontSize: 20.sp,
+                  height: 50.w,
+                  text: "Submit",
+                  color: Color(0xff4689EC),
+                  onTap: () {
+                    widget.isEditCoupon == true
+                        ? read.uploadEditedCouponDetails(
+                        context, widget.isNavFromDashboard)
+                        : read.uploadCouponDetails(
+                        context, widget.isNavFromDashboard);
+                  },
+                ),
+                SizedBox(
+                  height: 90.h,
+                )
+              ],
+            ),
           ),
+        ),
+      ),
     );
   }
 }

@@ -41,8 +41,7 @@ class SAddCouponsController extends ChangeNotifier {
   TextEditingController minOrderAmountController = TextEditingController();
   TextEditingController maxDiscountAmountController = TextEditingController();
   TextEditingController termsAndConditionController = TextEditingController();
-  ProductListAsPerCategoryRepo productListAsPerCategoryRepo =
-      ProductListAsPerCategoryRepo();
+  ProductListAsPerCategoryRepo productListAsPerCategoryRepo = ProductListAsPerCategoryRepo();
   CouponCodeExistsRepo couponCodeExistsRepo = CouponCodeExistsRepo();
   AddCouponsRepo addCouponsRepo = AddCouponsRepo();
   EditCouponsRepo editCouponsRepo = EditCouponsRepo();
@@ -71,8 +70,6 @@ class SAddCouponsController extends ChangeNotifier {
       categoryId = "";
       productId = "";
       termsAndConditionController.clear();
-      // termsAndConditionController.text =
-      //     "hbfjhhf dhbihiurenihyubyreiuwgniuynhiurt";
       await getCategoriesList(context);
       notifyListeners();
     }
@@ -86,6 +83,7 @@ class SAddCouponsController extends ChangeNotifier {
 
   void onCategorySelect(value, context) async {
     categoryId = value;
+
     productId = "";
     await getProductList(context);
     notifyListeners();
@@ -94,9 +92,8 @@ class SAddCouponsController extends ChangeNotifier {
   void onProductSelect(value, context) async {
     productId = value;
     int length = productList?.length ?? 0;
-    print(productId);
+    print("productId${productId}");
     for (int i = 0; i < length; i++) {
-      print(productList?[i].id);
       if (productList?[i].id.toString() == value.toString()) {
         print("helloooooo");
         productType = productList?[i].productType ?? "";
@@ -173,7 +170,6 @@ class SAddCouponsController extends ChangeNotifier {
               type: SnackType.error);
         }
         LoadingOverlay.of(context).hide();
-
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -190,6 +186,17 @@ class SAddCouponsController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  void clearProduct(){
+    productId="";
+    notifyListeners();
+  }
+  void clearCategory(){
+    categoryId="";
+    productList?.clear();
+    productId="";
+    notifyListeners();
   }
 
   CouponCodeExistsRequestModel get couponCodeExistsRequestModel =>

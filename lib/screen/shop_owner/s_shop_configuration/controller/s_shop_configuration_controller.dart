@@ -529,6 +529,7 @@ class SShopConfigurationController extends ChangeNotifier {
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         if (isInitialConfiguration) {
+
           // read.onNavigation(0,ShopDashBoardView(
           //   refresh: true,
           // ), context);
@@ -651,9 +652,17 @@ class SShopConfigurationController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
         if (isInitialConfiguration) {
-          read.onNavigation(0,ShopDashBoardView(
-            refresh: true,
-          ), context);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SMainScreenView(
+                  index: 0,
+                  screenName: ShopDashBoardView(
+                    refresh: true,
+                  ),
+                )),
+                (Route<dynamic> route) => false,
+          );
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(

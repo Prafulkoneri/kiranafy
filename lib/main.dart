@@ -356,7 +356,10 @@ class _MyAppState extends State<MyApp> {
     final android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
-        icon: '');
+        styleInformation: BigTextStyleInformation(''),
+         icon: '',
+
+    );
     final iOS = IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 

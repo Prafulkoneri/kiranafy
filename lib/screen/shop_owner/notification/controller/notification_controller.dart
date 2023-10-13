@@ -73,8 +73,15 @@ class ShopNoticationController extends ChangeNotifier {
       final result = CNotificationModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        notificationList?.clear();
-        notifyListeners();
+        if(result.status==200) {
+          notificationList?.clear();
+          notifyListeners();
+        }
+        else{
+
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

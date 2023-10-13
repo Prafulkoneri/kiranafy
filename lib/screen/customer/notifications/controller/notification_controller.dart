@@ -38,10 +38,15 @@ class CustomerNoticationController extends ChangeNotifier {
       final result = NotificationModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        notificationdata = result.notificationdata;
-        notificationList = notificationdata?.notificationList;
-        showLoader(false);
-        notifyListeners();
+        if(result.status==200) {
+          notificationdata = result.notificationdata;
+          notificationList = notificationdata?.notificationList;
+          showLoader(false);
+          notifyListeners();
+        }
+        else{
+          Utils.showPrimarySnackbar(context, result.message, type: SnackType.error);
+        }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
