@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_detail_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -21,8 +18,7 @@ class CustomerDetailView extends StatefulWidget {
   final String? customerId;
   final String? screenName;
 
-  const CustomerDetailView(
-      {super.key, required this.customerId, required this.screenName});
+  const CustomerDetailView({super.key, this.customerId, this.screenName});
 
   @override
   State<CustomerDetailView> createState() => _CustomerDetailViewState();
@@ -43,14 +39,17 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
     final read = context.read<SCustomerDetailController>();
     final watch = context.watch<SCustomerDetailController>();
     final readMain = context.read<SMainScreenController>();
+    final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           title: "Customer Details",
           onBackBtnPressed: () {
-            readMain.onNavigation(4, CustomerListView(
-                isRefresh: false, fromPage: widget.screenName), context);
+            readMain.onNavigation(
+                4,
+                CustomerListView(isRefresh: false, fromPage: widget.screenName),
+                context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -223,190 +222,209 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                     itemCount: watch.customerOrderDetails?.length ?? 0,
                     itemBuilder: (context, index) {
                       final element = watch.customerOrderDetails?[index];
-                      return Container(
-                        padding: const EdgeInsets.all(20),
-                        margin: const EdgeInsets.only(
-                          left: 19.0,
-                          right: 19.0,
-                          bottom: 10,
-                          top: 10.0,
-                        ),
-                        // padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xffEFEFEF)),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20.0)),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Order ID - ${element?.orderUniqueId}',
-                                  style: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                SizedBox(
-                                  width: 100.w,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: MaterialStateProperty.all(0),
-                                      // backgroundColor: ,
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.white),
-                                      shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          side: BorderSide(
-                                            color: element?.orderStatus ==
-                                                    "Pending"
-                                                ? Yellow
-                                                : element?.orderStatus ==
-                                                        "Delivered"
-                                                    ? Color(0xff39C19D)
-                                                    : element?.orderStatus ==
-                                                            "Confirmed"
-                                                        ? Color(0xff115B7A)
-                                                        : element?.orderStatus ==
-                                                                "Cancelled"
-                                                            ? Colors.red
-                                                            : element?.orderStatus ==
-                                                                    "Dispatched"
-                                                                ? Colors.orange
-                                                                : element?.orderStatus ==
-                                                                        "Packing"
-                                                                    ? Colors
-                                                                        .brown
-                                                                    : Color(
-                                                                        0xff39C19D),
-                                            // width: 1,
+                      return GestureDetector(
+                        onTap: () {
+                          readMainScreen.onNavigation(
+                              0,
+                              ShopOrderView(
+                                route: "customerDetails",
+                                orderId: element?.id.toString(),
+                                fromOrderStatus: true,
+                                selectedIndex: 0,
+                              ),
+                              context);
+                          readMainScreen.hideBottomNavigationBar();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          margin: const EdgeInsets.only(
+                            left: 19.0,
+                            right: 19.0,
+                            bottom: 10,
+                            top: 10.0,
+                          ),
+                          // padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xffEFEFEF)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20.0)),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Order ID - ${element?.orderUniqueId}',
+                                    style: TextStyle(
+                                        color: Black,
+                                        letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                  SizedBox(
+                                    width: 100.w,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        elevation: MaterialStateProperty.all(0),
+                                        // backgroundColor: ,
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: BorderSide(
+                                              color: element?.orderStatus ==
+                                                      "Pending"
+                                                  ? Yellow
+                                                  : element?.orderStatus ==
+                                                          "Delivered"
+                                                      ? Color(0xff39C19D)
+                                                      : element?.orderStatus ==
+                                                              "Confirmed"
+                                                          ? Color(0xff115B7A)
+                                                          : element?.orderStatus ==
+                                                                  "Cancelled"
+                                                              ? Colors.red
+                                                              : element?.orderStatus ==
+                                                                      "Dispatched"
+                                                                  ? Colors
+                                                                      .orange
+                                                                  : element?.orderStatus ==
+                                                                          "Packing"
+                                                                      ? Colors
+                                                                          .brown
+                                                                      : Color(
+                                                                          0xff39C19D),
+                                              // width: 1,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           OrderDeliveryView(
-                                      //               orderId: element?.id
-                                      //                   .toString())),
-                                      // );
-                                    },
-                                    child: Text(
-                                      element?.orderStatus == "Refund"
-                                          ? "Delivered"
-                                          : element?.orderStatus ?? "",
-                                      style: GoogleFonts.dmSans(
-                                        textStyle: TextStyle(
-                                            color: element?.orderStatus ==
-                                                    "Pending"
-                                                ? Yellow
-                                                ///////
-                                                : element?.orderStatus ==
-                                                        "Delivered"
-                                                    ? Color(0xff39C19D)
-                                                    ///////
-                                                    : element?.orderStatus ==
-                                                            "Confirmed"
-                                                        ? Color(0xff115B7A)
-                                                        /////////
-                                                        : element?.orderStatus ==
-                                                                "Cancelled"
-                                                            ? Colors.red
-                                                            //////////////
-                                                            : element?.orderStatus ==
-                                                                    "Dispatched"
-                                                                ? Colors.orange
-                                                                : element?.orderStatus ==
-                                                                        "Packing"
-                                                                    ? Colors
-                                                                        .brown
-                                                                    : Colors
-                                                                        .green,
-                                            // letterSpacing: .5
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w700),
+                                      onPressed: () {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           OrderDeliveryView(
+                                        //               orderId: element?.id
+                                        //                   .toString())),
+                                        // );
+                                      },
+                                      child: Text(
+                                        element?.orderStatus == "Refund"
+                                            ? "Delivered"
+                                            : element?.orderStatus ?? "",
+                                        style: GoogleFonts.dmSans(
+                                          textStyle: TextStyle(
+                                              color: element?.orderStatus ==
+                                                      "Pending"
+                                                  ? Yellow
+                                                  ///////
+                                                  : element?.orderStatus ==
+                                                          "Delivered"
+                                                      ? Color(0xff39C19D)
+                                                      ///////
+                                                      : element?.orderStatus ==
+                                                              "Confirmed"
+                                                          ? Color(0xff115B7A)
+                                                          /////////
+                                                          : element?.orderStatus ==
+                                                                  "Cancelled"
+                                                              ? Colors.red
+                                                              //////////////
+                                                              : element?.orderStatus ==
+                                                                      "Dispatched"
+                                                                  ? Colors
+                                                                      .orange
+                                                                  : element?.orderStatus ==
+                                                                          "Packing"
+                                                                      ? Colors
+                                                                          .brown
+                                                                      : Colors
+                                                                          .green,
+                                              // letterSpacing: .5
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                       ),
-                                    ),
 
-                                    //
+                                      //
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${element?.createdAt}',
-                                  style: TextStyle(
-                                      color: const Color(0xff5B5B5B),
-                                      // letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total Amount',
-                                  style: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                Text(
-                                  'Total Quantity',
-                                  style: TextStyle(
-                                      color: Black,
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '\u{20B9} ${element?.totalAmount}',
-                                  style: TextStyle(
-                                      color: const Color(0xff5B5B5B),
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w200),
-                                ),
-                                Text(
-                                  '${element?.totalItems}',
-                                  style: TextStyle(
-                                      color: const Color(0xff5B5B5B),
-                                      letterSpacing: .5,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${element?.createdAt}',
+                                    style: TextStyle(
+                                        color: const Color(0xff5B5B5B),
+                                        // letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Total Amount',
+                                    style: TextStyle(
+                                        color: Black,
+                                        letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                  Text(
+                                    'Total Quantity',
+                                    style: TextStyle(
+                                        color: Black,
+                                        letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '\u{20B9} ${element?.totalAmount}',
+                                    style: TextStyle(
+                                        color: const Color(0xff5B5B5B),
+                                        letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w200),
+                                  ),
+                                  Text(
+                                    '${element?.totalItems}',
+                                    style: TextStyle(
+                                        color: const Color(0xff5B5B5B),
+                                        letterSpacing: .5,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

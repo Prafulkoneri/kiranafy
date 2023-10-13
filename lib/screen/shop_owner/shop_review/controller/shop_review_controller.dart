@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/review/model/customer_review_list_shop_model.dart';
@@ -32,6 +33,7 @@ class SShopReviewListController extends ChangeNotifier {
         .shopReview(pref.getString("successToken"))
         .then((response) {
       print("successToken");
+      log(response.body);
       final result = ShopReviewListModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -43,11 +45,9 @@ class SShopReviewListController extends ChangeNotifier {
 
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

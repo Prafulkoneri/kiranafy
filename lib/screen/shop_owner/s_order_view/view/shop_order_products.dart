@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -443,6 +442,11 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                             ),
                           )
                         : Container(
+                            foregroundDecoration: BoxDecoration(
+                              color: Colors.grey,
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                            color: Colors.grey.withOpacity(0.1),
                             width: ScreenUtil().screenWidth,
                             child: Row(
                               children: [

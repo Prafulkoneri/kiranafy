@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////9/5/2023\\\\\\\\\\\\\\\\\\
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +6,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/notification/view/notification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_reason_bottom_sheet_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/delivery_code_bottom_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
+import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -26,7 +26,7 @@ import 'package:provider/provider.dart';
 
 class ShopOrderView extends StatefulWidget {
   final String? orderId;
-  final  String ?  route;
+  final String? route;
   final int? selectedIndex;
   final bool? fromOrderStatus;
 
@@ -35,7 +35,7 @@ class ShopOrderView extends StatefulWidget {
     this.orderId,
     required this.selectedIndex,
     required this.fromOrderStatus,
-  required this.route,
+    required this.route,
   });
 
   @override
@@ -63,21 +63,38 @@ class _ShopOrderViewState extends State<ShopOrderView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            if(widget.route=="notification"){
-              readMainScreen.onNavigation(0, NotificationsScreenView(route:""),context);
+            if (widget.route == "notification") {
+              readMainScreen.onNavigation(
+                  0, NotificationsScreenView(route: ""), context);
               readMainScreen.hideBottomNavigationBar();
             }
-            if(widget.route=="orderStatus"){
-              readMainScreen.onNavigation(1, SOrderStatusView(selectedIndex: widget.selectedIndex), context);
+            if (widget.route == "customerDetails") {
+              readMainScreen.onNavigation(
+                  0, CustomerDetailView(screenName: ""), context);
               readMainScreen.showBottomNavigationBar();
             }
-            if(widget.route=="paymentRefund"){
-              readMainScreen.onNavigation(0, SPaymentRefundList(
-                isNavFromAccounts: false,
-              ), context);
+            ////////////////////
+            if (widget.route == "paymentsScreen") {
+              readMainScreen.onNavigation(2, SPaymentsView(), context);
               readMainScreen.showBottomNavigationBar();
             }
-
+            ////////////////////
+            if (widget.route == "orderStatus") {
+              readMainScreen.onNavigation(
+                  1,
+                  SOrderStatusView(selectedIndex: widget.selectedIndex),
+                  context);
+              readMainScreen.showBottomNavigationBar();
+            }
+            if (widget.route == "paymentRefund") {
+              readMainScreen.onNavigation(
+                  0,
+                  SPaymentRefundList(
+                    isNavFromAccounts: false,
+                  ),
+                  context);
+              readMainScreen.showBottomNavigationBar();
+            }
           },
           title: "Order",
           onActionTap: () {},
@@ -86,26 +103,32 @@ class _ShopOrderViewState extends State<ShopOrderView> {
       body: watch.isLoading
           ? const Loader()
           : watch.isDetailsAvailable
-              ?
-      WillPopScope(
-          onWillPop: ()async{
-            if(widget.route=="notification"){
-              readMainScreen.onNavigation(0, NotificationsScreenView(route:""),context);
-              readMainScreen.hideBottomNavigationBar();
-            }
-            if(widget.route=="orderStatus"){
-              readMainScreen.onNavigation(1, SOrderStatusView(selectedIndex: widget.selectedIndex), context);
-              readMainScreen.showBottomNavigationBar();
-            }
-            if(widget.route=="paymentRefund"){
-              readMainScreen.onNavigation(0, SPaymentRefundList(
-                isNavFromAccounts: false,
-              ), context);
-              readMainScreen.showBottomNavigationBar();
-            }
-            return false;
-          },
-             child: SingleChildScrollView(
+              ? WillPopScope(
+                  onWillPop: () async {
+                    if (widget.route == "notification") {
+                      readMainScreen.onNavigation(
+                          0, NotificationsScreenView(route: ""), context);
+                      readMainScreen.hideBottomNavigationBar();
+                    }
+                    if (widget.route == "orderStatus") {
+                      readMainScreen.onNavigation(
+                          1,
+                          SOrderStatusView(selectedIndex: widget.selectedIndex),
+                          context);
+                      readMainScreen.showBottomNavigationBar();
+                    }
+                    if (widget.route == "paymentRefund") {
+                      readMainScreen.onNavigation(
+                          0,
+                          SPaymentRefundList(
+                            isNavFromAccounts: false,
+                          ),
+                          context);
+                      readMainScreen.showBottomNavigationBar();
+                    }
+                    return false;
+                  },
+                  child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +143,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 // crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
@@ -172,7 +196,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     color: Colors.red,
                                                     // letterSpacing: .5,
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w500),
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
                                             ),
 
@@ -200,7 +225,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           BorderRadius.circular(
                                                               10),
                                                       side: BorderSide(
-                                                        color: Color(0xffE4C400),
+                                                        color:
+                                                            Color(0xffE4C400),
                                                         // width: 1,
                                                       ),
                                                     ),
@@ -213,7 +239,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   "${watch.orderDetails?.orderStatus}",
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
-                                                        color: Color(0xffE4C400),
+                                                        color:
+                                                            Color(0xffE4C400),
                                                         // letterSpacing: .5,
                                                         fontSize: 12.sp,
                                                         fontWeight:
@@ -237,16 +264,18 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       // backgroundColor: ,
                                                       backgroundColor:
                                                           MaterialStateProperty
-                                                              .all(Colors.white),
-                                                      shape: MaterialStateProperty
-                                                          .all(
+                                                              .all(
+                                                                  Colors.white),
+                                                      shape:
+                                                          MaterialStateProperty
+                                                              .all(
                                                         RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           side: BorderSide(
-                                                            color:
-                                                                Color(0xff39C19D),
+                                                            color: Color(
+                                                                0xff39C19D),
                                                             // width: 1,
                                                           ),
                                                         ),
@@ -257,19 +286,21 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       "${watch.orderDetails?.orderStatus}",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
-                                                            color:
-                                                                Color(0xff39C19D),
+                                                            color: Color(
+                                                                0xff39C19D),
                                                             // letterSpacing: .5,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w500),
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                     ),
 
                                                     //
                                                   ),
                                                 )
-                                              : watch.orderDetails?.orderStatus ==
+                                              : watch.orderDetails
+                                                          ?.orderStatus ==
                                                       "Packing"
                                                   ? SizedBox(
                                                       height: 22.h,
@@ -303,16 +334,18 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         onPressed: () {},
                                                         child: Text(
                                                           "${watch.orderDetails?.orderStatus}",
-                                                          style:
-                                                              GoogleFonts.dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Color(
-                                                                    0xff39C19D),
-                                                                // letterSpacing: .5,
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
+                                                          style: GoogleFonts
+                                                              .dmSans(
+                                                            textStyle:
+                                                                TextStyle(
+                                                                    color: Color(
+                                                                        0xff39C19D),
+                                                                    // letterSpacing: .5,
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
                                                           ),
                                                         ),
 
@@ -362,11 +395,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         color: Color(
                                                                             0xff39C19D),
                                                                         // letterSpacing: .5,
-                                                                        fontSize:
-                                                                            12.sp,
+                                                                        fontSize: 12
+                                                                            .sp,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500),
+                                                                            FontWeight.w500),
                                                               ),
                                                             ),
 
@@ -385,11 +417,12 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     ButtonStyle(
                                                                   elevation:
                                                                       MaterialStateProperty
-                                                                          .all(0),
+                                                                          .all(
+                                                                              0),
                                                                   // backgroundColor: ,
                                                                   backgroundColor:
-                                                                      MaterialStateProperty
-                                                                          .all(Colors
+                                                                      MaterialStateProperty.all(
+                                                                          Colors
                                                                               .white),
                                                                   shape:
                                                                       MaterialStateProperty
@@ -409,7 +442,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                onPressed: () {},
+                                                                onPressed:
+                                                                    () {},
                                                                 child: Text(
                                                                   "${watch.orderDetails?.orderStatus}",
                                                                   style:
@@ -437,15 +471,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     style:
                                                                         ButtonStyle(
                                                                       elevation:
-                                                                          MaterialStateProperty
-                                                                              .all(0),
+                                                                          MaterialStateProperty.all(
+                                                                              0),
                                                                       // backgroundColor: ,
                                                                       backgroundColor:
                                                                           MaterialStateProperty.all(
                                                                               Colors.white),
-                                                                      shape:
-                                                                          MaterialStateProperty
-                                                                              .all(
+                                                                      shape: MaterialStateProperty
+                                                                          .all(
                                                                         RoundedRectangleBorder(
                                                                           borderRadius:
                                                                               BorderRadius.circular(10),
@@ -490,13 +523,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           // backgroundColor: ,
                                                                           backgroundColor:
                                                                               MaterialStateProperty.all(Colors.white),
-                                                                          shape: MaterialStateProperty
-                                                                              .all(
+                                                                          shape:
+                                                                              MaterialStateProperty.all(
                                                                             RoundedRectangleBorder(
-                                                                              borderRadius:
-                                                                                  BorderRadius.circular(10),
-                                                                              side:
-                                                                                  BorderSide(
+                                                                              borderRadius: BorderRadius.circular(10),
+                                                                              side: BorderSide(
                                                                                 color: Color(0xff39C19D),
                                                                                 // width: 1,
                                                                               ),
@@ -508,8 +539,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         child:
                                                                             Text(
                                                                           "${watch.orderDetails?.orderStatus}",
-                                                                          style: GoogleFonts
-                                                                              .dmSans(
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
                                                                                 color: Color(0xff39C19D),
                                                                                 // letterSpacing: .5,
@@ -532,13 +563,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                               ElevatedButton(
                                                                             style:
                                                                                 ButtonStyle(
-                                                                              elevation:
-                                                                                  MaterialStateProperty.all(0),
+                                                                              elevation: MaterialStateProperty.all(0),
                                                                               // backgroundColor: ,
-                                                                              backgroundColor:
-                                                                                  MaterialStateProperty.all(Colors.white),
-                                                                              shape:
-                                                                                  MaterialStateProperty.all(
+                                                                              backgroundColor: MaterialStateProperty.all(Colors.white),
+                                                                              shape: MaterialStateProperty.all(
                                                                                 RoundedRectangleBorder(
                                                                                   borderRadius: BorderRadius.circular(10),
                                                                                   side: BorderSide(
@@ -553,8 +581,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                             child:
                                                                                 Text(
                                                                               "${watch.orderDetails?.orderStatus}",
-                                                                              style:
-                                                                                  GoogleFonts.dmSans(
+                                                                              style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(
                                                                                     color: Color(0xff39C19D),
                                                                                     // letterSpacing: .5,
@@ -609,7 +636,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         ),
                         watch.orderDetails?.deliveryType == "delivery_to"
                             ? Container(
-                                margin: EdgeInsets.only(left: 19.w, right: 19.w),
+                                margin:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 // height: 156.h,
                                 width: double.infinity,
                                 child: Card(
@@ -684,7 +712,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 ),
                                                 onPressed: () {},
                                                 child: Text(
-                                                  "${watch.deliveryAddressDetails?.deliveryAddressType}".capitalize(),
+                                                  "${watch.deliveryAddressDetails?.deliveryAddressType}"
+                                                      .capitalize(),
                                                   // "${element.deliveryAddressType}",
                                                   // "Home",
                                                   style: GoogleFonts.dmSans(
@@ -720,7 +749,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     color: Black,
                                                     letterSpacing: .5,
                                                     fontSize: 13.sp,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ),
                                           ],
@@ -770,7 +800,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 ),
                               )
                             : Container(
-                                padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
                                 child: Row(
                                   children: [
                                     Flexible(
@@ -787,14 +818,16 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 children: [],
                                                 text:
                                                     'This is a Self- Pickup Order, the customer will collect the ordered products from your shop.',
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = () {},
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {},
                                                 style: TextStyle(
                                                     color: Colors.blue,
                                                     // letterSpacing: .5,
                                                     height: 1.5.w,
                                                     fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ]),
                                       ),
@@ -866,8 +899,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           ),
                                                           Text(
                                                             "Confirm",
-                                                            textAlign:
-                                                                TextAlign.center,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             style: GoogleFonts
                                                                 .dmSans(
                                                               textStyle:
@@ -887,7 +920,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     ),
                                                   ),
                                                 ) ///////////////////////////////////////////Confirmed//////////////
-                                              : watch.orderDetails?.orderStatus ==
+                                              : watch.orderDetails
+                                                          ?.orderStatus ==
                                                       "Confirmed"
                                                   ? Expanded(
                                                       child: InkWell(
@@ -933,9 +967,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color: Colors.white,
                                                                           // letterSpacing: .5,
@@ -948,9 +981,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color: Colors.white,
                                                                           // letterSpacing: .5,
@@ -988,7 +1020,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               // margin: EdgeInsets.only(
                                                               //     left: 19.w, right: 20.w),
                                                               padding:
-                                                                  EdgeInsets.only(
+                                                                  EdgeInsets
+                                                                      .only(
                                                                 // left: 20.w,
                                                                 top: 9.w,
                                                                 bottom: 7.w,
@@ -1017,9 +1050,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
-                                                                    style:
-                                                                        GoogleFonts
-                                                                            .dmSans(
+                                                                    style: GoogleFonts
+                                                                        .dmSans(
                                                                       textStyle: TextStyle(
                                                                           color: Colors.white,
                                                                           // letterSpacing: .5,
@@ -1054,10 +1086,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         true,
                                                                     shape: const RoundedRectangleBorder(
                                                                         borderRadius: BorderRadius.only(
-                                                                            topLeft: Radius.circular(
-                                                                                30),
-                                                                            topRight:
-                                                                                Radius.circular(30))),
+                                                                            topLeft:
+                                                                                Radius.circular(30),
+                                                                            topRight: Radius.circular(30))),
                                                                     context:
                                                                         context,
                                                                     builder:
@@ -1066,7 +1097,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     },
                                                                   );
                                                                 },
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   // margin: EdgeInsets.only(
                                                                   //     left: 19.w, right: 20.w),
                                                                   padding:
@@ -1097,8 +1129,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       Text(
                                                                         "Order Delivered To Customer",
                                                                         textAlign:
-                                                                            TextAlign
-                                                                                .center,
+                                                                            TextAlign.center,
                                                                         style: GoogleFonts
                                                                             .dmSans(
                                                                           textStyle: TextStyle(
@@ -1139,8 +1170,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             child: Expanded(
                                               child: InkWell(
                                                 onTap: () {
-                                                  read.checkIfAllProductsSelected(context);
-                                                  if(!watch.canShopOwnerCancel){
+                                                  read.checkIfAllProductsSelected(
+                                                      context);
+                                                  if (!watch
+                                                      .canShopOwnerCancel) {
                                                     return;
                                                   }
                                                   // read.shopOrderStatus(
@@ -1150,13 +1183,15 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   //     "",
                                                   //     "");
                                                   showModalBottomSheet(
-                                                    backgroundColor: Colors.white,
+                                                    backgroundColor:
+                                                        Colors.white,
                                                     isScrollControlled: true,
                                                     shape: const RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius.only(
                                                                 topLeft: Radius
-                                                                    .circular(30),
+                                                                    .circular(
+                                                                        30),
                                                                 topRight: Radius
                                                                     .circular(
                                                                         30))),
@@ -1189,9 +1224,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         "Cancel",
                                                         textAlign:
                                                             TextAlign.center,
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               // letterSpacing: .5,
                                                               fontSize: 18.sp,
                                                               fontWeight:
@@ -1213,7 +1250,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                       SizedBox(
                                         height: 9.h,
                                       ),
-                                      watch.orderDetails?.orderStatus == "Pending"
+                                      watch.orderDetails?.orderStatus ==
+                                              "Pending"
                                           ? Container(
                                               padding: EdgeInsets.only(
                                                   left: 19.w, right: 19.w),
@@ -1243,7 +1281,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   color: Black,
                                                                   // letterSpacing: .5,
                                                                   height: 1.5.w,
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400),
@@ -1276,7 +1315,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                             Text(
@@ -1290,7 +1330,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ],
@@ -1326,7 +1367,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             ),
                                             Text(
                                               // maxLines: 3,
-                                              watch.orderDetails?.deliverySlot ==
+                                              watch.orderDetails
+                                                          ?.deliverySlot ==
                                                       "shop_owner_slot_9_to_12"
                                                   ? " 09:00 AM - 12:00 PM"
                                                   : watch.orderDetails
@@ -1350,7 +1392,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ],
@@ -1379,7 +1422,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                             Text(
@@ -1393,7 +1437,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ],
@@ -1429,7 +1474,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             ),
                                             Text(
                                               // maxLines: 3,
-                                              watch.orderDetails?.deliverySlot ==
+                                              watch.orderDetails
+                                                          ?.deliverySlot ==
                                                       "shop_owner_slot_9_to_12"
                                                   ? "09:00 AM - 12:00 PM"
                                                   : watch.orderDetails
@@ -1453,7 +1499,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w700),
+                                                    fontWeight:
+                                                        FontWeight.w700),
                                               ),
                                             ),
                                           ],
@@ -1464,8 +1511,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
 
                         //////////////
                         Container(
-                          padding:
-                              EdgeInsets.only(left: 19.w, top: 10.w, right: 19.w),
+                          padding: EdgeInsets.only(
+                              left: 19.w, top: 10.w, right: 19.w),
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1489,7 +1536,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                               ),
                               ShopOrderProducts(),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Sub Total",
@@ -1524,7 +1572,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 endIndent: 0,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   RichText(
                                     text: TextSpan(children: [
@@ -1549,7 +1598,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     color: SplashText,
                                                     // letterSpacing: .5,
                                                     fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             )
                                           : TextSpan(
@@ -1584,7 +1634,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 height: 10.w,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Delivery Charges",
@@ -1621,7 +1672,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 endIndent: 0,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     "Total Amount",
@@ -1727,9 +1779,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             top: 2.w,
                                             bottom: 2.w),
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color(0xff39C19D).withOpacity(0.3),
-                                          borderRadius: BorderRadius.circular(5),
+                                          color: Color(0xff39C19D)
+                                              .withOpacity(0.3),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
                                           border: Border.all(
                                             color: Color(0xff39C19D),
                                             style: BorderStyle.solid,
@@ -1804,7 +1857,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                         watch.orderDetails?.orderStatus == "Order Refund" &&
                                 (watch.orderDetails?.shopOwnerCancelledStatus ==
                                         "NO" &&
-                                    watch.orderDetails?.customerCancelledStatus ==
+                                    watch.orderDetails
+                                            ?.customerCancelledStatus ==
                                         "NO")
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1922,9 +1976,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                color:
-                                                                    Colors.black,
-                                                                fontSize: 18.sp),
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    18.sp),
                                                           ),
                                                           SizedBox(
                                                             height: 11.w,
@@ -1935,9 +1990,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                color:
-                                                                    Colors.black,
-                                                                fontSize: 18.sp),
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    18.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -1951,9 +2007,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             border: Border.all(
                                                                 color: Color(
                                                                     0xff115B7A))),
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                                horizontal: 12.w),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    12.w),
                                                         child: Center(
                                                             child: Text(
                                                           watch.orderDetails
@@ -1979,7 +2036,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           style: TextStyle(
                                                               fontSize: 12.sp,
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               color: Color(
                                                                   0xff115B7A)),
                                                         )),
@@ -2018,7 +2076,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         height: 16.w,
@@ -2026,13 +2085,16 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       Text("Refund Amount",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 14.sp)),
                                                       SizedBox(
                                                         height: 10.w,
                                                       ),
                                                       PrimaryCTextFormField(
-                                                        textInputType: TextInputType.number,
+                                                        textInputType:
+                                                            TextInputType
+                                                                .number,
                                                         controller: watch
                                                             .refundPayableAmount,
                                                         hintText:
@@ -2060,7 +2122,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -2086,7 +2149,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -2097,14 +2161,15 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           "Payment Transaction ID",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 14.sp)),
                                                       SizedBox(
                                                         height: 10.w,
                                                       ),
                                                       PrimaryCTextFormField(
-                                                        controller:
-                                                            watch.upiIdController,
+                                                        controller: watch
+                                                            .upiIdController,
                                                         hintText:
                                                             "Type Transaction ID",
                                                       ),
@@ -2137,7 +2202,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   color: Color(0xffEFFDFF),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         height: 15.w,
@@ -2184,8 +2250,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             decoration: BoxDecoration(
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(
-                                                                            5.w),
+                                                                        .circular(5
+                                                                            .w),
                                                                 border: Border.all(
                                                                     color: Color(
                                                                         0xff115B7A))),
@@ -2207,14 +2273,13 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           watch.orderDetails?.customerRefundPaymentStatus ==
                                                                               "not_received"
                                                                       ? "Pending from Customer"
-                                                                      : watch.orderDetails?.shopOwnerRefundStatus ==
-                                                                                  "accept" &&
-                                                                              watch.orderDetails?.customerRefundPaymentStatus ==
-                                                                                  "received"
+                                                                      : watch.orderDetails?.shopOwnerRefundStatus == "accept" &&
+                                                                              watch.orderDetails?.customerRefundPaymentStatus == "received"
                                                                           ? "Payment Recieved"
                                                                           : "",
                                                               style: TextStyle(
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -2227,10 +2292,12 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       SizedBox(
                                                         height: 16.w,
                                                       ),
-                                                      Text("Refund Reject Reason",
+                                                      Text(
+                                                          "Refund Reject Reason",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 14.sp)),
                                                       SizedBox(
                                                         height: 10.w,
@@ -2301,7 +2368,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                             18.sp),
                                                                   ),
                                                                   SizedBox(
-                                                                    height: 11.w,
+                                                                    height:
+                                                                        11.w,
                                                                   ),
                                                                   Text(
                                                                     "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
@@ -2320,9 +2388,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 height: 22.w,
                                                                 decoration: BoxDecoration(
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5
-                                                                                .w),
+                                                                        BorderRadius.circular(5
+                                                                            .w),
                                                                     border: Border.all(
                                                                         color: Color(
                                                                             0xff115B7A))),
@@ -2337,13 +2404,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           watch.orderDetails?.customerRefundPaymentStatus ==
                                                                               "not_received"
                                                                       ? "Payment Pending"
-                                                                      : watch.orderDetails?.shopOwnerRefundStatus ==
-                                                                                  "accept" &&
-                                                                              watch.orderDetails?.customerRefundPaymentStatus ==
-                                                                                  "not_received"
+                                                                      : watch.orderDetails?.shopOwnerRefundStatus == "accept" &&
+                                                                              watch.orderDetails?.customerRefundPaymentStatus == "not_received"
                                                                           ? "Pending from Customer"
-                                                                          : watch.orderDetails?.shopOwnerRefundStatus == "accept" &&
-                                                                                  watch.orderDetails?.customerRefundPaymentStatus == "received"
+                                                                          : watch.orderDetails?.shopOwnerRefundStatus == "accept" && watch.orderDetails?.customerRefundPaymentStatus == "received"
                                                                               ? "Payment Recieved"
                                                                               : "",
                                                                   style: TextStyle(
@@ -2374,14 +2438,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         value:
                                                                             true),
                                                                     SizedBox(
-                                                                      width: 6.w,
+                                                                      width:
+                                                                          6.w,
                                                                     ),
                                                                     Text(
                                                                       "Refund Payment Transferred by UPI/QR Code",
                                                                       style: TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .w400,
+                                                                          fontWeight: FontWeight
+                                                                              .w400,
                                                                           fontSize:
                                                                               14.sp),
                                                                     ),
@@ -2395,14 +2459,14 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         value:
                                                                             true),
                                                                     SizedBox(
-                                                                      width: 6.w,
+                                                                      width:
+                                                                          6.w,
                                                                     ),
                                                                     Text(
                                                                       "Refund Payment Given by Cash",
                                                                       style: TextStyle(
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .w400,
+                                                                          fontWeight: FontWeight
+                                                                              .w400,
                                                                           fontSize:
                                                                               14.sp),
                                                                     ),
@@ -2422,10 +2486,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     Text(
                                                                         "Payment Transaction ID",
                                                                         style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .w500,
-                                                                            fontSize:
-                                                                                14.sp)),
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            fontSize: 14.sp)),
                                                                     SizedBox(
                                                                       height:
                                                                           14.w,
@@ -2480,12 +2543,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       Text(
                                                                         "Return Request Rejected ",
                                                                         style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .w700,
-                                                                            color: Colors
-                                                                                .black,
-                                                                            fontSize:
-                                                                                18.sp),
+                                                                            fontWeight:
+                                                                                FontWeight.w700,
+                                                                            color: Colors.black,
+                                                                            fontSize: 18.sp),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -2525,7 +2586,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       : Container(),
                                 ],
                               )
-                            : watch.orderDetails?.orderStatus == "Order Refund" &&
+                            : watch.orderDetails?.orderStatus ==
+                                        "Order Refund" &&
                                     (watch.orderDetails
                                                 ?.shopOwnerCancelledStatus ==
                                             "YES" ||
@@ -2562,9 +2624,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                color:
-                                                                    Colors.black,
-                                                                fontSize: 18.sp),
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    18.sp),
                                                           ),
                                                           SizedBox(
                                                             height: 10.w,
@@ -2575,9 +2638,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                color:
-                                                                    Colors.black,
-                                                                fontSize: 18.sp),
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize:
+                                                                    18.sp),
                                                           ),
                                                           SizedBox(
                                                             height: 20.w,
@@ -2594,9 +2658,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             border: Border.all(
                                                                 color: Color(
                                                                     0xff115B7A))),
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                                horizontal: 12.w),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    12.w),
                                                         child: Center(
                                                             child: Text(
                                                           watch.orderDetails
@@ -2622,7 +2687,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           style: TextStyle(
                                                               fontSize: 12.sp,
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               color: Color(
                                                                   0xff115B7A)),
                                                         )),
@@ -2631,7 +2697,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         "Cancel Reason",
@@ -2678,7 +2745,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         height: 16.w,
@@ -2686,13 +2754,16 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       Text("Refund Amount",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 14.sp)),
                                                       SizedBox(
                                                         height: 10.w,
                                                       ),
                                                       PrimaryCTextFormField(
-                                                          textInputType: TextInputType.number,
+                                                        textInputType:
+                                                            TextInputType
+                                                                .number,
                                                         controller: watch
                                                             .refundPayableAmount,
                                                         hintText:
@@ -2720,7 +2791,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -2746,7 +2818,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -2757,14 +2830,15 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           "Payment Transaction ID",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 14.sp)),
                                                       SizedBox(
                                                         height: 10.w,
                                                       ),
                                                       PrimaryCTextFormField(
-                                                        controller:
-                                                            watch.upiIdController,
+                                                        controller: watch
+                                                            .upiIdController,
                                                         hintText:
                                                             "Type Transaction ID",
                                                       ),
@@ -2796,7 +2870,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   color: Color(0xffEFFDFF),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         height: 15.w,
@@ -2843,8 +2918,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             decoration: BoxDecoration(
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(
-                                                                            5.w),
+                                                                        .circular(5
+                                                                            .w),
                                                                 border: Border.all(
                                                                     color: Color(
                                                                         0xff115B7A))),
@@ -2866,14 +2941,13 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           watch.orderDetails?.customerRefundPaymentStatus ==
                                                                               "not_received"
                                                                       ? "Pending from Customer"
-                                                                      : watch.orderDetails?.shopOwnerRefundStatus ==
-                                                                                  "accept" &&
-                                                                              watch.orderDetails?.customerRefundPaymentStatus ==
-                                                                                  "received"
+                                                                      : watch.orderDetails?.shopOwnerRefundStatus == "accept" &&
+                                                                              watch.orderDetails?.customerRefundPaymentStatus == "received"
                                                                           ? "Payment Recieved"
                                                                           : "",
                                                               style: TextStyle(
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -2896,7 +2970,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         (value) {
                                                                       // read.onRefundByUpi(value);
                                                                     },
-                                                                    value: true),
+                                                                    value:
+                                                                        true),
                                                                 SizedBox(
                                                                   width: 6.w,
                                                                 ),
@@ -2916,7 +2991,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 PrimaryCheckBox(
                                                                     onChanged:
                                                                         (value) {},
-                                                                    value: true),
+                                                                    value:
+                                                                        true),
                                                                 SizedBox(
                                                                   width: 6.w,
                                                                 ),
@@ -3023,7 +3099,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
-                                                                fontSize: 16.sp),
+                                                                fontSize:
+                                                                    16.sp),
                                                           ),
                                                           SizedBox(
                                                             height: 6.w,
@@ -3036,9 +3113,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
-                                                                fontSize: 16.sp),
+                                                                fontSize:
+                                                                    16.sp),
                                                           ),
-                                                          SizedBox(height: 45.w),
+                                                          SizedBox(
+                                                              height: 45.w),
                                                         ],
                                                       ),
                                                     )
@@ -3173,7 +3252,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                   ],
                                 ),
                               )
-                            : watch.shopOrderViewData?.orderRefundStatus == true &&
+                            : watch.shopOrderViewData?.orderRefundStatus ==
+                                        true &&
                                     watch.orderDetails?.orderStatus ==
                                         "Delivered" &&
                                     watch.orderDetails
@@ -3183,8 +3263,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 ? Container()
                                 //
 
-                                : watch.shopOrderViewData
-                                                ?.orderRefundStatus ==
+                                : watch.shopOrderViewData?.orderRefundStatus ==
                                             true &&
                                         watch.orderDetails?.orderStatus ==
                                             "Delivered" &&
@@ -3204,7 +3283,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Column(
                                                   crossAxisAlignment:
@@ -3238,8 +3318,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           BorderRadius.circular(
                                                               5.w),
                                                       border: Border.all(
-                                                          color:
-                                                              Color(0xff115B7A))),
+                                                          color: Color(
+                                                              0xff115B7A))),
                                                   padding: EdgeInsets.symmetric(
                                                       horizontal: 12.w),
                                                   child: Center(
@@ -3253,7 +3333,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         fontSize: 12.sp,
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        color: Color(0xff115B7A)),
+                                                        color:
+                                                            Color(0xff115B7A)),
                                                   )),
                                                 ),
                                               ],
@@ -3274,10 +3355,12 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   height: 10.w,
                                                 ),
                                                 PrimaryCTextFormField(
-                                                    textInputType: TextInputType.number,
+                                                  textInputType:
+                                                      TextInputType.number,
                                                   controller:
                                                       watch.refundPayableAmount,
-                                                  hintText: "Type Refund Amount",
+                                                  hintText:
+                                                      "Type Refund Amount",
                                                 ),
                                                 SizedBox(
                                                   height: 16.w,
@@ -3286,9 +3369,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   children: [
                                                     PrimaryCheckBox(
                                                       onChanged: (value) {
-                                                        read.onRefundByUpi(value);
+                                                        read.onRefundByUpi(
+                                                            value);
                                                       },
-                                                      value: watch.isRefundByUpi,
+                                                      value:
+                                                          watch.isRefundByUpi,
                                                     ),
                                                     SizedBox(
                                                       width: 6.w,
@@ -3316,7 +3401,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 PrimaryCTextFormField(
                                                   controller:
                                                       watch.upiIdController,
-                                                  hintText: "Type Transaction ID",
+                                                  hintText:
+                                                      "Type Transaction ID",
                                                 ),
                                               ],
                                             ),
@@ -3341,7 +3427,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 true &&
                                             (watch.orderDetails?.orderStatus ==
                                                     "Delivered" ||
-                                                watch.orderDetails?.orderStatus ==
+                                                watch.orderDetails
+                                                        ?.orderStatus ==
                                                     "Order Refund") &&
                                             watch.orderDetails
                                                     ?.shopDeliveredRefundStatus ==
@@ -3372,8 +3459,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           "Refund Amount",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w700,
-                                                              color: Colors.black,
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.black,
                                                               fontSize: 18.sp),
                                                         ),
                                                         SizedBox(
@@ -3383,8 +3472,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
                                                           style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.w700,
-                                                              color: Colors.black,
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color:
+                                                                  Colors.black,
                                                               fontSize: 18.sp),
                                                         ),
                                                       ],
@@ -3394,7 +3485,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(5.w),
+                                                                  .circular(
+                                                                      5.w),
                                                           border: Border.all(
                                                               color: Color(
                                                                   0xff115B7A))),
@@ -3427,7 +3519,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     ? Row(
                                                         children: [
                                                           PrimaryCheckBox(
-                                                              onChanged: (value) {
+                                                              onChanged:
+                                                                  (value) {
                                                                 // read.onRefundByUpi(value);
                                                               },
                                                               value: true),
@@ -3440,7 +3533,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       )
@@ -3459,7 +3553,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                fontSize: 14.sp),
+                                                                fontSize:
+                                                                    14.sp),
                                                           ),
                                                         ],
                                                       ),
@@ -3806,7 +3901,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     //   ],
                     // ),
                   ),
-      ) : Column(
+                )
+              : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
