@@ -7,7 +7,6 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -56,8 +55,8 @@ class OrderSummaryController extends ChangeNotifier {
   List<CustomerAddress>? customerAddress;
   List<CartItemList>? cartItemList;
   List<FinalCouponList>? finalCouponList;
-  List<FullFillYourCraving> fullFillYourCravingsAdmin=[];
-  List<FullFillYourCraving> fullFillYourCravingsCustom=[];
+  List<FullFillYourCraving> fullFillYourCravingsAdmin = [];
+  List<FullFillYourCraving> fullFillYourCravingsCustom = [];
 
   bool isLoading = true;
   bool isStackLoaderVisible = false;
@@ -74,8 +73,8 @@ class OrderSummaryController extends ChangeNotifier {
   String subTotal = "";
   String totalAmount = "";
   String selfPickupTotalAmount = "";
-  int offset=0;
-  bool showPaginationLoader=false;
+  int offset = 0;
+  bool showPaginationLoader = false;
   String selfPickupDeliveryCharges = "";
   String totalDiscount = "";
   String customerPickup = "";
@@ -83,7 +82,8 @@ class OrderSummaryController extends ChangeNotifier {
   int selectedAddressId = 0;
   List<bool> isFulFilProductAdded = [];
   List<bool> isFulFilProductAddedCustome = [];
-  FullFillYourCravingsRepo fullFillYourCravingsRepo=FullFillYourCravingsRepo();
+  FullFillYourCravingsRepo fullFillYourCravingsRepo =
+      FullFillYourCravingsRepo();
   Future<void> initState(
     context,
     cId,
@@ -111,10 +111,12 @@ class OrderSummaryController extends ChangeNotifier {
 
     notifyListeners();
   }
-showPaginationLoaderInApp(value){
-    showPaginationLoader=value;
+
+  showPaginationLoaderInApp(value) {
+    showPaginationLoader = value;
     notifyListeners();
-}
+  }
+
   void showLoader(value) {
     isLoading = value;
     notifyListeners();
@@ -184,26 +186,31 @@ showPaginationLoaderInApp(value){
     notifyListeners();
   }
 
-  OrderSummaryReqModel get orderSummeryRequestModel => OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+  OrderSummaryReqModel get orderSummeryRequestModel =>
+      OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
-  FullFillCravingsReqModel get fullFillCravingsReqModel=>FullFillCravingsReqModel(
-    offset: offset.toString(),
-    limit: "10",
-    shopId: shopId
-  );
+  FullFillCravingsReqModel get fullFillCravingsReqModel =>
+      FullFillCravingsReqModel(
+          offset: offset.toString(), limit: "10", shopId: shopId);
 
-  Future<void> getFullFillYourCravingsList(context)async{
+  Future<void> getFullFillYourCravingsList(context) async {
     print("comeonnn");
     SharedPreferences pref = await SharedPreferences.getInstance();
-    fullFillYourCravingsRepo.getFullYourCravingsList(fullFillCravingsReqModel, pref.getString("successToken"))
+    fullFillYourCravingsRepo
+        .getFullYourCravingsList(
+            fullFillCravingsReqModel, pref.getString("successToken"))
         .then((response) {
       log("response.body${response.body}");
-      final result = FullFillCravingsResModel.fromJson(jsonDecode(response.body));
+      final result =
+          FullFillCravingsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fullFillYourCravingsAdmin.addAll(result.data?.fullFillYourCravingsAdminProduct??[]);
-        fullFillYourCravingsCustom.addAll(result.data?.fullFillYourCravingsCustomProduct??[]);
+        fullFillYourCravingsAdmin
+            .addAll(result.data?.fullFillYourCravingsAdminProduct ?? []);
+        fullFillYourCravingsCustom
+            .addAll(result.data?.fullFillYourCravingsCustomProduct ?? []);
         int fulfilcravingListLength = fullFillYourCravingsAdmin?.length ?? 0;
-        isFulFilProductAdded = List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        isFulFilProductAdded =
+            List<bool>.filled(fulfilcravingListLength, false, growable: true);
         for (int i = 0; i < fulfilcravingListLength; i++) {
           if (fullFillYourCravingsAdmin[i].addToCartCheck == "yes") {
             isFulFilProductAdded.insert(i, true);
@@ -211,8 +218,11 @@ showPaginationLoaderInApp(value){
             isFulFilProductAdded.insert(i, false);
           }
         }
-        int fulfilcravingListCustomeLength = fullFillYourCravingsCustom.length ?? 0;
-        isFulFilProductAddedCustome = List<bool>.filled(fulfilcravingListCustomeLength, false,growable: true);
+        int fulfilcravingListCustomeLength =
+            fullFillYourCravingsCustom.length ?? 0;
+        isFulFilProductAddedCustome = List<bool>.filled(
+            fulfilcravingListCustomeLength, false,
+            growable: true);
         for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
           if (fullFillYourCravingsCustom[i].addToCartCheck == "yes") {
             isFulFilProductAddedCustome.insert(i, true);
@@ -231,8 +241,8 @@ showPaginationLoaderInApp(value){
       showPaginationLoaderInApp(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
-          (Object e) {
-            showPaginationLoaderInApp(false);
+      (Object e) {
+        showPaginationLoaderInApp(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
@@ -244,7 +254,7 @@ showPaginationLoaderInApp(value){
   }
 
   Future<void> getOrderSummary(context, id, cId, route) async {
-    offset=0;
+    offset = 0;
     print(route);
     if (route == 'cartDetail') {
       expectedDateController.clear();
@@ -262,7 +272,7 @@ showPaginationLoaderInApp(value){
     orderSummaryRepo
         .viewOrderSummery(
             orderSummeryRequestModel, pref.getString("successToken"))
-        .then((response)async{
+        .then((response) async {
       log("response.body${response.body}");
       final result = OrderSummaryResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
@@ -351,7 +361,9 @@ showPaginationLoaderInApp(value){
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(2, AddAddressView(
+          read.onNavigation(
+              2,
+              AddAddressView(
                 shopId: shopDetailData?.id.toString(),
                 cartId: cartId,
                 route: "orderAddAddress",
@@ -413,11 +425,11 @@ showPaginationLoaderInApp(value){
     );
   }
 
-  Future<void> onScrollMaxExtent(context)async{
+  Future<void> onScrollMaxExtent(context) async {
     showPaginationLoaderInApp(true);
     print("1234567890");
-    offset=offset+1;
-   getFullFillYourCravingsList(context);
+    offset = offset + 1;
+    getFullFillYourCravingsList(context);
 
     print(showPaginationLoader);
     notifyListeners();

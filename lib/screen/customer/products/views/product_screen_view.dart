@@ -344,7 +344,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                     bottom: 14.w),
                                                 decoration: const BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: Color(0xff4689EC),
+                                                  color: Color(0xffFBDFDF),
                                                 ),
                                                 child: watch.favAllShop
                                                     ? SvgPicture.asset(
