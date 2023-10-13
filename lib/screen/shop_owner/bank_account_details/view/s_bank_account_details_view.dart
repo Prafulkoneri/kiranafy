@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/controller/get_bank_account_controll.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -43,9 +41,12 @@ class _ShopBankAccountDetailsViewState
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(4, SAccountScreenView(
-              refresh: false,
-            ), context);
+            readMainScreen.onNavigation(
+                4,
+                SAccountScreenView(
+                  refresh: false,
+                ),
+                context);
           },
           title: "Bank A/C Details",
           action: SvgPicture.asset("assets/icons/forward.svg"),
@@ -55,15 +56,18 @@ class _ShopBankAccountDetailsViewState
         ),
       ),
       body: watch.isLoading
-          ?const Loader()
+          ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          readMainScreen.onNavigation(4, SAccountScreenView(
-            refresh: false,
-          ), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMainScreen.onNavigation(
+                    4,
+                    SAccountScreenView(
+                      refresh: false,
+                    ),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -184,7 +188,7 @@ class _ShopBankAccountDetailsViewState
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 }

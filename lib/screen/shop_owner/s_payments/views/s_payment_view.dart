@@ -8,7 +8,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/controller/payment_histaory_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 
 class SPaymentsView extends StatefulWidget {
   final bool? isNavFromAccounts;
-  const SPaymentsView({Key? key, required this.isNavFromAccounts})
+  const SPaymentsView({Key? key, this.isNavFromAccounts})
       : super(
           key: key,
         );
@@ -44,9 +44,11 @@ class _SPaymentsViewState extends State<SPaymentsView> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-            isBackButtonEnabled: widget.isNavFromAccounts == true ? true : false,
+            isBackButtonEnabled:
+                widget.isNavFromAccounts == true ? true : false,
             onBackBtnPressed: () {
-              readMainScreen.onNavigation(4, SAccountScreenView(refresh: true), context);
+              readMainScreen.onNavigation(
+                  4, SAccountScreenView(refresh: true), context);
             },
             title: "Payments",
             // isBackButtonEnabled: false,
@@ -55,11 +57,15 @@ class _SPaymentsViewState extends State<SPaymentsView> {
         body: watch.isLoading
             ? const Loader()
             : WillPopScope(
-          onWillPop: ()async{
-            widget.isNavFromAccounts == false ?readMainScreen.onNavigation(0,ShopDashBoardView(refresh: false),context): readMainScreen.onNavigation(4, SAccountScreenView(refresh: true), context);
-         return false;
-          },
-              child: StackLoader(
+                onWillPop: () async {
+                  widget.isNavFromAccounts == false
+                      ? readMainScreen.onNavigation(
+                          0, ShopDashBoardView(refresh: false), context)
+                      : readMainScreen.onNavigation(
+                          4, SAccountScreenView(refresh: true), context);
+                  return false;
+                },
+                child: StackLoader(
                   showLoader: watch.isStackLoading,
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
@@ -119,8 +125,10 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                           var pickedDate = await showDatePicker(
                                             builder: (BuildContext, child) {
                                               return Theme(
-                                                data: Theme.of(context).copyWith(
-                                                  colorScheme: ColorScheme.light(
+                                                data:
+                                                    Theme.of(context).copyWith(
+                                                  colorScheme:
+                                                      ColorScheme.light(
                                                     primary: Color(0xff1767B1),
                                                     // <-- SEE HERE
                                                     onPrimary: Colors.white,
@@ -145,10 +153,12 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                             lastDate: DateTime(2100),
                                           );
                                           if (pickedDate != null) {
-                                            String date = DateFormat('dd-MM-yyy')
-                                                .format(
-                                                    pickedDate ?? DateTime.now());
-                                            read.onToDateSelected(context, date);
+                                            String date =
+                                                DateFormat('dd-MM-yyy').format(
+                                                    pickedDate ??
+                                                        DateTime.now());
+                                            read.onToDateSelected(
+                                                context, date);
                                           }
                                         },
                                         child: SvgPicture.asset(
@@ -172,7 +182,8 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                   padding:
                                       EdgeInsets.only(left: 12.w, right: 12.w),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         height: 12.w,
@@ -213,7 +224,8 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                   padding:
                                       EdgeInsets.only(left: 12.w, right: 12.w),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         height: 12.w,
@@ -269,85 +281,109 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                   shrinkWrap: true,
                                   itemBuilder: (BuildContext, index) {
                                     final element = watch.ordersList?[index];
-                                    return Container(
-                                      padding: EdgeInsets.all(14.w),
-                                      margin: EdgeInsets.only(bottom: 15.w),
-                                      width: ScreenUtil().screenWidth,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10.w),
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Color(0xffEFEFEF)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Order ID: ${element?.orderUniqueId}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 15.sp,
-                                                    color: Color(0xff3A3A3A)),
-                                              ),
-                                              Text(
-                                                "${element?.totalAmount}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 19.sp,
-                                                    color: Color(0xff39C19D)),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 7.w,
-                                          ),
-                                          Row(
-                                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "${element?.createdAt}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 7.w,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "${element?.customerName}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "${element?.paymentMode}",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 12.sp,
-                                                        color: Color(0xffA3A3A3)),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                    return GestureDetector(
+                                      onTap: () {
+                                        readMainScreen.onNavigation(
+                                            0,
+                                            ShopOrderView(
+                                              route: "paymentsScreen",
+                                              orderId: element?.id.toString(),
+                                              fromOrderStatus: true,
+                                              selectedIndex: 0,
+                                            ),
+                                            context);
+                                        readMainScreen
+                                            .hideBottomNavigationBar();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(14.w),
+                                        margin: EdgeInsets.only(bottom: 15.w),
+                                        width: ScreenUtil().screenWidth,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.w),
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: Color(0xffEFEFEF)),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Order ID: ${element?.orderUniqueId}",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 15.sp,
+                                                      color: Color(0xff3A3A3A)),
+                                                ),
+                                                Text(
+                                                  "${element?.totalAmount}",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 19.sp,
+                                                      color: Color(0xff39C19D)),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 7.w,
+                                            ),
+                                            Row(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "${element?.createdAt}",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 12.sp,
+                                                      color: Color(0xffA3A3A3)),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 7.w,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "${element?.customerName}",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 12.sp,
+                                                      color: Color(0xffA3A3A3)),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${element?.paymentMode}",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 12.sp,
+                                                          color: Color(
+                                                              0xffA3A3A3)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
-                                  }):Column(
+                                  })
+                              : Column(
                                   children: [
                                     SizedBox(
                                       height: 50.h,
@@ -377,7 +413,6 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                     ),
                   ),
                 ),
-            )
-    );
+              ));
   }
 }

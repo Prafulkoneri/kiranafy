@@ -11,12 +11,10 @@ import 'package:local_supper_market/screen/customer/cart/repository/cart_item_qu
 import 'package:local_supper_market/screen/customer/cart/repository/cart_list_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,7 +99,6 @@ class CartDetailController extends ChangeNotifier {
           CartDetailResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         shopDetailData = result.cartDetailData?.shopDetails;
-
         cartItemList = result.cartDetailData?.cartItemList;
         itemCount = result.cartDetailData?.itemCount.toString() ?? "";
         totalAmount = result.cartDetailData?.totalAmount.toString() ?? "";
@@ -150,7 +147,8 @@ class CartDetailController extends ChangeNotifier {
         if (result.status == 200) {
           print("helloooo");
           Navigator.pop(context);
-          final read=Provider.of<MainScreenController>(context,listen: false);
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
           read.onNavigation(2, CartScreenView(), context);
           read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
@@ -327,7 +325,8 @@ class CartDetailController extends ChangeNotifier {
           cartItemList?.removeAt(index);
         }
         if (cartItemList!.isEmpty) {
-          final read=Provider.of<MainScreenController>(context,listen: false);
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
           read.onNavigation(2, CartScreenView(), context);
           // Navigator.pushAndRemoveUntil(
           //   context,

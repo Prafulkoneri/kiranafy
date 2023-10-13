@@ -127,6 +127,7 @@ class PrimarySTextFormField extends StatelessWidget {
   final Color? color;
   final bool? enableBorder;
   final double? hintFontSize;
+  final FontWeight? fontWeight;
   final EdgeInsetsGeometry? padding;
   final TextInputType? textInputType;
   final void Function()? onTap;
@@ -148,6 +149,7 @@ class PrimarySTextFormField extends StatelessWidget {
       this.onChanged,
       this.lengthLimitingTextInputFormatter,
       this.textInputType,
+      this.fontWeight,
       this.hintText})
       : super(key: key);
 
@@ -197,7 +199,7 @@ class PrimarySTextFormField extends StatelessWidget {
                       left: 10.w, top: maxLines != null ? 30.w : 0.w),
               hintStyle: TextStyle(
                   fontSize: hintFontSize ?? 16.sp,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: fontWeight ?? FontWeight.w400,
                   color: Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

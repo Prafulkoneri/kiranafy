@@ -242,7 +242,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                           print(element?.categoryId);
                                           print(element?.shopId);
                                           print(element?.productType);
-                                          readProductScreen.updateProductId(element?.productId.toString(), context,false);
+                                          readProductScreen.updateProductId(
+                                              element?.productId.toString(),
+                                              context,
+                                              false);
                                           // return;
                                           readMain.onNavigation(
                                               0,
@@ -251,8 +254,10 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                                     element?.shopId.toString(),
                                                 categoryId: element?.categoryId
                                                     .toString(),
-                                                productId: element?.productId.toString(),
-                                                productType: element?.productType,
+                                                productId: element?.productId
+                                                    .toString(),
+                                                productType:
+                                                    element?.productType,
                                                 routeName: "homeScreen",
                                               ),
                                               context);
@@ -419,11 +424,11 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                           ? GestureDetector(
                               onTap: () {
                                 print((watch.customerplacead?.toList()
-                                  ?..shuffle())
+                                      ?..shuffle())
                                     ?.first
                                     .redirectToShop);
                                 print((watch.customerplacead?.toList()
-                                  ?..shuffle())
+                                      ?..shuffle())
                                     ?.first
                                     .redirectToProduct);
 
@@ -480,11 +485,14 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                         .toString(),
                                   );
                                   // return;
-                                  readProductScreen.updateProductId((watch.customerplacead?.toList()
-                                    ?..shuffle())
-                                      ?.first
-                                      .productId
-                                      .toString(), context,false);
+                                  readProductScreen.updateProductId(
+                                      (watch.customerplacead?.toList()
+                                            ?..shuffle())
+                                          ?.first
+                                          .productId
+                                          .toString(),
+                                      context,
+                                      false);
                                   readMain.onNavigation(
                                       0,
                                       ProductScreenView(

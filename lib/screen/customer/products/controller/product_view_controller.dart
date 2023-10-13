@@ -158,7 +158,8 @@ class ProductViewController extends ChangeNotifier {
           quantityList.insert(index, value - 1);
 
           if (quantityList[index] == 0) {
-            removeFromCart(pType, pUnitId, shopDetails?.id, index, context,false);
+            removeFromCart(
+                pType, pUnitId, shopDetails?.id, index, context, false);
             isUnitImagesAdded[index] = false;
           }
           quantityBtnPressed(false);
@@ -234,7 +235,8 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, index, context,isSimilarProduct) async {
+  Future<void> addToCart(
+      pType, pId, sId, index, context, isSimilarProduct) async {
     print("quantityList1${quantityList}");
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
@@ -260,14 +262,12 @@ class ProductViewController extends ChangeNotifier {
           // quantityList.removeAt(index);
           // quantityList.insert(index,1);
           print("quantityList3${quantityList}");
-          if(!isSimilarProduct) {
+          if (!isSimilarProduct) {
             cartItemIdList.removeAt(index);
             cartItemIdList.insert(index, result.cartItemId);
+          } else {
+            isSimilarProductAdded[index] = true;
           }
-
-          else {
-          isSimilarProductAdded[index] = true;
-        }
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -773,6 +773,7 @@ class ProductViewController extends ChangeNotifier {
 
   void updateProductId(pId, context, refresh) {
     productId = pId;
+    // categoryId = cId;
     if (refresh) {
       initState(
           context, shopId, categoryId, pId, selectedUnitId, productType, "");
@@ -831,7 +832,8 @@ class ProductViewController extends ChangeNotifier {
   // }
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
 
-  Future<void> removeFromCart(pType, puId, sId, index, context,isSimilarProduct) async {
+  Future<void> removeFromCart(
+      pType, puId, sId, index, context, isSimilarProduct) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeCartItemRepo
         .removeCartItem(
@@ -846,11 +848,10 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        if(!isSimilarProduct){
+        if (!isSimilarProduct) {
           cartItemIdList.removeAt(index);
-        cartItemIdList.insert(index, 0);
-        }
-        else{
+          cartItemIdList.insert(index, 0);
+        } else {
           isSimilarProductAdded[index] = false;
         }
 
