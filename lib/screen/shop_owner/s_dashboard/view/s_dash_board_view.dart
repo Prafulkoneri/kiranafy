@@ -482,7 +482,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 DashBoardCount(
-                                  text: '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
+                                  text:
+                                      '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
                                 ),
                                 ShopDashBoard(
                                   text: 'Product Offer',
@@ -1342,6 +1343,82 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     SizedBox(
                       height: 10.w,
                     ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     SizedBox(
+                    //       width: 19.w,
+                    //     ),
+                    //     Expanded(
+                    //       child: Container(
+                    //         padding: EdgeInsets.only(
+                    //             left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
+                    //         // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                    //         // height: 50.h,/
+                    //         decoration: BoxDecoration(
+                    //             gradient: LinearGradient(
+                    //                 end: Alignment.topCenter,
+                    //                 begin: Alignment.bottomCenter,
+                    //                 colors: <Color>[
+                    //                   green.withOpacity(0.55),
+                    //                   green1.withOpacity(0.98),
+                    //                 ]),
+                    //             color: Custlogin,
+                    //             // border: Border.all(width: 1, color: Black),
+                    //             borderRadius: BorderRadius.circular(8)),
+
+                    //         child: Column(
+                    //           children: [
+                    //             DashBoardCount(
+                    //               text: watch.dashBoardData?.totalRefund
+                    //                       .toString() ??
+                    //                   "0",
+                    //             ),
+                    //             ShopDashBoard(
+                    //               text: 'Total Refund Amount',
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10.w,
+                    //     ),
+                    //     Expanded(
+                    //       child: Container(
+                    //         padding: EdgeInsets.only(
+                    //             left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
+                    //         // height: 50.h,/
+                    //         decoration: BoxDecoration(
+                    //             gradient: LinearGradient(
+                    //                 end: Alignment.topCenter,
+                    //                 begin: Alignment.bottomCenter,
+                    //                 colors: <Color>[
+                    //                   green.withOpacity(0.55),
+                    //                   green1.withOpacity(0.98),
+                    //                 ]),
+                    //             color: Custlogin,
+                    //             // border: Border.all(width: 1, color: Black),
+                    //             borderRadius: BorderRadius.circular(10)),
+
+                    //         child: Column(
+                    //           children: [
+                    //             DashBoardCount(
+                    //                 text:
+                    //                     "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}"),
+                    //             ShopDashBoard(
+                    //               text: 'Total Cancelled Amount',
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10.w,
+                    //     ),
+                    //   ],
+                    // ),
+                    /////////////////////////////////////////
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -1349,88 +1426,158 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
-                            // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    end: Alignment.topCenter,
-                                    begin: Alignment.bottomCenter,
-                                    colors: <Color>[
-                                      green.withOpacity(0.55),
-                                      green1.withOpacity(0.98),
-                                    ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(8)),
+                          child: GestureDetector(
+                            onTap: () {
+                              readOrderStatus.onTabClicked(2);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 2, isFromOrderView: false),
+                                  context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 2,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      end: Alignment.topCenter,
+                                      begin: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        green.withOpacity(0.55),
+                                        green1.withOpacity(0.98),
+                                      ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                DashBoardCount(
-                                  text: watch.dashBoardData?.totalRefund
-                                          .toString() ??
-                                      "0",
-                                ),
-                                ShopDashBoard(
-                                  text: 'Total Refund Amount',
-                                ),
-                              ],
+                              child: Column(
+                                children: [
+                                  DashBoardCount(text: "0"
+                                      // '${watch.dashBoardData?.inprocessOrdersCount}',
+                                      ),
+                                  ShopDashBoard(
+                                    text: 'Pending Refund Amount',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 10.w,
+                          width: 19.w,
                         ),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
-                            // height: 50.h,/
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    end: Alignment.topCenter,
-                                    begin: Alignment.bottomCenter,
-                                    colors: <Color>[
-                                      green.withOpacity(0.55),
-                                      green1.withOpacity(0.98),
-                                    ]),
-                                color: Custlogin,
-                                // border: Border.all(width: 1, color: Black),
-                                borderRadius: BorderRadius.circular(10)),
+                          child: GestureDetector(
+                            onTap: () {
+                              readOrderStatus.onTabClicked(3);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 3, isFromOrderView: false),
+                                  context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 3,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
+                              // EdgeInsets.symmetric(vertical: 9.w, horizontal: 15.w),
+                              // height: 50.h,/
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      end: Alignment.topCenter,
+                                      begin: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        green.withOpacity(0.55),
+                                        green1.withOpacity(0.98),
+                                      ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
 
-                            child: Column(
-                              children: [
-                                DashBoardCount(
-                                    text:
-                                        "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}"),
-                                // Text(
-                                //   "\u{20B9} ${watch.dashBoardData?.cancelledRefundAmount}",
-                                //   textAlign: TextAlign.center,
-                                //   style: GoogleFonts.dmSans(
-                                //     textStyle: TextStyle(
-                                //         color: Colors.white,
-                                //         // letterSpacing: .5,
-                                //         fontSize: 16.sp,
-                                //         fontWeight: FontWeight.w700),
-                                //   ),
-                                // ),
-                                ShopDashBoard(
-                                  text: 'Total Cancelled Amount',
-                                ),
-                                // Text(
-                                //   "Total Cancelled Amount",
-                                //   textAlign: TextAlign.center,
-                                //   style: GoogleFonts.dmSans(
-                                //     textStyle: TextStyle(
-                                //         color: Colors.white,
-                                //         // letterSpacing: .5,
-                                //         fontSize: 12.sp,
-                                //         fontWeight: FontWeight.w700),
-                                //   ),
-                                // ),
-                              ],
+                              child: Column(
+                                children: [
+                                  DashBoardCount(text: "0"
+                                      // '${watch.dashBoardData?.deliveredOrdersCount}',
+                                      ),
+                                  ShopDashBoard(
+                                    text: 'Refunded Amount',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 19.w,
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              readOrderStatus.onTabClicked(4);
+                              readMain.onNavigation(
+                                  1,
+                                  SOrderStatusView(
+                                      selectedIndex: 4, isFromOrderView: false),
+                                  context);
+                              // Navigator.pushAndRemoveUntil(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => SMainScreenView(
+                              //             index: 1,
+                              //             screenName: SOrderStatusView(
+                              //                 selectedIndex: 4,
+                              //                 isFromOrderView: false),
+                              //           )),
+                              //   (Route<dynamic> route) => false,
+                              // );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      end: Alignment.topCenter,
+                                      begin: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        green.withOpacity(0.55),
+                                        green1.withOpacity(0.98),
+                                      ]),
+                                  color: Custlogin,
+                                  // border: Border.all(width: 1, color: Black),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                children: [
+                                  DashBoardCount(text: "0"
+                                      // '${watch.dashBoardData?.cancelledOrdersCount}',
+                                      ),
+                                  ShopDashBoard(
+                                    text: 'Cancelled Amount',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
