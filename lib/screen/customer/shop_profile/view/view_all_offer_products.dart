@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_offers_controller.dart';
@@ -297,7 +296,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        "${element.weight}${element.unit}",
+                                                        "${element.weight} ${element.unit}",
                                                         style:
                                                             GoogleFonts.roboto(
                                                           textStyle: TextStyle(

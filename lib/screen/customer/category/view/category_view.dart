@@ -7,7 +7,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/category/controller/product_as_per_category_controller.dart';
 import 'package:local_supper_market/screen/customer/category/view/filter_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -217,8 +216,8 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                               ),
                               onPressed: () {
                                 print("j");
-                                read.getFilterProductList(context,true,
-                                    element?.id.toString());
+                                read.getFilterProductList(
+                                    context, true, element?.id.toString());
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -259,325 +258,313 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             child: Column(
                               children: [
                                 Container(
-                                            child: ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                scrollDirection: Axis.vertical,
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                // physics: NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    watch.productList?.length ??
-                                                        0,
-                                                itemBuilder:
-                                                    (BuildContext, index) {
-                                                  final element =
-                                                      watch.productList?[index];
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      readProductViewController
-                                                          .updateProductId(
-                                                              element?.id
-                                                                  .toString(),
-                                                              context,
-                                                              false);
-                                                      readMain.onNavigation(
-                                                          1,
-                                                          ProductScreenView(
-                                                              selectedUnitId: element
-                                                                  ?.productUnitId
-                                                                  .toString(),
-                                                              categoryId: watch
-                                                                  .categoryId,
-                                                              productId: element
-                                                                  ?.id
-                                                                  .toString(),
-                                                              shopId:
-                                                                  widget.shopId,
-                                                              productType: element
-                                                                  ?.productType),
-                                                          context);
-                                                      // Navigator.pushAndRemoveUntil(
-                                                      //   context,
-                                                      //   MaterialPageRoute(
-                                                      //       builder: (context) =>
-                                                      //           MainScreenView(
-                                                      //             index: 1,
-                                                      //             screenName: ProductScreenView(
-                                                      //                 selectedUnitId: element
-                                                      //                     ?.productUnitId
-                                                      //                     .toString(),
-                                                      //                 categoryId: watch
-                                                      //                     .categoryId,
-                                                      //                 productId: element
-                                                      //                     ?.id
-                                                      //                     .toString(),
-                                                      //                 shopId:
-                                                      //                     widget.shopId,
-                                                      //                 productType: element
-                                                      //                     ?.productType),
-                                                      //           )),
-                                                      //   (Route<dynamic> route) => false,
-                                                      // );
-                                                      print(
-                                                        element?.productUnitId
-                                                            .toString(),
-                                                      );
-                                                    },
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 18.w,
-                                                                  top: 8.w,
-                                                                  right: 17.w),
-                                                          child: Container(
-                                                            child: Card(
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15.0),
+                                  child: ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      scrollDirection: Axis.vertical,
+                                      physics: BouncingScrollPhysics(),
+                                      // physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: watch.productList?.length ?? 0,
+                                      itemBuilder: (BuildContext, index) {
+                                        final element =
+                                            watch.productList?[index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            readProductViewController
+                                                .updateProductId(
+                                                    element?.id.toString(),
+                                                    context,
+                                                    false);
+                                            readMain.onNavigation(
+                                                1,
+                                                ProductScreenView(
+                                                    selectedUnitId: element
+                                                        ?.productUnitId
+                                                        .toString(),
+                                                    categoryId:
+                                                        watch.categoryId,
+                                                    productId:
+                                                        element?.id.toString(),
+                                                    shopId: widget.shopId,
+                                                    productType:
+                                                        element?.productType),
+                                                context);
+                                            // Navigator.pushAndRemoveUntil(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //       builder: (context) =>
+                                            //           MainScreenView(
+                                            //             index: 1,
+                                            //             screenName: ProductScreenView(
+                                            //                 selectedUnitId: element
+                                            //                     ?.productUnitId
+                                            //                     .toString(),
+                                            //                 categoryId: watch
+                                            //                     .categoryId,
+                                            //                 productId: element
+                                            //                     ?.id
+                                            //                     .toString(),
+                                            //                 shopId:
+                                            //                     widget.shopId,
+                                            //                 productType: element
+                                            //                     ?.productType),
+                                            //           )),
+                                            //   (Route<dynamic> route) => false,
+                                            // );
+                                            print(
+                                              element?.productUnitId.toString(),
+                                            );
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 18.w,
+                                                    top: 8.w,
+                                                    right: 17.w),
+                                                child: Container(
+                                                  child: Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15.0),
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 8.w,
+                                                          ),
+                                                          element?.productImagePath ==
+                                                                  ""
+                                                              ? Image.asset(
+                                                                  'assets/images/image_not_found.png',
+                                                                  width: 80.w,
+                                                                  height: 80.h,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                )
+                                                              : AppNetworkImages(
+                                                                  imageUrl:
+                                                                      element?.productImagePath ??
+                                                                          "",
+                                                                  width: 80.w,
+                                                                  height: 80.h,
+                                                                  fit: BoxFit
+                                                                      .cover,
                                                                 ),
-                                                                child: Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width:
-                                                                          8.w,
-                                                                    ),
-                                                                    element?.productImagePath ==
-                                                                            ""
-                                                                        ? Image.asset('assets/images/image_not_found.png',
-                                                                            width:
-                                                                                80.w,
-                                                                            height:
-                                                                                80.h,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          )
-                                                                        : AppNetworkImages(
-                                                                            imageUrl:
-                                                                                element?.productImagePath ?? "",
-                                                                            width:
-                                                                                80.w,
-                                                                            height:
-                                                                                80.h,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                    Expanded(
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsets.only(
-                                                                            left:
-                                                                                20.0.w,
-                                                                            top: 12.w,
-                                                                            right: 13.w),
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 20.0
+                                                                          .w,
+                                                                      top: 12.w,
+                                                                      right:
+                                                                          13.w),
+                                                              child: Column(
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Flexible(
                                                                         child:
-                                                                            Column(
-                                                                          children: [
-                                                                            Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
-                                                                                Flexible(
-                                                                                  child: Text(
-                                                                                    element?.productName ?? "",
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(color: Black1, letterSpacing: .5, fontSize: 16.sp, fontWeight: FontWeight.w700),
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                                element?.discountPercentage != ""
-                                                                                    ? Container(
-                                                                                        width: 60.w,
-                                                                                        height: 20.h,
-                                                                                        decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
-                                                                                        child: Center(
-                                                                                          child: Text("${element?.discountPercentage} off",
-                                                                                              // textAlign: TextAlign.center,
-                                                                                              style: GoogleFonts.dmSans(
-                                                                                                textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
-                                                                                              )),
-                                                                                        ),
-                                                                                      )
-                                                                                    : Container(),
-                                                                              ],
-                                                                            ),
-                                                                            SizedBox(
-                                                                              height: 6.h,
-                                                                            ),
-                                                                            Row(
-                                                                              children: [
-                                                                                Text("${element?.weight}${element?.unit}",
-                                                                                    // textAlign: TextAlign.center,
-                                                                                    style: GoogleFonts.dmSans(
-                                                                                      textStyle: TextStyle(color: Grey, letterSpacing: .5, fontSize: 14.sp, fontWeight: FontWeight.w500),
-                                                                                    )),
-                                                                              ],
-                                                                            ),
-                                                                            Row(
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  child: Padding(
-                                                                                    padding: EdgeInsets.only(top: 12.w),
-                                                                                    child: Row(
-                                                                                      children: [
-                                                                                        Row(
-                                                                                          children: [
-                                                                                            element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
-                                                                                            SizedBox(
-                                                                                              width: 10.w,
-                                                                                            ),
-                                                                                            element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
-                                                                                                ? Text(
-                                                                                                    '\u{20B9}${element?.offerPrice}',
-                                                                                                    style: GoogleFonts.dmSans(
-                                                                                                      textStyle: TextStyle(
-                                                                                                          // decoration:
-                                                                                                          // TextDecoration.lineThrough,
-                                                                                                          color: Black,
-                                                                                                          letterSpacing: .5,
-                                                                                                          fontSize: 13.sp,
-                                                                                                          fontWeight: FontWeight.w500),
-                                                                                                    ),
-                                                                                                  )
-                                                                                                : Container()
-                                                                                          ],
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                                watch.quantityList[index]==0
-                                                                                    ? GestureDetector(
-                                                                                        onTap: () {
-                                                                                          read.addToCart(element?.productType, element?.productUnitId, element?.shopId, index, context);
-                                                                                        },
-                                                                                        child: SvgPicture.asset(
-                                                                                          'assets/images/add.svg',
-                                                                                        ))
-                                                                                    : Row(
-                                                                                  children: [
-                                                                                    GestureDetector(
-                                                                                      onTap: () {
-                                                                                        if (watch.isQuanityBtnPressed) {
-                                                                                          return;
-                                                                                        }
-                                                                                        read.subtractItemQuantity(
-                                                                                            context,
-                                                                                            element
-                                                                                                ?.cartItemId
-                                                                                                .toString(),
-                                                                                            index,
-                                                                                            element
-                                                                                                ?.productType,
-                                                                                            element
-                                                                                                ?.productUnitId);
-                                                                                      },
-                                                                                      child: SvgPicture
-                                                                                          .asset(
-                                                                                        'assets/icons/minus.svg',
-                                                                                        // width: 30.w,
-                                                                                        // height: 30.h,
-                                                                                      ),
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 12.w,
-                                                                                    ),
-                                                                                    Text(
-                                                                                      "${watch.quantityList[index]}",
-                                                                                      style: GoogleFonts
-                                                                                          .dmSans(
-                                                                                        textStyle: TextStyle(
-                                                                                          // decoration:
-                                                                                          // TextDecoration.lineThrough,
-                                                                                            color: Black,
-                                                                                            // letterSpacing:
-                                                                                            //     .5,
-                                                                                            fontSize: 16.sp,
-                                                                                            fontWeight: FontWeight.w500),
-                                                                                      ),
-                                                                                    ),
-                                                                                    SizedBox(
-                                                                                      width: 12.w,
-                                                                                    ),
-                                                                                    GestureDetector(
-                                                                                      onTap: () {
-                                                                                        print(watch
-                                                                                            .isQuanityBtnPressed);
-                                                                                        // return;
-                                                                                        if (watch
-                                                                                            .isQuanityBtnPressed) {
-                                                                                          return;
-                                                                                        }
-                                                                                        print(element?.productType);
-                                                                                        read.addItemQuantity(
-                                                                                            context,
-                                                                                            element
-                                                                                                ?.cartItemId
-                                                                                                .toString(),
-                                                                                            element?.productType,
-                                                                                            index);
-                                                                                      },
-                                                                                      child: SvgPicture
-                                                                                          .asset(
-                                                                                        'assets/images/add.svg',
-                                                                                        // width: 30.w,
-                                                                                        // height: 30.h,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                )
-                                                                                // GestureDetector(
-                                                                                //   onTap: () {
-                                                                                //     read.addToCart(
-                                                                                //         element
-                                                                                //             ?.productType,
-                                                                                //         element
-                                                                                //             ?.productUnitId,
-                                                                                //         element
-                                                                                //             ?.shopId,
-                                                                                //         index,
-                                                                                //         context);
-                                                                                //     watch.onCategoryProductSelected(
-                                                                                //         index);
-                                                                                //   },
-                                                                                //   child: watch.isCategoryProductAdded[index] ==
-                                                                                //           false
-                                                                                //       ? SvgPicture
-                                                                                //           .asset(
-                                                                                //           'assets/images/add.svg',
-                                                                                //           // width: 15.w,
-                                                                                //           // height: 19.h,
-                                                                                //         )
-                                                                                //       : SvgPicture.asset(
-                                                                                //           "assets/icons/tick_green_bg.svg"),
-                                                                                // )
-                                                                              ],
-                                                                            ),
-                                                                            SizedBox(
-                                                                              height: 12.w,
-                                                                            ),
-                                                                          ],
+                                                                            Text(
+                                                                          element?.productName ??
+                                                                              "",
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
+                                                                            textStyle: TextStyle(
+                                                                                color: Black1,
+                                                                                letterSpacing: .5,
+                                                                                fontSize: 16.sp,
+                                                                                fontWeight: FontWeight.w700),
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    )
-                                                                  ],
-                                                                )),
-                                                            // decoration: BoxDecoration(
-                                                            //   // color: Colors.blueAccent,
-                                                            //   border: Border.all(width: 1, color: grey1),
-                                                            // ),
-                                                            // decoration: BoxDecoration(color: Black),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                }),
+                                                                      element?.discountPercentage !=
+                                                                              ""
+                                                                          ? Container(
+                                                                              width: 60.w,
+                                                                              height: 20.h,
+                                                                              decoration: BoxDecoration(color: lightgreen, borderRadius: BorderRadius.all(Radius.circular(5.w))),
+                                                                              child: Center(
+                                                                                child: Text("${element?.discountPercentage} off",
+                                                                                    // textAlign: TextAlign.center,
+                                                                                    style: GoogleFonts.dmSans(
+                                                                                      textStyle: TextStyle(color: Colors.white, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w500),
+                                                                                    )),
+                                                                              ),
+                                                                            )
+                                                                          : Container(),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 6.h,
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                          "${element?.weight} ${element?.unit}",
+                                                                          // textAlign: TextAlign.center,
+                                                                          style:
+                                                                              GoogleFonts.dmSans(
+                                                                            textStyle: TextStyle(
+                                                                                color: Grey,
+                                                                                letterSpacing: .5,
+                                                                                fontSize: 14.sp,
+                                                                                fontWeight: FontWeight.w500),
+                                                                          )),
+                                                                    ],
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              EdgeInsets.only(top: 12.w),
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Row(
+                                                                                children: [
+                                                                                  element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                                  SizedBox(
+                                                                                    width: 10.w,
+                                                                                  ),
+                                                                                  element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
+                                                                                      ? Text(
+                                                                                          '\u{20B9}${element?.offerPrice}',
+                                                                                          style: GoogleFonts.dmSans(
+                                                                                            textStyle: TextStyle(
+                                                                                                // decoration:
+                                                                                                // TextDecoration.lineThrough,
+                                                                                                color: Black,
+                                                                                                letterSpacing: .5,
+                                                                                                fontSize: 13.sp,
+                                                                                                fontWeight: FontWeight.w500),
+                                                                                          ),
+                                                                                        )
+                                                                                      : Container()
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      watch.quantityList[index] ==
+                                                                              0
+                                                                          ? GestureDetector(
+                                                                              onTap: () {
+                                                                                read.addToCart(element?.productType, element?.productUnitId, element?.shopId, index, context);
+                                                                              },
+                                                                              child: SvgPicture.asset(
+                                                                                'assets/images/add.svg',
+                                                                              ))
+                                                                          : Row(
+                                                                              children: [
+                                                                                GestureDetector(
+                                                                                  onTap: () {
+                                                                                    if (watch.isQuanityBtnPressed) {
+                                                                                      return;
+                                                                                    }
+                                                                                    read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId);
+                                                                                  },
+                                                                                  child: SvgPicture.asset(
+                                                                                    'assets/icons/minus.svg',
+                                                                                    // width: 30.w,
+                                                                                    // height: 30.h,
+                                                                                  ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 12.w,
+                                                                                ),
+                                                                                Text(
+                                                                                  "${watch.quantityList[index]}",
+                                                                                  style: GoogleFonts.dmSans(
+                                                                                    textStyle: TextStyle(
+                                                                                        // decoration:
+                                                                                        // TextDecoration.lineThrough,
+                                                                                        color: Black,
+                                                                                        // letterSpacing:
+                                                                                        //     .5,
+                                                                                        fontSize: 16.sp,
+                                                                                        fontWeight: FontWeight.w500),
+                                                                                  ),
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 12.w,
+                                                                                ),
+                                                                                GestureDetector(
+                                                                                  onTap: () {
+                                                                                    print(watch.isQuanityBtnPressed);
+                                                                                    // return;
+                                                                                    if (watch.isQuanityBtnPressed) {
+                                                                                      return;
+                                                                                    }
+                                                                                    print(element?.productType);
+                                                                                    read.addItemQuantity(context, element?.cartItemId.toString(), element?.productType, index);
+                                                                                  },
+                                                                                  child: SvgPicture.asset(
+                                                                                    'assets/images/add.svg',
+                                                                                    // width: 30.w,
+                                                                                    // height: 30.h,
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            )
+                                                                      // GestureDetector(
+                                                                      //   onTap: () {
+                                                                      //     read.addToCart(
+                                                                      //         element
+                                                                      //             ?.productType,
+                                                                      //         element
+                                                                      //             ?.productUnitId,
+                                                                      //         element
+                                                                      //             ?.shopId,
+                                                                      //         index,
+                                                                      //         context);
+                                                                      //     watch.onCategoryProductSelected(
+                                                                      //         index);
+                                                                      //   },
+                                                                      //   child: watch.isCategoryProductAdded[index] ==
+                                                                      //           false
+                                                                      //       ? SvgPicture
+                                                                      //           .asset(
+                                                                      //           'assets/images/add.svg',
+                                                                      //           // width: 15.w,
+                                                                      //           // height: 19.h,
+                                                                      //         )
+                                                                      //       : SvgPicture.asset(
+                                                                      //           "assets/icons/tick_green_bg.svg"),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height:
+                                                                        12.w,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )),
+                                                  // decoration: BoxDecoration(
+                                                  //   // color: Colors.blueAccent,
+                                                  //   border: Border.all(width: 1, color: grey1),
+                                                  // ),
+                                                  // decoration: BoxDecoration(color: Black),
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        );
+                                      }),
+                                ),
                                 SizedBox(
                                   height: 100.w,
                                 ),

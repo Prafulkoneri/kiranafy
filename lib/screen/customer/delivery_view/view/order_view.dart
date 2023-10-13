@@ -843,11 +843,70 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         ],
                                       ),
                                     ),
-
-                              // SizedBox(
-                              //   height: 20.h,
-                              // ),
                               watch.orderDetails?.orderStatus == "Delivered"
+                                  // ||
+                                  //         watch.orderDetails?.orderStatus ==
+                                  //             "Order Refund"
+                                  ? SizedBox(
+                                      height: 10.h,
+                                    )
+                                  : Container(),
+                              watch.orderDetails?.orderStatus == "Order Refund"
+                                  // ||
+                                  //         watch.orderDetails?.orderStatus ==
+                                  //             "Order Refund"
+                                  ? SizedBox(
+                                      height: 10.h,
+                                    )
+                                  : Container(),
+                              /////////////////////////////////////
+                              watch.orderDetails?.orderStatus == "Order Refund"
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        read.orderInvoice(
+                                          context,
+                                        );
+                                      },
+                                      child: Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                              left: 20.w,
+                                              right: 20.w,
+                                              top: 9.w,
+                                              bottom: 9.w),
+                                          width: ScreenUtil().screenWidth,
+                                          margin: EdgeInsets.only(
+                                            left: 12.w,
+                                            right: 11.w,
+                                            // top: 9.w,
+                                            // bottom: 9.w
+                                          ),
+                                          // height: 50.h,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff115B7A),
+                                              // border: Border.all(width: 1, color: Black),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Text(
+                                            "Invoice",
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  // letterSpacing: .5,
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
+                              ////////////////New//////////////////////
+                              watch.orderDetails?.orderStatus == "Delivered"
+                                  // ||
+                                  //         watch.orderDetails?.orderStatus ==
+                                  //             "Order Refund"
                                   ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

@@ -1095,7 +1095,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                  "${element?.weight}${element?.unit}",
+                                                                  "${element?.weight} ${element?.unit}",
                                                                   style:
                                                                       GoogleFonts
                                                                           .roboto(

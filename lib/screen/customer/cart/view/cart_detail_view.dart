@@ -924,7 +924,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                   children: <Widget>[
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w,
+                                                          left: 1.w,
                                                           top: 5.w,
                                                           right: 6.w),
                                                       child: Row(
@@ -939,7 +939,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                     20.sp),
                                                           ),
                                                           SizedBox(
-                                                            width: 10,
+                                                            width: 5,
                                                           ),
                                                           Flexible(
                                                             child: Text(
@@ -967,7 +967,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 6.w,
+                                                          left: 1.w,
                                                           top: 5.w,
                                                           right: 6.w),
                                                       child: Row(
@@ -982,7 +982,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                     20.sp),
                                                           ),
                                                           SizedBox(
-                                                            width: 10,
+                                                            width: 5,
                                                           ),
                                                           Flexible(
                                                             child: Text(

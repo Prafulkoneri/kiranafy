@@ -869,7 +869,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         Row(
                                                           children: [
                                                             Text(
-                                                              "${element?.weight}${element?.unit}",
+                                                              "${element?.weight} ${element?.unit}",
                                                               style: GoogleFonts
                                                                   .roboto(
                                                                 textStyle:
@@ -1260,7 +1260,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                  "${element?.weight}${element?.unit}",
+                                                                  "${element?.weight} ${element?.unit}",
                                                                   style:
                                                                       GoogleFonts
                                                                           .roboto(
@@ -2093,7 +2093,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     height: 6.h,
                                                                   ),
                                                                   Text(
-                                                                    "${element?.weight}${element?.unit}",
+                                                                    "${element?.weight} ${element?.unit}",
                                                                     style: GoogleFonts
                                                                         .dmSans(
                                                                       textStyle: TextStyle(
