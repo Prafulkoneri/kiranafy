@@ -14,7 +14,7 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 
 import 'package:provider/provider.dart';
-import 'package:telephony/telephony.dart';
+// import 'package:telephony/telephony.dart';
 
 enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
@@ -26,38 +26,38 @@ class CustomerSignUp extends StatefulWidget {
 }
 
 class _CustomerSignUpState extends State<CustomerSignUp> {
-  Telephony telephony = Telephony.instance;
+  // Telephony telephony = Telephony.instance;
   OtpFieldController otpbox = OtpFieldController();
   @override
   void initState() {
-    if(Platform.isAndroid) {
-      telephony.listenIncomingSms(
-        onNewMessage: (SmsMessage message) {
-          print(message.address); // +977981******67, sender nubmer
-          print(message.body); // Your OTP code is 34567
-          print(message.date); // 1659690242000, timestamp
-
-          // get the message
-          String sms = message.body.toString();
-
-          if (message.body!.contains(
-              'yourFirebaseProjectName.firebaseapp.com')) {
-            // verify SMS is sent for OTP with sender number
-            String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
-            // prase code from the OTP sms
-            otpbox.set(otpcode.split(""));
-            // split otp code to list of number
-            // and populate to otb boxes
-            setState(() {
-              // refresh UI
-            });
-          } else {
-            print("Normal message.");
-          }
-        },
-        listenInBackground: false,
-      );
-    }
+    // if(Platform.isAndroid) {
+    //   telephony.listenIncomingSms(
+    //     onNewMessage: (SmsMessage message) {
+    //       print(message.address); // +977981******67, sender nubmer
+    //       print(message.body); // Your OTP code is 34567
+    //       print(message.date); // 1659690242000, timestamp
+    //
+    //       // get the message
+    //       String sms = message.body.toString();
+    //
+    //       if (message.body!.contains(
+    //           'yourFirebaseProjectName.firebaseapp.com')) {
+    //         // verify SMS is sent for OTP with sender number
+    //         String otpcode = sms.replaceAll(new RegExp(r'[^0-9]'), '');
+    //         // prase code from the OTP sms
+    //         otpbox.set(otpcode.split(""));
+    //         // split otp code to list of number
+    //         // and populate to otb boxes
+    //         setState(() {
+    //           // refresh UI
+    //         });
+    //       } else {
+    //         print("Normal message.");
+    //       }
+    //     },
+    //     listenInBackground: false,
+    //   );
+    // }
 
     super.initState();
   }

@@ -465,6 +465,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           ?.customerCancelledStatus ==
                                                       "YES"
                                               ? "Cancelled"
+
                                               : watch.orderDetails
                                                               ?.orderStatus ==
                                                           "Order Refund" &&
@@ -860,43 +861,53 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     )
                                   : Container(),
                               /////////////////////////////////////
-                              watch.orderDetails?.orderStatus == "Order Refund"
-                                  ? GestureDetector(
+                            watch.orderDetails
+                                  ?.orderStatus ==
+                                  "Order Refund" &&
+                                  watch.orderDetails
+                                      ?.shopCancelledStatus ==
+                                      "YES"?Container():
+                            watch.orderDetails
+                                ?.orderStatus ==
+                                "Order Refund" &&
+                                watch.orderDetails
+                                    ?.customerCancelledStatus ==
+                                    "YES" ?Container():
+                            watch.orderDetails?.orderStatus == "Order Refund"?
+                                   GestureDetector(
                                       onTap: () {
                                         read.orderInvoice(
                                           context,
                                         );
                                       },
-                                      child: Expanded(
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 20.w,
-                                              right: 20.w,
-                                              top: 9.w,
-                                              bottom: 9.w),
-                                          width: ScreenUtil().screenWidth,
-                                          margin: EdgeInsets.only(
-                                            left: 12.w,
-                                            right: 11.w,
-                                            // top: 9.w,
-                                            // bottom: 9.w
-                                          ),
-                                          // height: 50.h,
-                                          decoration: BoxDecoration(
-                                              color: Color(0xff115B7A),
-                                              // border: Border.all(width: 1, color: Black),
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Text(
-                                            "Invoice",
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  // letterSpacing: .5,
-                                                  fontSize: 18.sp,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            left: 20.w,
+                                            right: 20.w,
+                                            top: 9.w,
+                                            bottom: 9.w),
+                                        width: ScreenUtil().screenWidth,
+                                        margin: EdgeInsets.only(
+                                          left: 12.w,
+                                          right: 11.w,
+                                          // top: 9.w,
+                                          // bottom: 9.w
+                                        ),
+                                        // height: 50.h,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff115B7A),
+                                            // border: Border.all(width: 1, color: Black),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Text(
+                                          "Invoice",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                // letterSpacing: .5,
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         ),
                                       ),
@@ -2117,6 +2128,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                             FontWeight.w700,
                                                         fontSize: 18.sp),
                                                   ),
+                                                  Text( "\u{20B9} ${watch.orderDetails?.customerRefundAmount}",style: TextStyle(
+                                                      fontWeight:
+                                                      FontWeight.w700,
+                                                      fontSize: 18.sp),),
                                                   SizedBox(
                                                     height: 19.w,
                                                   ),
