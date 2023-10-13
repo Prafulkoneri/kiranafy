@@ -111,7 +111,8 @@ class _CustomerFilterViewState extends State<CustomerFilterView> {
                     },
                   ),
                   Text(
-                    "Ordered But Not Favourite",
+                    // "Ordered But Not Favourite",
+                    "Ordered Customers",
                     style: TextStyle(
                         color: Black1,
                         fontSize: 16.sp,

@@ -2233,7 +2233,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 height: 11.w,
                                                               ),
                                                               Text(
-                                                                "\u{20B9} ${watch.orderDetails?.totalAmount}",
+                                                                // "",
+                                                                // "\u{20B9} ${watch.orderDetails?.totalAmount}",
+                                                                "\u{20B9} ${watch.orderDetails?.customerRefundAmount}",
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
@@ -3364,6 +3366,31 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 ),
                                                 SizedBox(
                                                   height: 16.w,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    PrimaryCheckBox(
+                                                      onChanged: (value) {
+                                                        read.onRefundByCash(
+                                                            value);
+                                                      },
+                                                      value:
+                                                          watch.isRefundByCash,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 6.w,
+                                                    ),
+                                                    Text(
+                                                      "Refund Payment Given by Cash",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14.sp),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10.w,
                                                 ),
                                                 Row(
                                                   children: [

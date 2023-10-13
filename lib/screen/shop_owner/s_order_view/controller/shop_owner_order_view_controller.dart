@@ -1,4 +1,3 @@
-
 //////////////////////////////////4/9/2023//////////////////
 import 'dart:async';
 import 'dart:convert';
@@ -79,7 +78,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   bool rejectPayment = false;
   bool isRefundByCash = false;
   bool isRefundByUpi = false;
-  bool canShopOwnerCancel=true;
+  bool canShopOwnerCancel = true;
   TextEditingController upiIdController = TextEditingController();
   TextEditingController rejectReasonController = TextEditingController();
   TextEditingController refundPayableAmount = TextEditingController();
@@ -193,11 +192,9 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
               type: SnackType.error);
           showLoader(false);
         }
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -316,7 +313,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         payload: '$savePath');
   }
 
-  void checkIfAllProductsSelected(context){
+  void checkIfAllProductsSelected(context) {
     List checkDataList = [];
     for (int i = 0; i < selectedProductList.length; i++) {
       print(selectedProductList);
@@ -325,15 +322,14 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
       }
       print(checkDataList);
     }
-    if(checkDataList.length!=selectedProductList.length){
-      canShopOwnerCancel=false;
+    if (checkDataList.length != selectedProductList.length) {
+      canShopOwnerCancel = false;
       Utils.showPrimarySnackbar(context, "Select all product before cancelling",
           type: SnackType.error);
       notifyListeners();
       return;
-    }
-    else{
-      canShopOwnerCancel=true;
+    } else {
+      canShopOwnerCancel = true;
       notifyListeners();
     }
   }
@@ -673,10 +669,13 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         refundPayableAmount.clear();
         upiIdController.clear();
         reasonController.clear();
-    final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(0, SPaymentRefundList(
-          isNavFromAccounts: false,
-        ), context);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
+        read.onNavigation(
+            0,
+            SPaymentRefundList(
+              isNavFromAccounts: false,
+            ),
+            context);
         read.showBottomNavigationBar();
         // Navigator.pushAndRemoveUntil(
         //   context,
@@ -727,6 +726,11 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
 
     if (refundPayableAmount.text == "") {
       Utils.showPrimarySnackbar(context, "Please Enter Refundable Amount",
+          type: SnackType.error);
+      return;
+    }
+    if (isRefundByUpi && upiIdController.text == "") {
+      Utils.showPrimarySnackbar(context, "Please Enter Transaction Id",
           type: SnackType.error);
       return;
     }
