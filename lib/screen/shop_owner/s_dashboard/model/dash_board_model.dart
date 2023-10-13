@@ -70,8 +70,7 @@ class Data {
     totalCustomersOrderedCount = json["total_customers_ordered_count"];
     customersLinkedToShops = json["customers_linked_to_shops"];
     shopOwnerActiveCouponsCount = json["shop_owner_active_coupons_count"];
-    shopOwnerActiveProductsCouponsCount =
-        json["shop_owner_active_products_coupons_count"];
+    shopOwnerActiveProductsCouponsCount = json["shop_owner_active_products_coupons_count"];
     seasonalProductsCount = json["seasonal_products_count"];
     fullfillYourCravingsProductsCount =
         json["fullfill_your_cravings_products_count"];

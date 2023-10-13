@@ -482,8 +482,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: Column(
                               children: [
                                 DashBoardCount(
-                                  text:
-                                      '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
+                                  text: '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
                                 ),
                                 ShopDashBoard(
                                   text: 'Product Offer',
