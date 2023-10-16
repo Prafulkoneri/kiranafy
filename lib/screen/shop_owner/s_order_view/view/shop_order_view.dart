@@ -3170,10 +3170,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 18.sp),
                                         ),
-                                        Text(watch.orderDetails?.updatedTime??""),
+                                        Text(watch.orderDetails?.orderCancelledDateAndTime??""),
                                       ],
                                     ),
-
                                     SizedBox(
                                       height: 15.w,
                                     ),
