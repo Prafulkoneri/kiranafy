@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +9,6 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MainScreenView extends StatefulWidget {
   final bool? isRefresh;

@@ -25,13 +25,16 @@ class RemoveItemFromCartReq {
 class CartRemoveResponseModel {
   int? status;
   String? message;
+  int? cartCount;
 
   CartRemoveResponseModel({
     required this.status,
     required this.message,
+    required this.cartCount,
   });
   CartRemoveResponseModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
+    cartCount = json["cart_count"];
   }
 }

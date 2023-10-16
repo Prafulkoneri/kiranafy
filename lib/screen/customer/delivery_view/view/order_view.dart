@@ -5092,7 +5092,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           ),
                                           ////////////new working //////////
                                           // Text(
-                                          //   "\u{20B9} ${watch.orderDetails?.shopOwnerRefundPaymentType}",
+                                          // //   "${watch.orderDetails?.shopOwnerRefundPaymentType}",
                                           //   style: TextStyle(
                                           //       // fontWeight: FontWeight.w700,
 
@@ -5420,7 +5420,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   //   watch.orderDetails?.shopOwnerCancelledReason != ""
                                   ? Container(
                                       padding: EdgeInsets.only(
-                                          left: 15.w, top: 11.w, bottom: 45.w,right: 15.w),
+                                          left: 15.w,
+                                          top: 11.w,
+                                          bottom: 45.w,
+                                          right: 15.w),
                                       // height: ScreenUtil().screenHeight,
                                       width: ScreenUtil().screenWidth,
                                       decoration: BoxDecoration(
@@ -5430,7 +5433,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 "Order Cancelled",
@@ -5438,7 +5442,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 18.sp),
                                               ),
-                                              Text(watch.orderDetails?.orderCancelledDateAndTime??""),
+                                              Text(watch.orderDetails
+                                                      ?.orderCancelledDateAndTime ??
+                                                  ""),
                                             ],
                                           ),
                                           SizedBox(

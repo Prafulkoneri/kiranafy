@@ -45,6 +45,7 @@ class MainScreenController extends ChangeNotifier {
   bool isLocationFound = false;
   String locationErrorMessage = "";
   bool hideBottomNavigation = false;
+  int cartCount = 0;
 
   void initState(context, index, currentScreen) async {
     // navigation(index, currentScreen);
@@ -60,6 +61,8 @@ class MainScreenController extends ChangeNotifier {
     currentTab = index;
     notifyListeners();
   }
+
+  void getCartCount() {}
 
   onSignOut() {
     currentTab = 0;
@@ -234,11 +237,9 @@ class MainScreenController extends ChangeNotifier {
         }
 
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

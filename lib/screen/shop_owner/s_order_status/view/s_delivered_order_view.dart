@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,12 +61,15 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
               final element = watch.deliveredOrdersList?[index];
               return GestureDetector(
                 onTap: () {
-                  readMainScreen.onNavigation(0,ShopOrderView(
-                    route: "orderStatus",
-                    orderId: element?.id.toString(),
-                    fromOrderStatus: true,
-                    selectedIndex: watch.selectedIndex,
-                  ), context);
+                  readMainScreen.onNavigation(
+                      0,
+                      ShopOrderView(
+                        route: "orderStatus",
+                        orderId: element?.id.toString(),
+                        fromOrderStatus: true,
+                        selectedIndex: watch.selectedIndex,
+                      ),
+                      context);
                   readMainScreen.hideBottomNavigationBar();
                   // Navigator.push(
                   //   context,
@@ -181,9 +183,17 @@ class _SDeliveredOrderViewState extends State<SDeliveredOrderView> {
                                   top: 4.w,
                                   bottom: 3.w),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Color(0xffFBDFDF),
-                              ),
+                                  borderRadius: BorderRadius.circular(5),
+                                  // color: Color(0xffFBDFDF),
+                                  color: element?.refundOrderStatus == "pending"
+                                      ? Colors.lightBlue.withOpacity(0.2)
+                                      : element?.refundOrderStatus == "accept"
+                                          ? Colors.green.withOpacity(0.3)
+                                          : element?.refundOrderStatus ==
+                                                  "reject"
+                                              ? Colors.red.withOpacity(0.2)
+                                              // Colors.red
+                                              : Colors.transparent),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
