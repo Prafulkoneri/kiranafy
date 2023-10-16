@@ -200,7 +200,7 @@ class PrimarySTextFormField extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: hintFontSize ?? 16.sp,
                   fontWeight: fontWeight ?? FontWeight.w400,
-                  color: Colors.black),
+                  color: color ?? Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,

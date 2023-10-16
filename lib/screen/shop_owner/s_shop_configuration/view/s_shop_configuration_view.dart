@@ -559,9 +559,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
-                                    color: Black,
                                     // fontWeight: FontWeight.bold,
-                                    readOnly: true,
+                                    readOnly: true, color: black,
                                     hintText: "1 to 100", hintFontSize: 15.sp,
                                     // hint: "1 to 500",
                                     // hintSize: 15.sp,
@@ -618,7 +617,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     // fontWeight: FontWeight.bold,
-                                    readOnly: true,
+                                    readOnly: true, color: black,
                                     hintText: "100 to 500",
                                     hintFontSize: 15.sp,
                                   ),
@@ -673,7 +672,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
-                                    readOnly: true,
+                                    readOnly: true, color: black,
                                     // fontWeight: FontWeight.bold,
                                     hintText: "500 to 1200",
                                     hintFontSize: 15.sp,
@@ -729,6 +728,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
+                                    color: black,
                                     // fontWeight: FontWeight.bold,
                                     readOnly: true,
                                     hintText: "1200 to 3000",
@@ -888,7 +888,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                             ),
                           ),
                           SizedBox(
-                            width: 70.w,
+                            width: 72.w,
                           ),
                           PrimaryCheckBox(
                             onChanged: (value) {
