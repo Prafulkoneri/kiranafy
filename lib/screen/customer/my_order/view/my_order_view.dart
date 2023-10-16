@@ -359,10 +359,25 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                 top: 4.w,
                                                 bottom: 3.w),
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Color(0xffFBDFDF),
-                                            ),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: element
+                                                            ?.refundOrderStatus ==
+                                                        "pending"
+                                                    ? Colors.lightBlue
+                                                        .withOpacity(0.2)
+                                                    : element?.refundOrderStatus ==
+                                                            "accept"
+                                                        ? Colors.green
+                                                            .withOpacity(0.3)
+                                                        : element?.refundOrderStatus ==
+                                                                "reject"
+                                                            ? Colors.red
+                                                                .withOpacity(
+                                                                    0.2)
+                                                            // Colors.red
+                                                            : Colors
+                                                                .transparent),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment

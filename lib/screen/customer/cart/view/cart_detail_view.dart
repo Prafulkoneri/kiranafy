@@ -721,6 +721,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                             children: [
                                                                               GestureDetector(
                                                                                 onTap: () {
+                                                                                  readMain.showBottomNavigationBar();
                                                                                   if (watch.isQuanityBtnPressed) {
                                                                                     return;
                                                                                   }
@@ -753,6 +754,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                               ),
                                                                               GestureDetector(
                                                                                 onTap: () {
+                                                                                  // readMain.showBottomNavigationBar();
                                                                                   print(watch.isQuanityBtnPressed);
                                                                                   if (watch.isQuanityBtnPressed) {
                                                                                     return;
