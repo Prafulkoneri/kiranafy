@@ -145,6 +145,7 @@ class OrderDetails {
   String? shopDeliveredCustomerPaymentStatus;
   int? shopOwnerRefunPaybelAmount;
   String? customerRefundReason;
+  String ? updatedTime;
 
   OrderDetails({
     required this.id,
@@ -179,6 +180,7 @@ class OrderDetails {
     required this.shopDeliveredTransactionId,
     required this.shopOwnerRefunPaybelAmount,
     required this.customerRefundReason,
+    required this.updatedTime,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -214,6 +216,7 @@ class OrderDetails {
     shopDeliveredTransactionId = json["shop_de_transaction_id"];
     shopOwnerRefunPaybelAmount = json["shop_owner_refund_payable_amount"];
     customerRefundReason = json["custom_refund_reason"]; //
+    updatedTime = json["updated_at"];
   }
 }
 

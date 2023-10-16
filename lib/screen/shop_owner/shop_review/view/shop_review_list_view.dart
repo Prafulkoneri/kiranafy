@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
+import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/screen/shop_owner/shop_review/controller/shop_review_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -88,7 +89,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("All Reviews",
+                          Text("All Review",
                               style: TextStyle(
                                   color: Black,
                                   fontSize: 16.sp,
@@ -104,159 +105,183 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                               final element = watch.reviewList?[index];
                               return Column(
                                 children: [
-                                  Container(
-                                    width: ScreenUtil().screenWidth,
-                                    padding: EdgeInsets.only(
-                                        left: 15.w,
-                                        right: 10.w,
-                                        top: 12.w,
-                                        bottom: 11.w),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffE8E8E8)),
-                                      borderRadius: BorderRadius.circular(10),
-                                      // color: Colors.red,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            element?.customerProfileImagePath ==
-                                                    ""
-                                                ? Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            'assets/images/nearshop2.png'),
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
+                                  GestureDetector(
+                                    onTap:(){
+                                      readMain.onNavigation(0,ShopOrderView(selectedIndex: 0, fromOrderStatus:false, route:"shopReview",orderId: element?.orderId.toString()),context);
+                                  readMain.hideBottomNavigationBar();
+                                    },
+                                    child: Container(
+                                      width: ScreenUtil().screenWidth,
+                                      padding: EdgeInsets.only(
+                                          left: 15.w,
+                                          right: 10.w,
+                                          top: 12.w,
+                                          bottom: 11.w),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            width: 1, color: Color(0xffE8E8E8)),
+                                        borderRadius: BorderRadius.circular(10),
+                                        // color: Colors.red,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              element?.customerProfileImagePath ==
+                                                      ""
+                                                  ? Container(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        image: DecorationImage(
                                                           fit: BoxFit.cover,
-                                                          image: CachedNetworkImageProvider(
-                                                              element?.customerProfileImagePath ??
-                                                                  "")),
-                                                    ),
-                                                  ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 5.w),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          "${element?.customerName}",
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                fontSize: 16.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                          ),
+                                                          image: AssetImage(
+                                                              'assets/images/nearshop2.png'),
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            SvgPicture.asset(
-                                                              'assets/icons/ReviewStart.svg',
-                                                              width: 14.w,
-                                                              height: 14.h,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 7.w,
-                                                            ),
-                                                            Text(
-                                                              "${element?.ratings}",
-                                                              style: GoogleFonts
-                                                                  .dmSans(
-                                                                textStyle: TextStyle(
-                                                                    color:
-                                                                        Black,
-                                                                    fontSize:
-                                                                        14.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 4.h,
-                                                    ),
-                                                    Text(
-                                                      "${element?.cityName} ${element?.stateName}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Color(
-                                                                0xff7C7C7C),
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      "${element?.createdAt}",
-                                                      style: GoogleFonts.dmSans(
-                                                        textStyle: TextStyle(
-                                                            color: Color(
-                                                                0xff7C7C7C),
-                                                            fontSize: 11.sp,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
                                                       ),
                                                     )
-                                                  ],
+                                                  : Container(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        image: DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: CachedNetworkImageProvider(
+                                                                element?.customerProfileImagePath ??
+                                                                    "")),
+                                                      ),
+                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 5.w),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "${element?.customerName}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Black,
+                                                                  fontSize: 16.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700),
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                'assets/icons/ReviewStart.svg',
+                                                                width: 14.w,
+                                                                height: 14.h,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 7.w,
+                                                              ),
+                                                              Text(
+                                                                "${element?.ratings}",
+                                                                style: GoogleFonts
+                                                                    .dmSans(
+                                                                  textStyle: TextStyle(
+                                                                      color:
+                                                                          Black,
+                                                                      fontSize:
+                                                                          14.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 4.h,
+                                                      ),
+                                                      Text(
+                                                        "${element?.orderUniqueId}",
+                                                        style: GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Color(
+                                                                  0xff7C7C7C),
+                                                              fontSize: 12.sp,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w400),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.h,
+                                                      ),
+                                                      Text(
+                                                        "${element?.cityName} ${element?.stateName}",
+                                                        style: GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Color(
+                                                                  0xff7C7C7C),
+                                                              fontSize: 12.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.h,
+                                                      ),
+                                                      Text(
+                                                        "${element?.createdAt}",
+                                                        style: GoogleFonts.dmSans(
+                                                          textStyle: TextStyle(
+                                                              color: Color(
+                                                                  0xff7C7C7C),
+                                                              fontSize: 11.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Divider(
-                                          color: grey,
-                                          thickness: 1,
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Text(
-                                          "${element?.review}",
-                                          // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Color(0xff7C7C7C),
-                                                // letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 15.h,
+                                          ),
+                                          Divider(
+                                            color: grey,
+                                            thickness: 1,
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
+                                          ),
+                                          Text(
+                                            "${element?.review}",
+                                            // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
+                                            style: GoogleFonts.dmSans(
+                                              textStyle: TextStyle(
+                                                  color: Color(0xff7C7C7C),
+                                                  // letterSpacing: .5,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   SizedBox(

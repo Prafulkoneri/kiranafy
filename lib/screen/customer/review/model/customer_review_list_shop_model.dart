@@ -65,6 +65,8 @@ class ReviewList {
   String? review;
   int? ratings;
   String? createdAt;
+  String ? orderUniqueId;
+  int ?orderId;
 
   ReviewList({
     required this.id,
@@ -76,6 +78,8 @@ class ReviewList {
     required this.review,
     required this.ratings,
     required this.createdAt,
+    required this.orderId,
+    required this.orderUniqueId,
   });
   ReviewList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -87,6 +91,8 @@ class ReviewList {
     review = json["review"];
     ratings = json["ratings"];
     createdAt = json["created_at"];
+    orderUniqueId = json["order_unique_id"];
+    orderId = json["order_id"];
   }
 }
 

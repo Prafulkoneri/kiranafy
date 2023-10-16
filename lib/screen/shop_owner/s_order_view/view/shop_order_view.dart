@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/shop_owner/s_order_view/view/cancel_r
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/delivery_code_bottom_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_products.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
+import 'package:local_supper_market/screen/shop_owner/shop_review/view/shop_review_list_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -91,6 +92,15 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   0,
                   SPaymentRefundList(
                     isNavFromAccounts: false,
+                  ),
+                  context);
+              readMainScreen.showBottomNavigationBar();
+            }
+            if (widget.route == "shopReview") {
+              readMainScreen.onNavigation(
+                  0,
+                  ShopReviewScreenView(
+                   fromDashBoard: true,
                   ),
                   context);
               readMainScreen.showBottomNavigationBar();
@@ -2888,16 +2898,26 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
+                                                              Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Refund Amount",
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            18.sp),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                  height: 5.w,
+                                                              ),
                                                               Text(
-                                                                "Refund Amount",
-                                                                style: TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        18.sp),
+                                                                  watch.orderDetails?.updatedTime??""
                                                               ),
                                                               SizedBox(
                                                                 height: 11.w,
@@ -3133,7 +3153,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             // watch.orderDetails?.shopOwnerCancelledReason == "No"
                             ? Container(
                                 padding: EdgeInsets.only(
-                                    left: 15.w, top: 11.w, bottom: 45.w),
+                                    left: 15.w, top: 11.w, bottom: 45.w,right: 15.w),
                                 // height: ScreenUtil().screenHeight,
                                 width: ScreenUtil().screenWidth,
                                 decoration:
@@ -3141,12 +3161,19 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Order Cancelled",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18.sp),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Order Cancelled",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18.sp),
+                                        ),
+                                        Text(watch.orderDetails?.updatedTime??""),
+                                      ],
                                     ),
+
                                     SizedBox(
                                       height: 15.w,
                                     ),

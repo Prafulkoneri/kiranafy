@@ -175,7 +175,7 @@ class Endpoint {
       "${baseUrl}lsm-customer-current-location-pincode";
   static const String shopGetOrderList =
       "${baseUrl}lsm-shop-owner-get-orders-list";
-  static const String shopOwneROrderView = "${baseUrl} ";
+  static const String shopOwneROrderView = "${baseUrl}lsm-shop-owner-order-view";
   static const String shopOwnerRefundUpdate =
       "${baseUrl}lsm-shop-owner-update-refund-status";
   static const String shopOwnerDeliveredRefundUpdate =
