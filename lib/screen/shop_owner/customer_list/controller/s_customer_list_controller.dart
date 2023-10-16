@@ -70,10 +70,6 @@ class SCustomerListController extends ChangeNotifier {
             Navigator.pop(context);
           }
         }
-        // favouriteToShopsList =
-        // orderedButNotFavouriteList =
-        //     customerListData?.orderedButNotFavouriteList;
-
         showLoader(false);
         notifyListeners();
       }

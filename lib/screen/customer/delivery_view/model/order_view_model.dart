@@ -162,6 +162,8 @@ class OrderDetails {
   String? shopDeliveredCustomerPaymentStatus;
   String? returnButtonStatus;
   String ? orderCancelledDateAndTime;
+  String ? deliveredRefundDateAndTime;
+  String ? refundDateAndTime;
 
   OrderDetails(
       {required this.id,
@@ -178,6 +180,8 @@ class OrderDetails {
       required this.orderStatus,
       required this.canCancelOrder,
       required this.subTotalAmount,
+      required this.deliveredRefundDateAndTime,
+      required this.refundDateAndTime,
       this.shopOwnerRefundPayableAmount,
       required this.customerRefundAmount,
       this.customerRefundReason,
@@ -240,6 +244,8 @@ class OrderDetails {
     shopCancelledStatus = json["shop_owner_cancelled_status"];
     returnButtonStatus = json["refund_button_status"];
     orderCancelledDateAndTime=json["order_cancelled_date_and_time"];
+    deliveredRefundDateAndTime=json["delivered_refund_date_time"];
+    refundDateAndTime=json["refund_datetime"];
   }
 }
 

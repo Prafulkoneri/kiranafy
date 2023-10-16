@@ -2368,16 +2368,23 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        "Refund Amount",
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight
+                                                                                    .w700,
+                                                                            color: Colors
+                                                                                .black,
+                                                                            fontSize:
+                                                                                18.sp),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                   Text(
-                                                                    "Refund Amount",
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w700,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                            18.sp),
+                                                                    watch.orderDetails?.refundDateAndTime??"",
                                                                   ),
                                                                   SizedBox(
                                                                     height:
@@ -2432,6 +2439,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           0xff115B7A)),
                                                                 )),
                                                               ),
+
                                                             ],
                                                           ),
                                                           SizedBox(
@@ -2917,7 +2925,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   height: 5.w,
                                                               ),
                                                               Text(
-                                                                  watch.orderDetails?.updatedTime??""
+                                                                  watch.orderDetails?.refundDateAndTime??""
                                                               ),
                                                               SizedBox(
                                                                 height: 11.w,
@@ -3518,11 +3526,15 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   Colors.black,
                                                               fontSize: 18.sp),
                                                         ),
+                                                        Text(
+                                                            watch.orderDetails?.deliveredRefundDateAndTime??""
+                                                        ),
                                                         SizedBox(
                                                           height: 11.w,
                                                         ),
                                                         Row(
                                                             children: [
+                                                              int.parse(watch.totalRefundAmount)>int.parse(watch.orderDetails?.shopDeliveredPayableAmount.toString()??"0")?
                                                               Text(
                                                                 "\u{20B9} ${watch.totalRefundAmount}  ",
                                                                 style: TextStyle(
@@ -3533,7 +3545,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     color:
                                                                     Colors.black,
                                                                     fontSize: 18.sp),
-                                                              ),
+                                                              ):Container(),
                                                               Text(
                                                                 "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
                                                                 style: TextStyle(
