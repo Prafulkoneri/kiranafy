@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
@@ -211,28 +210,27 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                             : read.updateAllShopFavList(
                                                 context, watch.shopDetails?.id);
                                       },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            left: 13.w,
-                                            right: 13.w,
-                                            top: 14.w,
-                                            bottom: 14.w),
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color(0xff4689EC),
-                                        ),
-                                        child: watch.favAllShop
-                                            ? SvgPicture.asset(
-                                                "assets/icons/fav_selected.svg",
-                                                width: 26.w,
-                                                height: 14.h,
-                                              )
-                                            : SvgPicture.asset(
-                                                "assets/images/favorite.svg",
-                                                width: 26.w,
-                                                height: 14.h,
-                                              ),
-                                      ),
+                                      child: watch.favAllShop
+                                          ? SvgPicture.asset(
+                                              "assets/icons/new_fvrt_selected.svg",
+                                              // width: 26.w,
+                                              // height: 14.h,
+                                            )
+                                          : SvgPicture.asset(
+                                              "assets/icons/new_fvrt_not_selected.svg",
+                                              // width: 26.w,
+                                              // height: 14.h,
+                                            ),
+                                      // ? SvgPicture.asset(
+                                      //     "assets/icons/fav_selected.svg",
+                                      //     width: 26.w,
+                                      //     height: 14.h,
+                                      //   )
+                                      // : SvgPicture.asset(
+                                      //     "assets/images/favorite.svg",
+                                      //     width: 26.w,
+                                      //     height: 14.h,
+                                      //   ),
                                     )
                                   ],
                                 ),

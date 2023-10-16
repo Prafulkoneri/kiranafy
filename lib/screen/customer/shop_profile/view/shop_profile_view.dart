@@ -385,29 +385,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         : read.updateAllShopFavList(
                                             context, watch.shopDetails?.id);
                                   },
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        left: 13.w,
-                                        right: 13.w,
-                                        top: 14.w,
-                                        bottom: 14.w),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      // color: Color(0xffFBDFDF),
-                                      color: Color(0xff4689EC),
-                                    ),
-                                    child: watch.favAllShop
-                                        ? SvgPicture.asset(
-                                            "assets/icons/fav_selected.svg",
-                                            width: 26.w,
-                                            height: 14.h,
-                                          )
-                                        : SvgPicture.asset(
-                                            "assets/images/favorite.svg",
-                                            width: 26.w,
-                                            height: 14.h,
-                                          ),
-                                  ),
+                                  child: watch.favAllShop
+                                      ? SvgPicture.asset(
+                                          "assets/icons/new_fvrt_selected.svg",
+                                          // width: 26.w,
+                                          // height: 14.h,
+                                        )
+                                      : SvgPicture.asset(
+                                          "assets/icons/new_fvrt_not_selected.svg",
+                                          // width: 26.w,
+                                          // height: 14.h,
+                                        ),
                                 )
                               ],
                             ),

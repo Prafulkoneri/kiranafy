@@ -728,7 +728,9 @@ class OrderSummaryController extends ChangeNotifier {
       return;
     }
     if (slotGroupValue == "") {
-      Utils.showPrimarySnackbar(context, "Select Slot", type: SnackType.error);
+      Utils.showPrimarySnackbar(
+          context, "Select another date as no slot available",
+          type: SnackType.error);
       return;
     }
     if (customerAddress!.isEmpty && groupValue == "delivery_to") {
