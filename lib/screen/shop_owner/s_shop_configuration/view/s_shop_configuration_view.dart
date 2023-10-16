@@ -289,25 +289,25 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0,top: 3.0),
+                              padding:
+                                  const EdgeInsets.only(bottom: 8.0, top: 3.0),
                               child: SDropDownField(
-                                  onChanged: (value){
+                                  onChanged: (value) {
                                     read.onOpeningAmPmSelected(value);
                                   },
-                                value: watch.openingAmPm,
+                                  value: watch.openingAmPm,
                                   iconPadding: EdgeInsets.only(right: 6.w),
-                                height: 44.w,
-                                  items:[
-                                  DropdownMenuItem(
-                                  child: Text("AM"),
-                                  value: "am",
-                                ),
+                                  height: 44.w,
+                                  items: [
+                                    DropdownMenuItem(
+                                      child: Text("AM"),
+                                      value: "am",
+                                    ),
                                     DropdownMenuItem(
                                       child: Text("PM"),
                                       value: "pm",
                                     )
-                                  ]
-                              ),
+                                  ]),
                             ),
                           ),
                           SizedBox(
@@ -327,15 +327,16 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0,top: 3.0),
+                              padding:
+                                  const EdgeInsets.only(bottom: 8.0, top: 3.0),
                               child: SDropDownField(
-                                onChanged: (value){
-                                  read.onClosingAmPmSelected(value);
-                                },
-                                value: watch.closingAmPm,
-                                iconPadding: EdgeInsets.only(right: 6.w),
+                                  onChanged: (value) {
+                                    read.onClosingAmPmSelected(value);
+                                  },
+                                  value: watch.closingAmPm,
+                                  iconPadding: EdgeInsets.only(right: 6.w),
                                   height: 44.w,
-                                  items:[
+                                  items: [
                                     DropdownMenuItem(
                                       child: Text("AM"),
                                       value: "am",
@@ -344,8 +345,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                       child: Text("PM"),
                                       value: "pm",
                                     )
-                                  ]
-                              ),
+                                  ]),
                             ),
                           ),
                         ],
@@ -559,8 +559,8 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
-                                    // color: Black,
-                                    fontWeight: FontWeight.bold,
+                                    color: Black,
+                                    // fontWeight: FontWeight.bold,
                                     readOnly: true,
                                     hintText: "1 to 100", hintFontSize: 15.sp,
                                     // hint: "1 to 500",
@@ -617,7 +617,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
-                                    fontWeight: FontWeight.bold,
+                                    // fontWeight: FontWeight.bold,
                                     readOnly: true,
                                     hintText: "100 to 500",
                                     hintFontSize: 15.sp,
@@ -674,7 +674,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                 Expanded(
                                   child: PrimarySTextFormField(
                                     readOnly: true,
-                                    fontWeight: FontWeight.bold,
+                                    // fontWeight: FontWeight.bold,
                                     hintText: "500 to 1200",
                                     hintFontSize: 15.sp,
                                   ),
@@ -729,7 +729,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                               children: [
                                 Expanded(
                                   child: PrimarySTextFormField(
-                                    fontWeight: FontWeight.bold,
+                                    // fontWeight: FontWeight.bold,
                                     readOnly: true,
                                     hintText: "1200 to 3000",
                                     hintFontSize: 15.sp,

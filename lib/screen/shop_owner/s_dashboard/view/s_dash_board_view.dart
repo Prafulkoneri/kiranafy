@@ -1,4 +1,6 @@
 // import 'package:connectivity/connectivity.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -121,14 +123,16 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             child: watch.dashBoardData?.bannerImages!.isEmpty ??
                                     true
                                 ? Container(
-                                    height: 190.w,
+                                    height:
+                                        Platform.isAndroid ? 180.0.h : 190.h,
                                     child: Image.asset(
                                       "assets/images/nearshop2.png",
                                       height: 190.w,
                                       fit: BoxFit.fill,
                                     ))
                                 : SizedBox(
-                                    height: 190.0.h,
+                                    height:
+                                        Platform.isAndroid ? 180.0.h : 190.h,
                                     child: PageView.builder(
                                         controller: watch.pageController,
                                         allowImplicitScrolling: true,
@@ -268,7 +272,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     ///////////////////
                     Container(
                       padding: EdgeInsets.only(
-                          left: 13.w, top: 5.w, right: 19.w, bottom: 17.w),
+                          left: 13.w, right: 19.w, bottom: 17.w),
                       decoration: BoxDecoration(
                         border: Border(
                           // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
@@ -277,7 +281,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Row(

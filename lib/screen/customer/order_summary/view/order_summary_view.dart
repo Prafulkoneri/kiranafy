@@ -46,7 +46,7 @@ class OrderSummaryView extends StatefulWidget {
 class _OrderSummaryViewState extends State<OrderSummaryView> {
   String radioButtonItem = '';
   bool showAddressModalSheet = false;
-  ScrollController scrollController=ScrollController();
+  ScrollController scrollController = ScrollController();
 
   // Group Value for Radio Button.
   int id = 1;
@@ -85,9 +85,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          context
-              .read<OrderSummaryController>()
-              .onScrollMaxExtent(context);
+          context.read<OrderSummaryController>().onScrollMaxExtent(context);
         });
       }
     });
@@ -275,28 +273,17 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   context,
                                                   watch.shopDetailData?.id);
                                         },
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 13.w,
-                                              right: 13.w,
-                                              top: 14.w,
-                                              bottom: 14.w),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0xff4689EC),
-                                          ),
-                                          child: watch.favAllShop
-                                              ? SvgPicture.asset(
-                                                  "assets/icons/fav_selected.svg",
-                                                  width: 26.w,
-                                                  height: 14.h,
-                                                )
-                                              : SvgPicture.asset(
-                                                  "assets/images/favorite.svg",
-                                                  width: 26.w,
-                                                  height: 14.h,
-                                                ),
-                                        ),
+                                        child: watch.favAllShop
+                                            ? SvgPicture.asset(
+                                                "assets/icons/new_fvrt_selected.svg",
+                                                // width: 26.w,
+                                                // height: 14.h,
+                                              )
+                                            : SvgPicture.asset(
+                                                "assets/icons/new_fvrt_not_selected.svg",
+                                                // width: 26.w,
+                                                // height: 14.h,
+                                              ),
                                       )
                                       // InkWell(
                                       //   // onTap: () {
@@ -778,24 +765,24 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                             ),
                                             GestureDetector(
                                               onTap: () {
-                                                // showModalBottomSheet(
-                                                //     backgroundColor: Colors.white,
-                                                //     isScrollControlled: true,
-                                                //     shape:
-                                                //         const RoundedRectangleBorder(
-                                                //             borderRadius:
-                                                //                 BorderRadius.only(
-                                                //                     topLeft: Radius
-                                                //                         .circular(
-                                                //                             30),
-                                                //                     topRight: Radius
-                                                //                         .circular(
-                                                //                             30))),
-                                                //     context: context,
-                                                //     builder: (context) {
-                                                //       // using a scaffold helps to more easily position the FAB
-                                                //       return ExpectedDeliveryDateSheetView();
-                                                //     });
+                                                showModalBottomSheet(
+                                                    backgroundColor: Colors
+                                                        .white,
+                                                    isScrollControlled: true,
+                                                    shape: const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        30),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        30))),
+                                                    context: context,
+                                                    builder: (context) {
+                                                      // using a scaffold helps to more easily position the FAB
+                                                      return ExpectedDeliveryDateSheetView();
+                                                    });
                                               },
                                               child: SvgPicture.asset(
                                                 'assets/images/pencil.svg',
@@ -1028,7 +1015,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                 children: [
                                   Padding(
                                     padding:
-                                  EdgeInsets.only(top: 16.w, left: 18.w),
+                                        EdgeInsets.only(top: 16.w, left: 18.w),
                                     child: Text(
                                       "Fulfil your cravings",
                                       style: GoogleFonts.dmSans(
@@ -1058,7 +1045,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                             .length ??
                                                         0, (index) {
                                                   final element = watch
-                                                      .fullFillYourCravingsAdmin[index];
+                                                          .fullFillYourCravingsAdmin[
+                                                      index];
                                                   return watch
                                                                   .fullFillYourCravingsAdmin[
                                                                       index]
@@ -1079,7 +1067,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                             SizedBox(
                                                               width: 10.w,
                                                             ),
-                                                            element.weight == "" &&
+                                                            element.weight ==
+                                                                        "" &&
                                                                     element.offerPrice ==
                                                                         "" &&
                                                                     element.mrpPrice ==
@@ -1145,7 +1134,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           //       offset: Offset(0, 3)),
                                                                           // ],
                                                                           ),
-                                                                      child: Card(
+                                                                      child:
+                                                                          Card(
                                                                         shape: RoundedRectangleBorder(
                                                                             borderRadius:
                                                                                 BorderRadius.circular(10.w)),
@@ -1161,20 +1151,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           width:
                                                                               156.w,
                                                                           padding: EdgeInsets.only(
-                                                                              left: 19
-                                                                                  .w,
-                                                                              top: 14
-                                                                                  .w,
-                                                                              right: 12
-                                                                                  .w,
-                                                                              bottom:
-                                                                                  12.w),
+                                                                              left: 19.w,
+                                                                              top: 14.w,
+                                                                              right: 12.w,
+                                                                              bottom: 12.w),
                                                                           child:
                                                                               Column(
                                                                             children: [
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.end,
+                                                                                mainAxisAlignment: MainAxisAlignment.end,
                                                                                 children: [
                                                                                   element.discountPercentage != ""
                                                                                       ? Container(
@@ -1196,12 +1181,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    5.h,
+                                                                                height: 5.h,
                                                                               ),
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.center,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   element.productImagePath == ""
                                                                                       ? Container(
@@ -1223,8 +1206,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    3.w,
+                                                                                height: 3.w,
                                                                               ),
                                                                               Row(
                                                                                 children: [
@@ -1247,8 +1229,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    2.w,
+                                                                                height: 2.w,
                                                                               ),
                                                                               Row(
                                                                                 children: [
@@ -1265,12 +1246,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    2.w,
+                                                                                height: 2.w,
                                                                               ),
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.spaceBetween,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                 children: [
                                                                                   Row(
                                                                                     children: [
@@ -1365,27 +1344,34 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: List.generate(
-                                                    watch.fullFillYourCravingsCustom.length ??
+                                                    watch.fullFillYourCravingsCustom
+                                                            .length ??
                                                         0, (index) {
                                                   final element = watch
-                                                          .fullFillYourCravingsCustom[index];
+                                                          .fullFillYourCravingsCustom[
+                                                      index];
                                                   return watch
-                                                                  .fullFillYourCravingsCustom[index]
+                                                                  .fullFillYourCravingsCustom[
+                                                                      index]
                                                                   .mrpPrice !=
                                                               "" &&
-                                                          int.parse(element.offerPrice ==
+                                                          int.parse(element
+                                                                          .offerPrice ==
                                                                       ""
                                                                   ? "0"
-                                                                  : element.offerPrice ??
+                                                                  : element
+                                                                          .offerPrice ??
                                                                       "0") <
-                                                              int.parse(element.mrpPrice ??
+                                                              int.parse(element
+                                                                      .mrpPrice ??
                                                                   "0")
                                                       ? Row(
                                                           children: [
                                                             SizedBox(
                                                               width: 10.w,
                                                             ),
-                                                            element.weight == "" &&
+                                                            element.weight ==
+                                                                        "" &&
                                                                     element.offerPrice ==
                                                                         "" &&
                                                                     element.mrpPrice ==
@@ -1398,7 +1384,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                 : GestureDetector(
                                                                     onTap: () {
                                                                       readProductViewController.updateProductId(
-                                                                          element.id
+                                                                          element
+                                                                              .id
                                                                               .toString(),
                                                                           context,
                                                                           false);
@@ -1418,8 +1405,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     },
                                                                     child:
                                                                         Container(
-                                                                      decoration: BoxDecoration(),
-                                                                      child: Card(
+                                                                      decoration:
+                                                                          BoxDecoration(),
+                                                                      child:
+                                                                          Card(
                                                                         shape: RoundedRectangleBorder(
                                                                             borderRadius:
                                                                                 BorderRadius.circular(10.w)),
@@ -1435,20 +1424,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                           width:
                                                                               156.w,
                                                                           padding: EdgeInsets.only(
-                                                                              left: 19
-                                                                                  .w,
-                                                                              top: 14
-                                                                                  .w,
-                                                                              right: 12
-                                                                                  .w,
-                                                                              bottom:
-                                                                                  12.w),
+                                                                              left: 19.w,
+                                                                              top: 14.w,
+                                                                              right: 12.w,
+                                                                              bottom: 12.w),
                                                                           child:
                                                                               Column(
                                                                             children: [
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.end,
+                                                                                mainAxisAlignment: MainAxisAlignment.end,
                                                                                 children: [
                                                                                   element.discountPercentage != ""
                                                                                       ? Container(
@@ -1470,12 +1454,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    5.h,
+                                                                                height: 5.h,
                                                                               ),
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.center,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   element.productImagePath == ""
                                                                                       ? Container(
@@ -1497,8 +1479,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    3.w,
+                                                                                height: 3.w,
                                                                               ),
                                                                               Row(
                                                                                 children: [
@@ -1521,8 +1502,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    2.w,
+                                                                                height: 2.w,
                                                                               ),
                                                                               Row(
                                                                                 children: [
@@ -1539,12 +1519,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 ],
                                                                               ),
                                                                               SizedBox(
-                                                                                height:
-                                                                                    2.w,
+                                                                                height: 2.w,
                                                                               ),
                                                                               Row(
-                                                                                mainAxisAlignment:
-                                                                                    MainAxisAlignment.spaceBetween,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                                 children: [
                                                                                   Row(
                                                                                     children: [
@@ -1643,19 +1621,22 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                             top: 0,
                                             child: Center(
                                               child: Visibility(
-                                                visible: watch.showPaginationLoader,
+                                                visible:
+                                                    watch.showPaginationLoader,
                                                 child: Container(
                                                   width: 40,
                                                   height: 40,
                                                   decoration: BoxDecoration(
-                                                    color: Colors.black.withOpacity(0.1),
+                                                    color: Colors.black
+                                                        .withOpacity(0.1),
                                                     shape: BoxShape.circle,
                                                   ),
                                                   child: Center(
                                                     child: Container(
                                                       width: 20,
                                                       height: 20,
-                                                      child: CircularProgressIndicator(
+                                                      child:
+                                                          CircularProgressIndicator(
                                                         color: SplashText,
                                                       ),
                                                     ),

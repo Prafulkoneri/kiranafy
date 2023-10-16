@@ -339,30 +339,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     .shopDetails
                                                                     ?.id);
                                                   },
-                                                  child: Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: 13.w,
-                                                        right: 13.w,
-                                                        top: 14.w,
-                                                        bottom: 14.w),
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: Color(0xff4689EC),
-                                                      // color: Color(0xffFBDFDF),
-                                                    ),
-                                                    child: watch.favAllShop
-                                                        ? SvgPicture.asset(
-                                                            "assets/icons/fav_selected.svg",
-                                                            width: 26.w,
-                                                            height: 14.h,
-                                                          )
-                                                        : SvgPicture.asset(
-                                                            "assets/images/favorite.svg",
-                                                            width: 26.w,
-                                                            height: 14.h,
-                                                          ),
-                                                  ),
+                                                  child: watch.favAllShop
+                                                      ? SvgPicture.asset(
+                                                          "assets/icons/new_fvrt_selected.svg",
+                                                          // width: 26.w,
+                                                          // height: 14.h,
+                                                        )
+                                                      : SvgPicture.asset(
+                                                          "assets/icons/new_fvrt_not_selected.svg",
+                                                          // width: 26.w,
+                                                          // height: 14.h,
+                                                        ),
                                                 )
                                               ],
                                             ),
@@ -466,7 +453,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           ?.customerCancelledStatus ==
                                                       "YES"
                                               ? "Cancelled"
-
                                               : watch.orderDetails
                                                               ?.orderStatus ==
                                                           "Order Refund" &&
@@ -862,58 +848,60 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                     )
                                   : Container(),
                               /////////////////////////////////////
-                            watch.orderDetails
-                                  ?.orderStatus ==
-                                  "Order Refund" &&
-                                  watch.orderDetails
-                                      ?.shopCancelledStatus ==
-                                      "YES"?Container():
-                            watch.orderDetails
-                                ?.orderStatus ==
-                                "Order Refund" &&
-                                watch.orderDetails
-                                    ?.customerCancelledStatus ==
-                                    "YES" ?Container():
-                            watch.orderDetails?.orderStatus == "Order Refund"?
-                                   GestureDetector(
-                                      onTap: () {
-                                        read.orderInvoice(
-                                          context,
-                                        );
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            left: 20.w,
-                                            right: 20.w,
-                                            top: 9.w,
-                                            bottom: 9.w),
-                                        width: ScreenUtil().screenWidth,
-                                        margin: EdgeInsets.only(
-                                          left: 12.w,
-                                          right: 11.w,
-                                          // top: 9.w,
-                                          // bottom: 9.w
-                                        ),
-                                        // height: 50.h,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff115B7A),
-                                            // border: Border.all(width: 1, color: Black),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Text(
-                                          "Invoice",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                // letterSpacing: .5,
-                                                fontSize: 18.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
+                              watch.orderDetails?.orderStatus ==
+                                          "Order Refund" &&
+                                      watch.orderDetails?.shopCancelledStatus ==
+                                          "YES"
+                                  ? Container()
+                                  : watch.orderDetails?.orderStatus ==
+                                              "Order Refund" &&
+                                          watch.orderDetails
+                                                  ?.customerCancelledStatus ==
+                                              "YES"
+                                      ? Container()
+                                      : watch.orderDetails?.orderStatus ==
+                                              "Order Refund"
+                                          ? GestureDetector(
+                                              onTap: () {
+                                                read.orderInvoice(
+                                                  context,
+                                                );
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 20.w,
+                                                    right: 20.w,
+                                                    top: 9.w,
+                                                    bottom: 9.w),
+                                                width: ScreenUtil().screenWidth,
+                                                margin: EdgeInsets.only(
+                                                  left: 12.w,
+                                                  right: 11.w,
+                                                  // top: 9.w,
+                                                  // bottom: 9.w
+                                                ),
+                                                // height: 50.h,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xff115B7A),
+                                                    // border: Border.all(width: 1, color: Black),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Text(
+                                                  "Invoice",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 18.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : Container(),
                               ////////////////New//////////////////////
                               watch.orderDetails?.orderStatus == "Delivered"
                                   // ||
@@ -2130,10 +2118,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                             FontWeight.w700,
                                                         fontSize: 18.sp),
                                                   ),
-                                                  Text( "\u{20B9} ${watch.orderDetails?.customerRefundAmount}",style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w700,
-                                                      fontSize: 18.sp),),
+                                                  Text(
+                                                    "\u{20B9} ${watch.orderDetails?.customerRefundAmount}",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 18.sp),
+                                                  ),
                                                   SizedBox(
                                                     height: 19.w,
                                                   ),
