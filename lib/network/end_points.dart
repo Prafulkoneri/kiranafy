@@ -127,14 +127,10 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-customer-list-who-liked-shops";
   static const String shopCustomerDetailView =
       "${baseUrl}lsm-shop-owner-customer-view";
-  static const String deliveryAddress =
-      "${baseUrl}lsm-customer-delivery-address-list";
-  static const String addDeliveryAddressList =
-      "${baseUrl}lsm-customer-add-delivery-address";
-  static const String markDefaultaddress =
-      "${baseUrl}lsm-customer-make-delivery-address-default";
-  static const String deleteDeliveryAddress =
-      "${baseUrl}lsm-customer-delete-delivery-address";
+  static const String deliveryAddress = "${baseUrl}lsm-customer-delivery-address-list";
+  static const String addDeliveryAddressList = "${baseUrl}lsm-customer-add-delivery-address";
+  static const String markDefaultaddress = "${baseUrl}lsm-customer-make-delivery-address-default";
+  static const String deleteDeliveryAddress = "${baseUrl}lsm-customer-delete-delivery-address";
   static const String editDeliveryAddress =
       "${baseUrl}lsm-customer-edit-delivery-address";
   static const String UpdateDeliveryAddress =

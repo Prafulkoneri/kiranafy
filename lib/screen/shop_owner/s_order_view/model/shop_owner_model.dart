@@ -147,6 +147,8 @@ class OrderDetails {
   String? customerRefundReason;
   String ? updatedTime;
   String ? orderCancelledDateAndTime;
+  String ? refundDateAndTime;
+  String ? deliveredRefundDateAndTime;
 
   OrderDetails({
     required this.id,
@@ -183,6 +185,8 @@ class OrderDetails {
     required this.customerRefundReason,
     required this.updatedTime,
     required this.orderCancelledDateAndTime,
+    required this.refundDateAndTime,
+    required this.deliveredRefundDateAndTime,
   });
   OrderDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -220,6 +224,8 @@ class OrderDetails {
     customerRefundReason = json["custom_refund_reason"]; //
     updatedTime = json["updated_at"];
     orderCancelledDateAndTime = json["order_cancelled_date_and_time"];
+    refundDateAndTime = json["refund_datetime"];
+    deliveredRefundDateAndTime = json["delivered_refund_date_time"];
   }
 }
 
