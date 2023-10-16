@@ -186,8 +186,7 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-remove-product-from-order";
   static const String currentLocationPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
-  static const String cancelOrderReason =
-      "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
+  static const String cancelOrderReason = "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
   static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
   static const String trackOrder = "${baseUrl}lsm-customer-track-order";
   static const String cmsFile = "${baseUrl}lsm-cms-data";

@@ -2395,7 +2395,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                   //   watch.orderDetails?.shopOwnerCancelledReason != ""
                                   ? Container(
                                       padding: EdgeInsets.only(
-                                          left: 15.w, top: 11.w, bottom: 45.w),
+                                          left: 15.w, top: 11.w, bottom: 45.w,right: 15.w),
                                       // height: ScreenUtil().screenHeight,
                                       width: ScreenUtil().screenWidth,
                                       decoration: BoxDecoration(
@@ -2404,11 +2404,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "Order Cancelled",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 18.sp),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Order Cancelled",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18.sp),
+                                              ),
+                                              Text(watch.orderDetails?.orderCancelledDateAndTime??""),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 15.w,
