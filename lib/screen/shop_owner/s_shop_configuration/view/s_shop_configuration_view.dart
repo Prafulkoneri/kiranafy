@@ -278,7 +278,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                             // width: 155.w,
                             child: PrimarySTextFormField(
                               hintText: "09:00",
-                              textInputType: TextInputType.datetime,
+                              textInputType:TextInputType.text,
                               controller: watch.startShopTimeController,
                               // hint: "Opening Time",
                               // hintSize: 15.sp,

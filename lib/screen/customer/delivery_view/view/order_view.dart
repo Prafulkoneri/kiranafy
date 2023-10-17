@@ -5304,7 +5304,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                           SizedBox(
                             height: 10.w,
                           ),
-watch.orderDetails?.shopOwnerRefundPaymentType=="upi"?Text("Refund Payment Transferred by UPI/QR Code",style:TextStyle(
+                          watch.orderDetails
+                              ?.refundPaymentStatus =="received"?watch.orderDetails?.shopOwnerRefundPaymentType=="upi"?Text("Refund Payment Transferred by UPI/QR Code",style:TextStyle(
     fontWeight: FontWeight
         .w600,
     fontSize:
@@ -5312,7 +5313,7 @@ watch.orderDetails?.shopOwnerRefundPaymentType=="upi"?Text("Refund Payment Trans
     fontWeight: FontWeight
         .w600,
     fontSize:
-    14.sp)),
+    14.sp)):Container(),
                           SizedBox(
                             height: 10.w,
                           ),
