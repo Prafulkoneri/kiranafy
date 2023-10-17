@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_detail_view.dart';
+import 'package:local_supper_market/screen/customer/category/view/category_view.dart';
 import 'package:local_supper_market/screen/customer/favourites/view/favourites_view.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -96,6 +97,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
+            // print(widget.)
             if (widget.routeName == "cart_details") {
               readMain.onNavigation(
                   2,
@@ -118,6 +120,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
             } else if (widget.routeName == "favouriteProduct") {
               readMain.onNavigation(
                   4, CFavouritesView(selectedIndex: 1), context);
+            } else if (widget.routeName == "categoryView") {
+              readMain.onNavigation(
+                  1,
+                  CategoryScreenView(
+                      categoryId: widget.categoryId, shopId: widget.shopId),
+                  context);
             } else {
               readMain.onNavigation(
                   1,
@@ -184,6 +192,12 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                 } else if (widget.routeName == "favouriteProduct") {
                   readMain.onNavigation(
                       4, CFavouritesView(selectedIndex: 1), context);
+                } else if (widget.routeName == "categoryView") {
+                  readMain.onNavigation(
+                      1,
+                      CategoryScreenView(
+                          categoryId: widget.categoryId, shopId: widget.shopId),
+                      context);
                 } else {
                   readMain.onNavigation(
                       1,

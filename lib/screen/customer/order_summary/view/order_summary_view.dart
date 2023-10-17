@@ -1029,7 +1029,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(
-                                        top: 15.w, bottom: 15.w),
+                                      top: 15.w,
+                                      bottom: 15.w,
+                                    ),
                                     child: SingleChildScrollView(
                                       controller: scrollController,
                                       scrollDirection: Axis.horizontal,
@@ -1065,7 +1067,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                       ? Row(
                                                           children: [
                                                             SizedBox(
-                                                              width: 10.w,
+                                                              width: index == 0
+                                                                  ? 10
+                                                                  : 2.w,
                                                             ),
                                                             element.weight ==
                                                                         "" &&
@@ -1149,12 +1153,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 BorderRadius.circular(20.w),
                                                                           ),
                                                                           width:
-                                                                              156.w,
+                                                                              136.w,
                                                                           padding: EdgeInsets.only(
                                                                               left: 19.w,
                                                                               top: 14.w,
                                                                               right: 12.w,
                                                                               bottom: 12.w),
+                                                                          // width:
+                                                                          //     130.w,
+                                                                          // padding: EdgeInsets.only(
+                                                                          //     left: 10.w,
+                                                                          //     top: 10.w,
+                                                                          //     right: 10.w,
+                                                                          //     bottom: 10.w),
                                                                           child:
                                                                               Column(
                                                                             children: [
@@ -1368,8 +1379,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                       ? Row(
                                                           children: [
                                                             SizedBox(
-                                                              width: 10.w,
-                                                            ),
+                                                                width: 2.w),
                                                             element.weight ==
                                                                         "" &&
                                                                     element.offerPrice ==
@@ -1422,12 +1432,19 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 BorderRadius.circular(20.w),
                                                                           ),
                                                                           width:
-                                                                              156.w,
+                                                                              136.w,
                                                                           padding: EdgeInsets.only(
                                                                               left: 19.w,
                                                                               top: 14.w,
                                                                               right: 12.w,
                                                                               bottom: 12.w),
+                                                                          // width:
+                                                                          //     156.w,
+                                                                          // padding: EdgeInsets.only(
+                                                                          //     left: 19.w,
+                                                                          //     top: 14.w,
+                                                                          //     right: 12.w,
+                                                                          //     bottom: 12.w),
                                                                           child:
                                                                               Column(
                                                                             children: [
@@ -1612,6 +1629,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                         )
                                                       : Container();
                                                 }),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
                                               ),
                                             ],
                                           ),
