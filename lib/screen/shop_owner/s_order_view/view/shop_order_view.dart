@@ -2584,6 +2584,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                             color: Colors.black,
                                                                             fontSize: 18.sp),
                                                                       ),
+                                                                      Text(watch.orderDetails?.refundDateAndTime??"",
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                 ],
