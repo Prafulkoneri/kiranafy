@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -111,6 +112,7 @@ String? selectedNotificationPayload;
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
+
 // void backgroundFetchHeadlessTask( task) async {
 //   String taskId = task.taskId;
 //   print('[BackgroundFetch] Headless event received.');
@@ -176,6 +178,8 @@ void main() async {
   print("lets go");
   print("void main");
   WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  // // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   if (Platform.isIOS) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
@@ -232,8 +236,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => EditAdminProductController()),
         ChangeNotifierProvider(create: (_) => ProductViewController()),
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
-        ChangeNotifierProvider(create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopEditProfileDetailController()),
+        ChangeNotifierProvider(
+            create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
         ChangeNotifierProvider(create: (_) => DeliveryAddressController()),
         ChangeNotifierProvider(create: (_) => AddAddressController()),
@@ -257,8 +263,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => ShopViewTicketController()),
         ChangeNotifierProvider(create: (_) => SubscriptionHistoryController()),
-        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
-        ChangeNotifierProvider(create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
+        ChangeNotifierProvider(
+            create: (_) => ShopSeasonalRecommandedOfferProductsController()),
         ChangeNotifierProvider(create: (_) => SBankAccountController()),
         ChangeNotifierProvider(create: (_) => SGetProductUnitListController()),
         ChangeNotifierProvider(create: (_) => CustomerSettingController()),
@@ -294,38 +302,35 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-
+    // FirebaseCrashlytics.instance.crash();
     initNotification(context);
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-
-     print("yes this is done and lets rock");
-     print(message?.data);
-     if (message?.data["notification_type"] == "custom") {
-       if (message?.data["user_type"] == "customer") {
-         context
-             .read<MainScreenController>()
-             .onInititalMessage(message?.data);
-       } else {
-         context
-             .read<SMainScreenController>()
-             .onCustomTypeNotification(context);
-       }
-       // context.read<SMainScreenController>().onCustomTypeNotification(context);
-     }
-     if (message?.data["notification_type"] == "order") {
-       if (message?.data["user_type"] == "customer") {
-         context
-             .read<MainScreenController>()
-             ..onInititalMessage(message);
-       } else {
-         context
-             .read<SMainScreenController>()
-             .onOrderTypeNotification(context, message?.data["redirect_id"]);
-       }
-       context
-           .read<SMainScreenController>()
-           .onOrderTypeNotification(context, message?.data["redirect_id"]);
-     }
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      print("yes this is done and lets rock");
+      print(message?.data);
+      if (message?.data["notification_type"] == "custom") {
+        if (message?.data["user_type"] == "customer") {
+          context.read<MainScreenController>().onInititalMessage(message?.data);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onCustomTypeNotification(context);
+        }
+        // context.read<SMainScreenController>().onCustomTypeNotification(context);
+      }
+      if (message?.data["notification_type"] == "order") {
+        if (message?.data["user_type"] == "customer") {
+          context.read<MainScreenController>()..onInititalMessage(message);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onOrderTypeNotification(context, message?.data["redirect_id"]);
+        }
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, message?.data["redirect_id"]);
+      }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print("void main");
@@ -362,7 +367,6 @@ class _MyAppState extends State<MyApp> {
     });
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-
       print("onBackgroundMessage: $message");
       if (message.data["notification_type"] == "custom") {
         if (message.data["user_type"] == "customer") {
@@ -394,16 +398,18 @@ class _MyAppState extends State<MyApp> {
 
     // fireBaseApi();
   }
+
   @pragma('vm:entry-point')
 
 /////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails('0', 'Adun Accounts',
-        channelDescription: 'channel description',
-        importance: Importance.max,
-        styleInformation: BigTextStyleInformation(''),
-         icon: '',
-
+    final android = AndroidNotificationDetails(
+      '0',
+      'Adun Accounts',
+      channelDescription: 'channel description',
+      importance: Importance.max,
+      styleInformation: BigTextStyleInformation(''),
+      icon: '',
     );
     final iOS = IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
@@ -424,7 +430,6 @@ class _MyAppState extends State<MyApp> {
       print("onMessageOpenedApp: $message");
     });
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-
       print("onBackgroundMessage: $message");
     });
   }
