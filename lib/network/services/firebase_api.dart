@@ -12,13 +12,16 @@ Future<void> handleBackGroundMessage(RemoteMessage message) async {
 }
 
 class FireBaseApi {
+
   final firebasemessaging = FirebaseMessaging.instance;
   final androidChannel = const AndroidNotificationChannel(
       'high_importance_channel', 'High Importance Notification',
       description: 'this channel is used for important notification',
       importance: Importance.defaultImportance);
   final _localNotification = FlutterLocalNotificationsPlugin();
+  @pragma('vm:entry-point')
   void handleMessage(RemoteMessage? message) {
+
     if (message == null) return;
     // navigatorKey.currentState?.pushNamed(NotificationsScreen.route, arguments:
     // message);
@@ -44,18 +47,22 @@ class FireBaseApi {
 
   ///////////////////
   Future<void> initPushNotification() async {
+
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
+
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((handleBackGroundMessage) {});
     FirebaseMessaging.onMessageOpenedApp.listen(handleBackGroundMessage);
     FirebaseMessaging.onBackgroundMessage(handleBackGroundMessage);
+
     FirebaseMessaging.onMessage.listen((message) {
+      @pragma('vm:entry-point')
       final notification = message.notification;
       if (notification == null) return;
       // _showNotification();

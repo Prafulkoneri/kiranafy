@@ -107,7 +107,15 @@ String? selectedNotificationPayload;
 //   final String image;
 //   final String payload;
 // }
-
+@pragma('vm:entry-point')
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+// void backgroundFetchHeadlessTask( task) async {
+//   String taskId = task.taskId;
+//   print('[BackgroundFetch] Headless event received.');
+//   BackgroundFetch.finish(taskId);
+// }
 Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
@@ -165,6 +173,8 @@ Future<void> initNotification(context) async {
 }
 
 void main() async {
+  print("lets go");
+  print("void main");
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isIOS) {
     await Firebase.initializeApp(
@@ -175,6 +185,7 @@ void main() async {
             projectId: "lsm-0001"));
   } else {
     await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   }
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
@@ -283,10 +294,13 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    
-    initNotification(context);
 
+    initNotification(context);
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+     print("yes this is done and lets rock");
+    });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print("void main");
       print(message.data);
       print("onMessageOpenedApp: $message");
       print("okkkkk");
@@ -320,6 +334,7 @@ class _MyAppState extends State<MyApp> {
     });
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+
       print("onBackgroundMessage: $message");
       if (message.data["notification_type"] == "custom") {
         if (message.data["user_type"] == "customer") {
@@ -351,6 +366,7 @@ class _MyAppState extends State<MyApp> {
 
     // fireBaseApi();
   }
+  @pragma('vm:entry-point')
 
 /////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
@@ -380,6 +396,7 @@ class _MyAppState extends State<MyApp> {
       print("onMessageOpenedApp: $message");
     });
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+
       print("onBackgroundMessage: $message");
     });
   }
