@@ -275,13 +275,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            // width: 155.w,
-                            child: PrimarySTextFormField(
+                            child: PrimarySTextFormFieldShopConfig(
                               hintText: "09:00",
-                              textInputType:TextInputType.text,
                               controller: watch.startShopTimeController,
-                              // hint: "Opening Time",
-                              // hintSize: 15.sp,
                             ),
                           ),
                           SizedBox(
@@ -314,12 +310,9 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                             width: 5.w,
                           ),
                           Expanded(
-                            child: PrimarySTextFormField(
-                              textInputType: TextInputType.datetime,
+                            child: PrimarySTextFormFieldShopConfig(
                               hintText: "08:00",
                               controller: watch.endShopTimeController,
-                              // hint: "Closing Time",
-                              // hintSize: 15.sp,
                             ),
                           ),
                           SizedBox(
