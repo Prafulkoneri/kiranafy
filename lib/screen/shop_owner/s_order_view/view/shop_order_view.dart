@@ -2380,6 +2380,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Column(
                                                                 crossAxisAlignment:
@@ -2407,16 +2408,33 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     height:
                                                                         11.w,
                                                                   ),
-                                                                  Text(
-                                                                    "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
-                                                                    style: TextStyle(
-                                                                        fontWeight:
+                                                                  Row(
+                                                                    children: [
+                                                                      int.parse(watch.orderDetails?.customerRefundAmount.toString()??"0")>int.parse(watch.orderDetails?.shopOwnerRefunPaybelAmount.toString()??"0")?
+                                                                      Text(
+                                                                        "\u{20B9} ${watch.orderDetails?.customerRefundAmount} ",
+                                                                        style: TextStyle(
+                                                                            fontWeight:
                                                                             FontWeight
                                                                                 .w700,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
+                                                                            color: Colors
+                                                                                .black,
+                                                                            decoration: TextDecoration.lineThrough,
+                                                                            fontSize:
                                                                             18.sp),
+                                                                      ):Container(),
+                                                                      Text(
+                                                                        "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight
+                                                                                    .w700,
+                                                                            color: Colors
+                                                                                .black,
+                                                                            fontSize:
+                                                                                18.sp),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
