@@ -1234,7 +1234,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                               Row(
                                                                                 children: [
                                                                                   Text(
-                                                                                    "${element.weight}${element.unit}",
+                                                                                    "${element.weight} ${element.unit}",
                                                                                     style: GoogleFonts.roboto(
                                                                                       textStyle: TextStyle(
                                                                                           color: Black1,
@@ -1507,7 +1507,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                               Row(
                                                                                 children: [
                                                                                   Text(
-                                                                                    "${element.weight}${element.unit}",
+                                                                                    "${element.weight} ${element.unit}",
                                                                                     style: GoogleFonts.roboto(
                                                                                       textStyle: TextStyle(
                                                                                           color: Black1,
@@ -1845,18 +1845,20 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                             SizedBox(
                               height: 10.w,
                             ),
-                            Container(
-                              child: Text(
-                                "You will save \u{20B9} ${watch.totalDiscount}",
-                                style: GoogleFonts.dmSans(
-                                  textStyle: TextStyle(
-                                      color: SplashText,
-                                      // letterSpacing: .5,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                            ),
+                            watch.totalDiscount == "0"
+                                ? Container()
+                                : Container(
+                                    child: Text(
+                                      "You will save \u{20B9} ${watch.totalDiscount}",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: SplashText,
+                                            // letterSpacing: .5,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                       ),

@@ -283,6 +283,7 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    
     initNotification(context);
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {

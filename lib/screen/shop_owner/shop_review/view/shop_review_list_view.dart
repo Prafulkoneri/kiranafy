@@ -106,9 +106,17 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                               return Column(
                                 children: [
                                   GestureDetector(
-                                    onTap:(){
-                                      readMain.onNavigation(0,ShopOrderView(selectedIndex: 0, fromOrderStatus:false, route:"shopReview",orderId: element?.orderId.toString()),context);
-                                  readMain.hideBottomNavigationBar();
+                                    onTap: () {
+                                      readMain.onNavigation(
+                                          0,
+                                          ShopOrderView(
+                                              selectedIndex: 0,
+                                              fromOrderStatus: false,
+                                              route: "shopReview",
+                                              orderId:
+                                                  element?.orderId.toString()),
+                                          context);
+                                      readMain.hideBottomNavigationBar();
                                     },
                                     child: Container(
                                       width: ScreenUtil().screenWidth,
@@ -157,11 +165,12 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                     ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 5.w),
+                                                  padding: EdgeInsets.only(
+                                                      left: 5.w),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
                                                         mainAxisAlignment:
@@ -174,10 +183,92 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                                 .dmSans(
                                                               textStyle: TextStyle(
                                                                   color: Black,
-                                                                  fontSize: 16.sp,
+                                                                  fontSize:
+                                                                      16.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "${element?.orderUniqueId}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Color(
+                                                                      0xff7C7C7C),
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
+                                                            ),
+                                                          ),
+                                                          // Row(
+                                                          //   children: [
+                                                          //     SvgPicture.asset(
+                                                          //       'assets/icons/ReviewStart.svg',
+                                                          //       width: 14.w,
+                                                          //       height: 14.h,
+                                                          //     ),
+                                                          //     SizedBox(
+                                                          //       width: 7.w,
+                                                          //     ),
+                                                          //     Text(
+                                                          //       "${element?.ratings}",
+                                                          //       style:
+                                                          //           GoogleFonts
+                                                          //               .dmSans(
+                                                          //         textStyle: TextStyle(
+                                                          //             color:
+                                                          //                 Black,
+                                                          //             fontSize:
+                                                          //                 14.sp,
+                                                          //             fontWeight:
+                                                          //                 FontWeight
+                                                          //                     .w500),
+                                                          //       ),
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
+                                                        ],
+                                                      ),
+                                                      // SizedBox(
+                                                      //   height: 4.h,
+                                                      // ),
+                                                      // Text(
+                                                      //   "${element?.orderUniqueId}",
+                                                      //   style:
+                                                      //       GoogleFonts.dmSans(
+                                                      //     textStyle: TextStyle(
+                                                      //         color: Color(
+                                                      //             0xff7C7C7C),
+                                                      //         fontSize: 12.sp,
+                                                      //         fontWeight:
+                                                      //             FontWeight
+                                                      //                 .w400),
+                                                      //   ),
+                                                      // ),
+                                                      SizedBox(
+                                                        height: 5.h,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "${element?.cityName} ${element?.stateName}",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle: TextStyle(
+                                                                  color: Color(
+                                                                      0xff7C7C7C),
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400),
                                                             ),
                                                           ),
                                                           Row(
@@ -192,8 +283,9 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                               ),
                                                               Text(
                                                                 "${element?.ratings}",
-                                                                style: GoogleFonts
-                                                                    .dmSans(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .dmSans(
                                                                   textStyle: TextStyle(
                                                                       color:
                                                                           Black,
@@ -209,41 +301,12 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                         ],
                                                       ),
                                                       SizedBox(
-                                                        height: 4.h,
-                                                      ),
-                                                      Text(
-                                                        "${element?.orderUniqueId}",
-                                                        style: GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Color(
-                                                                  0xff7C7C7C),
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w400),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 1.h,
-                                                      ),
-                                                      Text(
-                                                        "${element?.cityName} ${element?.stateName}",
-                                                        style: GoogleFonts.dmSans(
-                                                          textStyle: TextStyle(
-                                                              color: Color(
-                                                                  0xff7C7C7C),
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 1.h,
+                                                        height: 2.h,
                                                       ),
                                                       Text(
                                                         "${element?.createdAt}",
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color: Color(
                                                                   0xff7C7C7C),
