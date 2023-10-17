@@ -1720,16 +1720,16 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                       height:
                                                                           14.w,
                                                                     ),
-                                                                    // SizedBox(
-                                                                    //   width:
-                                                                    //       14.w,
-                                                                    // ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          14.w,
+                                                                    ),
                                                                     Row(
                                                                       children: [
-                                                                        SizedBox(
-                                                                          width:
-                                                                              24.w,
-                                                                        ),
+                                                                        // SizedBox(
+                                                                        //   width:
+                                                                        //       24.w,
+                                                                        // ),
                                                                         GestureDetector(
                                                                           onTap:
                                                                               () {
@@ -1778,7 +1778,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              5.w,
+                                                                              30.w,
                                                                         ),
                                                                         GestureDetector(
                                                                           onTap:
@@ -2263,7 +2263,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              20.w,
+                                                                              30.w,
                                                                         ),
                                                                         GestureDetector(
                                                                           onTap:

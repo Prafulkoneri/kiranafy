@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/controller/edit_profile_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
@@ -66,13 +64,6 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               onWillPop: () async {
                 readMain.onNavigation(
                     4, ProfileScreenView(isRefreshed: false), context);
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => MainScreenView(
-                //           index: 4, screenName: ProfileScreenView())),
-                //   (Route<dynamic> route) => false,
-                // );
 
                 return false;
               },
