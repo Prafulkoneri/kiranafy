@@ -71,7 +71,11 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             }
             if (widget.route == "customerDetails") {
               readMainScreen.onNavigation(
-                  0, CustomerDetailView(screenName: "",), context);
+                  0,
+                  CustomerDetailView(
+                    screenName: "",
+                  ),
+                  context);
               readMainScreen.showBottomNavigationBar();
             }
             ////////////////////
@@ -100,7 +104,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
               readMainScreen.onNavigation(
                   0,
                   ShopReviewScreenView(
-                   fromDashBoard: true,
+                    fromDashBoard: true,
                   ),
                   context);
               readMainScreen.showBottomNavigationBar();
@@ -2164,24 +2168,38 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
-                                                        height: 16.w,
+                                                      watch.isRefundByUpi
+                                                          ? SizedBox(
+                                                              height: 16.w,
+                                                            )
+                                                          : Container(),
+                                                      Visibility(
+                                                        visible:
+                                                            watch.isRefundByUpi,
+                                                        child: Text(
+                                                            "Payment Transaction ID",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize:
+                                                                    14.sp)),
                                                       ),
-                                                      Text(
-                                                          "Payment Transaction ID",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 14.sp)),
-                                                      SizedBox(
-                                                        height: 10.w,
-                                                      ),
-                                                      PrimaryCTextFormField(
-                                                        controller: watch
-                                                            .upiIdController,
-                                                        hintText:
-                                                            "Type Transaction ID",
+                                                      watch.isRefundByUpi
+                                                          ? SizedBox(
+                                                              height: 10.w,
+                                                            )
+                                                          : Container(),
+                                                      Visibility(
+                                                        visible:
+                                                            watch.isRefundByUpi,
+                                                        child:
+                                                            PrimaryCTextFormField(
+                                                          controller: watch
+                                                              .upiIdController,
+                                                          hintText:
+                                                              "Type Transaction ID",
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -2374,17 +2392,16 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         "Refund Amount",
                                                                         style: TextStyle(
                                                                             fontWeight:
-                                                                                FontWeight
-                                                                                    .w700,
-                                                                            color: Colors
-                                                                                .black,
-                                                                            fontSize:
-                                                                                18.sp),
+                                                                                FontWeight.w700,
+                                                                            color: Colors.black,
+                                                                            fontSize: 18.sp),
                                                                       ),
                                                                     ],
                                                                   ),
                                                                   Text(
-                                                                    watch.orderDetails?.refundDateAndTime??"",
+                                                                    watch.orderDetails
+                                                                            ?.refundDateAndTime ??
+                                                                        "",
                                                                   ),
                                                                   SizedBox(
                                                                     height:
@@ -2439,7 +2456,6 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           0xff115B7A)),
                                                                 )),
                                                               ),
-
                                                             ],
                                                           ),
                                                           SizedBox(
@@ -2843,24 +2859,38 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           ),
                                                         ],
                                                       ),
-                                                      SizedBox(
-                                                        height: 16.w,
+                                                      watch.isRefundByUpi
+                                                          ? SizedBox(
+                                                              height: 16.w,
+                                                            )
+                                                          : Container(),
+                                                      Visibility(
+                                                        visible:
+                                                            watch.isRefundByUpi,
+                                                        child: Text(
+                                                            "Payment Transaction ID",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize:
+                                                                    14.sp)),
                                                       ),
-                                                      Text(
-                                                          "Payment Transaction ID",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 14.sp)),
-                                                      SizedBox(
-                                                        height: 10.w,
-                                                      ),
-                                                      PrimaryCTextFormField(
-                                                        controller: watch
-                                                            .upiIdController,
-                                                        hintText:
-                                                            "Type Transaction ID",
+                                                      watch.isRefundByUpi
+                                                          ? SizedBox(
+                                                              height: 10.w,
+                                                            )
+                                                          : Container(),
+                                                      Visibility(
+                                                        visible:
+                                                            watch.isRefundByUpi,
+                                                        child:
+                                                            PrimaryCTextFormField(
+                                                          controller: watch
+                                                              .upiIdController,
+                                                          hintText:
+                                                              "Type Transaction ID",
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -2922,28 +2952,30 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                  height: 5.w,
+                                                                height: 5.w,
                                                               ),
-                                                              Text(
-                                                                  watch.orderDetails?.refundDateAndTime??""
-                                                              ),
+                                                              Text(watch
+                                                                      .orderDetails
+                                                                      ?.refundDateAndTime ??
+                                                                  ""),
                                                               SizedBox(
                                                                 height: 11.w,
                                                               ),
                                                               Row(
                                                                 children: [
-                                                                  int.parse(watch.orderDetails?.customerRefundAmount??"0")> int.parse(watch.orderDetails?.shopOwnerRefunPaybelAmount.toString()??"0")?  Text(
-                                                                    "\u{20B9} ${watch.orderDetails?.customerRefundAmount} ",
-                                                                    style: TextStyle(
-                                                                        decoration: TextDecoration.lineThrough,
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontSize:
-                                                                        18.sp),
-                                                                  ):Container(),
+                                                                  int.parse(watch.orderDetails?.customerRefundAmount ??
+                                                                              "0") >
+                                                                          int.parse(watch.orderDetails?.shopOwnerRefunPaybelAmount.toString() ??
+                                                                              "0")
+                                                                      ? Text(
+                                                                          "\u{20B9} ${watch.orderDetails?.customerRefundAmount} ",
+                                                                          style: TextStyle(
+                                                                              decoration: TextDecoration.lineThrough,
+                                                                              fontWeight: FontWeight.w700,
+                                                                              color: Colors.black,
+                                                                              fontSize: 18.sp),
+                                                                        )
+                                                                      : Container(),
                                                                   Text(
                                                                     "\u{20B9} ${watch.orderDetails?.shopOwnerRefunPaybelAmount}",
                                                                     style: TextStyle(
@@ -3177,7 +3209,10 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                             // watch.orderDetails?.shopOwnerCancelledReason == "No"
                             ? Container(
                                 padding: EdgeInsets.only(
-                                    left: 15.w, top: 11.w, bottom: 45.w,right: 15.w),
+                                    left: 15.w,
+                                    top: 11.w,
+                                    bottom: 45.w,
+                                    right: 15.w),
                                 // height: ScreenUtil().screenHeight,
                                 width: ScreenUtil().screenWidth,
                                 decoration:
@@ -3186,7 +3221,8 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Order Cancelled",
@@ -3194,7 +3230,9 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               fontWeight: FontWeight.w700,
                                               fontSize: 18.sp),
                                         ),
-                                        Text(watch.orderDetails?.orderCancelledDateAndTime??""),
+                                        Text(watch.orderDetails
+                                                ?.orderCancelledDateAndTime ??
+                                            ""),
                                       ],
                                     ),
                                     SizedBox(
@@ -3464,22 +3502,33 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(
-                                                  height: 16.w,
+                                                watch.isRefundByUpi
+                                                    ? SizedBox(
+                                                        height: 16.w,
+                                                      )
+                                                    : Container(),
+                                                Visibility(
+                                                  visible: watch.isRefundByUpi,
+                                                  child: Text(
+                                                      "Payment Transaction ID",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 14.sp)),
                                                 ),
-                                                Text("Payment Transaction ID",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14.sp)),
-                                                SizedBox(
-                                                  height: 10.w,
-                                                ),
-                                                PrimaryCTextFormField(
-                                                  controller:
-                                                      watch.upiIdController,
-                                                  hintText:
-                                                      "Type Transaction ID",
+                                                watch.isRefundByUpi
+                                                    ? SizedBox(
+                                                        height: 10.w,
+                                                      )
+                                                    : Container(),
+                                                Visibility(
+                                                  visible: watch.isRefundByUpi,
+                                                  child: PrimaryCTextFormField(
+                                                    controller:
+                                                        watch.upiIdController,
+                                                    hintText:
+                                                        "Type Transaction ID",
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -3542,39 +3591,49 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   Colors.black,
                                                               fontSize: 18.sp),
                                                         ),
-                                                        Text(
-                                                            watch.orderDetails?.deliveredRefundDateAndTime??""
-                                                        ),
+                                                        Text(watch.orderDetails
+                                                                ?.deliveredRefundDateAndTime ??
+                                                            ""),
                                                         SizedBox(
                                                           height: 11.w,
                                                         ),
                                                         Row(
-                                                            children: [
-                                                              int.parse(watch.totalRefundAmount)>int.parse(watch.orderDetails?.shopDeliveredPayableAmount.toString()??"0")?
-                                                              Text(
-                                                                "\u{20B9} ${watch.totalRefundAmount}  ",
-                                                                style: TextStyle(
-                                                                    decoration: TextDecoration.lineThrough,
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                    color:
-                                                                    Colors.black,
-                                                                    fontSize: 18.sp),
-                                                              ):Container(),
-                                                              Text(
-                                                                "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
-                                                                style: TextStyle(
-                                                                    fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                    color:
-                                                                    Colors.black,
-                                                                    fontSize: 18.sp),
-                                                              ),
-                                                            ],
+                                                          children: [
+                                                            int.parse(watch
+                                                                        .totalRefundAmount) >
+                                                                    int.parse(watch
+                                                                            .orderDetails
+                                                                            ?.shopDeliveredPayableAmount
+                                                                            .toString() ??
+                                                                        "0")
+                                                                ? Text(
+                                                                    "\u{20B9} ${watch.totalRefundAmount}  ",
+                                                                    style: TextStyle(
+                                                                        decoration:
+                                                                            TextDecoration
+                                                                                .lineThrough,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            18.sp),
+                                                                  )
+                                                                : Container(),
+                                                            Text(
+                                                              "\u{20B9} ${watch.orderDetails?.shopDeliveredPayableAmount}",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      18.sp),
+                                                            ),
+                                                          ],
                                                         ),
-
                                                       ],
                                                     ),
                                                     Container(
