@@ -278,6 +278,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                             readMain.onNavigation(
                                                 1,
                                                 ProductScreenView(
+                                                    routeName: "categoryView",
                                                     selectedUnitId: element
                                                         ?.productUnitId
                                                         .toString(),

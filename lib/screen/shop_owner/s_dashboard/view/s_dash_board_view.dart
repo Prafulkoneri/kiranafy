@@ -271,8 +271,8 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     ),
                     ///////////////////
                     Container(
-                      padding: EdgeInsets.only(
-                          left: 13.w, right: 19.w, bottom: 17.w),
+                      padding:
+                          EdgeInsets.only(left: 13.w, right: 19.w, top: 10.w),
                       decoration: BoxDecoration(
                         border: Border(
                           // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
@@ -345,7 +345,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     /////
                     Padding(
                       padding: EdgeInsets.only(
-                          left: 19.0.w, top: 20.w, bottom: 10.w),
+                          left: 19.0.w, top: 10.w, bottom: 10.w),
                       child: DashBoardSideHeading(
                         text: 'Customer',
                       ),
