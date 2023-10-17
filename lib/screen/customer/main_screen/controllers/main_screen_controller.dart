@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -46,6 +47,8 @@ class MainScreenController extends ChangeNotifier {
   String locationErrorMessage = "";
   bool hideBottomNavigation = false;
   int cartCount = 0;
+  RemoteMessage ? notificationMessage;
+  bool isInititalNotification=false;
 
   void initState(context, index, currentScreen) async {
     // navigation(index, currentScreen);
@@ -70,6 +73,14 @@ class MainScreenController extends ChangeNotifier {
     currentScreen = HomeScreenView(refreshPage: false);
     // notifyListeners();
   }
+
+  void onInititalMessage(msg){
+    isInititalNotification=true;
+    notificationMessage=msg;
+    notifyListeners();
+  }
+
+
 
   void onBottomNavChanged(index) {
     currentIndex = index;
@@ -142,7 +153,7 @@ class MainScreenController extends ChangeNotifier {
 
   onCustomTypeNotification(context) {
     print("hello");
-    currentScreen = CustomerNotificationsScreenView();
+    currentScreen = CustomerNotificationsScreenView(isRefresh: true,route: "main",);
     hideBottomNavigation = false;
     notifyListeners();
   }
@@ -224,6 +235,7 @@ class MainScreenController extends ChangeNotifier {
           locationNotFound = false;
           locationErrorMessage = "";
           isLocationFound = true;
+
         } else {
           isLocationFound = false;
           locationErrorMessage = result.message ?? "";
@@ -266,9 +278,22 @@ class MainScreenController extends ChangeNotifier {
         notifyListeners();
       });
     } else {
-      final read = Provider.of<HomeScreenController>(context, listen: false);
-      read.initState(context, true);
-      Navigator.pop(context);
+      if(isInititalNotification){
+        print(notificationMessage?.data);
+        if (notificationMessage?.data["notification_type"] == "custom") {
+          onCustomTypeNotification(context);
+        }
+        else{
+          onOrderTypeNotification(context,notificationMessage?.data["redirect_id"]);
+        }
+        isInititalNotification=false;
+        Navigator.pop(context);
+      }
+      else {
+        final read = Provider.of<HomeScreenController>(context, listen: false);
+        read.initState(context, true);
+        Navigator.pop(context);
+      }
       // Navigator.pushAndRemoveUntil(
       //   context,
       //   MaterialPageRoute(

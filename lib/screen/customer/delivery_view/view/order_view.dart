@@ -3001,6 +3001,7 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/controller/customer_order_view_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/cancel_order_view_bottom_sheet.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_product_list_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
@@ -3070,14 +3071,24 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             onBackBtnPressed: () {
               print(widget.screenName);
               print("jhkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-              widget.screenName == "notification"
-                  ? readMain.onNavigation(
-                      4,
-                      CustomerNotificationsScreenView(
-                        isRefresh: false,
-                      ),
-                      context)
-                  : readMain.onNavigation(4, MyOrderView(), context);
+              if(widget.screenName=="main"){
+                readMain.onNavigation(
+                    0,
+                    HomeScreenView(refreshPage:true),
+                    context);
+
+              }
+              else if( widget.screenName == "notification"){
+                readMain.onNavigation(
+                    4,
+                    CustomerNotificationsScreenView(
+                      isRefresh: false,
+                    ),
+                    context) ;
+              }
+              else{
+                readMain.onNavigation(4, MyOrderView(), context);
+              }
               readMain.showBottomNavigationBar();
             },
             title: "Order",
@@ -5045,13 +5056,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             ],
                                           ),
 
-                                          // Text(
-                                          //   "\u{20B9} ${watch.orderDetails?.shopOwnerRefundPaymentType}",
-                                          //   style: TextStyle(
-                                          //       // fontWeight: FontWeight.w700,
-
-                                          //       fontSize: 1.sp),
-                                          // ),
+                                          Text(
+                                            " ${watch.orderDetails?.refundDateAndTime}",
+                                          ),
                                           SizedBox(
                                             height: 13.w,
                                           ),
@@ -5519,6 +5526,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     color: Colors.black,
                                                     fontSize: 18.sp),
                                               ),
+
                                               Container(
                                                 height: 22.w,
                                                 decoration: BoxDecoration(
@@ -5565,6 +5573,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               ),
                                             ],
                                           ),
+                                          Text(watch.orderDetails
+                                              ?.deliveredRefundDateAndTime ??
+                                              ""),
                                           SizedBox(
                                             height: 13.w,
                                           ),
@@ -5640,9 +5651,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           "received"
                                                   ? Column(
                                                       children: [
-                                                        Text(watch.orderDetails
-                                                                ?.deliveredRefundDateAndTime ??
-                                                            ""),
+
                                                         SizedBox(
                                                           height: 8.w,
                                                         ),

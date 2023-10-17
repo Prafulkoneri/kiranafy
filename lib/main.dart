@@ -178,8 +178,8 @@ void main() async {
   print("lets go");
   print("void main");
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // await Firebase.initializeApp();
+  // // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   if (Platform.isIOS) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
@@ -302,11 +302,35 @@ final firebaseMessaging = FirebaseMessaging.instance;
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    // FirebaseCrashlytics.instance.crash();
     initNotification(context);
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
       print("yes this is done and lets rock");
+      print(message?.data);
+      if (message?.data["notification_type"] == "custom") {
+        if (message?.data["user_type"] == "customer") {
+          context.read<MainScreenController>().onInititalMessage(message?.data);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onCustomTypeNotification(context);
+        }
+        // context.read<SMainScreenController>().onCustomTypeNotification(context);
+      }
+      if (message?.data["notification_type"] == "order") {
+        if (message?.data["user_type"] == "customer") {
+          context.read<MainScreenController>()..onInititalMessage(message);
+        } else {
+          context
+              .read<SMainScreenController>()
+              .onOrderTypeNotification(context, message?.data["redirect_id"]);
+        }
+        context
+            .read<SMainScreenController>()
+            .onOrderTypeNotification(context, message?.data["redirect_id"]);
+      }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print("void main");

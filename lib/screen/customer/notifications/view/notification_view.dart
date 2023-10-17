@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -14,7 +15,8 @@ import 'package:provider/provider.dart';
 
 class CustomerNotificationsScreenView extends StatefulWidget {
   final bool? isRefresh;
-  const CustomerNotificationsScreenView({Key? key, this.isRefresh})
+  final String ? route;
+  const CustomerNotificationsScreenView({Key? key, this.isRefresh,this.route})
       : super(key: key);
 
   @override
@@ -42,12 +44,20 @@ class _CustomerNotificationsScreenViewState
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(
-                  4,
-                  ProfileScreenView(
-                    isRefreshed: false,
-                  ),
-                  context);
+              if(widget.route=="main"){
+                readMain.onNavigation(
+                    0,
+                    HomeScreenView(refreshPage:true),
+                    context);
+              }
+              else {
+                readMain.onNavigation(
+                    4,
+                    ProfileScreenView(
+                      isRefreshed: false,
+                    ),
+                    context);
+              }
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(

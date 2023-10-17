@@ -28,13 +28,6 @@ class SMainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void onFabIconPressed() {
-  //   currentTab = 4;
-  //   currentScreen=ChatListScreenView();
-  //   print(currentIndex);
-  //   notifyListeners();
-  // }
-
   void onHomeScreenPressed() {
     currentTab = 0;
     currentScreen = ShopDashBoardView(
@@ -42,8 +35,6 @@ class SMainScreenController extends ChangeNotifier {
     );
     notifyListeners();
   }
-
-
 
   void onCategoryPressed(context) {
     currentIndex = 0;
@@ -58,8 +49,6 @@ class SMainScreenController extends ChangeNotifier {
   }
 
   void onCategorySelectUpdatePressed(context) {
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => SMainScreenView()));
     currentIndex = 0;
     currentScreen = SSCategoryListView();
     notifyListeners();
