@@ -88,7 +88,6 @@ class CustomerOrderViewController extends ChangeNotifier {
   //////////////
   OrderViewRepo orderViewRepo = OrderViewRepo();
   SubmitReviewRepo submitReviewRepo = SubmitReviewRepo();
-  // ShopReviewListRepo shopReviewListRepo = ShopReviewListRepo();
   GetCustomerCancelOrderRepo getcustomerCancelOrderRepo =
       GetCustomerCancelOrderRepo();
   CustomerCancelOrderRepo customerCancelOrderRepo = CustomerCancelOrderRepo();

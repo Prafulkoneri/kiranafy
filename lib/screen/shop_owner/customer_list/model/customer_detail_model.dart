@@ -91,6 +91,8 @@ class CustomerOrderDetail {
   String? createdAt;
   String? totalAmount;
   String? totalItems;
+  String ? customerCancelledStatus;
+  String ? shopOwnerCancelledStatus;
 
   CustomerOrderDetail({
     required this.id,
@@ -99,6 +101,8 @@ class CustomerOrderDetail {
     required this.createdAt,
     required this.totalAmount,
     required this.totalItems,
+    required this.customerCancelledStatus,
+    required this.shopOwnerCancelledStatus,
   });
   CustomerOrderDetail.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -107,5 +111,7 @@ class CustomerOrderDetail {
     createdAt = json["created_at"];
     totalAmount = json["total_amount"];
     totalItems = json["total_items"];
+    customerCancelledStatus=json["customer_cancelled_status"];
+    shopOwnerCancelledStatus=json["shop_owner_cancelled_status"];
   }
 }

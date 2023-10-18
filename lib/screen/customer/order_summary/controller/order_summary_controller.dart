@@ -82,15 +82,11 @@ class OrderSummaryController extends ChangeNotifier {
   int selectedAddressId = 0;
   List<bool> isFulFilProductAdded = [];
   List<bool> isFulFilProductAddedCustome = [];
+  List <bool> isSlotAvailable=[];
   FullFillYourCravingsRepo fullFillYourCravingsRepo =
       FullFillYourCravingsRepo();
-  Future<void> initState(
-    context,
-    cId,
-    id,
-    refresh,
-    route,
-  ) async {
+
+  Future<void> initState(context, cId, id, refresh, route,) async {
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
@@ -98,6 +94,8 @@ class OrderSummaryController extends ChangeNotifier {
     print(route);
 
     if (refresh) {
+      fullFillYourCravingsAdmin.clear();
+      fullFillYourCravingsCustom.clear();
       if (route != "orderSummary") {
         if (customerPickup == "active" && route == "addAddress") {
           groupValue = "self_pickup";
@@ -186,14 +184,14 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  OrderSummaryReqModel get orderSummeryRequestModel =>
-      OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+  OrderSummaryReqModel get orderSummeryRequestModel => OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
   FullFillCravingsReqModel get fullFillCravingsReqModel =>
       FullFillCravingsReqModel(
           offset: offset.toString(), limit: "10", shopId: shopId);
 
   Future<void> getFullFillYourCravingsList(context) async {
+
     print("comeonnn");
     SharedPreferences pref = await SharedPreferences.getInstance();
     fullFillYourCravingsRepo
@@ -208,7 +206,7 @@ class OrderSummaryController extends ChangeNotifier {
             .addAll(result.data?.fullFillYourCravingsAdminProduct ?? []);
         fullFillYourCravingsCustom
             .addAll(result.data?.fullFillYourCravingsCustomProduct ?? []);
-        int fulfilcravingListLength = fullFillYourCravingsAdmin?.length ?? 0;
+        int fulfilcravingListLength = fullFillYourCravingsAdmin.length ?? 0;
         isFulFilProductAdded =
             List<bool>.filled(fulfilcravingListLength, false, growable: true);
         for (int i = 0; i < fulfilcravingListLength; i++) {
@@ -358,6 +356,7 @@ class OrderSummaryController extends ChangeNotifier {
         couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
         showLoader(false);
         int deliverySlotLength = shopDeliverySlots?.length ?? 0;
+        isSlotAvailable=List<bool>.filled(deliverySlotLength, true,growable: false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
@@ -385,11 +384,17 @@ class OrderSummaryController extends ChangeNotifier {
                 slotGroupValue = "shop_owner_slot_9_to_12";
                 return;
               }
+              else{
+                isSlotAvailable[i]=false;
+              }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
               if (currentHour <= 14) {
                 slotGroupValue = "shop_owner_slot_12_to_3";
                 return;
+              }
+              else{
+                isSlotAvailable[i]=false;
               }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
@@ -397,11 +402,17 @@ class OrderSummaryController extends ChangeNotifier {
                 slotGroupValue = "shop_owner_slot_3_to_6";
                 return;
               }
+              else{
+                isSlotAvailable[i]=false;
+              }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
               if (currentHour <= 20) {
                 slotGroupValue = "shop_owner_slot_6_to_9";
                 return;
+              }
+              else{
+                isSlotAvailable[i]=false;
               }
             }
           }
@@ -657,8 +668,7 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel =>
-      CustomerRemoveCouponsRequestModel(
+  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel => CustomerRemoveCouponsRequestModel(
         cartId: cartId,
         shopId: shopId,
       );

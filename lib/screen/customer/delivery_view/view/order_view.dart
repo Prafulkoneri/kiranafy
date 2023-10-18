@@ -2991,6 +2991,7 @@
 //   }
 // }
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -3041,6 +3042,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             widget.orderId.toString(),
           );
     });
+  }
+  @override
+  void dispose() {
+    if (kFlutterMemoryAllocationsEnabled) {
+      MemoryAllocations.instance.dispatchObjectDisposed(object: this);
+    }
+    super.dispose();
   }
 
   @override
@@ -3201,70 +3209,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 ],
                                               ),
                                             )),
-                                            // Row(
-                                            //   children: [
-                                            //     InkWell(
-                                            //       onTap: () {
-                                            //         read.launchPhone(
-                                            //             watch.shopDetails
-                                            //                     ?.shopOwnerSupportNumber ??
-                                            //                 "",
-                                            //             context);
-                                            //       },
-                                            //       child: Container(
-                                            //           padding: EdgeInsets.only(
-                                            //               left: 11.w,
-                                            //               right: 11.w,
-                                            //               top: 13.w,
-                                            //               bottom: 13.w),
-                                            //           decoration: BoxDecoration(
-                                            //             shape: BoxShape.circle,
-                                            //             color: Color(0xff23AA49),
-                                            //           ),
-                                            //           child: SvgPicture.asset(
-                                            //             "assets/icons/new_call.svg",
-                                            //             width: 26.w,
-                                            //             height: 14.h,
-                                            //           )),
-                                            //     ),
-                                            //     SizedBox(
-                                            //       width: 13.w,
-                                            //     ),
-                                            //     InkWell(
-                                            //       onTap: () {
-                                            //         watch.favAllShop
-                                            //             ? read.removeAllShopFavList(
-                                            //                 context,
-                                            //                 watch.shopDetails?.id)
-                                            //             : read.updateAllShopFavList(
-                                            //                 context,
-                                            //                 watch.shopDetails?.id);
-                                            //       },
-                                            //       child: Container(
-                                            //         padding: EdgeInsets.only(
-                                            //             left: 13.w,
-                                            //             right: 13.w,
-                                            //             top: 14.w,
-                                            //             bottom: 14.w),
-                                            //         decoration: const BoxDecoration(
-                                            //           shape: BoxShape.circle,
-                                            //           color: Color(0xff4689EC),
-                                            //         ),
-                                            //         child: watch.favAllShop
-                                            //             ? SvgPicture.asset(
-                                            //                 "assets/icons/fav_selected.svg",
-                                            //                 width: 26.w,
-                                            //                 height: 14.h,
-                                            //               )
-                                            //             : SvgPicture.asset(
-                                            //                 "assets/images/favorite.svg",
-                                            //                 width: 26.w,
-                                            //                 height: 14.h,
-                                            //               ),
-                                            //       ),
-                                            //     )
-                                            //   ],
-                                            // ),
+
                                             Row(
                                               children: [
                                                 InkWell(
@@ -5191,12 +5136,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           "received"
                                                   ? Column(
                                                       children: [
-                                                        Text(watch.orderDetails
-                                                                ?.refundDatetime ??
-                                                            ""),
-                                                        SizedBox(
-                                                          height: 8.w,
-                                                        ),
+
                                                         watch.orderDetails
                                                                     ?.shopOwnerRefundTransactionId !=
                                                                 ""

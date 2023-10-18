@@ -154,20 +154,29 @@ class _ExpectedDeliveryDateSheetViewState
                   itemBuilder: (BuildContext, index) {
                     return GestureDetector(
                       onTap: () {
-                        read.onDeliverySlotSelected(
-                            watch.shopDeliverySlots?[index]);
+                        watch.isSlotAvailable[index]?read.onDeliverySlotSelected(
+                            watch.shopDeliverySlots?[index]):null;
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 11.w, vertical: 8.w),
                         decoration: BoxDecoration(
+                          color: watch.isSlotAvailable[index]?Colors.transparent:Colors.grey.withOpacity(0.3),
                           border: Border.all(
-                              color: Color(0xff4689EC).withOpacity(0.55.w)),
+                              color: !watch.isSlotAvailable[index]?Colors.transparent:Color(0xff4689EC).withOpacity(0.55.w)),
                           borderRadius: BorderRadius.circular(5.w),
                         ),
                         margin: EdgeInsets.only(bottom: 20.w),
                         child: Row(
                           children: [
+                            !watch.isSlotAvailable[index]?Container(
+                              height: 16.w,
+                              width: 16.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.grey),
+                              ),
+                            ):
                             OrderSummaryRadioButton(
                                 value: watch.shopDeliverySlots?[index],
                                 groupValue: watch.slotGroupValue,

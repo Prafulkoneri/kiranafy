@@ -277,7 +277,10 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             side: BorderSide(
-                                              color: element?.orderStatus ==
+                                              color:
+                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?Color(0xff39C19D):
+                                              element?.orderStatus=="Refund" && (element?.shopOwnerCancelledStatus=="YES" || element?.customerCancelledStatus=="YES")?Colors.red:
+                                              element?.orderStatus ==
                                                       "Pending"
                                                   ? Yellow
                                                   : element?.orderStatus ==
@@ -315,12 +318,18 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                         // );
                                       },
                                       child: Text(
+                                        element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?"Delivered":
+                                        element?.orderStatus=="Refund" && (element?.shopOwnerCancelledStatus=="YES" || element?.customerCancelledStatus=="YES")?"Cancelled":
                                         element?.orderStatus == "Refund"
                                             ? "Delivered"
                                             : element?.orderStatus ?? "",
                                         style: GoogleFonts.dmSans(
                                           textStyle: TextStyle(
-                                              color: element?.orderStatus ==
+                                              color:
+
+                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?Color(0xff39C19D):
+                                              element?.orderStatus=="Refund" && (element?.shopOwnerCancelledStatus=="YES" || element?.customerCancelledStatus=="YES")?Colors.red:
+                                              element?.orderStatus ==
                                                       "Pending"
                                                   ? Yellow
                                                   ///////
@@ -357,9 +366,9 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
+                              // SizedBox(
+                              //   height: 10.h,
+                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -374,7 +383,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20.h,
+                                height: 10.h,
                               ),
                               Row(
                                 mainAxisAlignment:
