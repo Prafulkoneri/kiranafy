@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/delivery_view/view/order_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/return/controller/return_view_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
@@ -45,26 +42,31 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMain.onNavigation(0,OrderDeliveryView(
-              screenName: "myorderview",
-                isRefresh: false,
-                orderId: watch.orderId.toString()), context);
+            readMain.onNavigation(
+                0,
+                OrderDeliveryView(
+                    screenName: "myorderview",
+                    isRefresh: false,
+                    orderId: watch.orderId.toString()),
+                context);
           },
           title: "Product Return Request",
         ),
       ),
       body: watch.isLoading
-          ?  Loader()
-
+          ? Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(0,OrderDeliveryView(
-              screenName: "myorderview",
-              isRefresh: false,
-              orderId: watch.orderId.toString()), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                readMain.onNavigation(
+                    0,
+                    OrderDeliveryView(
+                        screenName: "myorderview",
+                        isRefresh: false,
+                        orderId: watch.orderId.toString()),
+                    context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
@@ -104,7 +106,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                         fontWeight: FontWeight.w500,
                                         color: Black1),
                                   )),
-                              Text("\u{20B9} ${watch.orderDetails?.totalAmount}",
+                              Text(
+                                  "\u{20B9} ${watch.orderDetails?.totalAmount}",
                                   style: GoogleFonts.roboto(
                                     textStyle: TextStyle(
                                         fontSize: 14.sp,
@@ -150,13 +153,14 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                 ?.orderProductDetails?.length ??
                             0,
                         itemBuilder: (context, index) {
-                          final element = watch
-                              .returnproductlistdata?.orderProductDetails?[index];
+                          final element = watch.returnproductlistdata
+                              ?.orderProductDetails?[index];
                           return Column(
                             children: [
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Row(
@@ -186,7 +190,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                         // ),
                                         element?.productImagePath == ""
                                             ? Image.asset(
-                                                'assets/images/profile_image.png',
+                                                'assets/images/image_not_found.png',
                                                 width: 44.w,
                                                 height: 44.w,
                                                 fit: BoxFit.cover,
@@ -336,7 +340,8 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                               return Column(
                                 children: [
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       PrimaryCheckBox(
                                         value: watch.isSelectedReason[index],
@@ -401,7 +406,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

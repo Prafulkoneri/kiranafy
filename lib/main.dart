@@ -174,6 +174,14 @@ Future<void> initNotification(context) async {
   });
 }
 
+Future<void> showNotificationWithImage() async {
+  final bigPictureStyleInformation = BigPictureStyleInformation(
+    FilePathAndroidBitmap('your_image_path'),
+    contentTitle: 'Notification with Image',
+    summaryText: 'This is an example of a notification with an image.',
+  );
+}
+
 void main() async {
   print("lets go");
   print("void main");
@@ -304,6 +312,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // FirebaseCrashlytics.instance.crash();
     initNotification(context);
+    showNotificationWithImage();
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
