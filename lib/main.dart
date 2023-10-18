@@ -119,6 +119,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 //   BackgroundFetch.finish(taskId);
 // }
 Future<void> initNotification(context) async {
+  showNotificationWithImage();
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
