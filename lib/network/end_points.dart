@@ -88,20 +88,15 @@ class Endpoint {
       "${baseUrl}lsm-customer-get-all-favourite-shops";
   static const String removeFrvtShops =
       "${baseUrl}lsm-customer-remove-shop-from-favourite";
-  static const String customerCreateTicket =
-      "${baseUrl}lsm-customer-create-ticket";
-  static const String submitCustomProduct =
-      "${baseUrl}lsm-shop-owner-add-custom-product";
+  static const String customerCreateTicket = "${baseUrl}lsm-customer-create-ticket";
+  static const String submitCustomProduct = "${baseUrl}lsm-shop-owner-add-custom-product";
   static const String bannerAds = "${baseUrl}lsm-customer-get-banner-ads";
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
-  static const String customerViewAllShop =
-      "${baseUrl}lsm-customer-view-all-shop-list"; /////rating
+  static const String customerViewAllShop = "${baseUrl}lsm-customer-view-all-shop-list"; /////rating
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-shop-list-as-per-category";
-  static const String customerProductListAsPerCategory =
-      "${baseUrl}lsm-customer-product-list-as-per-category";
-  static const String customerProductListAsPerSearch =
-      "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
+  static const String customerProductListAsPerCategory = "${baseUrl}lsm-customer-product-list-as-per-category";
+  static const String customerProductListAsPerSearch = "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   static const String customerProductListAsPerFilter =
       "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   static const String addAdminProductToFav =

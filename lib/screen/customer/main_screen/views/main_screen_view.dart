@@ -38,15 +38,13 @@ class _MainScreenViewState extends State<MainScreenView> {
     });
   }
 
-  final GlobalKey<NavigatorState> navigatorKey =
-      new GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainScreenController>();
     final watch = context.watch<MainScreenController>();
     final cartWatch = context.watch<CartListController>();
-
     return Scaffold(
         extendBody: true,
         bottomNavigationBar: Visibility(

@@ -391,13 +391,25 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
+
     if (startShopTimeController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Shop Opening Time",
           type: SnackType.error);
       return;
     }
+
+    if(RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$').hasMatch(startShopTimeController.text)){
+      Utils.showPrimarySnackbar(context, "Incorrect Shop Opening Time Format",
+          type: SnackType.error);
+      return;
+    }
     if (endShopTimeController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Shop Closing Time",
+          type: SnackType.error);
+      return;
+    }
+    if(RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$').hasMatch(endShopTimeController.text)){
+      Utils.showPrimarySnackbar(context, "Incorrect Shop Closing Time Format",
           type: SnackType.error);
       return;
     }

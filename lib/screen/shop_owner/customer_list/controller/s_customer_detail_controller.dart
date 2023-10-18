@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/model/customer_detail_model.dart';
@@ -50,7 +51,7 @@ class SCustomerDetailController extends ChangeNotifier {
         .getCustomerDetails(
             shopCustomerDetailReqModel, pref.getString("successToken"))
         .then((response) {
-      print(response.body);
+      log(response.body);
       final result = CustomerDetailResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {

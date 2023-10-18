@@ -328,6 +328,7 @@ class CartDetailController extends ChangeNotifier {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
           read.onNavigation(2, CartScreenView(), context);
+          read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(

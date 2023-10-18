@@ -213,21 +213,15 @@ class ReturnOrderController extends ChangeNotifier {
       final result =
           SubmitReturnOrderResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        LoadingOverlay.of(context).hide();
         final read=Provider.of<MainScreenController>(context,listen: false);
         read.onNavigation(0, OrderDeliveryView(
                         screenName: "myorderview",
                         orderId: orderId,
                       ), context);
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => OrderDeliveryView(
-        //               screenName: "myorderview",
-        //               orderId: orderId,
-        //             )));
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-        LoadingOverlay.of(context).hide();
+
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
