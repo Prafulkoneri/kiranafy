@@ -3079,22 +3079,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             onBackBtnPressed: () {
               print(widget.screenName);
               print("jhkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-              if(widget.screenName=="main"){
+              if (widget.screenName == "main") {
                 readMain.onNavigation(
-                    0,
-                    HomeScreenView(refreshPage:true),
-                    context);
-
-              }
-              else if( widget.screenName == "notification"){
+                    0, HomeScreenView(refreshPage: true), context);
+              } else if (widget.screenName == "notification") {
                 readMain.onNavigation(
                     4,
                     CustomerNotificationsScreenView(
                       isRefresh: false,
                     ),
-                    context) ;
-              }
-              else{
+                    context);
+              } else {
                 readMain.onNavigation(4, MyOrderView(), context);
               }
               readMain.showBottomNavigationBar();
@@ -4249,22 +4244,27 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       indent: 0,
                                       endIndent: 0,
                                     ),
-                                    SizedBox(
-                                      height: 10.w,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        "You will save \u{20B9} ${watch.orderDetails?.totalDiscount}",
-                                        //  ",
-                                        style: GoogleFonts.dmSans(
-                                          textStyle: TextStyle(
-                                              color: SplashText,
-                                              // letterSpacing: .5,
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    ),
+                                    watch.orderDetails?.totalDiscount != ""
+                                        ? SizedBox(
+                                            height: 10.w,
+                                          )
+                                        : Container(),
+                                    watch.orderDetails?.totalDiscount != ""
+                                        ? Container(
+                                            child: Text(
+                                              "You will save \u{20B9} ${watch.orderDetails?.totalDiscount}",
+                                              //  ",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: SplashText,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 18.sp,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ),
+                                          )
+                                        : Container()
                                   ],
                                 ),
                               ),
@@ -5466,7 +5466,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     color: Colors.black,
                                                     fontSize: 18.sp),
                                               ),
-
                                               Container(
                                                 height: 22.w,
                                                 decoration: BoxDecoration(
@@ -5514,7 +5513,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             ],
                                           ),
                                           Text(watch.orderDetails
-                                              ?.deliveredRefundDateAndTime ??
+                                                  ?.deliveredRefundDateAndTime ??
                                               ""),
                                           SizedBox(
                                             height: 13.w,
@@ -5591,7 +5590,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           "received"
                                                   ? Column(
                                                       children: [
-
                                                         SizedBox(
                                                           height: 8.w,
                                                         ),

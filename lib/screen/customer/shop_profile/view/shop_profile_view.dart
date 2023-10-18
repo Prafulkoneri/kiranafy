@@ -73,6 +73,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
             )
           : WillPopScope(
               onWillPop: () async {
+                print("backkkkkkkkkkkkkkkkkkkk");
                 print("widget.routeName ${widget.routeName}");
                 // read.onBackPressed(
                 //     widget.routeName, context, widget.categoryId);
@@ -81,7 +82,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       1,
                       AllNearShopsView(
                         isSearchFocus: false,
-                        refreshPage: false,
+                        refreshPage: true,
                       ),
                       context);
                 } else if (widget.routeName == "nearShopsCategory") {
@@ -89,7 +90,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       1,
                       AllNearCategoryShopsView(
                         categoryId: widget.categoryId,
-                        refresh: false,
+                        refresh: true,
                       ),
                       context);
                 } else if (widget.routeName == "homeNearbyShop") {

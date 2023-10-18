@@ -72,8 +72,7 @@ dependencies:
 #  connectivity: ^3.0.3
   fluttertoast: ^8.0.6
   firebase_crashlytics: ^3.3.7
-
-
+  # awesome_notifications: ^0.8.2
 
   # Check permission_handler:
   permission_handler:
@@ -97,7 +96,7 @@ dependencies:
   wakelock: ^0.6.2
   wakelock_windows: ^0.2.1
   pull_to_refresh_flutter3: ^2.0.1
- 
+  flutter_lints: ^2.0.0
  
 dev_dependencies:
   flutter_test:
