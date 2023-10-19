@@ -714,7 +714,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           ShopOwnerDeliveredRefundSubmitReqModel(
             orderId: orderId,
             shopDeliveredRefundStatus: "YES",
-            shopDeliveredPaymentType: "upi",
+            shopDeliveredPaymentType: isRefundByCash?"cash":"upi",
             shopDeliveredPayableAmount: refundPayableAmount.text,
             shopDeliveredTransactionId: upiIdController.text,
           );

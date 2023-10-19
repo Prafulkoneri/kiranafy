@@ -113,11 +113,6 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
 
-// void backgroundFetchHeadlessTask( task) async {
-//   String taskId = task.taskId;
-//   print('[BackgroundFetch] Headless event received.');
-//   BackgroundFetch.finish(taskId);
-// }
 Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
@@ -417,7 +412,6 @@ class _MyAppState extends State<MyApp> {
       'Adun Accounts',
       channelDescription: 'channel description',
       importance: Importance.max,
-      styleInformation: BigTextStyleInformation(''),
       icon: '',
     );
     final iOS = IOSNotificationDetails();

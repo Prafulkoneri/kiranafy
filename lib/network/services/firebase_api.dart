@@ -256,6 +256,12 @@ class FireBaseApi {
               android: AndroidNotificationDetails(
                   androidChannel.id, androidChannel.name,
                   channelDescription: androidChannel.description,
+                  // styleInformation: BigPictureStyleInformation(
+                  //   FilePathAndroidBitmap('assets/images/dash.png'),
+                  //   contentTitle: notification.title,
+                  //   hideExpandedLargeIcon: false,
+                  //   summaryText: notification.body,
+                  // ),
                   icon: '@mipmap/ic_launcher')),
           payload: jsonEncode(message.toMap()));
     });

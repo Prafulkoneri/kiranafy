@@ -3595,6 +3595,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
+                                                  crossAxisAlignment:CrossAxisAlignment.start,
                                                   children: [
                                                     Column(
                                                       crossAxisAlignment:
@@ -3690,7 +3691,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   height: 27.w,
                                                 ),
                                                 watch.orderDetails
-                                                            ?.shopOwnerRefundPaymentType !=
+                                                            ?.shopDeliveredPayableType !=
                                                         "cash"
                                                     ? Row(
                                                         children: [
@@ -3704,7 +3705,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             width: 6.w,
                                                           ),
                                                           Text(
-                                                            "Refund Payment Transferred by UPI/QR Code",
+                                                            "Refund Payment Transferred by UPI/QR Cod",
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

@@ -5263,7 +5263,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                             "received",
                                                             context);
                                                       },
-                                                      text: "Yes Received",
+                                                      text:"Yes Received",
                                                     )),
                                                     SizedBox(width: 12.w),
                                                     Expanded(
@@ -5279,6 +5279,15 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                   ],
                                                 )
                                               : Container(),
+                                          SizedBox(
+                                              height: 10.w,
+                                          ),
+                                          // watch.orderDetails?.shopOwnerRefundPaymentType=="upi"?
+                                          // Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(
+                                          //     fontWeight:
+                                          //     FontWeight.w600,
+                                          //     fontSize: 14.sp)):Text("Refund Payment Given by Cash"),
+
                                           watch.orderDetails
                                                           ?.refundPaymentStatus ==
                                                       "not_received" &&
@@ -5286,7 +5295,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           ?.refundOrderStatus ==
                                                       "accept"
                                               ? SizedBox(
-                                                  height: 31.w,
+                                                  height: 21.w,
                                                 )
                                               : Container(),
                                           Text(
