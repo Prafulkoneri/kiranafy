@@ -12,8 +12,6 @@ import 'package:local_supper_market/screen/customer/delivery_view/model/order_in
 import 'package:local_supper_market/screen/customer/delivery_view/repository/order_invoiec_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/view/payment_refund_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/cancel_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/order_status_mode.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/model/remove_product_from_order.dart';

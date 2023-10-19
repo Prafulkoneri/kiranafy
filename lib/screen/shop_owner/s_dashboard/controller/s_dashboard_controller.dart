@@ -101,8 +101,8 @@ class SDashBoardController extends ChangeNotifier {
     }).onError((error, stackTrace) {
       isInternetConnected = false;
       // print("exception in controller");
-      Utils.showPrimarySnackbar(context, "Please Connect to Internet",
-          type: SnackType.debugError);
+      // Utils.showPrimarySnackbar(context, "Please Connect to Internet",
+      //     type: SnackType.debugError);
 
       // Utils().showNoInternetDialog(context);
     }).catchError(
@@ -141,8 +141,8 @@ class SDashBoardController extends ChangeNotifier {
       }
     }).onError((error, stackTrace) {
       isInternetConnected = false;
-      Utils.showPrimarySnackbar(context, "Please Connect to Internet",
-          type: SnackType.debugError);
+      // Utils.showPrimarySnackbar(context, "Please Connect to Internet",
+      //     type: SnackType.debugError);
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -185,8 +185,8 @@ class SDashBoardController extends ChangeNotifier {
       }
     }).onError((error, stackTrace) {
       isInternetConnected = false;
-      Utils.showPrimarySnackbar(context, "Please Connect to Internet",
-          type: SnackType.debugError);
+      // Utils.showPrimarySnackbar(context, "Please Connect to Internet",
+      //     type: SnackType.debugError);
       notifyListeners();
     }).catchError(
       (Object e) {

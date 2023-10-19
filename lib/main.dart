@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/customer/favourites/controller/favour
 import 'package:local_supper_market/screen/customer/help_center/controller/ticket_list_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
@@ -493,7 +494,9 @@ class _MyAppState extends State<MyApp> {
                             fontFamily: 'dm_sans_regular',
                           ),
                           debugShowCheckedModeBanner: false,
-                          home: SplashScreen(),
+                          home: HomeScreenView(
+                            refreshPage: true,
+                          ),
                           // initialRoute: '/',
                           //   routes: {
                           //       '/':(context)=>SplashScreen(),
