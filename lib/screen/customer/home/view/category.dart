@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
@@ -43,10 +42,13 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categoryFirstList[index];
                         return GestureDetector(
                           onTap: () {
-                            readMain.onNavigation(1,AllNearCategoryShopsView(
-                              categoryId: element.id.toString(),
-                              refresh: true,
-                            ), context);
+                            readMain.onNavigation(
+                                1,
+                                AllNearCategoryShopsView(
+                                  categoryId: element.id.toString(),
+                                  refresh: true,
+                                ),
+                                context);
                             // Navigator.pushAndRemoveUntil(
                             //   context,
                             //   MaterialPageRoute(
@@ -126,10 +128,13 @@ class _ShopCategoryState extends State<ShopCategory> {
                         final element = watch.categorySecondList[index];
                         return GestureDetector(
                           onTap: () {
-                            readMain.onNavigation(1,AllNearCategoryShopsView(
-                              categoryId: element.id.toString(),
-                              refresh: true,
-                            ), context);
+                            readMain.onNavigation(
+                                1,
+                                AllNearCategoryShopsView(
+                                  categoryId: element.id.toString(),
+                                  refresh: true,
+                                ),
+                                context);
                             // Navigator.pushAndRemoveUntil(
                             //   context,
                             //   MaterialPageRoute(

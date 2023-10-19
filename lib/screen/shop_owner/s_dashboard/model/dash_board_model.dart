@@ -33,11 +33,12 @@ class Data {
   int? deliveredOrdersCount;
   int? cancelledOrdersCount;
   int? totalBusiness;
-  int? cancelledAmount;
   int? acceptRefundOrdersCount;
   int? pendingRefundOrdersCount;
   int? totalRefund;
-  int? cancelledRefundAmount;
+  int? totalRefundAmountPending; //
+  int? totalRefundAmountAccept; //
+  int? cancelledAmount; //
   List<BannerImageData>? bannerImages;
 
   Data({
@@ -57,10 +58,12 @@ class Data {
     required this.deliveredOrdersCount,
     required this.cancelledOrdersCount,
     required this.totalBusiness,
-    required this.cancelledAmount,
+    required this.cancelledAmount, //
+    required this.totalRefundAmountPending, //
+    required this.totalRefundAmountAccept, //
     required this.pendingRefundOrdersCount,
     required this.acceptRefundOrdersCount,
-    this.cancelledRefundAmount,
+    // this.cancelledRefundAmount,
     this.totalRefund,
   });
 
@@ -70,7 +73,8 @@ class Data {
     totalCustomersOrderedCount = json["total_customers_ordered_count"];
     customersLinkedToShops = json["customers_linked_to_shops"];
     shopOwnerActiveCouponsCount = json["shop_owner_active_coupons_count"];
-    shopOwnerActiveProductsCouponsCount = json["shop_owner_active_products_coupons_count"];
+    shopOwnerActiveProductsCouponsCount =
+        json["shop_owner_active_products_coupons_count"];
     seasonalProductsCount = json["seasonal_products_count"];
     fullfillYourCravingsProductsCount =
         json["fullfill_your_cravings_products_count"];
@@ -85,7 +89,9 @@ class Data {
     pendingRefundOrdersCount = json["pending_refund_orders_count"];
     acceptRefundOrdersCount = json["accept_refund_orders_count"];
     totalRefund = json["total_refund"];
-    cancelledRefundAmount = json["cancelled_amount"];
+    cancelledAmount = json["cancelled_amount"]; //
+    totalRefundAmountPending = json["total_refund_amount_pending"]; //
+    totalRefundAmountAccept = json["total_refund_amount_accept"]; //
     if (json["shop_banner_images"] != null) {
       bannerImages = <BannerImageData>[];
       json["shop_banner_images"].forEach((v) {

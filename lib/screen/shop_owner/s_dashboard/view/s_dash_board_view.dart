@@ -1431,25 +1431,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              readOrderStatus.onTabClicked(2);
-                              readMain.onNavigation(
-                                  1,
-                                  SOrderStatusView(
-                                      selectedIndex: 2, isFromOrderView: false),
-                                  context);
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => SMainScreenView(
-                              //             index: 1,
-                              //             screenName: SOrderStatusView(
-                              //                 selectedIndex: 2,
-                              //                 isFromOrderView: false),
-                              //           )),
-                              //   (Route<dynamic> route) => false,
-                              // );
-                            },
+                            // onTap: () {
+                            //   readOrderStatus.onTabClicked(2);
+                            //   readMain.onNavigation(
+                            //       1,
+                            //       SOrderStatusView(
+                            //           selectedIndex: 2, isFromOrderView: false),
+                            //       context);
+                            //   // Navigator.pushAndRemoveUntil(
+                            //   //   context,
+                            //   //   MaterialPageRoute(
+                            //   //       builder: (context) => SMainScreenView(
+                            //   //             index: 1,
+                            //   //             screenName: SOrderStatusView(
+                            //   //                 selectedIndex: 2,
+                            //   //                 isFromOrderView: false),
+                            //   //           )),
+                            //   //   (Route<dynamic> route) => false,
+                            //   // );
+                            // },
                             child: Container(
                               padding: EdgeInsets.only(
                                   left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
@@ -1469,9 +1469,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  DashBoardCount(text: "0"
-                                      // '${watch.dashBoardData?.inprocessOrdersCount}',
-                                      ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.totalRefundAmountPending}',
+                                  ),
                                   ShopDashBoard(
                                     text: 'Pending Refund Amount',
                                   ),
@@ -1485,25 +1486,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              readOrderStatus.onTabClicked(3);
-                              readMain.onNavigation(
-                                  1,
-                                  SOrderStatusView(
-                                      selectedIndex: 3, isFromOrderView: false),
-                                  context);
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => SMainScreenView(
-                              //             index: 1,
-                              //             screenName: SOrderStatusView(
-                              //                 selectedIndex: 3,
-                              //                 isFromOrderView: false),
-                              //           )),
-                              //   (Route<dynamic> route) => false,
-                              // );
-                            },
+                            // onTap: () {
+                            //   readOrderStatus.onTabClicked(3);
+                            //   readMain.onNavigation(
+                            //       1,
+                            //       SOrderStatusView(
+                            //           selectedIndex: 3, isFromOrderView: false),
+                            //       context);
+                            //   // Navigator.pushAndRemoveUntil(
+                            //   //   context,
+                            //   //   MaterialPageRoute(
+                            //   //       builder: (context) => SMainScreenView(
+                            //   //             index: 1,
+                            //   //             screenName: SOrderStatusView(
+                            //   //                 selectedIndex: 3,
+                            //   //                 isFromOrderView: false),
+                            //   //           )),
+                            //   //   (Route<dynamic> route) => false,
+                            //   // );
+                            // },
                             child: Container(
                               padding: EdgeInsets.only(
                                   left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
@@ -1523,9 +1524,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
 
                               child: Column(
                                 children: [
-                                  DashBoardCount(text: "0"
-                                      // '${watch.dashBoardData?.deliveredOrdersCount}',
-                                      ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.totalRefundAmountAccept}',
+                                    // '${watch.dashBoardData?.deliveredOrdersCount}',
+                                  ),
                                   ShopDashBoard(
                                     text: 'Refunded Amount',
                                   ),
@@ -1539,25 +1542,25 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              readOrderStatus.onTabClicked(4);
-                              readMain.onNavigation(
-                                  1,
-                                  SOrderStatusView(
-                                      selectedIndex: 4, isFromOrderView: false),
-                                  context);
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => SMainScreenView(
-                              //             index: 1,
-                              //             screenName: SOrderStatusView(
-                              //                 selectedIndex: 4,
-                              //                 isFromOrderView: false),
-                              //           )),
-                              //   (Route<dynamic> route) => false,
-                              // );
-                            },
+                            // onTap: () {
+                            //   readOrderStatus.onTabClicked(4);
+                            //   readMain.onNavigation(
+                            //       1,
+                            //       SOrderStatusView(
+                            //           selectedIndex: 4, isFromOrderView: false),
+                            //       context);
+                            //   // Navigator.pushAndRemoveUntil(
+                            //   //   context,
+                            //   //   MaterialPageRoute(
+                            //   //       builder: (context) => SMainScreenView(
+                            //   //             index: 1,
+                            //   //             screenName: SOrderStatusView(
+                            //   //                 selectedIndex: 4,
+                            //   //                 isFromOrderView: false),
+                            //   //           )),
+                            //   //   (Route<dynamic> route) => false,
+                            //   // );
+                            // },
                             child: Container(
                               padding: EdgeInsets.only(
                                   left: 2.w, right: 2.w, top: 9.w, bottom: 9.w),
@@ -1574,9 +1577,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 children: [
-                                  DashBoardCount(text: "0"
-                                      // '${watch.dashBoardData?.cancelledOrdersCount}',
-                                      ),
+                                  DashBoardCount(
+                                    text:
+                                        '${watch.dashBoardData?.cancelledAmount}',
+                                    // '${watch.dashBoardData?.cancelledOrdersCount}',
+                                  ),
                                   ShopDashBoard(
                                     text: 'Cancelled Amount',
                                   ),
