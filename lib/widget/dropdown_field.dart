@@ -298,7 +298,7 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
                       horizontal: 10,
                       vertical: 0,
                     ),
-                    hintText: 'Search for an item...',
+                    hintText: 'Search...',
                     hintStyle: const TextStyle(fontSize: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -315,6 +315,11 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
               //   return item.value.toString().contains(searchValue);
               // },
             ),
+    onMenuStateChange: (isOpen) {
+      if (!isOpen) {
+        widget.textEditingController?.clear();
+      }
+    },
             value: widget.value,
             isDense: true,
             decoration: InputDecoration(
