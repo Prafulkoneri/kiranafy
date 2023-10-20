@@ -236,7 +236,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                         children: [
                           Expanded(
                             child: watch.countryId == 0
-                                ? CDropDownField(
+                                ? SearchDropDownField(
+                              textEditingController: watch.countrySearchController,
                                     onChanged: (value) async {
                                       read.onCountrySelected(value);
                                       await read.getStateList(context);
@@ -256,7 +257,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                                     hint: "Country",
                                     titleHeader: "Country",
                                   )
-                                : CDropDownField(
+                                : SearchDropDownField(
+                              textEditingController: watch.countrySearchController,
                                     value: watch.countryId.toString(),
                                     onChanged: (value) async {
                                       read.onCountrySelected(value);
@@ -283,7 +285,7 @@ class _AddAddressViewState extends State<AddAddressView> {
                           ),
                           Expanded(
                               child: watch.stateId == 0
-                                  ? CDropDownField(
+                                  ? SearchDropDownField(textEditingController: watch.stateSearchController,
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
                                         await read.getCityList(context);
@@ -303,7 +305,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       hint: "State",
                                       titleHeader: "State",
                                     )
-                                  : CDropDownField(
+                                  : SearchDropDownField(
+                                textEditingController: watch.stateSearchController,
                                       value: watch.stateId.toString(),
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
@@ -333,7 +336,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                         children: [
                           Expanded(
                               child: watch.cityId == 0
-                                  ? CDropDownField(
+                                  ? SearchDropDownField(
+                                textEditingController: watch.citySearchController,
                                       onChanged: (value) async {
                                         await read.onCitySelected(value);
                                         await read.getAreaList(context);
@@ -353,7 +357,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       hint: "City",
                                       titleHeader: "City",
                                     )
-                                  : CDropDownField(
+                                  : SearchDropDownField(
+                                textEditingController: watch.citySearchController,
                                       value: watch.cityId.toString(),
                                       onChanged: (value) async {
                                         await read.onCitySelected(value);
@@ -384,7 +389,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                         children: [
                           Expanded(
                               child: watch.areaId == 0
-                                  ? CDropDownField(
+                                  ? SearchDropDownField(
+                                textEditingController: watch.areaSearchController,
                                       onChanged: (value) async {
                                         read.onAreaSelected(value);
                                         read.getPinCodeList(context);
@@ -404,7 +410,8 @@ class _AddAddressViewState extends State<AddAddressView> {
                                       hint: "Area",
                                       titleHeader: "Area",
                                     )
-                                  : CDropDownField(
+                                  : SearchDropDownField(
+                                textEditingController: watch.areaSearchController,
                                       value: watch.areaId.toString(),
                                       onChanged: (value) async {
                                         read.onAreaSelected(value);

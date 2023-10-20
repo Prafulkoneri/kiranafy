@@ -35,11 +35,15 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   TextEditingController emailIdController = TextEditingController();
   TextEditingController shopAddressController = TextEditingController();
   TextEditingController pinCodeController = TextEditingController();
+  final TextEditingController stateSearchController = TextEditingController();
+  final TextEditingController countrySearchController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController areaSearchController = TextEditingController();
   String selectedCountryId = "";
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
-
+  List stateList=[];
   int selectedPincode = 0;
   List<CountryData>? countryDataList;
   List<StateData>? stateDataList;
@@ -566,11 +570,17 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       );
 
   Future<void> getStateList(context) async {
+    stateList.clear();
     LoadingOverlay.of(context).show();
     registrationDataRepo.getStateList(_stateListReqModel).then((response) {
       final result = GetStateListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         stateDataList = result.stateData;
+        int length=stateDataList?.length??0;
+        for(int i=0;i<length;i++){
+          stateList.add(stateDataList?[i].stateName);
+        }
+
         var contain = stateDataList
             ?.where((element) => element.id.toString() == selectedStateId);
         if (contain?.isNotEmpty ?? false) {
@@ -705,6 +715,23 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       await uploadImage(context);
     }
   }
+
+  // void getSearchStateList(value){
+  //
+  // var a= stateDataList?.where((item) =>
+  //       item.stateName.toString().toLowerCase().startsWith(value.toLowerCase())).toList();
+  // if(a?.isEmpty==true){
+  //   showValueStateField=false;
+  //   notifyListeners();
+  // }
+  // int length=a?.length??0;
+  // for(int i =0;i<length;i++){
+  //   print(a?[i].stateName);
+  // }
+  // stateDataList=a;
+  //
+  //       notifyListeners();
+  // }
 
   void openGallery1() async {
     PickedFile? pickedFile = await ImagePicker().getImage(

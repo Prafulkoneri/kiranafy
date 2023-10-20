@@ -38,6 +38,10 @@ class AddAddressController extends ChangeNotifier {
   String pincode = "";
   bool showPincodeValueField = false;
   RegistrationDataRepo registrationDataRepo = RegistrationDataRepo();
+  final TextEditingController stateSearchController = TextEditingController();
+  final TextEditingController countrySearchController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController areaSearchController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController mobNoController = TextEditingController();
   TextEditingController apartmentNameController = TextEditingController();

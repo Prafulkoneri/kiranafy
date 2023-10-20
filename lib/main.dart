@@ -118,6 +118,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 //   print('[BackgroundFetch] Headless event received.');
 //   BackgroundFetch.finish(taskId);
 // }
+
 Future<void> initNotification(context) async {
   showNotificationWithImage();
   const AndroidInitializationSettings initializationSettingsAndroid =

@@ -22,6 +22,10 @@ class ShopRegistrationController extends ChangeNotifier {
   List<CityData>? cityList;
   List<AreaData>? areaList;
   List? pincodeList;
+  final TextEditingController stateSearchController = TextEditingController();
+  final TextEditingController countrySearchController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController areaSearchController = TextEditingController();
   TextEditingController shopNameController = TextEditingController();
   TextEditingController ownerNameController = TextEditingController();
   TextEditingController mobController = TextEditingController();

@@ -183,7 +183,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: SDropDownField(
+                            child: SearchDropDownField(
+                              textEditingController: watch.countrySearchController,
                               onChanged: (value) async {
                                 await read.onCountrySelected(value);
                                 await read.getStateList(context);
@@ -207,7 +208,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           ),
                           Expanded(
                               child: watch.stateId == 0
-                                  ? SDropDownField(
+                                  ? SearchDropDownField(
+                                textEditingController: watch.stateSearchController,
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
                                         await read.getCityList(context);
@@ -227,6 +229,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       hint: "State",
                                     )
                                   : SDropDownField(
+                                textEditingController: watch.stateSearchController,
                                       value: watch.stateId.toString(),
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
@@ -252,7 +255,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       watch.cityId == 0
-                          ? SDropDownField(
+                          ? SearchDropDownField(
+                        textEditingController: watch.citySearchController,
                               onChanged: (value) async {
                                 await read.onCitySelected(value);
                                 await read.getAreaList(context);
@@ -270,7 +274,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                   .toList(),
                               hint: "City",
                             )
-                          : SDropDownField(
+                          : SearchDropDownField(
+                        textEditingController: watch.citySearchController,
                               value: watch.cityId.toString(),
                               onChanged: (value) async {
                                 await read.onCitySelected(value);
@@ -293,7 +298,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         height: 18.w,
                       ),
                       watch.areaId == 0
-                          ? SDropDownField(
+                          ? SearchDropDownField(
+                        textEditingController: watch.areaSearchController,
                               onChanged: (value) async {
                                 read.onAreaSelected(value);
                                 read.getPinCodeList(context);
@@ -313,7 +319,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                   .toList(),
                               hint: "Area",
                             )
-                          : SDropDownField(
+                          : SearchDropDownField(
+                        textEditingController: watch.areaSearchController,
                               value: watch.areaId.toString(),
                               onChanged: (value) async {
                                 read.onAreaSelected(value);
