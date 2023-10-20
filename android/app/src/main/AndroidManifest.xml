@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+<!--    <uses-permission android:name="android.permission.RECEIVE_SMS"/>-->
    <application
         android:label="Local Super Mart"
         android:requestLegacyExternalStorage="true"
@@ -53,12 +53,12 @@
        <meta-data
            android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyCm27F5Jrl8b6vXkNCOotiTdnM8QeygfOY"/>
-        <receiver android:name="com.shounakmulay.telephony.sms.IncomingSmsReceiver"
-            android:permission="android.permission.BROADCAST_SMS" android:exported="true">
-            <intent-filter>
-            <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-            </intent-filter>
-        </receiver>
+<!--        <receiver android:name="com.shounakmulay.telephony.sms.IncomingSmsReceiver"-->
+<!--            android:permission="android.permission.BROADCAST_SMS" android:exported="true">-->
+<!--            <intent-filter>-->
+<!--            <action android:name="android.provider.Telephony.SMS_RECEIVED"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
     
 </manifest>

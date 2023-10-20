@@ -37,6 +37,10 @@ class UpdateProfileController extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  final TextEditingController stateSearchController = TextEditingController();
+  final TextEditingController countrySearchController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController areaSearchController = TextEditingController();
   List<StateData>? stateList;
   List<CityData>? cityList;
   List<AreaData>? areaList;
