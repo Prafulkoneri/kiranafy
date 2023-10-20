@@ -9,7 +9,6 @@ import 'package:local_supper_market/screen/customer/account/view/profile_screen_
 import 'package:local_supper_market/screen/customer/delivery_address/controller/delivery_address_controller.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/checkbox.dart';

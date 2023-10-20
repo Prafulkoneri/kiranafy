@@ -7,18 +7,21 @@ import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_v
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/notification_seen_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/repository/dashboard_repo.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/repository/notification_seen_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_edit_profile_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/model/get_subscription_history_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/repository/get_subscription_history_repo.dart';
-import 'package:local_supper_market/utils/check_internet_connection.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SDashBoardController extends ChangeNotifier {
   DashBoardRepo dashBoardRepo = DashBoardRepo();
   ShopEditProfileRepo shopEditProfileRepo = ShopEditProfileRepo();
+  SubscriptionHistoryRepo subscriptionHistoryRepo = SubscriptionHistoryRepo();
+  NotificationSeenRepo notificationSeenRepo = NotificationSeenRepo();
   SAccountScreenController sAccountScreenController =
       SAccountScreenController();
   List<ShopBannerImageData>? bannerImageList;
@@ -35,7 +38,7 @@ class SDashBoardController extends ChangeNotifier {
   List<SubscriptionHistory>? subscriptionHistory;
   List specialBenifitlist = [];
   bool isInternetConnected = true;
-
+  NotificationData? notificationdata;
   // void onCategorySelect(context) {
   //   Navigator.push(
   //       context, MaterialPageRoute(builder: (context) => SSCategoryListView()));
@@ -52,6 +55,7 @@ class SDashBoardController extends ChangeNotifier {
       await getDashBoardData(context);
       await getShopEditProfileDetails(context);
       await getSubscriptionPaymentHistory(context);
+      notificationSeen(context);
     }
     notifyListeners();
   }
@@ -154,8 +158,6 @@ class SDashBoardController extends ChangeNotifier {
     );
   }
 
-  SubscriptionHistoryRepo subscriptionHistoryRepo = SubscriptionHistoryRepo();
-
   Future<void> getSubscriptionPaymentHistory(context) async {
     showLoader(true);
     print("loading");
@@ -187,6 +189,38 @@ class SDashBoardController extends ChangeNotifier {
       isInternetConnected = false;
       // Utils.showPrimarySnackbar(context, "Please Connect to Internet",
       //     type: SnackType.debugError);
+      notifyListeners();
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  ///////////////////////////////////////////
+  Future<void> notificationSeen(context) async {
+    // showLoader(true);
+    print("loading");
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    notificationSeenRepo
+        .notificationSeen(pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = NotiFicationSeenModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        notificationdata = result.notificationdata;
+        // showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      // isInternetConnected = false;
       notifyListeners();
     }).catchError(
       (Object e) {

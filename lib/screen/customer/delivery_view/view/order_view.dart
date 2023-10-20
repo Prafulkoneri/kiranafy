@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profi
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:local_supper_market/widget/favourite.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/rating.dart';
 import 'package:local_supper_market/widget/textfield.dart';
@@ -51,6 +52,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
           );
     });
   }
+
   @override
   void dispose() {
     if (kFlutterMemoryAllocationsEnabled) {
@@ -212,100 +214,85 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 ],
                                               ),
                                             )),
-
-                                            Row(
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    read.launchPhone(
-                                                        watch.shopDetails
-                                                                ?.shopOwnerSupportNumber ??
-                                                            "",
-                                                        context);
-                                                  },
-                                                  child: Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 13.w,
-                                                          right: 13.w,
-                                                          top: 14.w,
-                                                          bottom: 14.w),
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color:
-                                                            Color(0xff23AA49),
-                                                      ),
-                                                      child: SvgPicture.asset(
-                                                        "assets/icons/new_call.svg",
-                                                        width: 26.w,
-                                                        height: 14.h,
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  width: 13.w,
-                                                ),
-                                                // InkWell(
-                                                //   onTap: () {
-                                                //     watch.favAllShop
-                                                //         ? read.removeAllShopFavList(
-                                                //             context,
-                                                //             watch.shopDetails?.id)
-                                                //         : read.updateAllShopFavList(
-                                                //             context,
-                                                //             watch.shopDetails?.id);
-                                                //   },
-                                                //   child: Container(
-                                                //     padding: EdgeInsets.only(
-                                                //         left: 13.w,
-                                                //         right: 13.w,
-                                                //         top: 14.w,
-                                                //         bottom: 14.w),
-                                                //     decoration: BoxDecoration(
-                                                //       shape: BoxShape.circle,
-                                                //       color: Color(0xff4689EC),
-                                                //     ),
-                                                //     child: watch.favAllShop
-                                                //         ? SvgPicture.asset(
-                                                //             "assets/icons/fav_selected.svg",
-                                                //             width: 26.w,
-                                                //             height: 14.h,
-                                                //           )
-                                                //         : SvgPicture.asset(
-                                                //             "assets/images/favorite.svg",
-                                                //             width: 26.w,
-                                                //             height: 14.h,
-                                                //           ),
-                                                //   ),
-                                                // )
-                                                InkWell(
-                                                  onTap: () {
-                                                    watch.favAllShop
-                                                        ? read
-                                                            .removeAllShopFavList(
-                                                                context,
-                                                                watch
-                                                                    .shopDetails
-                                                                    ?.id)
-                                                        : read
-                                                            .updateAllShopFavList(
-                                                                context,
-                                                                watch
-                                                                    .shopDetails
-                                                                    ?.id);
-                                                  },
-                                                  child: watch.favAllShop
-                                                      ? SvgPicture.asset(
-                                                          "assets/icons/new_fvrt_selected.svg",
-                                                          // width: 26.w,
-                                                          // height: 14.h,
-                                                        )
-                                                      : SvgPicture.asset(
-                                                          "assets/icons/new_fvrt_not_selected.svg",
-                                                          // width: 26.w,
-                                                          // height: 14.h,
-                                                        ),
-                                                )
-                                              ],
-                                            ),
+                                            FavouriteView(
+                                              isFvrt: watch.favAllShop,
+                                              onPhoneTap: () {
+                                                read.launchPhone(
+                                                    watch.shopDetails
+                                                            ?.shopOwnerSupportNumber ??
+                                                        "",
+                                                    context);
+                                              },
+                                              onFvrtTap: () {
+                                                watch.favAllShop
+                                                    ? read.removeAllShopFavList(
+                                                        context,
+                                                        watch.shopDetails?.id)
+                                                    : read.updateAllShopFavList(
+                                                        context,
+                                                        watch.shopDetails?.id);
+                                              },
+                                            )
+                                            // Row(
+                                            //   children: [
+                                            //     InkWell(
+                                            //       onTap: () {
+                                            // read.launchPhone(
+                                            //     watch.shopDetails
+                                            //             ?.shopOwnerSupportNumber ??
+                                            //         "",
+                                            //     context);
+                                            //       },
+                                            //       child: Container(
+                                            //           padding: EdgeInsets.only(
+                                            //               left: 13.w,
+                                            //               right: 13.w,
+                                            //               top: 14.w,
+                                            //               bottom: 14.w),
+                                            //           decoration: BoxDecoration(
+                                            //             shape: BoxShape.circle,
+                                            //             color:
+                                            //                 Color(0xff23AA49),
+                                            //           ),
+                                            //           child: SvgPicture.asset(
+                                            //             "assets/icons/new_call.svg",
+                                            //             width: 26.w,
+                                            //             height: 14.h,
+                                            //           )),
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 13.w,
+                                            //     ),
+                                            //     InkWell(
+                                            //       onTap: () {
+                                            // watch.favAllShop
+                                            //     ? read
+                                            //         .removeAllShopFavList(
+                                            //             context,
+                                            //             watch
+                                            //                 .shopDetails
+                                            //                 ?.id)
+                                            //     : read
+                                            //         .updateAllShopFavList(
+                                            //             context,
+                                            //             watch
+                                            //                 .shopDetails
+                                            //                 ?.id);
+                                            //       },
+                                            //       child: watch.favAllShop
+                                            //           ? SvgPicture.asset(
+                                            //               "assets/icons/new_fvrt_selected.svg",
+                                            //               // width: 26.w,
+                                            //               // height: 14.h,
+                                            //             )
+                                            //           : SvgPicture.asset(
+                                            //               "assets/icons/new_fvrt_not_selected.svg",
+                                            //               // width: 26.w,
+                                            //               // height: 14.h,
+                                            //             ),
+                                            //     )
+                                            //   ],
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -2144,7 +2131,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           "received"
                                                   ? Column(
                                                       children: [
-
                                                         watch.orderDetails
                                                                     ?.shopOwnerRefundTransactionId !=
                                                                 ""
@@ -2271,7 +2257,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                             "received",
                                                             context);
                                                       },
-                                                      text:"Yes Received",
+                                                      text: "Yes Received",
                                                     )),
                                                     SizedBox(width: 12.w),
                                                     Expanded(
@@ -2288,7 +2274,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                 )
                                               : Container(),
                                           SizedBox(
-                                              height: 10.w,
+                                            height: 10.w,
                                           ),
                                           // watch.orderDetails?.shopOwnerRefundPaymentType=="upi"?
                                           // Text("Refund Payment Transferred by UPI/QR Code",style: TextStyle(
