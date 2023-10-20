@@ -95,20 +95,23 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             ),
                           ),
                           GestureDetector(
-                              onTap: () {
-                                readMain.onNavigation(
-                                    0,
-                                    NotificationsScreenView(route: "dashboard"),
-                                    context);
-                                readMain.hideBottomNavigationBar();
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             NotificationsScreenView()));
-                              },
-                              child: SvgPicture.asset(
-                                  "assets/icons/notification_shop.svg"))
+                            onTap: () {
+                              readMain.onNavigation(
+                                  0,
+                                  NotificationsScreenView(route: "dashboard"),
+                                  context);
+                              readMain.hideBottomNavigationBar();
+                            },
+                            child: watch.notificationdata?.notificationStatus ==
+                                    "unseen"
+                                ? SvgPicture.asset(
+                                    "assets/icons/notification_shop.svg")
+                                : Container(
+                                    height: 50.h,
+                                    width: 50.h,
+                                    color: Black,
+                                  ),
+                          )
                         ],
                       ),
                     ),

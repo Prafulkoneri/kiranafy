@@ -22,6 +22,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/controller/shop
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:local_supper_market/widget/favourite.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_coupons_view.dart';
@@ -349,57 +350,73 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 ),
                               ],
                             ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    read.launchPhone(
-                                        watch.shopDetails
-                                                ?.shopOwnerSupportNumber ??
-                                            "",
-                                        context);
-                                  },
-                                  child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: 13.w,
-                                          right: 13.w,
-                                          top: 14.w,
-                                          bottom: 14.w),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0xff23AA49),
-                                      ),
-                                      child: SvgPicture.asset(
-                                        "assets/icons/new_call.svg",
-                                        // width: 26.w,
-                                        // height: 14.h,
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 13.w,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    watch.favAllShop
-                                        ? read.removeAllShopFavList(
-                                            context, watch.shopDetails?.id)
-                                        : read.updateAllShopFavList(
-                                            context, watch.shopDetails?.id);
-                                  },
-                                  child: watch.favAllShop
-                                      ? SvgPicture.asset(
-                                          "assets/icons/new_fvrt_selected.svg",
-                                          // width: 26.w,
-                                          // height: 14.h,
-                                        )
-                                      : SvgPicture.asset(
-                                          "assets/icons/new_fvrt_not_selected.svg",
-                                          // width: 26.w,
-                                          // height: 14.h,
-                                        ),
-                                )
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     InkWell(
+                            //       onTap: () {
+                            //         read.launchPhone(
+                            //             watch.shopDetails
+                            //                     ?.shopOwnerSupportNumber ??
+                            //                 "",
+                            //             context);
+                            //       },
+                            //       child: Container(
+                            //           padding: EdgeInsets.only(
+                            //               left: 13.w,
+                            //               right: 13.w,
+                            //               top: 14.w,
+                            //               bottom: 14.w),
+                            //           decoration: BoxDecoration(
+                            //             shape: BoxShape.circle,
+                            //             color: Color(0xff23AA49),
+                            //           ),
+                            //           child: SvgPicture.asset(
+                            //             "assets/icons/new_call.svg",
+                            //             // width: 26.w,
+                            //             // height: 14.h,
+                            //           )),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 13.w,
+                            //     ),
+                            //     InkWell(
+                            //       onTap: () {
+                            //         watch.favAllShop
+                            //             ? read.removeAllShopFavList(
+                            //                 context, watch.shopDetails?.id)
+                            //             : read.updateAllShopFavList(
+                            //                 context, watch.shopDetails?.id);
+                            //       },
+                            //       child: watch.favAllShop
+                            //           ? SvgPicture.asset(
+                            //               "assets/icons/new_fvrt_selected.svg",
+                            //               // width: 26.w,
+                            //               // height: 14.h,
+                            //             )
+                            //           : SvgPicture.asset(
+                            //               "assets/icons/new_fvrt_not_selected.svg",
+                            //               // width: 26.w,
+                            //               // height: 14.h,
+                            //             ),
+                            //     )
+                            //   ],
+                            // ),
+                            FavouriteView(
+                              isFvrt: watch.favAllShop,
+                              onPhoneTap: () {
+                                read.launchPhone(
+                                    watch.shopDetails?.shopOwnerSupportNumber ??
+                                        "",
+                                    context);
+                              },
+                              onFvrtTap: () {
+                                watch.favAllShop
+                                    ? read.removeAllShopFavList(
+                                        context, watch.shopDetails?.id)
+                                    : read.updateAllShopFavList(
+                                        context, watch.shopDetails?.id);
+                              },
+                            )
                           ],
                         ),
                       ),

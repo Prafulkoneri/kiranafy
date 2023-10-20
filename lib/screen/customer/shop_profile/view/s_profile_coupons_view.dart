@@ -81,7 +81,6 @@ class _CShopCouponsViewState extends State<CShopCouponsView> {
             ),
           ),
         ),
-
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),

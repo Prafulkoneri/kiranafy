@@ -5,7 +5,7 @@ class Endpoint {
   // Base Url
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
-      // 'https://localsupermart.com/testing++++++++   /api/';
+      // 'https://localsupermart.com/testing/api/';
       'https://localsupermart.com/testing/api/';
   // 'http://lsm.mplussoft.org/api/';
   // 'https://localsupermart.com/live/api/';
@@ -88,15 +88,20 @@ class Endpoint {
       "${baseUrl}lsm-customer-get-all-favourite-shops";
   static const String removeFrvtShops =
       "${baseUrl}lsm-customer-remove-shop-from-favourite";
-  static const String customerCreateTicket = "${baseUrl}lsm-customer-create-ticket";
-  static const String submitCustomProduct = "${baseUrl}lsm-shop-owner-add-custom-product";
+  static const String customerCreateTicket =
+      "${baseUrl}lsm-customer-create-ticket";
+  static const String submitCustomProduct =
+      "${baseUrl}lsm-shop-owner-add-custom-product";
   static const String bannerAds = "${baseUrl}lsm-customer-get-banner-ads";
   static const String customerViewShop = "${baseUrl}lsm-customer-view-shop";
-  static const String customerViewAllShop = "${baseUrl}lsm-customer-view-all-shop-list"; /////rating
+  static const String customerViewAllShop =
+      "${baseUrl}lsm-customer-view-all-shop-list";
   static const String customerViewAllCategoryShop =
       "${baseUrl}lsm-customer-shop-list-as-per-category";
-  static const String customerProductListAsPerCategory = "${baseUrl}lsm-customer-product-list-as-per-category";
-  static const String customerProductListAsPerSearch = "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
+  static const String customerProductListAsPerCategory =
+      "${baseUrl}lsm-customer-product-list-as-per-category";
+  static const String customerProductListAsPerSearch =
+      "${baseUrl}lsm-customer-search-product-in-shop-as-per-category";
   static const String customerProductListAsPerFilter =
       "${baseUrl}lsm-customer-product-list-as-per-category-and-filter";
   static const String addAdminProductToFav =
@@ -122,10 +127,14 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-customer-list-who-liked-shops";
   static const String shopCustomerDetailView =
       "${baseUrl}lsm-shop-owner-customer-view";
-  static const String deliveryAddress = "${baseUrl}lsm-customer-delivery-address-list";
-  static const String addDeliveryAddressList = "${baseUrl}lsm-customer-add-delivery-address";
-  static const String markDefaultaddress = "${baseUrl}lsm-customer-make-delivery-address-default";
-  static const String deleteDeliveryAddress = "${baseUrl}lsm-customer-delete-delivery-address";
+  static const String deliveryAddress =
+      "${baseUrl}lsm-customer-delivery-address-list";
+  static const String addDeliveryAddressList =
+      "${baseUrl}lsm-customer-add-delivery-address";
+  static const String markDefaultaddress =
+      "${baseUrl}lsm-customer-make-delivery-address-default";
+  static const String deleteDeliveryAddress =
+      "${baseUrl}lsm-customer-delete-delivery-address";
   static const String editDeliveryAddress =
       "${baseUrl}lsm-customer-edit-delivery-address";
   static const String UpdateDeliveryAddress =
@@ -166,7 +175,8 @@ class Endpoint {
       "${baseUrl}lsm-customer-current-location-pincode";
   static const String shopGetOrderList =
       "${baseUrl}lsm-shop-owner-get-orders-list";
-  static const String shopOwneROrderView = "${baseUrl}lsm-shop-owner-order-view";
+  static const String shopOwneROrderView =
+      "${baseUrl}lsm-shop-owner-order-view";
   static const String shopOwnerRefundUpdate =
       "${baseUrl}lsm-shop-owner-update-refund-status";
   static const String shopOwnerDeliveredRefundUpdate =
@@ -177,7 +187,8 @@ class Endpoint {
       "${baseUrl}lsm-shop-owner-remove-product-from-order";
   static const String currentLocationPincode =
       "${baseUrl}lsm-customer-current-location-pincode";
-  static const String cancelOrderReason = "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
+  static const String cancelOrderReason =
+      "${baseUrl}lsm-shop-owner-get-order-cancel-reasons";
   static const String customerOrderView = "${baseUrl}lsm-customer-order-view";
   static const String trackOrder = "${baseUrl}lsm-customer-track-order";
   static const String cmsFile = "${baseUrl}lsm-cms-data";
@@ -266,6 +277,7 @@ class Endpoint {
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
   static const String removeCartItem = "${baseUrl}lsm-customer-remove-cart";
+
   static const String shopReviewList =
       "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =
@@ -278,4 +290,6 @@ class Endpoint {
       "${baseUrl}get-area-list-for-shop-filter";
   static const String getFullFillCravingList =
       "${baseUrl}lsm-customer-get-fullfill-cravings-product-list";
+  static const String notificationSeenRepo =
+      "${baseUrl}lsm-notification-status";
 }

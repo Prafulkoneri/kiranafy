@@ -41,23 +41,21 @@ class FavouritesController extends ChangeNotifier {
   RemoveCustomFvrtProductRepo removeCustomFavProductRepo =
       RemoveCustomFvrtProductRepo();
 
-  Future<void> initState(context,selectedIndex) async {
-    if(selectedIndex==0){
+  Future<void> initState(context, selectedIndex) async {
+    if (selectedIndex == 0) {
       isFavShopPressed = true;
-    }
-else{
-      isFavShopPressed=false;
+    } else {
+      isFavShopPressed = false;
     }
     favShopList?.clear();
     adminProductList?.clear();
     customProductList?.clear();
     isLoading = true;
     await getAllFavouriteShop(context);
-
   }
 
   onFavouriteShopTapped() {
-    isFavShopPressed = true;
+    isFavShopPressed = false;
     notifyListeners();
   }
 
@@ -77,7 +75,7 @@ else{
     print(pref.getString("successToken"));
     allFvrtShopsRepo
         .allfvrtShops(pref.getString("successToken"))
-        .then((response) async{
+        .then((response) async {
       print(response.body);
       final result = GetAllFavShopsResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
