@@ -287,9 +287,6 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                             height: 11.h,
                           ),
                           GestureDetector(
-                            // onTap: () {
-                            //   read.openProductImage();
-                            // },
                             onTap: () {
                               showDialog(
                                 context: context,

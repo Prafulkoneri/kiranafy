@@ -1,17 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/s_add_product_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -73,16 +66,6 @@ class _AddProductViewState extends State<AddProductView> {
                   SSelectedProductView(
                       isRefresh: false, categoryId: widget.categoryId),
                   context);
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => SMainScreenView(
-              //             index: 0,
-              //             screenName: SSelectedProductView(
-              //                 isRefresh: false, categoryId: widget.categoryId),
-              //           )),
-              //   (Route<dynamic> route) => false,
-              // );
             },
             title: "Add Products",
             action: SvgPicture.asset("assets/icons/forward.svg"),

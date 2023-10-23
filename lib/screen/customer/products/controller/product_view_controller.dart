@@ -28,7 +28,6 @@ import 'package:local_supper_market/screen/customer/products/repository/product_
 import 'package:local_supper_market/screen/customer/products/repository/remove_admin_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
