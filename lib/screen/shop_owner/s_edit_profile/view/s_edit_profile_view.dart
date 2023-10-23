@@ -1,25 +1,17 @@
-import 'dart:io';
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/terms_and_condition_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_auth/model/state_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/controller/shop_edit_profile_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 
 class SEditProfileView extends StatefulWidget {
   final bool? fromDashBoard;
@@ -39,7 +31,6 @@ class _SEditProfileViewState extends State<SEditProfileView> {
   }
 
   final TextEditingController textEditingController = TextEditingController();
-
 
   @override
   void dispose() {
@@ -373,7 +364,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                             children: [
                               Expanded(
                                   child: SearchDropDownField(
-                                    textEditingController: watch.countrySearchController,
+                                textEditingController:
+                                    watch.countrySearchController,
                                 value: watch.selectedCountryId,
                                 onChanged: (value) async {
                                   read.onCountrySelected(value);
@@ -399,7 +391,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                               Expanded(
                                   child: watch.showValueStateField
                                       ? SearchDropDownField(
-                                    textEditingController: watch.stateSearchController,
+                                          textEditingController:
+                                              watch.stateSearchController,
                                           value: watch.selectedStateId,
                                           onChanged: (value) async {
                                             read.onStateSelected(value);
@@ -444,13 +437,13 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                         )),
                             ],
                           ),
-
                           SizedBox(
                             height: 22.w,
                           ),
                           watch.showValueCityField
                               ? SearchDropDownField(
-                            textEditingController: watch.citySearchController,
+                                  textEditingController:
+                                      watch.citySearchController,
                                   value: watch.selectedCityId,
                                   onChanged: (value) async {
                                     read.onCitySelected(value);
@@ -471,7 +464,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                   titleHeader: "City",
                                 )
                               : SearchDropDownField(
-                            textEditingController: watch.citySearchController,
+                                  textEditingController:
+                                      watch.citySearchController,
                                   onChanged: (value) async {
                                     read.onCitySelected(value);
                                     read.getAreaList(context);
@@ -498,7 +492,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                           ),
                           watch.showValueAreaField
                               ? SearchDropDownField(
-                            textEditingController: watch.areaSearchController,
+                                  textEditingController:
+                                      watch.areaSearchController,
                                   value: watch.selectedAreaId,
                                   onChanged: (value) async {
                                     read.onAreaSelected(value);
@@ -519,7 +514,8 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                   titleHeader: "Area",
                                 )
                               : SearchDropDownField(
-                            textEditingController: watch.areaSearchController,
+                                  textEditingController:
+                                      watch.areaSearchController,
                                   onChanged: (value) async {
                                     read.onAreaSelected(value);
                                     read.getPinCodeList(context);

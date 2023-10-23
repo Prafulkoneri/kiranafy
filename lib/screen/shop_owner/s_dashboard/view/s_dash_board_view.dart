@@ -95,25 +95,29 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             ),
                           ),
                           GestureDetector(
-                              onTap: () {
-                                readMain.onNavigation(
-                                    0,
-                                    NotificationsScreenView(route: "dashboard"),
-                                    context);
-                                readMain.hideBottomNavigationBar();
-                              },
-                              child:
-                                  //  watch.notificationdata?.notificationStatus ==
-                                  //         "unseen"
-                                  //     ?
-                                  SvgPicture.asset(
-                                      "assets/icons/notification_shop.svg")
-                              // : Container(
-                              //   height: 50.h,
-                              //   width: 50.h,
-                              //   color: Black,
-                              // ),
-                              ),
+                            onTap: () {
+                              readMain.onNavigation(
+                                  0,
+                                  NotificationsScreenView(route: "dashboard"),
+                                  context);
+                              readMain.hideBottomNavigationBar();
+                            },
+                            child: watch.notificationdata?.notificationStatus ==
+                                    "unseen"
+                                ? SvgPicture.asset(
+                                    "assets/icons/notification_shop.svg")
+                                : SvgPicture.asset(
+                                    "assets/icons/notification_empty01.svg",
+                                    // color: Colors.white,
+                                    height: 28.0,
+                                    width: 28,
+                                  ),
+                            // : Container(
+                            //   height: 50.h,
+                            //   width: 50.h,
+                            //   color: Black,
+                            // ),notification_empty
+                          ),
                         ],
                       ),
                     ),
