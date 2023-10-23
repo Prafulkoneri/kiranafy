@@ -112,6 +112,7 @@ String? selectedNotificationPayload;
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  print("common baby");
 }
 
 // void backgroundFetchHeadlessTask( task) async {
@@ -121,6 +122,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 // }
 
 Future<void> initNotification(context) async {
+  print("helloo init notification");
   showNotificationWithImage();
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
@@ -132,6 +134,7 @@ Future<void> initNotification(context) async {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS);
+
   await flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: (String? payload) {
     print(payload);
@@ -148,10 +151,11 @@ Future<void> initNotification(context) async {
             Provider.of<SMainScreenController>(context, listen: false);
         final readCustomer =
             Provider.of<MainScreenController>(context, listen: false);
+
         var res = jsonDecode(payload);
-        print("common baby");
-        print(res["data"]["user_type"]);
-        print("common baby");
+        // print("common baby");
+        // print(res["data"]["user_type"]);
+        // print("common baby");
         if (res["data"]["notification_type"] == "order") {
           if (res["data"]["user_type"] == "customer") {
             readCustomer.onOrderTypeNotification(
@@ -175,6 +179,7 @@ Future<void> initNotification(context) async {
       // OpenFile.open(payload);
     }
   });
+
 }
 
 Future<void> showNotificationWithImage() async {
@@ -348,6 +353,37 @@ class _MyAppState extends State<MyApp> {
             .onOrderTypeNotification(context, message?.data["redirect_id"]);
       }
     });
+
+    // FirebaseMessaging.onMessage.listen((message) async {
+    //   @pragma('vm:entry-point')
+    //   final notification = message.notification;
+    //   if (notification == null) return;
+    //   final http.Response response = await http.get(Uri.parse(
+    //       "http://thewowstyle.com/wp-content/uploads/2015/01/nature-images.jpg"));
+    //   BigPictureStyleInformation bigPictureStyleInformation =
+    //   BigPictureStyleInformation(
+    //     ByteArrayAndroidBitmap.fromBase64String(
+    //         base64Encode(response.bodyBytes)),
+    //     largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+    //         base64Encode(response.bodyBytes)),
+    //   );
+    //   // _showNotification();
+    //   _localNotification.show(
+    //       notification.hashCode,
+    //       notification.title,
+    //       notification.body,
+    //       // notification.
+    //       NotificationDetails(
+    //           android: AndroidNotificationDetails(
+    //               androidChannel.id, androidChannel.name,
+    //               channelDescription: androidChannel.description,
+    //               styleInformation: bigPictureStyleInformation,
+    //               icon: '@mipmap/ic_launcher')),
+    //       payload: jsonEncode(message.toMap()));
+    // });
+
+
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print("void main");
       print(message.data);
@@ -383,6 +419,10 @@ class _MyAppState extends State<MyApp> {
     });
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+      print("triggered");
+      final readShopDashBoardController =
+      Provider.of<SDashBoardController>(context, listen: false);
+      readShopDashBoardController.getNotificationSeen(context);
       print("onBackgroundMessage: $message");
       if (message.data["notification_type"] == "custom") {
         if (message.data["user_type"] == "customer") {
@@ -439,16 +479,16 @@ class _MyAppState extends State<MyApp> {
   }
 
 ////Invoice/////////////////
-  void fireBaseApi() async {
-    await firebaseMessaging.requestPermission();
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      print("onMessageOpenedApp: $message");
-    });
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-      print("onBackgroundMessage: $message");
-    });
-  }
+//   void fireBaseApi() async {
+//     await firebaseMessaging.requestPermission();
+//
+//     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+//       print("onMessageOpenedApp: $message");
+//     });
+//     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+//       print("onBackgroundMessage: $message");
+//     });
+//   }
 
   // This widget is the root of your application.
   @override

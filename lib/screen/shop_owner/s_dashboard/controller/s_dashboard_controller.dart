@@ -55,7 +55,7 @@ class SDashBoardController extends ChangeNotifier {
       await getDashBoardData(context);
       await getShopEditProfileDetails(context);
       await getSubscriptionPaymentHistory(context);
-      notificationSeen(context);
+     await  getNotificationSeen(context);
     }
     notifyListeners();
   }
@@ -202,7 +202,7 @@ class SDashBoardController extends ChangeNotifier {
   }
 
   ///////////////////////////////////////////
-  Future<void> notificationSeen(context) async {
+  Future<void> getNotificationSeen(context) async {
     // showLoader(true);
     print("loading");
     SharedPreferences pref = await SharedPreferences.getInstance();

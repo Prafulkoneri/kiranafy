@@ -1,6 +1,9 @@
 // import 'package:connectivity/connectivity.dart';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,23 +46,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SDashBoardController>().initState(context, widget.refresh);
     });
-    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-    //   if (result == ConnectivityResult.none) {
-    //     // No internet connection, show toast message
-    //     showToast("No internet connection");
-    //   }
-    // });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      // print(message.data);
+      // print(message.data["notification_type"]);
+      final readShopDashBoardController = Provider.of<SDashBoardController>(context, listen: false);
+      readShopDashBoardController.getNotificationSeen(context);
+    });
   }
-  //
-  // void showToast(String message) {
-  //   Fluttertoast.showToast(
-  //     msg: message,
-  //     toastLength: Toast.LENGTH_SHORT,
-  //     gravity: ToastGravity.BOTTOM,
-  //     backgroundColor: Colors.red,
-  //     textColor: Colors.white,
-  //   );
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -278,7 +272,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         // child:
                       ),
                     ),
-                    ///////////////////
                     Container(
                       padding:
                           EdgeInsets.only(left: 13.w, right: 19.w, top: 10.w),
@@ -351,7 +344,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ],
                       ),
                     ),
-                    /////
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 10.w, bottom: 10.w),
@@ -466,8 +458,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                       ],
                     ),
-                    /////
-
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
@@ -561,8 +551,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                         ),
                       ],
                     ),
-                    ///////////////////////////////
-
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),

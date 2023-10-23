@@ -334,34 +334,34 @@
 //     FirebaseMessaging.onMessageOpenedApp.listen(handleBackGroundMessage);
 //     FirebaseMessaging.onBackgroundMessage(handleBackGroundMessage);
 
-//     FirebaseMessaging.onMessage.listen((message) async {
-//       @pragma('vm:entry-point')
-//       final notification = message.notification;
-//       if (notification == null) return;
-//       final http.Response response = await http.get(Uri.parse(
-//           "http://thewowstyle.com/wp-content/uploads/2015/01/nature-images.jpg"));
-//       BigPictureStyleInformation bigPictureStyleInformation =
-//           BigPictureStyleInformation(
-//         ByteArrayAndroidBitmap.fromBase64String(
-//             base64Encode(response.bodyBytes)),
-//         largeIcon: ByteArrayAndroidBitmap.fromBase64String(
-//             base64Encode(response.bodyBytes)),
-//       );
-//       // _showNotification();
-//       _localNotification.show(
-//           notification.hashCode,
-//           notification.title,
-//           notification.body,
-//           // notification.
-//           NotificationDetails(
-//               android: AndroidNotificationDetails(
-//                   androidChannel.id, androidChannel.name,
-//                   channelDescription: androidChannel.description,
-//                   styleInformation: bigPictureStyleInformation,
-//                   icon: '@mipmap/ic_launcher')),
-//           payload: jsonEncode(message.toMap()));
-//     });
-//   }
+  //   FirebaseMessaging.onMessage.listen((message) async {
+  //     @pragma('vm:entry-point')
+  //     final notification = message.notification;
+  //     if (notification == null) return;
+  //     final http.Response response = await http.get(Uri.parse(
+  //         "http://thewowstyle.com/wp-content/uploads/2015/01/nature-images.jpg"));
+  //     BigPictureStyleInformation bigPictureStyleInformation =
+  //         BigPictureStyleInformation(
+  //       ByteArrayAndroidBitmap.fromBase64String(
+  //           base64Encode(response.bodyBytes)),
+  //       largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+  //           base64Encode(response.bodyBytes)),
+  //     );
+  //     // _showNotification();
+  //     _localNotification.show(
+  //         notification.hashCode,
+  //         notification.title,
+  //         notification.body,
+  //         // notification.
+  //         NotificationDetails(
+  //             android: AndroidNotificationDetails(
+  //                 androidChannel.id, androidChannel.name,
+  //                 channelDescription: androidChannel.description,
+  //                 styleInformation: bigPictureStyleInformation,
+  //                 icon: '@mipmap/ic_launcher')),
+  //         payload: jsonEncode(message.toMap()));
+  //   });
+  // }
 
 //   Future<void> initNotification() async {
 //     await firebasemessaging.requestPermission();

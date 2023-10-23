@@ -185,7 +185,7 @@
 
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_supper_market/main.dart';
@@ -243,27 +243,57 @@ class FireBaseApi {
     FirebaseMessaging.onMessageOpenedApp.listen(handleBackGroundMessage);
     FirebaseMessaging.onBackgroundMessage(handleBackGroundMessage);
 
-    FirebaseMessaging.onMessage.listen((message) {
+    FirebaseMessaging.onMessage.listen((message)async {
+      print("this is the main file");
+      print(message.data);
       @pragma('vm:entry-point')
       final notification = message.notification;
       if (notification == null) return;
       // _showNotification();
-      _localNotification.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-              android: AndroidNotificationDetails(
-                  androidChannel.id, androidChannel.name,
-                  channelDescription: androidChannel.description,
-                  // styleInformation: BigPictureStyleInformation(
-                  //   FilePathAndroidBitmap('assets/images/dash.png'),
-                  //   contentTitle: notification.title,
-                  //   hideExpandedLargeIcon: false,
-                  //   summaryText: notification.body,
-                  // ),
-                  icon: '@mipmap/ic_launcher')),
-          payload: jsonEncode(message.toMap()));
+      if(message.data["notification_type"]=="custom"){
+        final http.Response response = await http.get(Uri.parse(
+            message.data["notificaton_image"]));
+        BigPictureStyleInformation bigPictureStyleInformation =
+        BigPictureStyleInformation(
+          ByteArrayAndroidBitmap.fromBase64String(
+              base64Encode(response.bodyBytes)),
+          largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+              base64Encode(response.bodyBytes)),
+        );
+        // _showNotification();
+        _localNotification.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            // notification.
+            NotificationDetails(
+                android: AndroidNotificationDetails(
+                    androidChannel.id, androidChannel.name,
+                    channelDescription: androidChannel.description,
+                    styleInformation: bigPictureStyleInformation,
+                    icon: '@mipmap/ic_launcher')),
+            payload: jsonEncode(message.toMap()));
+
+      }
+      else{
+        _localNotification.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+                android: AndroidNotificationDetails(
+                    androidChannel.id, androidChannel.name,
+                    channelDescription: androidChannel.description,
+                    // styleInformation: BigPictureStyleInformation(
+                    //   FilePathAndroidBitmap('assets/images/dash.png'),
+                    //   contentTitle: notification.title,
+                    //   hideExpandedLargeIcon: false,
+                    //   summaryText: notification.body,
+                    // ),
+                    icon: '@mipmap/ic_launcher')),
+            payload: jsonEncode(message.toMap()));
+      }
+
     });
   }
 
