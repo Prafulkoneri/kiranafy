@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
@@ -17,15 +16,23 @@ class RefferAndEarnView extends StatefulWidget {
 }
 
 class _RefferAndEarnViewState extends State<RefferAndEarnView> {
-  Future<void> shareToInstagram() async {
-    final instagramUrl = 'https://www.instagram.com/';
-    final caption = Uri.encodeFull('Check out my awesome app! #MyApp');
-    final url = 'instagram://library?caption=$caption';
-
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      await launch(instagramUrl);
+  // _launchInstagram() async {
+  //   const nativeUrl =
+  //   // "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US";
+  //   "instagram://user?username";
+  //   const webUrl = "https://www.instagram.com";
+  //   if (await canLaunch(nativeUrl)) {
+  //     await launch(nativeUrl);
+  //   } else if (await canLaunch(webUrl)) {
+  //     await launch(webUrl);
+  //   } else {
+  //     print("can't open Instagram");
+  //   }
+  // }
+  final url = Uri.parse("https://www.instagram.com/direct/new/");
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 
@@ -69,7 +76,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                 height: 21.w,
               ),
               Container(
-                // padding: EdgeInsets.only(left: 5.w, right: 3.w),
+                // padding: EdgeInsets.only(left: 8.w, right: 3.w),
                 child: Stack(
                   children: [
                     const Image(
@@ -77,7 +84,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                         "assets/images/reffer_and_earn.png",
                       ),
                       // width: ScreenUtil().screenWidth,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                     Positioned(
                       //<-- SEE HERE
@@ -240,7 +247,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            shareToInstagram();
+                            _launchUrl();
                           },
                           child: Container(
                               padding: EdgeInsets.only(

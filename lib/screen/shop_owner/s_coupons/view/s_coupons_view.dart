@@ -12,7 +12,6 @@ import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_v
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -56,11 +55,12 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
             isBackButtonEnabled:
                 widget.isNavFromDashBoard == true ? false : true,
             onBackBtnPressed: () {
-
-              readMain.onNavigation(4, SAccountScreenView(
-                refresh: false,
-              ), context);
-
+              readMain.onNavigation(
+                  4,
+                  SAccountScreenView(
+                    refresh: false,
+                  ),
+                  context);
             },
             title: "Coupon",
             action: SvgPicture.asset("assets/icons/addressadd.svg"),
@@ -68,10 +68,13 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
               if (watchDashBoardScreen.specialBenifitlist
                   .contains("create_offer_coupons")) {
                 if (widget.isNavFromDashBoard == true) {
-                  readMain.onNavigation(3, SAddCouponsView(
-                    isEditCoupon: false,
-                    isNavFromDashboard: true,
-                  ), context);
+                  readMain.onNavigation(
+                      3,
+                      SAddCouponsView(
+                        isEditCoupon: false,
+                        isNavFromDashboard: true,
+                      ),
+                      context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -84,10 +87,13 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                   //   (Route<dynamic> route) => false,
                   // );
                 } else {
-                  readMain.onNavigation(4, SAddCouponsView(
-                    isEditCoupon: false,
-                    isNavFromDashboard: false,
-                  ), context);
+                  readMain.onNavigation(
+                      4,
+                      SAddCouponsView(
+                        isEditCoupon: false,
+                        isNavFromDashboard: false,
+                      ),
+                      context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -111,13 +117,19 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
       body: watch.isLoading
           ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          widget.isNavFromDashBoard == true? readMain.onNavigation(0,ShopDashBoardView(refresh: false), context):            readMain.onNavigation(4, SAccountScreenView(
-            refresh: false,
-          ), context);
-          return false;
-        },
-            child: Column(
+              onWillPop: () async {
+                widget.isNavFromDashBoard == true
+                    ? readMain.onNavigation(
+                        0, ShopDashBoardView(refresh: false), context)
+                    : readMain.onNavigation(
+                        4,
+                        SAccountScreenView(
+                          refresh: false,
+                        ),
+                        context);
+                return false;
+              },
+              child: Column(
                 children: [
                   Expanded(
                       child: SingleChildScrollView(
@@ -140,10 +152,12 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                     padding: EdgeInsets.only(
                                         left: 19.0.w, right: 19.w, top: 15.0.w),
                                     child: Stack(
-                                      alignment: AlignmentDirectional.centerStart,
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
                                       children: <Widget>[
                                         Padding(
-                                          padding: EdgeInsets.only(bottom: 12.h),
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
                                           child: Image.asset(
                                             'assets/images/Coupons.png',
                                             // height: 125.h, width: 352.w
@@ -207,7 +221,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                             letterSpacing: .5,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w700),
+                                                                FontWeight
+                                                                    .w700),
                                                       ),
                                                     ),
                                                     // SizedBox(
@@ -216,7 +231,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                     InkWell(
                                                       onTap: () {
                                                         read.viewCouponsDetail(
-                                                            context, element?.id);
+                                                            context,
+                                                            element?.id);
                                                         showModalBottomSheet(
                                                             backgroundColor:
                                                                 Colors.white,
@@ -262,7 +278,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                             letterSpacing: .5,
                                                             fontSize: 10.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     ),
                                                   )
@@ -280,7 +297,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                         left: 18.0.h),
                                                     child: Text(
                                                         "${element?.couponDiscountPercentage} OFF",
-                                                        style: GoogleFonts.dmSans(
+                                                        style:
+                                                            GoogleFonts.dmSans(
                                                           textStyle: TextStyle(
                                                               color: Black,
                                                               letterSpacing: .5,
@@ -301,7 +319,8 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                             letterSpacing: .5,
                                                             fontSize: 10.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ))
                                                 ],
                                               ),
@@ -397,14 +416,18 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                 if (widget
                                                                         .isNavFromDashBoard ==
                                                                     true) {
-                                                                  readMain.onNavigation(3, SAddCouponsView(
-                                                                    isEditCoupon:
-                                                                    true,
-                                                                    couponId:
-                                                                    element?.id.toString(),
-                                                                    isNavFromDashboard:
-                                                                    true,
-                                                                  ), context);
+                                                                  readMain.onNavigation(
+                                                                      3,
+                                                                      SAddCouponsView(
+                                                                        isEditCoupon:
+                                                                            true,
+                                                                        couponId: element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                        isNavFromDashboard:
+                                                                            true,
+                                                                      ),
+                                                                      context);
                                                                   // Navigator
                                                                   //     .pushAndRemoveUntil(
                                                                   //   context,
@@ -424,14 +447,18 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                   //       false,
                                                                   // );
                                                                 } else {
-                                                                  readMain.onNavigation(3, SAddCouponsView(
-                                                                    isEditCoupon:
-                                                                    true,
-                                                                    couponId:
-                                                                    element?.id.toString(),
-                                                                    isNavFromDashboard:
-                                                                    false,
-                                                                  ), context);
+                                                                  readMain.onNavigation(
+                                                                      3,
+                                                                      SAddCouponsView(
+                                                                        isEditCoupon:
+                                                                            true,
+                                                                        couponId: element
+                                                                            ?.id
+                                                                            .toString(),
+                                                                        isNavFromDashboard:
+                                                                            false,
+                                                                      ),
+                                                                      context);
                                                                   // Navigator
                                                                   //     .pushAndRemoveUntil(
                                                                   //   context,
@@ -505,8 +532,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                               MainAxisAlignment.center,
                                                                           children: <Widget>[
                                                                             Flexible(
-                                                                              child:
-                                                                                  Text(
+                                                                              child: Text(
                                                                                 "Do you really want to delete coupon ? ",
                                                                                 textAlign: TextAlign.center,
                                                                                 style: GoogleFonts.dmSans(
@@ -515,12 +541,10 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                               ),
                                                                             ),
                                                                             SizedBox(
-                                                                              height:
-                                                                                  37.h,
+                                                                              height: 37.h,
                                                                             ),
                                                                             Row(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.spaceBetween,
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
                                                                                 SizedBox(
                                                                                   width: 19.w,
@@ -644,7 +668,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                   ),
                 ],
               ),
-          ),
+            ),
     );
   }
 }

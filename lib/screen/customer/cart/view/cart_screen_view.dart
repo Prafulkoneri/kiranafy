@@ -41,11 +41,13 @@ class _CartScreenViewState extends State<CartScreenView> {
         child: PrimaryAppBar(
           isBackButtonEnabled: false,
           title: "Shop Cart",
-          action: SvgPicture.asset(
-            'assets/images/delete.svg',
-            // width: 20.w,
-            // height: 18.h,
-          ),
+          action: watch.cartList?.isNotEmpty == true
+              ? SvgPicture.asset(
+                  'assets/images/delete.svg',
+                  // width: 20.w,
+                  // height: 18.h,
+                )
+              : Container(),
           onActionTap: () async {
             // await read.deleteShopCart(
             //   context,

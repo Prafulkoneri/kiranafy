@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/review/controller/customer_review_list_shop_controller.dart';
@@ -261,216 +262,257 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    Container(
-                      padding: EdgeInsets.only(left: 19.w, right: 19.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CReview(
-                            text: "All Reviews",
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: watch.reviewList?.length ?? 0,
-                            itemBuilder: (context, index) {
-                              final element = watch.reviewList?[index];
-                              return Column(
-                                children: [
-                                  Container(
-                                    width: ScreenUtil().screenWidth,
-                                    padding: EdgeInsets.only(
-                                        left: 15.w,
-                                        right: 10.w,
-                                        top: 12.w,
-                                        bottom: 11.w),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1, color: Color(0xffE8E8E8)),
-                                      borderRadius: BorderRadius.circular(10),
-                                      // color: Colors.red,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                    watch.reviewList?.isNotEmpty == true
+                        ? Container(
+                            padding: EdgeInsets.only(left: 19.w, right: 19.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CReview(
+                                  text: "All Reviews",
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: watch.reviewList?.length ?? 0,
+                                  itemBuilder: (context, index) {
+                                    final element = watch.reviewList?[index];
+                                    return Column(
                                       children: [
-                                        Row(
-                                          children: [
-                                            element?.customerProfileImagePath ==
-                                                    ""
-                                                ? Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            'assets/images/nearshop2.png'),
+                                        Container(
+                                          width: ScreenUtil().screenWidth,
+                                          padding: EdgeInsets.only(
+                                              left: 15.w,
+                                              right: 10.w,
+                                              top: 12.w,
+                                              bottom: 11.w),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 1,
+                                                color: Color(0xffE8E8E8)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            // color: Colors.red,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  element?.customerProfileImagePath ==
+                                                          ""
+                                                      ? Container(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            image:
+                                                                DecorationImage(
+                                                              fit: BoxFit.cover,
+                                                              image: AssetImage(
+                                                                  'assets/images/nearshop2.png'),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : Container(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            image: DecorationImage(
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                image: CachedNetworkImageProvider(
+                                                                    element?.customerProfileImagePath ??
+                                                                        "")),
+                                                          ),
+                                                        ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 5.w),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              DashBoardSideHeading(
+                                                                  text:
+                                                                      "${element?.customerName}"),
+                                                              // Text(
+                                                              //   "${element?.customerName}",
+                                                              //   style: GoogleFonts
+                                                              //       .dmSans(
+                                                              //     textStyle: TextStyle(
+                                                              //         color: Black,
+                                                              //         fontSize: 16.sp,
+                                                              //         fontWeight:
+                                                              //             FontWeight
+                                                              //                 .w700),
+                                                              //   ),
+                                                              // ),
+                                                              Row(
+                                                                children: [
+                                                                  SvgPicture
+                                                                      .asset(
+                                                                    'assets/icons/ReviewStart.svg',
+                                                                    width: 14.w,
+                                                                    height:
+                                                                        14.h,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 7.w,
+                                                                  ),
+                                                                  UpdateProfile(
+                                                                    text:
+                                                                        "${element?.ratings}.0",
+                                                                  )
+                                                                  // Text(
+                                                                  //   "${element?.ratings}.0",
+                                                                  //   // double.parse(element
+                                                                  //   //             ?.ratings
+                                                                  //   //             .toString() ??
+                                                                  //   //         "0.0")
+                                                                  //   //     .toStringAsFixed(
+                                                                  //   //         1),
+                                                                  //   style: GoogleFonts
+                                                                  //       .dmSans(
+                                                                  //     textStyle: TextStyle(
+                                                                  //         color:
+                                                                  //             Black,
+                                                                  //         fontSize:
+                                                                  //             14.sp,
+                                                                  //         fontWeight:
+                                                                  //             FontWeight
+                                                                  //                 .w500),
+                                                                  //   ),
+                                                                  // ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 4.h,
+                                                          ),
+                                                          CReviewone(
+                                                            fontSize: 12,
+                                                            text:
+                                                                "${element?.cityName} ${element?.stateName}",
+                                                          ),
+                                                          // Text(
+                                                          //   "${element?.cityName} ${element?.stateName}",
+                                                          //   style: GoogleFonts.dmSans(
+                                                          //     textStyle: TextStyle(
+                                                          //         color: grey5,
+                                                          //         fontSize: 12.sp,
+                                                          //         fontWeight:
+                                                          //             FontWeight
+                                                          //                 .w400),
+                                                          //   ),
+                                                          // ),
+                                                          CReviewone(
+                                                            text:
+                                                                "${element?.createdAt}",
+                                                            fontSize: 11,
+                                                          )
+                                                          // Text(
+                                                          //   "${element?.createdAt}",
+                                                          //   style: GoogleFonts.dmSans(
+                                                          //     textStyle: TextStyle(
+                                                          //         color: Color(
+                                                          //             0xff7C7C7C),
+                                                          //         fontSize: 11.sp,
+                                                          //         fontWeight:
+                                                          //             FontWeight
+                                                          //                 .w400),
+                                                          //   ),
+                                                          // )
+                                                        ],
                                                       ),
                                                     ),
-                                                  )
-                                                : Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: CachedNetworkImageProvider(
-                                                              element?.customerProfileImagePath ??
-                                                                  "")),
-                                                    ),
                                                   ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(left: 5.w),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        DashBoardSideHeading(
-                                                            text:
-                                                                "${element?.customerName}"),
-                                                        // Text(
-                                                        //   "${element?.customerName}",
-                                                        //   style: GoogleFonts
-                                                        //       .dmSans(
-                                                        //     textStyle: TextStyle(
-                                                        //         color: Black,
-                                                        //         fontSize: 16.sp,
-                                                        //         fontWeight:
-                                                        //             FontWeight
-                                                        //                 .w700),
-                                                        //   ),
-                                                        // ),
-                                                        Row(
-                                                          children: [
-                                                            SvgPicture.asset(
-                                                              'assets/icons/ReviewStart.svg',
-                                                              width: 14.w,
-                                                              height: 14.h,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 7.w,
-                                                            ),
-                                                            UpdateProfile(
-                                                              text:
-                                                                  "${element?.ratings}.0",
-                                                            )
-                                                            // Text(
-                                                            //   "${element?.ratings}.0",
-                                                            //   // double.parse(element
-                                                            //   //             ?.ratings
-                                                            //   //             .toString() ??
-                                                            //   //         "0.0")
-                                                            //   //     .toStringAsFixed(
-                                                            //   //         1),
-                                                            //   style: GoogleFonts
-                                                            //       .dmSans(
-                                                            //     textStyle: TextStyle(
-                                                            //         color:
-                                                            //             Black,
-                                                            //         fontSize:
-                                                            //             14.sp,
-                                                            //         fontWeight:
-                                                            //             FontWeight
-                                                            //                 .w500),
-                                                            //   ),
-                                                            // ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 4.h,
-                                                    ),
-                                                    CReviewone(
-                                                      fontSize: 12,
-                                                      text:
-                                                          "${element?.cityName} ${element?.stateName}",
-                                                    ),
-                                                    // Text(
-                                                    //   "${element?.cityName} ${element?.stateName}",
-                                                    //   style: GoogleFonts.dmSans(
-                                                    //     textStyle: TextStyle(
-                                                    //         color: grey5,
-                                                    //         fontSize: 12.sp,
-                                                    //         fontWeight:
-                                                    //             FontWeight
-                                                    //                 .w400),
-                                                    //   ),
-                                                    // ),
-                                                    CReviewone(
-                                                      text:
-                                                          "${element?.createdAt}",
-                                                      fontSize: 11,
-                                                    )
-                                                    // Text(
-                                                    //   "${element?.createdAt}",
-                                                    //   style: GoogleFonts.dmSans(
-                                                    //     textStyle: TextStyle(
-                                                    //         color: Color(
-                                                    //             0xff7C7C7C),
-                                                    //         fontSize: 11.sp,
-                                                    //         fontWeight:
-                                                    //             FontWeight
-                                                    //                 .w400),
-                                                    //   ),
-                                                    // )
-                                                  ],
-                                                ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Divider(
-                                          color: grey,
-                                          thickness: 1,
+                                              SizedBox(
+                                                height: 15.h,
+                                              ),
+                                              Divider(
+                                                color: grey,
+                                                thickness: 1,
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              CReviewone(
+                                                text: "${element?.review}",
+                                                fontSize: 14,
+                                              )
+                                              // Text(
+                                              //   "${element?.review}",
+                                              //   // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
+                                              //   style: GoogleFonts.dmSans(
+                                              //     textStyle: TextStyle(
+                                              //         color: Color(0xff7C7C7C),
+                                              //         // letterSpacing: .5,
+                                              //         fontSize: 14.sp,
+                                              //         fontWeight: FontWeight.w400),
+                                              //   ),
+                                              // ),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 10.h,
-                                        ),
-                                        CReviewone(
-                                          text: "${element?.review}",
-                                          fontSize: 14,
                                         )
-                                        // Text(
-                                        //   "${element?.review}",
-                                        //   // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
-                                        //   style: GoogleFonts.dmSans(
-                                        //     textStyle: TextStyle(
-                                        //         color: Color(0xff7C7C7C),
-                                        //         // letterSpacing: .5,
-                                        //         fontSize: 14.sp,
-                                        //         fontWeight: FontWeight.w400),
-                                        //   ),
-                                        // ),
                                       ],
-                                    ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        : Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 120.h,
+                                ),
+                                Image.asset(
+                                  "assets/images/empty_order.png",
+                                  width: 150.w,
+                                  height: 150.h,
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  "No Reviews Found",
+                                  style: GoogleFonts.dmSans(
+                                    textStyle: TextStyle(
+                                        color: Black1,
+                                        letterSpacing: .5,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w600),
                                   ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  )
-                                ],
-                              );
-                            },
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

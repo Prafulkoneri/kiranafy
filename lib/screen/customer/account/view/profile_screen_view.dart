@@ -19,6 +19,7 @@ import 'package:local_supper_market/screen/customer/help_center/view/help_center
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.dart';
+import 'package:local_supper_market/screen/customer/my_vouchers/view/my_vouchers_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/view/reffer_and_earn_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
@@ -376,6 +377,39 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       ),
                       AccountScreen(
                         text: 'Notifications',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ///////////////////////////////////////////////////////////
+              GestureDetector(
+                onTap: () {
+                  readMain.onNavigation(4, const MyVouchersView(), context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+                  padding: EdgeInsets.only(bottom: 15.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(width: 1, color: grey10),
+                    ),
+                    // color: Colors.white,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/notification.svg',
+                        // width: 14.w,
+                        // height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 18.w,
+                      ),
+                      AccountScreen(
+                        text: 'My Vouchers',
                       ),
                     ],
                   ),
