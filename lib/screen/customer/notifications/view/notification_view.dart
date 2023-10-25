@@ -15,8 +15,8 @@ import 'package:provider/provider.dart';
 
 class CustomerNotificationsScreenView extends StatefulWidget {
   final bool? isRefresh;
-  final String ? route;
-  const CustomerNotificationsScreenView({Key? key, this.isRefresh,this.route})
+  final String? route;
+  const CustomerNotificationsScreenView({Key? key, this.isRefresh, this.route})
       : super(key: key);
 
   @override
@@ -43,163 +43,170 @@ class _CustomerNotificationsScreenViewState
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
-            onBackBtnPressed: () {
-              if(widget.route=="main"){
-                readMain.onNavigation(
-                    0,
-                    HomeScreenView(refreshPage:true),
-                    context);
-              }
-              else {
-                readMain.onNavigation(
-                    4,
-                    ProfileScreenView(
-                      isRefreshed: false,
-                    ),
-                    context);
-              }
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => MainScreenView(
-              //           index: 4, screenName: ProfileScreenView(isRefreshed: false,))),
-              //   (Route<dynamic> route) => false,
-              // );
-              readMain.showBottomNavigationBar();
-            },
-            title: "Notifications",
-            action: InkWell(
-              onTap: () {
-                // await read.cDeleteNotification(
+              onBackBtnPressed: () {
+                if (widget.route == "main") {
+                  readMain.onNavigation(
+                      0, HomeScreenView(refreshPage: true), context);
+                } else {
+                  readMain.onNavigation(
+                      4,
+                      ProfileScreenView(
+                        isRefreshed: false,
+                      ),
+                      context);
+                }
+                // Navigator.pushAndRemoveUntil(
                 //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => MainScreenView(
+                //           index: 4, screenName: ProfileScreenView(isRefreshed: false,))),
+                //   (Route<dynamic> route) => false,
                 // );
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        backgroundColor: Color(0xffFFFFFF),
-                        // shape: ,
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                readMain.showBottomNavigationBar();
+              },
+              title: "Notifications",
+              action: watch.notificationList?.isNotEmpty == true
+                  ? InkWell(
+                      onTap: () {
+                        // await read.cDeleteNotification(
+                        //   context,
+                        // );
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                backgroundColor: Color(0xffFFFFFF),
+                                // shape: ,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
 
-                        // scrollable: true,
-                        child: Container(
-                          height: 205.h,
-                          // width: 400.w,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                  "Do you really want to Delete Notifications ? ",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    textStyle: TextStyle(
-                                        color: Color(0xff006F94),
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 37.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 19.w,
-                                  ),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        await read.cDeleteNotification(
-                                          context,
-                                        );
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            left: 24.w,
-                                            right: 24.w,
-                                            top: 9.w,
-                                            bottom: 9.w),
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
-                                            borderRadius:
-                                                BorderRadius.circular(8)),
+                                // scrollable: true,
+                                child: Container(
+                                  height: 205.h,
+                                  // width: 400.w,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Flexible(
                                         child: Text(
-                                          "Yes",
+                                          "Do you really want to Delete Notifications ? ",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
-                                                color: Colors.white,
-                                                // letterSpacing: .5,
+                                                color: Color(0xff006F94),
                                                 fontSize: 20.sp,
                                                 fontWeight: FontWeight.w700),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            left: 14.w,
-                                            right: 15.w,
-                                            top: 9.w,
-                                            bottom: 9.w),
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffEC7074),
-                                            // border: Border.all(width: 1, color: Black),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              "No",
-                                              textAlign: TextAlign.center,
-                                              style: GoogleFonts.dmSans(
-                                                textStyle: TextStyle(
-                                                    color: Colors.white,
-                                                    // letterSpacing: .5,
-                                                    fontSize: 20.sp,
-                                                    fontWeight:
-                                                        FontWeight.w700),
+                                      SizedBox(
+                                        height: 37.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: 19.w,
+                                          ),
+                                          Expanded(
+                                            child: GestureDetector(
+                                              onTap: () async {
+                                                Navigator.pop(context);
+                                                await read.cDeleteNotification(
+                                                  context,
+                                                );
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 24.w,
+                                                    right: 24.w,
+                                                    top: 9.w,
+                                                    bottom: 9.w),
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xff39C19D),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8)),
+                                                child: Text(
+                                                  "Yes",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.dmSans(
+                                                    textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        // letterSpacing: .5,
+                                                        fontSize: 20.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                          Expanded(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    left: 14.w,
+                                                    right: 15.w,
+                                                    top: 9.w,
+                                                    bottom: 9.w),
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xffEC7074),
+                                                    // border: Border.all(width: 1, color: Black),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "No",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: GoogleFonts.dmSans(
+                                                        textStyle: TextStyle(
+                                                            color: Colors.white,
+                                                            // letterSpacing: .5,
+                                                            fontSize: 20.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10.w,
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    });
-              },
-              child: SvgPicture.asset(
-                'assets/images/delete.svg',
-                width: 20.w,
-                height: 18.h,
-              ),
-            ),
-          ),
+                                ),
+                              );
+                            });
+                      },
+                      child: SvgPicture.asset(
+                        'assets/images/delete.svg',
+                        width: 20.w,
+                        height: 18.h,
+                      ),
+                    )
+                  : Container(
+                      // height: 10,
+                      // width: 10,
+                      // color: Colors.amber,
+                      )),
         ),
         body: watch.isLoading
             ? Loader()

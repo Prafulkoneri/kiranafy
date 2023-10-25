@@ -42,6 +42,7 @@ class FavouritesController extends ChangeNotifier {
       RemoveCustomFvrtProductRepo();
 
   Future<void> initState(context, selectedIndex) async {
+    print(selectedIndex);
     if (selectedIndex == 0) {
       isFavShopPressed = true;
     } else {
@@ -55,7 +56,7 @@ class FavouritesController extends ChangeNotifier {
   }
 
   onFavouriteShopTapped() {
-    isFavShopPressed = false;
+    isFavShopPressed = true;
     notifyListeners();
   }
 
@@ -70,6 +71,7 @@ class FavouritesController extends ChangeNotifier {
   }
 
   Future<void> getAllFavouriteShop(context) async {
+    allProduct.clear();
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -82,6 +84,7 @@ class FavouritesController extends ChangeNotifier {
       if (response.statusCode == 200) {
         favShopList = result.data;
         fav = List<bool>.filled(favShopList?.length ?? 0, true, growable: true);
+
         await getAllFavouriteProduct(context);
         notifyListeners();
       } else {
@@ -149,8 +152,9 @@ class FavouritesController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index] = false;
+        fav[index] = false; ///////////////////////////
         favShopList?.removeAt(index);
+
         print("hello");
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
