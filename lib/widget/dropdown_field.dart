@@ -307,7 +307,7 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
                 ),
               ),
               searchMatchFn: (item,searchValue){
-                return item.child.toString().toLowerCase().contains(searchValue.toLowerCase());
+                return item.value.toString().toLowerCase().contains(searchValue.toLowerCase());
               },
               //     (item, searchValue) {
               //   print(item);

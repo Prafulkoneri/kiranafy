@@ -191,7 +191,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               },
                               items: watch.countryList
                                   ?.map((item) => DropdownMenuItem<String>(
-                                        value: item.id.toString(),
+                                        value: item.countryName.toString(),
                                         child: Text(
                                           item.countryName ?? "",
                                           style: TextStyle(
@@ -207,7 +207,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             width: 13.w,
                           ),
                           Expanded(
-                              child: watch.stateId == 0
+                              child: watch.stateName == ""
                                   ? SearchDropDownField(
                                 textEditingController: watch.stateSearchController,
                                       onChanged: (value) async {
@@ -217,7 +217,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -230,7 +230,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                     )
                                   : SDropDownField(
                                 textEditingController: watch.stateSearchController,
-                                      value: watch.stateId.toString(),
+                                      value: watch.stateName.toString(),
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
                                         await read.getCityList(context);
@@ -238,7 +238,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -254,7 +254,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 18.w,
                       ),
-                      watch.cityId == 0
+                      watch.cityName == ""
                           ? SearchDropDownField(
                         textEditingController: watch.citySearchController,
                               onChanged: (value) async {
@@ -263,7 +263,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               },
                               items: watch.cityList
                                   ?.map((item) => DropdownMenuItem<String>(
-                                        value: item.id.toString(),
+                                        value: item.cityName.toString(),
                                         child: Text(
                                           item.cityName ?? "",
                                           style: TextStyle(
@@ -276,14 +276,14 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             )
                           : SearchDropDownField(
                         textEditingController: watch.citySearchController,
-                              value: watch.cityId.toString(),
+                              value: watch.cityName.toString(),
                               onChanged: (value) async {
                                 await read.onCitySelected(value);
                                 await read.getAreaList(context);
                               },
                               items: watch.cityList
                                   ?.map((item) => DropdownMenuItem<String>(
-                                        value: item.id.toString(),
+                                        value: item.cityName.toString(),
                                         child: Text(
                                           item.cityName ?? "",
                                           style: TextStyle(
@@ -297,7 +297,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       SizedBox(
                         height: 18.w,
                       ),
-                      watch.areaId == 0
+                      watch.areaName == ""
                           ? SearchDropDownField(
                         textEditingController: watch.areaSearchController,
                               onChanged: (value) async {
@@ -307,7 +307,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               items: watch.areaList
                                   ?.map(
                                     (item) => DropdownMenuItem<String>(
-                                      value: item.id.toString(),
+                                      value: item.areaName.toString(),
                                       child: Text(
                                         item.areaName ?? "",
                                         style: TextStyle(
@@ -321,7 +321,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             )
                           : SearchDropDownField(
                         textEditingController: watch.areaSearchController,
-                              value: watch.areaId.toString(),
+                              value: watch.areaName.toString(),
                               onChanged: (value) async {
                                 read.onAreaSelected(value);
                                 read.getPinCodeList(context);
@@ -329,7 +329,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               items: watch.areaList
                                   ?.map(
                                     (item) => DropdownMenuItem<String>(
-                                      value: item.id.toString(),
+                                      value: item.areaName.toString(),
                                       child: Text(
                                         item.areaName ?? "",
                                         style: TextStyle(

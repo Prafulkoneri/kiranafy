@@ -33,6 +33,10 @@ class AddAddressController extends ChangeNotifier {
   int stateId = 0;
   int cityId = 0;
   int areaId = 0;
+  String countryName="";
+  String stateName="";
+  String cityName="";
+  String areaName="";
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
@@ -63,6 +67,10 @@ class AddAddressController extends ChangeNotifier {
     showLoader(true);
     pageRoute = route;
     groupValue = "home";
+    countryName="";
+    stateName="";
+    cityName="";
+    areaName="";
     countryId = 0;
     stateId = 0;
     cityId = 0;
@@ -102,11 +110,17 @@ class AddAddressController extends ChangeNotifier {
   }
 
   void onCountrySelected(value) async {
-    countryId = int.parse(value.toString());
+    print(value);
+    countryName=value;
+    var a=countryList?.where((element) => element.countryName?.contains(value)??false).toList();
+   countryId=a?[0].id??0;
     stateId = 0;
     cityId = 0;
     areaId = 0;
     pincode = "";
+    stateName="";
+    cityName="";
+    areaName="";
     print("nhjvwuriuiwbytiuywi");
     print(countryId);
     notifyListeners();
@@ -143,10 +157,14 @@ class AddAddressController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
-    stateId = int.parse(value.toString());
+    stateName=value;
+    var a=stateList?.where((element) => element.stateName?.contains(value)??false).toList();
+    stateId = a?[0].id??0;
     cityId = 0;
     areaId = 0;
     pincode = "";
+    cityName="";
+    areaName="";
     notifyListeners();
   }
 
@@ -186,9 +204,12 @@ class AddAddressController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
-    cityId = int.parse(value.toString());
+    cityName=value;
+    var a=cityList?.where((element) => element.cityName?.contains(value)??false).toList();
+    cityId = a?[0].id??0;
     areaId = 0;
     pincode = "";
+    areaName="";
     notifyListeners();
   }
 
@@ -197,7 +218,9 @@ class AddAddressController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    areaId = int.parse(value.toString());
+    areaName=value;
+    var a=areaList?.where((element) => element.areaName?.contains(value)??false).toList();
+    areaId = a?[0].id??0;
     pincode = "";
     notifyListeners();
   }
@@ -472,6 +495,10 @@ class AddAddressController extends ChangeNotifier {
         cityList = result.cities;
         areaList = result.areas;
         pincodeList = result.pincodes;
+        countryName=countryList?.where((element) => element.id?.toString().contains(countryId.toString())??false).toList()[0].countryName??"";
+        stateName=stateList?.where((element) => element.id?.toString().contains(stateId.toString())??false).toList()[0].stateName??"";
+        cityName=cityList?.where((element) => element.id?.toString().contains(cityId.toString())??false).toList()[0].cityName??"";
+        areaName=areaList?.where((element) => element.id?.toString().contains(areaId.toString())??false).toList()[0].areaName??"";
         if (pincodeList?.contains(pincode.toString()) ?? false) {
           showPincodeValueField = true;
         } else {

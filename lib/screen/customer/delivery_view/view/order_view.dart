@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,14 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
             context,
             widget.orderId.toString(),
           );
+    });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      final read = Provider.of<CustomerOrderViewController>(
+          context, listen: false);
+      if(message.data["redirect_id"].toString()==widget.orderId.toString()) {
+
+        read.customerOrderView(context, widget.orderId.toString());
+      }
     });
   }
 
@@ -797,8 +806,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
-                                          width: 19.w,
+                                          width:   watch.orderDetails?.orderStatus == "Delivered" ||
+                                              watch.orderDetails?.orderStatus ==
+                                                  "Order Refund" && (watch.orderDetails?.customerCancelledStatus=="NO" && watch.orderDetails?.shopCancelledStatus=="NO")?19.w:0,
                                         ),
+                                        watch.orderDetails?.orderStatus == "Delivered" ||
+                                        watch.orderDetails?.orderStatus ==
+                                            "Order Refund" && (watch.orderDetails?.customerCancelledStatus=="NO" && watch.orderDetails?.shopCancelledStatus=="NO")?
                                         Expanded(
                                           child: InkWell(
                                             onTap: () {
@@ -831,7 +845,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               ),
                                             ),
                                           ),
-                                        ),
+                                        ):Container(),
                                         SizedBox(
                                           width: 10.w,
                                         ),

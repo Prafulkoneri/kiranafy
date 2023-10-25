@@ -368,7 +368,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: watch.countryId == 0
+                            child: watch.countryName == ""
                                 ? SearchDropDownField(
                               textEditingController: watch.countrySearchController,
                                     onChanged: (value) async {
@@ -378,7 +378,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     items: watch.countryList
                                         ?.map(
                                             (item) => DropdownMenuItem<String>(
-                                                  value: item.id.toString(),
+                                                  value: item.countryName.toString(),
                                                   child: Text(
                                                     item.countryName ?? "",
                                                     style: TextStyle(
@@ -392,7 +392,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                   )
                                 : SearchDropDownField(
                                    textEditingController: watch.countrySearchController,
-                                    value: watch.countryId.toString(),
+                                    value: watch.countryName.toString(),
                                     onChanged: (value) async {
                                       read.onCountrySelected(value);
                                       await read.getStateList(context);
@@ -400,7 +400,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     items: watch.countryList
                                         ?.map(
                                             (item) => DropdownMenuItem<String>(
-                                                  value: item.id.toString(),
+                                                  value: item.countryName.toString(),
                                                   child: Text(
                                                     item.countryName ?? "",
                                                     style: TextStyle(
@@ -417,7 +417,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                             width: 30.w,
                           ),
                           Expanded(
-                              child: watch.stateId == 0
+                              child: watch.stateName == ""
                                   ? SearchDropDownField(
                                 textEditingController: watch.stateSearchController,
                                       onChanged: (value) async {
@@ -427,7 +427,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -441,7 +441,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     )
                                   : SearchDropDownField(
                                   textEditingController: watch.stateSearchController,
-                                      value: watch.stateId.toString(),
+                                      value: watch.stateName.toString(),
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
                                         await read.getCityList(context);
@@ -449,7 +449,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -470,7 +470,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                              child: watch.cityId == 0
+                              child: watch.cityName == ""
                                   ? SearchDropDownField(
                                       textEditingController: watch.citySearchController,
                                       onChanged: (value) async {
@@ -480,7 +480,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.cityList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.cityName.toString(),
                                                 child: Text(
                                                   item.cityName ?? "",
                                                   style: TextStyle(
@@ -494,7 +494,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     )
                                   : SearchDropDownField(
                                 textEditingController: watch.citySearchController,
-                                      value: watch.cityId.toString(),
+                                      value: watch.cityName.toString(),
                                       onChanged: (value) async {
                                         await read.onCitySelected(value);
                                         await read.getAreaList(context);
@@ -502,7 +502,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.cityList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.cityName.toString(),
                                                 child: Text(
                                                   item.cityName ?? "",
                                                   style: TextStyle(
@@ -518,7 +518,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                             width: 30.w,
                           ),
                           Expanded(
-                              child: watch.areaId == 0
+                              child: watch.areaName == ""
                                   ? SearchDropDownField(
                                 textEditingController: watch.areaSearchController,
                                       onChanged: (value) async {
@@ -528,7 +528,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.areaList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.areaName.toString(),
                                                 child: Text(
                                                   item.areaName ?? "",
                                                   style: TextStyle(
@@ -542,7 +542,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     )
                                   : SearchDropDownField(
                                 textEditingController: watch.areaSearchController,
-                                      value: watch.areaId.toString(),
+                                      value: watch.areaName.toString(),
                                       onChanged: (value) async {
                                         read.onAreaSelected(value);
                                         read.getPinCodeList(context);
@@ -550,7 +550,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                       items: watch.areaList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.id.toString(),
+                                                value: item.areaName.toString(),
                                                 child: Text(
                                                   item.areaName ?? "",
                                                   style: TextStyle(

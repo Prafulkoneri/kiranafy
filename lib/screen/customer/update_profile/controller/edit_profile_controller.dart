@@ -48,6 +48,10 @@ class UpdateProfileController extends ChangeNotifier {
   int stateId = 0;
   int cityId = 0;
   int areaId = 0;
+  String countryName="";
+  String stateName="";
+  String cityName="";
+  String areaName="";
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
@@ -67,7 +71,10 @@ class UpdateProfileController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
-
+     countryName="";
+     stateName="";
+     cityName="";
+     areaName="";
     await getCountryList(context);
     await getCustomerProfileDetails(context);
   }
@@ -119,6 +126,10 @@ class UpdateProfileController extends ChangeNotifier {
         cityList = result.city;
         areaList = result.area;
         pincodeList = result.pincode;
+        countryName=countryList?.where((element) => element.id?.toString().contains(countryId.toString())??false).toList()[0].countryName??"";
+        stateName=stateList?.where((element) => element.id?.toString().contains(stateId.toString())??false).toList()[0].stateName??"";
+        cityName=cityList?.where((element) => element.id?.toString().contains(cityId.toString())??false).toList()[0].cityName??"";
+        areaName=areaList?.where((element) => element.id?.toString().contains(areaId.toString())??false).toList()[0].areaName??"";
         if (pincodeList?.contains(pincode.toString())==false) {
           pincode = "";
         }
@@ -152,15 +163,22 @@ class UpdateProfileController extends ChangeNotifier {
 
 ////////////Country
   void onCountrySelected(value) async {
-    countryId = int.parse(value.toString());
+    countryName=value;
+    countryId=countryList?.where((element) => element.countryName?.contains(value)??false).toList()[0].id??0;
     print("nhjvwuriuiwbytiuywi");
+    stateName="";
+    cityName="";
+    areaName="";
     print(countryId);
     notifyListeners();
   }
 
   Future<void> onStateSelected(value) async {
-    stateId = int.parse(value.toString());
+    stateName=value;
+    stateId=stateList?.where((element) => element.stateName?.contains(value)??false).toList()[0].id??0;
     cityId = 0;
+    cityName="";
+    areaName="";
     notifyListeners();
   }
 
@@ -196,8 +214,10 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
-    cityId = int.parse(value.toString());
+    cityName=value;
+    cityId=cityList?.where((element) => element.cityName?.contains(value)??false).toList()[0].id??0;
     areaId = 0;
+    areaName="";
     notifyListeners();
   }
 
@@ -206,7 +226,8 @@ class UpdateProfileController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    areaId = int.parse(value.toString());
+    areaName=value;
+    areaId=areaList?.where((element) => element.areaName?.contains(value)??false).toList()[0].id??0;
     pincode = "";
     notifyListeners();
   }

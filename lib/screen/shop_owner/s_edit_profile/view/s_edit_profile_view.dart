@@ -363,10 +363,10 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                  child: SearchDropDownField(
+                                  child: watch.countryName==""?
+                                  SearchDropDownField(
                                 textEditingController:
                                     watch.countrySearchController,
-                                value: watch.selectedCountryId,
                                 onChanged: (value) async {
                                   read.onCountrySelected(value);
                                   read.getStateList(context);
@@ -384,7 +384,28 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                     .toList(),
                                 hint: "Country",
                                 titleHeader: "Country",
-                              )),
+                              ): SearchDropDownField(
+                                    textEditingController:
+                                    watch.countrySearchController,
+                                    value: watch.countryName,
+                                    onChanged: (value) async {
+                                      read.onCountrySelected(value);
+                                      read.getStateList(context);
+                                    },
+                                    items: watch.countryDataList
+                                        ?.map((item) => DropdownMenuItem<String>(
+                                      value: item.countryName.toString(),
+                                      child: Text(
+                                        item.countryName ?? "",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ))
+                                        .toList(),
+                                    hint: "Country",
+                                    titleHeader: "Country",
+                                  )),
                               SizedBox(
                                 width: 30.w,
                               ),
@@ -393,7 +414,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                       ? SearchDropDownField(
                                           textEditingController:
                                               watch.stateSearchController,
-                                          value: watch.selectedStateId,
+                                          value: watch.stateName,
                                           onChanged: (value) async {
                                             read.onStateSelected(value);
                                             read.getCityList(context);
@@ -401,7 +422,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                           items: watch.stateDataList
                                               ?.map((item) =>
                                                   DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
+                                                    value: item.stateName.toString(),
                                                     child: Text(
                                                       item.stateName ?? "",
                                                       style: const TextStyle(
@@ -423,7 +444,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                           items: watch.stateDataList
                                               ?.map((item) =>
                                                   DropdownMenuItem<String>(
-                                                    value: item.id.toString(),
+                                                    value: item.stateName.toString(),
                                                     child: Text(
                                                       item.stateName ?? "",
                                                       style: const TextStyle(
@@ -444,14 +465,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                               ? SearchDropDownField(
                                   textEditingController:
                                       watch.citySearchController,
-                                  value: watch.selectedCityId,
+                                  value: watch.cityName,
                                   onChanged: (value) async {
                                     read.onCitySelected(value);
                                     read.getAreaList(context);
                                   },
                                   items: watch.cityDataList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.id.toString(),
+                                            value: item.cityName.toString(),
                                             child: Text(
                                               item.cityName ?? "",
                                               style: const TextStyle(
@@ -472,7 +493,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                   },
                                   items: watch.cityDataList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.id.toString(),
+                                            value: item.cityName.toString(),
                                             child: Text(
                                               item.cityName ?? "",
                                               style: const TextStyle(
@@ -494,14 +515,14 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                               ? SearchDropDownField(
                                   textEditingController:
                                       watch.areaSearchController,
-                                  value: watch.selectedAreaId,
+                                  value: watch.areaName,
                                   onChanged: (value) async {
                                     read.onAreaSelected(value);
                                     read.getPinCodeList(context);
                                   },
                                   items: watch.areaDataList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.id.toString(),
+                                            value: item.areaName.toString(),
                                             child: Text(
                                               item.areaName ?? "",
                                               style: const TextStyle(
@@ -522,7 +543,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                   },
                                   items: watch.areaDataList
                                       ?.map((item) => DropdownMenuItem<String>(
-                                            value: item.id.toString(),
+                                            value: item.areaName.toString(),
                                             child: Text(
                                               item.areaName ?? "",
                                               style: const TextStyle(

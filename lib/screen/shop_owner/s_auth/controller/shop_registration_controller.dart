@@ -39,12 +39,21 @@ class ShopRegistrationController extends ChangeNotifier {
   int cityId = 0;
   int areaId = 0;
   int shopId = 0;
+  String countryName="";
+  String stateName="";
+  String cityName="";
+  String areaName="";
+
   String countryCode = "+91";
   String selectedCountryCode = "";
   String successToken = "";
   String pincode = "";
 
-  Future<void> initState(context) async {
+  Future<void> initState(context) async{
+   countryName="";
+   stateName="";
+   cityName="";
+   areaName="";
     SharedPreferences pref = await SharedPreferences.getInstance();
     mobController.text = pref.getString("mobileNo").toString();
     selectedCountryCode = pref.getString("countryCode").toString();
@@ -90,11 +99,16 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onCountrySelected(value) async {
+    countryName=value;
+    countryId=countryList?.where((element) => element.countryName?.contains(value)??false).toList()[0].id??0;
     stateId=0;
     cityId=0;
     areaId=0;
+     stateName="";
+     cityName="";
+     areaName="";
     pincode="";
-    countryId = int.parse(value.toString());
+
     notifyListeners();
   }
 
@@ -128,10 +142,13 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
+    stateName=value;
+    stateId=stateList?.where((element) => element.stateName?.contains(value)??false).toList()[0].id??0;
     cityId=0;
     areaId=0;
+    cityName="";
+    areaName="";
     pincode="";
-    stateId = int.parse(value.toString());
     notifyListeners();
   }
 
@@ -170,7 +187,10 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
+    cityName=value;
+    cityId=cityList?.where((element) => element.cityName?.contains(value)??false).toList()[0].id??0;
     areaId=0;
+    areaName="";
     pincode="";
 
     cityId = int.parse(value.toString());
@@ -182,8 +202,8 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    pincode="";
-    areaId = int.parse(value.toString());
+    areaName=value;
+    areaId=areaList?.where((element) => element.areaName?.contains(value)??false).toList()[0].id??0;
     notifyListeners();
   }
 

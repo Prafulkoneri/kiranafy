@@ -43,6 +43,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   String selectedStateId = "";
   String selectedCityId = "";
   String selectedAreaId = "";
+  String countryName="";
+  String stateName="";
+  String cityName="";
+  String areaName="";
   List stateList=[];
   int selectedPincode = 0;
   List<CountryData>? countryDataList;
@@ -101,6 +105,10 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   /////start edit Profile/////////////////
 
   Future<void> getShopEditProfileDetails(context) async {
+     countryName="";
+     stateName="";
+     cityName="";
+     areaName="";
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -256,6 +264,11 @@ class ShopEditProfileDetailController extends ChangeNotifier {
 
           print("dadasdsadsa");
         }
+        countryName=countryDataList?.where((element) => element.id?.toString().contains(selectedCountryId.toString())??false).toList()[0].countryName??"";
+        stateName=stateDataList?.where((element) => element.id?.toString().contains(selectedStateId.toString())??false).toList()[0].stateName??"";
+        cityName=cityDataList?.where((element) => element.id?.toString().contains(selectedCityId.toString())??false).toList()[0].cityName??"";
+        areaName=areaDataList?.where((element) => element.id?.toString().contains(selectedAreaId.toString())??false).toList()[0].areaName??"";
+
         showLoader(false);
         notifyListeners();
       }
@@ -390,12 +403,14 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   void onCountrySelected(value) async {
-    selectedCountryId = value.toString();
+    countryName=value;
+    selectedCountryId=countryDataList?.where((element) => element.countryName?.contains(value)??false).toList()[0].id.toString()??"";
     notifyListeners();
   }
 
   Future<void> onStateSelected(value) async {
-    selectedStateId = value.toString();
+    stateName=value;
+    selectedStateId=stateDataList?.where((element) => element.stateName?.contains(value)??false).toList()[0].id.toString()??"";
     notifyListeners();
   }
 
@@ -443,7 +458,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
-    selectedCityId = value.toString();
+    cityName=value;
+    selectedCityId=cityDataList?.where((element) => element.cityName?.contains(value)??false).toList()[0].id.toString()??"";
     notifyListeners();
   }
 
@@ -452,7 +468,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    selectedAreaId = value.toString();
+    areaName=value;
+    selectedAreaId=areaDataList?.where((element) => element.areaName?.contains(value)??false).toList()[0].id.toString()??"";
     notifyListeners();
   }
 
