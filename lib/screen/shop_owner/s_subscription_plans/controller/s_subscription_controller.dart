@@ -46,8 +46,9 @@ class SSubscriptionController extends ChangeNotifier {
   String? amount;
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
-    paymentHistory(context);
+    applyReferCode(context);
     transactionIdController.clear();
+    applyreferalCodeController.clear();
     // radioGrpValue = "1";
     paymentMode = "0";
     selectedServicesId = "0";
@@ -269,8 +270,8 @@ class SSubscriptionController extends ChangeNotifier {
 
   ApplyReferalCodeReqModel get applyReferalCodeReqModel =>
       ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
-  Future<void> paymentHistory(context) async {
-    showLoader(true);
+  Future<void> applyReferCode(context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     referlcodeRepo
         .referCodeApply(
@@ -280,9 +281,15 @@ class SSubscriptionController extends ChangeNotifier {
       final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
 
       if (response.statusCode == 200) {
-        amount = result.amount;
-        showLoader(false);
-        notifyListeners();
+        if (result.status == 200) {
+          amount = result.amount;
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          LoadingOverlay.of(context).hide();
+        }
       } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
       } else {

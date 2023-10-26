@@ -569,6 +569,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                             color: SplashText,
 
                                             onTap: () {
+                                              read.applyReferCode(context);
                                               // read.removeCoupon(context, true);
                                             },
                                             child: Text(

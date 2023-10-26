@@ -99,6 +99,7 @@ dependencies:
   pull_to_refresh_flutter3: ^2.0.1
   flutter_lints: ^2.0.0
   dropdown_search: ^5.0.6
+  flutter_animated_button:
  
 dev_dependencies:
   flutter_test:
