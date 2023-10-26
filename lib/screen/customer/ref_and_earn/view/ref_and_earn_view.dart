@@ -24,66 +24,12 @@ class RefferAndEarnView extends StatefulWidget {
 }
 
 class _RefferAndEarnViewState extends State<RefferAndEarnView> {
-  // _launchInstagram() async {
-  //   const nativeUrl =
-  //   // "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US";
-  //   "instagram://user?username";
-  //   const webUrl = "https://www.instagram.com";
-  //   if (await canLaunch(nativeUrl)) {
-  //     await launch(nativeUrl);
-  //   } else if (await canLaunch(webUrl)) {
-  //     await launch(webUrl);
-  //   } else {
-  //     print("can't open Instagram");
-  //   }
-  // }
-  // final bool TargetPlatform = false;
-  // Future<void> launchUrl(String url) async {
-  //   final _canLaunch = await canLaunch(url);
-  //   if (kIsWeb) {
-  //     if (_canLaunch) {
-  //       await launch(url);
-  //     } else {
-  //       throw "Could not launch $url";
-  //     }
-  //     return;
-  //   }
-  //   if (Platform.isAndroid) {
-  //     if (url.startsWith("https://www.facebook.com/")) {
-  //       final url2 = "fb://facewebmodal/f?href=$url";
-  //       final intent2 = AndroidIntent(action: "action_view", data: url2);
-  //       final canWork = await intent2.canResolveActivity();
-  //       if (canWork == true) return intent2.launch();
-  //     }
-  //     final intent = AndroidIntent(action: "action_view", data: url);
-  //     return intent.launch();
-  //   } else {
-  //     if (_canLaunch) {
-  //       await launch(url, forceSafariVC: false);
-  //     } else {
-  //       throw "Could not launch $url";
-  //     }
-  //   }
-  // }
-  // final url = Uri.parse("https://facebook.com/profile.php?id=your_id");
-  // void _launchURL(String url) async {
-  //   if (await canLaunchUrl(Uri.parse(url))) {
-  //     await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-  //   } else {
-  //     throw 'Could not launch $url';
-  //   }
-  // }
-
-  // final url = Uri.parse("https://www.instagram.com/direct/new/");
-  // Future<void> _launchUrl() async {
-  //   if (!await launchUrl(url)) {
-  //     throw Exception('Could not launch $url');
-  //   }
-  // }
-
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<RefAndEarnController>().initState(context);
+      context.read<RefAndEarnController>().initState(
+            context,
+          );
     });
   }
 
