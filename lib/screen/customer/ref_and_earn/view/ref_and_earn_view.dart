@@ -1,40 +1,38 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
-
-
-class RefferAndEarnView extends StatefulWidget {
-  const RefferAndEarnView({super.key});
+class RefAndEarnView extends StatefulWidget {
+  const RefAndEarnView({Key? key}) : super(key: key);
 
   @override
-  State<RefferAndEarnView> createState() => _RefferAndEarnViewState();
+  _RefAndEarnViewState createState() => _RefAndEarnViewState();
 }
 
-class _RefferAndEarnViewState extends State<RefferAndEarnView> {
+class _RefAndEarnViewState extends State<RefAndEarnView> {
 
-
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<RefAndEarnController>()
-          .initState(context);
+      context.read<ProfileController>().getReferAndEarnDetails(context);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final readMain = context.read<MainScreenController>();
-    final read = context.read<RefAndEarnController>();
-    final watch= context.read<RefAndEarnController>();
-    return Scaffold(
+    final read=context.read<ProfileController>();
+    final watch=context.read<ProfileController>();
+    final readMain=context.read<MainScreenController>();
+    return  Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
@@ -42,7 +40,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
             // read.onBackPressed();
             readMain.onNavigation(
                 4,
-                const ProfileScreenView(
+                ProfileScreenView(
                   isRefreshed: false,
                 ),
                 context);
@@ -50,7 +48,8 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
           title: "Refer & Earn",
         ),
       ),
-      body: watch.isLoading?Loader():WillPopScope(
+      body:
+      WillPopScope(
         onWillPop: () async {
           readMain.onNavigation(
               4,
@@ -367,3 +366,4 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
     );
   }
 }
+

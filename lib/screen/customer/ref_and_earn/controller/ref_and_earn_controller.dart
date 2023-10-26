@@ -3,22 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/model/ref_and_earn_model.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/repository/ref_and_earn_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/s_buy_subscription_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RefAndEarnController extends ChangeNotifier {
   RefAndEarnRepo  refAndEarnRepo= RefAndEarnRepo();
-  bool isLoading=false;
+  bool isLoading=true;
   ReferAndEarnCouponDetails ? referAndEarnCouponDetails;
 
   Future<void> initState(context) async {
@@ -46,9 +36,7 @@ class RefAndEarnController extends ChangeNotifier {
         showLoader(false);
         notifyListeners();
       }
-      else if(response.statusCode == 401){
-        Utils().logoutUser(context);
-      }
+
       else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);

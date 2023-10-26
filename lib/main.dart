@@ -256,6 +256,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
         ChangeNotifierProvider(
             create: (_) => SAllRecommandedProductsController()),
+        ChangeNotifierProvider(create: (_) => RefAndEarnController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),
@@ -299,7 +300,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
         ChangeNotifierProvider(create: (_) => SShopReviewListController()),
-        ChangeNotifierProvider(create: (_) => RefAndEarnController()),
+
         // ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],
       child: MyApp(),

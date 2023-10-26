@@ -1,13 +1,16 @@
 import 'package:fdottedline_nullsafety/fdottedline__nullsafety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
+import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/my_vouchers/view/my_vouchers_detail_view.dart';
+import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +23,17 @@ class MyVouchersView extends StatefulWidget {
 
 class _MyVouchersViewState extends State<MyVouchersView> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileController>().initState(context,true);
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    final readMain = context.read<MainScreenController>();
+    final read=context.read<RefAndEarnController>();
+    final watch=context.read<ProfileController>();
+    final readMain=context.read<MainScreenController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
@@ -52,6 +64,11 @@ class _MyVouchersViewState extends State<MyVouchersView> {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
+              Text(
+              watch.referAndEarnCouponDetails?.discountAmount??"null"),
+
+
+
               ListView.builder(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
