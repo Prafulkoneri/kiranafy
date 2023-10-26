@@ -290,6 +290,6 @@ class Endpoint {
       "${baseUrl}get-area-list-for-shop-filter";
   static const String getFullFillCravingList =
       "${baseUrl}lsm-customer-get-fullfill-cravings-product-list";
-  static const String notificationSeenRepo =
-      "${baseUrl}lsm-notification-status";
+  static const String notificationSeenRepo = "${baseUrl}lsm-notification-status";
+  static const String referAndEarn = "${baseUrl}lsm-display-referral-code";
 }

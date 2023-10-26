@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class RefferAndEarnView extends StatefulWidget {
   const RefferAndEarnView({super.key});
@@ -16,34 +19,27 @@ class RefferAndEarnView extends StatefulWidget {
 }
 
 class _RefferAndEarnViewState extends State<RefferAndEarnView> {
-  // _launchInstagram() async {
-  //   const nativeUrl =
-  //   // "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US";
-  //   "instagram://user?username";
-  //   const webUrl = "https://www.instagram.com";
-  //   if (await canLaunch(nativeUrl)) {
-  //     await launch(nativeUrl);
-  //   } else if (await canLaunch(webUrl)) {
-  //     await launch(webUrl);
-  //   } else {
-  //     print("can't open Instagram");
-  //   }
-  // }
-  final url = Uri.parse("https://www.instagram.com/direct/new/");
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
+
+
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<RefAndEarnController>()
+          .initState(context);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final readMain = context.read<MainScreenController>();
+    final read = context.read<RefAndEarnController>();
+    final watch= context.read<RefAndEarnController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
+            // read.onBackPressed();
             readMain.onNavigation(
                 4,
                 const ProfileScreenView(
@@ -54,10 +50,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
           title: "Refer & Earn",
         ),
       ),
-      body:
-          //  watch.isLoading
-          //     ? Loader():
-          WillPopScope(
+      body: watch.isLoading?Loader():WillPopScope(
         onWillPop: () async {
           readMain.onNavigation(
               4,
@@ -107,7 +100,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: 'Rs. 500 ',
+                                  text: 'Rs. ${watch.referAndEarnCouponDetails?.discountAmount} ',
                                   style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
                                         color: Color(0xff39C19D),
@@ -247,7 +240,7 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _launchUrl();
+
                           },
                           child: Container(
                               padding: EdgeInsets.only(
