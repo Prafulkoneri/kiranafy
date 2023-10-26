@@ -49,7 +49,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().getReferAndEarnDetails(context);
+      context.read<ProfileController>().initState(context,widget.isRefreshed);
     });
   }
 
@@ -58,7 +58,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
     final read = context.read<ProfileController>();
     final watch = context.watch<ProfileController>();
     final readMain = context.read<MainScreenController>();
-    final readRefAndEarn = context.read<RefAndEarnController>();
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
@@ -423,7 +423,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////////////////////////////////////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,RefAndEarnView(), context);
+                  // readMain.onNavigation(4,RefAndEarnView(), context);
+                read.getReferAndEarnDetails(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

@@ -22,15 +22,16 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().getReferAndEarnDetails(context);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // Provider.of<ReferAndEarnController>(context, listen: false).initState(context);
+      // if you use true then everytime notifyListeners fires it will run this code, which is undesirable
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final read=context.read<ProfileController>();
-    final watch=context.read<ProfileController>();
+    final read=Provider.of<ProfileController>(context, listen: false);
+    final watch=Provider.of<ProfileController>(context, listen: false);
     final readMain=context.read<MainScreenController>();
     return  Scaffold(
       appBar: PreferredSize(
@@ -48,8 +49,7 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
           title: "Refer & Earn",
         ),
       ),
-      body:
-      WillPopScope(
+      body: WillPopScope(
         onWillPop: () async {
           readMain.onNavigation(
               4,
@@ -159,8 +159,9 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                 height: 23.h,
               ),
               Container(
+                margin: EdgeInsets.only(right: 14.w,left: 14.w),
                 padding: EdgeInsets.only(
-                    left: 62.w, top: 14, bottom: 13.w, right: 61.13.w),
+                    left: 10.w, top: 14.w, bottom: 13.w, right: 10.w),
                 decoration: BoxDecoration(
                     color: Color(0xffE2FFF7),
                     borderRadius: BorderRadius.circular(8),
@@ -179,7 +180,7 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                     /*defining default style is optional */
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'AGRO557',
+                        text: '${watch.referAndEarnCouponDetails?.customerReferralCode}',
                         style: GoogleFonts.dmSans(
                           textStyle: const TextStyle(
                               color: Color(0xff39C19D),
@@ -197,7 +198,7 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
               Padding(
                 padding: EdgeInsets.only(left: 24.w, right: 17.w),
                 child: Text(
-                  "Onboard kirana shops with your referral code to get discount voucher of Rs. 1000 which can be applied on any shop order. You will receive the voucher code under My Vouchers section when the referred shop gets approved and listed on our platform. ",
+                  "Onboard kirana shops with your referral code to get discount voucher of Rs. ${watch.referAndEarnCouponDetails?.discountAmount} which can be applied on any shop order. You will receive the voucher code under My Vouchers section when the referred shop gets approved and listed on our platform. ",
                   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                   style: GoogleFonts.dmSans(
                     textStyle: TextStyle(

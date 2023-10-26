@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/update_profile/view/update_p
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/sign_out_model.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +46,6 @@ class ProfileController extends ChangeNotifier {
   Future<void> initState(context, isRefreshed) async {
     if (isRefreshed) {
       await getCustomerProfileDetails(context);
-      // await getReferAndEarnDetails(context);
     }
   }
 
@@ -60,7 +60,7 @@ class ProfileController extends ChangeNotifier {
         context, MaterialPageRoute(builder: (context) => MyOrderView()));
   }
   Future<void> getReferAndEarnDetails(context) async {
-    showRLoader(true);
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     refAndEarnRepo
         .getRefAndEarnData(pref.getString("successToken"))
@@ -72,6 +72,9 @@ class ProfileController extends ChangeNotifier {
       log(response.body);
       if (response.statusCode == 200) {
         referAndEarnCouponDetails=result.couponDetails;
+        LoadingOverlay.of(context).hide();
+        final read = Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(4,RefAndEarnView(),context);
         showRLoader(false);
         notifyListeners();
 

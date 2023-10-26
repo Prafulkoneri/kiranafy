@@ -255,7 +255,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SCustomerListController()),
         ChangeNotifierProvider(
             create: (_) => SAllRecommandedProductsController()),
-        ChangeNotifierProvider(create: (_) => RefAndEarnController()),
+        ChangeNotifierProvider(create: (_) => ReferAndEarnController()),
         ChangeNotifierProvider(
             create: (_) => ShopEditProfileDetailController()),
         ChangeNotifierProvider(create: (_) => SCustomerDetailController()),

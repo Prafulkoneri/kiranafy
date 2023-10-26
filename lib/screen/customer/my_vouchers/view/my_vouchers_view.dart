@@ -31,7 +31,7 @@ class _MyVouchersViewState extends State<MyVouchersView> {
   }
   @override
   Widget build(BuildContext context) {
-    final read=context.read<RefAndEarnController>();
+    // final read=context.read<RefAndEarnController>();
     final watch=context.read<ProfileController>();
     final readMain=context.read<MainScreenController>();
     return Scaffold(
