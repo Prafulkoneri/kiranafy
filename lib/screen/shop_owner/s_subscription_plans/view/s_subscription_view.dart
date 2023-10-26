@@ -19,17 +19,16 @@ import 'package:provider/provider.dart';
 
 class SSubscriptionScreenView extends StatefulWidget {
   final bool? loggedIn;
-  final String ? routeName;
+  final String? routeName;
 
-  const SSubscriptionScreenView({Key? key, required this.loggedIn,required this.routeName})
+  const SSubscriptionScreenView(
+      {Key? key, required this.loggedIn, required this.routeName})
       : super(key: key);
 
   @override
   _SSubscriptionScreenViewState createState() =>
       _SSubscriptionScreenViewState();
 }
-
-
 
 class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
   void initState() {
@@ -52,20 +51,19 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
           // isBackButtonEnabled: false,
           onBackBtnPressed: () {
             print(widget.routeName);
-            if(widget.loggedIn==true){
-              if(widget.routeName=="accounts"){
-                readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
-              }
-              else{
-                readMainScreen.onNavigation(0,SMySubscriptionView(screenName: "dashboard"), context);
+            if (widget.loggedIn == true) {
+              if (widget.routeName == "accounts") {
+                readMainScreen.onNavigation(
+                    4, SMySubscriptionView(screenName: "accounts"), context);
+              } else {
+                readMainScreen.onNavigation(
+                    0, SMySubscriptionView(screenName: "dashboard"), context);
               }
 
               readMainScreen.showBottomNavigationBar();
-            }
-            else{
+            } else {
               Navigator.pop(context);
             }
-
           },
           title: "Subscription Plans",
         ),
@@ -75,17 +73,17 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
           : WillPopScope(
               onWillPop: () async {
                 print(widget.routeName);
-                if(widget.loggedIn==true){
-                  if(widget.routeName=="accounts"){
-                    readMainScreen.onNavigation(4,SMySubscriptionView(screenName: "accounts"), context);
-                  }
-                  else{
-                    readMainScreen.onNavigation(0,SMySubscriptionView(screenName: "dashboard"), context);
+                if (widget.loggedIn == true) {
+                  if (widget.routeName == "accounts") {
+                    readMainScreen.onNavigation(4,
+                        SMySubscriptionView(screenName: "accounts"), context);
+                  } else {
+                    readMainScreen.onNavigation(0,
+                        SMySubscriptionView(screenName: "dashboard"), context);
                   }
 
                   readMainScreen.showBottomNavigationBar();
-                }
-                else{
+                } else {
                   Navigator.pop(context);
                 }
                 return false;
@@ -496,6 +494,105 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(left: 19.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Available Referal Code",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            // height: 1.5,
+                                            color: black,
+                                            letterSpacing: .05,
+                                            // overflow: TextOverflow.ellipsis,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Container(
+                                padding:
+                                    EdgeInsets.only(left: 19.w, right: 19.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Enter Referal Code",
+                                      style: GoogleFonts.dmSans(
+                                        textStyle: TextStyle(
+                                            color: Black1,
+                                            // letterSpacing: .5,
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 11.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: 200.w,
+                                          height: 34.w,
+                                          child: TextField(
+                                            controller: watch
+                                                .applyreferalCodeController,
+                                            decoration: InputDecoration(
+                                              fillColor: grey4,
+                                              filled: true,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        // SizedBox(
+                                        //   width: 30.w,
+                                        // ),
+                                        SizedBox(
+                                          height: 32.h,
+                                          width: 91.w,
+                                          child: PrimaryButton(
+                                            color: SplashText,
+
+                                            onTap: () {
+                                              // read.removeCoupon(context, true);
+                                            },
+                                            child: Text(
+                                              "Apply",
+                                              style: GoogleFonts.dmSans(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    // letterSpacing: .5,
+                                                    fontSize: 15.sp,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+
+                                            //
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 11.h,
                               ),
                               Padding(
                                 padding: EdgeInsets.only(

@@ -292,4 +292,6 @@ class Endpoint {
       "${baseUrl}lsm-customer-get-fullfill-cravings-product-list";
   static const String notificationSeenRepo =
       "${baseUrl}lsm-notification-status";
+  static const String referAndEarn = "${baseUrl}lsm-display-referral-code";
+  static const String applyReferCode = "${baseUrl}lsm-apply-referral-code";
 }

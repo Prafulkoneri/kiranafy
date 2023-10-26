@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/apply_referal_code_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_buy_subscription_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/model/s_subscription_plans_model.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/apply_referal_code_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/s_buy_subscription_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/repository/subscription_plan_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -16,7 +18,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SSubscriptionController extends ChangeNotifier {
   SubscriptionPlansRepo subscriptionPlansRepo = SubscriptionPlansRepo();
+  ReferlCodeRepo referlcodeRepo = ReferlCodeRepo();
   TextEditingController transactionIdController = TextEditingController();
+  TextEditingController applyreferalCodeController = TextEditingController();
   ShopBuySubscriptionsRepo shopBuySubscriptionsRepo =
       ShopBuySubscriptionsRepo();
   List<SubscriptionData>? subscriptionData;
@@ -39,9 +43,10 @@ class SSubscriptionController extends ChangeNotifier {
   String planAmount = "";
   bool isSelectedPaymentUpi = false;
   bool isQrCodeSeleted = false;
-
+  String? amount;
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
+    paymentHistory(context);
     transactionIdController.clear();
     // radioGrpValue = "1";
     paymentMode = "0";
@@ -121,11 +126,9 @@ class SSubscriptionController extends ChangeNotifier {
         print("sfsfsdfsfsdf");
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -182,10 +185,11 @@ class SSubscriptionController extends ChangeNotifier {
           BuySubscriptionResponseModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        final read=Provider.of<SMainScreenController>(context,listen: false);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
         if (loggedIn) {
-          read.onNavigation(4, SMySubscriptionView(screenName: "accounts"), context);
+          read.onNavigation(
+              4, SMySubscriptionView(screenName: "accounts"), context);
           read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -261,5 +265,40 @@ class SSubscriptionController extends ChangeNotifier {
       isQrCodeSeleted = false;
     }
     notifyListeners();
+  }
+
+  ApplyReferalCodeReqModel get applyReferalCodeReqModel =>
+      ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
+  Future<void> paymentHistory(context) async {
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    referlcodeRepo
+        .referCodeApply(
+            applyReferalCodeReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+        amount = result.amount;
+        showLoader(false);
+        notifyListeners();
+      } else if (response.statusCode == 401) {
+        Utils().logoutUser(context);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
   }
 }
