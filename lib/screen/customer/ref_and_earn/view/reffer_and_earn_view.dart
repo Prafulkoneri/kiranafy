@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +11,10 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RefferAndEarnView extends StatefulWidget {
-  const RefferAndEarnView({super.key});
+  // final bool? canWork;
+  const RefferAndEarnView({
+    super.key,
+  });
 
   @override
   State<RefferAndEarnView> createState() => _RefferAndEarnViewState();
@@ -29,10 +34,70 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
   //     print("can't open Instagram");
   //   }
   // }
-  final url = Uri.parse("https://www.instagram.com/direct/new/");
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
+  // final bool TargetPlatform = false;
+  // Future<void> launchUrl(String url) async {
+  //   final _canLaunch = await canLaunch(url);
+  //   if (kIsWeb) {
+  //     if (_canLaunch) {
+  //       await launch(url);
+  //     } else {
+  //       throw "Could not launch $url";
+  //     }
+  //     return;
+  //   }
+  //   if (Platform.isAndroid) {
+  //     if (url.startsWith("https://www.facebook.com/")) {
+  //       final url2 = "fb://facewebmodal/f?href=$url";
+  //       final intent2 = AndroidIntent(action: "action_view", data: url2);
+  //       final canWork = await intent2.canResolveActivity();
+  //       if (canWork == true) return intent2.launch();
+  //     }
+  //     final intent = AndroidIntent(action: "action_view", data: url);
+  //     return intent.launch();
+  //   } else {
+  //     if (_canLaunch) {
+  //       await launch(url, forceSafariVC: false);
+  //     } else {
+  //       throw "Could not launch $url";
+  //     }
+  //   }
+  // }
+  // final url = Uri.parse("https://facebook.com/profile.php?id=your_id");
+  // void _launchURL(String url) async {
+  //   if (await canLaunchUrl(Uri.parse(url))) {
+  //     await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
+  _launchWhatsapp() async {
+    //  const url = "https://wa.me/?text=Hey buddy, try this super cool new app!";
+    const url =
+        "https://wa.me/?text=Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  // final url = Uri.parse("https://www.instagram.com/direct/new/");
+  // Future<void> _launchUrl() async {
+  //   if (!await launchUrl(url)) {
+  //     throw Exception('Could not launch $url');
+  //   }
+  // }
+  var url = 'https://www.instagram.com/<chats>/';
+  _launchInstagram() async {
+    const nativeUrl = "instagram://user?chats";
+    const webUrl = "https://www.instagram.com/";
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        universalLinksOnly: true,
+      );
+    } else {
+      throw 'There was a problem to open the url: $url';
     }
   }
 
@@ -247,7 +312,9 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _launchUrl();
+                            _launchInstagram();
+                            // _launchURL(
+                            //     "https://developers.facebook.com/docs/messenger-platform/plugin-reference/send-to-messenger");
                           },
                           child: Container(
                               padding: EdgeInsets.only(
@@ -307,16 +374,21 @@ class _RefferAndEarnViewState extends State<RefferAndEarnView> {
                     ),
                     Column(
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 6.w, right: 6.w, top: 6.w, bottom: 6.w),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.white),
-                            child: Image.asset(
-                              "assets/images/whatsapp.png",
-                              width: 28.w,
-                              height: 29.w,
-                            )),
+                        GestureDetector(
+                          onTap: () {
+                            _launchWhatsapp();
+                          },
+                          child: Container(
+                              padding: EdgeInsets.only(
+                                  left: 6.w, right: 6.w, top: 6.w, bottom: 6.w),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: Colors.white),
+                              child: Image.asset(
+                                "assets/images/whatsapp.png",
+                                width: 28.w,
+                                height: 29.w,
+                              )),
+                        ),
                         SizedBox(
                           height: 9.w,
                         ),
