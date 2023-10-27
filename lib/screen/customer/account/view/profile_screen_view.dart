@@ -22,7 +22,8 @@ import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.
 import 'package:local_supper_market/screen/customer/my_vouchers/view/my_vouchers_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
-import 'package:local_supper_market/screen/customer/ref_and_earn/view/ref_and_earn_view.dart';
+
+import 'package:local_supper_market/screen/customer/ref_and_earn/view/refer_and_earn_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -423,8 +424,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////////////////////////////////////////////
               GestureDetector(
                 onTap: () {
-                  // readMain.onNavigation(4,RefAndEarnView(), context);
-                read.getReferAndEarnDetails(context);
+                  readMain.onNavigation(4,ReferAndEarnView(isRefreshed: true), context);
+                // read.getReferAndEarnDetails(context);
+                // read.onBackPressed();
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),

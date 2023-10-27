@@ -1,41 +1,46 @@
 import 'dart:io';
-import 'package:flutter_animated_button/flutter_animated_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/account/controller/profile_controller.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
-import 'package:provider/provider.dart';
+import 'package:local_supper_market/widget/loader.dart';
 import 'package:share_plus/share_plus.dart';
-class RefAndEarnView extends StatefulWidget {
-  const RefAndEarnView({Key? key}) : super(key: key);
+import 'package:provider/provider.dart';
+
+class ReferAndEarnView extends StatefulWidget {
+  final bool? isRefreshed;
+  const ReferAndEarnView({super.key, required this.isRefreshed});
 
   @override
-  _RefAndEarnViewState createState() => _RefAndEarnViewState();
+  State<ReferAndEarnView> createState() => _ReferAndEarnViewState();
 }
 
-class _RefAndEarnViewState extends State<RefAndEarnView> {
-
+class _ReferAndEarnViewState extends State<ReferAndEarnView> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      context.read<ReferAndEarnController>().initState(context);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final read=Provider.of<ProfileController>(context, listen: false);
-    final watch=Provider.of<ProfileController>(context, listen: false);
-    final readMain=context.read<MainScreenController>();
-    return  Scaffold(
+    final read = context.read<ReferAndEarnController>();
+    final watch = context.watch<ReferAndEarnController>();
+    final readMain = context.read<MainScreenController>();
+
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
+
             // read.onBackPressed();
             readMain.onNavigation(
                 4,
@@ -47,7 +52,8 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
           title: "Refer & Earn",
         ),
       ),
-      body: WillPopScope(
+      body:watch.isLoading?Loader():
+      WillPopScope(
         onWillPop: () async {
           readMain.onNavigation(
               4,
@@ -64,6 +70,9 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
             children: [
               SizedBox(
                 height: 21.w,
+              ),
+              Container(
+                // child: Text(watch.rLoader?"aaa":"bbb"),
               ),
               Container(
                 // padding: EdgeInsets.only(left: 8.w, right: 3.w),
@@ -233,10 +242,10 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                   onPress: () {
                     if (Platform.isAndroid) {
                       Share.share(
-                          'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                          'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount. https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
                     } else {
                       Share.share(
-                          'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://apps.apple.com/us/app/local-supermart/id6451146831');
+                          'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount https://apps.apple.com/us/app/local-supermart/id6451146831');
                     }
                   },
                 ),
@@ -251,4 +260,3 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
     );
   }
 }
-
