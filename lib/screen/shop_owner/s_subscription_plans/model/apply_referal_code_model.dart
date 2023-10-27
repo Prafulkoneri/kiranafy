@@ -15,17 +15,17 @@ class ApplyReferalCodeReqModel {
 ////////////////////
 class ApplyRefResmodel {
   int? status;
-  String? amount;
+  String? discountPercentage;
   String? message;
 
   ApplyRefResmodel({
     required this.status,
-    required this.amount,
+    required this.discountPercentage,
     required this.message,
   });
   ApplyRefResmodel.fromJson(Map<String, dynamic> json) {
     message = json["message"];
-    amount = json["amount"];
+    discountPercentage = json["discount_percentage"];
     status = json["status"];
   }
 }

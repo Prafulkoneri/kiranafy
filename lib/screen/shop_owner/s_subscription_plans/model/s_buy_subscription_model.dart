@@ -3,11 +3,17 @@ class BuySubscriptionRequestModel {
   String? serviceId;
   String? paymentMode;
   String? transactionId;
+  String ? paidAmount;
+  String ? referalCode;
+  String ? discountPercentage;
 
   BuySubscriptionRequestModel(
       {this.subscriptionId,
       this.serviceId,
       this.paymentMode,
+        this.paidAmount,
+        this.referalCode,
+        this.discountPercentage,
       this.transactionId});
 
   Map<String, dynamic> toJson() {
@@ -16,6 +22,9 @@ class BuySubscriptionRequestModel {
     data["service_id"] = serviceId;
     data["payment_mode"] = paymentMode;
     data["transaction_id"] = transactionId;
+    data["paid_amount"] = paidAmount;
+    data["referral_code"] = referalCode;
+    data["discount_percentage"] = discountPercentage;
     return data;
   }
 }

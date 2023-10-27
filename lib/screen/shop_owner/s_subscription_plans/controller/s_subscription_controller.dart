@@ -43,10 +43,14 @@ class SSubscriptionController extends ChangeNotifier {
   String planAmount = "";
   bool isSelectedPaymentUpi = false;
   bool isQrCodeSeleted = false;
-  String? amount;
+  double  discountPercentage=0;
+  double discountAmount=0;
+  bool isReferalCodeApplied=false;
+
+
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
-    applyReferCode(context);
+    // applyReferCode(context);
     transactionIdController.clear();
     applyreferalCodeController.clear();
     // radioGrpValue = "1";
@@ -55,6 +59,7 @@ class SSubscriptionController extends ChangeNotifier {
     selectPaymentMode = "0";
     isSelectedPaymentUpi = false;
     isQrCodeSeleted = false;
+
     // onPaymentModeSelected(value);
   }
 
@@ -75,45 +80,25 @@ class SSubscriptionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void onTimeShopSetup() {
-  //   oneTimeShop = !oneTimeShop;
-  //   notifyListeners();
-  // }
-  //
-  // void onProductPrice() {
-  //   productPrice = !productPrice;
-  //   notifyListeners();
-  // }
-  //
-  // void onShopDigital() {
-  //   shopDigital = !shopDigital;
-  //   notifyListeners();
-  // }
-
-  // void onPrimeCatchy() {
-  //   primeCatchy = !primeCatchy;
-  //   notifyListeners();
-  // }
-
   Future<void> getSubscriptionPlanDetails(context) async {
     showLoader(true);
+    isReferalCodeApplied=false;
+    planAmount="";
+    discountAmount=0;
+    discountPercentage=0;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     subscriptionPlansRepo
         .getSubscriptionPlans(pref.getString("successToken"))
         .then((response) {
       print("successToken");
-      final result =
-          ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
-      print(response.statusCode);
+      final result = ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print(response.body);
         subscriptionData = result.subscriptionData;
         addOnServicesList = result.addOnServicesList;
         planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
-        selectAddonServicesList = List<bool>.filled(
-            addOnServicesList?.length ?? 0, false,
-            growable: true);
+        selectAddonServicesList = List<bool>.filled(addOnServicesList?.length ?? 0, false, growable: true);
         int length = subscriptionData?.length ?? 0;
         radioValue.clear();
         for (int i = 0; i < length; i++) {
@@ -121,15 +106,13 @@ class SSubscriptionController extends ChangeNotifier {
         }
         radioGrpValue = radioValue[0];
         selectedPlanId = radioGrpValue;
-        print("sfsfsdfsfsdf");
-        print(radioValue);
-        print(radioGrpValue);
-        print("sfsfsdfsfsdf");
         showLoader(false);
         notifyListeners();
-      } else if (response.statusCode == 401) {
+      }
+      else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      } else {
+      }
+      else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -151,6 +134,9 @@ class SSubscriptionController extends ChangeNotifier {
           subscriptionId: selectedPlanId,
           serviceId: selectedServicesId,
           paymentMode: isQrCodeSeleted ? "qr_code" : "upi",
+          paidAmount: ((double.parse(planAmount)-discountAmount).round()).toString(),
+          referalCode: applyreferalCodeController.text,
+          discountPercentage: discountPercentage.round().toString(),
           transactionId: transactionIdController.text);
 
   Future<void> buySubscriptionPlan(context, loggedIn) async {
@@ -236,6 +222,8 @@ class SSubscriptionController extends ChangeNotifier {
     radioGrpValue = value.toString();
     print(radioGrpValue);
     planAmount = price.toString();
+    discountAmount=(double.parse(planAmount)*discountPercentage)/100;
+    print(discountAmount);
     selectedPlanId = id.toString();
     notifyListeners();
   }
@@ -268,8 +256,8 @@ class SSubscriptionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ApplyReferalCodeReqModel get applyReferalCodeReqModel =>
-      ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
+  ApplyReferalCodeReqModel get applyReferalCodeReqModel => ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
+
   Future<void> applyReferCode(context) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -282,7 +270,11 @@ class SSubscriptionController extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          amount = result.amount;
+          discountPercentage = double.parse(result.discountPercentage??"0");
+          print(discountPercentage);
+          discountAmount=(double.parse(planAmount)*discountPercentage)/100;
+          print(discountAmount);
+          isReferalCodeApplied=true;
           LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
@@ -307,5 +299,11 @@ class SSubscriptionController extends ChangeNotifier {
         return false;
       },
     );
+  }
+
+  Future<void> removeReferCode(context) async {
+    isReferalCodeApplied=false;
+    applyreferalCodeController.clear();
+    notifyListeners();
   }
 }

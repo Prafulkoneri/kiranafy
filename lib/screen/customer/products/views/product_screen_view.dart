@@ -597,7 +597,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       ?.productUnitDetails?[index];
                                   return GestureDetector(
                                     onTap: () {
-                                      read.showUnitImages(true);
+
                                       read.productsUnitImage(
                                           context, element?.id.toString());
                                     },

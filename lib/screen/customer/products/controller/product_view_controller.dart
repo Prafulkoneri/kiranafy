@@ -18,6 +18,7 @@ import 'package:local_supper_market/screen/customer/products/model/product_unit_
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
+import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_admin_product_from_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/remove_custom_product_from_fav_model.dart';
@@ -406,6 +407,7 @@ class ProductViewController extends ChangeNotifier {
       slectedUnitId: selectedUnitId, productType: productType);
 
   Future<void> productsUnitImage(context, suId) async {
+    LoadingOverlay.of(context).show();
     // print("id$id");
     print("bybeeeeeeeeeeeeeeeeeeeeeeeee");
     print(suId);
@@ -422,7 +424,6 @@ class ProductViewController extends ChangeNotifier {
       final result =
           UnitImagesResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        // unitImages = result.data;
         addProductShopId =
             result.data?.unitBasedProductImagePath?.shopId.toString();
         addProductUnitId =
@@ -431,28 +432,20 @@ class ProductViewController extends ChangeNotifier {
             result.data?.unitBasedProductImagePath?.productType.toString();
         unitImages = result.data?.unitBasedProductImagePath?.imageList ?? [];
         data = result.data?.unitBasedProductImagePath;
-        ///////////////////////
-        // similarProduct = productViewData?.similarProducts;
-        // int unitProductLength = similarProduct?.length ?? 0;
-        // isSimilarProductAdded =
-        //     List<bool>.filled(similarProductLength, false, growable: true);
-        // for (int i = 0; i < similarProductLength; i++) {
-        //   if (similarProduct?[i].addToCartCheck == "yes") {
-        //     isSimilarProductAdded.insert(i, true);
-        //   } else {
-        //     isSimilarProductAdded.insert(i, false);
-        //   }
-        // }
-
+        showUnitImages(true);
+        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
