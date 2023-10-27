@@ -22,7 +22,6 @@ import 'package:local_supper_market/screen/customer/my_order/view/my_order_view.
 import 'package:local_supper_market/screen/customer/my_vouchers/view/my_vouchers_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/screen/customer/ref_and_earn/controller/ref_and_earn_controller.dart';
-
 import 'package:local_supper_market/screen/customer/ref_and_earn/view/refer_and_earn_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/view/update_profile_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
@@ -50,7 +49,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().initState(context,widget.isRefreshed);
+      context.read<ProfileController>().initState(context, widget.isRefreshed);
     });
   }
 
@@ -78,9 +77,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-
-              Text(
-                  watch.referAndEarnCouponDetails?.discountAmount??"null"),
+              // Text(
+              //     watch.referAndEarnCouponDetails?.discountAmount??"null"),
               Container(
                 margin: EdgeInsets.only(
                     left: 14.w, right: 14.w, top: 20.w, bottom: 0.w),
@@ -407,7 +405,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SvgPicture.asset(
-                        'assets/icons/notification.svg',
+                        'assets/icons/voucher.svg',
                         // width: 14.w,
                         // height: 13.h,
                       ),
@@ -424,9 +422,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               ////////////////////////////////////////////////////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,ReferAndEarnView(isRefreshed: true), context);
-                // read.getReferAndEarnDetails(context);
-                // read.onBackPressed();
+                  readMain.onNavigation(4,ReferAndEarnView(isRefreshed:true), context);
+                  // read.getReferAndEarnDetails(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -442,7 +439,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SvgPicture.asset(
-                        'assets/icons/notification.svg',
+                        'assets/icons/refer.svg',
                         // width: 14.w,
                         // height: 13.h,
                       ),
