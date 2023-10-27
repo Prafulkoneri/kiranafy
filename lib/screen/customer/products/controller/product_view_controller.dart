@@ -16,6 +16,7 @@ import 'package:local_supper_market/screen/customer/products/model/add_admin_pro
 import 'package:local_supper_market/screen/customer/products/model/add_custom_product_to_fav_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_unit_images_res_model.dart';
 import 'package:local_supper_market/screen/customer/products/model/product_view_model.dart';
+import 'package:local_supper_market/screen/customer/products/repository/banner_navigate_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
@@ -65,6 +66,7 @@ class ProductViewController extends ChangeNotifier {
   String quantityAction = "";
 
   ProductViewRepo productViewRepo = ProductViewRepo();
+  HomeBannerRepo homeBannerRepo = HomeBannerRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
   AddAdminProductToFavRepo addAdminProductToFavRepo =
       AddAdminProductToFavRepo();
@@ -79,6 +81,7 @@ class ProductViewController extends ChangeNotifier {
   CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
 
   Future<void> initState(context, sId, cId, pId, suId, pType, rName) async {
+    print(rName);
     isUnitImagesVisible = false;
     print("productId");
     print(pId);
@@ -87,7 +90,13 @@ class ProductViewController extends ChangeNotifier {
     unitImages.clear();
     cartItemIdList.clear();
     quantityList.clear();
-    await productsView(context, sId, cId, pId, pType);
+
+    if (rName == "homeScreenBanner") {
+      productsViewBanner(context, sId, cId, pId, pType);
+    } else {
+      productsView(context, sId, cId, pId, pType);
+    }
+    // await productsView(context, sId, cId, pId, pType);
     // await productsUnitImage(context, suId);
     print("55555555555555555555555555555555555");
     print(pId);
@@ -379,7 +388,90 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-///////////
+///////////////////////////////////////////////////////////
+  Future<void> productsViewBanner(context, sId, cId, pId, pType) async {
+    // print("id$id");
+
+    print("helohhhhhhhhooooooooooooo");
+    shopId = sId.toString();
+    categoryId = cId.toString();
+    productId = pId.toString();
+    productType = pType.toString();
+    showLoader(true);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString("successToken"));
+    homeBannerRepo
+        .homeBannerNavigate(
+            productViewRequestModel, pref.getString("successToken"))
+        .then((response) {
+      dev.log('Bannere: ${response.body}');
+
+      // deb("response.body${response.body}");
+      final result =
+          ProductViewResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        quantityList.clear();
+        productViewData = result.data;
+        productDetails = productViewData?.productDetails;
+        productImage = productDetails?.productImagePath;
+        shopDetails = productViewData?.shopDetails;
+        int unitDetailLength = productViewData?.productUnitDetails?.length ?? 0;
+        for (int i = 0; i < unitDetailLength; i++) {
+          quantityList.add(productViewData?.productUnitDetails?[i].quantity);
+          print(cartItemIdList);
+          cartItemIdList
+              .add(productViewData?.productUnitDetails?[i].cartItemId);
+        }
+        print("quantityListInitState${quantityList}");
+        print("cartIteMlIST${cartItemIdList}");
+        favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
+        isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
+
+        /////////////Similar Products////////////////
+        similarProduct = productViewData?.similarProducts;
+        int similarProductLength = similarProduct?.length ?? 0;
+        print("similarproductlength ${similarProductLength}");
+        isSimilarProductAdded =
+            List<bool>.filled(similarProductLength, false, growable: true);
+        for (int i = 0; i < similarProductLength; i++) {
+          if (similarProduct?[i].addToCartCheck == "yes") {
+            isSimilarProductAdded.insert(i, true);
+          } else {
+            isSimilarProductAdded.insert(i, false);
+          }
+        }
+        //////////////////Unit Images////////////////
+        productUnitDetail = productViewData?.productUnitDetails;
+        int productUnitImageLength = productUnitDetail?.length ?? 0;
+        isUnitImagesAdded =
+            List<bool>.filled(productUnitImageLength, false, growable: true);
+        for (int i = 0; i < productUnitImageLength; i++) {
+          if (productUnitDetail?[i].addToCartCheck == "yes") {
+            isUnitImagesAdded.insert(i, true);
+          } else {
+            isUnitImagesAdded.insert(i, false);
+          }
+        }
+        showLoader(false);
+        notifyListeners();
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+///////////////////////////////////////////////////////////////
   void onSimilarProductSelected(index) {
     isSimilarProductAdded[index] = true;
     notifyListeners();

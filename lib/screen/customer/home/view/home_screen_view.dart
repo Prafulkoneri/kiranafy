@@ -258,7 +258,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                                     .toString(),
                                                 productType:
                                                     element?.productType,
-                                                routeName: "homeScreen",
+                                                routeName: "homeScreenBanner",
                                               ),
                                               context);
                                         }
@@ -431,97 +431,69 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 //       ?..shuffle())
                                 //     ?.first
                                 //     .redirectToProduct);
-                                //
-                                // if ((watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .redirectToShop ==
-                                //     "yes") {
-                                //   readMain.onNavigation(
-                                //       1,
-                                //       ShopProfileView(
-                                //           shopId:
-                                //               (watch.customerplacead?.toList()
-                                //                     ?..shuffle())
-                                //                   ?.first
-                                //                   .shopId
-                                //                   .toString(),
-                                //           refreshPage: true,
-                                //           routeName: "homeScreen"),
-                                //       context);
-                                // }
-                                // if ((watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .redirectToProduct
-                                //         .toString() ==
-                                //     "yes") {
-                                //   print(
-                                //     (watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .shopId
-                                //         .toString(),
-                                //   );
-                                //   print(
-                                //     (watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .categoryId
-                                //         .toString(),
-                                //   );
-                                //   print(
-                                //     (watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .productId
-                                //         .toString(),
-                                //   );
-                                //   print(
-                                //     (watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .productType
-                                //         .toString(),
-                                //   );
-                                //   // return;
-                                //   readProductScreen.updateProductId(
-                                //       (watch.customerplacead?.toList()
-                                //             ?..shuffle())
-                                //           ?.first
-                                //           .productId
-                                //           .toString(),
-                                //       context,
-                                //       false);
-                                //   readMain.onNavigation(
-                                //       0,
-                                //       ProductScreenView(
-                                //         shopId: (watch.customerplacead?.toList()
-                                //               ?..shuffle())
-                                //             ?.first
-                                //             .shopId
-                                //             .toString(),
-                                //         categoryId:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .categoryId
-                                //                 .toString(),
-                                //         productId:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .productId
-                                //                 .toString(),
-                                //         productType:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .productType,
-                                //         routeName: "homeScreen",
-                                //       ),
-                                //       context);
-                                // }
+
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToShop ==
+                                    "yes") {
+                                  readMain.onNavigation(
+                                      1,
+                                      ShopProfileView(
+                                          shopId:
+                                              (watch.customerplacead?.toList()
+                                                    ?..shuffle())
+                                                  ?.first
+                                                  .shopId
+                                                  .toString(),
+                                          refreshPage: true,
+                                          routeName: "homeScreen"),
+                                      context);
+                                }
+                                if ((watch.customerplacead?.toList()
+                                          ?..shuffle())
+                                        ?.first
+                                        .redirectToProduct
+                                        .toString() ==
+                                    "yes") {
+                                  // return;
+                                  readProductScreen.updateProductId(
+                                      (watch.customerplacead?.toList()
+                                            ?..shuffle())
+                                          ?.first
+                                          .productId
+                                          .toString(),
+                                      context,
+                                      false);
+                                  readMain.onNavigation(
+                                      0,
+                                      ProductScreenView(
+                                        shopId: (watch.customerplacead?.toList()
+                                              ?..shuffle())
+                                            ?.first
+                                            .shopId
+                                            .toString(),
+                                        categoryId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .categoryId
+                                                .toString(),
+                                        productId:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productId
+                                                .toString(),
+                                        productType:
+                                            (watch.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .productType,
+                                        routeName: "homeScreenBanner",
+                                      ),
+                                      context);
+                                }
                               },
                               child: Container(
                                   padding: EdgeInsets.only(

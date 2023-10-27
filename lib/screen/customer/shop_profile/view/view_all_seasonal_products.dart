@@ -145,6 +145,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                               readMain.onNavigation(
                                                   1,
                                                   ProductScreenView(
+                                                      routeName:
+                                                          "shopProductView",
                                                       selectedUnitId: element
                                                           ?.productUnitId
                                                           .toString(),

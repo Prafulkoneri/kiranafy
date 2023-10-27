@@ -34,7 +34,7 @@ class ProductScreenView extends StatefulWidget {
       this.shopId,
       this.categoryId,
       this.productId,
-      this.routeName});
+      required this.routeName});
 
   @override
   _ProductScreenViewState createState() => _ProductScreenViewState();
@@ -116,6 +116,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
               //             shopId: watch.shopDetails?.id.toString(),
               //             cartId: watch.cartId)));
             } else if (widget.routeName == "homeScreen") {
+              readMain.onNavigation(
+                  0, HomeScreenView(refreshPage: false), context);
+            } else if (widget.routeName == "homeScreenBanner") {
               readMain.onNavigation(
                   0, HomeScreenView(refreshPage: false), context);
             } else if (widget.routeName == "favouriteProduct") {

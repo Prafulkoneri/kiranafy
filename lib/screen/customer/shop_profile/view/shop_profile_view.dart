@@ -1084,6 +1084,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 readMain.onNavigation(
                                                     1,
                                                     ProductScreenView(
+                                                        routeName:
+                                                            "shopProductView",
                                                         selectedUnitId: element
                                                             ?.productUnitId
                                                             .toString(),
@@ -1957,6 +1959,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                       readMain.onNavigation(
                                                           1,
                                                           ProductScreenView(
+                                                              routeName:
+                                                                  "shopProductView",
                                                               selectedUnitId: element
                                                                   ?.productUnitId
                                                                   .toString(),

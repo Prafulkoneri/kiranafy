@@ -142,6 +142,8 @@ class _AllRecommandedProductsViewState
                                             readMain.onNavigation(
                                                 1,
                                                 ProductScreenView(
+                                                    routeName:
+                                                        "shopProductView",
                                                     selectedUnitId: element
                                                         ?.productUnitId
                                                         .toString(),
