@@ -226,42 +226,42 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                         watch.bannerData?[pagePosition];
                                     return GestureDetector(
                                       onTap: () {
-                                        // if (element?.redirectToShop == "yes") {
-                                        //   readMain.onNavigation(
-                                        //       1,
-                                        //       ShopProfileView(
-                                        //           shopId: element?.shopId
-                                        //               .toString(),
-                                        //           refreshPage: true,
-                                        //           routeName: "homeScreen"),
-                                        //       context);
-                                        // }
-                                        // if (element?.redirectToProduct ==
-                                        //     "yes") {
-                                        //   print(element?.productId);
-                                        //   print(element?.categoryId);
-                                        //   print(element?.shopId);
-                                        //   print(element?.productType);
-                                        //   readProductScreen.updateProductId(
-                                        //       element?.productId.toString(),
-                                        //       context,
-                                        //       false);
-                                        //   // return;
-                                        //   readMain.onNavigation(
-                                        //       0,
-                                        //       ProductScreenView(
-                                        //         shopId:
-                                        //             element?.shopId.toString(),
-                                        //         categoryId: element?.categoryId
-                                        //             .toString(),
-                                        //         productId: element?.productId
-                                        //             .toString(),
-                                        //         productType:
-                                        //             element?.productType,
-                                        //         routeName: "homeScreen",
-                                        //       ),
-                                        //       context);
-                                        // }
+                                        if (element?.redirectToShop == "yes") {
+                                          readMain.onNavigation(
+                                              1,
+                                              ShopProfileView(
+                                                  shopId: element?.shopId
+                                                      .toString(),
+                                                  refreshPage: true,
+                                                  routeName: "homeScreen"),
+                                              context);
+                                        }
+                                        if (element?.redirectToProduct ==
+                                            "yes") {
+                                          print(element?.productId);
+                                          print(element?.categoryId);
+                                          print(element?.shopId);
+                                          print(element?.productType);
+                                          readProductScreen.updateProductId(
+                                              element?.productId.toString(),
+                                              context,
+                                              false);
+                                          // return;
+                                          readMain.onNavigation(
+                                              0,
+                                              ProductScreenView(
+                                                shopId:
+                                                    element?.shopId.toString(),
+                                                categoryId: element?.categoryId
+                                                    .toString(),
+                                                productId: element?.productId
+                                                    .toString(),
+                                                productType:
+                                                    element?.productType,
+                                                routeName: "homeScreen",
+                                              ),
+                                              context);
+                                        }
                                       },
                                       child: Container(
                                         width:

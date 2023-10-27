@@ -11,6 +11,7 @@ import 'package:local_supper_market/screen/customer/main_screen/controllers/main
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+
 class RefAndEarnView extends StatefulWidget {
   const RefAndEarnView({Key? key}) : super(key: key);
 
@@ -19,19 +20,17 @@ class RefAndEarnView extends StatefulWidget {
 }
 
 class _RefAndEarnViewState extends State<RefAndEarnView> {
-
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final read=Provider.of<ProfileController>(context, listen: false);
-    final watch=Provider.of<ProfileController>(context, listen: false);
-    final readMain=context.read<MainScreenController>();
-    return  Scaffold(
+    final read = Provider.of<ProfileController>(context, listen: false);
+    final watch = Provider.of<ProfileController>(context, listen: false);
+    final readMain = context.read<MainScreenController>();
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
@@ -97,7 +96,8 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                             children: [
                               RichText(
                                 text: TextSpan(
-                                  text: 'Rs. ${watch.referAndEarnCouponDetails?.discountAmount} ',
+                                  text:
+                                      'Rs. ${watch.referAndEarnCouponDetails?.discountAmount} ',
                                   style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
                                         color: Color(0xff39C19D),
@@ -157,7 +157,7 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                 height: 23.h,
               ),
               Container(
-                margin: EdgeInsets.only(right: 14.w,left: 14.w),
+                margin: EdgeInsets.only(right: 14.w, left: 14.w),
                 padding: EdgeInsets.only(
                     left: 10.w, top: 14.w, bottom: 13.w, right: 10.w),
                 decoration: BoxDecoration(
@@ -178,7 +178,8 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                     /*defining default style is optional */
                     children: <TextSpan>[
                       TextSpan(
-                        text: '${watch.referAndEarnCouponDetails?.customerReferralCode}',
+                        text:
+                            '${watch.referAndEarnCouponDetails?.customerReferralCode}',
                         style: GoogleFonts.dmSans(
                           textStyle: const TextStyle(
                               color: Color(0xff39C19D),
@@ -213,7 +214,6 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
               Container(
                 margin: EdgeInsets.only(
                     left: 30.w, top: 14, bottom: 13.w, right: 30.w),
-
                 child: AnimatedButton(
                   backgroundColor: Color(0xffE2FFF7),
                   borderWidth: 1,
@@ -225,7 +225,7 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                   transitionType: TransitionType.BOTTOM_TO_TOP,
                   textStyle: GoogleFonts.dmSans(
                     textStyle: const TextStyle(
-                      // letterSpacing: 5,
+                        // letterSpacing: 5,
                         color: Color(0xff39C19D),
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
@@ -233,10 +233,10 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
                   onPress: () {
                     if (Platform.isAndroid) {
                       Share.share(
-                          'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                          'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount. https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
                     } else {
                       Share.share(
-                          'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://apps.apple.com/us/app/local-supermart/id6451146831');
+                          'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount https://apps.apple.com/us/app/local-supermart/id6451146831');
                     }
                   },
                 ),
@@ -251,4 +251,3 @@ class _RefAndEarnViewState extends State<RefAndEarnView> {
     );
   }
 }
-

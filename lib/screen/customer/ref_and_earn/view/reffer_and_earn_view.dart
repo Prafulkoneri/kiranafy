@@ -1,5 +1,5 @@
 // // import 'dart:io';
-//
+
 // // import 'package:flutter/material.dart';
 // // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // // import 'package:google_fonts/google_fonts.dart';
@@ -9,17 +9,17 @@
 // // import 'package:local_supper_market/widget/app_bar.dart';
 // // import 'package:provider/provider.dart';
 // // import 'package:url_launcher/url_launcher.dart';
-//
+
 // // class RefferAndEarnView extends StatefulWidget {
 // //   // final bool? canWork;
 // //   const RefferAndEarnView({
 // //     super.key,
 // //   });
-//
+
 // //   @override
 // //   State<RefferAndEarnView> createState() => _RefferAndEarnViewState();
 // // }
-//
+
 // // class _RefferAndEarnViewState extends State<RefferAndEarnView> {
 // //   _launchWhatsapp() async {
 // //     //  const url = "https://wa.me/?text=Hey buddy, try this super cool new app!";
@@ -31,7 +31,7 @@
 // //       throw 'Could not launch $url';
 // //     }
 // //   }
-//
+
 // //   @override
 // //   Widget build(BuildContext context) {
 // //     final readMain = context.read<MainScreenController>();
@@ -61,7 +61,7 @@
 // //                 isRefreshed: false,
 // //               ),
 // //               context);
-//
+
 // //           return false;
 // //         },
 // //         child: SingleChildScrollView(
@@ -374,7 +374,7 @@
 // //   }
 // // }
 // import 'dart:io';
-//
+
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/scheduler.dart';
@@ -390,14 +390,14 @@
 // import 'package:local_supper_market/widget/loader.dart';
 // import 'package:provider/provider.dart';
 // import 'package:share_plus/share_plus.dart';
-//
+
 // class RefAndEarnView extends StatefulWidget {
 //   const RefAndEarnView({Key? key}) : super(key: key);
-//
+
 //   @override
 //   _RefAndEarnViewState createState() => _RefAndEarnViewState();
 // }
-//
+
 // class _RefAndEarnViewState extends State<RefAndEarnView> {
 //   @override
 //   void initState() {
@@ -405,7 +405,7 @@
 //       context.read<RefAndEarnController>().initState(context);
 //     });
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     final read = context.read<RefAndEarnController>();
@@ -437,7 +437,7 @@
 //                       isRefreshed: false,
 //                     ),
 //                     context);
-//
+
 //                 return false;
 //               },
 //               child: SingleChildScrollView(
@@ -595,13 +595,7 @@
 //                     Container(
 //                       margin: EdgeInsets.only(
 //                           left: 30.w, top: 14, bottom: 13.w, right: 30.w),
-//                       // width: 40,
-//                       // decoration: BoxDecoration(
-//                       //     color: Color(0xffE2FFF7),
-//                       //     borderRadius: BorderRadius.circular(8),
-//                       //     border: Border.all(
-//                       //       color: Color(0xff39C19D),
-//                       //     )),
+                   
 //                       child: AnimatedButton(
 //                         backgroundColor: Color(0xffE2FFF7),
 //                         borderWidth: 1,

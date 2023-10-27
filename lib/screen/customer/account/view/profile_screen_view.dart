@@ -49,7 +49,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileController>().initState(context,widget.isRefreshed);
+      context.read<ProfileController>().initState(context, widget.isRefreshed);
     });
   }
 
@@ -77,9 +77,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-
-              Text(
-                  watch.referAndEarnCouponDetails?.discountAmount??"null"),
+              // Text(
+              //     watch.referAndEarnCouponDetails?.discountAmount??"null"),
               Container(
                 margin: EdgeInsets.only(
                     left: 14.w, right: 14.w, top: 20.w, bottom: 0.w),
@@ -406,7 +405,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SvgPicture.asset(
-                        'assets/icons/notification.svg',
+                        'assets/icons/voucher.svg',
                         // width: 14.w,
                         // height: 13.h,
                       ),
@@ -424,7 +423,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   // readMain.onNavigation(4,RefAndEarnView(), context);
-                read.getReferAndEarnDetails(context);
+                  read.getReferAndEarnDetails(context);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
@@ -440,7 +439,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       SvgPicture.asset(
-                        'assets/icons/notification.svg',
+                        'assets/icons/refer.svg',
                         // width: 14.w,
                         // height: 13.h,
                       ),
