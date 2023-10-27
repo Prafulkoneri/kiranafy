@@ -277,7 +277,6 @@ class Endpoint {
   static const String subScreiptionInvoice = "${baseUrl}lsm-shop-owner-invoice";
   static const String orderInvoice = "${baseUrl}lsm-customer-invoice";
   static const String removeCartItem = "${baseUrl}lsm-customer-remove-cart";
-
   static const String shopReviewList =
       "${baseUrl}lsm-shop-owner-review-list-for-shop";
   static const String shopDeliveryArealist =
@@ -294,4 +293,7 @@ class Endpoint {
       "${baseUrl}lsm-notification-status";
   static const String referAndEarn = "${baseUrl}lsm-display-referral-code";
   static const String applyReferCode = "${baseUrl}lsm-apply-referral-code";
+  static const String myVouchers = "${baseUrl}lsm-get-customer-vouchers";
+  static const String bannerNavigation =
+      "${baseUrl}lsm-customer-banner-product-view";
 }

@@ -20,6 +20,7 @@ import 'package:local_supper_market/screen/customer/help_center/controller/ticke
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
+import 'package:local_supper_market/screen/customer/my_vouchers/controller/my_voucher_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/screen/customer/notifications/controller/notification_controller.dart';
@@ -299,6 +300,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ReturnOrderController()),
         ChangeNotifierProvider(create: (_) => PaymentRefundListController()),
         ChangeNotifierProvider(create: (_) => SShopReviewListController()),
+        ChangeNotifierProvider(create: (_) => MyVocherScreenController()),
 
         // ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],

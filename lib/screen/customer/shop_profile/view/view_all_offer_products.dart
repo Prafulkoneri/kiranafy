@@ -136,6 +136,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                             readMain.onNavigation(
                                                 1,
                                                 ProductScreenView(
+                                                    routeName:
+                                                        "shopProductView",
                                                     selectedUnitId: element
                                                         .productUnitId
                                                         .toString(),

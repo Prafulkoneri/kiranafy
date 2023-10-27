@@ -38,7 +38,8 @@ class _MainScreenViewState extends State<MainScreenView> {
     });
   }
 
-  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -416,6 +417,6 @@ class _MainScreenViewState extends State<MainScreenView> {
         //   ],
         // ),
 
-    );
+        );
   }
 }
