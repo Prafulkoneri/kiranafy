@@ -180,16 +180,16 @@ class OrderPaymentController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     print(shopDetailData?.minimumOrderAmountForDelivery);
     print(orderPaymentData?.finalTotalAmount);
-    int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
-    double totalOrderAmount =
-        double.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0");
-    if (minAmount > totalOrderAmount) {
-      LoadingOverlay.of(context).hide();
-      Utils.showPrimarySnackbar(context,
-          "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
-          type: SnackType.error);
-      return;
-    }
+    // int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
+    // double totalOrderAmount =
+    //     double.parse(orderPaymentData?.finalTotalAmount.toString() ?? "0");
+    // if (minAmount > totalOrderAmount) {
+    //   LoadingOverlay.of(context).hide();
+    //   Utils.showPrimarySnackbar(context,
+    //       "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
+    //       type: SnackType.error);
+    //   return;
+    // }
 
     if (groupValue == "") {
       LoadingOverlay.of(context).hide();
@@ -217,7 +217,8 @@ class OrderPaymentController extends ChangeNotifier {
       if (response.statusCode == 200) {
         transactionIdController.clear();
         final read = Provider.of<MainScreenController>(context, listen: false);
-        final readCart = Provider.of<CartListController>(context, listen: false);
+        final readCart =
+            Provider.of<CartListController>(context, listen: false);
         readCart.getCartList(context);
         // Navigator.pop(context);
         // Navigator.pop(context);

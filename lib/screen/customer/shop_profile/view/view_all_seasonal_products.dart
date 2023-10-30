@@ -120,7 +120,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
-                                        childAspectRatio: (1.5.w / 1.8.w),
+                                        childAspectRatio: (1.4.w / 1.8.w),
                                         crossAxisSpacing: 4.0,
                                         mainAxisSpacing: 4.0),
                                 itemBuilder: (BuildContext, index) {
@@ -390,53 +390,49 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                         //       : SvgPicture.asset(
                                                         //           "assets/icons/tick_green_bg.svg"),
                                                         // ),
-                                                        watch.isAllSeasonalProductAdded[
-                                                                    index] ==
-                                                                false
-                                                            ? GestureDetector(
-                                                                onTap: () {
-                                                                  read.addToCart(
-                                                                      element
-                                                                          ?.productType,
-                                                                      element
-                                                                          ?.productUnitId,
-                                                                      element
-                                                                          ?.shopId,
-                                                                      index,
-                                                                      context);
-                                                                  // watch
-                                                                  //     .onOfferSelected(
-                                                                  //         index);
-                                                                },
-                                                                child:
-                                                                    SvgPicture
-                                                                        .asset(
-                                                                  'assets/images/add.svg',
-                                                                  // width: 15.w,
-                                                                  // height: 19.h,
-                                                                ))
-                                                            : GestureDetector(
-                                                                onTap: () {
-                                                                  read.removeFromCart(
-                                                                      element
-                                                                          ?.productType,
-                                                                      element
-                                                                          ?.productUnitId,
-                                                                      element
-                                                                          ?.shopId,
-                                                                      index,
-                                                                      context);
-                                                                },
-                                                                child: SvgPicture
-                                                                    .asset(
-                                                                        "assets/icons/tick_green_bg.svg"),
-                                                              ),
                                                       ],
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     height: 5.w,
                                                   ),
+                                                  watch.isAllSeasonalProductAdded[
+                                                              index] ==
+                                                          false
+                                                      ? GestureDetector(
+                                                          onTap: () {
+                                                            read.addToCart(
+                                                                element
+                                                                    ?.productType,
+                                                                element
+                                                                    ?.productUnitId,
+                                                                element?.shopId,
+                                                                index,
+                                                                context);
+                                                            // watch
+                                                            //     .onOfferSelected(
+                                                            //         index);
+                                                          },
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            'assets/images/add.svg',
+                                                            // width: 15.w,
+                                                            // height: 19.h,
+                                                          ))
+                                                      : GestureDetector(
+                                                          onTap: () {
+                                                            read.removeFromCart(
+                                                                element
+                                                                    ?.productType,
+                                                                element
+                                                                    ?.productUnitId,
+                                                                element?.shopId,
+                                                                index,
+                                                                context);
+                                                          },
+                                                          child: SvgPicture.asset(
+                                                              "assets/icons/tick_green_bg.svg"),
+                                                        ),
                                                 ],
                                               ),
                                             ),

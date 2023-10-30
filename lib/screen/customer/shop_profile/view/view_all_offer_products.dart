@@ -115,7 +115,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
-                                        childAspectRatio: (1.5.w / 1.8.w),
+                                        childAspectRatio: (1.4.w / 1.8.w),
                                         crossAxisSpacing: 0.0,
                                         mainAxisSpacing: 0.0),
                                 itemBuilder: (BuildContext, index) {
@@ -386,10 +386,21 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                         //       : SvgPicture.asset(
                                                         //           "assets/icons/tick_green_bg.svg"),
                                                         // ),
-                                                        watch.isAllOfferProductAdded[
-                                                                    index] ==
-                                                                false
-                                                            ? GestureDetector(
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.w,
+                                                  ),
+                                                  watch.isAllOfferProductAdded[
+                                                              index] ==
+                                                          false
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            GestureDetector(
                                                                 onTap: () {
                                                                   read.addToCart(
                                                                       element
@@ -410,29 +421,23 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                   'assets/images/add.svg',
                                                                   // width: 15.w,
                                                                   // height: 19.h,
-                                                                ))
-                                                            : GestureDetector(
-                                                                onTap: () {
-                                                                  read.removeFromCart(
-                                                                      element
-                                                                          .productType,
-                                                                      element
-                                                                          .productUnitId,
-                                                                      element
-                                                                          .shopId,
-                                                                      index,
-                                                                      context);
-                                                                },
-                                                                child: SvgPicture
-                                                                    .asset(
-                                                                        "assets/icons/tick_green_bg.svg"),
-                                                              ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.w,
-                                                  ),
+                                                                )),
+                                                          ],
+                                                        )
+                                                      : GestureDetector(
+                                                          onTap: () {
+                                                            read.removeFromCart(
+                                                                element
+                                                                    .productType,
+                                                                element
+                                                                    .productUnitId,
+                                                                element.shopId,
+                                                                index,
+                                                                context);
+                                                          },
+                                                          child: SvgPicture.asset(
+                                                              "assets/icons/tick_green_bg.svg"),
+                                                        ),
                                                 ],
                                               ),
                                             ),
