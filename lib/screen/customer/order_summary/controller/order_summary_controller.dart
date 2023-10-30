@@ -82,11 +82,17 @@ class OrderSummaryController extends ChangeNotifier {
   int selectedAddressId = 0;
   List<bool> isFulFilProductAdded = [];
   List<bool> isFulFilProductAddedCustome = [];
-  List <bool> isSlotAvailable=[];
+  List<bool> isSlotAvailable = [];
   FullFillYourCravingsRepo fullFillYourCravingsRepo =
       FullFillYourCravingsRepo();
 
-  Future<void> initState(context, cId, id, refresh, route,) async {
+  Future<void> initState(
+    context,
+    cId,
+    id,
+    refresh,
+    route,
+  ) async {
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
@@ -185,14 +191,14 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  OrderSummaryReqModel get orderSummeryRequestModel => OrderSummaryReqModel(shopId: shopId, cartId: cartId);
+  OrderSummaryReqModel get orderSummeryRequestModel =>
+      OrderSummaryReqModel(shopId: shopId, cartId: cartId);
 
   FullFillCravingsReqModel get fullFillCravingsReqModel =>
       FullFillCravingsReqModel(
           offset: offset.toString(), limit: "10", shopId: shopId);
 
   Future<void> getFullFillYourCravingsList(context) async {
-
     print("comeonnn");
     SharedPreferences pref = await SharedPreferences.getInstance();
     fullFillYourCravingsRepo
@@ -357,7 +363,8 @@ class OrderSummaryController extends ChangeNotifier {
         couponDiscount = orderFinalTotals?.couponDiscount.toString() ?? "";
         showLoader(false);
         int deliverySlotLength = shopDeliverySlots?.length ?? 0;
-        isSlotAvailable=List<bool>.filled(deliverySlotLength, true,growable: false);
+        isSlotAvailable =
+            List<bool>.filled(deliverySlotLength, true, growable: false);
         if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
@@ -384,36 +391,32 @@ class OrderSummaryController extends ChangeNotifier {
               if (currentHour <= 11) {
                 slotGroupValue = "shop_owner_slot_9_to_12";
                 return;
-              }
-              else{
-                isSlotAvailable[i]=false;
+              } else {
+                isSlotAvailable[i] = false;
               }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
               if (currentHour <= 14) {
                 slotGroupValue = "shop_owner_slot_12_to_3";
                 return;
-              }
-              else{
-                isSlotAvailable[i]=false;
+              } else {
+                isSlotAvailable[i] = false;
               }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
               if (currentHour <= 17) {
                 slotGroupValue = "shop_owner_slot_3_to_6";
                 return;
-              }
-              else{
-                isSlotAvailable[i]=false;
+              } else {
+                isSlotAvailable[i] = false;
               }
             }
             if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
               if (currentHour <= 20) {
                 slotGroupValue = "shop_owner_slot_6_to_9";
                 return;
-              }
-              else{
-                isSlotAvailable[i]=false;
+              } else {
+                isSlotAvailable[i] = false;
               }
             }
           }
@@ -669,7 +672,8 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel => CustomerRemoveCouponsRequestModel(
+  CustomerRemoveCouponsRequestModel get customerRemoveCouponsRequestModel =>
+      CustomerRemoveCouponsRequestModel(
         cartId: cartId,
         shopId: shopId,
       );
@@ -746,6 +750,17 @@ class OrderSummaryController extends ChangeNotifier {
     }
     if (customerAddress!.isEmpty && groupValue == "delivery_to") {
       Utils.showPrimarySnackbar(context, "Add an address",
+          type: SnackType.error);
+      return;
+    }
+    int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
+    double totalOrderAmount = double.parse(
+      groupValue == "self_pickup" ? selfPickupTotalAmount : totalAmount,
+    );
+    if (minAmount > totalOrderAmount) {
+      // LoadingOverlay.of(context).hide();
+      Utils.showPrimarySnackbar(context,
+          "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
           type: SnackType.error);
       return;
     }
@@ -910,46 +925,42 @@ class OrderSummaryController extends ChangeNotifier {
 
   void checkDeliveryDateAndSlot() async {
     var currentDate = DateFormat('dd-MM-yyy').format(DateTime.now());
-    isSlotAvailable=List<bool>.filled(shopDeliverySlots?.length??0,true);
+    isSlotAvailable = List<bool>.filled(shopDeliverySlots?.length ?? 0, true);
     if (expectedDateController.text == currentDate) {
       var currentHour = DateTime.now().hour;
-      int deliverySlotLength=shopDeliverySlots?.length??0;
+      int deliverySlotLength = shopDeliverySlots?.length ?? 0;
       // isSlotAvailable=List<bool>.filled(shopDeliverySlots?.length??0,true);
       for (int i = 0; i < deliverySlotLength; i++) {
         if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
           if (currentHour <= 11) {
             slotGroupValue = "shop_owner_slot_9_to_12";
             return;
-          }
-          else{
-            isSlotAvailable[i]=false;
+          } else {
+            isSlotAvailable[i] = false;
           }
         }
         if (shopDeliverySlots?[i] == "shop_owner_slot_12_to_3") {
           if (currentHour <= 14) {
             slotGroupValue = "shop_owner_slot_12_to_3";
             return;
-          }
-          else{
-            isSlotAvailable[i]=false;
+          } else {
+            isSlotAvailable[i] = false;
           }
         }
         if (shopDeliverySlots?[i] == "shop_owner_slot_3_to_6") {
           if (currentHour <= 17) {
             slotGroupValue = "shop_owner_slot_3_to_6";
             return;
-          }
-          else{
-            isSlotAvailable[i]=false;
+          } else {
+            isSlotAvailable[i] = false;
           }
         }
         if (shopDeliverySlots?[i] == "shop_owner_slot_6_to_9") {
           if (currentHour <= 20) {
             slotGroupValue = "shop_owner_slot_6_to_9";
             return;
-          }
-          else{
-            isSlotAvailable[i]=false;
+          } else {
+            isSlotAvailable[i] = false;
           }
         }
       }

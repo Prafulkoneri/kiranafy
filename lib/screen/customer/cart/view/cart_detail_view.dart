@@ -8,7 +8,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/cart/controller/cart_detail_controller.dart';
 import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/view/order_summary_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
@@ -919,21 +918,67 @@ class _CartDetailViewState extends State<CartDetailView> {
                                               return AlertDialog(
                                                 contentPadding:
                                                     EdgeInsets.symmetric(
-                                                        horizontal: 5.w),
+                                                        horizontal: 5.w,
+                                                        vertical: 5),
                                                 scrollable: true,
-                                                title: Text("Conditions",
-                                                    style: GoogleFonts.dmSans(
-                                                      textStyle: TextStyle(
-                                                          color: Black,
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w700),
-                                                    )),
                                                 content: Column(
                                                   children: <Widget>[
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              width: 1,
+                                                              color: Color(
+                                                                      0xff000000)
+                                                                  .withOpacity(
+                                                                      0.15)),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      padding: EdgeInsets.only(
+                                                          left: 82.w,
+                                                          right: 78.w,
+                                                          top: 30,
+                                                          bottom: 19),
+                                                      child: Image(
+                                                        image: AssetImage(
+                                                          "assets/images/order_detail_condition.png",
+                                                        ),
+                                                        fit: BoxFit.cover,
+                                                        // width: 168.w,
+                                                        // height: 135.h,
+                                                      ),
+                                                    ),
+                                                    // Container()
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 9.0,
+                                                              top: 17),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text("Conditions",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color:
+                                                                            Black,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 16
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w700),
+                                                              ))
+                                                        ],
+                                                      ),
+                                                    ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 1.w,
+                                                          left: 15.w,
                                                           top: 5.w,
                                                           right: 6.w),
                                                       child: Row(
@@ -948,23 +993,23 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                     20.sp),
                                                           ),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 8,
                                                           ),
                                                           Flexible(
                                                             child: Text(
                                                               // softWrap: true,
                                                               // maxLines: 3,//
-                                                              "Regarding product delivery please contact to shop owner.",
+                                                              "Regarding  product delivery   please contact to shop owner.",
                                                               textAlign:
                                                                   TextAlign
-                                                                      .justify,
+                                                                      .start,
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
                                                                     color: Black1,
-                                                                    height: 1.5,
-
-                                                                    // letterSpacing: .05,
+                                                                    // height: 1.5,
+                                                                    // letterSpacing:
+                                                                    //     0.5,
                                                                     // overflow: TextOverflow.ellipsis,
                                                                     fontSize: 14.sp,
                                                                     fontWeight: FontWeight.w400),
@@ -974,9 +1019,10 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                         ],
                                                       ),
                                                     ),
+
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                          left: 1.w,
+                                                          left: 15.w,
                                                           top: 5.w,
                                                           right: 6.w),
                                                       child: Row(
@@ -991,7 +1037,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                     20.sp),
                                                           ),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 8,
                                                           ),
                                                           Flexible(
                                                             child: Text(
@@ -1020,12 +1066,32 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                 actions: [
                                                   Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.end,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
-                                                      ElevatedButton(
-                                                          child:
-                                                              Text("Continue"),
-                                                          onPressed: () {
+                                                      PrimaryButton(
+                                                          width: 108.h,
+                                                          height: 30,
+                                                          color: SplashText,
+                                                          child: Text(
+                                                            "Okay",
+                                                            style: GoogleFonts
+                                                                .dmSans(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+
+                                                                      // letterSpacing: .05,
+                                                                      // overflow: TextOverflow.ellipsis,
+                                                                      fontSize:
+                                                                          16.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                            ),
+                                                          ),
+                                                          onTap: () {
                                                             Navigator.pop(
                                                                 context);
                                                             readMain.onNavigation(
