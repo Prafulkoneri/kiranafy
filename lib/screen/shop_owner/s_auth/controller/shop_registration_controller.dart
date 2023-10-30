@@ -193,7 +193,7 @@ class ShopRegistrationController extends ChangeNotifier {
     areaName="";
     pincode="";
 
-    cityId = int.parse(value.toString());
+    // cityId = int.parse(value.toString());
     notifyListeners();
   }
 

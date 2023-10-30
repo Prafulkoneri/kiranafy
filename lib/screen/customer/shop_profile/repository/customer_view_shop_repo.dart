@@ -6,8 +6,7 @@ class CustomerViewShopRepo {
   Future<http.Response> getShopDetails(CustomerViewShopReqModel reqModel,token) async {
     print(token);
     try {
-      return await http
-          .post(Uri.parse(Endpoint.customerViewShop),body: reqModel.toJson(),headers: {
+      return await http.post(Uri.parse(Endpoint.customerViewShop),body: reqModel.toJson(),headers: {
         "Authorization": "Bearer $token",
       });
     } catch (e) {

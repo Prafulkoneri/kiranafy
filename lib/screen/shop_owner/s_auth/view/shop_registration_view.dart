@@ -228,7 +228,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                           .toList(),
                                       hint: "State",
                                     )
-                                  : SDropDownField(
+                                  : SearchDropDownField(
                                 textEditingController: watch.stateSearchController,
                                       value: watch.stateName.toString(),
                                       onChanged: (value) async {

@@ -359,21 +359,43 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                           SizedBox(
                             height: 22.w,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: watch.countryName==""?
-                                  SearchDropDownField(
-                                textEditingController:
-                                    watch.countrySearchController,
-                                onChanged: (value) async {
-                                  read.onCountrySelected(value);
-                                  read.getStateList(context);
-                                },
-                                items: watch.countryDataList
-                                    ?.map((item) => DropdownMenuItem<String>(
-                                          value: item.id.toString(),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: watch.countryName==""?
+                                      SearchDropDownField(
+                                    textEditingController:
+                                        watch.countrySearchController,
+                                    onChanged: (value) async {
+                                      read.onCountrySelected(value);
+                                      read.getStateList(context);
+                                    },
+                                    items: watch.countryDataList
+                                        ?.map((item) => DropdownMenuItem<String>(
+                                              value: item.id.toString(),
+                                              child: Text(
+                                                item.countryName ?? "",
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ))
+                                        .toList(),
+                                    hint: "Country",
+                                    titleHeader: "Country",
+                                  ): SearchDropDownField(
+                                        textEditingController:
+                                        watch.countrySearchController,
+                                        value: watch.countryName,
+                                        onChanged: (value) async {
+                                          read.onCountrySelected(value);
+                                          read.getStateList(context);
+                                        },
+                                        items: watch.countryDataList
+                                            ?.map((item) => DropdownMenuItem<String>(
+                                          value: item.countryName.toString(),
                                           child: Text(
                                             item.countryName ?? "",
                                             style: const TextStyle(
@@ -381,83 +403,63 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                                             ),
                                           ),
                                         ))
-                                    .toList(),
-                                hint: "Country",
-                                titleHeader: "Country",
-                              ): SearchDropDownField(
-                                    textEditingController:
-                                    watch.countrySearchController,
-                                    value: watch.countryName,
-                                    onChanged: (value) async {
-                                      read.onCountrySelected(value);
-                                      read.getStateList(context);
-                                    },
-                                    items: watch.countryDataList
-                                        ?.map((item) => DropdownMenuItem<String>(
-                                      value: item.countryName.toString(),
-                                      child: Text(
-                                        item.countryName ?? "",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
-                                        .toList(),
-                                    hint: "Country",
-                                    titleHeader: "Country",
-                                  )),
-                              SizedBox(
-                                width: 30.w,
+                                            .toList(),
+                                        hint: "Country",
+                                        titleHeader: "Country",
+                                      )),
+                                  SizedBox(
+                                    width: 30.w,
+                                  ),
+                                  Expanded(
+                                      child: watch.showValueStateField
+                                          ? SearchDropDownField(
+                                              textEditingController:
+                                                  watch.stateSearchController,
+                                              value: watch.stateName,
+                                              onChanged: (value) async {
+                                                read.onStateSelected(value);
+                                                read.getCityList(context);
+                                              },
+                                              items: watch.stateDataList
+                                                  ?.map((item) =>
+                                                      DropdownMenuItem<String>(
+                                                        value: item.stateName.toString(),
+                                                        child: Text(
+                                                          item.stateName ?? "",
+                                                          style: const TextStyle(
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ))
+                                                  .toList(),
+                                              hint: "State",
+                                              titleHeader: "State",
+                                            )
+                                          : SearchDropDownField(
+                                              textEditingController:
+                                                  watch.stateSearchController,
+                                              onChanged: (value) async {
+                                                read.onStateSelected(value);
+                                                read.getCityList(context);
+                                              },
+                                              items: watch.stateDataList
+                                                  ?.map((item) =>
+                                                      DropdownMenuItem<String>(
+                                                        value: item.stateName.toString(),
+                                                        child: Text(
+                                                          item.stateName ?? "",
+                                                          style: const TextStyle(
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ))
+                                                  .toList(),
+                                              hint: "State",
+                                              titleHeader: "State",
+                                            )),
+                                ],
                               ),
-                              Expanded(
-                                  child: watch.showValueStateField
-                                      ? SearchDropDownField(
-                                          textEditingController:
-                                              watch.stateSearchController,
-                                          value: watch.stateName,
-                                          onChanged: (value) async {
-                                            read.onStateSelected(value);
-                                            read.getCityList(context);
-                                          },
-                                          items: watch.stateDataList
-                                              ?.map((item) =>
-                                                  DropdownMenuItem<String>(
-                                                    value: item.stateName.toString(),
-                                                    child: Text(
-                                                      item.stateName ?? "",
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                          hint: "State",
-                                          titleHeader: "State",
-                                        )
-                                      : SearchDropDownField(
-                                          textEditingController:
-                                              watch.stateSearchController,
-                                          onChanged: (value) async {
-                                            read.onStateSelected(value);
-                                            read.getCityList(context);
-                                          },
-                                          items: watch.stateDataList
-                                              ?.map((item) =>
-                                                  DropdownMenuItem<String>(
-                                                    value: item.stateName.toString(),
-                                                    child: Text(
-                                                      item.stateName ?? "",
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                          hint: "State",
-                                          titleHeader: "State",
-                                        )),
-                            ],
-                          ),
+
                           SizedBox(
                             height: 22.w,
                           ),

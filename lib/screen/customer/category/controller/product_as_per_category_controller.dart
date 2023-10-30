@@ -215,9 +215,10 @@ class ProductCategoryController extends ChangeNotifier {
       );
 
   Future<void> getFilterProductList(context,hideFilter,cId) async {
-    quantityList.clear();
-    cartItemIdList.clear();
     showLoader(true);
+
+    cartItemIdList.clear();
+
     categoryId=cId;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
@@ -229,6 +230,7 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           ProductAsPerCategoryResModel.fromJson(jsonDecode(response.body));
       print(result);
+      quantityList.clear();
       if (response.statusCode == 200) {
         allCategoryList = result.data?.allCategoryList;
         productList = result.data?.productList;
