@@ -49,11 +49,11 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       // print(message.data);
       // print(message.data["notification_type"]);
-      final readShopDashBoardController = Provider.of<SDashBoardController>(context, listen: false);
+      final readShopDashBoardController =
+          Provider.of<SDashBoardController>(context, listen: false);
       readShopDashBoardController.getNotificationSeen(context);
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -1527,7 +1527,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     // '${watch.dashBoardData?.deliveredOrdersCount}',
                                   ),
                                   ShopDashBoard(
-                                    text: 'Refunded Amount',
+                                    text: 'Refunded\nAmount',
                                   ),
                                 ],
                               ),

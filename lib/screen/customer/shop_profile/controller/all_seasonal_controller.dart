@@ -388,9 +388,11 @@ class ShopAllSeasonalController extends ChangeNotifier {
   bool isLoading = true;
   bool showPaginationLoader = false;
   List<bool> isAllSeasonalProductAdded = [];
+  List cartItemIdList=[];
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
   Data? data;
+  List quantitySeasonalList = [];
   // List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData> seasonalProduct = [];
   Future<void> initState(context, id) async {
@@ -438,11 +440,17 @@ class ShopAllSeasonalController extends ChangeNotifier {
         isAllSeasonalProductAdded =
             List<bool>.filled(seasonProductLength, false, growable: true);
         for (int i = 0; i < seasonProductLength; i++) {
-          if (seasonalProduct?[i].addToCartCheck == "yes") {
+          if (seasonalProduct[i].addToCartCheck == "yes") {
             isAllSeasonalProductAdded.insert(i, true);
           } else {
             isAllSeasonalProductAdded.insert(i, false);
           }
+        }
+        quantitySeasonalList.clear();
+        cartItemIdList.clear();
+        for(int i=0;i<seasonProductLength;i++){
+          quantitySeasonalList.add(seasonalProduct[i].quantity);
+          cartItemIdList.add(seasonalProduct[i].cartItemId);
         }
         showLoader(false);
 
@@ -688,8 +696,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
   CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
   String quantityAction = "";
   List<bool> isSeasonalProductAdded = [];
-  List cartItemIdList = [];
-  List quantitySeasonalList = [];
+
   bool isQuanityBtnPressed = false;
   String cartItemId = "";
   String productType = "";

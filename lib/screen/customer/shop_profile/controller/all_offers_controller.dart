@@ -324,7 +324,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -461,6 +463,7 @@ class AllOffersController extends ChangeNotifier {
             isAllOfferProductAdded.insert(i, false);
           }
         }
+
         showLoader(false);
 
         showPaginationLoader = false;
@@ -561,8 +564,8 @@ class AllOffersController extends ChangeNotifier {
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add product to cart");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to add product to cart");
       return;
     }
     addProductToCartRepo
@@ -754,6 +757,131 @@ class AllOffersController extends ChangeNotifier {
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  /////////////////////////////////////
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
+  String quantityAction = "";
+
+  List cartItemIdList = [];
+  List quantityAllofferList = [];
+  bool isQuanityBtnPressed = false;
+  String cartItemId = "";
+  String productType = "";
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
+    notifyListeners();
+  }
+
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopId);
+
+  Future<void> subtractItemQuantity(
+      context, CIId, index, pType, pUnitId) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityAllofferList);
+    print(quantityAllofferList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    productType = pType;
+    print(cartItemIdList);
+    cartItemId = cartItemIdList[index].toString();
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          int value = quantityAllofferList[index];
+          quantityAllofferList.removeAt(index);
+          print("${value}valueeeeeeeee");
+          quantityAllofferList.insert(index, value - 1);
+
+          if (quantityAllofferList[index] == 0) {
+            removeFromCart(pType, pUnitId, shopId, index, context);
+          }
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> addItemQuantity(context, CIId, pType, index) async {
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    cartItemId = cartItemIdList[index].toString();
+    productType = pType;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print("hello");
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          int value = quantityAllofferList[index];
+          quantityAllofferList.removeAt(index);
+          quantityAllofferList.insert(index, value + 1);
+          quantityBtnPressed(false);
+
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
