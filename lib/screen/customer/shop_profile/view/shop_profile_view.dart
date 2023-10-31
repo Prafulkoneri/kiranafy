@@ -1017,7 +1017,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               context,
                                                                               element?.cartItemId.toString(),
                                                                               element?.productType,
-                                                                              index,"offer");
+                                                                              index,
+                                                                              "offer");
                                                                         },
                                                                         child: SvgPicture
                                                                             .asset(
@@ -1545,7 +1546,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                                 return;
                                                                               }
                                                                               print(element?.productType);
-                                                                              read.addItemQuantity(context, element?.cartItemId.toString(), element?.productType, index,"seasonal");
+                                                                              read.addItemQuantity(context, element?.cartItemId.toString(), element?.productType, index, "seasonal");
                                                                             },
                                                                             child:
                                                                                 SvgPicture.asset(
@@ -2134,7 +2135,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                           .toString(),
                                                                       element
                                                                           ?.productType,
-                                                                      index,"recommanded");
+                                                                      index,
+                                                                      "recommanded");
                                                                 },
                                                                 child:
                                                                     SvgPicture
