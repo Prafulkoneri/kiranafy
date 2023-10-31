@@ -396,9 +396,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                   SizedBox(
                                                     height: 5.w,
                                                   ),
-                                                  watch.isAllSeasonalProductAdded[
+                                                  watch.quantitySeasonalList[
                                                               index] ==
-                                                          false
+                                                          0
                                                       ? GestureDetector(
                                                           onTap: () {
                                                             read.addToCart(
@@ -409,30 +409,123 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                 element?.shopId,
                                                                 index,
                                                                 context);
-                                                            // watch
-                                                            //     .onOfferSelected(
-                                                            //         index);
                                                           },
                                                           child:
                                                               SvgPicture.asset(
                                                             'assets/images/add.svg',
-                                                            // width: 15.w,
-                                                            // height: 19.h,
                                                           ))
-                                                      : GestureDetector(
-                                                          onTap: () {
-                                                            read.removeFromCart(
-                                                                element
-                                                                    ?.productType,
-                                                                element
-                                                                    ?.productUnitId,
-                                                                element?.shopId,
-                                                                index,
-                                                                context);
-                                                          },
-                                                          child: SvgPicture.asset(
-                                                              "assets/icons/tick_green_bg.svg"),
-                                                        ),
+                                                      : Row(
+                                                          children: [
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                if (watch
+                                                                    .isQuanityBtnPressed) {
+                                                                  return;
+                                                                }
+                                                                read.subtractItemQuantity(
+                                                                    context,
+                                                                    element
+                                                                        ?.cartItemId
+                                                                        .toString(),
+                                                                    index,
+                                                                    element
+                                                                        ?.productType,
+                                                                    element
+                                                                        ?.productUnitId);
+                                                              },
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                'assets/icons/minus.svg',
+                                                                // width: 30.w,
+                                                                // height: 30.h,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 12.w,
+                                                            ),
+                                                            Text(
+                                                              "${watch.quantitySeasonalList[index]}",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle: TextStyle(
+                                                                    // decoration:
+                                                                    // TextDecoration.lineThrough,
+                                                                    color: Black,
+                                                                    // letterSpacing:
+                                                                    //     .5,
+                                                                    fontSize: 16.sp,
+                                                                    fontWeight: FontWeight.w500),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 12.w,
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                print(watch
+                                                                    .isQuanityBtnPressed);
+                                                                // return;
+                                                                if (watch
+                                                                    .isQuanityBtnPressed) {
+                                                                  return;
+                                                                }
+                                                                print(element
+                                                                    ?.productType);
+                                                                read.addItemQuantity(
+                                                                    context,
+                                                                    element
+                                                                        ?.cartItemId
+                                                                        .toString(),
+                                                                    element
+                                                                        ?.productType,
+                                                                    index);
+                                                              },
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                'assets/images/add.svg',
+                                                                // width: 30.w,
+                                                                // height: 30.h,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                  // watch.isAllSeasonalProductAdded[
+                                                  //             index] ==
+                                                  //         false
+                                                  //     ? GestureDetector(
+                                                  //         onTap: () {
+                                                  //           read.addToCart(
+                                                  //               element
+                                                  //                   ?.productType,
+                                                  //               element
+                                                  //                   ?.productUnitId,
+                                                  //               element?.shopId,
+                                                  //               index,
+                                                  //               context);
+                                                  //           // watch
+                                                  //           //     .onOfferSelected(
+                                                  //           //         index);
+                                                  //         },
+                                                  //         child:
+                                                  //             SvgPicture.asset(
+                                                  //           'assets/images/add.svg',
+                                                  //           // width: 15.w,
+                                                  //           // height: 19.h,
+                                                  //         ))
+                                                  //     : GestureDetector(
+                                                  //         onTap: () {
+                                                  //           read.removeFromCart(
+                                                  //               element
+                                                  //                   ?.productType,
+                                                  //               element
+                                                  //                   ?.productUnitId,
+                                                  //               element?.shopId,
+                                                  //               index,
+                                                  //               context);
+                                                  //         },
+                                                  //         child: SvgPicture.asset(
+                                                  //             "assets/icons/tick_green_bg.svg"),
+                                                  //       ),
                                                 ],
                                               ),
                                             ),

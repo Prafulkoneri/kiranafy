@@ -5,7 +5,9 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -62,6 +64,18 @@ class ShopProfileViewController extends ChangeNotifier {
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   bool isPageRefresh = false;
+
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
+  String quantityAction = "";
+
+  List cartItemIdSeasonalList = [];
+  List cartItemIdRecommandedList = [];
+  List cartItemIdOfferlList = [];
+  List quantitySeasonalList = [];
+  List quantityRecommandedList = [];
+  List quantityOfferList = [];
+  bool isQuanityBtnPressed = false;
+  String cartItemId = "";
 
   Future<void> initState(context, id, refresh) async {
     if (refresh) {
@@ -147,6 +161,24 @@ class ShopProfileViewController extends ChangeNotifier {
         print("bye");
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
+        quantitySeasonalList.clear();
+        quantityOfferList.clear();
+        quantityRecommandedList.clear();
+        cartItemIdRecommandedList.clear();
+        cartItemIdOfferlList.clear();
+        cartItemIdSeasonalList.clear();
+        for (int i = 0; i < seasonProductLength; i++) {
+          quantitySeasonalList.add(seasonalProduct?[i].quantity);
+          cartItemIdSeasonalList.add(seasonalProduct?[i].cartItemId);
+        }
+        for (int i = 0; i < recommandedProductLength; i++) {
+          quantityRecommandedList.add(recommandedProduct?[i].quantity);
+          cartItemIdRecommandedList.add(recommandedProduct?[i].cartItemId);
+        }
+        for (int i = 0; i < offerProductLength; i++) {
+          quantityOfferList.add(offerProduct?[i].quantity);
+          cartItemIdOfferlList.add(offerProduct?[i].cartItemId);
+        }
 
         int imageLength = bannerImageData?.length ?? 0;
         if (bannerImageData!.isNotEmpty) {
@@ -302,13 +334,57 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, context) async {
+  // Future<void> addToCart(pType, pId, sId, context) async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   if (pref.getString("status") == "guestLoggedIn") {
+  //     Utils().showLoginDialog(context, "Please Login to add product to cart");
+  //     return;
+  //   }
+  //   LoadingOverlay.of(context).show();
+  //   addProductToCartRepo
+  //       .addProductToCart(
+  //           AddProductToCartReqModel(
+  //               productType: pType,
+  //               productUnitId: pId.toString(),
+  //               shopId: sId.toString(),
+  //               quantity: "1"),
+  //           pref.getString("successToken"))
+  //       .then((response) async {
+  //     log("response.body${response.body}");
+  //     final result =
+  //         AddProductToCartResModel.fromJson(jsonDecode(response.body));
+  //     if (response.statusCode == 200) {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.success);
+  //       notifyListeners();
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.error);
+  //       LoadingOverlay.of(context).hide();
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+  //     LoadingOverlay.of(context).hide();
+  //   }).catchError(
+  //     (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       LoadingOverlay.of(context).hide();
+  //     },
+  //     test: (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       LoadingOverlay.of(context).hide();
+  //       return false;
+  //     },
+  //   );
+  // }
+  Future<void> addToCart(pType,pId,sId,index,context) async {
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
+
     if (pref.getString("status") == "guestLoggedIn") {
       Utils().showLoginDialog(context, "Please Login to add product to cart");
       return;
     }
-    LoadingOverlay.of(context).show();
     addProductToCartRepo
         .addProductToCart(
             AddProductToCartReqModel(
@@ -323,6 +399,11 @@ class ShopProfileViewController extends ChangeNotifier {
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         await getShopDetails(context, sId, false);
+        // isSeasonalProductAdded[index] = true;
+        // quantitySeasonalList.removeAt(index);
+        // quantitySeasonalList.insert(index, 1);
+        // cartItemIdList.removeAt(index);
+        // cartItemIdList.insert(index, result.cartItemId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -401,9 +482,48 @@ class ShopProfileViewController extends ChangeNotifier {
   //       shopId: shopId.toString(),
   //     );
 
-  Future<void> removeFromCart(pType, puId, sId, context) async {
+  // Future<void> removeFromCart(pType, puId, sId, context) async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   LoadingOverlay.of(context).show();
+  //   removeCartItemRepo
+  //       .removeCartItem(
+  //           RemoveItemFromCartReq(
+  //               productType: pType.toString(),
+  //               productUnitId: puId.toString(),
+  //               shopId: sId.toString(),
+  //               quantity: "0"),
+  //           pref.getString("successToken"))
+  //       .then((response) async {
+  //     log("response.body${response.body}");
+  //     final result =
+  //         CartRemoveResponseModel.fromJson(jsonDecode(response.body));
+  //     if (response.statusCode == 200) {
+  //       await getShopDetails(context, sId, false);
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.success);
+  //       notifyListeners();
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.error);
+  //       LoadingOverlay.of(context).hide();
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+  //     LoadingOverlay.of(context).hide();
+  //   }).catchError(
+  //     (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       LoadingOverlay.of(context).hide();
+  //     },
+  //     test: (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       LoadingOverlay.of(context).hide();
+  //       return false;
+  //     },
+  //   );
+  // }
+  Future<void> removeFromCart(pType, puId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    LoadingOverlay.of(context).show();
     removeCartItemRepo
         .removeCartItem(
             RemoveItemFromCartReq(
@@ -418,20 +538,177 @@ class ShopProfileViewController extends ChangeNotifier {
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         await getShopDetails(context, sId, false);
+        // isSeasonalProductAdded[index] = false;
+        notifyListeners();
+        // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+///////////////////////////////////////////////////////////////////////////////////
+
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
+    notifyListeners();
+  }
+
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopId);
+
+  Future<void> subtractItemQuantity(
+      context, CIId, index, pType, pUnitId,type) async {
+    LoadingOverlay.of(context).show();
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantitySeasonalList);
+    print(quantitySeasonalList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    productType = pType;
+    print(cartItemIdSeasonalList);
+    if (type == "offer") {
+      cartItemId = cartItemIdOfferlList[index].toString();
+    } else if (type == "seasonal") {
+      cartItemId = cartItemIdSeasonalList[index].toString();
+    } else {
+      cartItemId = cartItemIdRecommandedList[index].toString();
+    }
+    // cartItemId = cartItemIdSeasonalList[index].toString();
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result = CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+
+          if (type == "offer") {
+            if(quantityOfferList[index]==0){
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          } else if (type == "seasonal") {
+            if (quantitySeasonalList[index] == 0) {
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          } else {
+            if(quantityRecommandedList[index]==0){
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          }
+          // quantitySeasonalList.removeAt(index);
+          // print("${value}valueeeeeeeee");
+          // quantitySeasonalList.insert(index, value - 1);
+          // int value = quantitySeasonalList[index];
+
+
+          quantityBtnPressed(false);
+          await getShopDetails(context, shopId, false);
+          // LoadingOverlay.of(context).hide();
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+
+          quantityBtnPressed(false);
+          LoadingOverlay.of(context).hide();
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
         LoadingOverlay.of(context).hide();
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
       LoadingOverlay.of(context).hide();
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+        LoadingOverlay.of(context).hide();
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
+        return false;
+      },
+    );
+  }
+
+  Future<void> addItemQuantity(context, CIId, pType, index, type) async {
+    LoadingOverlay.of(context).show();
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    if (type == "offer") {
+      cartItemId = cartItemIdOfferlList[index].toString();
+    } else if (type == "seasonal") {
+      cartItemId = cartItemIdSeasonalList[index].toString();
+    } else {
+      cartItemId = cartItemIdRecommandedList[index].toString();
+    }
+
+    productType = pType;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      print("hello");
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          quantityBtnPressed(false);
+          await getShopDetails(context, shopId, false);
+          // int value = quantitySeasonalList[index];
+          // quantitySeasonalList.removeAt(index);
+          // quantitySeasonalList.insert(index, value + 1);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+          LoadingOverlay.of(context).hide();
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+        LoadingOverlay.of(context).hide();
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+      LoadingOverlay.of(context).hide();
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
         LoadingOverlay.of(context).hide();
       },
       test: (Object e) {
@@ -442,8 +719,6 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 }
-
-
 
 
 ///////////////////////////////////////

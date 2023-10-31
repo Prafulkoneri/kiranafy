@@ -304,16 +304,24 @@ class ShopSignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "loggedIn");
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: ShopDashBoardView(
-                    refresh: true,
-                  ))),
-          (Route<dynamic> route) => false,
-        );
+        if (kycVerificationStatus == "no" && shopRegistrationStatus == "yes") {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+        }
+          else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SMainScreenView(
+                        index: 0,
+                        screenName: ShopDashBoardView(
+                          refresh: true,
+                        ))),
+                (Route<dynamic> route) => false,
+          );
+        }
+
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
