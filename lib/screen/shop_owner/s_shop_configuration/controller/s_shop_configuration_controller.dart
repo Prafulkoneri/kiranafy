@@ -74,6 +74,8 @@ class SShopConfigurationController extends ChangeNotifier {
   String closingAmPm="pm";
 
   Future<void> initState(context, initialConfiguration) async {
+    openingAmPm="am";
+    closingAmPm="pm";
     upiIdController.clear();
     supportNumberController.clear();
     firstDeliveryController.clear();
@@ -289,8 +291,8 @@ class SShopConfigurationController extends ChangeNotifier {
             data?.shopOwnerAmount4DeliveryCharges ?? "";
         startShopTimeController.text = data?.shopOwnerShopOpeningTime ?? "";
         endShopTimeController.text = data?.shopOwnerShopCloseTime ?? "";
-        openingAmPm=data?.openingAmPm??"";
-        closingAmPm=data?.closingAmPm??"";
+        openingAmPm=data?.openingAmPm??"am";
+        closingAmPm=data?.closingAmPm??"pm";
         upiIdController.text = result.upiid ?? "";
         minimumDeliveryAmountController.text =
             data?.minimumOrderDeliveryAmount ?? "";

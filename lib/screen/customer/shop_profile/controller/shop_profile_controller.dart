@@ -162,7 +162,10 @@ class ShopProfileViewController extends ChangeNotifier {
         print(favAllShop);
         print("uivynuibnywetinyiqwn8wq7eyvnb8q8ew");
         quantitySeasonalList.clear();
+        quantityOfferList.clear();
         quantityRecommandedList.clear();
+        cartItemIdRecommandedList.clear();
+        cartItemIdOfferlList.clear();
         cartItemIdSeasonalList.clear();
         for (int i = 0; i < seasonProductLength; i++) {
           quantitySeasonalList.add(seasonalProduct?[i].quantity);
@@ -374,7 +377,7 @@ class ShopProfileViewController extends ChangeNotifier {
   //     },
   //   );
   // }
-  Future<void> addToCart(pType, pId, sId, index, context) async {
+  Future<void> addToCart(pType,pId,sId,index,context) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
 
@@ -403,8 +406,6 @@ class ShopProfileViewController extends ChangeNotifier {
         // cartItemIdList.insert(index, result.cartItemId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
-
-        LoadingOverlay.of(context).hide();
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -575,7 +576,7 @@ class ShopProfileViewController extends ChangeNotifier {
           shopId: shopId);
 
   Future<void> subtractItemQuantity(
-      context, CIId, index, pType, pUnitId) async {
+      context, CIId, index, pType, pUnitId,type) async {
     LoadingOverlay.of(context).show();
     quantityBtnPressed(true);
     print("*********");
@@ -585,7 +586,14 @@ class ShopProfileViewController extends ChangeNotifier {
     quantityAction = "subtract";
     productType = pType;
     print(cartItemIdSeasonalList);
-    cartItemId = cartItemIdSeasonalList[index].toString();
+    if (type == "offer") {
+      cartItemId = cartItemIdOfferlList[index].toString();
+    } else if (type == "seasonal") {
+      cartItemId = cartItemIdSeasonalList[index].toString();
+    } else {
+      cartItemId = cartItemIdRecommandedList[index].toString();
+    }
+    // cartItemId = cartItemIdSeasonalList[index].toString();
     print(cartItemId);
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
@@ -593,21 +601,32 @@ class ShopProfileViewController extends ChangeNotifier {
             cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) async {
       log("response.body${response.body}");
-      final result =
-          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      final result = CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          await getShopDetails(context, shopId, false);
-          // int value = quantitySeasonalList[index];
+
+          if (type == "offer") {
+            if(quantityOfferList[index]==0){
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          } else if (type == "seasonal") {
+            if (quantitySeasonalList[index] == 0) {
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          } else {
+            if(quantityRecommandedList[index]==0){
+              removeFromCart(pType, pUnitId, shopId, index, context);
+            }
+          }
           // quantitySeasonalList.removeAt(index);
           // print("${value}valueeeeeeeee");
           // quantitySeasonalList.insert(index, value - 1);
+          // int value = quantitySeasonalList[index];
 
-          if (quantitySeasonalList[index] == 0) {
-            removeFromCart(pType, pUnitId, shopId, index, context);
-          }
+
           quantityBtnPressed(false);
-          LoadingOverlay.of(context).hide();
+          await getShopDetails(context, shopId, false);
+          // LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -664,12 +683,11 @@ class ShopProfileViewController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
+          quantityBtnPressed(false);
           await getShopDetails(context, shopId, false);
           // int value = quantitySeasonalList[index];
           // quantitySeasonalList.removeAt(index);
           // quantitySeasonalList.insert(index, value + 1);
-          quantityBtnPressed(false);
-          LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -701,8 +719,6 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 }
-
-
 
 
 ///////////////////////////////////////

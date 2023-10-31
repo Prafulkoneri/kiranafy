@@ -970,7 +970,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               element?.cartItemId.toString(),
                                                                               index,
                                                                               element?.productType,
-                                                                              element?.productUnitId);
+                                                                              element?.productUnitId,"offer");
                                                                         },
                                                                         child: SvgPicture
                                                                             .asset(
@@ -1506,7 +1506,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               if (watch.isQuanityBtnPressed) {
                                                                                 return;
                                                                               }
-                                                                              read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId);
+                                                                              read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId,"seasonal");
                                                                             },
                                                                             child:
                                                                                 SvgPicture.asset(
@@ -2086,7 +2086,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                       element
                                                                           ?.productType,
                                                                       element
-                                                                          ?.productUnitId);
+                                                                          ?.productUnitId,"recommended");
                                                                 },
                                                                 child:
                                                                     SvgPicture
