@@ -98,16 +98,20 @@ class HomeScreenController extends ChangeNotifier {
       } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -133,7 +137,6 @@ class HomeScreenController extends ChangeNotifier {
       if (response.statusCode == 200) {
         print("${response.body}");
         print("77777777");
-
         print(result.categoriesFirstList);
         print("77777777");
         categoryFirstList = result.categoriesFirstList ?? [];
@@ -141,16 +144,20 @@ class HomeScreenController extends ChangeNotifier {
 
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -181,16 +188,20 @@ class HomeScreenController extends ChangeNotifier {
         // showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
@@ -218,16 +229,20 @@ class HomeScreenController extends ChangeNotifier {
         showLoader(false);
         notifyListeners();
       } else {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
     }).onError((error, stackTrace) {
+      showLoader(false);
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
     }).catchError(
       (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
       },
       test: (Object e) {
+        showLoader(false);
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         return false;
       },
