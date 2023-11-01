@@ -699,19 +699,7 @@ class AllOffersController extends ChangeNotifier {
       final result = ViewAllOfferProducts.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         allproducts = result.data;
-        // seasonalProduct.clear();
-        // seasonalProduct = data?.seasonalProducts;
-        // seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
-        // int seasonProductLength = seasonalProduct?.length ?? 0;
-        // isAllSeasonalProductAdded =
-        //     List<bool>.filled(seasonProductLength, false, growable: true);
-        // for (int i = 0; i < seasonProductLength; i++) {
-        //   if (seasonalProduct?[i].addToCartCheck == "yes") {
-        //     isAllSeasonalProductAdded.insert(i, true);
-        //   } else {
-        //     isAllSeasonalProductAdded.insert(i, false);
-        //   }
-        // }
+
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
         int offerProductLength = allOfferProducts?.length ?? 0;
         isAllOfferProductAdded =
@@ -723,6 +711,13 @@ class AllOffersController extends ChangeNotifier {
             isAllOfferProductAdded.insert(i, false);
           }
         }
+        quantityList.clear();
+        cartItemIdList.clear();
+        for (int i = 0; i < offerProductLength; i++) {
+          quantityList.add(allOfferProducts?[i].quantity);
+          cartItemIdList.add(allOfferProducts?[i].cartItemId);
+        }
+
         showLoader(false);
         showPaginationLoader = false;
         notifyListeners();
