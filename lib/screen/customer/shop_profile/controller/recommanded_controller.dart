@@ -3,16 +3,16 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/recommanded_products_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/recommanded_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
-
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SAllRecommandedProductsController extends ChangeNotifier {
   String shopId = "";
@@ -23,9 +23,20 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   List<bool> isRecommandedProductAdded = [];
   Data? data;
+
+  bool isQuanityBtnPressed = false;
+  // List cartItemIdList = [];
+  List cartItemIdList = [];
+  List quantityList = [];
+  String quantityAction = "";
+  String cartItemId = "";
+  String productType = "";
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
   // List<CustomerProductData>? recommandedProducts;
   List<CustomerProductData> recommandedProducts = [];
   Future<void> initState(context, id) async {
+    quantityList.clear();
+    cartItemIdList.clear();
     recommandedProducts.clear();
     offset = 0;
     await getAllRecommandedProducts(context, id);
@@ -72,6 +83,11 @@ class SAllRecommandedProductsController extends ChangeNotifier {
             isRecommandedProductAdded.insert(i, false);
           }
         }
+        /////////////////////
+        for (int i = 0; i < recommandedProductLength; i++) {
+          quantityList.add(recommandedProducts[i].quantity);
+          cartItemIdList.add(recommandedProducts[i].cartItemId);
+        }
         showLoader(false);
 
         showPaginationLoader = false;
@@ -101,8 +117,8 @@ class SAllRecommandedProductsController extends ChangeNotifier {
   Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
-    if(pref.getString("status")=="guestLoggedIn"){
-      Utils().showLoginDialog(context,"Please Login to add product to cart");
+    if (pref.getString("status") == "guestLoggedIn") {
+      Utils().showLoginDialog(context, "Please Login to add product to cart");
       return;
     }
     addProductToCartRepo
@@ -119,6 +135,11 @@ class SAllRecommandedProductsController extends ChangeNotifier {
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         isRecommandedProductAdded[index] = true;
+        quantityList.removeAt(index);
+        quantityList.insert(index, 1);
+        print(quantityList);
+        cartItemIdList.removeAt(index);
+        cartItemIdList.insert(index, result.cartItemId);
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -167,6 +188,11 @@ class SAllRecommandedProductsController extends ChangeNotifier {
           } else {
             isRecommandedProductAdded.insert(i, false);
           }
+        }
+        int length = result.data?.recommandedProducts?.length ?? 0;
+        for (int i = 0; i < length; i++) {
+          quantityList.add(result.data?.recommandedProducts?[i].quantity);
+          cartItemIdList.add(result.data?.recommandedProducts?[i].cartItemId);
         }
         showLoader(false);
 
@@ -224,6 +250,123 @@ class SAllRecommandedProductsController extends ChangeNotifier {
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+////////////////////////////////////////////////////////////////
+
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
+    notifyListeners();
+  }
+
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopId);
+
+  Future<void> subtractItemQuantity(
+      context, CIId, index, pType, pUnitId) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityList);
+    print(quantityList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    productType = pType;
+    print(cartItemIdList);
+    cartItemId = cartItemIdList[index].toString();
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          print("${value}valueeeeeeeee");
+          quantityList.insert(index, value - 1);
+
+          if (quantityList[index] == 0) {
+            removeFromCart(pType, pUnitId, shopId, index, context);
+          }
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> addItemQuantity(context, CIId, pType, index) async {
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    cartItemId = cartItemIdList[index].toString();
+    productType = pType;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print("hello");
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          quantityList.insert(index, value + 1);
+          quantityBtnPressed(false);
+
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);

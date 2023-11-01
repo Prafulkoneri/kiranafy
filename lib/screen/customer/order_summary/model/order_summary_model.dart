@@ -203,6 +203,8 @@ class FullFillYourCraving {
   String? status;
   String? unit;
   String? addToCartCheck;
+  int? quantity;
+  int? cartItemId;
 
   FullFillYourCraving({
     required this.id,
@@ -221,6 +223,8 @@ class FullFillYourCraving {
     required this.status,
     required this.unit,
     required this.addToCartCheck,
+    required this.quantity,
+    required this.cartItemId,
   });
 
   FullFillYourCraving.fromJson(Map<String, dynamic> json) {
@@ -240,6 +244,8 @@ class FullFillYourCraving {
     status = json["status"];
     unit = json["unit"];
     addToCartCheck = json["add_to_cart_check"];
+    quantity = json["quantity"];
+    cartItemId = json["cart_item_id"];
   }
 }
 
