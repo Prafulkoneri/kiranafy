@@ -358,7 +358,18 @@ class AllOffersController extends ChangeNotifier {
   bool favAllShop = true; /////shop add fvrt
   AddFavShopRepo addFavShopRepo = AddFavShopRepo();
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
+
+  bool isQuanityBtnPressed = false;
+  // List cartItemIdList = [];
+  List cartItemIdList = [];
+  List quantityList = [];
+  String quantityAction = "";
+  String cartItemId = "";
+  String productType = "";
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
   Future<void> initState(context, id) async {
+    quantityList.clear();
+    cartItemIdList.clear();
     allOfferProducts.clear();
     offset = 0;
     await getAllOfferes(context, id);
@@ -463,7 +474,11 @@ class AllOffersController extends ChangeNotifier {
             isAllOfferProductAdded.insert(i, false);
           }
         }
-
+        ///////////////
+        for (int i = 0; i < offerProductLength; i++) {
+          quantityList.add(allOfferProducts?[i].quantity);
+          cartItemIdList.add(allOfferProducts?[i].cartItemId);
+        }
         showLoader(false);
 
         showPaginationLoader = false;
@@ -582,6 +597,11 @@ class AllOffersController extends ChangeNotifier {
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         isAllOfferProductAdded[index] = true;
+        quantityList.removeAt(index);
+        quantityList.insert(index, 1);
+        cartItemIdList.removeAt(index);
+        cartItemIdList.insert(index, result.cartItemId);
+
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
@@ -765,15 +785,6 @@ class AllOffersController extends ChangeNotifier {
     );
   }
 
-  /////////////////////////////////////
-  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
-  String quantityAction = "";
-
-  List cartItemIdList = [];
-  List quantityAllofferList = [];
-  bool isQuanityBtnPressed = false;
-  String cartItemId = "";
-  String productType = "";
   quantityBtnPressed(value) {
     isQuanityBtnPressed = value;
     notifyListeners();
@@ -790,8 +801,8 @@ class AllOffersController extends ChangeNotifier {
       context, CIId, index, pType, pUnitId) async {
     quantityBtnPressed(true);
     print("*********");
-    print(quantityAllofferList);
-    print(quantityAllofferList[index]);
+    print(quantityList);
+    print(quantityList[index]);
     print("*********");
     quantityAction = "subtract";
     productType = pType;
@@ -808,12 +819,12 @@ class AllOffersController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          int value = quantityAllofferList[index];
-          quantityAllofferList.removeAt(index);
+          int value = quantityList[index];
+          quantityList.removeAt(index);
           print("${value}valueeeeeeeee");
-          quantityAllofferList.insert(index, value - 1);
+          quantityList.insert(index, value - 1);
 
-          if (quantityAllofferList[index] == 0) {
+          if (quantityList[index] == 0) {
             removeFromCart(pType, pUnitId, shopId, index, context);
           }
           quantityBtnPressed(false);
@@ -859,9 +870,9 @@ class AllOffersController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          int value = quantityAllofferList[index];
-          quantityAllofferList.removeAt(index);
-          quantityAllofferList.insert(index, value + 1);
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          quantityList.insert(index, value + 1);
           quantityBtnPressed(false);
 
           notifyListeners();
