@@ -464,11 +464,11 @@ class AllOffersController extends ChangeNotifier {
         allOfferProducts.clear();
         // seasonalProduct = data?.seasonalProducts;
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
-        int offerProductLength = allOfferProducts?.length ?? 0;
+        int offerProductLength = allOfferProducts.length ?? 0;
         isAllOfferProductAdded =
             List<bool>.filled(offerProductLength, false, growable: true);
         for (int i = 0; i < offerProductLength; i++) {
-          if (allOfferProducts?[i].addToCartCheck == "yes") {
+          if (allOfferProducts[i].addToCartCheck == "yes") {
             isAllOfferProductAdded.insert(i, true);
           } else {
             isAllOfferProductAdded.insert(i, false);
@@ -476,8 +476,8 @@ class AllOffersController extends ChangeNotifier {
         }
         ///////////////
         for (int i = 0; i < offerProductLength; i++) {
-          quantityList.add(allOfferProducts?[i].quantity);
-          cartItemIdList.add(allOfferProducts?[i].cartItemId);
+          quantityList.add(allOfferProducts[i].quantity);
+          cartItemIdList.add(allOfferProducts[i].cartItemId);
         }
         showLoader(false);
 
@@ -578,6 +578,7 @@ class AllOffersController extends ChangeNotifier {
   }
 
   Future<void> addToCart(pType, pId, sId, index, context) async {
+    print("index:$index");
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
       Utils().showLoginDialog(context, "Please Login to add product to cart");
@@ -599,6 +600,7 @@ class AllOffersController extends ChangeNotifier {
         isAllOfferProductAdded[index] = true;
         quantityList.removeAt(index);
         quantityList.insert(index, 1);
+        print(quantityList);
         cartItemIdList.removeAt(index);
         cartItemIdList.insert(index, result.cartItemId);
 
@@ -701,21 +703,20 @@ class AllOffersController extends ChangeNotifier {
         allproducts = result.data;
 
         allOfferProducts.addAll(result.data?.offerProducts ?? []);
-        int offerProductLength = allOfferProducts?.length ?? 0;
+        int offerProductLength = allOfferProducts.length ?? 0;
         isAllOfferProductAdded =
             List<bool>.filled(offerProductLength, false, growable: true);
         for (int i = 0; i < offerProductLength; i++) {
-          if (allOfferProducts?[i].addToCartCheck == "yes") {
+          if (allOfferProducts[i].addToCartCheck == "yes") {
             isAllOfferProductAdded.insert(i, true);
           } else {
             isAllOfferProductAdded.insert(i, false);
           }
         }
-        quantityList.clear();
-        cartItemIdList.clear();
-        for (int i = 0; i < offerProductLength; i++) {
-          quantityList.add(allOfferProducts?[i].quantity);
-          cartItemIdList.add(allOfferProducts?[i].cartItemId);
+        int length=result.data?.offerProducts?.length??0;
+        for (int i = 0; i < length; i++) {
+          quantityList.add(result.data?.offerProducts?[i].quantity);
+          cartItemIdList.add(result.data?.offerProducts?[i].cartItemId);
         }
 
         showLoader(false);

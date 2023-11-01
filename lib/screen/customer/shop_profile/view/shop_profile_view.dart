@@ -2508,6 +2508,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           ),
                         ],
                       ),
+
                       SizedBox(
                         height: 100.w,
                       ),
