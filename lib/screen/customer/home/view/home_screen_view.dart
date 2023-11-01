@@ -420,7 +420,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                         height: 20.h,
                       ),
 
-                      watch.placeAd.isNotEmpty == true
+                      watch.customerplacead?.isNotEmpty == true
                           ? GestureDetector(
                               onTap: () {
                                 // print((watch.customerplacead?.toList()
@@ -432,68 +432,68 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 //     ?.first
                                 //     .redirectToProduct);
 
-                                if ((watch.customerplacead?.toList()
-                                          ?..shuffle())
-                                        ?.first
-                                        .redirectToShop ==
-                                    "yes") {
-                                  readMain.onNavigation(
-                                      1,
-                                      ShopProfileView(
-                                          shopId:
-                                              (watch.customerplacead?.toList()
-                                                    ?..shuffle())
-                                                  ?.first
-                                                  .shopId
-                                                  .toString(),
-                                          refreshPage: true,
-                                          routeName: "homeScreen"),
-                                      context);
-                                }
-                                if ((watch.customerplacead?.toList()
-                                          ?..shuffle())
-                                        ?.first
-                                        .redirectToProduct
-                                        .toString() ==
-                                    "yes") {
-                                  // return;
-                                  readProductScreen.updateProductId(
-                                      (watch.customerplacead?.toList()
-                                            ?..shuffle())
-                                          ?.first
-                                          .productId
-                                          .toString(),
-                                      context,
-                                      false);
-                                  readMain.onNavigation(
-                                      0,
-                                      ProductScreenView(
-                                        shopId: (watch.customerplacead?.toList()
-                                              ?..shuffle())
-                                            ?.first
-                                            .shopId
-                                            .toString(),
-                                        categoryId:
-                                            (watch.customerplacead?.toList()
-                                                  ?..shuffle())
-                                                ?.first
-                                                .categoryId
-                                                .toString(),
-                                        productId:
-                                            (watch.customerplacead?.toList()
-                                                  ?..shuffle())
-                                                ?.first
-                                                .productId
-                                                .toString(),
-                                        productType:
-                                            (watch.customerplacead?.toList()
-                                                  ?..shuffle())
-                                                ?.first
-                                                .productType,
-                                        routeName: "homeScreenBanner",
-                                      ),
-                                      context);
-                                }
+                                // if ((watch.customerplacead?.toList()
+                                //           ?..shuffle())
+                                //         ?.first
+                                //         .redirectToShop ==
+                                //     "yes") {
+                                //   readMain.onNavigation(
+                                //       1,
+                                //       ShopProfileView(
+                                //           shopId:
+                                //               (watch.customerplacead?.toList()
+                                //                     ?..shuffle())
+                                //                   ?.first
+                                //                   .shopId
+                                //                   .toString(),
+                                //           refreshPage: true,
+                                //           routeName: "homeScreen"),
+                                //       context);
+                                // }
+                                // if ((watch.customerplacead?.toList()
+                                //           ?..shuffle())
+                                //         ?.first
+                                //         .redirectToProduct
+                                //         .toString() ==
+                                //     "yes") {
+                                //   // return;
+                                //   readProductScreen.updateProductId(
+                                //       (watch.customerplacead?.toList()
+                                //             ?..shuffle())
+                                //           ?.first
+                                //           .productId
+                                //           .toString(),
+                                //       context,
+                                //       false);
+                                //   readMain.onNavigation(
+                                //       0,
+                                //       ProductScreenView(
+                                //         shopId: (watch.customerplacead?.toList()
+                                //               ?..shuffle())
+                                //             ?.first
+                                //             .shopId
+                                //             .toString(),
+                                //         categoryId:
+                                //             (watch.customerplacead?.toList()
+                                //                   ?..shuffle())
+                                //                 ?.first
+                                //                 .categoryId
+                                //                 .toString(),
+                                //         productId:
+                                //             (watch.customerplacead?.toList()
+                                //                   ?..shuffle())
+                                //                 ?.first
+                                //                 .productId
+                                //                 .toString(),
+                                //         productType:
+                                //             (watch.customerplacead?.toList()
+                                //                   ?..shuffle())
+                                //                 ?.first
+                                //                 .productType,
+                                //         routeName: "homeScreenBanner",
+                                //       ),
+                                //       context);
+                                // }
                               },
                               child: Container(
                                   padding: EdgeInsets.only(

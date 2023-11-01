@@ -436,7 +436,7 @@ class ShopAllSeasonalController extends ChangeNotifier {
         seasonalProduct.clear();
         // seasonalProduct = data?.seasonalProducts;
         seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
-        int seasonProductLength = seasonalProduct?.length ?? 0;
+        int seasonProductLength = seasonalProduct.length ?? 0;
         isAllSeasonalProductAdded =
             List<bool>.filled(seasonProductLength, false, growable: true);
         for (int i = 0; i < seasonProductLength; i++) {

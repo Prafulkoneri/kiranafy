@@ -2416,7 +2416,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                             )
                           : Container(),
-                      watchHome.placeAd.isNotEmpty == true
+                      watchHome.customerplacead?.isNotEmpty == true
                           ? Container(
                               padding: EdgeInsets.only(
                                 right: 19.0.w,
@@ -2424,41 +2424,37 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ),
                               width: ScreenUtil().screenWidth,
                               // height: 100.h,
-                              child: (watchHome.placeAd.toList()..shuffle())
-                                          .first !=
+                              child: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath !=
                                       ""
                                   ? AppNetworkImages(
                                       showShopImage: true,
-                                      imageUrl: (watchHome.placeAd.toList()
-                                            ..shuffle())
-                                          .first,
+                                      imageUrl: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath,
                                       height: 163.h,
                                       width: 352.w,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
-                                      "assets/images/image_not_found.png",
+                                      "assets/images/nearshop2.png",
                                       height: 170.w,
                                       // width: 340.w,
                                       // scale: 0.5,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                             )
                           : Container(
-                              padding: EdgeInsets.only(
-                                right: 19.0.w,
-                                left: 19.0.w,
-                              ),
-                              width: ScreenUtil().screenWidth,
-                              // height: 100.h,
-                              child: Image.asset(
-                                "assets/images/image_not_found.png",
-                                height: 170.w,
-                                // width: 340.w,
-                                // scale: 0.5,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          padding: EdgeInsets.only(
+                            right: 19.0.w,
+                            left: 19.0.w,
+                          ),
+                          width: ScreenUtil().screenWidth,
+                          // height: 100.h,
+                          child: Image.asset(
+                            "assets/images/nearshop2.png",
+                            height: 170.w,
+                            // width: 340.w,
+                            // scale: 0.5,
+                            fit: BoxFit.cover,
+                          )),
 
                       SizedBox(
                         height: 20.h,

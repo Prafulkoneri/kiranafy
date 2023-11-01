@@ -210,6 +210,7 @@ class HomeScreenController extends ChangeNotifier {
 
   //////////////////////////////////////
   Future<void> getPlaceAd(context) async {
+    customerplacead?.clear();
     showLoader(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
     print("bnvuuiwveuciiutwmibijmiuey");
@@ -223,9 +224,9 @@ class HomeScreenController extends ChangeNotifier {
         cplacead = result.cplacead;
         customerplacead = cplacead?.customerplacead;
         int imageLength = customerplacead?.length ?? 0;
-        for (int i = 0; i < imageLength; i++) {
-          placeAd.add(customerplacead?[i].shopBannerImagePath);
-        }
+        // for (int i = 0; i < imageLength; i++) {
+        //   placeAd.add(customerplacead?[i].shopBannerImagePath);
+        // }
         showLoader(false);
         notifyListeners();
       } else {

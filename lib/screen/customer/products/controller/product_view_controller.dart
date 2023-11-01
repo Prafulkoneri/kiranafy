@@ -64,7 +64,8 @@ class ProductViewController extends ChangeNotifier {
   List cartItemIdList = [];
   String cartItemId = "";
   String quantityAction = "";
-
+  List similarQuantityList=[];
+  List similarCartItemIdList=[];
   ProductViewRepo productViewRepo = ProductViewRepo();
   HomeBannerRepo homeBannerRepo = HomeBannerRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -87,6 +88,8 @@ class ProductViewController extends ChangeNotifier {
     print(pId);
     print(productId);
     quantityList.clear();
+    similarQuantityList.clear();
+    similarCartItemIdList.clear();
     unitImages.clear();
     cartItemIdList.clear();
     quantityList.clear();
@@ -140,113 +143,11 @@ class ProductViewController extends ChangeNotifier {
           productType: productType,
           shopId: shopDetails?.id);
 
-  Future<void> subtractItemQuantity(
-      context, CIId, index, pType, pUnitId) async {
-    quantityBtnPressed(true);
-    print("*********");
-    print(quantityList);
-    print(quantityList[index]);
-    print("*********");
-    quantityAction = "subtract";
-    print(cartItemIdList);
-    cartItemId = cartItemIdList[index].toString();
-    print(cartItemId);
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    cartItemQuantityRepo
-        .cartItemQuantity(
-            cartItemQuantityRequestModel, pref.getString("successToken"))
-        .then((response) {
-      dev.log("response.body${response.body}");
-      final result =
-          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        if (result.status == 200) {
-          int value = quantityList[index];
-          quantityList.removeAt(index);
-          print("${value}valueeeeeeeee");
-          quantityList.insert(index, value - 1);
-
-          if (quantityList[index] == 0) {
-            removeFromCart(
-                pType, pUnitId, shopDetails?.id, index, context, false);
-            isUnitImagesAdded[index] = false;
-          }
-          quantityBtnPressed(false);
-          notifyListeners();
-        } else {
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-          quantityBtnPressed(false);
-        }
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-        quantityBtnPressed(false);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-      quantityBtnPressed(false);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        quantityBtnPressed(false);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
-
-  Future<void> addItemQuantity(context, CIId, index) async {
-    quantityBtnPressed(true);
-    quantityAction = "add";
-    cartItemId = cartItemIdList[index].toString();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    cartItemQuantityRepo
-        .cartItemQuantity(
-            cartItemQuantityRequestModel, pref.getString("successToken"))
-        .then((response) {
-      print("hello");
-      dev.log("response.body${response.body}");
-      final result =
-          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
-      if (response.statusCode == 200) {
-        if (result.status == 200) {
-          int value = quantityList[index];
-          quantityList.removeAt(index);
-          quantityList.insert(index, value + 1);
-          quantityBtnPressed(false);
-
-          notifyListeners();
-        } else {
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-          quantityBtnPressed(false);
-        }
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-        quantityBtnPressed(false);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-      quantityBtnPressed(false);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        quantityBtnPressed(false);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
 
   Future<void> addToCart(
       pType, pId, sId, index, context, isSimilarProduct) async {
     print("quantityList1${quantityList}");
+    LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
       Utils().showLoginDialog(context, "Please Login to add product to cart");
@@ -254,16 +155,16 @@ class ProductViewController extends ChangeNotifier {
     }
     addProductToCartRepo
         .addProductToCart(
-            AddProductToCartReqModel(
-                productType: pType,
-                productUnitId: pId.toString(),
-                shopId: sId.toString(),
-                quantity: "1"),
-            pref.getString("successToken"))
+        AddProductToCartReqModel(
+            productType: pType,
+            productUnitId: pId.toString(),
+            shopId: sId.toString(),
+            quantity: "1"),
+        pref.getString("successToken"))
         .then((response) {
       dev.log("response.body${response.body}");
       final result =
-          AddProductToCartResModel.fromJson(jsonDecode(response.body));
+      AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
           cartItemId = result.cartItemId.toString();
@@ -275,22 +176,32 @@ class ProductViewController extends ChangeNotifier {
             cartItemIdList.removeAt(index);
             cartItemIdList.insert(index, result.cartItemId);
           } else {
+            similarQuantityList.removeAt(index);
+            similarQuantityList.insert(index, 1);
+            print(quantityList);
+            similarCartItemIdList.removeAt(index);
+            similarCartItemIdList.insert(index, result.cartItemId);
             isSimilarProductAdded[index] = true;
           }
+          LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
+          LoadingOverlay.of(context).hide();
         }
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
+        LoadingOverlay.of(context).hide();
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      LoadingOverlay.of(context).hide();
     }).catchError(
-      (Object e) {
+          (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -298,6 +209,156 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
+
+  Future<void> subtractItemQuantity(
+      context, CIId, index, pType, pUnitId,isSimilarProduct) async {
+    LoadingOverlay.of(context).show();
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityList);
+    print("*********");
+    quantityAction = "subtract";
+    productType=pType;
+    print(cartItemIdList);
+    if(!isSimilarProduct) {
+      cartItemId = cartItemIdList[index].toString();
+    }
+    else{
+      cartItemId = similarCartItemIdList[index].toString();
+    }
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      dev.log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          if(!isSimilarProduct) {
+            int value = quantityList[index];
+            quantityList.removeAt(index);
+            print("${value}valueeeeeeeee");
+            quantityList.insert(index, value - 1);
+
+            if (quantityList[index] == 0) {
+              removeFromCart(
+                  pType, pUnitId, shopDetails?.id, index, context, false);
+              isUnitImagesAdded[index] = false;
+            }
+          }
+          else{
+            int value = similarQuantityList[index];
+            similarQuantityList.removeAt(index);
+            print("${value}valueeeeeeeee");
+            similarQuantityList.insert(index, value - 1);
+
+            if (similarQuantityList[index] == 0) {
+              removeFromCart(
+                  pType, pUnitId, shopDetails?.id, index, context, false);
+            }
+          }
+          LoadingOverlay.of(context).hide();
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          LoadingOverlay.of(context).hide();
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        LoadingOverlay.of(context).hide();
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      LoadingOverlay.of(context).hide();
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+  Future<void> addItemQuantity(context, CIId, index,pType,isSimilarProduct) async {
+   LoadingOverlay.of(context).show();
+    print("hello");
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    productType=pType;
+    if(!isSimilarProduct){
+      cartItemId = cartItemIdList[index].toString();
+    }
+    else{
+      cartItemId=similarCartItemIdList[index].toString();
+    }
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) {
+      print("hello");
+      dev.log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          if(!isSimilarProduct) {
+            int value = quantityList[index];
+            quantityList.removeAt(index);
+            quantityList.insert(index, value + 1);
+          }
+          else{
+            int value=similarQuantityList[index];
+            similarQuantityList.removeAt(index);
+            similarQuantityList.insert(index,value+1);
+          }
+          quantityBtnPressed(false);
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          LoadingOverlay.of(context).hide();
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        LoadingOverlay.of(context).hide();
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      LoadingOverlay.of(context).hide();
+      quantityBtnPressed(false);
+
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        LoadingOverlay.of(context).hide();
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+
 
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(
@@ -357,6 +418,13 @@ class ProductViewController extends ChangeNotifier {
             isSimilarProductAdded.insert(i, false);
           }
         }
+
+
+        for(int i=0;i<similarProductLength;i++){
+          similarQuantityList.add(similarProduct?[i].quantity);
+          similarCartItemIdList.add(similarProduct?[i].cartItemId);
+        }
+
         //////////////////Unit Images////////////////
         productUnitDetail = productViewData?.productUnitDetails;
         int productUnitImageLength = productUnitDetail?.length ?? 0;
@@ -439,6 +507,10 @@ class ProductViewController extends ChangeNotifier {
           } else {
             isSimilarProductAdded.insert(i, false);
           }
+        }
+        for(int i=0;i<similarProductLength;i++){
+          similarQuantityList.add(similarProduct?[i].quantity);
+          similarCartItemIdList.add(similarProduct?[i].cartItemId);
         }
         //////////////////Unit Images////////////////
         productUnitDetail = productViewData?.productUnitDetails;
@@ -547,17 +619,12 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  AddCustomProductToFavReqModel get addCustomProductToFavReqModel =>
-      AddCustomProductToFavReqModel(
+  AddCustomProductToFavReqModel get addCustomProductToFavReqModel => AddCustomProductToFavReqModel(
         shopId: shopId,
         productId: productId,
       );
 //////Add Admin Product To favrt////
-  AddAdminProductToFavReqModel get addAdminProductToFavReqModel =>
-      AddAdminProductToFavReqModel(
-        shopId: shopId,
-        productId: productId,
-      );
+  AddAdminProductToFavReqModel get addAdminProductToFavReqModel => AddAdminProductToFavReqModel(shopId: shopId,productId: productId,);
 
   Future addToFavProduct(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -627,17 +694,11 @@ class ProductViewController extends ChangeNotifier {
   }
 
   /////End/////
-  RemoveAdminProductReqModel get removeFavProductReqModel =>
-      RemoveAdminProductReqModel(
-          shopId: shopId.toString(), productId: productId.toString());
+  RemoveAdminProductReqModel get removeFavProductReqModel => RemoveAdminProductReqModel(shopId: shopId.toString(), productId: productId.toString());
 
-  RemoveCustomProductReqModel get removeCustomeProductReqModel =>
-      RemoveCustomProductReqModel(
-          shopId: shopId.toString(), productId: productId.toString());
+  RemoveCustomProductReqModel get removeCustomeProductReqModel => RemoveCustomProductReqModel(shopId: shopId.toString(), productId: productId.toString());
 
-  Future<void> removeFavProduct(
-    context,
-  ) async {
+  Future<void> removeFavProduct(context,) async {
     if (productType == "admin_product") {
       SharedPreferences pref = await SharedPreferences.getInstance();
       removeFavProductRepo
@@ -711,9 +772,8 @@ class ProductViewController extends ChangeNotifier {
   }
 
   ////////////Add Fvrt/////////////
-  AddFavReqModel get addFavReqModel => AddFavReqModel(
-        shopId: shopId.toString(),
-      );
+  AddFavReqModel get addFavReqModel => AddFavReqModel(shopId: shopId.toString(),);
+
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
@@ -750,9 +810,8 @@ class ProductViewController extends ChangeNotifier {
   }
 
   ////////////////Remove//////////////
-  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
-        shopId: shopId.toString(),
-      );
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(shopId: shopId.toString(),);
+
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
 
   Future<void> removeAllShopFavList(context, id) async {
@@ -787,6 +846,7 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
+
   ///////////////End/////////////
 
   // void onShareXFileFromAssets(BuildContext context) async {

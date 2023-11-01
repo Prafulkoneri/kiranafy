@@ -620,7 +620,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   SizedBox(
                                     height: 30,
                                   ),
-                                  watchHome.placeAd.isNotEmpty == true
+                                  watchHome.customerplacead?.isNotEmpty == true
                                       ? Container(
                                           padding: EdgeInsets.only(
                                             right: 19.0.w,
@@ -629,15 +629,10 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                           width: ScreenUtil().screenWidth,
 
                                           // height: 100.h,
-                                          child: (watchHome.placeAd.toList()
-                                                        ..shuffle())
-                                                      .first !=
+                                          child: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath !=
                                                   ""
                                               ? AppNetworkImages(
-                                                  imageUrl: (watchHome.placeAd
-                                                          .toList()
-                                                        ..shuffle())
-                                                      .first,
+                                                  imageUrl: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath,
                                                   showShopImage: true,
                                                   height: 163.h,
                                                   width: 352.w,
