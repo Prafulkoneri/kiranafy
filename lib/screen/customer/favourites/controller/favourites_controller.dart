@@ -152,7 +152,7 @@ class FavouritesController extends ChangeNotifier {
       log("response.body${response.body}");
       final result = RemoveFavResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        fav[index] = false; ///////////////////////////
+        // fav[index] = false; ///////////////////////////
         favShopList?.removeAt(index);
 
         print("hello");
