@@ -592,10 +592,10 @@ class OrderSummaryController extends ChangeNotifier {
         );
         offerGroupValue = "";
         notifyListeners();
-        if (pType)
-          // isFulFilProductAdded[index] = false;
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.success);
+
+        // isFulFilProductAdded[index] = false;
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -1148,7 +1148,7 @@ class OrderSummaryController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          await getOrderSummary(context, shopId, cartId, "orderSummery");
           int value = quantityAdminList[index];
           quantityAdminList.removeAt(index);
           print("${value}valueeeeeeeee");
@@ -1207,7 +1207,10 @@ class OrderSummaryController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          print("44444");
+          print(cartId);
+          print("44444");
+          await getOrderSummary(context, shopId, cartId, "orderSummery");
           int value = quantityAdminList[index];
           quantityAdminList.removeAt(index);
           quantityAdminList.insert(index, value + 1);
@@ -1262,7 +1265,7 @@ class OrderSummaryController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          await getOrderSummary(context, shopId, cartId, "orderSummery");
           int value = quantityCustomeList[index];
           quantityCustomeList.removeAt(index);
           print("${value}valueeeeeeeee");
@@ -1320,7 +1323,10 @@ class OrderSummaryController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          print("44444");
+          print(cartId);
+          print("44444");
+          await getOrderSummary(context, shopId, cartId, "orderSummery");
           int value = quantityCustomeList[index];
           quantityCustomeList.removeAt(index);
           quantityCustomeList.insert(index, value + 1);
