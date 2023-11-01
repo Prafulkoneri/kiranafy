@@ -4,7 +4,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:local_supper_market/screen/customer/cart/model/add_product_to_cart_model.dart';
+import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -80,11 +82,20 @@ class OrderSummaryController extends ChangeNotifier {
   String customerPickup = "";
   TextEditingController couponCodeController = TextEditingController();
   int selectedAddressId = 0;
-  List<bool> isFulFilProductAdded = [];
-  List<bool> isFulFilProductAddedCustome = [];
+  // List<bool> isFulFilProductAdded = [];
+  // List<bool> isFulFilProductAddedCustome = [];
   List<bool> isSlotAvailable = [];
   FullFillYourCravingsRepo fullFillYourCravingsRepo =
       FullFillYourCravingsRepo();
+  String quantityAction = "";
+  String cartItemId = "";
+  String productType = "";
+  bool isQuanityBtnPressed = false;
+  List cartItemCustomeIdList = [];
+  List cartItemAdminIdList = [];
+  List quantityAdminList = [];
+  List quantityCustomeList = [];
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
 
   Future<void> initState(
     context,
@@ -93,6 +104,10 @@ class OrderSummaryController extends ChangeNotifier {
     refresh,
     route,
   ) async {
+    cartItemAdminIdList.clear();
+    cartItemCustomeIdList.clear();
+    quantityAdminList.clear();
+    quantityCustomeList.clear();
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
@@ -214,27 +229,45 @@ class OrderSummaryController extends ChangeNotifier {
         fullFillYourCravingsCustom
             .addAll(result.data?.fullFillYourCravingsCustomProduct ?? []);
         int fulfilcravingListLength = fullFillYourCravingsAdmin.length ?? 0;
-        isFulFilProductAdded =
-            List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        // isFulFilProductAdded =
+        //     List<bool>.filled(fulfilcravingListLength, false, growable: true);
+        // for (int i = 0; i < fulfilcravingListLength; i++) {
+        //   if (fullFillYourCravingsAdmin[i].addToCartCheck == "yes") {
+        //     isFulFilProductAdded.insert(i, true);
+        //   } else {
+        //     isFulFilProductAdded.insert(i, false);
+        //   }
+        // }
+        ///////////////////////
         for (int i = 0; i < fulfilcravingListLength; i++) {
-          if (fullFillYourCravingsAdmin[i].addToCartCheck == "yes") {
-            isFulFilProductAdded.insert(i, true);
-          } else {
-            isFulFilProductAdded.insert(i, false);
-          }
+          quantityAdminList
+              .add(result.data?.fullFillYourCravingsAdminProduct?[i].quantity);
+          cartItemAdminIdList.add(
+              result.data?.fullFillYourCravingsAdminProduct?[i].cartItemId);
         }
+        /////////////////////////
         int fulfilcravingListCustomeLength =
             fullFillYourCravingsCustom.length ?? 0;
-        isFulFilProductAddedCustome = List<bool>.filled(
-            fulfilcravingListCustomeLength, false,
-            growable: true);
+        // isFulFilProductAddedCustome = List<bool>.filled(
+        //     fulfilcravingListCustomeLength, false,
+        //     growable: true);
+        // for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
+        //   if (fullFillYourCravingsCustom[i].addToCartCheck == "yes") {
+        //     isFulFilProductAddedCustome.insert(i, true);
+        //   } else {
+        //     isFulFilProductAddedCustome.insert(i, false);
+        //   }
+        // }
+        //////////////////////////////////
         for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
-          if (fullFillYourCravingsCustom[i].addToCartCheck == "yes") {
-            isFulFilProductAddedCustome.insert(i, true);
-          } else {
-            isFulFilProductAddedCustome.insert(i, false);
-          }
+          quantityCustomeList
+              .add(result.data?.fullFillYourCravingsCustomProduct?[i].quantity);
+          cartItemCustomeIdList.add(
+              result.data?.fullFillYourCravingsCustomProduct?[i].cartItemId);
         }
+
+        //////////////////////////////
+
         showPaginationLoaderInApp(false);
         notifyListeners();
       } else {
@@ -455,15 +488,15 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onFulFilCarvingsSelected(index) {
-    isFulFilProductAdded[index] = true;
-    notifyListeners();
-  }
+  // void onFulFilCarvingsSelected(index) {
+  //   isFulFilProductAdded[index] = true;
+  //   notifyListeners();
+  // }
 
-  void onFulFilCarvingsCustomeSelected(index) {
-    isFulFilProductAddedCustome[index] = true;
-    notifyListeners();
-  }
+  // void onFulFilCarvingsCustomeSelected(index) {
+  //   isFulFilProductAddedCustome[index] = true;
+  //   notifyListeners();
+  // }
 
   void launchPhone(String mobNumber, context) async {
     var number = Uri.parse("tel:${mobNumber}");
@@ -535,7 +568,7 @@ class OrderSummaryController extends ChangeNotifier {
     );
   }
 
-  Future<void> addToCart(pType, pId, sId, context) async {
+  Future<void> addToCart(pType, pId, sId, index, context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     addProductToCartRepo
         .addProductToCart(
@@ -559,9 +592,10 @@ class OrderSummaryController extends ChangeNotifier {
         );
         offerGroupValue = "";
         notifyListeners();
-        // isFulFilProductAdded[index] = false;
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        if (pType)
+          // isFulFilProductAdded[index] = false;
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -1063,6 +1097,253 @@ class OrderSummaryController extends ChangeNotifier {
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+/////////////////////////////Admin/////////////////////////////
+
+  //////////////////////////////////Admin/////////////////
+
+  CartItemQuantityReqModel get cartItemQuantityRequestModel =>
+      CartItemQuantityReqModel(
+          cartItemId: cartItemId,
+          quantityAction: quantityAction,
+          productType: productType,
+          shopId: shopId);
+
+  quantityBtnPressed(value) {
+    isQuanityBtnPressed = value;
+    notifyListeners();
+  }
+
+  Future<void> subtractAdminItemQuantity(
+    context,
+    CIId,
+    index,
+    pType,
+    pUnitId,
+  ) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityAdminList);
+    print(quantityAdminList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    productType = pType;
+    print(cartItemAdminIdList);
+    cartItemId = cartItemAdminIdList[index].toString();
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          int value = quantityAdminList[index];
+          quantityAdminList.removeAt(index);
+          print("${value}valueeeeeeeee");
+          quantityAdminList.insert(index, value - 1);
+
+          if (quantityAdminList[index] == 0) {
+            removeFromCart(
+                pType,
+                pUnitId,
+                shopId,
+                // index,
+                context);
+          }
+
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+////////////////////////////////////////////////////////////
+
+  Future<void> addAdminItemQuantity(context, CIId, pType, index) async {
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    cartItemId = cartItemAdminIdList[index].toString();
+    productType = pType;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      print("hello");
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          int value = quantityAdminList[index];
+          quantityAdminList.removeAt(index);
+          quantityAdminList.insert(index, value + 1);
+          quantityBtnPressed(false);
+
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+////////////////////////////////////////////////CUSTOME FUNCTIION////////////////////////////
+  Future<void> subtractCustomeItemQuantity(
+      context, CIId, index, pType, pUnitId) async {
+    quantityBtnPressed(true);
+    print("*********");
+    print(quantityCustomeList);
+    print(quantityCustomeList[index]);
+    print("*********");
+    quantityAction = "subtract";
+    productType = pType;
+    print(cartItemCustomeIdList);
+    cartItemId = cartItemCustomeIdList[index].toString();
+    print(cartItemId);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          int value = quantityCustomeList[index];
+          quantityCustomeList.removeAt(index);
+          print("${value}valueeeeeeeee");
+          quantityCustomeList.insert(index, value - 1);
+
+          if (quantityCustomeList[index] == 0) {
+            removeFromCart(
+                pType,
+                pUnitId,
+                shopId,
+                // index,
+                context);
+          }
+          quantityBtnPressed(false);
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
+
+////////////////////////////////////////////////
+  Future<void> addCustomeItemQuantity(context, CIId, pType, index) async {
+    quantityBtnPressed(true);
+    quantityAction = "add";
+    cartItemId = cartItemCustomeIdList[index].toString();
+    productType = pType;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    cartItemQuantityRepo
+        .cartItemQuantity(
+            cartItemQuantityRequestModel, pref.getString("successToken"))
+        .then((response) async {
+      print("hello");
+      log("response.body${response.body}");
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          await getOrderSummary(context, cartId, shopId, "orderSummery");
+          int value = quantityCustomeList[index];
+          quantityCustomeList.removeAt(index);
+          quantityCustomeList.insert(index, value + 1);
+          quantityBtnPressed(false);
+
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          quantityBtnPressed(false);
+        }
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+        quantityBtnPressed(false);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      quantityBtnPressed(false);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        quantityBtnPressed(false);
       },
       test: (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);

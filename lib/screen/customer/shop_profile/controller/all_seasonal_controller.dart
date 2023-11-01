@@ -388,14 +388,23 @@ class ShopAllSeasonalController extends ChangeNotifier {
   bool isLoading = true;
   bool showPaginationLoader = false;
   List<bool> isAllSeasonalProductAdded = [];
-  List cartItemIdList=[];
+  List cartItemIdList = [];
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   RemoveCartItemRepo removeCartItemRepo = RemoveCartItemRepo();
   Data? data;
-  List quantitySeasonalList = [];
+  // List quantitySeasonalList = [];
   // List<CustomerProductData>? seasonalProduct;
   List<CustomerProductData> seasonalProduct = [];
+
+  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
+  String quantityAction = "";
+  bool isQuanityBtnPressed = false;
+  String cartItemId = "";
+  String productType = "";
+  List quantityList = [];
   Future<void> initState(context, id) async {
+    quantityList.clear();
+    cartItemIdList.clear();
     seasonalProduct.clear();
     offset = 0;
     // await getShopDetails(context, id);
@@ -446,10 +455,9 @@ class ShopAllSeasonalController extends ChangeNotifier {
             isAllSeasonalProductAdded.insert(i, false);
           }
         }
-        quantitySeasonalList.clear();
-        cartItemIdList.clear();
-        for(int i=0;i<seasonProductLength;i++){
-          quantitySeasonalList.add(seasonalProduct[i].quantity);
+        ////////////////////////////
+        for (int i = 0; i < seasonProductLength; i++) {
+          quantityList.add(seasonalProduct[i].quantity);
           cartItemIdList.add(seasonalProduct[i].cartItemId);
         }
         showLoader(false);
@@ -538,8 +546,8 @@ class ShopAllSeasonalController extends ChangeNotifier {
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         isAllSeasonalProductAdded[index] = true;
-        quantitySeasonalList.removeAt(index);
-        quantitySeasonalList.insert(index, 1);
+        quantityList.removeAt(index);
+        quantityList.insert(index, 1);
         cartItemIdList.removeAt(index);
         cartItemIdList.insert(index, result.cartItemId);
         Utils.showPrimarySnackbar(context, result.message,
@@ -591,6 +599,11 @@ class ShopAllSeasonalController extends ChangeNotifier {
           } else {
             isAllSeasonalProductAdded.insert(i, false);
           }
+        }
+        int length = result.data?.seasonalProducts?.length ?? 0;
+        for (int i = 0; i < length; i++) {
+          quantityList.add(result.data?.seasonalProducts?[i].quantity);
+          cartItemIdList.add(result.data?.seasonalProducts?[i].cartItemId);
         }
         showLoader(false);
 
@@ -693,13 +706,6 @@ class ShopAllSeasonalController extends ChangeNotifier {
     );
   }
 
-  CartItemQuantityRepo cartItemQuantityRepo = CartItemQuantityRepo();
-  String quantityAction = "";
-  List<bool> isSeasonalProductAdded = [];
-
-  bool isQuanityBtnPressed = false;
-  String cartItemId = "";
-  String productType = "";
   quantityBtnPressed(value) {
     isQuanityBtnPressed = value;
     notifyListeners();
@@ -716,8 +722,8 @@ class ShopAllSeasonalController extends ChangeNotifier {
       context, CIId, index, pType, pUnitId) async {
     quantityBtnPressed(true);
     print("*********");
-    print(quantitySeasonalList);
-    print(quantitySeasonalList[index]);
+    print(quantityList);
+    print(quantityList[index]);
     print("*********");
     quantityAction = "subtract";
     productType = pType;
@@ -734,12 +740,12 @@ class ShopAllSeasonalController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          int value = quantitySeasonalList[index];
-          quantitySeasonalList.removeAt(index);
+          int value = quantityList[index];
+          quantityList.removeAt(index);
           print("${value}valueeeeeeeee");
-          quantitySeasonalList.insert(index, value - 1);
+          quantityList.insert(index, value - 1);
 
-          if (quantitySeasonalList[index] == 0) {
+          if (quantityList[index] == 0) {
             removeFromCart(pType, pUnitId, shopId, index, context);
           }
           quantityBtnPressed(false);
@@ -785,9 +791,9 @@ class ShopAllSeasonalController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          int value = quantitySeasonalList[index];
-          quantitySeasonalList.removeAt(index);
-          quantitySeasonalList.insert(index, value + 1);
+          int value = quantityList[index];
+          quantityList.removeAt(index);
+          quantityList.insert(index, value + 1);
           quantityBtnPressed(false);
 
           notifyListeners();

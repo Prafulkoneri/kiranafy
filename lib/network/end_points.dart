@@ -6,11 +6,10 @@ class Endpoint {
   static const String baseUrl =
       // 'https://projects.m-staging.in/local-super-mart/api/';
       // 'https://localsupermart.com/testing/api/';
-      // 'https://localsupermart.com/testing/api/';
+      'https://localsupermart.com/testing/api/';
   // 'http://lsm.mplussoft.org/api/';
-  'https://localsupermart.com/live/api/';
-  static const String checkMobNoExist =
-      '${baseUrl}lsm-shop-owner-mobile-number-exists';
+  // 'https://localsupermart.com/live/api/';
+  static const String checkMobNoExist = '${baseUrl}lsm-shop-owner-mobile-number-exists';
   static const String getCountryList = '${baseUrl}lsm-country-list';
   static const String getStateList = '${baseUrl}lsm-state-list';
   static const String getShopEditProfileDetail =

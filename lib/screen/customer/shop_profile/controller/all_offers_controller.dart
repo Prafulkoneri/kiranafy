@@ -350,7 +350,7 @@ class AllOffersController extends ChangeNotifier {
   AllOfferProductsRepo allOfferProductsRepo = AllOfferProductsRepo();
   AddProductToCartRepo addProductToCartRepo = AddProductToCartRepo();
   List<ShopCategory>? shopCategory;
-  List<CustomerProductData>? offerProduct;
+  // List<CustomerProductData>? offerProduct;
   List<CustomerProductData> allOfferProducts = [];
   //  List<CustomerProductData> seasonalProduct = [];
   bool showPaginationLoader = false;
@@ -713,7 +713,7 @@ class AllOffersController extends ChangeNotifier {
             isAllOfferProductAdded.insert(i, false);
           }
         }
-        int length=result.data?.offerProducts?.length??0;
+        int length = result.data?.offerProducts?.length ?? 0;
         for (int i = 0; i < length; i++) {
           quantityList.add(result.data?.offerProducts?[i].quantity);
           cartItemIdList.add(result.data?.offerProducts?[i].cartItemId);
