@@ -100,6 +100,12 @@ class CartDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
         shopDetailData = result.cartDetailData?.shopDetails;
         cartItemList = result.cartDetailData?.cartItemList;
+        if (cartItemList?.isEmpty == true) {
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
+          read.onNavigation(2, CartScreenView(), context);
+          read.showBottomNavigationBar();
+        }
         itemCount = result.cartDetailData?.itemCount.toString() ?? "";
         totalAmount = result.cartDetailData?.totalAmount.toString() ?? "";
         totalSavedAmount =

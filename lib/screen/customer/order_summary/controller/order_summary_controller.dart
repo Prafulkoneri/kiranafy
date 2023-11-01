@@ -104,10 +104,6 @@ class OrderSummaryController extends ChangeNotifier {
     refresh,
     route,
   ) async {
-    cartItemAdminIdList.clear();
-    cartItemCustomeIdList.clear();
-    quantityAdminList.clear();
-    quantityCustomeList.clear();
     // if(route=="addAddress"||route=="editAddress"){
     //    groupValue="delivery_to";
     // }
@@ -117,6 +113,10 @@ class OrderSummaryController extends ChangeNotifier {
     if (refresh) {
       fullFillYourCravingsAdmin.clear();
       fullFillYourCravingsCustom.clear();
+      cartItemAdminIdList.clear();
+      cartItemCustomeIdList.clear();
+      quantityAdminList.clear();
+      quantityCustomeList.clear();
       if (route != "orderSummary") {
         if (customerPickup == "active" && route == "addAddress") {
           groupValue = "self_pickup";
@@ -229,6 +229,8 @@ class OrderSummaryController extends ChangeNotifier {
         fullFillYourCravingsCustom
             .addAll(result.data?.fullFillYourCravingsCustomProduct ?? []);
         int fulfilcravingListLength = fullFillYourCravingsAdmin.length ?? 0;
+        int fulfilcavingAdminListLength =
+            result.data?.fullFillYourCravingsAdminProduct?.length ?? 0;
         // isFulFilProductAdded =
         //     List<bool>.filled(fulfilcravingListLength, false, growable: true);
         // for (int i = 0; i < fulfilcravingListLength; i++) {
@@ -239,15 +241,18 @@ class OrderSummaryController extends ChangeNotifier {
         //   }
         // }
         ///////////////////////
-        for (int i = 0; i < fulfilcravingListLength; i++) {
+        for (int i = 0; i < fulfilcavingAdminListLength; i++) {
           quantityAdminList
               .add(result.data?.fullFillYourCravingsAdminProduct?[i].quantity);
           cartItemAdminIdList.add(
               result.data?.fullFillYourCravingsAdminProduct?[i].cartItemId);
         }
+        int fulfilcavingCustomeListLength =
+            result.data?.fullFillYourCravingsCustomProduct?.length ?? 0;
         /////////////////////////
         int fulfilcravingListCustomeLength =
             fullFillYourCravingsCustom.length ?? 0;
+
         // isFulFilProductAddedCustome = List<bool>.filled(
         //     fulfilcravingListCustomeLength, false,
         //     growable: true);
@@ -259,7 +264,7 @@ class OrderSummaryController extends ChangeNotifier {
         //   }
         // }
         //////////////////////////////////
-        for (int i = 0; i < fulfilcravingListCustomeLength; i++) {
+        for (int i = 0; i < fulfilcavingCustomeListLength; i++) {
           quantityCustomeList
               .add(result.data?.fullFillYourCravingsCustomProduct?[i].quantity);
           cartItemCustomeIdList.add(
