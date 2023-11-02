@@ -43,10 +43,9 @@ class SSubscriptionController extends ChangeNotifier {
   String planAmount = "";
   bool isSelectedPaymentUpi = false;
   bool isQrCodeSeleted = false;
-  double  discountPercentage=0;
-  double discountAmount=0;
-  bool isReferalCodeApplied=false;
-
+  double discountPercentage = 0;
+  double discountAmount = 0;
+  bool isReferalCodeApplied = false;
 
   Future<void> initState(context) async {
     await getSubscriptionPlanDetails(context);
@@ -82,23 +81,26 @@ class SSubscriptionController extends ChangeNotifier {
 
   Future<void> getSubscriptionPlanDetails(context) async {
     showLoader(true);
-    isReferalCodeApplied=false;
-    planAmount="";
-    discountAmount=0;
-    discountPercentage=0;
+    isReferalCodeApplied = false;
+    planAmount = "";
+    discountAmount = 0;
+    discountPercentage = 0;
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     subscriptionPlansRepo
         .getSubscriptionPlans(pref.getString("successToken"))
         .then((response) {
       print("successToken");
-      final result = ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
+      final result =
+          ShopSubscriptionPlansResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         print(response.body);
         subscriptionData = result.subscriptionData;
         addOnServicesList = result.addOnServicesList;
-        planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
-        selectAddonServicesList = List<bool>.filled(addOnServicesList?.length ?? 0, false, growable: true);
+        // planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
+        selectAddonServicesList = List<bool>.filled(
+            addOnServicesList?.length ?? 0, false,
+            growable: true);
         int length = subscriptionData?.length ?? 0;
         radioValue.clear();
         for (int i = 0; i < length; i++) {
@@ -108,11 +110,9 @@ class SSubscriptionController extends ChangeNotifier {
         selectedPlanId = radioGrpValue;
         showLoader(false);
         notifyListeners();
-      }
-      else if (response.statusCode == 401) {
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -134,7 +134,8 @@ class SSubscriptionController extends ChangeNotifier {
           subscriptionId: selectedPlanId,
           serviceId: selectedServicesId,
           paymentMode: isQrCodeSeleted ? "qr_code" : "upi",
-          paidAmount: ((double.parse(planAmount)-discountAmount).round()).toString(),
+          paidAmount:
+              ((double.parse(planAmount) - discountAmount).round()).toString(),
           referalCode: applyreferalCodeController.text,
           discountPercentage: discountPercentage.round().toString(),
           transactionId: transactionIdController.text);
@@ -222,7 +223,7 @@ class SSubscriptionController extends ChangeNotifier {
     radioGrpValue = value.toString();
     print(radioGrpValue);
     planAmount = price.toString();
-    discountAmount=(double.parse(planAmount)*discountPercentage)/100;
+    // discountAmount = (double.parse(planAmount) * discountPercentage) / 100;
     print(discountAmount);
     selectedPlanId = id.toString();
     notifyListeners();
@@ -256,54 +257,55 @@ class SSubscriptionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  ApplyReferalCodeReqModel get applyReferalCodeReqModel => ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
+  ApplyReferalCodeReqModel get applyReferalCodeReqModel =>
+      ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
 
-  Future<void> applyReferCode(context) async {
-    LoadingOverlay.of(context).show();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    referlcodeRepo
-        .referCodeApply(
-            applyReferalCodeReqModel, pref.getString("successToken"))
-        .then((response) {
-      log(response.body);
-      final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
+  // Future<void> applyReferCode(context) async {
+  //   LoadingOverlay.of(context).show();
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   referlcodeRepo
+  //       .referCodeApply(
+  //           applyReferalCodeReqModel, pref.getString("successToken"))
+  //       .then((response) {
+  //     log(response.body);
+  //     final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
 
-      if (response.statusCode == 200) {
-        if (result.status == 200) {
-          discountPercentage = double.parse(result.discountPercentage??"0");
-          print(discountPercentage);
-          discountAmount=(double.parse(planAmount)*discountPercentage)/100;
-          print(discountAmount);
-          isReferalCodeApplied=true;
-          LoadingOverlay.of(context).hide();
-          notifyListeners();
-        } else {
-          Utils.showPrimarySnackbar(context, result.message,
-              type: SnackType.error);
-          LoadingOverlay.of(context).hide();
-        }
-      } else if (response.statusCode == 401) {
-        Utils().logoutUser(context);
-      } else {
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.error);
-      }
-    }).onError((error, stackTrace) {
-      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-    }).catchError(
-      (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-      },
-      test: (Object e) {
-        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-        return false;
-      },
-    );
-  }
+  //     if (response.statusCode == 200) {
+  //       if (result.status == 200) {
+  //         discountPercentage = double.parse(result.discountPercentage??"0");
+  //         print(discountPercentage);
+  //         discountAmount=(double.parse(planAmount)*discountPercentage)/100;
+  //         print(discountAmount);
+  //         isReferalCodeApplied=true;
+  //         LoadingOverlay.of(context).hide();
+  //         notifyListeners();
+  //       } else {
+  //         Utils.showPrimarySnackbar(context, result.message,
+  //             type: SnackType.error);
+  //         LoadingOverlay.of(context).hide();
+  //       }
+  //     } else if (response.statusCode == 401) {
+  //       Utils().logoutUser(context);
+  //     } else {
+  //       Utils.showPrimarySnackbar(context, result.message,
+  //           type: SnackType.error);
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+  //   }).catchError(
+  //     (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //     },
+  //     test: (Object e) {
+  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+  //       return false;
+  //     },
+  //   );
+  // }
 
-  Future<void> removeReferCode(context) async {
-    isReferalCodeApplied=false;
-    applyreferalCodeController.clear();
-    notifyListeners();
-  }
+  // Future<void> removeReferCode(context) async {
+  //   isReferalCodeApplied=false;
+  //   applyreferalCodeController.clear();
+  //   notifyListeners();
+  // }
 }

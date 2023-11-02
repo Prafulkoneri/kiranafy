@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 // import 'package:connectivity/connectivity.dart';
@@ -27,6 +28,10 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+// import 'dart:js' as js;
+
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreenView extends StatefulWidget {
   final bool? refreshPage;
@@ -115,6 +120,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
     final mainScreenWatch = context.watch<MainScreenController>();
     final readMain = context.read<MainScreenController>();
     final readProductScreen = context.read<ProductViewController>();
+
     return Scaffold(
       body: watch.isLoading
           ? Loader()
@@ -422,78 +428,16 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
                       watch.customerplacead?.isNotEmpty == true
                           ? GestureDetector(
-                              onTap: () {
-                                // print((watch.customerplacead?.toList()
-                                //       ?..shuffle())
-                                //     ?.first
-                                //     .redirectToShop);
-                                // print((watch.customerplacead?.toList()
-                                //       ?..shuffle())
-                                //     ?.first
-                                //     .redirectToProduct);
-
-                                // if ((watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .redirectToShop ==
-                                //     "yes") {
-                                //   readMain.onNavigation(
-                                //       1,
-                                //       ShopProfileView(
-                                //           shopId:
-                                //               (watch.customerplacead?.toList()
-                                //                     ?..shuffle())
-                                //                   ?.first
-                                //                   .shopId
-                                //                   .toString(),
-                                //           refreshPage: true,
-                                //           routeName: "homeScreen"),
-                                //       context);
-                                // }
-                                // if ((watch.customerplacead?.toList()
-                                //           ?..shuffle())
-                                //         ?.first
-                                //         .redirectToProduct
-                                //         .toString() ==
-                                //     "yes") {
-                                //   // return;
-                                //   readProductScreen.updateProductId(
-                                //       (watch.customerplacead?.toList()
-                                //             ?..shuffle())
-                                //           ?.first
-                                //           .productId
-                                //           .toString(),
-                                //       context,
-                                //       false);
-                                //   readMain.onNavigation(
-                                //       0,
-                                //       ProductScreenView(
-                                //         shopId: (watch.customerplacead?.toList()
-                                //               ?..shuffle())
-                                //             ?.first
-                                //             .shopId
-                                //             .toString(),
-                                //         categoryId:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .categoryId
-                                //                 .toString(),
-                                //         productId:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .productId
-                                //                 .toString(),
-                                //         productType:
-                                //             (watch.customerplacead?.toList()
-                                //                   ?..shuffle())
-                                //                 ?.first
-                                //                 .productType,
-                                //         routeName: "homeScreenBanner",
-                                //       ),
-                                //       context);
-                                // }
+                              onTap: () async {
+                                log('${(watch.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}');
+                                launchUrl(Uri.parse(
+                                        '${(watch.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}'))
+                                    .onError(
+                                  (error, stackTrace) {
+                                    print("Url is not valid!");
+                                    return false;
+                                  },
+                                );
                               },
                               child: Container(
                                   padding: EdgeInsets.only(
@@ -524,8 +468,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                           // width: 340.w,
                                           // scale: 0.5,
                                           fit: BoxFit.cover,
-                                        )),
-                            )
+                                        )))
                           : Container(
                               padding: EdgeInsets.only(
                                 right: 19.0.w,

@@ -600,7 +600,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       ?.productUnitDetails?[index];
                                   return GestureDetector(
                                     onTap: () {
-
                                       read.productsUnitImage(
                                           context, element?.id.toString());
                                     },
@@ -863,7 +862,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   element
                                                                       ?.productType,
                                                                   element
-                                                                      ?.productUnitId,false);
+                                                                      ?.productUnitId,
+                                                                  false);
                                                             },
                                                             child: SvgPicture
                                                                 .asset(
@@ -906,7 +906,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   element
                                                                       ?.cartItemId
                                                                       .toString(),
-                                                                  index,element?.productType,false);
+                                                                  index,
+                                                                  element
+                                                                      ?.productType,
+                                                                  false);
                                                             },
                                                             child: SvgPicture
                                                                 .asset(
@@ -978,7 +981,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                         ?.isNotEmpty ??
                                     false
                                 ? Container(
-                                    height: 205.w,
+                                    height: 210.w,
                                     child: ListView.builder(
                                         physics: const BouncingScrollPhysics(),
                                         padding: EdgeInsets.zero,
@@ -1141,7 +1144,9 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                               height: 2.w,
                                                             ),
                                                             Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
                                                               children: [
                                                                 Text(
                                                                   "${element?.weight} ${element?.unit}",
@@ -1158,33 +1163,33 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                 Row(
                                                                   children: [
                                                                     element?.mrpPrice !=
-                                                                        ""
+                                                                            ""
                                                                         ? Text(
-                                                                        '\u{20B9}${element?.mrpPrice}',
-                                                                        style:
-                                                                        GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
+                                                                            '\u{20B9}${element?.mrpPrice}',
+                                                                            style:
+                                                                                GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
                                                                         : const Text(""),
                                                                     SizedBox(
                                                                       width:
-                                                                      5.w,
+                                                                          5.w,
                                                                     ),
                                                                     element?.offerPrice !=
-                                                                        "" &&
-                                                                        element?.offerPrice !=
-                                                                            element?.mrpPrice
+                                                                                "" &&
+                                                                            element?.offerPrice !=
+                                                                                element?.mrpPrice
                                                                         ? Text(
-                                                                      '\u{20B9}${element?.offerPrice}',
-                                                                      style:
-                                                                      GoogleFonts.dmSans(
-                                                                        textStyle: TextStyle(
-                                                                          // decoration:
-                                                                          // TextDecoration.lineThrough,
-                                                                            color: Black,
-                                                                            letterSpacing: .5,
-                                                                            fontSize: 13.sp,
-                                                                            fontWeight: FontWeight.w500),
-                                                                      ),
-                                                                    )
+                                                                            '\u{20B9}${element?.offerPrice}',
+                                                                            style:
+                                                                                GoogleFonts.dmSans(
+                                                                              textStyle: TextStyle(
+                                                                                  // decoration:
+                                                                                  // TextDecoration.lineThrough,
+                                                                                  color: Black,
+                                                                                  letterSpacing: .5,
+                                                                                  fontSize: 13.sp,
+                                                                                  fontWeight: FontWeight.w500),
+                                                                            ),
+                                                                          )
                                                                         : const Text(""),
                                                                   ],
                                                                 ),
@@ -1198,7 +1203,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                   MainAxisAlignment
                                                                       .end,
                                                               children: [
-
                                                                 // GestureDetector(
                                                                 //   onTap: () {
                                                                 //     read.addToCart(
@@ -1251,73 +1255,66 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                           // height: 19.h,
                                                                         ))
                                                                     : Row(
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        if (watch
-                                                                            .isQuanityBtnPressed) {
-                                                                          return;
-                                                                        }
-                                                                        print(element?.productType);
+                                                                        children: [
+                                                                          GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              if (watch.isQuanityBtnPressed) {
+                                                                                return;
+                                                                              }
+                                                                              print(element?.productType);
 
-                                                                        read.subtractItemQuantity(
-                                                                            context,
-                                                                            element?.cartItemId.toString(),
-                                                                            index,
-                                                                            element?.productType,
-                                                                            element?.productUnitId,true);
-                                                                      },
-                                                                      child: SvgPicture
-                                                                          .asset(
-                                                                        'assets/icons/minus.svg',
-                                                                        // width: 30.w,
-                                                                        // height: 30.h,
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 12.w,
-                                                                    ),
-                                                                    Text(
-                                                                      "${watch.similarQuantityList[index]}",
-                                                                      style: GoogleFonts
-                                                                          .dmSans(
-                                                                        textStyle: TextStyle(
-                                                                          // decoration:
-                                                                          // TextDecoration.lineThrough,
-                                                                            color: Black,
-                                                                            // letterSpacing:
-                                                                            //     .5,
-                                                                            fontSize: 16.sp,
-                                                                            fontWeight: FontWeight.w500),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 12.w,
-                                                                    ),
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        print(watch
-                                                                            .isQuanityBtnPressed);
-                                                                        // return;
-                                                                        if (watch
-                                                                            .isQuanityBtnPressed) {
-                                                                          return;
-                                                                        }
-                                                                        print(element?.productType);
-                                                                        read.addItemQuantity(
-                                                                            context,
-                                                                            element?.cartItemId.toString(),
-                                                                            index,element?.productType,true);
-                                                                      },
-                                                                      child: SvgPicture
-                                                                          .asset(
-                                                                        'assets/images/add.svg',
-                                                                        // width: 30.w,
-                                                                        // height: 30.h,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                )
+                                                                              read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId, true);
+                                                                            },
+                                                                            child:
+                                                                                SvgPicture.asset(
+                                                                              'assets/icons/minus.svg',
+                                                                              // width: 30.w,
+                                                                              // height: 30.h,
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                12.w,
+                                                                          ),
+                                                                          Text(
+                                                                            "${watch.similarQuantityList[index]}",
+                                                                            style:
+                                                                                GoogleFonts.dmSans(
+                                                                              textStyle: TextStyle(
+                                                                                  // decoration:
+                                                                                  // TextDecoration.lineThrough,
+                                                                                  color: Black,
+                                                                                  // letterSpacing:
+                                                                                  //     .5,
+                                                                                  fontSize: 16.sp,
+                                                                                  fontWeight: FontWeight.w500),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                12.w,
+                                                                          ),
+                                                                          GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              print(watch.isQuanityBtnPressed);
+                                                                              // return;
+                                                                              if (watch.isQuanityBtnPressed) {
+                                                                                return;
+                                                                              }
+                                                                              print(element?.productType);
+                                                                              read.addItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, true);
+                                                                            },
+                                                                            child:
+                                                                                SvgPicture.asset(
+                                                                              'assets/images/add.svg',
+                                                                              // width: 30.w,
+                                                                              // height: 30.h,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      )
 
                                                                 // GestureDetector(
                                                                 //         onTap:

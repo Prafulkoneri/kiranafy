@@ -387,72 +387,73 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 ),
               ),
               ///////////////////////////////////////////////////////////
-              GestureDetector(
-                onTap: () {
-                  readMain.onNavigation(4, const MyVouchersView(), context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/voucher.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      AccountScreen(
-                        text: 'My Vouchers',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     readMain.onNavigation(4, const MyVouchersView(), context);
+              //   },
+              //   child: Container(
+              //     margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+              //     padding: EdgeInsets.only(bottom: 15.w),
+              //     decoration: BoxDecoration(
+              //       border: Border(
+              //         bottom: BorderSide(width: 1, color: grey10),
+              //       ),
+              //       // color: Colors.white,
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.start,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [
+              //         SvgPicture.asset(
+              //           'assets/icons/voucher.svg',
+              //           // width: 14.w,
+              //           // height: 13.h,
+              //         ),
+              //         SizedBox(
+              //           width: 18.w,
+              //         ),
+              //         AccountScreen(
+              //           text: 'My Vouchers',
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               ////////////////////////////////////////////////////////////
-              GestureDetector(
-                onTap: () {
-                  readMain.onNavigation(4,ReferAndEarnView(isRefreshed:true), context);
-                  // read.getReferAndEarnDetails(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
-                  padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: grey10),
-                    ),
-                    // color: Colors.white,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/refer.svg',
-                        // width: 14.w,
-                        // height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 18.w,
-                      ),
-                      AccountScreen(
-                        text: 'Refer & Earn',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     readMain.onNavigation(
+              //         4, ReferAndEarnView(isRefreshed: true), context);
+              //     // read.getReferAndEarnDetails(context);
+              //   },
+              //   child: Container(
+              //     margin: EdgeInsets.only(left: 27.w, right: 28.w, top: 16.w),
+              //     padding: EdgeInsets.only(bottom: 15.w),
+              //     decoration: BoxDecoration(
+              //       border: Border(
+              //         bottom: BorderSide(width: 1, color: grey10),
+              //       ),
+              //       // color: Colors.white,
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.start,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [
+              //         SvgPicture.asset(
+              //           'assets/icons/refer.svg',
+              //           // width: 14.w,
+              //           // height: 13.h,
+              //         ),
+              //         SizedBox(
+              //           width: 18.w,
+              //         ),
+              //         AccountScreen(
+              //           text: 'Refer & Earn',
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
 ///////////////////////////////////////////////////////////////////
               GestureDetector(
                 onTap: () async {

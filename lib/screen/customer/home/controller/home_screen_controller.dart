@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/near_shops/model/all_near_sh
 import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenController extends ChangeNotifier {
   BannerRepo bannerRepo = BannerRepo();
@@ -227,6 +228,7 @@ class HomeScreenController extends ChangeNotifier {
         // for (int i = 0; i < imageLength; i++) {
         //   placeAd.add(customerplacead?[i].shopBannerImagePath);
         // }
+
         showLoader(false);
         notifyListeners();
       } else {

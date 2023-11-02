@@ -2620,7 +2620,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           ),
                                         )
                                       : Container(),
-                              watch.orderDetails?.orderStatus == "Delivered"
+                              watch.orderDetails?.orderStatus == "Delivered" ||
+                                      watch.orderDetails?.orderStatus ==
+                                          "Order Refund"
                                   ? Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -2663,78 +2665,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           print(rating);
                                                         }),
                                                   ),
-                                                  //                                                             Container(
-                                                  //                               padding: EdgeInsets.only(left: 19.w),
-                                                  //                               child: Row(
-                                                  //                                 children: [
-                                                  //                                   GestureDetector(
-                                                  //                                       onTap: () {
-                                                  //                                         read.onRatingSelect(1);
-                                                  //                                       },
-                                                  //                                       child: SvgPicture.asset(
-                                                  //                                         "assets/icons/order_rating.svg",
-                                                  //                                         color: watch.ratingValue == null
-                                                  //                                             ? Color(0xffDBDBDB)
-                                                  //                                             : Colors.yellow,
-                                                  //                                       )),
-                                                  //                                   SizedBox(
-                                                  //                                     width: 9.77.w,
-                                                  //                                   ),
-                                                  //                                   GestureDetector(
-                                                  //                                       onTap: () {
-                                                  //                                         read.onRatingSelect(2);
-                                                  //                                       },
-                                                  //                                       child: SvgPicture.asset(
-                                                  //                                         "assets/icons/order_rating.svg",
-                                                  //                                         color: watch.ratingValue == 2 &&
-                                                  //                                                 watch.ratingValue == 3 &&
-                                                  //                                                 watch.ratingValue == 4 &&
-                                                  //                                                 watch.ratingValue == 5
-                                                  //                                             ? Colors.yellow
-                                                  //                                             : Color(0xffDBDBDB),
-                                                  //                                       )),
-                                                  //                                   SizedBox(
-                                                  //                                     width: 9.77.w,
-                                                  //                                   ),
-                                                  //                                   GestureDetector(
-                                                  //                                       onTap: () {
-                                                  //                                         read.onRatingSelect(3);
-                                                  //                                       },
-                                                  //                                       child: SvgPicture.asset(
-                                                  //                                           "assets/icons/order_rating.svg", color:
-                                                  //                                           watch.ratingValue == 3 &&
-                                                  //                                           watch.ratingValue == 4 &&
-                                                  //                                           watch.ratingValue == 5
-                                                  //                                           ? Colors.yellow
-                                                  //                                           : Color(0xffDBDBDB),)),
-                                                  //                                   SizedBox(
-                                                  //                                     width: 9.77.w,
-                                                  //                                   ),
-                                                  //                                   GestureDetector(
-                                                  //                                       onTap: () {
-                                                  //                                         read.onRatingSelect(4);
-                                                  //                                       },
-                                                  //                                       child: SvgPicture.asset(
-                                                  //                                           "assets/icons/order_rating.svg", color:
-                                                  // watch.ratingValue == 4 &&
-                                                  // watch.ratingValue == 5
-                                                  // ? Colors.yellow
-                                                  //     : Color(0xffDBDBDB),)),
-                                                  //                                   SizedBox(
-                                                  //                                     width: 9.77.w,
-                                                  //                                   ),
-                                                  //                                   GestureDetector(
-                                                  //                                       onTap: () {
-                                                  //                                         read.onRatingSelect(5);
-                                                  //                                       },
-                                                  //                                       child: SvgPicture.asset(
-                                                  //                                           "assets/icons/order_rating.svg", color:
-                                                  //                                           watch.ratingValue == 5
-                                                  //                                           ? Colors.yellow
-                                                  //                                           : Color(0xffDBDBDB),))
-                                                  //                                 ],
-                                                  //                               ),
-                                                  //                             ),
                                                   SizedBox(
                                                     height: 10.h,
                                                   ),
@@ -2829,6 +2759,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         SizedBox(
                                           height: 19.h,
                                         ),
+                                        //        watch.orderDetails?.orderStatus == "Delivered"&& watch.orderDetails?.orderStatus==""
+                                        // ?
                                         ListView.builder(
                                             physics:
                                                 NeverScrollableScrollPhysics(),

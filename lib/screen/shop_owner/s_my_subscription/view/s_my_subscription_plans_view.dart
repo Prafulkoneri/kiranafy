@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -42,8 +40,6 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     // print(context.read<SubscriptionHistoryController>().currentSubscriptionPlan);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final read = context.read<SubscriptionHistoryController>();
@@ -54,15 +50,21 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          title: "My Subscription",
+          title: "My Subscriptionaa",
           onBackBtnPressed: () {
-            widget.screenName == "accounts" ?
-            readMainScreen.onNavigation(4, SAccountScreenView(
-              refresh: false,
-            ), context) :
-            readMainScreen.onNavigation(0, ShopDashBoardView(
-              refresh: false,
-            ), context);
+            widget.screenName == "accounts"
+                ? readMainScreen.onNavigation(
+                    4,
+                    SAccountScreenView(
+                      refresh: false,
+                    ),
+                    context)
+                : readMainScreen.onNavigation(
+                    0,
+                    ShopDashBoardView(
+                      refresh: false,
+                    ),
+                    context);
             // Navigator.pushAndRemoveUntil(
             //         context,
             //         MaterialPageRoute(
@@ -78,15 +80,25 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
         ),
       ),
       body: watch.isLoading
-          ?const Loader()
+          ? const Loader()
           : WillPopScope(
-        onWillPop: ()async{
-          widget.screenName == "accounts" ?
-          readMainScreen.onNavigation(4, SAccountScreenView(refresh: false,), context) :
-          readMainScreen.onNavigation(0, ShopDashBoardView(refresh: false,), context);
-          return false;
-        },
-            child: SingleChildScrollView(
+              onWillPop: () async {
+                widget.screenName == "accounts"
+                    ? readMainScreen.onNavigation(
+                        4,
+                        SAccountScreenView(
+                          refresh: false,
+                        ),
+                        context)
+                    : readMainScreen.onNavigation(
+                        0,
+                        ShopDashBoardView(
+                          refresh: false,
+                        ),
+                        context);
+                return false;
+              },
+              child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                     // mainAxisAlignment: M,
@@ -161,8 +173,9 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                       backgroundColor:
                                                           MaterialStateProperty
                                                               .all(LightGreen1),
-                                                      shape: MaterialStateProperty
-                                                          .all(
+                                                      shape:
+                                                          MaterialStateProperty
+                                                              .all(
                                                         RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
@@ -183,7 +196,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                             // letterSpacing: .5,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     ),
 
@@ -237,7 +251,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                   "Expiry Date : ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                       color: Colors.white),
                                                 ),
                                               ),
@@ -331,8 +346,9 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                       backgroundColor:
                                                           MaterialStateProperty
                                                               .all(LightGreen1),
-                                                      shape: MaterialStateProperty
-                                                          .all(
+                                                      shape:
+                                                          MaterialStateProperty
+                                                              .all(
                                                         RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius
@@ -353,7 +369,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                             // letterSpacing: .5,
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                                FontWeight.w400),
+                                                                FontWeight
+                                                                    .w400),
                                                       ),
                                                     ),
 
@@ -407,7 +424,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                   "Expiry Date : ${watch.currentSubscriptionPlan?.subscriptionActiveTill}",
                                                   style: TextStyle(
                                                       fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                       color: Colors.white),
                                                 ),
                                               ),
@@ -453,8 +471,8 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         ),
                       ),
                       Container(
-                          padding:
-                              EdgeInsets.only(left: 0.w, top: 10.w, right: 34.w),
+                          padding: EdgeInsets.only(
+                              left: 0.w, top: 10.w, right: 34.w),
                           child: HtmlWidget(
                             watch.currentSubscriptionPlan?.planBenifits ?? "",
                             textStyle: TextStyle(
@@ -601,8 +619,14 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               // color: Colors.transparent,
                               color: Color(0xff4689EC),
                               onTap: () {
-                                readMainScreen.onNavigation(0,SSubscriptionScreenView(loggedIn: true,routeName: widget.screenName.toString()), context);
-                             readMainScreen.hideBottomNavigationBar();
+                                readMainScreen.onNavigation(
+                                    0,
+                                    SSubscriptionScreenView(
+                                        loggedIn: true,
+                                        routeName:
+                                            widget.screenName.toString()),
+                                    context);
+                                readMainScreen.hideBottomNavigationBar();
                                 // Navigator.push(
                                 //     context,
                                 //     MaterialPageRoute(
@@ -716,7 +740,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                       ),
                     ]),
               ),
-          ),
+            ),
     );
   }
 
