@@ -41,11 +41,9 @@ class ShopNoticationController extends ChangeNotifier {
         notificationList = notificationdata?.notificationList;
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -73,12 +71,10 @@ class ShopNoticationController extends ChangeNotifier {
       final result = CNotificationModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
-        if(result.status==200) {
+        if (result.status == 200) {
           notificationList?.clear();
           notifyListeners();
-        }
-        else{
-
+        } else {
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.error);
         }
@@ -99,3 +95,32 @@ class ShopNoticationController extends ChangeNotifier {
     );
   }
 }
+//////////////////////////////////////////////////
+// Future<void> cDeleteNotification(context) async {
+//     SharedPreferences pref = await SharedPreferences.getInstance();
+//     print(pref.getString("successToken"));
+//     cDeleteNotificationRepo
+//         .cdeleteNotification(pref.getString("successToken"))
+//         .then((response) {
+//       print(response.body);
+//       final result = CNotificationModel.fromJson(jsonDecode(response.body));
+//       print(response.statusCode);
+//       if (response.statusCode == 200) {
+//         notificationList?.clear();
+//         notifyListeners();
+//       } else {
+//         Utils.showPrimarySnackbar(context, result.message,
+//             type: SnackType.error);
+//       }
+//     }).onError((error, stackTrace) {
+//       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+//     }).catchError(
+//       (Object e) {
+//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+//       },
+//       test: (Object e) {
+//         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+//         return false;
+//       },
+//     );
+//   }

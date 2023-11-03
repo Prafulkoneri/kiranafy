@@ -19,7 +19,6 @@ import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_m
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_setting/view/s_setting_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
-
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';

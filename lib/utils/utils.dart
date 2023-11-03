@@ -4,8 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
+import 'package:local_supper_market/widget/buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum SnackType {
@@ -273,6 +277,179 @@ class Utils {
         });
   }
 
+////////////////////////////////////////////////////////////////////
+  showByesubscriptionDialog(BuildContext context, message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Color(0xffFFFFFF),
+            // shape: ,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+
+            // scrollable: true,
+            child: Container(
+              height: 320.h,
+              // width: 400.w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: 11.w, right: 10.w, top: 10.w, bottom: 10.w),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1,
+                            color: Color(0xff000000).withOpacity(0.15)),
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.only(
+                        left: 82.w, right: 78.w, top: 30, bottom: 19),
+                    child: Image(
+                      image: AssetImage(
+                        "assets/images/order_detail_condition.png",
+                      ),
+                      fit: BoxFit.cover,
+                      // width: 168.w,
+                      // height: 135.h,
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 37.h,
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 9.0, top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Renew Subscription",
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black,
+                                  // letterSpacing: .5,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w700),
+                            ))
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 15.w, top: 10.w, right: 10.w),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "•",
+                          style: TextStyle(fontSize: 20.sp),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Flexible(
+                          child: Text(
+                            // softWrap: true,
+                            // maxLines: 3,//
+                            "Dear Shop Owner, your subscription has expired and your shop listing is currently inactive on customer app, Please renew to continue using the services. On successful subscription activation, your shop will be reactivated and made visible on the customer app. ",
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.dmSans(
+                              textStyle: TextStyle(
+                                  color: Black1,
+                                  // height: 1.5,
+                                  // letterSpacing:
+                                  //     0.5,
+                                  // overflow: TextOverflow.ellipsis,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 22.h,
+                  ),
+                  PrimaryButton(
+                      width: 108.h,
+                      height: 30,
+                      color: SplashText,
+                      child: Text(
+                        "Okay",
+                        style: GoogleFonts.dmSans(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+
+                              // letterSpacing: .05,
+                              // overflow: TextOverflow.ellipsis,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SSubscriptionScreenView(
+                                      loggedIn: true,
+                                      routeName: "dashBoard",
+                                    )));
+
+                        //   4,
+                        //   SMySubscriptionView(
+                        //     screenName: "accounts",
+                        //   ),
+                        //   context);
+                        // Navigator.pop(
+                        //     context);
+                        // readMain.onNavigation(
+                        //     2,
+                        //     OrderSummaryView(
+                        //       route:
+                        //           "cartDetail",
+                        //       isRefresh:
+                        //           true,
+                        //       cartId: watch
+                        //           .orderCartId
+                        //           .toString(),
+                        //       shopId: watch
+                        //           .shopDetailData
+                        //           ?.id
+                        //           .toString(),
+                        //     ),
+                        //     context);
+                        //
+                        // readMain.hideBottomNavigationBar();
+
+                        // Navigator.pop(context);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) =>
+                        //           OrderSummaryView(
+                        //             route:
+                        //                 "cartDetail",
+                        //             isRefresh:
+                        //                 true,
+                        //             cartId: watch
+                        //                 .orderCartId
+                        //                 .toString(),
+                        //             shopId: watch
+                        //                 .shopDetailData
+                        //                 ?.id
+                        //                 .toString(),
+                        //           )),
+                        // );
+                        // your code
+                      }),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+///////////////////////////////////////////////////////////////////
   // Widget showNoInternetDialog(context) {
   //   print("hello");
   //   return Scaffold(

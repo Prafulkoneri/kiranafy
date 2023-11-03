@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +12,6 @@ import 'package:local_supper_market/screen/customer/home/view/home_screen_view.d
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_category_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/category_shop_filtter_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/view/shop_filter_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
 import 'package:local_supper_market/utils/header.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -18,6 +19,7 @@ import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AllNearCategoryShopsView extends StatefulWidget {
   final String? categoryId;
@@ -703,28 +705,50 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                   //   height: 30,
                                   // ),
                                   watchHome.customerplacead?.isNotEmpty == true
-                                      ? Container(
-                                          padding: EdgeInsets.only(
-                                            right: 19.0.w,
-                                            left: 19.0.w,
+                                      ? GestureDetector(
+                                          onTap: () async {
+                                            log('${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}');
+                                            launchUrl(Uri.parse(
+                                                    '${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}'))
+                                                .onError(
+                                              (error, stackTrace) {
+                                                print("Url is not valid!");
+                                                return false;
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                              right: 19.0.w,
+                                              left: 19.0.w,
+                                            ),
+                                            width: ScreenUtil().screenWidth,
+                                            // height: 100.h,
+                                            child: (watchHome.customerplacead
+                                                            ?.toList()
+                                                          ?..shuffle())
+                                                        ?.first
+                                                        .shopBannerImagePath !=
+                                                    ""
+                                                ? AppNetworkImages(
+                                                    showShopImage: true,
+                                                    imageUrl: (watchHome
+                                                            .customerplacead
+                                                            ?.toList()
+                                                          ?..shuffle())
+                                                        ?.first
+                                                        .shopBannerImagePath,
+                                                    height: 163.h,
+                                                    width: 352.w,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.asset(
+                                                    "assets/images/nearshop2.png",
+                                                    width: ScreenUtil()
+                                                        .screenWidth,
+                                                    height: 163.h,
+                                                  ),
                                           ),
-                                          width: ScreenUtil().screenWidth,
-                                          // height: 100.h,
-                                          child: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath !=
-                                                  ""
-                                              ? AppNetworkImages(
-                                                  showShopImage: true,
-                                                  imageUrl: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath,
-                                                  height: 163.h,
-                                                  width: 352.w,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              : Image.asset(
-                                                  "assets/images/nearshop2.png",
-                                                  width:
-                                                      ScreenUtil().screenWidth,
-                                                  height: 163.h,
-                                                ),
                                         )
                                       : Container(
                                           padding: EdgeInsets.only(

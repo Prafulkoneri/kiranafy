@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +20,7 @@ import 'package:local_supper_market/widget/network_image.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AllNearShopsView extends StatefulWidget {
   final bool? refreshPage;
@@ -621,25 +624,47 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     height: 30,
                                   ),
                                   watchHome.customerplacead?.isNotEmpty == true
-                                      ? Container(
-                                          padding: EdgeInsets.only(
-                                            right: 19.0.w,
-                                            left: 19.0.w,
-                                          ),
-                                          width: ScreenUtil().screenWidth,
+                                      ? GestureDetector(
+                                          onTap: () async {
+                                            log('${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}');
+                                            launchUrl(Uri.parse(
+                                                    '${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}'))
+                                                .onError(
+                                              (error, stackTrace) {
+                                                print("Url is not valid!");
+                                                return false;
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                              right: 19.0.w,
+                                              left: 19.0.w,
+                                            ),
+                                            width: ScreenUtil().screenWidth,
 
-                                          // height: 100.h,
-                                          child: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath !=
-                                                  ""
-                                              ? AppNetworkImages(
-                                                  imageUrl: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath,
-                                                  showShopImage: true,
-                                                  height: 163.h,
-                                                  width: 352.w,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              : Image.asset(
-                                                  "assets/images/nearshop2.png"),
+                                            // height: 100.h,
+                                            child: (watchHome.customerplacead
+                                                            ?.toList()
+                                                          ?..shuffle())
+                                                        ?.first
+                                                        .shopBannerImagePath !=
+                                                    ""
+                                                ? AppNetworkImages(
+                                                    imageUrl: (watchHome
+                                                            .customerplacead
+                                                            ?.toList()
+                                                          ?..shuffle())
+                                                        ?.first
+                                                        .shopBannerImagePath,
+                                                    showShopImage: true,
+                                                    height: 163.h,
+                                                    width: 352.w,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.asset(
+                                                    "assets/images/nearshop2.png"),
+                                          ),
                                         )
                                       : Container(
                                           padding: EdgeInsets.only(

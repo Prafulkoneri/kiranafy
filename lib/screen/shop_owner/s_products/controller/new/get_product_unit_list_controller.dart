@@ -24,15 +24,11 @@ class SGetProductUnitListController extends ChangeNotifier {
   DeleteUnitProductCategoryRepo deleteUnitProductCategoryRepo =
       DeleteUnitProductCategoryRepo();
 
-  Future<void> initState(context, pId, pType,refresh) async {
+  Future<void> initState(context, pId, pType, refresh) async {
     showLoader(false);
-if(refresh){
-  await getUnitProductList(context, pId, pType);
-}
-
-
-
-
+    if (refresh) {
+      await getUnitProductList(context, pId, pType);
+    }
   }
 
   showLoader(value) {
@@ -77,11 +73,9 @@ if(refresh){
         //     type: SnackType.success);
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }

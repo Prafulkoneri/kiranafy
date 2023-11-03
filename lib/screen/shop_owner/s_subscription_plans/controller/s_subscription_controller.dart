@@ -97,7 +97,7 @@ class SSubscriptionController extends ChangeNotifier {
         print(response.body);
         subscriptionData = result.subscriptionData;
         addOnServicesList = result.addOnServicesList;
-        // planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
+        planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
         selectAddonServicesList = List<bool>.filled(
             addOnServicesList?.length ?? 0, false,
             growable: true);
@@ -223,7 +223,7 @@ class SSubscriptionController extends ChangeNotifier {
     radioGrpValue = value.toString();
     print(radioGrpValue);
     planAmount = price.toString();
-    // discountAmount = (double.parse(planAmount) * discountPercentage) / 100;
+    discountAmount = (double.parse(planAmount) * discountPercentage) / 100;
     print(discountAmount);
     selectedPlanId = id.toString();
     notifyListeners();
@@ -260,52 +260,53 @@ class SSubscriptionController extends ChangeNotifier {
   ApplyReferalCodeReqModel get applyReferalCodeReqModel =>
       ApplyReferalCodeReqModel(referalCode: applyreferalCodeController.text);
 
-  // Future<void> applyReferCode(context) async {
-  //   LoadingOverlay.of(context).show();
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   referlcodeRepo
-  //       .referCodeApply(
-  //           applyReferalCodeReqModel, pref.getString("successToken"))
-  //       .then((response) {
-  //     log(response.body);
-  //     final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
+  Future<void> applyReferCode(context) async {
+    LoadingOverlay.of(context).show();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    referlcodeRepo
+        .referCodeApply(
+            applyReferalCodeReqModel, pref.getString("successToken"))
+        .then((response) {
+      log(response.body);
+      final result = ApplyRefResmodel.fromJson(jsonDecode(response.body));
 
-  //     if (response.statusCode == 200) {
-  //       if (result.status == 200) {
-  //         discountPercentage = double.parse(result.discountPercentage??"0");
-  //         print(discountPercentage);
-  //         discountAmount=(double.parse(planAmount)*discountPercentage)/100;
-  //         print(discountAmount);
-  //         isReferalCodeApplied=true;
-  //         LoadingOverlay.of(context).hide();
-  //         notifyListeners();
-  //       } else {
-  //         Utils.showPrimarySnackbar(context, result.message,
-  //             type: SnackType.error);
-  //         LoadingOverlay.of(context).hide();
-  //       }
-  //     } else if (response.statusCode == 401) {
-  //       Utils().logoutUser(context);
-  //     } else {
-  //       Utils.showPrimarySnackbar(context, result.message,
-  //           type: SnackType.error);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
-  //   }).catchError(
-  //     (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //     },
-  //     test: (Object e) {
-  //       Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
-  //       return false;
-  //     },
-  //   );
-  // }
+      if (response.statusCode == 200) {
+        if (result.status == 200) {
+          discountPercentage = double.parse(result.discountPercentage ?? "0");
+          print(discountPercentage);
+          discountAmount =
+              (double.parse(planAmount) * discountPercentage) / 100;
+          print(discountAmount);
+          isReferalCodeApplied = true;
+          LoadingOverlay.of(context).hide();
+          notifyListeners();
+        } else {
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+          LoadingOverlay.of(context).hide();
+        }
+      } else if (response.statusCode == 401) {
+        Utils().logoutUser(context);
+      } else {
+        Utils.showPrimarySnackbar(context, result.message,
+            type: SnackType.error);
+      }
+    }).onError((error, stackTrace) {
+      Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+    }).catchError(
+      (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+      },
+      test: (Object e) {
+        Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
+        return false;
+      },
+    );
+  }
 
-  // Future<void> removeReferCode(context) async {
-  //   isReferalCodeApplied=false;
-  //   applyreferalCodeController.clear();
-  //   notifyListeners();
-  // }
+  Future<void> removeReferCode(context) async {
+    isReferalCodeApplied = false;
+    applyreferalCodeController.clear();
+    notifyListeners();
+  }
 }

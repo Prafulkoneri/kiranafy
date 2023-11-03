@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +31,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/view/s_profile_
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_offer_products.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_seasonal_products.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShopProfileView extends StatefulWidget {
   const ShopProfileView(
@@ -970,7 +973,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               element?.cartItemId.toString(),
                                                                               index,
                                                                               element?.productType,
-                                                                              element?.productUnitId,"offer");
+                                                                              element?.productUnitId,
+                                                                              "offer");
                                                                         },
                                                                         child: SvgPicture
                                                                             .asset(
@@ -1506,7 +1510,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               if (watch.isQuanityBtnPressed) {
                                                                                 return;
                                                                               }
-                                                                              read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId,"seasonal");
+                                                                              read.subtractItemQuantity(context, element?.cartItemId.toString(), index, element?.productType, element?.productUnitId, "seasonal");
                                                                             },
                                                                             child:
                                                                                 SvgPicture.asset(
@@ -2086,7 +2090,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                       element
                                                                           ?.productType,
                                                                       element
-                                                                          ?.productUnitId,"recommended");
+                                                                          ?.productUnitId,
+                                                                      "recommended");
                                                                 },
                                                                 child:
                                                                     SvgPicture
@@ -2417,44 +2422,64 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             )
                           : Container(),
                       watchHome.customerplacead?.isNotEmpty == true
-                          ? Container(
+                          ? GestureDetector(
+                              onTap: () async {
+                                log('${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}');
+                                launchUrl(Uri.parse(
+                                        '${(watchHome.customerplacead?.toList()?..shuffle())?.first.advertisementUrl}'))
+                                    .onError(
+                                  (error, stackTrace) {
+                                    print("Url is not valid!");
+                                    return false;
+                                  },
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  right: 19.0.w,
+                                  left: 19.0.w,
+                                ),
+                                width: ScreenUtil().screenWidth,
+                                // height: 100.h,
+                                child: (watchHome.customerplacead?.toList()
+                                              ?..shuffle())
+                                            ?.first
+                                            .shopBannerImagePath !=
+                                        ""
+                                    ? AppNetworkImages(
+                                        showShopImage: true,
+                                        imageUrl:
+                                            (watchHome.customerplacead?.toList()
+                                                  ?..shuffle())
+                                                ?.first
+                                                .shopBannerImagePath,
+                                        height: 163.h,
+                                        width: 352.w,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        "assets/images/nearshop2.png",
+                                        height: 170.w,
+                                        // width: 340.w,
+                                        // scale: 0.5,
+                                        fit: BoxFit.fill,
+                                      ),
+                              ),
+                            )
+                          : Container(
                               padding: EdgeInsets.only(
                                 right: 19.0.w,
                                 left: 19.0.w,
                               ),
                               width: ScreenUtil().screenWidth,
                               // height: 100.h,
-                              child: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath !=
-                                      ""
-                                  ? AppNetworkImages(
-                                      showShopImage: true,
-                                      imageUrl: (watchHome.customerplacead?.toList()?..shuffle())?.first.shopBannerImagePath,
-                                      height: 163.h,
-                                      width: 352.w,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      "assets/images/nearshop2.png",
-                                      height: 170.w,
-                                      // width: 340.w,
-                                      // scale: 0.5,
-                                      fit: BoxFit.fill,
-                                    ),
-                            )
-                          : Container(
-                          padding: EdgeInsets.only(
-                            right: 19.0.w,
-                            left: 19.0.w,
-                          ),
-                          width: ScreenUtil().screenWidth,
-                          // height: 100.h,
-                          child: Image.asset(
-                            "assets/images/nearshop2.png",
-                            height: 170.w,
-                            // width: 340.w,
-                            // scale: 0.5,
-                            fit: BoxFit.cover,
-                          )),
+                              child: Image.asset(
+                                "assets/images/nearshop2.png",
+                                height: 170.w,
+                                // width: 340.w,
+                                // scale: 0.5,
+                                fit: BoxFit.cover,
+                              )),
 
                       SizedBox(
                         height: 20.h,

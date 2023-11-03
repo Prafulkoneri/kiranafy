@@ -1,4 +1,3 @@
-
 class GetSubscriptionHistoryModel {
   int? status;
   String? message;
@@ -48,16 +47,17 @@ class CurrentSubscriptionPlan {
   String? paidAmount;
   String? planBenifits;
   List? subscriptionSpecialBenifits;
+  String? status;
 
-  CurrentSubscriptionPlan({
-    required this.id,
-    required this.planName,
-    required this.subscriptionActiveTill,
-    required this.paidAmount,
-    required this.planBenifits,
-    required this.subscriptionSpecialBenifits,
-    required this.invoiceId,
-  });
+  CurrentSubscriptionPlan(
+      {required this.id,
+      required this.planName,
+      required this.subscriptionActiveTill,
+      required this.paidAmount,
+      required this.planBenifits,
+      required this.subscriptionSpecialBenifits,
+      required this.invoiceId,
+      required this.status});
   CurrentSubscriptionPlan.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     planName = json["plan_name"];
@@ -65,6 +65,7 @@ class CurrentSubscriptionPlan {
     paidAmount = json["paid_amount"];
     planBenifits = json["plan_benifits"];
     invoiceId = json["invoice_id"];
+    status = json["status"];
     // subscriptionSpecialBenifits = json["subscription_special_benifits"];
     //////////////
     if (json["subscription_special_benifits"] != null) {
