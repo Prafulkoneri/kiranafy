@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/view/s_shop_configuration_view.dart';
@@ -140,7 +141,8 @@ class SSubscriptionController extends ChangeNotifier {
           discountPercentage: discountPercentage.round().toString(),
           transactionId: transactionIdController.text);
 
-  Future<void> buySubscriptionPlan(context, loggedIn) async {
+  Future<void> buySubscriptionPlan(context, loggedIn,
+      [String? screenName]) async {
     if (!isQrCodeSeleted & !isSelectedPaymentUpi) {
       Utils.showPrimarySnackbar(context, "Please Select Mode Of Payment",
           type: SnackType.error);
@@ -175,10 +177,11 @@ class SSubscriptionController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final read = Provider.of<SMainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
+
         if (loggedIn) {
-          read.onNavigation(
-              4, SMySubscriptionView(screenName: "accounts"), context);
-          read.showBottomNavigationBar();
+          // read.onNavigation(
+          //     4, SMySubscriptionView(screenName: "accounts"), context);
+          // read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -187,6 +190,19 @@ class SSubscriptionController extends ChangeNotifier {
           //           screenName: SMySubscriptionView(screenName: "accounts"))),
           //   (Route<dynamic> route) => false,
           // );
+          if (screenName == "dashboard") {
+            read.onNavigation(
+                4,
+                ShopDashBoardView(
+                  refresh: true,
+                ),
+                context);
+            read.showBottomNavigationBar();
+          } else {
+            read.onNavigation(
+                4, SMySubscriptionView(screenName: "accounts"), context);
+            read.showBottomNavigationBar();
+          }
         } else {
           SharedPreferences pref = await SharedPreferences.getInstance();
           pref.setString('status', 'subscriptionCompleted');

@@ -20,9 +20,13 @@ import 'package:provider/provider.dart';
 class SSubscriptionScreenView extends StatefulWidget {
   final bool? loggedIn;
   final String? routeName;
+  final String? screenName;
 
   const SSubscriptionScreenView(
-      {Key? key, required this.loggedIn, required this.routeName})
+      {Key? key,
+      required this.loggedIn,
+      required this.routeName,
+      this.screenName})
       : super(key: key);
 
   @override
@@ -829,7 +833,8 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                         backgroundColor: MaterialStateProperty.all(SplashText),
                       ),
                       onPressed: () {
-                        read.buySubscriptionPlan(context, widget.loggedIn);
+                        read.buySubscriptionPlan(
+                            context, widget.loggedIn, widget.screenName);
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -875,8 +880,8 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                     width: 160.w,
                                     onTap: () async {
                                       print("hello");
-                                      await read.buySubscriptionPlan(
-                                          context, widget.loggedIn);
+                                      await read.buySubscriptionPlan(context,
+                                          widget.loggedIn, widget.screenName);
                                       // readMainScreen.onNavigation(
                                       //     4, SShopConfigurationView(), context);
                                       // };

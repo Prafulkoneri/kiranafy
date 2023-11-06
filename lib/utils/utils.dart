@@ -392,7 +392,9 @@ class Utils {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SSubscriptionScreenView(
-                                    loggedIn: true, routeName: "dashboard")));
+                                      loggedIn: true,
+                                      routeName: "dashBoard",
+                                    )));
 
                         //   4,
                         //   SMySubscriptionView(
