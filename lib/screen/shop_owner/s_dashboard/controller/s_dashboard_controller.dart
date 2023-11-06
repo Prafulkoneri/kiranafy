@@ -94,7 +94,7 @@ class SDashBoardController extends ChangeNotifier {
             );
           });
         }
-        if (dashBoardData?.currentSubscriptionPlanExpireDate == "active") {
+        if (dashBoardData?.currentSubscriptionPlanExpireDate == "inactive") {
           Utils()
               .showByesubscriptionDialog(context, "Please Renew Subscription");
           return;
