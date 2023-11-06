@@ -7,9 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum SnackType {
@@ -26,6 +28,7 @@ enum SnackType {
 }
 
 class Utils {
+
 // /////////////////////////////////////////.
 //   bool ActiveConnection = false;
 //   String T = "";
@@ -388,11 +391,21 @@ class Utils {
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SSubscriptionScreenView(
-                                    loggedIn: true, routeName: "dashboard")));
+                        Navigator.pop(context);
+                        final readMainScreen = Provider.of<SMainScreenController>(context, listen: false);
+                        readMainScreen.onNavigation(
+                            0,
+                            SSubscriptionScreenView(
+                                loggedIn: true,
+                                routeName:
+                               "dashboard"),
+                            context);
+                        readMainScreen.hideBottomNavigationBar();
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => SSubscriptionScreenView(
+                        //             loggedIn: true, routeName: "dashboard")));
 
                         //   4,
                         //   SMySubscriptionView(

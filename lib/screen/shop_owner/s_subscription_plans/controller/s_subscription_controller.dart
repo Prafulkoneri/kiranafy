@@ -177,33 +177,11 @@ class SSubscriptionController extends ChangeNotifier {
         final read = Provider.of<SMainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
 
-        if (loggedIn ) {
-          read.onNavigation(4, SMySubscriptionView(screenName: "accounts"), context);
-          read.showBottomNavigationBar();
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => SMainScreenView(
-          //           index: 4,
-          //           screenName: SMySubscriptionView(screenName: "accounts"))),
-          //   (Route<dynamic> route) => false,
-          // );
-        }
         if (loggedIn) {
-          // read.onNavigation(
-          //     4, SMySubscriptionView(screenName: "accounts"), context);
-          // read.showBottomNavigationBar();
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //       builder: (context) => SMainScreenView(
-          //           index: 4,
-          //           screenName: SMySubscriptionView(screenName: "accounts"))),
-          //   (Route<dynamic> route) => false,
-          // );
+          print(screenName);
           if (screenName == "dashboard") {
             read.onNavigation(
-                4,
+                0,
                 ShopDashBoardView(
                   refresh: true,
                 ),
