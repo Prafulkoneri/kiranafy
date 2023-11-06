@@ -46,7 +46,6 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SDashBoardController>().initState(context, widget.refresh);
     });
-
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       // print(message.data);
       // print(message.data["notification_type"]);

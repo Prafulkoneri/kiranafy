@@ -7,6 +7,7 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
+import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
@@ -152,6 +153,7 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
+  List quantityList = [];
   void onRadioButtonSelected(value, context) {
     groupValue = value;
     if (groupValue == "delivery_to" && customerAddress!.isEmpty) {
@@ -395,6 +397,17 @@ class OrderSummaryController extends ChangeNotifier {
           }
         }
         cartItemList = result.orderSummaryData?.cartItemList;
+        if (cartItemList?.isEmpty == true) {
+          final read =
+              Provider.of<MainScreenController>(context, listen: false);
+          read.onNavigation(2, CartScreenView(), context);
+          read.showBottomNavigationBar();
+        }
+        int length = cartItemList?.length ?? 0;
+        quantityList.clear();
+        for (int i = 0; i < length; i++) {
+          quantityList.add(cartItemList?[i].quantity);
+        }
         finalCouponList = result.orderSummaryData?.finalCouponList;
         int couponListLength = finalCouponList?.length ?? 0;
         viewMore = List<bool>.filled(couponListLength, false);

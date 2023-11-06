@@ -57,10 +57,6 @@ class SDashBoardController extends ChangeNotifier {
       await getSubscriptionPaymentHistory(context);
       await getNotificationSeen(context);
     }
-    if (dashBoardData?.currentSubscriptionPlanExpireDate == "active") {
-      Utils().showByesubscriptionDialog(context, "Please Renew Subscription");
-      return;
-    }
     notifyListeners();
   }
 
