@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class CartListController extends ChangeNotifier {
     print(pref.getString("successToken"));
     cartListRepo.cartList(pref.getString("successToken")).then((response) {
       print(response.body);
+      log(response.body);
       final result = CartListModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {
@@ -66,6 +68,7 @@ class CartListController extends ChangeNotifier {
         .deleteShopCart(pref.getString("successToken"))
         .then((response) {
       print(response.body);
+      log(response.body);
       final result = ShopCartDeleteResModel.fromJson(jsonDecode(response.body));
       print(response.statusCode);
       if (response.statusCode == 200) {

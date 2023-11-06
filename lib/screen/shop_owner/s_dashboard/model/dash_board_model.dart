@@ -39,6 +39,7 @@ class Data {
   int? totalRefundAmountPending; //
   int? totalRefundAmountAccept; //
   int? cancelledAmount; //
+  String? currentSubscriptionPlanExpireDate;
   List<BannerImageData>? bannerImages;
 
   Data({
@@ -63,6 +64,7 @@ class Data {
     required this.totalRefundAmountAccept, //
     required this.pendingRefundOrdersCount,
     required this.acceptRefundOrdersCount,
+    required this.currentSubscriptionPlanExpireDate,
     // this.cancelledRefundAmount,
     this.totalRefund,
   });
@@ -92,6 +94,8 @@ class Data {
     cancelledAmount = json["cancelled_amount"]; //
     totalRefundAmountPending = json["total_refund_amount_pending"]; //
     totalRefundAmountAccept = json["total_refund_amount_accept"]; //
+    currentSubscriptionPlanExpireDate =
+        json["current_subscription_plan_expiry_date"]; //
     if (json["shop_banner_images"] != null) {
       bannerImages = <BannerImageData>[];
       json["shop_banner_images"].forEach((v) {

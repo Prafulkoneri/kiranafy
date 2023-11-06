@@ -14,7 +14,6 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/model/set_pincode_model.dart';
 import 'package:local_supper_market/screen/customer/main_screen/repository/set_pincode_repo.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
@@ -46,12 +45,17 @@ class MainScreenController extends ChangeNotifier {
   bool isLocationFound = false;
   String locationErrorMessage = "";
   bool hideBottomNavigation = false;
-  int cartCount = 0;
-  RemoteMessage ? notificationMessage;
-  bool isInititalNotification=false;
 
-  void initState(context, index, currentScreen) async {
+  RemoteMessage? notificationMessage;
+  bool isInititalNotification = false;
+
+  void initState(
+    context,
+    index,
+    currentScreen,
+  ) async {
     // navigation(index, currentScreen);
+    // newBudget;
     if (isFirstLoad) {
       showMap(context, true);
     }
@@ -65,8 +69,16 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getCartCount() {}
+  ////New///////
+  int cartCount = 0;
+  void getCartCount(newBudget) {
+    print(cartCount);
+    cartCount = newBudget;
+    notifyListeners();
+  }
+//////
 
+//////////
   onSignOut() {
     currentTab = 0;
     isFirstLoad = true;
@@ -74,13 +86,11 @@ class MainScreenController extends ChangeNotifier {
     // notifyListeners();
   }
 
-  void onInititalMessage(msg){
-    isInititalNotification=true;
-    notificationMessage=msg;
+  void onInititalMessage(msg) {
+    isInititalNotification = true;
+    notificationMessage = msg;
     notifyListeners();
   }
-
-
 
   void onBottomNavChanged(index) {
     currentIndex = index;
@@ -153,7 +163,10 @@ class MainScreenController extends ChangeNotifier {
 
   onCustomTypeNotification(context) {
     print("hello");
-    currentScreen = CustomerNotificationsScreenView(isRefresh: true,route: "main",);
+    currentScreen = CustomerNotificationsScreenView(
+      isRefresh: true,
+      route: "main",
+    );
     hideBottomNavigation = false;
     notifyListeners();
   }
@@ -180,6 +193,7 @@ class MainScreenController extends ChangeNotifier {
   void onMyCartPressed() {
     currentTab = 2;
     currentScreen = CartScreenView();
+    // getCartCount(newBudget);
     notifyListeners();
   }
 
@@ -235,7 +249,6 @@ class MainScreenController extends ChangeNotifier {
           locationNotFound = false;
           locationErrorMessage = "";
           isLocationFound = true;
-
         } else {
           isLocationFound = false;
           locationErrorMessage = result.message ?? "";
@@ -278,18 +291,17 @@ class MainScreenController extends ChangeNotifier {
         notifyListeners();
       });
     } else {
-      if(isInititalNotification){
+      if (isInititalNotification) {
         print(notificationMessage?.data);
         if (notificationMessage?.data["notification_type"] == "custom") {
           onCustomTypeNotification(context);
+        } else {
+          onOrderTypeNotification(
+              context, notificationMessage?.data["redirect_id"]);
         }
-        else{
-          onOrderTypeNotification(context,notificationMessage?.data["redirect_id"]);
-        }
-        isInititalNotification=false;
+        isInititalNotification = false;
         Navigator.pop(context);
-      }
-      else {
+      } else {
         final read = Provider.of<HomeScreenController>(context, listen: false);
         read.initState(context, true);
         Navigator.pop(context);

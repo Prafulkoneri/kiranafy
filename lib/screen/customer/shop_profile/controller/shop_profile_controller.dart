@@ -377,7 +377,7 @@ class ShopProfileViewController extends ChangeNotifier {
   //     },
   //   );
   // }
-  Future<void> addToCart(pType,pId,sId,index,context) async {
+  Future<void> addToCart(pType, pId, sId, index, context) async {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
 
@@ -576,7 +576,7 @@ class ShopProfileViewController extends ChangeNotifier {
           shopId: shopId);
 
   Future<void> subtractItemQuantity(
-      context, CIId, index, pType, pUnitId,type) async {
+      context, CIId, index, pType, pUnitId, type) async {
     LoadingOverlay.of(context).show();
     quantityBtnPressed(true);
     print("*********");
@@ -601,12 +601,12 @@ class ShopProfileViewController extends ChangeNotifier {
             cartItemQuantityRequestModel, pref.getString("successToken"))
         .then((response) async {
       log("response.body${response.body}");
-      final result = CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
+      final result =
+          CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-
           if (type == "offer") {
-            if(quantityOfferList[index]==0){
+            if (quantityOfferList[index] == 0) {
               removeFromCart(pType, pUnitId, shopId, index, context);
             }
           } else if (type == "seasonal") {
@@ -614,7 +614,7 @@ class ShopProfileViewController extends ChangeNotifier {
               removeFromCart(pType, pUnitId, shopId, index, context);
             }
           } else {
-            if(quantityRecommandedList[index]==0){
+            if (quantityRecommandedList[index] == 0) {
               removeFromCart(pType, pUnitId, shopId, index, context);
             }
           }
@@ -622,7 +622,6 @@ class ShopProfileViewController extends ChangeNotifier {
           // print("${value}valueeeeeeeee");
           // quantitySeasonalList.insert(index, value - 1);
           // int value = quantitySeasonalList[index];
-
 
           quantityBtnPressed(false);
           await getShopDetails(context, shopId, false);

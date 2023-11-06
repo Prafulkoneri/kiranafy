@@ -13,8 +13,10 @@ import 'package:provider/provider.dart';
 class MainScreenView extends StatefulWidget {
   final bool? isRefresh;
   final Widget? screenName;
+  final Widget? newBudget;
   final int? index;
-  const MainScreenView({Key? key, this.isRefresh, this.screenName, this.index})
+  const MainScreenView(
+      {Key? key, this.isRefresh, this.screenName, this.newBudget, this.index})
       : super(key: key);
 
   @override
@@ -32,9 +34,11 @@ class _MainScreenViewState extends State<MainScreenView> {
     });
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<MainScreenController>()
-          .initState(context, widget.index, widget.screenName);
+      context.read<MainScreenController>().initState(
+            context,
+            widget.index,
+            widget.screenName,
+          );
     });
   }
 
@@ -202,6 +206,10 @@ class _MainScreenViewState extends State<MainScreenView> {
                           child: watch.currentTab == 2
                               ? badges.Badge(
                                   badgeContent: Text(
+                                    // "${watch.cartCount}",
+
+                                    // widget.newBudget.toString(),
+                                    // widget.newBudget.toString(),
                                     cartWatch.cartList?.length.toString() ?? "",
                                     style: TextStyle(
                                         color: Colors.white,

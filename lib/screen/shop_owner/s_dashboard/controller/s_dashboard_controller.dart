@@ -55,7 +55,11 @@ class SDashBoardController extends ChangeNotifier {
       await getDashBoardData(context);
       await getShopEditProfileDetails(context);
       await getSubscriptionPaymentHistory(context);
-     await  getNotificationSeen(context);
+      await getNotificationSeen(context);
+    }
+    if (dashBoardData?.currentSubscriptionPlanExpireDate == "active") {
+      Utils().showByesubscriptionDialog(context, "Please Renew Subscription");
+      return;
     }
     notifyListeners();
   }
@@ -93,6 +97,11 @@ class SDashBoardController extends ChangeNotifier {
               curve: Curves.easeIn,
             );
           });
+        }
+        if (dashBoardData?.currentSubscriptionPlanExpireDate == "active") {
+          Utils()
+              .showByesubscriptionDialog(context, "Please Renew Subscription");
+          return;
         }
         notifyListeners();
       } else if (response.statusCode == 401) {

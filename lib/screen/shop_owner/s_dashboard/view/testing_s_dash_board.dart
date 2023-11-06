@@ -70,7 +70,9 @@
 // //           ? const Loader()
 
 // //           // watch.currentSubscriptionPlan?.status == "active"
-// //           //     ? Container(
+// //           //     ?
+//
+// Container(
 // //           //         child: Column(
 // //           //         children: <Widget>[
 // //           //           Container(
@@ -337,13 +339,13 @@
 // //                                                   ),
 // //                                                   onTap: () {
 // //                                                     Navigator.pop(context);
-// //                                                     readMain.onNavigation(
-// //                                                         0,
-// //                                                         SMySubscriptionView(
-// //                                                           screenName:
-// //                                                               "dashboard",
-// //                                                         ),
-// //                                                         context);
+                                                    // readMain.onNavigation(
+                                                    //     0,
+                                                    //     SMySubscriptionView(
+                                                    //       screenName:
+                                                    //           "dashboard",
+                                                    //     ),
+                                                    //     context);
 // //                                                   }),
 // //                                             ],
 // //                                           ),

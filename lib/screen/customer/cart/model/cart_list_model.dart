@@ -39,6 +39,7 @@ class CartList {
   String? cityName;
   int? shopPincode;
   String? itemCount;
+  int? cartCount;
   int? totalAmount;
 
   CartList({
@@ -50,6 +51,7 @@ class CartList {
     required this.cityName,
     required this.shopPincode,
     required this.itemCount,
+    required this.cartCount,
     required this.totalAmount,
   });
 
@@ -62,6 +64,7 @@ class CartList {
     cityName = json["city_name"];
     shopPincode = json["shop_pincode"];
     itemCount = json["item_count"];
+    cartCount = json["count"];
     totalAmount = json["total_amount"];
   }
 }

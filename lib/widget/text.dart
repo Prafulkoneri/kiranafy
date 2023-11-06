@@ -116,7 +116,9 @@ class NearByShopslocation extends StatelessWidget {
 class ShopDashBoard extends StatelessWidget {
   final String text;
 
-  ShopDashBoard({required this.text});
+  ShopDashBoard({
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
