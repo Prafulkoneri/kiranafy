@@ -9,6 +9,7 @@ import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantit
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
@@ -28,6 +29,7 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/shop
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -405,6 +407,9 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain=   Provider.of<MainScreenController>(context,
+            listen: false);
+        readMain.getCartCount(result.cartCount);
         await getShopDetails(context, sId, false);
         // isSeasonalProductAdded[index] = true;
         // quantitySeasonalList.removeAt(index);
@@ -544,6 +549,9 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain=   Provider.of<MainScreenController>(context,
+            listen: false);
+        readMain.getCartCount(result.cartCount);
         await getShopDetails(context, sId, false);
         // isSeasonalProductAdded[index] = false;
         notifyListeners();
