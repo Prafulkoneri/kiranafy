@@ -1,19 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/delete_admin_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/search_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_products_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/delete_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/delete_custome_product_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/search_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +60,6 @@ class SSelectedProductsController extends ChangeNotifier {
         category_id: categoryId,
         limit: "10",
         offset: offset.toString(),
-
       );
 
   DeleteAdminProductReqModel get deleteAdminProductReqModel =>
@@ -75,7 +69,7 @@ class SSelectedProductsController extends ChangeNotifier {
     // if (offset == 0) {
     //   isLoading = true;
     // }
-    offset=0;
+    offset = 0;
 
     categoryId = id;
     showLoader(true);
@@ -103,11 +97,9 @@ class SSelectedProductsController extends ChangeNotifier {
         showPaginationLoader = false;
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -125,11 +117,14 @@ class SSelectedProductsController extends ChangeNotifier {
   }
 
   void onAddProductPressed(context, id) {
-    final read=Provider.of<SMainScreenController>(context,listen: false);
-    read.onNavigation(0, AddProductView(
-      categoryId: id,
-      refresh: true,
-    ), context);
+    final read = Provider.of<SMainScreenController>(context, listen: false);
+    read.onNavigation(
+        0,
+        AddProductView(
+          categoryId: id,
+          refresh: true,
+        ),
+        context);
     // Navigator.pushAndRemoveUntil(
     //   context,
     //   MaterialPageRoute(
@@ -251,9 +246,9 @@ class SSelectedProductsController extends ChangeNotifier {
         final result = GetSelectedProductsResponseModel.fromJson(
             jsonDecode(response.body));
         if (response.statusCode == 200) {
-          productsFromAdmins = result.data?.productsFromAdmin??[];
+          productsFromAdmins = result.data?.productsFromAdmin ?? [];
           categoryName = result.data?.categoryName ?? "";
-          customProducts = result.data?.customProduct??[];
+          customProducts = result.data?.customProduct ?? [];
           totalSelectedAndCustomProducts =
               result.data?.totalSelectedAndCustomProducts ?? 0;
           // categoryProductData = result.data;
@@ -281,7 +276,6 @@ class SSelectedProductsController extends ChangeNotifier {
         },
       );
     } else {
-
       await selectedProducts(context, cId);
     }
   }
@@ -305,12 +299,13 @@ class SSelectedProductsController extends ChangeNotifier {
         productsFromAdmin = result.data?.productsFromAdmin;
         categoryName = result.data?.categoryName ?? "";
         customProduct = result.data?.customProduct;
-        totalSelectedAndCustomProducts = result.data?.totalSelectedAndCustomProducts ?? 0;
+        totalSelectedAndCustomProducts =
+            result.data?.totalSelectedAndCustomProducts ?? 0;
         productsFromAdmins.addAll(result.data?.productsFromAdmin ?? []);
         customProducts.addAll(result.data?.customProduct ?? []);
         // Utils.showPrimarySnackbar(context, result.message,
         //     type: SnackType.success);
-        showPaginationLoader=false;
+        showPaginationLoader = false;
         // showLoader(false);
         notifyListeners();
       } else {

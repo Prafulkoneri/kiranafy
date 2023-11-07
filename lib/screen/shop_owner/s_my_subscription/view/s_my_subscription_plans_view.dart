@@ -62,7 +62,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                 : readMainScreen.onNavigation(
                     0,
                     ShopDashBoardView(
-                      refresh: false,
+                      refresh: true,
                     ),
                     context);
             // Navigator.pushAndRemoveUntil(

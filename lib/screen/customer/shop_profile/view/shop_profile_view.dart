@@ -945,6 +945,12 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     0
                                                                 ? GestureDetector(
                                                                     onTap: () {
+                                                                      print(
+                                                                          "0");
+                                                                      print(watch
+                                                                          .cartCount);
+                                                                      print(
+                                                                          "0");
                                                                       read.addToCart(
                                                                           element
                                                                               ?.productType,

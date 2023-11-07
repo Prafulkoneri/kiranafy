@@ -422,7 +422,7 @@ class AddEditUnitController extends ChangeNotifier {
           );
 
   Future<void> updateEditUnitDetails(context) async {
-    LoadingOverlay.of(context).show();
+    // LoadingOverlay.of(context).show();
     if (valueController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Value", type: SnackType.error);
       return;
@@ -464,17 +464,26 @@ class AddEditUnitController extends ChangeNotifier {
       log(response.body);
       print("uiiiiiiiiiiiiiiiiiiiiiiiiiii");
       if (response.statusCode == 200) {
-        LoadingOverlay.of(context).hide();
-        final read = Provider.of<SMainScreenController>(context, listen: false);
-        read.onNavigation(
-            0,
-            UnitDetailView(
-              refresh: true,
-              categoryId: categoryId,
-              productId: productId,
-              productType: producttype,
-            ),
-            context);
+        LoadingOverlay.of(context).show();
+        if (result.status == 200) {
+          LoadingOverlay.of(context).hide();
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              0,
+              UnitDetailView(
+                refresh: true,
+                categoryId: categoryId,
+                productId: productId,
+                productType: producttype,
+              ),
+              context);
+        } else {
+          LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.error);
+        }
+
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -483,8 +492,8 @@ class AddEditUnitController extends ChangeNotifier {
         //           screenName: UnitDetailView(refresh: true,categoryId: categoryId,productId: productId,productType: producttype,))),
         //       (Route<dynamic> route) => false,
         // );
-        Utils.showPrimarySnackbar(context, result.message,
-            type: SnackType.success);
+        // Utils.showPrimarySnackbar(context, result.message,
+        //     type: SnackType.success);
         // showLoader(false);
         notifyListeners();
       } else {
@@ -618,6 +627,7 @@ class AddEditUnitController extends ChangeNotifier {
         // );
         Utils.showPrimarySnackbar(context, "Updated Successfully",
             type: SnackType.success);
+        notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, "Error on uploading",

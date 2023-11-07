@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/selected_products_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_shop_configuration/model/shop_configuration_edit_request_model.dart';
 
 class SSelectedProductsRepo {
   Future<http.Response> selectedProducts(

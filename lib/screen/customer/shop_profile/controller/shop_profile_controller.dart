@@ -334,6 +334,13 @@ class ShopProfileViewController extends ChangeNotifier {
     );
   }
 
+  int cartCount = 0;
+  void getCartCount(newBudget) {
+    print(cartCount);
+    cartCount = newBudget;
+    notifyListeners();
+  }
+
   // Future<void> addToCart(pType, pId, sId, context) async {
   //   SharedPreferences pref = await SharedPreferences.getInstance();
   //   if (pref.getString("status") == "guestLoggedIn") {
