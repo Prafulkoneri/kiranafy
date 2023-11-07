@@ -397,12 +397,14 @@ class OrderSummaryController extends ChangeNotifier {
           }
         }
         cartItemList = result.orderSummaryData?.cartItemList;
+        /////////////NEW//////////////////////
         if (cartItemList?.isEmpty == true) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
           read.onNavigation(2, CartScreenView(), context);
           read.showBottomNavigationBar();
         }
+        /////////////NEW//////////////////////
         int length = cartItemList?.length ?? 0;
         quantityList.clear();
         for (int i = 0; i < length; i++) {
