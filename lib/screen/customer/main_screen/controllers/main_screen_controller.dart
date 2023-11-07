@@ -26,6 +26,7 @@ import '../../near_shops/view/all_near_shops_view.dart';
 class MainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
+  int cartCount=0;
   bool stackLoaderVisible = false;
   SetPincodeRepo setPincodeRepo = SetPincodeRepo();
   final PageStorageBucket bucket = PageStorageBucket();
@@ -70,10 +71,9 @@ class MainScreenController extends ChangeNotifier {
   }
 
   ////New///////
-  int cartCount = 0;
-  void getCartCount(newBudget) {
-    print(cartCount);
-    cartCount = newBudget;
+  void getCartCount(count) {
+    // print(cartCount);
+    cartCount = count;
     notifyListeners();
   }
 //////

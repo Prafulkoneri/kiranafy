@@ -8,7 +8,9 @@ import 'package:local_supper_market/screen/customer/cart/model/cart_list_model.d
 import 'package:local_supper_market/screen/customer/cart/model/shop_cart_delete_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_list_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/shop_cart_delete_repo.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/utils/Utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartListController extends ChangeNotifier {
@@ -41,6 +43,9 @@ class CartListController extends ChangeNotifier {
       print(response.statusCode);
       if (response.statusCode == 200) {
         cartList = result.cartData?.cartList;
+        final readMain=   Provider.of<MainScreenController>(context,
+            listen: false);
+        readMain.getCartCount(cartList?.length);
         showLoader(false);
         notifyListeners();
       } else {
