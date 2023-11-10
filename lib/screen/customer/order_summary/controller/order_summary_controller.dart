@@ -47,6 +47,7 @@ class OrderSummaryController extends ChangeNotifier {
       );
   TextEditingController expectedDateController = TextEditingController();
   String shopId = "";
+  String couponCode = "";
   String cartId = "";
   String groupValue = "";
   String discountPercentage = "";
@@ -196,9 +197,10 @@ class OrderSummaryController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onOfferSelected(value, context, discount) async {
+  void onOfferSelected(value, context, discount, cCode) async {
     offerGroupValue = value.toString();
     couponDiscount = discount;
+    couponCode = cCode;
     await applyCoupon(context);
     notifyListeners();
   }
@@ -636,6 +638,7 @@ class OrderSummaryController extends ChangeNotifier {
 
   CustomerApplyCouponsRequestModel get customerApplyCouponsRequestModel =>
       CustomerApplyCouponsRequestModel(
+        couponCode: couponCode,
         shopId: shopId,
         couponId: offerGroupValue,
         cartId: cartId,
@@ -808,16 +811,24 @@ class OrderSummaryController extends ChangeNotifier {
       return;
     }
     int minAmount = shopDetailData?.minimumOrderAmountForDelivery ?? 0;
-    double totalOrderAmount = double.parse(
-      groupValue == "self_pickup" ? selfPickupTotalAmount : totalAmount,
-    );
-    if (minAmount > totalOrderAmount) {
+    // double totalOrderAmount = double.parse(
+    //   groupValue == "self_pickup" ? selfPickupTotalAmount : totalAmount,
+    // );
+    // if (minAmount > totalOrderAmount) {
+    //   // LoadingOverlay.of(context).hide();
+    //   Utils.showPrimarySnackbar(context,
+    //       "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
+    //       type: SnackType.error);
+    //   return;
+    // }
+    if (minAmount > (orderFinalTotals?.subTotal ?? 0)) {
       // LoadingOverlay.of(context).hide();
       Utils.showPrimarySnackbar(context,
           "Minimum Order Amount Should be ${shopDetailData?.minimumOrderAmountForDelivery}",
           type: SnackType.error);
       return;
     }
+
     showOnPageLoader(true);
     final read = Provider.of<MainScreenController>(context, listen: false);
     read.onNavigation(
@@ -841,6 +852,7 @@ class OrderSummaryController extends ChangeNotifier {
           finalTotalDiscount: totalDiscount,
           totalItems: orderFinalTotals?.itemCount.toString(),
           couponDiscountAmount: couponDiscount,
+          couponCode: couponCode,
         ),
         context);
     // Navigator.push(

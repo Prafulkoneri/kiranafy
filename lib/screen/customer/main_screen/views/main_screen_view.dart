@@ -256,8 +256,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                     children: [
                                       badges.Badge(
                                         badgeContent: Text(
-                                          watch.cartCount.toString() ??
-                                              "",
+                                          watch.cartCount.toString() ?? "",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 11.sp,

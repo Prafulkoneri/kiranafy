@@ -32,6 +32,7 @@ class OrderPaymentView extends StatefulWidget {
   final String? finalSubTotal;
   final String? finalDeliveryCharges;
   final String? couponDiscountAmount;
+  final String? couponCode;
 
   const OrderPaymentView(
       {super.key,
@@ -47,7 +48,8 @@ class OrderPaymentView extends StatefulWidget {
       this.totalItems,
       this.finalSubTotal,
       this.finalDeliveryCharges,
-      this.couponDiscountAmount});
+      this.couponDiscountAmount,
+      this.couponCode});
 
   @override
   State<OrderPaymentView> createState() => _OrderPaymentViewState();
@@ -75,7 +77,8 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           widget.totalItems,
           widget.finalSubTotal,
           widget.finalDeliveryCharges,
-          widget.couponDiscountAmount);
+          widget.couponDiscountAmount,
+          widget.couponCode);
     });
   }
 

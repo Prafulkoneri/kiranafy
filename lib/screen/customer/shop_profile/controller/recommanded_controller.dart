@@ -6,12 +6,14 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/recommanded_products_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/recommanded_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SAllRecommandedProductsController extends ChangeNotifier {
@@ -134,6 +136,9 @@ class SAllRecommandedProductsController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
+        readMain.getCartCount(result.cartCount);
         isRecommandedProductAdded[index] = true;
         quantityList.removeAt(index);
         quantityList.insert(index, 1);
@@ -236,6 +241,9 @@ class SAllRecommandedProductsController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
+        readMain.getCartCount(result.cartCount);
         isRecommandedProductAdded[index] = false;
         // await getAllOfferes(context, sId);
         Utils.showPrimarySnackbar(context, result.message,

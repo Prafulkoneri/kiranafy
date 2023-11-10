@@ -74,10 +74,10 @@ class AddEditUnitController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // showLoader(value) {
-  //   isLoading = value;
-  //   notifyListeners();
-  // }
+  showLoader(value) {
+    isLoading = value;
+    notifyListeners();
+  }
 
   Future<void> getUnitList(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -129,7 +129,7 @@ class AddEditUnitController extends ChangeNotifier {
 
   Future<void> getData(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    // showLoader(true);
+    showLoader(true);
     editUnitProductCategoryRepo
         .getEditUnit(
             editProductUnitCategoryRequestModel, pref.getString("successToken"))
@@ -145,12 +145,13 @@ class AddEditUnitController extends ChangeNotifier {
         mrpController.text = data?.mrpPrice.toString() ?? "";
         offerPriceController.text = data?.offerPrice.toString() ?? "";
         switchValue = data?.status == "active" ? true : false;
+        // switchValue = data?.status == "active";
         unitList = result.editunitdata?.units;
         networkImage1 = data?.unitBasedProductImage1Path ?? "";
         networkImage2 = data?.unitBasedProductImage2Path ?? "";
         networkImage3 = data?.unitBasedProductImage3Path ?? "";
         unitId = data?.unitId.toString() ?? "";
-        // showLoader(false);
+        showLoader(false);
         notifyListeners();
       } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
@@ -422,7 +423,7 @@ class AddEditUnitController extends ChangeNotifier {
           );
 
   Future<void> updateEditUnitDetails(context) async {
-    // LoadingOverlay.of(context).show();
+    LoadingOverlay.of(context).show();
     if (valueController.text == "") {
       Utils.showPrimarySnackbar(context, "Enter Value", type: SnackType.error);
       return;

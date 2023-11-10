@@ -8,6 +8,7 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -31,6 +32,7 @@ import 'package:local_supper_market/screen/customer/products/repository/remove_a
 import 'package:local_supper_market/screen/customer/products/repository/remove_custom_product_fav_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -64,8 +66,8 @@ class ProductViewController extends ChangeNotifier {
   List cartItemIdList = [];
   String cartItemId = "";
   String quantityAction = "";
-  List similarQuantityList=[];
-  List similarCartItemIdList=[];
+  List similarQuantityList = [];
+  List similarCartItemIdList = [];
   ProductViewRepo productViewRepo = ProductViewRepo();
   HomeBannerRepo homeBannerRepo = HomeBannerRepo();
   ProductUnitImageRepo productUnitImageRepo = ProductUnitImageRepo();
@@ -143,7 +145,6 @@ class ProductViewController extends ChangeNotifier {
           productType: productType,
           shopId: shopDetails?.id);
 
-
   Future<void> addToCart(
       pType, pId, sId, index, context, isSimilarProduct) async {
     print("quantityList1${quantityList}");
@@ -155,18 +156,21 @@ class ProductViewController extends ChangeNotifier {
     }
     addProductToCartRepo
         .addProductToCart(
-        AddProductToCartReqModel(
-            productType: pType,
-            productUnitId: pId.toString(),
-            shopId: sId.toString(),
-            quantity: "1"),
-        pref.getString("successToken"))
+            AddProductToCartReqModel(
+                productType: pType,
+                productUnitId: pId.toString(),
+                shopId: sId.toString(),
+                quantity: "1"),
+            pref.getString("successToken"))
         .then((response) {
       dev.log("response.body${response.body}");
       final result =
-      AddProductToCartResModel.fromJson(jsonDecode(response.body));
+          AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
+          final readMain =
+              Provider.of<MainScreenController>(context, listen: false);
+          readMain.getCartCount(result.cartCount);
           cartItemId = result.cartItemId.toString();
           print("quantityList2${quantityList}");
           // quantityList.removeAt(index);
@@ -199,7 +203,7 @@ class ProductViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       LoadingOverlay.of(context).hide();
     }).catchError(
-          (Object e) {
+      (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
         LoadingOverlay.of(context).hide();
       },
@@ -211,19 +215,18 @@ class ProductViewController extends ChangeNotifier {
   }
 
   Future<void> subtractItemQuantity(
-      context, CIId, index, pType, pUnitId,isSimilarProduct) async {
+      context, CIId, index, pType, pUnitId, isSimilarProduct) async {
     LoadingOverlay.of(context).show();
     quantityBtnPressed(true);
     print("*********");
     print(quantityList);
     print("*********");
     quantityAction = "subtract";
-    productType=pType;
+    productType = pType;
     print(cartItemIdList);
-    if(!isSimilarProduct) {
+    if (!isSimilarProduct) {
       cartItemId = cartItemIdList[index].toString();
-    }
-    else{
+    } else {
       cartItemId = similarCartItemIdList[index].toString();
     }
     print(cartItemId);
@@ -237,7 +240,7 @@ class ProductViewController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          if(!isSimilarProduct) {
+          if (!isSimilarProduct) {
             int value = quantityList[index];
             quantityList.removeAt(index);
             print("${value}valueeeeeeeee");
@@ -248,8 +251,7 @@ class ProductViewController extends ChangeNotifier {
                   pType, pUnitId, shopDetails?.id, index, context, false);
               isUnitImagesAdded[index] = false;
             }
-          }
-          else{
+          } else {
             int value = similarQuantityList[index];
             similarQuantityList.removeAt(index);
             print("${value}valueeeeeeeee");
@@ -292,17 +294,17 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  Future<void> addItemQuantity(context, CIId, index,pType,isSimilarProduct) async {
-   LoadingOverlay.of(context).show();
+  Future<void> addItemQuantity(
+      context, CIId, index, pType, isSimilarProduct) async {
+    LoadingOverlay.of(context).show();
     print("hello");
     quantityBtnPressed(true);
     quantityAction = "add";
-    productType=pType;
-    if(!isSimilarProduct){
+    productType = pType;
+    if (!isSimilarProduct) {
       cartItemId = cartItemIdList[index].toString();
-    }
-    else{
-      cartItemId=similarCartItemIdList[index].toString();
+    } else {
+      cartItemId = similarCartItemIdList[index].toString();
     }
     SharedPreferences pref = await SharedPreferences.getInstance();
     cartItemQuantityRepo
@@ -315,15 +317,14 @@ class ProductViewController extends ChangeNotifier {
           CartItemQuantityResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         if (result.status == 200) {
-          if(!isSimilarProduct) {
+          if (!isSimilarProduct) {
             int value = quantityList[index];
             quantityList.removeAt(index);
             quantityList.insert(index, value + 1);
-          }
-          else{
-            int value=similarQuantityList[index];
+          } else {
+            int value = similarQuantityList[index];
             similarQuantityList.removeAt(index);
-            similarQuantityList.insert(index,value+1);
+            similarQuantityList.insert(index, value + 1);
           }
           quantityBtnPressed(false);
           LoadingOverlay.of(context).hide();
@@ -344,7 +345,6 @@ class ProductViewController extends ChangeNotifier {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
       LoadingOverlay.of(context).hide();
       quantityBtnPressed(false);
-
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -357,8 +357,6 @@ class ProductViewController extends ChangeNotifier {
       },
     );
   }
-
-
 
   ProductViewRequestModel get productViewRequestModel =>
       ProductViewRequestModel(
@@ -419,8 +417,7 @@ class ProductViewController extends ChangeNotifier {
           }
         }
 
-
-        for(int i=0;i<similarProductLength;i++){
+        for (int i = 0; i < similarProductLength; i++) {
           similarQuantityList.add(similarProduct?[i].quantity);
           similarCartItemIdList.add(similarProduct?[i].cartItemId);
         }
@@ -508,7 +505,7 @@ class ProductViewController extends ChangeNotifier {
             isSimilarProductAdded.insert(i, false);
           }
         }
-        for(int i=0;i<similarProductLength;i++){
+        for (int i = 0; i < similarProductLength; i++) {
           similarQuantityList.add(similarProduct?[i].quantity);
           similarCartItemIdList.add(similarProduct?[i].cartItemId);
         }
@@ -619,12 +616,17 @@ class ProductViewController extends ChangeNotifier {
     );
   }
 
-  AddCustomProductToFavReqModel get addCustomProductToFavReqModel => AddCustomProductToFavReqModel(
+  AddCustomProductToFavReqModel get addCustomProductToFavReqModel =>
+      AddCustomProductToFavReqModel(
         shopId: shopId,
         productId: productId,
       );
 //////Add Admin Product To favrt////
-  AddAdminProductToFavReqModel get addAdminProductToFavReqModel => AddAdminProductToFavReqModel(shopId: shopId,productId: productId,);
+  AddAdminProductToFavReqModel get addAdminProductToFavReqModel =>
+      AddAdminProductToFavReqModel(
+        shopId: shopId,
+        productId: productId,
+      );
 
   Future addToFavProduct(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -694,11 +696,17 @@ class ProductViewController extends ChangeNotifier {
   }
 
   /////End/////
-  RemoveAdminProductReqModel get removeFavProductReqModel => RemoveAdminProductReqModel(shopId: shopId.toString(), productId: productId.toString());
+  RemoveAdminProductReqModel get removeFavProductReqModel =>
+      RemoveAdminProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
 
-  RemoveCustomProductReqModel get removeCustomeProductReqModel => RemoveCustomProductReqModel(shopId: shopId.toString(), productId: productId.toString());
+  RemoveCustomProductReqModel get removeCustomeProductReqModel =>
+      RemoveCustomProductReqModel(
+          shopId: shopId.toString(), productId: productId.toString());
 
-  Future<void> removeFavProduct(context,) async {
+  Future<void> removeFavProduct(
+    context,
+  ) async {
     if (productType == "admin_product") {
       SharedPreferences pref = await SharedPreferences.getInstance();
       removeFavProductRepo
@@ -772,7 +780,9 @@ class ProductViewController extends ChangeNotifier {
   }
 
   ////////////Add Fvrt/////////////
-  AddFavReqModel get addFavReqModel => AddFavReqModel(shopId: shopId.toString(),);
+  AddFavReqModel get addFavReqModel => AddFavReqModel(
+        shopId: shopId.toString(),
+      );
 
   Future<void> updateAllShopFavList(context, id) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -810,7 +820,9 @@ class ProductViewController extends ChangeNotifier {
   }
 
   ////////////////Remove//////////////
-  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(shopId: shopId.toString(),);
+  RemoveFavReqModel get removeFavReqModel => RemoveFavReqModel(
+        shopId: shopId.toString(),
+      );
 
   RemoveFavShopRepo removeFavShopRepo = RemoveFavShopRepo();
 
@@ -992,6 +1004,9 @@ class ProductViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
+        readMain.getCartCount(result.cartCount);
         if (!isSimilarProduct) {
           cartItemIdList.removeAt(index);
           cartItemIdList.insert(index, 0);

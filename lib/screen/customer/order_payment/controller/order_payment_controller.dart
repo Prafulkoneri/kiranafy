@@ -39,6 +39,7 @@ class OrderPaymentController extends ChangeNotifier {
   String finalDeliveryCharges = "";
   String customerPaymentMode = "";
   String couponDiscount = "";
+  String couponCode = "";
 
   ShopDetails? shopDetailData;
   OrderPaymentData? orderPaymentData;
@@ -56,11 +57,26 @@ class OrderPaymentController extends ChangeNotifier {
       tItems,
       fSubTotal,
       fDCharges,
-      cDiscountAmount) async {
+      cDiscountAmount,
+      cCode) async {
     showStackLoader(false);
     groupValue = "cash";
-    await orderPayment(context, cId, id, cuId, cdaId, cdDate, cdSlot, cdType,
-        ftAmount, ftDiscount, tItems, fSubTotal, fDCharges, cDiscountAmount);
+    await orderPayment(
+        context,
+        cId,
+        id,
+        cuId,
+        cdaId,
+        cdDate,
+        cdSlot,
+        cdType,
+        ftAmount,
+        ftDiscount,
+        tItems,
+        fSubTotal,
+        fDCharges,
+        cDiscountAmount,
+        cCode);
   }
 
   void onRadioButtonSelected(value) {
@@ -96,7 +112,8 @@ class OrderPaymentController extends ChangeNotifier {
       finalTotalDiscount: finalTotalDiscount.toString(),
       totalItems: totalItems.toString(),
       finalSubTotal: finalSubTotal.toString(),
-      finalDeliveryCharges: finalDeliveryCharges.toString());
+      finalDeliveryCharges: finalDeliveryCharges.toString(),
+      couponCode: couponCode.toString());
 
   Future<void> orderPayment(
       context,
@@ -112,7 +129,8 @@ class OrderPaymentController extends ChangeNotifier {
       tItems,
       fSubTotal,
       fDCharges,
-      cDiscountAmount) async {
+      cDiscountAmount,
+      cCode) async {
     showLoader(true);
     shopId = id.toString();
     cartId = cId.toString();
@@ -127,6 +145,7 @@ class OrderPaymentController extends ChangeNotifier {
     finalSubTotal = fSubTotal.toString();
     finalDeliveryCharges = fDCharges.toString();
     couponDiscount = cDiscountAmount.toString();
+    couponCode = cCode.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     orderPaymentRepo
@@ -158,21 +177,23 @@ class OrderPaymentController extends ChangeNotifier {
   /////////////////////////////////////////////////////////////////////////////////////
   CustomerPlaceOrderReqModel get customerPlaceOrderReqModel =>
       CustomerPlaceOrderReqModel(
-          shopId: shopId.toString(),
-          cartId: cartId.toString(),
-          couponId: couponId.toString(),
-          customerDeliveryAddressId: customerDeliveryAddressId.toString(),
-          customerDeliveryDate: customerDeliveryDate.toString(),
-          customerDeliverySlot: customerDeliverySlot.toString(),
-          customerDeliveryType: customerDeliveryType.toString(),
-          finalTotalAmount: finalTotalAmount.toString(),
-          finalTotalDiscount: finalTotalDiscount.toString(),
-          totalItems: totalItems.toString(),
-          finalSubTotal: finalSubTotal.toString(),
-          finalDeliveryCharges: finalDeliveryCharges.toString(),
-          transactionId: transactionIdController.text,
-          customerPaymentMode: groupValue,
-          couponDiscountAmount: couponDiscount);
+        shopId: shopId.toString(),
+        cartId: cartId.toString(),
+        couponId: couponId.toString(),
+        customerDeliveryAddressId: customerDeliveryAddressId.toString(),
+        customerDeliveryDate: customerDeliveryDate.toString(),
+        customerDeliverySlot: customerDeliverySlot.toString(),
+        customerDeliveryType: customerDeliveryType.toString(),
+        finalTotalAmount: finalTotalAmount.toString(),
+        finalTotalDiscount: finalTotalDiscount.toString(),
+        totalItems: totalItems.toString(),
+        finalSubTotal: finalSubTotal.toString(),
+        finalDeliveryCharges: finalDeliveryCharges.toString(),
+        transactionId: transactionIdController.text,
+        customerPaymentMode: groupValue,
+        couponDiscountAmount: couponDiscount,
+        couponCode: couponCode,
+      );
 
   Future<void> placeOrder(
     context,

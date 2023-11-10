@@ -265,11 +265,11 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                       Row(
                                                         children: [
                                                           InkWell(
-                                                            onTap: () {
+                                                            onTap: () async {
                                                               readMainScreen
                                                                   .onNavigation(
                                                                       0,
-                                                                      AddUnitView(
+                                                                      await AddUnitView(
                                                                         routeName:
                                                                             "unitList",
                                                                         categoryId:

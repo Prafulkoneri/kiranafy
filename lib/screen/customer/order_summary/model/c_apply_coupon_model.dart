@@ -4,6 +4,7 @@ class CustomerApplyCouponsRequestModel {
   String? cartId;
   String? shopId;
   String? couponId;
+  String? couponCode;
   String? subTotal;
   String? couponDiscount;
   String? totalDiscount;
@@ -11,16 +12,18 @@ class CustomerApplyCouponsRequestModel {
   String? productTotalDiscount;
   String? total;
 
-  CustomerApplyCouponsRequestModel(
-      {this.cartId,
-      this.shopId,
-      this.couponId,
-      this.subTotal,
-      this.couponDiscount,
-      this.totalDiscount,
-      this.deliveryCharges,
-      this.productTotalDiscount,
-      this.total});
+  CustomerApplyCouponsRequestModel({
+    this.cartId,
+    this.shopId,
+    this.couponId,
+    this.subTotal,
+    this.couponDiscount,
+    this.totalDiscount,
+    this.deliveryCharges,
+    this.productTotalDiscount,
+    this.total,
+    this.couponCode,
+  });
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -33,6 +36,7 @@ class CustomerApplyCouponsRequestModel {
     data["delivery_charges"] = deliveryCharges;
     data["product_total_discount"] = productTotalDiscount;
     data["total"] = total;
+    data["coupon_code"] = couponCode;
     return data;
   }
 }
@@ -63,7 +67,7 @@ class ApplyCouponData {
   String? deliveryCharges;
   String? total;
   String? totalDiscount;
-  String ? discountPercentage;
+  String? discountPercentage;
 
   ApplyCouponData({
     required this.couponCode,

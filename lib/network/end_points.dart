@@ -1,6 +1,6 @@
 class Endpoint {
   Endpoint._();
-  // Get Base Url
+  // Get Base Url8766762277
   // static const String getBaseUrl = 'https://newcms.m-staging.in/local-super-mart-admin/api/app-base-url';
   // Base Url
   static const String baseUrl =

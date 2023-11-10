@@ -612,6 +612,9 @@ class SSubscriptionController extends ChangeNotifier {
           print(discountAmount);
           isReferalCodeApplied = true;
           LoadingOverlay.of(context).hide();
+          Utils.showPrimarySnackbar(context, result.message,
+              type: SnackType.success);
+          // LoadingOverlay.of(context).hide();
           notifyListeners();
         } else {
           Utils.showPrimarySnackbar(context, result.message,
@@ -637,9 +640,19 @@ class SSubscriptionController extends ChangeNotifier {
     );
   }
 
+  SubscriptionData? selectedSubscriptionPlan;
+
   Future<void> removeReferCode(context) async {
     isReferalCodeApplied = false;
     applyreferalCodeController.clear();
+    discountPercentage = 0;
+    discountAmount = 0;
+    if (selectedSubscriptionPlan != null) {
+      planAmount = selectedSubscriptionPlan!.subscriptionPrice.toString();
+    }
+
+    // planAmount = subscriptionData?[0].subscriptionPrice.toString() ?? "";
+    // planAmount = subscriptionData?[1].subscriptionPrice.toString() ?? "";
     notifyListeners();
   }
 }

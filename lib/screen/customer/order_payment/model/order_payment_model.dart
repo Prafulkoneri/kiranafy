@@ -13,6 +13,7 @@ class OrderPaymentReqModel {
   String? customerDeliveryAddressId; //
   String? finalSubTotal;
   String? finalDeliveryCharges;
+  String? couponCode;
 
   OrderPaymentReqModel(
       {this.cartId,
@@ -26,7 +27,8 @@ class OrderPaymentReqModel {
       this.customerDeliveryDate, //
       this.customerDeliveryAddressId, //
       this.finalSubTotal,
-      this.finalDeliveryCharges});
+      this.finalDeliveryCharges,
+      this.couponCode});
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
@@ -42,6 +44,7 @@ class OrderPaymentReqModel {
     data["customer_delivery_address_id"] = customerDeliveryAddressId;
     data["final_sub_total"] = finalSubTotal;
     data["final_delivery_charges"] = finalDeliveryCharges;
+    data["coupon_code"] = couponCode;
     return data;
   }
 }

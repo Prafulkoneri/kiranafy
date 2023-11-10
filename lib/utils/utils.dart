@@ -913,7 +913,7 @@ class Utils {
                         left: 82.w, right: 78.w, top: 30, bottom: 19),
                     child: Image(
                       image: AssetImage(
-                        "assets/images/order_detail_condition.png",
+                        "assets/images/subscription_delete.png",
                       ),
                       fit: BoxFit.cover,
                       // width: 168.w,

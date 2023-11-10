@@ -78,8 +78,11 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                         final element = watch.finalCouponList?[index];
                         return GestureDetector(
                           onTap: () {
-                            read.onOfferSelected(element?.id.toString(),
-                                context, element?.couponDiscountMaxAmount);
+                            read.onOfferSelected(
+                                element?.id.toString(),
+                                context,
+                                element?.couponDiscountMaxAmount,
+                                element?.couponCode);
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
@@ -104,7 +107,8 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                                   element?.id.toString(),
                                                   context,
                                                   element
-                                                      ?.couponDiscountMaxAmount);
+                                                      ?.couponDiscountMaxAmount,
+                                                  element?.couponCode);
                                             }),
                                       ],
                                     ),

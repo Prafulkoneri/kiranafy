@@ -56,11 +56,9 @@ class ShopSettingController extends ChangeNotifier {
             result.settingData?.appNotification == "on" ? true : false;
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -82,7 +80,7 @@ class ShopSettingController extends ChangeNotifier {
   ChangeSettingRepo changeSettingRepo = ChangeSettingRepo();
   ChangeSettingsRequestModel get changeSettingRequestModel =>
       ChangeSettingsRequestModel(
-          appNotification: isAppNotificationEnable ? "on" : "off");
+          appNotification: isAppNotificationEnable ? "off" : "on");
 
   Future<void> changeSettings(context, value) async {
     LoadingOverlay.of(context).show();

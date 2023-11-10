@@ -407,8 +407,8 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final readMain=   Provider.of<MainScreenController>(context,
-            listen: false);
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
         readMain.getCartCount(result.cartCount);
         await getShopDetails(context, sId, false);
         // isSeasonalProductAdded[index] = true;
@@ -549,8 +549,8 @@ class ShopProfileViewController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final readMain=   Provider.of<MainScreenController>(context,
-            listen: false);
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
         readMain.getCartCount(result.cartCount);
         await getShopDetails(context, sId, false);
         // isSeasonalProductAdded[index] = false;

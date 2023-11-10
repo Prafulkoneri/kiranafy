@@ -800,8 +800,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                               watch.orderDetails?.orderStatus == "Delivered" ||
                                       watch.orderDetails?.orderStatus ==
                                           "Order Refund"
-                                  ?
-                                   Row(
+                                  ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -821,7 +820,6 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               ? 19.w
                                               : 0,
                                         ),
-
                                         watch.orderDetails?.orderStatus ==
                                                     "Delivered" ||
                                                 watch.orderDetails
@@ -2624,12 +2622,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       : Container(),
                               watch.orderDetails?.orderStatus == "Delivered" ||
                                       watch.orderDetails?.orderStatus ==
-                                          "Order Refund"   && (watch.orderDetails
-                                                                ?.customerCancelledStatus ==
-                                                            "NO" &&
-                                                        watch.orderDetails
-                                                                ?.shopCancelledStatus ==
-                                                            "NO")
+                                              "Order Refund" &&
+                                          (watch.orderDetails
+                                                      ?.customerCancelledStatus ==
+                                                  "NO" &&
+                                              watch.orderDetails
+                                                      ?.shopCancelledStatus ==
+                                                  "NO")
                                   ? Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

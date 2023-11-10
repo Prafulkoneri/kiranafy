@@ -1402,162 +1402,161 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                   ),
                                 ),
                               ),
-                              // widget.routeName == "accounts"
-                              //     ? Container()
-                              //     : Column(
+                              widget.routeName == "accounts"
+                                  ? Container()
+                                  : Column(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.only(left: 19.w),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Available Referal Code",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      // height: 1.5,
+                                                      color: black,
+                                                      letterSpacing: .05,
+                                                      // overflow: TextOverflow.ellipsis,
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.h,
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 19.w, right: 19.w),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Enter Referal Code",
+                                                style: GoogleFonts.dmSans(
+                                                  textStyle: TextStyle(
+                                                      color: Black1,
+                                                      // letterSpacing: .5,
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 11.h,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                      height: 34.w,
+                                                      child: TextField(
+                                                        controller: watch
+                                                            .applyreferalCodeController,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets.only(
+                                                                  bottom: 10.w,
+                                                                  left: 8.w),
+                                                          fillColor: grey4,
+                                                          filled: true,
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide.none,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20.w,
+                                                  ),
+                                                  !watch.isReferalCodeApplied
+                                                      ? SizedBox(
+                                                          height: 32.h,
+                                                          width: 91.w,
+                                                          child: PrimaryButton(
+                                                            color: SplashText,
 
-                              //         children: [
-                              //           Container(
-                              //             padding: EdgeInsets.only(left: 19.w),
-                              //             child: Row(
-                              //               mainAxisAlignment:
-                              //                   MainAxisAlignment.spaceBetween,
-                              //               children: [
-                              //                 Text(
-                              //                   "Available Referal Code",
-                              //                   style: GoogleFonts.dmSans(
-                              //                     textStyle: TextStyle(
-                              //                         // height: 1.5,
-                              //                         color: black,
-                              //                         letterSpacing: .05,
-                              //                         // overflow: TextOverflow.ellipsis,
-                              //                         fontSize: 16.sp,
-                              //                         fontWeight:
-                              //                             FontWeight.w700),
-                              //                   ),
-                              //                 ),
-                              //               ],
-                              //             ),
-                              //           ),
-                              //           SizedBox(
-                              //             height: 5.h,
-                              //           ),
-                              //           Container(
-                              //             padding: EdgeInsets.only(
-                              //                 left: 19.w, right: 19.w),
-                              //             child: Column(
-                              //               crossAxisAlignment:
-                              //                   CrossAxisAlignment.start,
-                              //               children: [
-                              //                 Text(
-                              //                   "Enter Referal Code",
-                              //                   style: GoogleFonts.dmSans(
-                              //                     textStyle: TextStyle(
-                              //                         color: Black1,
-                              //                         // letterSpacing: .5,
-                              //                         fontSize: 14.sp,
-                              //                         fontWeight:
-                              //                             FontWeight.w400),
-                              //                   ),
-                              //                 ),
-                              //                 SizedBox(
-                              //                   height: 11.h,
-                              //                 ),
-                              //                 Row(
-                              //                   mainAxisAlignment:
-                              //                       MainAxisAlignment
-                              //                           .spaceBetween,
-                              //                   children: [
-                              //                     Expanded(
-                              //                       child: Container(
-                              //                         height: 34.w,
-                              //                         child: TextField(
-                              //                           controller: watch
-                              //                               .applyreferalCodeController,
-                              //                           decoration:
-                              //                               InputDecoration(
-                              //                             contentPadding:
-                              //                                 EdgeInsets.only(
-                              //                                     bottom: 10.w,
-                              //                                     left: 8.w),
-                              //                             fillColor: grey4,
-                              //                             filled: true,
-                              //                             border:
-                              //                                 OutlineInputBorder(
-                              //                               borderSide:
-                              //                                   BorderSide.none,
-                              //                               borderRadius:
-                              //                                   BorderRadius
-                              //                                       .circular(
-                              //                                           10.0),
-                              //                             ),
-                              //                           ),
-                              //                         ),
-                              //                       ),
-                              //                     ),
-                              //                     SizedBox(
-                              //                       width: 20.w,
-                              //                     ),
-                              //                     !watch.isReferalCodeApplied
-                              //                         ? SizedBox(
-                              //                             height: 32.h,
-                              //                             width: 91.w,
-                              //                             child: PrimaryButton(
-                              //                               color: SplashText,
+                                                            onTap: () {
+                                                              read.applyReferCode(
+                                                                  context);
+                                                              // read.removeCoupon(context, true);
+                                                            },
+                                                            child: Text(
+                                                              "Apply",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 15
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                              ),
+                                                            ),
 
-                              //                               onTap: () {
-                              //                                 read.applyReferCode(
-                              //                                     context);
-                              //                                 // read.removeCoupon(context, true);
-                              //                               },
-                              //                               child: Text(
-                              //                                 "Apply",
-                              //                                 style: GoogleFonts
-                              //                                     .dmSans(
-                              //                                   textStyle:
-                              //                                       TextStyle(
-                              //                                           color: Colors
-                              //                                               .white,
-                              //                                           // letterSpacing: .5,
-                              //                                           fontSize: 15
-                              //                                               .sp,
-                              //                                           fontWeight:
-                              //                                               FontWeight.w500),
-                              //                                 ),
-                              //                               ),
+                                                            //
+                                                          ),
+                                                        )
+                                                      : SizedBox(
+                                                          height: 32.h,
+                                                          width: 91.w,
+                                                          child: PrimaryButton(
+                                                            color: Colors.red,
+                                                            onTap: () {
+                                                              read.removeReferCode(
+                                                                  context);
+                                                              // read.removeCoupon(context, true);
+                                                            },
+                                                            child: Text(
+                                                              "Remove",
+                                                              style: GoogleFonts
+                                                                  .dmSans(
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        // letterSpacing: .5,
+                                                                        fontSize: 15
+                                                                            .sp,
+                                                                        fontWeight:
+                                                                            FontWeight.w500),
+                                                              ),
+                                                            ),
 
-                              //                               //
-                              //                             ),
-                              //                           )
-                              //                         : SizedBox(
-                              //                             height: 32.h,
-                              //                             width: 91.w,
-                              //                             child: PrimaryButton(
-                              //                               color: Colors.red,
-                              //                               onTap: () {
-                              //                                 read.removeReferCode(
-                              //                                     context);
-                              //                                 // read.removeCoupon(context, true);
-                              //                               },
-                              //                               child: Text(
-                              //                                 "Remove",
-                              //                                 style: GoogleFonts
-                              //                                     .dmSans(
-                              //                                   textStyle:
-                              //                                       TextStyle(
-                              //                                           color: Colors
-                              //                                               .white,
-                              //                                           // letterSpacing: .5,
-                              //                                           fontSize: 15
-                              //                                               .sp,
-                              //                                           fontWeight:
-                              //                                               FontWeight.w500),
-                              //                                 ),
-                              //                               ),
-
-                              //                               //
-                              //                             ),
-                              //                           )
-                              //                   ],
-                              //                 ),
-                              //               ],
-                              //             ),
-                              //           ),
-                              //           SizedBox(
-                              //             height: 11.h,
-                              //           ),
-                              //         ],
-                              //       ),
+                                                            //
+                                                          ),
+                                                        )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 11.h,
+                                        ),
+                                      ],
+                                    ),
                               Padding(
                                 padding: EdgeInsets.only(
                                   left: 19.w,

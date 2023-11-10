@@ -12,10 +12,12 @@ import 'package:local_supper_market/screen/customer/category/model/seach_product
 import 'package:local_supper_market/screen/customer/category/repository/product_as_per_category_repo.dart';
 import 'package:local_supper_market/screen/customer/category/repository/product_as_per_filter_repo.dart';
 import 'package:local_supper_market/screen/customer/category/repository/search_product_as_per_category_repo.dart';
+import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductCategoryController extends ChangeNotifier {
@@ -292,6 +294,9 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           AddProductToCartResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
+        readMain.getCartCount(result.cartCount);
         isCategoryProductAdded[index] = true;
         quantityList.removeAt(index);
         quantityList.insert(index, 1);
@@ -334,6 +339,9 @@ class ProductCategoryController extends ChangeNotifier {
       final result =
           CartRemoveResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
+        readMain.getCartCount(result.cartCount);
         isCategoryProductAdded[index] = false;
         notifyListeners();
         // await getAllOfferes(context, sId);

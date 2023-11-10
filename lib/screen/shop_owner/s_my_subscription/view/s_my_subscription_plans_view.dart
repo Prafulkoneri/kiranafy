@@ -50,7 +50,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          title: "My Subscriptionaa",
+          title: "My Subscription     ",
           onBackBtnPressed: () {
             widget.screenName == "accounts"
                 ? readMainScreen.onNavigation(
