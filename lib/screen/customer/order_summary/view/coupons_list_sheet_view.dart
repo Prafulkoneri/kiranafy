@@ -87,9 +87,20 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                           child: Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 11.w, vertical: 14.w),
+                            // couponType
+
                             decoration: BoxDecoration(
+                              color: element?.couponType == "voucher"
+                                  ? Color(0xff39C19D).withOpacity(0.1)
+                                  : Colors.transparent,
                               border: Border.all(
-                                  color: Color(0xff4689EC).withOpacity(0.55.w)),
+
+                                  // width: 2,
+                                  color:
+                                      // element?.couponType == "voucher"
+                                      //     // ? Colors.green
+                                      //     // :
+                                      Color(0xff4689EC).withOpacity(0.55.w)),
                               borderRadius: BorderRadius.circular(5.w),
                             ),
                             margin: EdgeInsets.only(bottom: 20.w),

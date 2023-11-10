@@ -196,7 +196,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         height: 34.h,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 25.w),
+                        padding: EdgeInsets.only(left: 22.w),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [

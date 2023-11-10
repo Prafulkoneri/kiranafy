@@ -133,7 +133,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                                     ),
                                     Text(
                                       // "",
-                                      "Onboard your favourite kirana shops\n on Local Supermart and get discount\n voucher on shop approval!",
+                                      "Onboard your favourite kirana shops\non Local Supermart and get discount\nvoucher on shop approval!",
                                       style: GoogleFonts.dmSans(
                                         textStyle: TextStyle(
                                             color: Black,
