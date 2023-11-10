@@ -141,8 +141,11 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                           SizedBox(
                                             height: 5.w,
                                           ),
-                                          Text(
-                                              "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9} ${element?.minOrderAmount}"),
+                                          element?.couponType == "voucher"
+                                              ? Text(
+                                                  "This is a special voucher code you received for referring a shop, check conditions from my voucher section!")
+                                              : Text(
+                                                  "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9} ${element?.minOrderAmount}")
                                         ],
                                       ),
                                     ),
