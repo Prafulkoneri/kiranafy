@@ -83,6 +83,10 @@ class OrderPaymentController extends ChangeNotifier {
     groupValue = value;
     notifyListeners();
   }
+   void onlinePymentGatWat(value) {
+    groupValue = value;
+    notifyListeners();
+  }
 
   void showErrorMessage(context) {
     Utils.showPrimarySnackbar(context, "QR Code is Not Available",
@@ -260,6 +264,7 @@ class OrderPaymentController extends ChangeNotifier {
         //   (Route<dynamic> route) => false,
         // );
         LoadingOverlay.of(context).hide();
+        print('dddd');
         notifyListeners();
       } else {
         LoadingOverlay.of(context).hide();

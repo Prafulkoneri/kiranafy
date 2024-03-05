@@ -129,9 +129,9 @@ Future<void> initNotification(context) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
   final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings();
+      const IOSInitializationSettings();
   final MacOSInitializationSettings initializationSettingsMacOS =
-      MacOSInitializationSettings();
+      const MacOSInitializationSettings();
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -184,7 +184,7 @@ Future<void> initNotification(context) async {
 }
 
 Future<void> showNotificationWithImage() async {
-  final bigPictureStyleInformation = BigPictureStyleInformation(
+  final bigPictureStyleInformation = const BigPictureStyleInformation(
     FilePathAndroidBitmap('your_image_path'),
     contentTitle: 'Notification with Image',
     summaryText: 'This is an example of a notification with an image.',
@@ -199,7 +199,7 @@ void main() async {
   // // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   if (Platform.isIOS) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
+        options: const FirebaseOptions(
             apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
             appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
             messagingSenderId: "110985117622",
@@ -304,7 +304,7 @@ void main() async {
 
         // ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -461,7 +461,7 @@ class _MyAppState extends State<MyApp> {
 
 /////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails(
+    final android = const AndroidNotificationDetails(
       '0',
       'Adun Accounts',
       channelDescription: 'channel description',
@@ -469,7 +469,7 @@ class _MyAppState extends State<MyApp> {
       styleInformation: BigTextStyleInformation(''),
       icon: '',
     );
-    final iOS = IOSNotificationDetails();
+    final iOS = const IOSNotificationDetails();
     final platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
