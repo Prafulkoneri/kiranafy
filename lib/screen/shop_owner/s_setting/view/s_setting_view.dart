@@ -20,6 +20,7 @@ class ShopSettingView extends StatefulWidget {
 }
 
 class _ShopSettingViewState extends State<ShopSettingView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<ShopSettingController>().initState(context);
@@ -41,7 +42,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                 Provider.of<SMainScreenController>(context, listen: false);
             read.onNavigation(
                 0,
-                SAccountScreenView(
+                const SAccountScreenView(
                   refresh: false,
                 ),
                 context);
@@ -56,7 +57,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                     Provider.of<SMainScreenController>(context, listen: false);
                 read.onNavigation(
                     0,
-                    SAccountScreenView(
+                    const SAccountScreenView(
                       refresh: false,
                     ),
                     context);
@@ -120,14 +121,14 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Dialog(
-                                      backgroundColor: Color(0xffFFFFFF),
+                                      backgroundColor: const Color(0xffFFFFFF),
                                       // shape: ,
-                                      shape: RoundedRectangleBorder(
+                                      shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10))),
 
                                       // scrollable: true,
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 205.h,
                                         // width: 400.w,
                                         child: Column(
@@ -140,7 +141,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                 textAlign: TextAlign.center,
                                                 style: GoogleFonts.dmSans(
                                                   textStyle: TextStyle(
-                                                      color: Color(0xff006F94),
+                                                      color: const Color(0xff006F94),
                                                       fontSize: 20.sp,
                                                       fontWeight:
                                                           FontWeight.w700),
@@ -173,7 +174,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                           bottom: 9.w),
                                                       decoration: BoxDecoration(
                                                           color:
-                                                              Color(0xff39C19D),
+                                                              const Color(0xff39C19D),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(8)),
@@ -212,7 +213,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                                                           bottom: 9.w),
                                                       decoration: BoxDecoration(
                                                           color:
-                                                              Color(0xffEC7074),
+                                                              const Color(0xffEC7074),
                                                           // border: Border.all(width: 1, color: Black),
                                                           borderRadius:
                                                               BorderRadius
@@ -266,7 +267,7 @@ class _ShopSettingViewState extends State<ShopSettingView> {
                     SizedBox(
                       height: 31.h,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 1,
                       color: Color(0xffE0E0E0),
                     ),

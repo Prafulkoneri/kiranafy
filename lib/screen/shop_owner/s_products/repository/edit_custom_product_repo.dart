@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 
 class EditCustomProductRepo {
   Future<http.Response> getCustomProductDetails(

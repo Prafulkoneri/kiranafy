@@ -47,7 +47,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 0,
-                ShopDashBoardView(
+                const ShopDashBoardView(
                   refresh: true,
                 ),
                 context);
@@ -72,14 +72,14 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
               onWillPop: () async {
                 readMain.onNavigation(
                     0,
-                    ShopDashBoardView(
+                    const ShopDashBoardView(
                       refresh: false,
                     ),
                     context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: watch.reviewList?.isNotEmpty == true
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                 ),
                                 ListView.builder(
                                   shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: watch.reviewList?.length ?? 0,
                                   itemBuilder: (context, index) {
                                     final element = watch.reviewList?[index];
@@ -129,7 +129,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                   width: 1,
-                                                  color: Color(0xffE8E8E8)),
+                                                  color: const Color(0xffE8E8E8)),
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               // color: Colors.red,
@@ -146,7 +146,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                             width: 50.0,
                                                             height: 50.0,
                                                             decoration:
-                                                                BoxDecoration(
+                                                                const BoxDecoration(
                                                               shape: BoxShape
                                                                   .circle,
                                                               image:
@@ -208,7 +208,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                                       GoogleFonts
                                                                           .dmSans(
                                                                     textStyle: TextStyle(
-                                                                        color: Color(
+                                                                        color: const Color(
                                                                             0xff7C7C7C),
                                                                         fontSize: 12
                                                                             .sp,
@@ -275,7 +275,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                                       GoogleFonts
                                                                           .dmSans(
                                                                     textStyle: TextStyle(
-                                                                        color: Color(
+                                                                        color: const Color(
                                                                             0xff7C7C7C),
                                                                         fontSize: 12
                                                                             .sp,
@@ -321,7 +321,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                               style: GoogleFonts
                                                                   .dmSans(
                                                                 textStyle: TextStyle(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xff7C7C7C),
                                                                     fontSize:
                                                                         11.sp,
@@ -352,7 +352,7 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color:
-                                                            Color(0xff7C7C7C),
+                                                            const Color(0xff7C7C7C),
                                                         // letterSpacing: .5,
                                                         fontSize: 14.sp,
                                                         fontWeight:

@@ -2,20 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/cart/view/cart_screen_view.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/customer_cancel_order_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/get_cancel_order_model.dart';
 
-import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/order_view_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/reorder_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/model/submit_review_model.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/repository/customer_cancel_order_repo.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/repository/get_cancel_order_view_repo.dart';
 
-import 'package:local_supper_market/screen/customer/delivery_view/repository/order_view_repo.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/repository/reorder_repo.dart';
-import 'package:local_supper_market/screen/customer/delivery_view/repository/submit_review_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
@@ -25,7 +13,6 @@ import 'package:local_supper_market/screen/customer/review/repository/customer_r
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 import 'package:local_supper_market/utils/utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -86,7 +73,7 @@ class CustomerReviewListControler extends ChangeNotifier {
         print(reviewlistData?.shopDetails);
         reviewList = reviewlistData?.reviewList;
 
-        print("fall all shops${favAllShop}");
+        print("fall all shops$favAllShop");
         shopDetails = reviewlistData?.shopDetails;
         favAllShop = shopDetails?.shopFavourite == "yes" ? true : false;
         print(shopDetails?.shopAddress);
@@ -115,7 +102,7 @@ class CustomerReviewListControler extends ChangeNotifier {
 
 ///////////////////////////////////////////////////////////////////////////////////
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {

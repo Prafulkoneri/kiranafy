@@ -6,7 +6,7 @@ class CustomerViewAllShopRepo {
   Future<http.Response> getAllShopList(
       CustomerViewAllShopReqModel reqModel, token) async {
     print(reqModel.toJson());
-    print(Uri.parse("${Endpoint.customerViewAllShop}"));
+    print(Uri.parse(Endpoint.customerViewAllShop));
     try {
       return await http.post(Uri.parse(Endpoint.customerViewAllShop),
           body: reqModel.toJson(),

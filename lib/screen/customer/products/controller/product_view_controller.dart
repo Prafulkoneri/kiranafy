@@ -147,7 +147,7 @@ class ProductViewController extends ChangeNotifier {
 
   Future<void> addToCart(
       pType, pId, sId, index, context, isSimilarProduct) async {
-    print("quantityList1${quantityList}");
+    print("quantityList1$quantityList");
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getString("status") == "guestLoggedIn") {
@@ -172,10 +172,10 @@ class ProductViewController extends ChangeNotifier {
               Provider.of<MainScreenController>(context, listen: false);
           readMain.getCartCount(result.cartCount);
           cartItemId = result.cartItemId.toString();
-          print("quantityList2${quantityList}");
+          print("quantityList2$quantityList");
           // quantityList.removeAt(index);
           // quantityList.insert(index,1);
-          print("quantityList3${quantityList}");
+          print("quantityList3$quantityList");
           if (!isSimilarProduct) {
             cartItemIdList.removeAt(index);
             cartItemIdList.insert(index, result.cartItemId);
@@ -398,15 +398,15 @@ class ProductViewController extends ChangeNotifier {
           cartItemIdList
               .add(productViewData?.productUnitDetails?[i].cartItemId);
         }
-        print("quantityListInitState${quantityList}");
-        print("cartIteMlIST${cartItemIdList}");
+        print("quantityListInitState$quantityList");
+        print("cartIteMlIST$cartItemIdList");
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
 
         /////////////Similar Products////////////////
         similarProduct = productViewData?.similarProducts;
         int similarProductLength = similarProduct?.length ?? 0;
-        print("similarproductlength ${similarProductLength}");
+        print("similarproductlength $similarProductLength");
         isSimilarProductAdded =
             List<bool>.filled(similarProductLength, false, growable: true);
         for (int i = 0; i < similarProductLength; i++) {
@@ -487,15 +487,15 @@ class ProductViewController extends ChangeNotifier {
           cartItemIdList
               .add(productViewData?.productUnitDetails?[i].cartItemId);
         }
-        print("quantityListInitState${quantityList}");
-        print("cartIteMlIST${cartItemIdList}");
+        print("quantityListInitState$quantityList");
+        print("cartIteMlIST$cartItemIdList");
         favAllShop = shopDetails?.isFvrt == "yes" ? true : false;
         isFavProduct = productDetails?.isProductFvrt == "yes" ? true : false;
 
         /////////////Similar Products////////////////
         similarProduct = productViewData?.similarProducts;
         int similarProductLength = similarProduct?.length ?? 0;
-        print("similarproductlength ${similarProductLength}");
+        print("similarproductlength $similarProductLength");
         isSimilarProductAdded =
             List<bool>.filled(similarProductLength, false, growable: true);
         for (int i = 0; i < similarProductLength; i++) {
@@ -770,7 +770,7 @@ class ProductViewController extends ChangeNotifier {
   }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {
@@ -828,7 +828,7 @@ class ProductViewController extends ChangeNotifier {
 
   Future<void> removeAllShopFavList(context, id) async {
     print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-    print("id${id}");
+    print("id$id");
     shopId = id.toString();
     SharedPreferences pref = await SharedPreferences.getInstance();
     removeFavShopRepo

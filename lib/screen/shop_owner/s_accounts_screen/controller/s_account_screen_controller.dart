@@ -59,7 +59,7 @@ class SAccountScreenController extends ChangeNotifier {
     // final read=Provider.of<MainScreenController>(context,listen: false);
     // read.onNavigation(0, OnBoardingScreenView(), context);
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+        MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
   }
 
   Future<void> getShopEditProfileDetails(context) async {
@@ -75,7 +75,7 @@ class SAccountScreenController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final shopDetails = result.shopDetails;
         print(shopDetails);
-        log("${response.body}");
+        log(response.body);
 
         number = shopDetails?.shopOwnerMobileNumber.toString() ?? "";
         email = shopDetails?.shopOwnerEmail ?? "";

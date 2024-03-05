@@ -42,7 +42,7 @@ class HeaderView extends StatelessWidget {
                   read.showMap(context, false);
                 },
                 child: Text(
-                  "${areaName},${cityName}",
+                  "$areaName,$cityName",
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                         color: SplashText1,

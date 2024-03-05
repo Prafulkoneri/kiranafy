@@ -92,7 +92,7 @@ class SAddCouponsController extends ChangeNotifier {
   void onProductSelect(value, context) async {
     productId = value;
     int length = productList?.length ?? 0;
-    print("productId${productId}");
+    print("productId$productId");
     for (int i = 0; i < length; i++) {
       if (productList?[i].id.toString() == value.toString()) {
         print("helloooooo");
@@ -312,7 +312,7 @@ class SAddCouponsController extends ChangeNotifier {
               Provider.of<SMainScreenController>(context, listen: false);
           read.onNavigation(
               3,
-              ShopCouponsView(
+              const ShopCouponsView(
                 isRefresh: true,
                 isNavFromDashBoard: true,
               ),
@@ -333,7 +333,7 @@ class SAddCouponsController extends ChangeNotifier {
               Provider.of<SMainScreenController>(context, listen: false);
           read.onNavigation(
               4,
-              ShopCouponsView(
+              const ShopCouponsView(
                 isRefresh: true,
                 isNavFromDashBoard: false,
               ),
@@ -502,13 +502,13 @@ class SAddCouponsController extends ChangeNotifier {
       final result =
           UpdateEditCouponsResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("isNavFromDashBoard${isNavFromDashBoard}");
+        print("isNavFromDashBoard$isNavFromDashBoard");
         if (isNavFromDashBoard) {
           final read =
               Provider.of<SMainScreenController>(context, listen: false);
           read.onNavigation(
               3,
-              ShopCouponsView(
+              const ShopCouponsView(
                 isRefresh: true,
                 isNavFromDashBoard: true,
               ),
@@ -529,7 +529,7 @@ class SAddCouponsController extends ChangeNotifier {
               Provider.of<SMainScreenController>(context, listen: false);
           read.onNavigation(
               4,
-              ShopCouponsView(
+              const ShopCouponsView(
                 isRefresh: true,
                 isNavFromDashBoard: false,
               ),

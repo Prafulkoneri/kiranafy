@@ -3,14 +3,14 @@ import 'package:local_supper_market/network/end_points.dart';
 
 class CAllCouponList {
   Future<http.Response> couponList(
-      token, upto_value, category_id, shop_id) async {
+      token, uptoValue, categoryId, shopId) async {
     print(Uri.parse(
-        "${Endpoint.customerAllCouponList}?uptoValue=${upto_value}&category_id=${category_id}&shop_id=${shop_id}"));
+        "${Endpoint.customerAllCouponList}?uptoValue=$uptoValue&category_id=$categoryId&shop_id=$shopId"));
 
     try {
       return await http.get(
           Uri.parse(
-              "${Endpoint.customerAllCouponList}?uptoValue=${upto_value}&category_id=${category_id}&shop_id=${shop_id}"),
+              "${Endpoint.customerAllCouponList}?uptoValue=$uptoValue&category_id=$categoryId&shop_id=$shopId"),
           headers: {
             "Authorization": "Bearer $token",
           });

@@ -8,7 +8,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/all_seasonal_controller.dart';
@@ -88,7 +87,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
                   readMain.onNavigation(
@@ -109,14 +108,14 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                         children: [
                           Container(
                             child: GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 padding: EdgeInsets.only(
                                     left: 10.w,
                                     top: 20.w,
                                     right: 10.w,
                                     bottom: 100.w),
-                                itemCount: watch.seasonalProduct?.length ?? 0,
+                                itemCount: watch.seasonalProduct.length ?? 0,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
@@ -124,23 +123,23 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                         crossAxisSpacing: 4.0,
                                         mainAxisSpacing: 4.0),
                                 itemBuilder: (BuildContext, index) {
-                                  final element = watch.seasonalProduct?[index];
+                                  final element = watch.seasonalProduct[index];
                                   return Card(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child:
-                                        element?.weight == "" &&
-                                                element?.offerPrice == "" &&
-                                                element?.mrpPrice == "" &&
-                                                element?.unit == "" &&
-                                                element?.productUnitId == null
+                                        element.weight == "" &&
+                                                element.offerPrice == "" &&
+                                                element.mrpPrice == "" &&
+                                                element.unit == "" &&
+                                                element.productUnitId == null
                                             ? Container()
                                             : GestureDetector(
                                                 onTap: () {
                                                   readProductViewController
                                                       .updateProductId(
-                                                          element?.id
+                                                          element.id
                                                               .toString(),
                                                           context,
                                                           false);
@@ -150,18 +149,18 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                           routeName:
                                                               "shopProductView",
                                                           selectedUnitId: element
-                                                              ?.productUnitId
+                                                              .productUnitId
                                                               .toString(),
                                                           categoryId: element
-                                                              ?.categoryId
+                                                              .categoryId
                                                               .toString(),
                                                           // categoryId: watch.categoryId,
-                                                          productId: element?.id
+                                                          productId: element.id
                                                               .toString(),
                                                           shopId:
-                                                              element?.shopId,
+                                                              element.shopId,
                                                           productType: element
-                                                              ?.productType),
+                                                              .productType),
                                                       context);
                                                   // Navigator.pushAndRemoveUntil(
                                                   //   context,
@@ -210,7 +209,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                               MainAxisAlignment
                                                                   .end,
                                                           children: [
-                                                            element?.discountPercentage !=
+                                                            element.discountPercentage !=
                                                                     ""
                                                                 ? Container(
                                                                     width: 60.w,
@@ -224,7 +223,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                     child:
                                                                         Center(
                                                                       child: Text(
-                                                                          "${element?.discountPercentage} off",
+                                                                          "${element.discountPercentage} off",
                                                                           style:
                                                                               GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
@@ -235,7 +234,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                           )),
                                                                     ),
                                                                   )
-                                                                : Container(
+                                                                : SizedBox(
                                                                     width: 60.w,
                                                                     height:
                                                                         20.h,
@@ -251,9 +250,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          element?.productImagePath ==
+                                                          element.productImagePath ==
                                                                   ""
-                                                              ? Container(
+                                                              ? SizedBox(
                                                                   height: 68.w,
                                                                   width: 68.w,
                                                                   child: Image
@@ -263,13 +262,13 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                         .cover,
                                                                   ),
                                                                 )
-                                                              : Container(
+                                                              : SizedBox(
                                                                   height: 68.w,
                                                                   width: 68.w,
                                                                   child:
                                                                       AppNetworkImages(
                                                                     imageUrl:
-                                                                        "${element?.productImagePath}",
+                                                                        "${element.productImagePath}",
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
@@ -283,7 +282,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                         children: [
                                                           Flexible(
                                                             child: Text(
-                                                              "${element?.productName}",
+                                                              "${element.productName}",
                                                               maxLines: 1,
                                                               style: GoogleFonts
                                                                   .roboto(
@@ -315,7 +314,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                 .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            "${element?.weight} ${element?.unit}",
+                                                            "${element.weight} ${element.unit}",
                                                             style: GoogleFonts
                                                                 .roboto(
                                                               textStyle:
@@ -332,25 +331,25 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                           ),
                                                           Row(
                                                             children: [
-                                                              element?.mrpPrice !=
+                                                              element.mrpPrice !=
                                                                       ""
                                                                   ? Text(
-                                                                      '\u{20B9}${element?.mrpPrice}',
+                                                                      '\u{20B9}${element.mrpPrice}',
                                                                       style: GoogleFonts.dmSans(
-                                                                          textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
+                                                                          textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice
                                                                               ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)
                                                                               : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
-                                                                  : Text(""),
+                                                                  : const Text(""),
                                                               SizedBox(
                                                                 width: 5.w,
                                                               ),
-                                                              element?.offerPrice !=
+                                                              element.offerPrice !=
                                                                           "" &&
-                                                                      element?.offerPrice !=
+                                                                      element.offerPrice !=
                                                                           element
-                                                                              ?.mrpPrice
+                                                                              .mrpPrice
                                                                   ? Text(
-                                                                      '\u{20B9}${element?.offerPrice}',
+                                                                      '\u{20B9}${element.offerPrice}',
                                                                       style: GoogleFonts
                                                                           .dmSans(
                                                                         textStyle: TextStyle(
@@ -362,7 +361,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                             fontWeight: FontWeight.w500),
                                                                       ),
                                                                     )
-                                                                  : Text(""),
+                                                                  : const Text(""),
                                                             ],
                                                           ),
                                                         ],
@@ -372,7 +371,7 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                       ),
                                                       Container(
                                                         // padding: EdgeInsets.only(right: 0.w, bottom: 0.w),
-                                                        child: Row(
+                                                        child: const Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .end,
@@ -417,9 +416,9 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                       onTap:
                                                                           () {
                                                                         read.addToCart(
-                                                                            element?.productType,
-                                                                            element?.productUnitId,
-                                                                            element?.shopId,
+                                                                            element.productType,
+                                                                            element.productUnitId,
+                                                                            element.shopId,
                                                                             index,
                                                                             context);
                                                                       },
@@ -437,10 +436,10 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                             }
                                                                             read.subtractItemQuantity(
                                                                                 context,
-                                                                                element?.cartItemId.toString(),
+                                                                                element.cartItemId.toString(),
                                                                                 index,
-                                                                                element?.productType,
-                                                                                element?.productUnitId);
+                                                                                element.productType,
+                                                                                element.productUnitId);
                                                                           },
                                                                           child:
                                                                               SvgPicture.asset(
@@ -479,11 +478,11 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                                                                             if (watch.isQuanityBtnPressed) {
                                                                               return;
                                                                             }
-                                                                            print(element?.productType);
+                                                                            print(element.productType);
                                                                             read.addItemQuantity(
                                                                                 context,
-                                                                                element?.cartItemId.toString(),
-                                                                                element?.productType,
+                                                                                element.cartItemId.toString(),
+                                                                                element.productType,
                                                                                 index);
                                                                           },
                                                                           child:
@@ -557,8 +556,8 @@ class _AllSeasonalProductsState extends State<AllSeasonalProducts> {
                               color: Colors.black.withOpacity(0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: Container(
+                            child: const Center(
+                              child: SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(

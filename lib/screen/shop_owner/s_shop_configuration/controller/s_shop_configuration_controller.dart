@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
@@ -23,7 +22,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-import 'dart:io';
 
 class SShopConfigurationController extends ChangeNotifier {
   ShopConfigurationRepo shopConfigRepo = ShopConfigurationRepo();
@@ -70,12 +68,12 @@ class SShopConfigurationController extends ChangeNotifier {
   String selectedAreaId = "";
   List<AreaList>? areaList;
   List initialSelectedAreaId = [];
-  String openingAmPm="am";
-  String closingAmPm="pm";
+  String openingAmPm = "am";
+  String closingAmPm = "pm";
 
   Future<void> initState(context, initialConfiguration) async {
-    openingAmPm="am";
-    closingAmPm="pm";
+    openingAmPm = "am";
+    closingAmPm = "pm";
     upiIdController.clear();
     supportNumberController.clear();
     firstDeliveryController.clear();
@@ -126,13 +124,13 @@ class SShopConfigurationController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onOpeningAmPmSelected(value){
-    openingAmPm=value;
+  void onOpeningAmPmSelected(value) {
+    openingAmPm = value;
     notifyListeners();
   }
 
-  void onClosingAmPmSelected(value){
-    closingAmPm=value;
+  void onClosingAmPmSelected(value) {
+    closingAmPm = value;
     notifyListeners();
   }
 
@@ -157,7 +155,7 @@ class SShopConfigurationController extends ChangeNotifier {
       deliveryAreasController.text += selectedDeliveryAreaName[i] + ", ";
     }
     for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
-      selectedAreaId += selectedDeliveryAreaId[i].toString() + ",";
+      selectedAreaId += "${selectedDeliveryAreaId[i]},";
     }
     selectedAreaId =
         selectedAreaId.toString().substring(0, selectedAreaId.length - 1);
@@ -260,7 +258,7 @@ class SShopConfigurationController extends ChangeNotifier {
     supportNumberController.text = pref.getString("mobileNo").toString();
     shopConfigRepo
         .shopCongurationDetails(pref.getString("successToken"))
-        .then((response) async{
+        .then((response) async {
       log(response.body);
       final result = ShopConfigurationResponse.fromJson(
         jsonDecode(response.body),
@@ -291,8 +289,8 @@ class SShopConfigurationController extends ChangeNotifier {
             data?.shopOwnerAmount4DeliveryCharges ?? "";
         startShopTimeController.text = data?.shopOwnerShopOpeningTime ?? "";
         endShopTimeController.text = data?.shopOwnerShopCloseTime ?? "";
-        openingAmPm=data?.openingAmPm??"am";
-        closingAmPm=data?.closingAmPm??"pm";
+        openingAmPm = data?.openingAmPm ?? "am";
+        closingAmPm = data?.closingAmPm ?? "pm";
         upiIdController.text = result.upiid ?? "";
         minimumDeliveryAmountController.text =
             data?.minimumOrderDeliveryAmount ?? "";
@@ -358,11 +356,9 @@ class SShopConfigurationController extends ChangeNotifier {
         }
         await shopDeliveryArea(context);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -400,7 +396,8 @@ class SShopConfigurationController extends ChangeNotifier {
       return;
     }
 
-    if(RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$').hasMatch(startShopTimeController.text)){
+    if (RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$')
+        .hasMatch(startShopTimeController.text)) {
       Utils.showPrimarySnackbar(context, "Incorrect Shop Opening Time Format",
           type: SnackType.error);
       return;
@@ -410,7 +407,8 @@ class SShopConfigurationController extends ChangeNotifier {
           type: SnackType.error);
       return;
     }
-    if(RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$').hasMatch(endShopTimeController.text)){
+    if (RegExp(r'^(?:[+0]9?)?[0-9]{0,12}$')
+        .hasMatch(endShopTimeController.text)) {
       Utils.showPrimarySnackbar(context, "Incorrect Shop Closing Time Format",
           type: SnackType.error);
       return;
@@ -454,9 +452,8 @@ class SShopConfigurationController extends ChangeNotifier {
       ///////////////Delivery Type///////////
 
       ////////////////////
-
     }
-    if (isCustomerPickupSelected&&isDeliveryCustomerSelected) {
+    if (isCustomerPickupSelected && isDeliveryCustomerSelected) {
       if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
         Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
             type: SnackType.error);
@@ -471,7 +468,6 @@ class SShopConfigurationController extends ChangeNotifier {
       ///////////////Delivery Type///////////
 
       ////////////////////
-
     }
 
     /////////////////////
@@ -490,7 +486,6 @@ class SShopConfigurationController extends ChangeNotifier {
     }
 //////////////
 
-
     // if (!ifFreePickupSelected && !isDeliveryChargesSelected) {
     //   Utils.showPrimarySnackbar(context, "Select Any Delivery Charges",
     //       type: SnackType.error);
@@ -498,7 +493,6 @@ class SShopConfigurationController extends ChangeNotifier {
     // }
 
 //////////////////////Minimum Order value/////////////
-
 
     if (!isNineToTwelve && !isThreeToSix && !isTwelveToThree && !isSixToNine) {
       Utils.showPrimarySnackbar(context, "Select Any Slot",
@@ -554,18 +548,17 @@ class SShopConfigurationController extends ChangeNotifier {
       print(response.body);
       final result = ShopConfigurationRes.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        final read =Provider.of<SMainScreenController>(context,listen: false);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
         if (isInitialConfiguration) {
-
           // read.onNavigation(0,ShopDashBoardView(
           //   refresh: true,
           // ), context);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) => SMainScreenView(
+                builder: (context) => const SMainScreenView(
                       index: 0,
                       screenName: ShopDashBoardView(
                         refresh: true,
@@ -574,10 +567,12 @@ class SShopConfigurationController extends ChangeNotifier {
             (Route<dynamic> route) => false,
           );
         } else {
-
-          read.onNavigation(4,SAccountScreenView(
-            refresh: true,
-          ), context);
+          read.onNavigation(
+              4,
+              const SAccountScreenView(
+                refresh: true,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -602,6 +597,7 @@ class SShopConfigurationController extends ChangeNotifier {
       }
     }).onError((error, stackTrace) {
       Utils.showPrimarySnackbar(context, error, type: SnackType.debugError);
+      return null;
     }).catchError(
       (Object e) {
         Utils.showPrimarySnackbar(context, e, type: SnackType.debugError);
@@ -617,11 +613,11 @@ class SShopConfigurationController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.shopconfigurationedit}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.shopconfigurationedit);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
-    request.fields["opening_am_pm"]=openingAmPm;
-    request.fields["closing_am_pm"]=closingAmPm;
+    request.fields["opening_am_pm"] = openingAmPm;
+    request.fields["closing_am_pm"] = closingAmPm;
     request.fields['shop_owner_support_number'] = supportNumberController.text;
     request.fields['shop_owner_shop_opening_time'] =
         startShopTimeController.text;
@@ -664,10 +660,9 @@ class SShopConfigurationController extends ChangeNotifier {
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     print(fileImage);
     File imageFile = fileImage;
-    var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile(
+    var multipartFile = http.MultipartFile(
         "shop_owner_payment_qr_code_image_path", stream, length,
         filename: basename(imageFile.path));
     newList.add(multipartFile);
@@ -676,7 +671,7 @@ class SShopConfigurationController extends ChangeNotifier {
     await request.send().then((response) {
       print(response.statusCode);
       if (response.statusCode == 200) {
-        final read=Provider.of<SMainScreenController>(context,listen: false);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
         print("sucesss");
         LoadingOverlay.of(context).hide();
         pref.setString("status", "loggedIn");
@@ -686,13 +681,13 @@ class SShopConfigurationController extends ChangeNotifier {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) => SMainScreenView(
-                  index: 0,
-                  screenName: ShopDashBoardView(
-                    refresh: true,
-                  ),
-                )),
-                (Route<dynamic> route) => false,
+                builder: (context) => const SMainScreenView(
+                      index: 0,
+                      screenName: ShopDashBoardView(
+                        refresh: true,
+                      ),
+                    )),
+            (Route<dynamic> route) => false,
           );
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -706,7 +701,8 @@ class SShopConfigurationController extends ChangeNotifier {
           //   (Route<dynamic> route) => false,
           // );
         } else {
-          read.onNavigation(4,SAccountScreenView(refresh: true), context);
+          read.onNavigation(
+              4, const SAccountScreenView(refresh: true), context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -752,10 +748,11 @@ class SShopConfigurationController extends ChangeNotifier {
     print(selectedDeliveryAreaName);
     notifyListeners();
   }
- onAddDeliveryAreaTap(){
-   areaSearchController.clear();
+
+  onAddDeliveryAreaTap() {
+    areaSearchController.clear();
     notifyListeners();
- }
+  }
 
   List selectedCategoryId = [];
   List<bool> selectedCategoryList = [];
@@ -792,14 +789,15 @@ class SShopConfigurationController extends ChangeNotifier {
           for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
             selectedDeliveryAreaList[ids.indexOf(selectedDeliveryAreaId[i])] =
                 true;
-            selectedDeliveryAreaName.add(name[ids.indexOf(selectedDeliveryAreaId[i])]);
+            selectedDeliveryAreaName
+                .add(name[ids.indexOf(selectedDeliveryAreaId[i])]);
             deliveryAreasController.text +=
                 name[ids.indexOf(selectedDeliveryAreaId[i])] + ", ";
           }
           deliveryAreasController.text = deliveryAreasController.text
               .substring(0, deliveryAreasController.text.length - 2);
           for (int i = 0; i < selectedDeliveryAreaId.length; i++) {
-            selectedAreaId += selectedDeliveryAreaId[i].toString() + ",";
+            selectedAreaId += "${selectedDeliveryAreaId[i]},";
           }
           selectedAreaId =
               selectedAreaId.toString().substring(0, selectedAreaId.length - 1);

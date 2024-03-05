@@ -179,21 +179,21 @@
 //                                                         SizedBox(
 //                                                           width: 14.w,
 //                                                         ),
-//                                                         PrimaryRadioButton(
-//                                                           value:
-//                                                               watch.radioValue[
-//                                                                   index],
-//                                                           groupValue: watch
-//                                                               .radioGrpValue,
-//                                                           onChanged: (value) {
-//                                                             read.onRadioBtnChanged(
-//                                                                 value,
-//                                                                 element?.id,
-//                                                                 element
-//                                                                     ?.subscriptionPrice);
-//                                                           },
-//                                                           leading: "",
-//                                                         ),
+// PrimaryRadioButton(
+//   value:
+//       watch.radioValue[
+//           index],
+//   groupValue: watch
+//       .radioGrpValue,
+//   onChanged: (value) {
+//     read.onRadioBtnChanged(
+//         value,
+//         element?.id,
+//         element
+//             ?.subscriptionPrice);
+//   },
+//   leading: "",
+// ),
 //                                                         SizedBox(
 //                                                           width: 7.w,
 //                                                         ),
@@ -929,7 +929,7 @@ class SSubscriptionScreenView extends StatefulWidget {
   final String? routeName;
 
   const SSubscriptionScreenView(
-      {Key? key, required this.loggedIn, required this.routeName})
+      {Key? key, required this.loggedIn, this.routeName})
       : super(key: key);
 
   @override
@@ -938,6 +938,7 @@ class SSubscriptionScreenView extends StatefulWidget {
 }
 
 class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SSubscriptionController>().initState(context);
@@ -960,16 +961,20 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
             print(widget.routeName);
             if (widget.loggedIn == true) {
               if (widget.routeName == "accounts") {
-                readMainScreen.onNavigation(
-                    4, SMySubscriptionView(screenName: "accounts"), context);
+                readMainScreen.onNavigation(4,
+                    const SMySubscriptionView(screenName: "accounts"), context);
               } else {
                 readMainScreen.onNavigation(
-                    0, SMySubscriptionView(screenName: "dashboard"), context);
+                    0,
+                    const SMySubscriptionView(screenName: "dashboard"),
+                    context);
               }
 
               readMainScreen.showBottomNavigationBar();
             } else {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              isBackButtonEnabled:
+              false;
             }
           },
           title: "Subscription Plans",
@@ -982,17 +987,22 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                 print(widget.routeName);
                 if (widget.loggedIn == true) {
                   if (widget.routeName == "accounts") {
-                    readMainScreen.onNavigation(4,
-                        SMySubscriptionView(screenName: "accounts"), context);
+                    readMainScreen.onNavigation(
+                        4,
+                        const SMySubscriptionView(screenName: "accounts"),
+                        context);
                   } else {
-                    readMainScreen.onNavigation(0,
-                        SMySubscriptionView(screenName: "dashboard"), context);
+                    readMainScreen.onNavigation(
+                        0,
+                        const SMySubscriptionView(screenName: "dashboard"),
+                        context);
                   }
 
                   readMainScreen.showBottomNavigationBar();
-                } else {
-                  Navigator.pop(context);
                 }
+                // else {
+                //   Navigator.pop(context);
+                // }
                 return false;
               },
               child: Column(
@@ -1022,12 +1032,12 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                           ),
                         ),
                         SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount:
                                       watch.subscriptionData?.length ?? 0,
@@ -1056,14 +1066,16 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                               ? yellow1
                                                                   .withOpacity(
                                                                       1)
-                                                              : Color(0xff4EC0FA)
+                                                              : const Color(
+                                                                      0xff4EC0FA)
                                                                   .withOpacity(
                                                                       1),
                                                           index.isEven
                                                               ? yellow2
                                                                   .withOpacity(
                                                                       1)
-                                                              : Color(0xff32DFAC)
+                                                              : const Color(
+                                                                      0xff32DFAC)
                                                                   .withOpacity(
                                                                       1),
                                                         ]),
@@ -1103,9 +1115,10 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                         Text(
                                                           element?.planName ??
                                                               "",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
                                                         ),
                                                       ],
                                                     ),
@@ -1160,7 +1173,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                       SizedBox(
                                                         height: 4.w,
                                                       ),
-                                                      Container(
+                                                      SizedBox(
                                                         width: ScreenUtil()
                                                                 .screenWidth /
                                                             1.29.w,
@@ -1234,7 +1247,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                                     ],
                                                                                   ),
                                                                                 ),
-                                                                                Divider(),
+                                                                                const Divider(),
                                                                                 Container(
                                                                                   padding: EdgeInsets.only(
                                                                                     // left: 23.w,
@@ -1274,7 +1287,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             7.w),
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                             0xff000000)
                                                                         .withOpacity(
                                                                             0.35),
@@ -1340,7 +1353,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                 height: 17.w,
                               ),
                               ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 itemCount: watch.addOnServicesList?.length ?? 0,
                                 shrinkWrap: true,
@@ -1458,7 +1471,7 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                                         .spaceBetween,
                                                 children: [
                                                   Expanded(
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       height: 34.w,
                                                       child: TextField(
                                                         controller: watch
@@ -1785,9 +1798,6 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                       print("hello");
                                       await read.buySubscriptionPlan(context,
                                           widget.loggedIn, widget.routeName);
-                                      // readMainScreen.onNavigation(
-                                      //     4, SShopConfigurationView(), context);
-                                      // };
                                     },
                                     text: 'Make Payment',
                                     textColor: SplashText1,

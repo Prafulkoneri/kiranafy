@@ -42,7 +42,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         child: PrimaryAppBar(
           onBackBtnPressed: () {
             readMain.onNavigation(
-                4, ProfileScreenView(isRefreshed: false), context);
+                4, const ProfileScreenView(isRefreshed: false), context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -59,16 +59,16 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
-                    4, ProfileScreenView(isRefreshed: false), context);
+                    4, const ProfileScreenView(isRefreshed: false), context);
 
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   width: ScreenUtil().screenWidth,
                   padding: EdgeInsets.symmetric(horizontal: 19.w),
@@ -117,7 +117,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                           ),
                                         ),
                                       )
-                                    : Container(
+                                    : SizedBox(
                                         height: 120.w,
                                         width: 120.w,
                                         child: ClipRRect(
@@ -130,7 +130,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                 bottom: -10.w,
                                 right: 0.w,
                                 left: 0.w,
-                                child: Container(
+                                child: SizedBox(
                                   height: 31.w,
                                   width: 31.w,
                                   child:
@@ -149,7 +149,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       SizedBox(
                         height: 20.w,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           UpdateProfile(
                             text: 'Mobile No.',
@@ -176,7 +176,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       SizedBox(
                         height: 20.w,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           UpdateProfile(
                             text: 'Alternate Mobile No.',
@@ -213,7 +213,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       SizedBox(
                         height: 20.w,
                       ),
-                      Row(
+                      const Row(
                         children: [
                           UpdateProfile(
                             text: 'Gender',
@@ -243,7 +243,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              AccountScreen(
+                              const AccountScreen(
                                 text: 'Male',
                               ),
                               // Text(
@@ -270,7 +270,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              AccountScreen(
+                              const AccountScreen(
                                 text: 'Female',
                               ),
                               // Text(
@@ -297,7 +297,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               SizedBox(
                                 width: 10.w,
                               ),
-                              AccountScreen(
+                              const AccountScreen(
                                 text: 'Other',
                               ),
                               // Text(
@@ -327,7 +327,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               builder: (BuildContext, child) {
                                 return Theme(
                                   data: Theme.of(context).copyWith(
-                                    colorScheme: ColorScheme.light(
+                                    colorScheme: const ColorScheme.light(
                                       primary: Color(0xff1767B1),
                                       // <-- SEE HERE
                                       onPrimary: Colors.white,
@@ -336,7 +336,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                     ),
                                     textButtonTheme: TextButtonThemeData(
                                       style: TextButton.styleFrom(
-                                        primary: Color(
+                                        foregroundColor: const Color(
                                             0xff1767B1), // button text color
                                       ),
                                     ),
@@ -355,7 +355,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               read.onDateSelected(date);
                             }
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.calendar_today_outlined,
                             color: Color(0xff03C9CC),
                           ),

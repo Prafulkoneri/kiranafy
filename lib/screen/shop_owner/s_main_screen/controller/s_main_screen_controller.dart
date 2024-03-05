@@ -4,7 +4,6 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_status/view/s_order_status_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_payments/views/s_payment_view.dart';
@@ -13,9 +12,9 @@ import 'package:local_supper_market/screen/shop_owner/s_select_category/view/s_s
 class SMainScreenController extends ChangeNotifier {
   int currentIndex = 0;
   int currentTab = 0;
-  bool hideBottomNavigation=false;
+  bool hideBottomNavigation = false;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = ShopDashBoardView(
+  Widget currentScreen = const ShopDashBoardView(
     refresh: true,
   );
 
@@ -30,7 +29,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = ShopDashBoardView(
+    currentScreen = const ShopDashBoardView(
       refresh: true,
     );
     notifyListeners();
@@ -38,25 +37,25 @@ class SMainScreenController extends ChangeNotifier {
 
   void onCategoryPressed(context) {
     currentIndex = 0;
-    currentScreen = SSCategoryListView();
+    currentScreen = const SSCategoryListView();
     notifyListeners();
   }
 
   void onCategoryAddPressed() {
     currentIndex = 0;
-    currentScreen = SSelectCategoryView();
+    currentScreen = const SSelectCategoryView();
     notifyListeners();
   }
 
   void onCategorySelectUpdatePressed(context) {
     currentIndex = 0;
-    currentScreen = SSCategoryListView();
+    currentScreen = const SSCategoryListView();
     notifyListeners();
   }
 
   void onOrdersPressed() {
     currentTab = 1;
-    currentScreen = SOrderStatusView(
+    currentScreen = const SOrderStatusView(
       selectedIndex: 0,
       isFromOrderView: false,
     );
@@ -65,7 +64,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onPaymentPressed() {
     currentTab = 2;
-    currentScreen = SPaymentsView(
+    currentScreen = const SPaymentsView(
       isNavFromAccounts: false,
     );
     notifyListeners();
@@ -73,7 +72,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen = ShopCouponsView(
+    currentScreen = const ShopCouponsView(
       isRefresh: true,
       isNavFromDashBoard: true,
     );
@@ -82,7 +81,7 @@ class SMainScreenController extends ChangeNotifier {
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = SAccountScreenView(
+    currentScreen = const SAccountScreenView(
       refresh: true,
     );
     notifyListeners();
@@ -102,9 +101,11 @@ class SMainScreenController extends ChangeNotifier {
 
   onCustomTypeNotification(context) {
     print("hello");
-    currentScreen = NotificationsScreenView(route: "dashboard",);
+    currentScreen = const NotificationsScreenView(
+      route: "dashboard",
+    );
     currentIndex = 0;
-    hideBottomNavigation=false;
+    hideBottomNavigation = false;
     notifyListeners();
   }
 
@@ -115,17 +116,28 @@ class SMainScreenController extends ChangeNotifier {
       orderId: id.toString(),
       fromOrderStatus: true,
     );
-    hideBottomNavigation=true;
+    hideBottomNavigation = true;
     notifyListeners();
   }
 
-  showBottomNavigationBar(){
-    hideBottomNavigation=false;
-    notifyListeners();
-  }
-  hideBottomNavigationBar(){
-    hideBottomNavigation=true;
+/////////////////////////////
+  // onVoucherTypeNotification(context, id) {
+  //   print("hello");
+  //   currentScreen = const NotificationsScreenView(
+  //     route: "",
+  //   );
+  //   currentIndex = 0;
+  //   hideBottomNavigation = false;
+  // }
+
+/////////////////////////////////
+  showBottomNavigationBar() {
+    hideBottomNavigation = false;
     notifyListeners();
   }
 
+  hideBottomNavigationBar() {
+    hideBottomNavigation = true;
+    notifyListeners();
+  }
 }

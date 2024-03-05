@@ -74,7 +74,7 @@ class TrackOrderStatusController extends ChangeNotifier {
   }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {

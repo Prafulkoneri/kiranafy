@@ -43,7 +43,7 @@ class _MainScreenViewState extends State<MainScreenView> {
   }
 
   final GlobalKey<NavigatorState> navigatorKey =
-      new GlobalKey<NavigatorState>();
+      GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
                 ),
@@ -93,7 +93,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -119,7 +119,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                   color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -151,7 +151,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -179,7 +179,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -216,7 +216,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                         fontSize: 11.sp,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                  badgeStyle: badges.BadgeStyle(
+                                  badgeStyle: const badges.BadgeStyle(
                                       badgeColor: Color(0xffFE7062)),
                                   position: badges.BadgePosition.topEnd(
                                       top: -10, end: -8),
@@ -227,7 +227,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                         EdgeInsets.only(left: 2.w, right: 2.w),
                                     child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -262,12 +262,12 @@ class _MainScreenViewState extends State<MainScreenView> {
                                               fontSize: 11.sp,
                                               fontWeight: FontWeight.w400),
                                         ),
-                                        badgeStyle: badges.BadgeStyle(
+                                        badgeStyle: const badges.BadgeStyle(
                                             badgeColor: Color(0xffFE7062)),
                                         position: badges.BadgePosition.topEnd(
                                             top: -10, end: -8),
                                         showBadge: true,
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -300,7 +300,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -327,7 +327,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -357,7 +357,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(
@@ -384,7 +384,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                                       EdgeInsets.only(left: 2.w, right: 2.w),
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 20.w,
                                         width: 21.w,
                                         child: SvgPicture.asset(

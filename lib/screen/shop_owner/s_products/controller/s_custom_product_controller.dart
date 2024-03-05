@@ -8,7 +8,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
@@ -253,8 +252,8 @@ class CustomProductController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.submitCustomProduct}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.submitCustomProduct);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['product_name'] = productNameController.text;
     request.fields['category_id'] = selectedCategory;
@@ -271,9 +270,9 @@ class CustomProductController extends ChangeNotifier {
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = productImage;
     var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile(
+    var multipartFile = http.MultipartFile(
         "product_image_path", stream, length,
         filename: basename(imageFile.path));
     newList.add(multipartFile);
@@ -281,7 +280,7 @@ class CustomProductController extends ChangeNotifier {
     print(request.fields);
     await request.send().then((response)async {
       final respStr = await response.stream.bytesToString();
-      print("respStr${respStr}");
+      print("respStr$respStr");
       var res=jsonDecode(respStr);
       print(res["status"]);
       if (response.statusCode == 200) {

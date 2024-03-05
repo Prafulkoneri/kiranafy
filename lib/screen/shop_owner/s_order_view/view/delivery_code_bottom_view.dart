@@ -24,7 +24,7 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
         Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.white),
           child: Material(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0)),
               child: Container(
@@ -51,7 +51,7 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
                       OtpTextField(
                         //  controller: otpController,
                         numberOfFields: 6,
-                        borderColor: Color(0xFF512DA8),
+                        borderColor: const Color(0xFF512DA8),
                         //set to true to show as box or false to show as dash
                         showFieldAsBox: false,
                         //runs when a code is typed in
@@ -74,7 +74,7 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
                         height: 60,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Button,
+                            backgroundColor: Button,
                             // onPrimary: Colors.white,
                             // shadowColor: Colors.greenAccent,
                             elevation: 3,
@@ -127,6 +127,7 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
                 color: Colors.red,
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -148,7 +149,6 @@ class _OrderDeliveryCodeViewState extends State<OrderDeliveryCodeView> {
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

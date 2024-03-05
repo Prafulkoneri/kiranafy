@@ -40,7 +40,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
     final read = context.read<PaymentHistoryController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
-        backgroundColor: Color(0xffFFFFFF),
+        backgroundColor: const Color(0xffFFFFFF),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
@@ -48,7 +48,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                 widget.isNavFromAccounts == true ? true : false,
             onBackBtnPressed: () {
               readMainScreen.onNavigation(
-                  4, SAccountScreenView(refresh: true), context);
+                  4, const SAccountScreenView(refresh: true), context);
             },
             title: "Payments",
             // isBackButtonEnabled: false,
@@ -60,15 +60,15 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                 onWillPop: () async {
                   widget.isNavFromAccounts == false
                       ? readMainScreen.onNavigation(
-                          0, ShopDashBoardView(refresh: false), context)
+                          0, const ShopDashBoardView(refresh: false), context)
                       : readMainScreen.onNavigation(
-                          4, SAccountScreenView(refresh: true), context);
+                          4, const SAccountScreenView(refresh: true), context);
                   return false;
                 },
                 child: StackLoader(
                   showLoader: watch.isStackLoading,
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 19.w),
                       child: Column(
@@ -103,7 +103,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                     right: 13.w),
                                 child: Row(
                                   children: [
-                                    Text("${watch.date}"),
+                                    Text(watch.date),
                                     SizedBox(
                                       width: 12.w,
                                     ),
@@ -128,7 +128,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                 data:
                                                     Theme.of(context).copyWith(
                                                   colorScheme:
-                                                      ColorScheme.light(
+                                                      const ColorScheme.light(
                                                     primary: Color(0xff1767B1),
                                                     // <-- SEE HERE
                                                     onPrimary: Colors.white,
@@ -139,7 +139,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                   textButtonTheme:
                                                       TextButtonThemeData(
                                                     style: TextButton.styleFrom(
-                                                      primary: Color(
+                                                      foregroundColor: const Color(
                                                           0xff1767B1), // button text color
                                                     ),
                                                   ),
@@ -177,7 +177,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                               Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color: Color(0xff115B7A),
+                                      color: const Color(0xff115B7A),
                                       borderRadius: BorderRadius.circular(5.w)),
                                   padding:
                                       EdgeInsets.only(left: 12.w, right: 12.w),
@@ -219,7 +219,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                               Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color: Color(0xff39C19D),
+                                      color: const Color(0xff39C19D),
                                       borderRadius: BorderRadius.circular(5.w)),
                                   padding:
                                       EdgeInsets.only(left: 12.w, right: 12.w),
@@ -277,7 +277,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                           watch.ordersList?.isNotEmpty ?? false
                               ? ListView.builder(
                                   itemCount: watch.ordersList?.length ?? 0,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   itemBuilder: (BuildContext, index) {
                                     final element = watch.ordersList?[index];
@@ -304,7 +304,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                               BorderRadius.circular(10.w),
                                           color: Colors.white,
                                           border: Border.all(
-                                              color: Color(0xffEFEFEF)),
+                                              color: const Color(0xffEFEFEF)),
                                         ),
                                         child: Column(
                                           children: [
@@ -319,7 +319,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                       fontWeight:
                                                           FontWeight.w700,
                                                       fontSize: 15.sp,
-                                                      color: Color(0xff3A3A3A)),
+                                                      color: const Color(0xff3A3A3A)),
                                                 ),
                                                 Text(
                                                   "${element?.totalAmount}",
@@ -327,7 +327,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 19.sp,
-                                                      color: Color(0xff39C19D)),
+                                                      color: const Color(0xff39C19D)),
                                                 ),
                                               ],
                                             ),
@@ -343,7 +343,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 12.sp,
-                                                      color: Color(0xffA3A3A3)),
+                                                      color: const Color(0xffA3A3A3)),
                                                 ),
                                               ],
                                             ),
@@ -361,7 +361,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 12.sp,
-                                                      color: Color(0xffA3A3A3)),
+                                                      color: const Color(0xffA3A3A3)),
                                                 ),
                                                 Row(
                                                   children: [
@@ -371,7 +371,7 @@ class _SPaymentsViewState extends State<SPaymentsView> {
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           fontSize: 12.sp,
-                                                          color: Color(
+                                                          color: const Color(
                                                               0xffA3A3A3)),
                                                     ),
                                                   ],

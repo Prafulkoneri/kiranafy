@@ -337,12 +337,10 @@ import 'package:local_supper_market/screen/customer/shop_profile/model/remove_it
 import 'package:local_supper_market/screen/customer/shop_profile/model/view_all_offer_products_model.dart';
 
 import 'package:local_supper_market/screen/customer/shop_profile/repository/all_products_repo.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/repository/customer_view_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/repository/remove_item_from_cart_repo.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AllOffersController extends ChangeNotifier {
   String shopId = "";

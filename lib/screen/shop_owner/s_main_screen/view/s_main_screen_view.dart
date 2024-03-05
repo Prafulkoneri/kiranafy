@@ -52,7 +52,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40.0),
                 topRight: Radius.circular(40.0),
               ),
@@ -75,7 +75,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
@@ -100,7 +100,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
@@ -133,7 +133,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               color: Colors.transparent,
                                   child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -160,7 +160,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               color: Colors.transparent,
                                   child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -194,7 +194,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               color: Colors.transparent,
                                   child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -219,7 +219,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                               color: Colors.transparent,
                                   child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 20.w,
                                           width: 21.w,
                                           child: SvgPicture.asset(
@@ -252,7 +252,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
@@ -277,7 +277,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
@@ -306,7 +306,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(
@@ -332,7 +332,7 @@ class _SMainScreenViewState extends State<SMainScreenView> {
                           color: Colors.transparent,
                               child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 20.w,
                                       width: 21.w,
                                       child: SvgPicture.asset(

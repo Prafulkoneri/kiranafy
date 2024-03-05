@@ -19,7 +19,7 @@ import 'package:provider/provider.dart';
 class OrderStatusView extends StatefulWidget {
   final String? orderId;
   final String? screenName;
-  OrderStatusView({super.key, this.orderId, required this.screenName});
+  const OrderStatusView({super.key, this.orderId, required this.screenName});
 
   @override
   State<OrderStatusView> createState() => _OrderStatusViewState();
@@ -57,7 +57,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Random random = new Random();
+    Random random = Random();
     final watch = context.watch<TrackOrderStatusController>();
     final read = context.read<TrackOrderStatusController>();
     final readMain = context.read<MainScreenController>();
@@ -89,7 +89,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
             widget.screenName == "orderSummary"
                 ? readMain.onNavigation(
                     0,
-                    HomeScreenView(
+                    const HomeScreenView(
                       refreshPage: true,
                     ),
                     context)
@@ -106,13 +106,13 @@ class _OrderStatusViewState extends State<OrderStatusView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 widget.screenName == "orderSummary"
                     ? readMain.onNavigation(
                         0,
-                        HomeScreenView(
+                        const HomeScreenView(
                           refreshPage: true,
                         ),
                         context)
@@ -127,7 +127,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -512,7 +512,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           margin: EdgeInsets.only(left: 11.w),
                           height: 21.w,
                           width: 21.w,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Color(0xff39C19D), shape: BoxShape.circle),
                         ),
                         SizedBox(
@@ -540,7 +540,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   watch.trackOrderDetails?.orderStatus ==
                                       "order_cancelled"
                               ? Colors.red
-                              : Color(0xffC4C4C4),
+                              : const Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -589,8 +589,8 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   ? Colors.red
                                   : watch.trackOrderDetails?.orderStatus !=
                                           "order_placed"
-                                      ? Color(0xff39C19D)
-                                      : Color(0xffC4C4C4),
+                                      ? const Color(0xff39C19D)
+                                      : const Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),
                         SizedBox(
@@ -621,7 +621,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   watch.trackOrderDetails?.orderStatus ==
                                       "order_cancelled"
                               ? Colors.red
-                              : Color(0xffC4C4C4),
+                              : const Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -666,7 +666,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                           "order_placed" ||
                                       watch.trackOrderDetails?.orderStatus ==
                                           "order_confirmed"
-                                  ? Color(0xffC4C4C4)
+                                  ? const Color(0xffC4C4C4)
                                   : (watch.trackOrderDetails
                                                       ?.trackOrderCancelledStatus ==
                                                   "order_placed_cancelled" ||
@@ -677,7 +677,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                                   ?.orderStatus ==
                                               "order_cancelled"
                                       ? Colors.red
-                                      : Color(0xff39C19D),
+                                      : const Color(0xff39C19D),
                               shape: BoxShape.circle),
                         ),
                         SizedBox(
@@ -708,7 +708,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   watch.trackOrderDetails?.orderStatus ==
                                       "order_cancelled"
                               ? Colors.red
-                              : Color(0xffC4C4C4),
+                              : const Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -751,10 +751,10 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           decoration: BoxDecoration(
                               color: watch.trackOrderDetails?.orderStatus ==
                                       "order_dispatched"
-                                  ? Color(0xff39C19D)
+                                  ? const Color(0xff39C19D)
                                   : watch.trackOrderDetails?.orderStatus ==
                                           "order_delivered"
-                                      ? Color(0xff39C19D)
+                                      ? const Color(0xff39C19D)
                                       : (watch.trackOrderDetails
                                                           ?.trackOrderCancelledStatus ==
                                                       "order_placed_cancelled" ||
@@ -765,7 +765,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                                       ?.orderStatus ==
                                                   "order_cancelled"
                                           ? Colors.red
-                                          : Color(0xffC4C4C4),
+                                          : const Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),
                         SizedBox(
@@ -796,7 +796,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                   watch.trackOrderDetails?.orderStatus ==
                                       "order_cancelled"
                               ? Colors.red
-                              : Color(0xffC4C4C4),
+                              : const Color(0xffC4C4C4),
                         ),
                         SizedBox(
                           width: 28.5.w,
@@ -839,7 +839,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                           decoration: BoxDecoration(
                               color: watch.trackOrderDetails?.orderStatus ==
                                       "order_delivered"
-                                  ? Color(0xff39C19D)
+                                  ? const Color(0xff39C19D)
                                   : (watch.trackOrderDetails
                                                       ?.trackOrderCancelledStatus ==
                                                   "order_placed_cancelled" ||
@@ -850,7 +850,7 @@ class _OrderStatusViewState extends State<OrderStatusView> {
                                                   ?.orderStatus ==
                                               "order_cancelled"
                                       ? Colors.red
-                                      : Color(0xffC4C4C4),
+                                      : const Color(0xffC4C4C4),
                               shape: BoxShape.circle),
                         ),
                         SizedBox(

@@ -41,11 +41,11 @@ class SplashController extends ChangeNotifier {
     await appVersionCheck(context);
     // final isOnline =
     //     Provider.of<ConnectivityProvider>(context, listen: false).isOnline;
-    Timer(Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 3), () async {
       if (isUpdateRequired) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => UpdateView()),
+          MaterialPageRoute(builder: (context) => const UpdateView()),
         );
         return;
       }
@@ -58,17 +58,17 @@ class SplashController extends ChangeNotifier {
       print(pref.getString("status"));
       if (pref.getString("status") == "numberRegistered") {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => ShopRegistrationView()));
+            MaterialPageRoute(builder: (context) => const ShopRegistrationView()));
       }
       if (pref.getString("status") == "shopRegistered") {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => SKycVerificationView()));
+            MaterialPageRoute(builder: (context) => const SKycVerificationView()));
       }
       if (pref.getString("status") == "kycUploaded") {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => SSubscriptionScreenView(
+                builder: (context) => const SSubscriptionScreenView(
                       loggedIn: false,
                       routeName: "kyc",
                     )));
@@ -78,7 +78,7 @@ class SplashController extends ChangeNotifier {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    SShopConfigurationView(initialShopConfigration: true)));
+                    const SShopConfigurationView(initialShopConfigration: true)));
       }
       if (pref.getString("status") == "customerLoggedIn") {
         final read = Provider.of<MainScreenController>(context, listen: false);
@@ -86,7 +86,7 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => MainScreenView(
+              builder: (context) => const MainScreenView(
                   index: 0,
                   screenName: HomeScreenView(
                     refreshPage: true,
@@ -96,7 +96,7 @@ class SplashController extends ChangeNotifier {
       }
       if (pref.getString("status") == null) {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+            MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
       }
 
       if (isUpdateRequired) {
@@ -112,7 +112,7 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => MainScreenView(
+                builder: (context) => const MainScreenView(
                     index: 0,
                     screenName: HomeScreenView(
                       refreshPage: true,
@@ -122,17 +122,17 @@ class SplashController extends ChangeNotifier {
         }
         if (pref.getString("status") == "numberRegistered") {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => ShopRegistrationView()));
+              MaterialPageRoute(builder: (context) => const ShopRegistrationView()));
         }
         if (pref.getString("status") == "shopRegistered") {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+              MaterialPageRoute(builder: (context) => const SKycVerificationView()));
         }
         if (pref.getString("status") == "kycUploaded") {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) => SSubscriptionScreenView(
+                  builder: (context) => const SSubscriptionScreenView(
                         loggedIn: false,
                         routeName: "kyc",
                       )));
@@ -142,13 +142,13 @@ class SplashController extends ChangeNotifier {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      SShopConfigurationView(initialShopConfigration: true)));
+                      const SShopConfigurationView(initialShopConfigration: true)));
         }
         if (pref.getString("status") == "loggedIn") {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => SMainScreenView(
+                builder: (context) => const SMainScreenView(
                     index: 0,
                     screenName: ShopDashBoardView(
                       refresh: true,
@@ -159,7 +159,7 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => MainScreenView(
+                builder: (context) => const MainScreenView(
                     index: 0,
                     screenName: HomeScreenView(
                       refreshPage: true,
@@ -169,7 +169,7 @@ class SplashController extends ChangeNotifier {
         }
         if (pref.getString("status") == null) {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+              MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
         }
       }
     });

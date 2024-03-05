@@ -56,13 +56,13 @@ class _CartScreenViewState extends State<CartScreenView> {
                 context: context,
                 builder: (BuildContext context) {
                   return Dialog(
-                    backgroundColor: Color(0xffFFFFFF),
+                    backgroundColor: const Color(0xffFFFFFF),
                     // shape: ,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
 
                     // scrollable: true,
-                    child: Container(
+                    child: SizedBox(
                       height: 205.h,
                       // width: 400.w,
                       child: Column(
@@ -79,7 +79,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.dmSans(
                                     textStyle: TextStyle(
-                                        color: Color(0xff006F94),
+                                        color: const Color(0xff006F94),
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w700),
                                   ),
@@ -114,7 +114,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                         top: 9.w,
                                         bottom: 9.w),
                                     decoration: BoxDecoration(
-                                        color: Color(0xff39C19D),
+                                        color: const Color(0xff39C19D),
                                         borderRadius: BorderRadius.circular(8)),
                                     child: Text(
                                       "Yes",
@@ -145,7 +145,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                         top: 9.w,
                                         bottom: 9.w),
                                     decoration: BoxDecoration(
-                                        color: Color(0xffEC7074),
+                                        color: const Color(0xffEC7074),
                                         // border: Border.all(width: 1, color: Black),
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -182,13 +182,13 @@ class _CartScreenViewState extends State<CartScreenView> {
       ),
       backgroundColor: backgroundColor,
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : watch.cartList!.isEmpty
               ? WillPopScope(
                   onWillPop: () async {
                     readMain.onNavigation(
                         0,
-                        HomeScreenView(
+                        const HomeScreenView(
                           refreshPage: false,
                         ),
                         context);
@@ -247,7 +247,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: SplashText,
+                              backgroundColor: SplashText,
                               // onPrimary: Colors.white,
                               // shadowColor: Colors.greenAccent,
                               elevation: 3,
@@ -266,7 +266,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                               }
                               readMain.onNavigation(
                                   1,
-                                  AllNearShopsView(
+                                  const AllNearShopsView(
                                     isSearchFocus: false,
                                     refreshPage: true,
                                   ),
@@ -303,18 +303,18 @@ class _CartScreenViewState extends State<CartScreenView> {
                   onWillPop: () async {
                     readMain.onNavigation(
                         0,
-                        HomeScreenView(
+                        const HomeScreenView(
                           refreshPage: false,
                         ),
                         context);
                     return false;
                   },
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             // physics: BouncingScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: watch.cartList?.length ?? 0,
@@ -344,7 +344,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
-                                      left: 20.w, top: 20.w, right: 16.w),
+                                      left: 18.w, top: 20.w, right: 18.w),
                                   // padding: ,
                                   // height: 165.h,
                                   // width: 354.w,
@@ -407,7 +407,7 @@ class _CartScreenViewState extends State<CartScreenView> {
                                           SizedBox(
                                             height: 17.w,
                                           ),
-                                          Divider(
+                                          const Divider(
                                             thickness: 1,
                                             // indent: 10,
                                             // endIndent: 10,

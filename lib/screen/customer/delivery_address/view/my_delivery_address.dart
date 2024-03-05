@@ -45,7 +45,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                 ),
                 context);
@@ -55,7 +55,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
           onActionTap: () {
             readMain.onNavigation(
                 4,
-                AddAddressView(
+                const AddAddressView(
                   route: "addressView",
                   isEditAdress: false,
                 ),
@@ -86,12 +86,12 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
       ),
       backgroundColor: backgroundColor,
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
                     4,
-                    ProfileScreenView(
+                    const ProfileScreenView(
                       isRefreshed: false,
                     ),
                     context);
@@ -107,7 +107,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                           ListView.builder(
                             padding: EdgeInsets.zero,
                             scrollDirection: Axis.vertical,
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: watch.deliveryAddressList?.length ?? 0,
                             itemBuilder: (BuildContext, index) {
@@ -138,7 +138,7 @@ class _MyDeliveryAddressViewState extends State<MyDeliveryAddressView> {
                                     BoxShadow(
                                         color: Colors.black.withOpacity(0.09),
                                         blurRadius: 5,
-                                        offset: Offset(-.0, 5.0),
+                                        offset: const Offset(-.0, 5.0),
                                         spreadRadius: 0),
                                   ],
                                 ),

@@ -64,9 +64,7 @@ class CAllCouponController extends ChangeNotifier {
       log(response.body);
       if (response.statusCode == 200) {
         allCouponlistdata = result.allCouponlistdata;
-        if (filterCouponList == null) {
-          filterCouponList = result.filterCouponList;
-        }
+        filterCouponList ??= result.filterCouponList;
 
         shopEnquiriesDetails = allCouponlistdata?.shopEnquiriesDetails;
         showLoader(false);
@@ -100,7 +98,7 @@ class CAllCouponController extends ChangeNotifier {
       // Utils.showPrimarySnackbar(context, "coupon code copid",
       //     type: SnackType.success);
     });
-    Timer(Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 3), () async {
       isOfferCopied = false;
       notifyListeners();
     });

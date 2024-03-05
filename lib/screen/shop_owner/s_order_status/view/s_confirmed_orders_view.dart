@@ -22,7 +22,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
     final watch = context.watch<SOrderStatusController>();
     final readMainScreen = context.read<SMainScreenController>();
     return watch.confirmedOrdersList!.isEmpty
-        ? Container(
+        ? SizedBox(
             height: MediaQuery.of(context).size.height / 1.5,
             child: Center(
               child: Column(
@@ -54,7 +54,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
         : ListView.builder(
             padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
             itemCount: watch.confirmedOrdersList?.length ?? 0,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (BuildContext, index) {
               final element = watch.confirmedOrdersList?[index];
@@ -84,7 +84,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.w),
                     color: Colors.white,
-                    border: Border.all(color: Color(0xffEFEFEF)),
+                    border: Border.all(color: const Color(0xffEFEFEF)),
                   ),
                   child: Column(
                     children: [
@@ -97,7 +97,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 15.sp,
-                                color: Color(0xff3A3A3A)),
+                                color: const Color(0xff3A3A3A)),
                           ),
                           Text(
                             "Order ID : ${element?.orderUniqueId}",
@@ -105,7 +105,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 15.sp,
-                                color: Color(0xff3A3A3A)),
+                                color: const Color(0xff3A3A3A)),
                           ),
                         ],
                       ),
@@ -120,14 +120,14 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12.sp,
-                                color: Color(0xff3A3A3A)),
+                                color: const Color(0xff3A3A3A)),
                           ),
                           Text(
                             "\u{20B9}  ${element?.totalAmount}",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14.sp,
-                                color: Color(0xff39C19D)),
+                                color: const Color(0xff39C19D)),
                           ),
                         ],
                       ),
@@ -142,7 +142,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12.sp,
-                                color: Color(0xffA3A3A3)),
+                                color: const Color(0xffA3A3A3)),
                           ),
                           InkWell(
                             onTap: () {
@@ -155,7 +155,7 @@ class _SConfirmedOrdersViewState extends State<SConfirmedOrdersView> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14.sp,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   width: 7.w,

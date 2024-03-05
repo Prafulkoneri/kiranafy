@@ -510,14 +510,14 @@ class SSubscriptionController extends ChangeNotifier {
           if (screenName == "dashboard") {
             read.onNavigation(
                 0,
-                ShopDashBoardView(
+                const ShopDashBoardView(
                   refresh: true,
                 ),
                 context);
             read.showBottomNavigationBar();
           } else {
             read.onNavigation(
-                4, SMySubscriptionView(screenName: "accounts"), context);
+                4, const SMySubscriptionView(screenName: "accounts"), context);
             read.showBottomNavigationBar();
           }
         } else {
@@ -526,8 +526,8 @@ class SSubscriptionController extends ChangeNotifier {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      SShopConfigurationView(initialShopConfigration: true)));
+                  builder: (context) => const SShopConfigurationView(
+                      initialShopConfigration: true)));
           notifyListeners();
         }
       } else {

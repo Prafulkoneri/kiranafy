@@ -83,7 +83,7 @@ class _CShopCouponsViewState extends State<CShopCouponsView> {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children:
@@ -116,7 +116,7 @@ class _CShopCouponsViewState extends State<CShopCouponsView> {
                             width: 9.38.w,
                           ),
                           DottedLine(
-                            dashColor: Color(0xff666666).withOpacity(0.2),
+                            dashColor: const Color(0xff666666).withOpacity(0.2),
                             dashGapLength: 5.w,
                             direction: Axis.vertical,
                             lineLength: 90.w,
@@ -138,7 +138,7 @@ class _CShopCouponsViewState extends State<CShopCouponsView> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(),
+                                const SizedBox(),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   // crossAxisAlignment: CrossAxisAlignment.center,

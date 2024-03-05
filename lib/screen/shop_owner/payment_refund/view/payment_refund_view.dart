@@ -8,7 +8,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/payment_refund/controller/payment_refund_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/view/shop_order_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -39,14 +38,14 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
     final read = context.read<PaymentRefundListController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           isBackButtonEnabled: true,
           // widget.isNavFromAccounts == true ? true : false,
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(0, ShopDashBoardView(
+            readMainScreen.onNavigation(0, const ShopDashBoardView(
               refresh: true,
             ), context);
           },
@@ -58,13 +57,13 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
           ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
-          readMainScreen.onNavigation(0, ShopDashBoardView(
+          readMainScreen.onNavigation(0, const ShopDashBoardView(
             refresh: true,
           ), context);
           return false;
         },
             child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 19.w),
                   child: Column(
@@ -96,7 +95,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                 left: 10.w, top: 5.w, bottom: 5.w, right: 13.w),
                             child: Row(
                               children: [
-                                Text("${watch.date}"),
+                                Text(watch.date),
                                 SizedBox(
                                   width: 8.w,
                                 ),
@@ -119,7 +118,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                         builder: (BuildContext, child) {
                                           return Theme(
                                             data: Theme.of(context).copyWith(
-                                              colorScheme: ColorScheme.light(
+                                              colorScheme: const ColorScheme.light(
                                                 primary: Color(0xff1767B1),
                                                 // <-- SEE HERE
                                                 onPrimary: Colors.white,
@@ -130,7 +129,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                               textButtonTheme:
                                                   TextButtonThemeData(
                                                 style: TextButton.styleFrom(
-                                                  primary: Color(
+                                                  foregroundColor: const Color(
                                                       0xff1767B1), // button text color
                                                 ),
                                               ),
@@ -169,7 +168,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Color(0xff115B7A),
+                                    color: const Color(0xff115B7A),
                                     borderRadius: BorderRadius.circular(5.w)),
                                 padding: EdgeInsets.only(left: 12.w, right: 12.w),
                                 child: Column(
@@ -216,7 +215,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: Color(0xff39C19D),
+                                    color: const Color(0xff39C19D),
                                     borderRadius: BorderRadius.circular(5.w)),
                                 padding: EdgeInsets.only(left: 12.w, right: 12.w),
                                 child: Column(
@@ -279,7 +278,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                             ? ListView.builder(
                                 // padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 20.w),
                                 itemCount: watch.pendingOrdersList?.length ?? 0,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext, index) {
                                   final element = watch.pendingOrdersList?[index];
@@ -311,7 +310,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                         borderRadius: BorderRadius.circular(10.w),
                                         color: Colors.white,
                                         border:
-                                            Border.all(color: Color(0xffEFEFEF)),
+                                            Border.all(color: const Color(0xffEFEFEF)),
                                       ),
                                       child: Column(
                                         children: [
@@ -325,7 +324,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 15.sp,
-                                                    color: Color(0xff3A3A3A)),
+                                                    color: const Color(0xff3A3A3A)),
                                               ),
                                               Text(
                                                 // "135",
@@ -333,7 +332,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 19.sp,
-                                                    color: Color(0xff39C19D)),
+                                                    color: const Color(0xff39C19D)),
                                               ),
                                             ],
                                           ),
@@ -349,7 +348,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
+                                                    color: const Color(0xffA3A3A3)),
                                               ),
                                             ],
                                           ),
@@ -366,7 +365,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
+                                                    color: const Color(0xffA3A3A3)),
                                               ),
                                               Row(
                                                 children: [
@@ -383,7 +382,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 12.sp,
-                                                        color: Color(0xffA3A3A3)),
+                                                        color: const Color(0xffA3A3A3)),
                                                   ),
                                                 ],
                                               ),
@@ -432,7 +431,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                 itemCount:
                                     //  2,
                                     watch.confirmedOrdersList?.length ?? 0,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext, index) {
                                   final element =
@@ -465,7 +464,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                         borderRadius: BorderRadius.circular(10.w),
                                         color: Colors.white,
                                         border:
-                                            Border.all(color: Color(0xffEFEFEF)),
+                                            Border.all(color: const Color(0xffEFEFEF)),
                                       ),
                                       child: Column(
                                         children: [
@@ -480,7 +479,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 15.sp,
-                                                    color: Color(0xff3A3A3A)),
+                                                    color: const Color(0xff3A3A3A)),
                                               ),
                                               Text(
                                                 // "135",
@@ -488,7 +487,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                     fontSize: 19.sp,
-                                                    color: Color(0xff39C19D)),
+                                                    color: const Color(0xff39C19D)),
                                               ),
                                             ],
                                           ),
@@ -504,7 +503,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
+                                                    color: const Color(0xffA3A3A3)),
                                               ),
                                             ],
                                           ),
@@ -521,7 +520,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 12.sp,
-                                                    color: Color(0xffA3A3A3)),
+                                                    color: const Color(0xffA3A3A3)),
                                               ),
                                               Row(
                                                 children: [
@@ -537,7 +536,7 @@ class _SPaymentRefundListState extends State<SPaymentRefundList> {
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 12.sp,
-                                                        color: Color(0xffA3A3A3)),
+                                                        color: const Color(0xffA3A3A3)),
                                                   ),
                                                 ],
                                               ),

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/controller/s_customer_list_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_detail_view.dart';
 import 'package:local_supper_market/screen/shop_owner/customer_list/view/customer_filter_view.dart';
@@ -12,7 +11,6 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -73,12 +71,12 @@ class _CustomerListViewState extends State<CustomerListView> {
 
 
            if( widget.fromPage == "account"){
-             readMain.onNavigation(4, SAccountScreenView(
+             readMain.onNavigation(4, const SAccountScreenView(
                refresh: false,
              ), context);
            }
            else{
-             readMain.onNavigation(0, ShopDashBoardView(
+             readMain.onNavigation(0, const ShopDashBoardView(
                refresh: false,
              ), context);
            }
@@ -110,7 +108,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                       topRight: Radius.circular(30))),
               context: context,
               builder: (context) {
-                return CustomerFilterView();
+                return const CustomerFilterView();
               },
             );
           },
@@ -121,10 +119,10 @@ class _CustomerListViewState extends State<CustomerListView> {
           : WillPopScope(
               onWillPop: () async {
                 if( widget.fromPage == "account"){
-                  readMain.onNavigation(4, SAccountScreenView(refresh: false,), context);
+                  readMain.onNavigation(4, const SAccountScreenView(refresh: false,), context);
                 }
                 else{
-                  readMain.onNavigation(0,ShopDashBoardView(refresh: false,), context);
+                  readMain.onNavigation(0,const ShopDashBoardView(refresh: false,), context);
                 }
                 return false;
               },
@@ -135,7 +133,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                         children: [
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: watch.customerList?.length ?? 0,
                             itemBuilder: (context, index) {
                               final element = watch.customerList?[index];
@@ -149,7 +147,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.white,
                                     border:
-                                        Border.all(color: Color(0xffEFEFEF))),
+                                        Border.all(color: const Color(0xffEFEFEF))),
                                 child: Column(
                                   children: [
                                     Container(
@@ -170,7 +168,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                                           shape:
                                                               BoxShape.circle,
                                                           border: Border.all(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff115B7A),
                                                               width: 2.w)),
                                                       child: ClipOval(
@@ -233,7 +231,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                           Row(
                                             children: [
                                               element?.isShopFavourite == "yes"
-                                                  ? Container(
+                                                  ? SizedBox(
                                                       width: 32.w,
                                                       height: 32.h,
                                                       child: SvgPicture.asset(
@@ -254,7 +252,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                                 child: Container(
                                                   width: 32.w,
                                                   height: 32.h,
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                       color: Color(0xff115B7A),
                                                       shape: BoxShape.circle),
                                                   child: Center(
@@ -271,7 +269,7 @@ class _CustomerListViewState extends State<CustomerListView> {
                                         ],
                                       ),
                                     ),
-                                    Divider(
+                                    const Divider(
                                       color: Color(0xffE8E8E8),
                                       thickness: 1,
                                     ),

@@ -82,7 +82,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
                   readMain.onNavigation(
@@ -96,7 +96,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                   return false;
                 },
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   controller: scrollController,
                   child: Stack(
                     children: [
@@ -110,7 +110,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                     top: 20.w,
                                     right: 10.w,
                                     bottom: 100.w),
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: watch.allOfferProducts.length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -240,7 +240,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                     children: [
                                                       element.productImagePath ==
                                                               ""
-                                                          ? Container(
+                                                          ? SizedBox(
                                                               height: 68.w,
                                                               width: 68.w,
                                                               child:
@@ -250,7 +250,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                     .cover,
                                                               ),
                                                             )
-                                                          : Container(
+                                                          : SizedBox(
                                                               height: 68.w,
                                                               width: 68.w,
                                                               child:
@@ -336,7 +336,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                               letterSpacing: .5,
                                                                               fontSize: 12.sp,
                                                                               fontWeight: FontWeight.w400)))
-                                                              : Text(""),
+                                                              : const Text(""),
                                                           SizedBox(
                                                             width: 5.w,
                                                           ),
@@ -359,7 +359,7 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                                                                         fontWeight: FontWeight.w500),
                                                                   ),
                                                                 )
-                                                              : Text(""),
+                                                              : const Text(""),
                                                         ],
                                                       ),
                                                     ],
@@ -517,8 +517,8 @@ class _AllOfferProductsState extends State<AllOfferProducts> {
                               color: Colors.black.withOpacity(0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: Container(
+                            child: const Center(
+                              child: SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(

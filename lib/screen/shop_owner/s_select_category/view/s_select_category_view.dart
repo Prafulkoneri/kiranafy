@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_select_category/controller/s_select_category_controller.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -38,7 +37,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
           onBackBtnPressed: () {
-            readMainScreen.onNavigation(0, SSCategoryListView(), context);
+            readMainScreen.onNavigation(0, const SSCategoryListView(), context);
             // readMainScreen.showBottomNavigationBar();
             // Navigator.pushAndRemoveUntil(
             //   context,
@@ -59,7 +58,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
           ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
-          readMainScreen.onNavigation(0, SSCategoryListView(), context);
+          readMainScreen.onNavigation(0, const SSCategoryListView(), context);
           readMainScreen.showBottomNavigationBar();
           return false;
         },
@@ -67,7 +66,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                 padding: EdgeInsets.only(
                     left: 50.w, right: 50.w, top: 40.w, bottom: 90.w),
                 shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 30,
@@ -81,7 +80,7 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                       read.onCategorySelected(index, element?.id);
                     },
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -89,11 +88,11 @@ class _SSelectCategoryViewState extends State<SSelectCategoryView> {
                           Stack(
                             clipBehavior: Clip.none,
                             children: [
-                              Container(
-                                child: AppNetworkImages(
-                                    imageUrl: "${element?.categoryImagePath}"),
+                              SizedBox(
                                 height: 60.w,
                                 width: 80.w,
+                                child: AppNetworkImages(
+                                    imageUrl: "${element?.categoryImagePath}"),
                               ),
                               Positioned(
                                   right: 0.w,

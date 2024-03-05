@@ -37,6 +37,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
   // final TextEditingController _searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<AllShopController>().initState(context, widget.refreshPage);
@@ -65,18 +66,18 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
 
     return Scaffold(
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
-                    0, HomeScreenView(refreshPage: false), context);
+                    0, const HomeScreenView(refreshPage: false), context);
                 // Navigator.of(context).popUntil(
                 //     (route) => route.settings.name == "MainScreenView");
                 return false;
               },
               child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +108,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                     controller: watch.searchController,
                                     decoration: InputDecoration(
                                       enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               width: 1, color: splashnone),
                                           borderRadius:
                                               BorderRadius.circular(8.w)),
@@ -118,10 +119,6 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                               // letterSpacing: .5,
                                               fontSize: 11,
                                               fontWeight: FontWeight.w400)),
-
-                                      // Add a clear button to the search bar
-
-                                      // Add a search icon or button to the search bar
                                       prefixIcon: IconButton(
                                         icon: SvgPicture.asset(
                                           'assets/images/search.svg',
@@ -132,10 +129,6 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                           // Perform the search here
                                         },
                                       ),
-
-                                      // border: OutlineInputBorder(
-                                      //   borderRadius: BorderRadius.circular(15.w),
-                                      // ),
                                     ),
                                   ),
                                 ),
@@ -156,7 +149,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                   builder: (BuildContext context) {
                                     return StatefulBuilder(
                                         builder: (context, setState) {
-                                      return ShopFilterView();
+                                      return const ShopFilterView();
                                     });
                                   },
                                 );
@@ -175,13 +168,13 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                         Padding(
                           padding: EdgeInsets.only(
                               top: 20.w, left: 19.0.w, bottom: 15.w),
-                          child: HomeSideHeading(
+                          child: const HomeSideHeading(
                             text: 'Nearby Shops',
                           ),
                         ),
                         SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: List.generate(
@@ -235,7 +228,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                   index]
                                                               .shopBannerImagePath ==
                                                           ""
-                                                      ? DecorationImage(
+                                                      ? const DecorationImage(
                                                           scale: 1.0,
                                                           image: AssetImage(
                                                               'assets/images/nearshop2.png'),
@@ -266,7 +259,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                               gradient: LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
-                                                stops: [
+                                                stops: const [
                                                   0.1,
                                                   0.9,
                                                 ],
@@ -286,6 +279,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                               children: [
                                                 Container(),
                                                 Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     NearByShops(
                                                       text:
@@ -296,8 +291,6 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                           '${element?.areaName}',
                                                     ),
                                                   ],
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
                                                 ),
                                               ],
                                             ),
@@ -350,7 +343,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
 
                                           // scrollDirection: Axis.vertical,p
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           // physics: BouncingScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: watch.allShops.length ?? 0,
@@ -401,7 +394,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                           image: element
                                                                       .shopBannerImagePath ==
                                                                   ""
-                                                              ? DecorationImage(
+                                                              ? const DecorationImage(
                                                                   // scale: 1.0,
                                                                   image: AssetImage(
                                                                       'assets/images/nearshop2.png'),
@@ -436,7 +429,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                       .topCenter,
                                                                   end: Alignment
                                                                       .bottomCenter,
-                                                                  stops: [
+                                                                  stops: const [
                                                                     0.1,
                                                                     0.9,
                                                                   ],
@@ -461,7 +454,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              Row(
+                                                              const Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .end,
@@ -521,7 +514,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                                                           color:
                                                                               yellow,
                                                                           borderRadius:
-                                                                              BorderRadius.all(Radius.circular(15)),
+                                                                              const BorderRadius.all(Radius.circular(15)),
                                                                         ),
                                                                         child:
                                                                             Row(
@@ -620,7 +613,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                             ],
                                           ),
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                   watchHome.customerplacead?.isNotEmpty == true
@@ -700,7 +693,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                           }
                                           readMain.onNavigation(
                                               1,
-                                              CustomerAdsView(
+                                              const CustomerAdsView(
                                                   route: "allShops"),
                                               context);
                                           // Navigator.pushAndRemoveUntil(
@@ -716,7 +709,7 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: Color(0xff39C19D),
+                                              color: const Color(0xff39C19D),
                                               borderRadius:
                                                   BorderRadius.circular(7.w)),
                                           padding: EdgeInsets.symmetric(
@@ -749,8 +742,8 @@ class _AllNearShopsViewState extends State<AllNearShopsView> {
                                       color: Colors.black.withOpacity(0.1),
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Center(
-                                      child: Container(
+                                    child: const Center(
+                                      child: SizedBox(
                                         width: 20,
                                         height: 20,
                                         child: CircularProgressIndicator(

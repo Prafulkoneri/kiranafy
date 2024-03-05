@@ -64,18 +64,18 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
           : WillPopScope(
               onWillPop: () async {
                 readMainScreen.onNavigation(
-                    0, ShopDashBoardView(refresh: false), context);
+                    0, const ShopDashBoardView(refresh: false), context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
                       margin: EdgeInsets.only(
                           left: 10.w, top: 10.w, right: 20.w, bottom: 0.w),
                       decoration: BoxDecoration(
-                        color: Color(0xff44B8CA),
+                        color: const Color(0xff44B8CA),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -129,7 +129,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              "${watch.name}",
+                                              watch.name,
                                               // "Rachel Green",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
@@ -145,7 +145,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                             onTap: () {
                                               readMainScreen.onNavigation(
                                                   4,
-                                                  SEditProfileView(
+                                                  const SEditProfileView(
                                                     fromDashBoard: false,
                                                   ),
                                                   context);
@@ -202,7 +202,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              "${watch.shopOwnerName}",
+                                              watch.shopOwnerName,
                                               // "Rachel Green",
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
@@ -290,7 +290,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            SShopConfigurationView(
+                            const SShopConfigurationView(
                               initialShopConfigration: false,
                             ),
                             context);
@@ -319,7 +319,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -337,7 +337,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             //       fontWeight: FontWeight.w400),
                             // ),
                             // ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Shop Configuration Setting',
                               ),
@@ -361,7 +361,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            CustomerListView(
+                            const CustomerListView(
                               isRefresh: true,
                               fromPage: "account",
                             ),
@@ -392,7 +392,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -403,7 +403,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Customers List',
                               ),
@@ -426,7 +426,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            ShopCouponsView(
+                            const ShopCouponsView(
                               isRefresh: true,
                               isNavFromDashBoard: false,
                             ),
@@ -458,7 +458,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -469,7 +469,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Coupons & Offers',
                               ),
@@ -484,7 +484,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            ShopSeasonalRecommandedOfferProductsView(
+                            const ShopSeasonalRecommandedOfferProductsView(
                               selectedProduct: "recommended",
                               isRefresh: true,
                             ),
@@ -516,7 +516,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           // mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -527,7 +527,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Recommended & Seasonal Products',
                               ),
@@ -540,7 +540,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     GestureDetector(
                       onTap: () {
                         readMainScreen.onNavigation(
-                            4, shopPromotionRequestView(), context);
+                            4, const shopPromotionRequestView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -564,7 +564,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -575,7 +575,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Ads & Promotions',
                               ),
@@ -588,7 +588,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            SMySubscriptionView(
+                            const SMySubscriptionView(
                               screenName: "accounts",
                             ),
                             context);
@@ -617,7 +617,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -628,7 +628,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'My Subscription',
                               ),
@@ -640,7 +640,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     GestureDetector(
                       onTap: () {
                         readMainScreen.onNavigation(
-                            4, ShopBankAccountDetailsView(), context);
+                            4, const ShopBankAccountDetailsView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -664,7 +664,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -675,7 +675,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Bank A/C Details',
                               ),
@@ -688,7 +688,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            SPaymentsView(
+                            const SPaymentsView(
                               isNavFromAccounts: true,
                             ),
                             context);
@@ -717,7 +717,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -728,7 +728,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Payments',
                               ),
@@ -741,7 +741,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     GestureDetector(
                       onTap: () {
                         readMainScreen.onNavigation(
-                            4, SHelpCenterView(), context);
+                            4, const SHelpCenterView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -764,7 +764,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -775,7 +775,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Help & Support',
                               ),
@@ -788,7 +788,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                       onTap: () {
                         readMainScreen.onNavigation(
                             4,
-                            NotificationsScreenView(route: "accounts"),
+                            const NotificationsScreenView(route: "accounts"),
                             context);
                         readMainScreen.hideBottomNavigationBar();
 
@@ -819,7 +819,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -830,7 +830,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Notification',
                               ),
@@ -842,7 +842,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     GestureDetector(
                       onTap: () {
                         readMainScreen.onNavigation(
-                            4, SAccountCmsPagesView(), context);
+                            4, const SAccountCmsPagesView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -876,7 +876,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                                 SizedBox(
                                   width: 18.w,
                                 ),
-                                AccountScreen(
+                                const AccountScreen(
                                   text: 'Local Supermart',
                                 ),
                               ],
@@ -894,7 +894,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                     GestureDetector(
                       onTap: () {
                         readMainScreen.onNavigation(
-                            4, ShopSettingView(), context);
+                            4, const ShopSettingView(), context);
                         // Navigator.pushAndRemoveUntil(
                         //   context,
                         //   MaterialPageRoute(
@@ -917,7 +917,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(
@@ -928,7 +928,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                             SizedBox(
                               width: 18.w,
                             ),
-                            Flexible(
+                            const Flexible(
                               child: AccountScreen(
                                 text: 'Settings',
                               ),
@@ -956,7 +956,7 @@ class _SAccountScreenViewState extends State<SAccountScreenView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             SvgPicture.asset(

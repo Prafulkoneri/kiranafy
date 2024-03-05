@@ -27,14 +27,14 @@ class _ShopDeliveryAreaDialogViewState
     final read = context.watch<SShopConfigurationController>();
     return Dialog(
 
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       // shape: ,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
 
       // scrollable: true,
       child: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -51,7 +51,7 @@ class _ShopDeliveryAreaDialogViewState
                   child: Container(
                     height: 20.w,
                     width: 20.w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.black,
                     ),
@@ -69,7 +69,7 @@ class _ShopDeliveryAreaDialogViewState
                 ),
               ],
             ),
-            Container(
+            SizedBox(
               width: ScreenUtil().screenWidth,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -92,11 +92,11 @@ class _ShopDeliveryAreaDialogViewState
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(width: 1, color: splashnone),
+                                    const BorderSide(width: 1, color: splashnone),
                                 borderRadius: BorderRadius.circular(8.w)),
                             focusedBorder: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(width: 1, color: splashnone),
+                                    const BorderSide(width: 1, color: splashnone),
                                 borderRadius: BorderRadius.circular(8.w)),
                             hintText: 'Search ',
                             hintStyle: GoogleFonts.dmSans(
@@ -142,16 +142,16 @@ class _ShopDeliveryAreaDialogViewState
                   SizedBox(
                     height: 15.h,
                   ),
-                  watch.isLoading?Center(child: CircularProgressIndicator()):
+                  watch.isLoading?const Center(child: CircularProgressIndicator()):
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: watch.areaList?.length ?? 0,
                     //  watch.shopDeliveryAreaData?.length ?? 0,
                     itemBuilder: (context, index) {
                       final element = watch.areaList?[index];
                       return Container(
-                        padding: EdgeInsets.only(left: 18, top: 20),
+                        padding: const EdgeInsets.only(left: 18, top: 20),
                         child: Row(
                           children: [
                             PrimaryCheckBox(
@@ -190,7 +190,7 @@ class _ShopDeliveryAreaDialogViewState
                         width: 274.w,
                         text: "Submit",
                         fontWeight: FontWeight.w700,
-                        color: Color(0xff39C19D),
+                        color: const Color(0xff39C19D),
                         onTap: () {
                           print("hellooo");
                           read.onDeliveryAreaSubmit(context);

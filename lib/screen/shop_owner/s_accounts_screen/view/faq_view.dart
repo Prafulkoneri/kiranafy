@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_cms_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +34,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
         child: PrimaryAppBar(
           title: "FAQ",
           onBackBtnPressed: () {
-            readMain.onNavigation(4, SAccountCmsPagesView(), context);
+            readMain.onNavigation(4, const SAccountCmsPagesView(), context);
             readMain.showBottomNavigationBar();
             // Navigator.pushAndRemoveUntil(
             //   context,
@@ -52,12 +50,12 @@ class _ShopFAQViewState extends State<ShopFAQView> {
           ? const Loader()
           : WillPopScope(
         onWillPop: ()async{
-          readMain.onNavigation(4, SAccountCmsPagesView(), context);
+          readMain.onNavigation(4, const SAccountCmsPagesView(), context);
           readMain.showBottomNavigationBar();
           return false;
         },
             child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
                     left: 20,
@@ -67,7 +65,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       ListView.builder(
@@ -81,7 +79,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(22),
                                 color: watch.isFaqExpanded[index]
-                                    ? Color(0xff44B8CA)
+                                    ? const Color(0xff44B8CA)
                                     : Colors.white,
                               ),
                               width: MediaQuery.of(context).size.width,
@@ -110,7 +108,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                             ? Colors.white
                                             : Colors.black,
                                       ),
-                                      tilePadding: EdgeInsets.only(
+                                      tilePadding: const EdgeInsets.only(
                                           left: 10, right: 10, bottom: 0),
                                       title: Row(
                                         crossAxisAlignment:
@@ -135,7 +133,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                       children: <Widget>[
                                         Container(
                                           width: ScreenUtil().screenWidth,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color.fromARGB(
                                                 255, 214, 251, 255),
                                             borderRadius: BorderRadius.only(
@@ -158,7 +156,7 @@ class _ShopFAQViewState extends State<ShopFAQView> {
                                                 // "gfgheryhjyurt",
                                                 "${element?.answer}",
                                                 textAlign: TextAlign.start,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w400),

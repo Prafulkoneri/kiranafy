@@ -246,7 +246,7 @@ class CustomerOrderViewController extends ChangeNotifier {
   }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {
@@ -421,7 +421,7 @@ class CustomerOrderViewController extends ChangeNotifier {
       cancelOrderErrorMsg = "Please Enter reason for cancellation";
       isCancelOrderErrorMsgVisible = true;
       notifyListeners();
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         isCancelOrderErrorMsgVisible = false;
         notifyListeners();
       });
@@ -431,7 +431,7 @@ class CustomerOrderViewController extends ChangeNotifier {
       cancelOrderErrorMsg = "Please select Reason";
       isCancelOrderErrorMsgVisible = true;
       notifyListeners();
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         isCancelOrderErrorMsgVisible = false;
         notifyListeners();
       });
@@ -450,7 +450,7 @@ class CustomerOrderViewController extends ChangeNotifier {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
           Navigator.pop(context);
-          read.onNavigation(4, MyOrderView(), context);
+          read.onNavigation(4, const MyOrderView(), context);
           print("hello");
           Utils.showPrimarySnackbar(context, result.message,
               type: SnackType.success);
@@ -504,7 +504,7 @@ class CustomerOrderViewController extends ChangeNotifier {
           CustomerReorderResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         final read = Provider.of<MainScreenController>(context, listen: false);
-        read.onNavigation(2, CartScreenView(), context);
+        read.onNavigation(2, const CartScreenView(), context);
         read.showBottomNavigationBar();
         // Navigator.pushAndRemoveUntil(
         //   context,
@@ -662,7 +662,7 @@ class CustomerOrderViewController extends ChangeNotifier {
           Permission.storage,
           //add more permission to request here.
         ].request();
-        var dir;
+        Directory dir;
         if (Platform.isIOS) {
           dir = await getApplicationDocumentsDirectory();
         } else {
@@ -670,42 +670,37 @@ class CustomerOrderViewController extends ChangeNotifier {
           dir = Directory(tempDir.path);
         }
 
-        if (dir != null) {
-          String fullPath =
-              orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString() ??
-                  "";
-          List splitPath = fullPath.split("/");
-          print(splitPath);
-          String saveName = splitPath[splitPath.length - 1];
-          print("savename${saveName}");
-          String savePath = dir.path + "/$saveName";
-          print('savepath');
-          print("savePath${savePath}");
-          print('savepath');
-          fileurl = Endpoint.baseUrl
-                  .toString()
-                  .substring(0, Endpoint.baseUrl.toString().length - 4)
-                  .toString() +
-              "${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
-          //output:  /storage/emulated/0/Download/banner.png
+        String fullPath =
+            orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString() ??
+                "";
+        List splitPath = fullPath.split("/");
+        print(splitPath);
+        String saveName = splitPath[splitPath.length - 1];
+        print("savename$saveName");
+        String savePath = "${dir.path}/$saveName";
+        print('savepath');
+        print("savePath$savePath");
+        print('savepath');
+        fileurl =
+            "${Endpoint.baseUrl.toString().substring(0, Endpoint.baseUrl.toString().length - 4)}${orderinvoicecdata?.customerInvoiceList?.invoiceLink.toString()}";
+        //output:  /storage/emulated/0/Download/banner.png
 
-          try {
-            await Dio().download(fileurl, savePath,
-                onReceiveProgress: (received, total) {
-              if (total != -1) {
-                print((received / total * 100).toStringAsFixed(0) + "%");
-                //you can build progressbar feature too
-              }
-            });
-            print("File is saved to download folder.");
-          } on DioError catch (e) {
-            print(e.message);
-            Utils.showPrimarySnackbar(context, "Invalid Url",
-                type: SnackType.error);
-            return;
-          }
-          _showNotification(saveName, savePath);
+        try {
+          await Dio().download(fileurl, savePath,
+              onReceiveProgress: (received, total) {
+            if (total != -1) {
+              print("${(received / total * 100).toStringAsFixed(0)}%");
+              //you can build progressbar feature too
+            }
+          });
+          print("File is saved to download folder.");
+        } on DioError catch (e) {
+          print(e.message);
+          Utils.showPrimarySnackbar(context, "Invalid Url",
+              type: SnackType.error);
+          return;
         }
+        _showNotification(saveName, savePath);
         print("No permission to read and write.");
         print(directory?.path.toString());
         print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
@@ -729,16 +724,16 @@ class CustomerOrderViewController extends ChangeNotifier {
   }
 
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+    const android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
         icon: '');
-    final iOS = IOSNotificationDetails();
-    final platform = NotificationDetails(android: android, iOS: iOS);
+    const iOS = IOSNotificationDetails();
+    const platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
         0, // notification id
-        "${fileName}",
+        "$fileName",
         'Download complete.',
         platform,
         payload: '$savePath');

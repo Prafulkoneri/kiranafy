@@ -55,7 +55,7 @@ class _CustomerFAQViewState extends State<CustomerFAQView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

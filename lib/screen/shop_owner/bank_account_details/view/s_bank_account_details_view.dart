@@ -43,7 +43,7 @@ class _ShopBankAccountDetailsViewState
           onBackBtnPressed: () {
             readMainScreen.onNavigation(
                 4,
-                SAccountScreenView(
+                const SAccountScreenView(
                   refresh: false,
                 ),
                 context);
@@ -61,14 +61,14 @@ class _ShopBankAccountDetailsViewState
               onWillPop: () async {
                 readMainScreen.onNavigation(
                     4,
-                    SAccountScreenView(
+                    const SAccountScreenView(
                       refresh: false,
                     ),
                     context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(

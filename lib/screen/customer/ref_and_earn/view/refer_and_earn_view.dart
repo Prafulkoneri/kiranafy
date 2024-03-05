@@ -43,7 +43,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
             // read.onBackPressed();
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                 ),
                 context);
@@ -52,7 +52,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -65,7 +65,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     SizedBox(
@@ -93,7 +93,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                             child: Row(
                               children: [
                                 Image(
-                                  image: AssetImage(
+                                  image: const AssetImage(
                                     "assets/images/reffer_and_earn_2.png",
                                   ),
                                   width: 126.w, height: 104.w,
@@ -157,7 +157,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                       // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Color(0xff39C19D),
+                            color: const Color(0xff39C19D),
                             // letterSpacing: .5,
                             fontSize: 25.sp,
                             fontWeight: FontWeight.w700),
@@ -171,10 +171,10 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                       padding: EdgeInsets.only(
                           left: 10.w, top: 14.w, bottom: 13.w, right: 10.w),
                       decoration: BoxDecoration(
-                          color: Color(0xffE2FFF7),
+                          color: const Color(0xffE2FFF7),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: Color(0xff39C19D),
+                            color: const Color(0xff39C19D),
                           )),
                       child: RichText(
                         text: TextSpan(
@@ -225,9 +225,9 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                       margin: EdgeInsets.only(
                           left: 30.w, top: 14, bottom: 13.w, right: 30.w),
                       child: AnimatedButton(
-                        backgroundColor: Color(0xffE2FFF7),
+                        backgroundColor: const Color(0xffE2FFF7),
                         borderWidth: 1,
-                        borderColor: Color.fromARGB(255, 12, 170, 128),
+                        borderColor: const Color.fromARGB(255, 12, 170, 128),
                         borderRadius: 12,
                         // width: 200,
                         text: 'Click to share your referral code',

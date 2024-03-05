@@ -49,7 +49,7 @@ class GetTicketListController extends ChangeNotifier {
         context: context,
         builder: (context) {
           // using a scaffold helps to more easily position the FAB
-          return RaiseTicketView();
+          return const RaiseTicketView();
         });
     notifyListeners();
   }
@@ -137,7 +137,7 @@ class GetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Select Ticket Type";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });
@@ -148,7 +148,7 @@ class GetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Enter Subject";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });
@@ -158,7 +158,7 @@ class GetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Enter Description";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });

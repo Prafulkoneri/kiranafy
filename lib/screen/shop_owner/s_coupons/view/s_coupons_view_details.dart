@@ -39,15 +39,15 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
           // height: MediaQuery.of(context).size.height * 0.50,
           height: 300.h,
           width: 390.w,
-          decoration: new BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(25.0),
-              topRight: const Radius.circular(25.0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.0),
+              topRight: Radius.circular(25.0),
             ),
           ),
           child: watch.isInfoLoading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Column(
@@ -196,7 +196,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                                 width: 17.w,
                                 height: 17.h,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 6.27,
                               ),
                               Flexible(
@@ -234,7 +234,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
               child: Container(
                 height: 50.w,
                 width: 50.w,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.black,
                 ),
@@ -260,6 +260,7 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                 color: Colors.green,
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -285,7 +286,6 @@ class _SCouponsDetailViewState extends State<SCouponsDetailView> {
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

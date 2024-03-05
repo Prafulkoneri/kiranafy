@@ -36,6 +36,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
   final TextEditingController _searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
@@ -66,12 +67,12 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
     final readMain = context.read<MainScreenController>();
     return Scaffold(
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
                     0,
-                    HomeScreenView(
+                    const HomeScreenView(
                       refreshPage: false,
                     ),
                     context);
@@ -91,7 +92,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
               },
               child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +123,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                     controller: watch.searchController,
                                     decoration: InputDecoration(
                                       enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                               width: 1, color: splashnone),
                                           borderRadius:
                                               BorderRadius.circular(8.w)),
@@ -171,7 +172,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                   builder: (BuildContext context) {
                                     return StatefulBuilder(
                                         builder: (context, setState) {
-                                      return ShopCategoryFiltterView();
+                                      return const ShopCategoryFiltterView();
                                     });
                                   },
                                 );
@@ -245,7 +246,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                         ),
                         SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: List.generate(
@@ -305,7 +306,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                   index]
                                                               .shopBannerImagePath ==
                                                           ""
-                                                      ? DecorationImage(
+                                                      ? const DecorationImage(
                                                           scale: 1.0,
                                                           image: AssetImage(
                                                               'assets/images/nearshop2.png'),
@@ -336,7 +337,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                               gradient: LinearGradient(
                                                 begin: Alignment.topCenter,
                                                 end: Alignment.bottomCenter,
-                                                stops: [
+                                                stops: const [
                                                   0.1,
                                                   0.9,
                                                 ],
@@ -356,6 +357,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                               children: [
                                                 Container(),
                                                 Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text("${element?.shopName}",
                                                         style: GoogleFonts.roboto(
@@ -374,8 +377,6 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                 // height: 10,
                                                                 fontWeight: FontWeight.w400))),
                                                   ],
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
                                                 ),
                                               ],
                                             ),
@@ -426,7 +427,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                       ? ListView.builder(
                                           // scrollDirection: Axis.vertical,p
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           // physics: BouncingScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: watch.allShops.length ?? 0,
@@ -438,7 +439,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                 readMain.onNavigation(
                                                     1,
                                                     ShopProfileView(
-                                                      shopId: element?.id
+                                                      shopId: element.id
                                                           .toString(),
                                                       routeName:
                                                           "nearShopsCategory",
@@ -485,7 +486,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                           image: element
                                                                       .shopBannerImagePath ==
                                                                   ""
-                                                              ? DecorationImage(
+                                                              ? const DecorationImage(
                                                                   // scale: 1.0,
                                                                   image: AssetImage(
                                                                       'assets/images/nearshop2.png'),
@@ -520,7 +521,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                       .topCenter,
                                                                   end: Alignment
                                                                       .bottomCenter,
-                                                                  stops: [
+                                                                  stops: const [
                                                                     0.1,
                                                                     0.9,
                                                                   ],
@@ -545,7 +546,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              Row(
+                                                              const Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .end,
@@ -600,7 +601,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                                                           color:
                                                                               yellow,
                                                                           borderRadius:
-                                                                              BorderRadius.all(Radius.circular(15)),
+                                                                              const BorderRadius.all(Radius.circular(15)),
                                                                         ),
                                                                         child:
                                                                             Row(
@@ -784,7 +785,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                           }
                                           readMain.onNavigation(
                                               0,
-                                              CustomerAdsView(
+                                              const CustomerAdsView(
                                                   route: "categoryShops"),
                                               context);
                                           // Navigator.pushAndRemoveUntil(
@@ -800,7 +801,7 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: Color(0xff39C19D),
+                                              color: const Color(0xff39C19D),
                                               borderRadius:
                                                   BorderRadius.circular(7.w)),
                                           padding: EdgeInsets.symmetric(
@@ -833,8 +834,8 @@ class _AllNearCategoryShopsViewState extends State<AllNearCategoryShopsView> {
                                       color: Colors.black.withOpacity(0.1),
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Center(
-                                      child: Container(
+                                    child: const Center(
+                                      child: SizedBox(
                                         width: 20,
                                         height: 20,
                                         child: CircularProgressIndicator(

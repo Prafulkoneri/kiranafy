@@ -28,7 +28,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
               height: 120.h,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: watch.nearByShopList?.length ?? 0,
                   itemBuilder: (BuildContext, index) {
@@ -69,7 +69,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(13.w),
                                   image: element?.shopBannerImagePath == ""
-                                      ? DecorationImage(
+                                      ? const DecorationImage(
                                           image: AssetImage(
                                               "assets/images/nearshop2.png"),
                                           fit: BoxFit.cover)
@@ -96,7 +96,7 @@ class _HomeCarousalState extends State<HomeCarousal> {
                                   gradient: LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
-                                    stops: [
+                                    stops: const [
                                       0.1,
                                       0.9,
                                     ],

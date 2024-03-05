@@ -28,17 +28,17 @@ class OnBoardingController extends ChangeNotifier {
 
   void onSkipPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CustomerSignInView()));
+        context, MaterialPageRoute(builder: (context) => const CustomerSignInView()));
   }
 
   void onShopOwnerBtnPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ShopSignInView()));
+        context, MaterialPageRoute(builder: (context) => const ShopSignInView()));
   }
 
   void onCustomerBtnPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CustomerSignInView()));
+        context, MaterialPageRoute(builder: (context) => const CustomerSignInView()));
 
     // Utils.showPrimarySnackbar(context,"This is a pre-launch for shop owner, app for customers will be launched soon!", type: SnackType.success);
     return;
@@ -54,9 +54,9 @@ class OnBoardingController extends ChangeNotifier {
       final result =
           OnBoardingResponseModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         onBoardingData = result.data;
-        Timer.periodic(Duration(seconds: 3), (Timer timer) {
+        Timer.periodic(const Duration(seconds: 3), (Timer timer) {
           int length = onBoardingData?.length ?? 0;
           if (currentIndex < length - 1) {
             currentIndex++;
@@ -66,7 +66,7 @@ class OnBoardingController extends ChangeNotifier {
             //   curve: Curves.easeIn,
             // );
             pageController.nextPage(
-                duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+                duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
           } else {
             currentIndex = length;
           }

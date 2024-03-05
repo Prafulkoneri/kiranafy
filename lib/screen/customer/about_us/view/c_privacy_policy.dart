@@ -18,6 +18,7 @@ class CustomerPrivacyPolicy extends StatefulWidget {
 }
 
 class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<CmsController>().initState(context);
@@ -53,7 +54,7 @@ class _CustomerPrivacyPolicyState extends State<CustomerPrivacyPolicy> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
 
           : WillPopScope(
               onWillPop: () async {

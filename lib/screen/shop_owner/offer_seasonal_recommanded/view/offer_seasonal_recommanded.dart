@@ -10,7 +10,6 @@ import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_a
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/controller/s_dashboard_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_admin_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
@@ -34,6 +33,7 @@ class ShopSeasonalRecommandedOfferProductsView extends StatefulWidget {
 
 class _ShopSeasonalRecommandedOfferProductsViewState
     extends State<ShopSeasonalRecommandedOfferProductsView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
@@ -57,7 +57,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
               widget.selectedProduct == "recommended"
                   ? readMainScreen.onNavigation(
                       4,
-                      SAccountScreenView(
+                      const SAccountScreenView(
                         refresh: false,
                       ),
                       context)
@@ -74,7 +74,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                   //       )
                   : readMainScreen.onNavigation(
                       0,
-                      ShopDashBoardView(
+                      const ShopDashBoardView(
                         refresh: true,
                       ),
                       context);
@@ -103,7 +103,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                 widget.selectedProduct == "recommended"
                     ? readMainScreen.onNavigation(
                         4,
-                        SAccountScreenView(
+                        const SAccountScreenView(
                           refresh: false,
                         ),
                         context)
@@ -120,7 +120,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                     //       )
                     : readMainScreen.onNavigation(
                         0,
-                        ShopDashBoardView(
+                        const ShopDashBoardView(
                           refresh: true,
                         ),
                         context);
@@ -138,7 +138,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(children: [
                   Container(
                     padding: EdgeInsets.only(
@@ -161,7 +161,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                 color: Colors.transparent,
                                 border: Border.all(
                                     color: watch.isRecommadedPressed
-                                        ? Color(0xff39C19D)
+                                        ? const Color(0xff39C19D)
                                         : Colors.transparent),
                               ),
                               child: Center(
@@ -169,7 +169,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                   "Recommended",
                                   style: TextStyle(
                                       color: watch.isRecommadedPressed
-                                          ? Color(0xff39C19D)
+                                          ? const Color(0xff39C19D)
                                           : Black1,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500),
@@ -194,19 +194,19 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                   return;
                                 }
                               },
+                              color: Colors.transparent,
+                              borderColor: watch.isSeasonalPressed
+                                  ? const Color(0xff39C19D)
+                                  : Colors.transparent,
                               child: Text(
                                 "Seasonal",
                                 style: TextStyle(
                                     color: watch.isSeasonalPressed
-                                        ? Color(0xff39C19D)
+                                        ? const Color(0xff39C19D)
                                         : Black,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500),
-                              ),
-                              color: Colors.transparent,
-                              borderColor: watch.isSeasonalPressed
-                                  ? Color(0xff39C19D)
-                                  : Colors.transparent),
+                              )),
                         )),
                         Expanded(
                             child: Container(
@@ -225,19 +225,19 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                   return;
                                 }
                               },
+                              color: Colors.transparent,
+                              borderColor: watch.isFulFilPressed
+                                  ? const Color(0xff39C19D)
+                                  : Colors.transparent,
                               child: Text(
                                 "Fulfil cravings",
                                 style: TextStyle(
                                     color: watch.isFulFilPressed
-                                        ? Color(0xff39C19D)
+                                        ? const Color(0xff39C19D)
                                         : Black,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500),
-                              ),
-                              color: Colors.transparent,
-                              borderColor: watch.isFulFilPressed
-                                  ? Color(0xff39C19D)
-                                  : Colors.transparent),
+                              )),
                         )),
                       ],
                     ),
@@ -282,7 +282,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                           ?.recommendedProducts?.length ??
                                       0,
                                   shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) {
                                     final element = watch.allproducts
                                         ?.recommendedProducts?[index];
@@ -295,7 +295,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                     color: Colors.black
                                                         .withOpacity(0.09),
                                                     blurRadius: 5,
-                                                    offset: Offset(-.0, 5.0),
+                                                    offset: const Offset(-.0, 5.0),
                                                     spreadRadius: 0),
                                               ],
                                               borderRadius:
@@ -308,14 +308,14 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                 dividerColor:
                                                     Colors.transparent),
                                             child: ListTileTheme(
-                                              contentPadding: EdgeInsets.all(0),
+                                              contentPadding: const EdgeInsets.all(0),
                                               dense: true,
                                               // horizontalTitleGap: 5.0,
                                               // minLeadingWidth: 6,
                                               child: ExpansionTile(
-                                                trailing: SizedBox.shrink(),
+                                                trailing: const SizedBox.shrink(),
 
-                                                title: Container(
+                                                title: SizedBox(
                                                   width:
                                                       ScreenUtil().screenWidth,
                                                   child: Row(
@@ -342,7 +342,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   )
                                                                 : Image(
                                                                     image:
-                                                                        AssetImage(
+                                                                        const AssetImage(
                                                                       "assets/images/image_not_found.png",
                                                                     ),
                                                                     height:
@@ -354,7 +354,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             SizedBox(
                                                               width: 8.w,
                                                             ),
-                                                            Container(
+                                                            SizedBox(
                                                               width: 150.w,
                                                               child: Text(
                                                                 "${element?.productName}",
@@ -455,7 +455,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(6),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
@@ -499,7 +499,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(6),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [
@@ -541,7 +541,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         right: 11.w),
                                                     child: Column(
                                                       children: [
-                                                        Divider(),
+                                                        const Divider(),
                                                         Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -629,7 +629,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                               0,
                                                           shrinkWrap: true,
                                                           physics:
-                                                              NeverScrollableScrollPhysics(),
+                                                              const NeverScrollableScrollPhysics(),
                                                           itemBuilder:
                                                               (context, int) {
                                                             final element = watch
@@ -780,7 +780,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                           0,
                                       //  watch.selectedProductList?.length ?? 0,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         final element = watch.allproducts
                                             ?.seasonalProducts?[index];
@@ -797,7 +797,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             .withOpacity(0.09),
                                                         blurRadius: 5,
                                                         offset:
-                                                            Offset(-.0, 5.0),
+                                                            const Offset(-.0, 5.0),
                                                         spreadRadius: 0),
                                                   ],
                                                   borderRadius:
@@ -812,14 +812,14 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         Colors.transparent),
                                                 child: ListTileTheme(
                                                   contentPadding:
-                                                      EdgeInsets.all(0),
+                                                      const EdgeInsets.all(0),
                                                   dense: true,
                                                   // horizontalTitleGap: 5.0,
                                                   // minLeadingWidth: 6,
                                                   child: ExpansionTile(
-                                                    trailing: SizedBox.shrink(),
+                                                    trailing: const SizedBox.shrink(),
 
-                                                    title: Container(
+                                                    title: SizedBox(
                                                       width: ScreenUtil()
                                                           .screenWidth,
                                                       child: Row(
@@ -847,7 +847,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       )
                                                                     : Image(
                                                                         image:
-                                                                            AssetImage(
+                                                                            const AssetImage(
                                                                           "assets/images/image_not_found.png",
                                                                         ),
                                                                         height:
@@ -860,7 +860,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 SizedBox(
                                                                   width: 8.w,
                                                                 ),
-                                                                Container(
+                                                                SizedBox(
                                                                   width: 150.w,
                                                                   child: Text(
                                                                     "${element?.productName}",
@@ -946,7 +946,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 child:
                                                                     Container(
                                                                   padding:
-                                                                      EdgeInsets
+                                                                      const EdgeInsets
                                                                           .all(
                                                                               6),
                                                                   decoration: BoxDecoration(
@@ -992,7 +992,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 child:
                                                                     Container(
                                                                   padding:
-                                                                      EdgeInsets
+                                                                      const EdgeInsets
                                                                           .all(
                                                                               6),
                                                                   decoration: BoxDecoration(
@@ -1035,7 +1035,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 right: 11.w),
                                                         child: Column(
                                                           children: [
-                                                            Divider(),
+                                                            const Divider(),
                                                             Row(
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
@@ -1118,7 +1118,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   0,
                                                               shrinkWrap: true,
                                                               physics:
-                                                                  NeverScrollableScrollPhysics(),
+                                                                  const NeverScrollableScrollPhysics(),
                                                               itemBuilder:
                                                                   (context,
                                                                       int) {
@@ -1258,7 +1258,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                           0,
                                       //  watch.selectedProductList?.length ?? 0,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
                                         final element = watch.allproducts
                                                 ?.fullfillYourCravingsProducts?[
@@ -1276,7 +1276,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                             .withOpacity(0.09),
                                                         blurRadius: 5,
                                                         offset:
-                                                            Offset(-.0, 5.0),
+                                                            const Offset(-.0, 5.0),
                                                         spreadRadius: 0),
                                                   ],
                                                   borderRadius:
@@ -1291,14 +1291,14 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                         Colors.transparent),
                                                 child: ListTileTheme(
                                                   contentPadding:
-                                                      EdgeInsets.all(0),
+                                                      const EdgeInsets.all(0),
                                                   dense: true,
                                                   // horizontalTitleGap: 5.0,
                                                   // minLeadingWidth: 6,
                                                   child: ExpansionTile(
-                                                    trailing: SizedBox.shrink(),
+                                                    trailing: const SizedBox.shrink(),
 
-                                                    title: Container(
+                                                    title: SizedBox(
                                                       width: ScreenUtil()
                                                           .screenWidth,
                                                       child: Row(
@@ -1326,7 +1326,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                       )
                                                                     : Image(
                                                                         image:
-                                                                            AssetImage(
+                                                                            const AssetImage(
                                                                           "assets/images/image_not_found.png",
                                                                         ),
                                                                         height:
@@ -1346,7 +1346,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 SizedBox(
                                                                   width: 8.w,
                                                                 ),
-                                                                Container(
+                                                                SizedBox(
                                                                   width: 150.w,
                                                                   child: Text(
                                                                     "${element?.productName}",
@@ -1432,7 +1432,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 child:
                                                                     Container(
                                                                   padding:
-                                                                      EdgeInsets
+                                                                      const EdgeInsets
                                                                           .all(
                                                                               6),
                                                                   decoration: BoxDecoration(
@@ -1478,7 +1478,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 child:
                                                                     Container(
                                                                   padding:
-                                                                      EdgeInsets
+                                                                      const EdgeInsets
                                                                           .all(
                                                                               6),
                                                                   decoration: BoxDecoration(
@@ -1521,7 +1521,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                 right: 11.w),
                                                         child: Column(
                                                           children: [
-                                                            Divider(),
+                                                            const Divider(),
                                                             Row(
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
@@ -1604,7 +1604,7 @@ class _ShopSeasonalRecommandedOfferProductsViewState
                                                                   0,
                                                               shrinkWrap: true,
                                                               physics:
-                                                                  NeverScrollableScrollPhysics(),
+                                                                  const NeverScrollableScrollPhysics(),
                                                               itemBuilder:
                                                                   (context,
                                                                       int) {

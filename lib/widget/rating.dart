@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-typedef void RatingChangeCallback(double rating);
+typedef RatingChangeCallback = void Function(double rating);
 
 class StarRating extends StatelessWidget {
   final int starCount;
@@ -10,7 +10,7 @@ class StarRating extends StatelessWidget {
   final RatingChangeCallback  onRatingChanged;
   final Color ? color;
 
-  StarRating({this.starCount = 5, this.rating = .0,required this.onRatingChanged, this.color});
+  const StarRating({super.key, this.starCount = 5, this.rating = .0,required this.onRatingChanged, this.color});
 
   Widget buildStar(BuildContext context, int index) {
     Widget icon;
@@ -34,7 +34,7 @@ class StarRating extends StatelessWidget {
             "assets/icons/order_rating.svg",color: Colors.yellow,),
       );
     }
-    return new InkResponse(
+    return InkResponse(
       onTap: onRatingChanged == null ? null : () {
         onRatingChanged(index + 1.0);
         },
@@ -44,6 +44,6 @@ class StarRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(children: new List.generate(starCount, (index) => buildStar(context, index)));
+    return Row(children: List.generate(starCount, (index) => buildStar(context, index)));
   }
 }

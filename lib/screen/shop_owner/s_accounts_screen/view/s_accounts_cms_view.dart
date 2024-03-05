@@ -6,17 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/about_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/faq_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/privacy_policy_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/terms_and_condition_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
 class SAccountCmsPagesView extends StatefulWidget {
@@ -38,7 +35,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
         child: PrimaryAppBar(
           title: "Accounts",
           onBackBtnPressed: () {
-    readMain.onNavigation(4, SAccountScreenView(
+    readMain.onNavigation(4, const SAccountScreenView(
                 refresh: false,
               ),context);
 
@@ -47,7 +44,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
       ),
       body: WillPopScope(
         onWillPop: ()async{
-          readMain.onNavigation(4, SAccountScreenView(
+          readMain.onNavigation(4, const SAccountScreenView(
             refresh: false,
           ),context);
           return false;
@@ -55,12 +52,12 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               GestureDetector(
                 onTap: () {
-    readMain.onNavigation(4, AboutScreenView(),context);
+    readMain.onNavigation(4, const AboutScreenView(),context);
     readMain.hideBottomNavigationBar();
 
                 },
@@ -77,7 +74,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(
@@ -106,7 +103,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,ShopFAQView(),context);
+                  readMain.onNavigation(4,const ShopFAQView(),context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => ShopFAQView()));
@@ -124,7 +121,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(
@@ -151,7 +148,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ///////////////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, PrivacyPolicyView(),context);
+                  readMain.onNavigation(4, const PrivacyPolicyView(),context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(
                   //     context,
@@ -171,7 +168,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(
@@ -195,7 +192,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, TermsAndConditionView(), context);
+                  readMain.onNavigation(4, const TermsAndConditionView(), context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(
                   //     context,
@@ -215,7 +212,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(
@@ -264,7 +261,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(
@@ -296,7 +293,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                 child: Container(
                   margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
                   padding: EdgeInsets.only(bottom: 15.w),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
 
                       // color: Colors.white,
                       ),
@@ -304,7 +301,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       SvgPicture.asset(

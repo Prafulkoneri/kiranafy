@@ -76,7 +76,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -276,7 +276,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                               Text(
                                 "Product Feature Image",
                                 style: TextStyle(
-                                    color: Color(0xff717171),
+                                    color: const Color(0xff717171),
                                     // letterSpacing: .5,
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w500),
@@ -298,9 +298,9 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                         onPressed: () {
                                           read.openCameras(context);
                                         },
-                                        child: Text("Camera"),
+                                        child: const Text("Camera"),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       ElevatedButton(
@@ -308,7 +308,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                           read.openGallery1(context);
                                           Navigator.pop(context);
                                         },
-                                        child: Text("Gallery "),
+                                        child: const Text("Gallery "),
                                       ),
                                     ],
                                   ),
@@ -344,7 +344,7 @@ class _SCustomProductViewState extends State<SCustomProductView> {
                                           Text(
                                             "Add Image",
                                             style: TextStyle(
-                                                color: Color(0xffB3B3B3),
+                                                color: const Color(0xffB3B3B3),
                                                 // letterSpacing: .5,
                                                 fontSize: 22.sp,
                                                 fontWeight: FontWeight.w400),

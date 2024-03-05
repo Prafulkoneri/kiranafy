@@ -373,7 +373,7 @@ class OrderSummaryController extends ChangeNotifier {
             selfPickupTotalAmount = (int.parse(totalAmount.toString()) -
                     int.parse(deliveryCharges.toString()))
                 .toString();
-            print("selfPickupTotalAmount${selfPickupTotalAmount}");
+            print("selfPickupTotalAmount$selfPickupTotalAmount");
             selfPickupDeliveryCharges = "0";
           } else {
             if (route != "orderSummary") {
@@ -403,7 +403,7 @@ class OrderSummaryController extends ChangeNotifier {
         if (cartItemList?.isEmpty == true) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(2, CartScreenView(), context);
+          read.onNavigation(2, const CartScreenView(), context);
           read.showBottomNavigationBar();
         }
         /////////////NEW//////////////////////
@@ -439,7 +439,7 @@ class OrderSummaryController extends ChangeNotifier {
           notifyListeners();
         }
         var currentHour = DateTime.now().hour;
-        print("currentHour${currentHour}");
+        print("currentHour$currentHour");
         if (route != "orderSummary") {
           for (int i = 0; i < deliverySlotLength; i++) {
             if (shopDeliverySlots?[i] == "shop_owner_slot_9_to_12") {
@@ -521,7 +521,7 @@ class OrderSummaryController extends ChangeNotifier {
   // }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {
@@ -938,7 +938,7 @@ class OrderSummaryController extends ChangeNotifier {
         print(currentHour);
         if (currentHour >= 12) {
           isExpectedDeliverySlotNotAvailable = true;
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
@@ -951,7 +951,7 @@ class OrderSummaryController extends ChangeNotifier {
       if (timeSlot == "shop_owner_slot_12_to_3") {
         if (currentHour >= 15) {
           isExpectedDeliverySlotNotAvailable = true;
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
@@ -964,7 +964,7 @@ class OrderSummaryController extends ChangeNotifier {
         print(currentHour);
         if (currentHour >= 18) {
           isExpectedDeliverySlotNotAvailable = true;
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });
@@ -975,7 +975,7 @@ class OrderSummaryController extends ChangeNotifier {
       if (timeSlot == "shop_owner_slot_6_to_9") {
         if (currentHour >= 21) {
           isExpectedDeliverySlotNotAvailable = true;
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             isExpectedDeliverySlotNotAvailable = false;
             notifyListeners();
           });

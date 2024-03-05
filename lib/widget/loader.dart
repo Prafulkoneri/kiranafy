@@ -11,7 +11,7 @@ class Loader extends StatefulWidget {
 class _LoaderState extends State<Loader> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }

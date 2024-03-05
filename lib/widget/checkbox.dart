@@ -52,12 +52,12 @@ class _PrimaryCheckBoxState extends State<PrimaryCheckBox> {
             height: widget.size ?? 18.w,
             width: widget.size ?? 18.w,
             decoration: BoxDecoration(
-                color: widget.value ?? false ? Color(0xff39C19D) : Colors.white,
+                color: widget.value ?? false ? const Color(0xff39C19D) : Colors.white,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
                     color: widget.value ?? false
                         ? Colors.transparent
-                        : Color(0xffB9B9B9))),
+                        : const Color(0xffB9B9B9))),
             child: Center(
               child: widget.value ?? false
                   ? SvgPicture.asset(
@@ -74,7 +74,7 @@ class _PrimaryCheckBoxState extends State<PrimaryCheckBox> {
           widget.textValue ?? "",
           style: widget.textStyle ??
               TextStyle(
-                  color: Color(0xff3A3A3A),
+                  color: const Color(0xff3A3A3A),
                   fontWeight: FontWeight.w400,
                   fontSize: 13.sp),
         ),
@@ -146,12 +146,12 @@ class _SeconderyCheckBoxState extends State<SeconderyCheckBox> {
             height: widget.size ?? 18.w,
             width: widget.size ?? 18.w,
             decoration: BoxDecoration(
-                color: widget.value ?? false ? Color(0xff4689EC) : Colors.white,
+                color: widget.value ?? false ? const Color(0xff4689EC) : Colors.white,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
                     color: widget.value ?? false
                         ? Colors.transparent
-                        : Color(0xffB9B9B9))),
+                        : const Color(0xffB9B9B9))),
             child: Center(
               child: widget.value ?? false
                   ? SvgPicture.asset(
@@ -168,7 +168,7 @@ class _SeconderyCheckBoxState extends State<SeconderyCheckBox> {
           widget.textValue ?? "",
           style: widget.textStyle ??
               TextStyle(
-                  color: Color(0xff3A3A3A),
+                  color: const Color(0xff3A3A3A),
                   fontWeight: FontWeight.w400,
                   fontSize: 13.sp),
         ),

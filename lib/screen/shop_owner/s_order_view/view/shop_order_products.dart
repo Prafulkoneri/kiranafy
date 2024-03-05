@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_order_view/controller/shop_owner_order_view_controller.dart';
 import 'package:local_supper_market/widget/checkbox.dart';
@@ -28,7 +27,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
       child: ListView.builder(
           padding: EdgeInsets.zero,
           // scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           // physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: watch.orderProductDetails?.length ?? 0,
@@ -38,12 +37,12 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
               children: [
                 watch.orderDetails?.orderStatus == "Pending" ||
                         watch.orderDetails?.orderStatus == "Confirmed"
-                    ? Container(
+                    ? SizedBox(
                         width: ScreenUtil().screenWidth,
                         child: Row(
                           children: [
                             element?.productImagePath == ""
-                                ? Container(
+                                ? SizedBox(
                                     height: 89.w,
                                     width: 89.w,
                                     child: Image.asset(
@@ -51,7 +50,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                       fit: BoxFit.cover,
                                     ),
                                   )
-                                : Container(
+                                : SizedBox(
                                     height: 89.w,
                                     width: 89.w,
                                     child: AppNetworkImages(
@@ -112,7 +111,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                             FontWeight.w700,
                                                         fontSize: 13.sp,
                                                         color:
-                                                            Color(0xffFF0000)),
+                                                            const Color(0xffFF0000)),
                                                   ),
                                                 )
                                               : Container(),
@@ -235,12 +234,12 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                     : watch.orderDetails?.orderStatus != "Pending" &&
                             watch.orderDetails?.orderStatus != "Confirmed" &&
                             element?.status == "active"
-                        ? Container(
+                        ? SizedBox(
                             width: ScreenUtil().screenWidth,
                             child: Row(
                               children: [
                                 element?.productImagePath == ""
-                                    ? Container(
+                                    ? SizedBox(
                                         height: 89.w,
                                         width: 89.w,
                                         child: Image.asset(
@@ -248,7 +247,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                           fit: BoxFit.cover,
                                         ),
                                       )
-                                    : Container(
+                                    : SizedBox(
                                         height: 89.w,
                                         width: 89.w,
                                         child: AppNetworkImages(
@@ -314,7 +313,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                             fontSize: 13.sp,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xffFF0000)),
                                                       ),
                                                     )
@@ -443,7 +442,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                             ),
                           )
                         : ColorFiltered(
-                            colorFilter: ColorFilter.mode(
+                            colorFilter: const ColorFilter.mode(
                               Colors.grey,
                               BlendMode.saturation,
                             ),
@@ -458,7 +457,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                               child: Row(
                                 children: [
                                   element?.productImagePath == ""
-                                      ? Container(
+                                      ? SizedBox(
                                           height: 89.w,
                                           width: 89.w,
                                           child: Image.asset(
@@ -466,7 +465,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                             fit: BoxFit.cover,
                                           ),
                                         )
-                                      : Container(
+                                      : SizedBox(
                                           height: 89.w,
                                           width: 89.w,
                                           child: AppNetworkImages(
@@ -534,7 +533,7 @@ class _ShopOrderProductsState extends State<ShopOrderProducts> {
                                                             fontWeight:
                                                                 FontWeight.w700,
                                                             fontSize: 13.sp,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xffFF0000),
                                                             decoration:
                                                                 TextDecoration

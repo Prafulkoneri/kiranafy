@@ -49,7 +49,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
     final read = context.read<SShopConfigurationController>();
     final readMainScreen = context.read<SMainScreenController>();
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
@@ -59,7 +59,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
             widget.initialShopConfigration == false
                 ? readMainScreen.onNavigation(
                     4,
-                    SAccountScreenView(
+                    const SAccountScreenView(
                       refresh: false,
                     ),
                     context)
@@ -90,7 +90,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 widget.initialShopConfigration == false
                     ? readMainScreen.onNavigation(
                         4,
-                        SAccountScreenView(
+                        const SAccountScreenView(
                           refresh: false,
                         ),
                         context)
@@ -108,7 +108,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
                   child: Column(
@@ -127,7 +127,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: (Color(0xffEFEFEF)))),
+                            border: Border.all(color: (const Color(0xffEFEFEF)))),
                         width: ScreenUtil().screenWidth,
                         child: Center(
                           child: Column(
@@ -166,7 +166,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                               fit: BoxFit.contain,
                                             ),
                                           )
-                                        : Container(
+                                        : SizedBox(
                                             height: 142.h,
                                             child: Column(
                                               // crossAxisAlignment:
@@ -185,7 +185,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontSize: 14.sp,
-                                                      color: Color(0xffB7B7B7)),
+                                                      color: const Color(0xffB7B7B7)),
                                                 ),
                                               ],
                                             ),
@@ -212,7 +212,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
-                            color: Color(0xff3A3A3A)),
+                            color: const Color(0xff3A3A3A)),
                       ),
                       SizedBox(
                         height: 13.w,
@@ -265,7 +265,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 14.sp,
-                              color: Color(0xff3A3A3A)),
+                              color: const Color(0xff3A3A3A)),
                         ),
                       ),
                       SizedBox(
@@ -294,14 +294,14 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                   value: watch.openingAmPm,
                                   iconPadding: EdgeInsets.only(right: 6.w),
                                   height: 44.w,
-                                  items: [
+                                  items: const [
                                     DropdownMenuItem(
-                                      child: Text("AM"),
                                       value: "am",
+                                      child: Text("AM"),
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("PM"),
                                       value: "pm",
+                                      child: Text("PM"),
                                     )
                                   ]),
                             ),
@@ -329,14 +329,14 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                   value: watch.closingAmPm,
                                   iconPadding: EdgeInsets.only(right: 6.w),
                                   height: 44.w,
-                                  items: [
+                                  items: const [
                                     DropdownMenuItem(
-                                      child: Text("AM"),
                                       value: "am",
+                                      child: Text("AM"),
                                     ),
                                     DropdownMenuItem(
-                                      child: Text("PM"),
                                       value: "pm",
+                                      child: Text("PM"),
                                     )
                                   ]),
                             ),
@@ -527,7 +527,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                                 SizedBox(
@@ -539,7 +539,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                               ],
@@ -584,7 +584,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                                 SizedBox(
@@ -596,7 +596,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                               ],
@@ -640,7 +640,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                                 SizedBox(
@@ -652,7 +652,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                               ],
@@ -696,7 +696,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                                 SizedBox(
@@ -708,7 +708,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 14.sp,
-                                        color: Color(0xff3A3A3A)),
+                                        color: const Color(0xff3A3A3A)),
                                   ),
                                 ),
                               ],
@@ -773,7 +773,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 15.sp,
-                                color: Color(0xff3A3A3A)),
+                                color: const Color(0xff3A3A3A)),
                           ),
                           GestureDetector(
                               onTap: () {
@@ -783,7 +783,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                                   builder: (context) {
                                     return StatefulBuilder(
                                       builder: (context, setState) {
-                                        return ShopDeliveryAreaDialogView();
+                                        return const ShopDeliveryAreaDialogView();
                                       },
                                     );
                                   },
@@ -814,7 +814,7 @@ class _SShopConfigurationViewState extends State<SShopConfigurationView> {
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16.sp,
-                            color: Color(0xff3A3A3A)),
+                            color: const Color(0xff3A3A3A)),
                       ),
                       SizedBox(
                         height: 15.w,

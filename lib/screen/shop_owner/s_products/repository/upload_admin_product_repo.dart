@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_add_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_admin_product_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
 
 class UploadAdminProductRepo {
   Future<http.Response> uploadAdminProduct(

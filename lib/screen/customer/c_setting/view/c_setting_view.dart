@@ -20,6 +20,7 @@ class CustomerSetting extends StatefulWidget {
 }
 
 class _CustomerSettingState extends State<CustomerSetting> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<CustomerSettingController>().initState(context);
@@ -40,7 +41,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                   // refresh: false,
                 ),
@@ -63,7 +64,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
         onWillPop: () async {
           readMain.onNavigation(
               4,
-              ProfileScreenView(
+              const ProfileScreenView(
                 isRefreshed: false,
                 // refresh: false,
               ),
@@ -79,7 +80,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SettingScreen(text: "App Notification"),
+                  const SettingScreen(text: "App Notification"),
                   CupertinoSwitch(
                     // This bool value toggles the switch.
                     value: watch.isAppNotificationEnable,
@@ -92,7 +93,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                   ),
                 ],
               ),
-              ShopAddress(
+              const ShopAddress(
                   text: "Enable or disable the notifications coming up."),
               SizedBox(
                 height: 41.h,
@@ -103,7 +104,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SettingScreen(text: "Delete Account"),
+                    const SettingScreen(text: "Delete Account"),
                     GestureDetector(
                       onTap: () {
                         // read.shopAccountDelete(context);
@@ -111,14 +112,14 @@ class _CustomerSettingState extends State<CustomerSetting> {
                             context: context,
                             builder: (BuildContext context) {
                               return Dialog(
-                                backgroundColor: Color(0xffFFFFFF),
+                                backgroundColor: const Color(0xffFFFFFF),
                                 // shape: ,
-                                shape: RoundedRectangleBorder(
+                                shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
 
                                 // scrollable: true,
-                                child: Container(
+                                child: SizedBox(
                                   height: 205.h,
                                   // width: 400.w,
                                   child: Column(
@@ -130,7 +131,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
-                                                color: Color(0xff006F94),
+                                                color: const Color(0xff006F94),
                                                 fontSize: 20.sp,
                                                 fontWeight: FontWeight.w700),
                                           ),
@@ -160,7 +161,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                                     top: 9.w,
                                                     bottom: 9.w),
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xff39C19D),
+                                                    color: const Color(0xff39C19D),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8)),
@@ -194,7 +195,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
                                                     top: 9.w,
                                                     bottom: 9.w),
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xffEC7074),
+                                                    color: const Color(0xffEC7074),
                                                     // border: Border.all(width: 1, color: Black),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -243,7 +244,7 @@ class _CustomerSettingState extends State<CustomerSetting> {
               SizedBox(
                 height: 31.h,
               ),
-              Divider(
+              const Divider(
                 thickness: 1,
                 color: Color(0xffE0E0E0),
               ),

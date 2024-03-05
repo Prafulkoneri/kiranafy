@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 // import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +30,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'dart:js' as js;
 
-import 'package:url_launcher/url_launcher_string.dart';
-
 class HomeScreenView extends StatefulWidget {
   final bool? refreshPage;
+
   final String? productId;
   const HomeScreenView({super.key, required this.refreshPage, this.productId});
 
@@ -123,7 +121,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
 
     return Scaffold(
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 SystemNavigator.pop();
@@ -135,7 +133,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
               child: RefreshIndicator(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.zero,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -158,28 +156,17 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             onTap: () {
                               readMain.onNavigation(
                                   1,
-                                  AllNearShopsView(
+                                  const AllNearShopsView(
                                     isSearchFocus: true,
                                     refreshPage: true,
                                   ),
                                   context);
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => MainScreenView(
-                              //           index: 1,
-                              //           screenName: AllNearShopsView(
-                              //             isSearchFocus: true,
-                              //             refreshPage: true,
-                              //           ))),
-                              //   (Route<dynamic> route) => false,
-                              // );
                             },
                             readOnly: true,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: splashnone),
+                                  borderSide: const BorderSide(
+                                      width: 1, color: splashnone),
                                   borderRadius: BorderRadius.circular(8.w)),
                               hintText: 'Search your shops...',
                               hintStyle: GoogleFonts.dmSans(
@@ -216,7 +203,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                               padding: EdgeInsets.only(left: 19.w),
                               child: PageView.builder(
                                   itemCount: watch.bannerData?.length ?? 0,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   padEnds: false,
                                   pageSnapping: true,
                                   scrollDirection: Axis.horizontal,
@@ -322,7 +309,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      HomeSideHeading(
+                                      const HomeSideHeading(
                                         text: 'Nearby Shops',
                                       ),
                                       // Text(
@@ -338,7 +325,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                         onTap: () {
                                           readMain.onNavigation(
                                               1,
-                                              AllNearShopsView(
+                                              const AllNearShopsView(
                                                 isSearchFocus: false,
                                                 refreshPage: true,
                                               ),
@@ -375,7 +362,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                   height: 15.h,
                                 ),
                                 //
-                                HomeCarousal(),
+                                const HomeCarousal(),
                                 SizedBox(
                                   height: 30.h,
                                 ),
@@ -388,7 +375,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 right: 19.0.w,
                                 left: 19.0.w,
                               ),
-                              child: HomeSideHeading(
+                              child: const HomeSideHeading(
                                 text: 'Shop By Category',
                               ),
                             )
@@ -399,13 +386,13 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             )
                           : Container(),
                       watch.categoryFirstList.isNotEmpty
-                          ? ShopCategory()
+                          ? const ShopCategory()
                           : Container(),
                       // SizedBox(
                       //   height: 20.h,
                       // ),
                       watch.couponData?.isNotEmpty == true
-                          ? CouponsScreen()
+                          ? const CouponsScreen()
                           : Container(
                               // height: 100,
                               // width: 500,
@@ -415,7 +402,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       // watch.hellotoffersdata?.isNotEmpty == true
                       //     ?
                       watch.hellotoffersdata?.isNotEmpty == true
-                          ? OfferPage()
+                          ? const OfferPage()
                           : Container(
                               // height: 100,
                               // width: 500,
@@ -501,7 +488,9 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                                 return;
                               }
                               readMain.onNavigation(
-                                  0, CustomerAdsView(route: "home"), context);
+                                  0,
+                                  const CustomerAdsView(route: "home"),
+                                  context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -513,7 +502,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Color(0xff39C19D),
+                                  color: const Color(0xff39C19D),
                                   borderRadius: BorderRadius.circular(7.w)),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 14.w, vertical: 2.w),
@@ -537,7 +526,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                   ),
                 ),
                 onRefresh: () {
-                  return Future.delayed(Duration(seconds: 1), () {
+                  return Future.delayed(const Duration(seconds: 1), () {
                     watch.initState(context, true);
                   });
                 },

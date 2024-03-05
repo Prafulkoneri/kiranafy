@@ -53,11 +53,11 @@ class _MyVoucherDetailViewState extends State<MyVoucherDetailView> {
           // height: MediaQuery.of(context).size.height * 0.50,
           height: 300.h,
           width: 390.w,
-          decoration: new BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(25.0),
-              topRight: const Radius.circular(25.0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.0),
+              topRight: Radius.circular(25.0),
             ),
           ),
           child: Column(
@@ -168,7 +168,7 @@ class _MyVoucherDetailViewState extends State<MyVoucherDetailView> {
                           width: 17.w,
                           height: 17.h,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 6.27,
                         ),
                         Flexible(
@@ -194,7 +194,7 @@ class _MyVoucherDetailViewState extends State<MyVoucherDetailView> {
               child: Container(
                 height: 50.w,
                 width: 50.w,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.black,
                 ),
@@ -220,6 +220,7 @@ class _MyVoucherDetailViewState extends State<MyVoucherDetailView> {
               color: Colors.green,
               width: ScreenUtil().screenWidth,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Text(
@@ -245,7 +246,6 @@ class _MyVoucherDetailViewState extends State<MyVoucherDetailView> {
                     ],
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
             ),
           ),

@@ -15,15 +15,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_custom_products_model.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -458,8 +455,8 @@ class EditCustomProductController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.updateEditCustomProduct}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.updateEditCustomProduct);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['product_id'] = productId;
     request.fields['show_under_fullfill_your_cravings'] =
@@ -484,16 +481,16 @@ class EditCustomProductController extends ChangeNotifier {
 
     File imageFile = productImage;
     var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile(
+    var multipartFile = http.MultipartFile(
         "product_image_path", stream, length,
         filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
     await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
-      print("respStr${respStr}");
+      print("respStr$respStr");
       var res = jsonDecode(respStr);
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
@@ -505,7 +502,7 @@ class EditCustomProductController extends ChangeNotifier {
         if (res["status"] == 200) {
           if (isNavFromAccount) {
             final read=Provider.of<SMainScreenController>(context,listen: false);
-            read.onNavigation(0,ShopSeasonalRecommandedOfferProductsView(
+            read.onNavigation(0,const ShopSeasonalRecommandedOfferProductsView(
               selectedProduct: "recommended",
               isRefresh: true,
             ), context);

@@ -79,7 +79,7 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -99,12 +99,12 @@ class _SEditProfileViewState extends State<SEditProfileView> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: ScreenUtil().screenWidth,
                       height: 70.h,
                       child: ListView(
                         shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         children: [
                           Row(

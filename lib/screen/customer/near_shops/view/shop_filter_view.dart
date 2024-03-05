@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/customer/my_order/controller/my_orders_controller.dart';
 import 'package:local_supper_market/screen/customer/near_shops/controller/all_shop_controller.dart';
 import 'package:local_supper_market/widget/dropdown_field.dart';
 import 'package:local_supper_market/widget/stack_Loader.dart';
@@ -165,7 +164,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 4.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -184,7 +183,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -203,7 +202,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -222,7 +221,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -241,7 +240,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -282,7 +281,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 4.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -301,7 +300,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -320,7 +319,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -339,7 +338,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color:Color(0xffFFC000),
                                       )
@@ -358,7 +357,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -389,7 +388,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
+                      backgroundColor: Colors.red,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,
@@ -424,7 +423,7 @@ class _ShopFilterViewState extends State<ShopFilterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Button,
+                      backgroundColor: Button,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,

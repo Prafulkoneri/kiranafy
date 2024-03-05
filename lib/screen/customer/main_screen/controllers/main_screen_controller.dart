@@ -14,6 +14,7 @@ import 'package:local_supper_market/screen/customer/home/controller/home_screen_
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/model/set_pincode_model.dart';
 import 'package:local_supper_market/screen/customer/main_screen/repository/set_pincode_repo.dart';
+import 'package:local_supper_market/screen/customer/my_vouchers/view/my_vouchers_view.dart';
 import 'package:local_supper_market/screen/customer/notifications/view/notification_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/utils/maps/view/map_view.dart';
@@ -30,7 +31,7 @@ class MainScreenController extends ChangeNotifier {
   bool stackLoaderVisible = false;
   SetPincodeRepo setPincodeRepo = SetPincodeRepo();
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreenView(
+  Widget currentScreen = const HomeScreenView(
     refreshPage: false,
   );
   bool isLocationServiceEnabled = false;
@@ -39,7 +40,7 @@ class MainScreenController extends ChangeNotifier {
   String lng = "";
   String message = "";
   bool isFirstLoad = true;
-  LatLng defaultLatLng = LatLng(18.5679, 73.9143);
+  LatLng defaultLatLng = const LatLng(18.5679, 73.9143);
   String cityName = "";
   String areaName = "";
   bool locationNotFound = false;
@@ -82,7 +83,7 @@ class MainScreenController extends ChangeNotifier {
   onSignOut() {
     currentTab = 0;
     isFirstLoad = true;
-    currentScreen = HomeScreenView(refreshPage: false);
+    currentScreen = const HomeScreenView(refreshPage: false);
     // notifyListeners();
   }
 
@@ -140,7 +141,7 @@ class MainScreenController extends ChangeNotifier {
 
   void onHomeScreenPressed() {
     currentTab = 0;
-    currentScreen = HomeScreenView(
+    currentScreen = const HomeScreenView(
       refreshPage: false,
     );
     notifyListeners();
@@ -161,9 +162,22 @@ class MainScreenController extends ChangeNotifier {
     notifyListeners();
   }
 
+/////////////
+  onCustomVoucherTypeNotification(context) {
+    print("hello");
+    currentScreen = const MyVouchersView(
+        // isRefresh: true,
+        // route: "main",
+        );
+    hideBottomNavigation = true;
+    notifyListeners();
+  }
+
+////////////
+
   onCustomTypeNotification(context) {
     print("hello");
-    currentScreen = CustomerNotificationsScreenView(
+    currentScreen = const CustomerNotificationsScreenView(
       isRefresh: true,
       route: "main",
     );
@@ -183,7 +197,7 @@ class MainScreenController extends ChangeNotifier {
 
   void onShopPressed() {
     currentTab = 1;
-    currentScreen = AllNearShopsView(
+    currentScreen = const AllNearShopsView(
       refreshPage: true,
       isSearchFocus: false,
     );
@@ -192,20 +206,20 @@ class MainScreenController extends ChangeNotifier {
 
   void onMyCartPressed() {
     currentTab = 2;
-    currentScreen = CartScreenView();
+    currentScreen = const CartScreenView();
     // getCartCount(newBudget);
     notifyListeners();
   }
 
   void onOfferPressed() {
     currentTab = 3;
-    currentScreen = AllCoupons();
+    currentScreen = const AllCoupons();
     notifyListeners();
   }
 
   void onAccountPressed() {
     currentTab = 4;
-    currentScreen = ProfileScreenView(
+    currentScreen = const ProfileScreenView(
       isRefreshed: true,
     );
     notifyListeners();
@@ -254,7 +268,7 @@ class MainScreenController extends ChangeNotifier {
           locationErrorMessage = result.message ?? "";
           locationNotFound = true;
           notifyListeners();
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             print("duration");
             locationNotFound = false;
             notifyListeners();
@@ -286,7 +300,7 @@ class MainScreenController extends ChangeNotifier {
       locationErrorMessage = "Select another location to continue";
       locationNotFound = true;
       notifyListeners();
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         locationNotFound = false;
         notifyListeners();
       });

@@ -10,7 +10,7 @@ import 'package:local_supper_market/widget/textfield.dart';
 import 'package:provider/provider.dart';
 
 class SKycVerificationView extends StatefulWidget {
-  SKycVerificationView({super.key});
+  const SKycVerificationView({super.key});
 
   @override
   @override
@@ -75,10 +75,11 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Row(children: [
+                        Row(
+                          children: [
                           Expanded(
                             child: GestureDetector(
                               onTap: () async {
@@ -573,7 +574,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
-                              color: Color(0xff8C8C8C)),
+                              color: const Color(0xff8C8C8C)),
                         ),
                         SizedBox(
                           height: 20.w,
@@ -585,7 +586,7 @@ class _SKycVerificationViewState extends State<SKycVerificationView> {
                               // width: 45.w,
                               // fontSize: 20.sp,
                               text: "Upload Documents",
-                              color: Color(0xff4689EC),
+                              color: const Color(0xff4689EC),
                               onTap: () {
                                 read.onUploadClicked(context);
                               }),

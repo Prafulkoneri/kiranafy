@@ -12,14 +12,12 @@ import 'package:local_supper_market/screen/customer/favourites/view/favourites_v
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/review/view/c_review_view.dart';
 
-import 'package:local_supper_market/screen/customer/home/view/coupons.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/shop_profile_controller.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/view_all_recommanded_products.dart';
 import 'package:local_supper_market/utils/header.dart';
@@ -72,7 +70,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     final readProductViewController = context.read<ProductViewController>();
     return Scaffold(
       body: watch.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : WillPopScope(
@@ -84,7 +82,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 if (widget.routeName == "allNearShopView") {
                   readMain.onNavigation(
                       1,
-                      AllNearShopsView(
+                      const AllNearShopsView(
                         isSearchFocus: false,
                         refreshPage: true,
                       ),
@@ -100,16 +98,16 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 } else if (widget.routeName == "homeNearbyShop") {
                   readMain.onNavigation(
                       0,
-                      HomeScreenView(
+                      const HomeScreenView(
                         refreshPage: false,
                       ),
                       context);
                 } else if (widget.routeName == "favouriteView") {
                   readMain.onNavigation(
-                      4, CFavouritesView(selectedIndex: 0), context);
+                      4, const CFavouritesView(selectedIndex: 0), context);
                 } else {
                   readMain.onNavigation(
-                      0, HomeScreenView(refreshPage: false), context);
+                      0, const HomeScreenView(refreshPage: false), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -121,7 +119,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -136,7 +134,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                         children: [
                           Align(
                             child: watch.bannerImageData?.isEmpty == true
-                                ? Container(
+                                ? SizedBox(
                                     height: 188.w,
                                     child: Image.asset(
                                       "assets/images/nearshop2.png",
@@ -147,7 +145,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                     height: 190.0.h,
                                     child: PageView.builder(
                                         allowImplicitScrolling: true,
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics: const NeverScrollableScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         controller: watch.pageController,
                                         onPageChanged: (index) {},
@@ -160,7 +158,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               element?.imagesPath == ""
-                                                  ? Container(
+                                                  ? SizedBox(
                                                       height: 190.w,
                                                       width: ScreenUtil()
                                                           .screenWidth,
@@ -169,15 +167,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                         height: 191.w,
                                                         fit: BoxFit.cover,
                                                       ))
-                                                  : Container(
+                                                  : SizedBox(
                                                       height: 180.w,
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
                                                       child: AppNetworkImages(
                                                           imageUrl: element
                                                                   ?.imagesPath ??
                                                               "",
                                                           fit: BoxFit.cover),
-                                                      width: ScreenUtil()
-                                                          .screenWidth,
                                                     ),
                                             ],
                                           );
@@ -196,7 +194,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              stops: [
+                              stops: const [
                                 0.1,
                                 0.9,
                               ],
@@ -265,7 +263,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           vertical: 5.w, horizontal: 10.w),
                                       decoration: BoxDecoration(
                                         color: yellow,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(15)),
                                       ),
                                       child: Row(
@@ -338,7 +336,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 SizedBox(
                                   width: 8.w,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 200.w,
                                   child: Text(
                                     "${watch.shopDetails?.shopAddress}\n${watch.shopDetails?.cityName} - ${watch.shopDetails?.shopPincode}",
@@ -434,7 +432,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border:
-                                Border.all(color: Color(0xffDDDDDD), width: 1),
+                                Border.all(color: const Color(0xffDDDDDD), width: 1),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -453,7 +451,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         "Shop Closed",
                                         style: GoogleFonts.roboto(
                                           textStyle: TextStyle(
-                                              color: Color(0xffFE5656),
+                                              color: const Color(0xffFE5656),
                                               // letterSpacing: .3,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w600),
@@ -464,7 +462,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                       children: [
                                         SvgPicture.asset(
                                           "assets/icons/ok.svg",
-                                          color: Color(0xff02BC7D),
+                                          color: const Color(0xff02BC7D),
                                           width: 26.w,
                                           height: 14.h,
                                         ),
@@ -475,7 +473,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           "Shop Open Now",
                                           style: GoogleFonts.roboto(
                                             textStyle: TextStyle(
-                                                color: Color(0xff02BC7D),
+                                                color: const Color(0xff02BC7D),
                                                 // letterSpacing: .3,
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w600),
@@ -498,7 +496,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                     "${watch.shopDetails?.shopOwnerShopOpeningTime} - ${watch.shopDetails?.shopOwnerShopCloseTime}",
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
-                                          color: Color(0xff3A3A3A),
+                                          color: const Color(0xff3A3A3A),
                                           // letterSpacing: .3,
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w600),
@@ -520,7 +518,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border:
-                                Border.all(color: Color(0xffDDDDDD), width: 1),
+                                Border.all(color: const Color(0xffDDDDDD), width: 1),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -539,7 +537,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                         "Delivery to this area is not available",
                                         style: GoogleFonts.roboto(
                                           textStyle: TextStyle(
-                                              color: Color(0xffFE5656),
+                                              color: const Color(0xffFE5656),
                                               // letterSpacing: .3,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w600),
@@ -550,7 +548,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                       children: [
                                         SvgPicture.asset(
                                           "assets/icons/ok.svg",
-                                          color: Color(0xff02BC7D),
+                                          color: const Color(0xff02BC7D),
                                           width: 26.w,
                                           height: 14.h,
                                         ),
@@ -561,7 +559,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           "Delivery to this area is available",
                                           style: GoogleFonts.roboto(
                                             textStyle: TextStyle(
-                                                color: Color(0xff02BC7D),
+                                                color: const Color(0xff02BC7D),
                                                 // letterSpacing: .3,
                                                 fontSize: 14.sp,
                                                 fontWeight: FontWeight.w600),
@@ -657,7 +655,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       SizedBox(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: List.generate(
@@ -746,7 +744,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                 0.03.w),
                                                         blurRadius: 5,
                                                         spreadRadius: 0,
-                                                        offset: Offset(0, 3)),
+                                                        offset: const Offset(0, 3)),
                                                   ],
                                                 ),
                                                 child: Card(
@@ -810,7 +808,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           children: [
                                                             element?.productImagePath ==
                                                                     ""
-                                                                ? Container(
+                                                                ? SizedBox(
                                                                     height:
                                                                         89.w,
                                                                     width: 89.w,
@@ -821,7 +819,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                           .cover,
                                                                     ),
                                                                   )
-                                                                : Container(
+                                                                : SizedBox(
                                                                     height:
                                                                         89.w,
                                                                     width: 89.w,
@@ -906,7 +904,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                             textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
                                                                                 ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)
                                                                                 : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
-                                                                    : Text(""),
+                                                                    : const Text(""),
                                                                 SizedBox(
                                                                   width: 5.w,
                                                                 ),
@@ -927,7 +925,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               fontWeight: FontWeight.w500),
                                                                         ),
                                                                       )
-                                                                    : Text(""),
+                                                                    : const Text(""),
                                                               ],
                                                             ),
                                                           ],
@@ -1165,7 +1163,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             ? SizedBox(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: List.generate(
@@ -1247,7 +1245,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                             blurRadius: 5,
                                                             spreadRadius: 0,
                                                             offset:
-                                                                Offset(0, 3)),
+                                                                const Offset(0, 3)),
                                                       ],
                                                     ),
                                                     child: Card(
@@ -1312,7 +1310,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                               children: [
                                                                 element?.productImagePath ==
                                                                         ""
-                                                                    ? Container(
+                                                                    ? SizedBox(
                                                                         height:
                                                                             89.w,
                                                                         width:
@@ -1324,7 +1322,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               .cover,
                                                                         ),
                                                                       )
-                                                                    : Container(
+                                                                    : SizedBox(
                                                                         height:
                                                                             89.w,
                                                                         width:
@@ -1396,7 +1394,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                             '\u{20B9}${element?.mrpPrice}',
                                                                             style:
                                                                                 GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400)))
-                                                                        : Text(""),
+                                                                        : const Text(""),
                                                                     SizedBox(
                                                                       width:
                                                                           5.w,
@@ -1418,7 +1416,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                                   fontWeight: FontWeight.w500),
                                                                             ),
                                                                           )
-                                                                        : Text(""),
+                                                                        : const Text(""),
                                                                   ],
                                                                 ),
                                                               ],
@@ -1713,7 +1711,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       ),
                       SizedBox(
                         child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.horizontal,
                           child: Column(
@@ -1724,7 +1722,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                 child: ListView.builder(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.horizontal,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: watch.shopCategory?.length ?? 0,
                                   itemBuilder: (BuildContext, index) {
@@ -1759,6 +1757,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Container(
                                                 margin: EdgeInsets.only(
@@ -1773,7 +1773,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 decoration: BoxDecoration(
                                                     color: CategoryOne,
                                                     borderRadius:
-                                                        BorderRadius.all(
+                                                        const BorderRadius.all(
                                                             Radius.circular(
                                                                 10))),
                                                 height: 50.h,
@@ -1815,8 +1815,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                 ),
                                               ),
                                             ],
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
                                           ),
                                           // SizedBox(
                                           //   width: 10.w,
@@ -1910,7 +1908,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               // width: 100,
                               ),
                       watch.recommandedProduct?.isNotEmpty ?? false
-                          ? Container(
+                          ? SizedBox(
                               width: 352.w,
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
@@ -1981,7 +1979,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                           padding: EdgeInsets.zero,
                                           scrollDirection: Axis.vertical,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: watch
                                                   .recommandedProduct?.length ??
@@ -2027,7 +2025,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                               .5,
                                                                           fontSize: 12.sp,
                                                                           fontWeight: FontWeight.w400)))
-                                                          : Text(""),
+                                                          : const Text(""),
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(
@@ -2050,7 +2048,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                     fontWeight: FontWeight.w500),
                                                               ),
                                                             )
-                                                          : Text(""),
+                                                          : const Text(""),
                                                     ),
                                                   ],
                                                 ),
@@ -2299,6 +2297,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                                   Radius
                                                                       .circular(
                                                                           10))),
+                                                      margin: EdgeInsets.only(
+                                                          bottom: index == 2
+                                                              ? 5
+                                                              : 10.h),
                                                       child: Row(
                                                         children: [
                                                           Padding(
@@ -2411,10 +2413,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                                           ),
                                                         ],
                                                       ),
-                                                      margin: EdgeInsets.only(
-                                                          bottom: index == 2
-                                                              ? 5
-                                                              : 10.h),
                                                     ),
                                                   );
                                           }
@@ -2505,7 +2503,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               }
                               readMain.onNavigation(
                                   1,
-                                  CustomerAdsView(route: "shopProfile"),
+                                  const CustomerAdsView(route: "shopProfile"),
                                   context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
@@ -2518,7 +2516,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Color(0xff39C19D),
+                                  color: const Color(0xff39C19D),
                                   borderRadius: BorderRadius.circular(7.w)),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 14.w, vertical: 2.w),

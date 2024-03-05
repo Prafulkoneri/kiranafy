@@ -300,7 +300,7 @@ class FireBaseApi {
   Future<void> initNotification() async {
     await firebasemessaging.requestPermission();
     fcmToken = await firebasemessaging.getToken();
-    log("Token : ${fcmToken}");
+    log("Token : $fcmToken");
     initPushNotification();
     initLocalNotifications();
     // initPushNotifications();

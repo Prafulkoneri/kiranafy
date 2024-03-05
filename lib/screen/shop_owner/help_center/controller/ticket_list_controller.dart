@@ -50,7 +50,7 @@ class SGetTicketListController extends ChangeNotifier {
         context: context,
         builder: (context) {
           // using a scaffold helps to more easily position the FAB
-          return SRaiseTicketView();
+          return const SRaiseTicketView();
         });
     notifyListeners();
   }
@@ -138,7 +138,7 @@ class SGetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Select Ticket Type";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });
@@ -149,7 +149,7 @@ class SGetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Enter Subject";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });
@@ -159,7 +159,7 @@ class SGetTicketListController extends ChangeNotifier {
       isTickedError = true;
       errorMsgForRaiseTicket = "Enter Description";
       notifyListeners();
-      Timer(Duration(seconds: 3), () async {
+      Timer(const Duration(seconds: 3), () async {
         isTickedError = false;
         notifyListeners();
       });

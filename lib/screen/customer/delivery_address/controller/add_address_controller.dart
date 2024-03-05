@@ -134,7 +134,7 @@ class AddAddressController extends ChangeNotifier {
     print(pageRoute);
     print("shopidddddddddddddd");
     if (pageRoute == "addressView") {
-      read.onNavigation(4, MyDeliveryAddressView(isRefresh: false), context);
+      read.onNavigation(4, const MyDeliveryAddressView(isRefresh: false), context);
     }
     if (pageRoute == "orderAddress") {
       read.onNavigation(4, OrderSummaryView(
@@ -319,7 +319,7 @@ class AddAddressController extends ChangeNotifier {
       print(response.body);
       final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         countryList = result.countryData;
         if (!isEditingAddress) {
           showLoader(false);
@@ -545,7 +545,7 @@ class AddAddressController extends ChangeNotifier {
           final readDeliveryAddressController =
               Provider.of<DeliveryAddressController>(context, listen: false);
 
-          read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
+          read.onNavigation(4, const MyDeliveryAddressView(isRefresh: true), context);
           readDeliveryAddressController.initState(context, true);
 
           // Navigator.pushAndRemoveUntil(
@@ -642,7 +642,7 @@ class AddAddressController extends ChangeNotifier {
           final readDeliveryAddressController =
               Provider.of<DeliveryAddressController>(context, listen: false);
 
-          read.onNavigation(4, MyDeliveryAddressView(isRefresh: true), context);
+          read.onNavigation(4, const MyDeliveryAddressView(isRefresh: true), context);
           readDeliveryAddressController.initState(context, true);
           // Navigator.pushAndRemoveUntil(
           //   context,

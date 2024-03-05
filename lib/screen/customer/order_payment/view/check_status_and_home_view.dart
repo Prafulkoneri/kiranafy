@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_status/controller/track_order_status_controller.dart';
 import 'package:local_supper_market/screen/customer/order_status/view/order_status_view.dart';
 import 'package:provider/provider.dart';
@@ -90,13 +89,13 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 23.w, right: 23.w),
-                child: Container(
+                child: SizedBox(
                   // margin: EdgeInsets.only(left: 79.w, right: 79.w),
                   width: 344.w, // <-- Your width
                   height: 45.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: SplashText,
+                      backgroundColor: SplashText,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,
@@ -151,7 +150,7 @@ class _CheckOrderStatusViewState extends State<CheckOrderStatusView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(0, HomeScreenView(refreshPage: true), context);
+                  readMain.onNavigation(0, const HomeScreenView(refreshPage: true), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(

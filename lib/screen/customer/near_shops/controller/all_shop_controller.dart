@@ -361,14 +361,13 @@ class AllShopController extends ChangeNotifier {
           nearByShops = searchshopData?.nearByShops;
           allShops = searchshopData?.allShops ?? [];
           favAllShop =
-          List<bool>.filled(allShops.length ?? 0, false, growable: true);
+              List<bool>.filled(allShops.length ?? 0, false, growable: true);
 
           int length = allShops.length ?? 0;
           for (int i = 0; i < length; i++) {
             if (allShops[i].isFavourite == "yes") {
               favAllShop.insert(i, true);
-            }
-            else{
+            } else {
               favAllShop.insert(i, false);
             }
           }

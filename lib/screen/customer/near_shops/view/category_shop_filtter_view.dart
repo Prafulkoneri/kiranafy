@@ -165,7 +165,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 4.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -184,7 +184,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -203,7 +203,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -222,7 +222,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -241,7 +241,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -282,7 +282,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 4.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -301,7 +301,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -320,7 +320,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -339,7 +339,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -358,7 +358,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                                       SizedBox(
                                         width: 2.w,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color(0xffFFC000),
                                       )
@@ -389,7 +389,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
+                      backgroundColor: Colors.red,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,
@@ -424,7 +424,7 @@ class _ShopCategoryFiltterViewState extends State<ShopCategoryFiltterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Button,
+                      backgroundColor: Button,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,

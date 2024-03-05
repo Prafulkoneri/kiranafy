@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -150,7 +149,7 @@ class _OfferPageState extends State<OfferPage> {
                                       width: 5.w,
                                     ),
                                     element?.productImagePath == ""
-                                        ? Container(
+                                        ? SizedBox(
                                             height: 68.w,
                                             width: 68.w,
                                             child: Image.asset(
@@ -159,7 +158,7 @@ class _OfferPageState extends State<OfferPage> {
                                               //     BoxFit.cover,
                                             ),
                                           )
-                                        : Container(
+                                        : SizedBox(
                                             height: 68.w,
                                             width: 68.w,
                                             child: AppNetworkImages(

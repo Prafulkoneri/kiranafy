@@ -94,7 +94,7 @@ class SCouponsListController extends ChangeNotifier {
       // Utils.showPrimarySnackbar(context, "coupon code copid",
       //     type: SnackType.success);
     });
-    Timer(Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 3), () async {
       isOfferCopied = false;
       notifyListeners();
     });

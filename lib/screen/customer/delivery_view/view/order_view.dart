@@ -99,16 +99,16 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
               print("jhkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
               if (widget.screenName == "main") {
                 readMain.onNavigation(
-                    0, HomeScreenView(refreshPage: true), context);
+                    0, const HomeScreenView(refreshPage: true), context);
               } else if (widget.screenName == "notification") {
                 readMain.onNavigation(
                     4,
-                    CustomerNotificationsScreenView(
+                    const CustomerNotificationsScreenView(
                       isRefresh: false,
                     ),
                     context);
               } else {
-                readMain.onNavigation(4, MyOrderView(), context);
+                readMain.onNavigation(4, const MyOrderView(), context);
               }
               readMain.showBottomNavigationBar();
             },
@@ -116,17 +116,17 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
                   widget.screenName == "notification"
                       ? readMain.onNavigation(
                           4,
-                          CustomerNotificationsScreenView(
+                          const CustomerNotificationsScreenView(
                             isRefresh: false,
                           ),
                           context)
-                      : readMain.onNavigation(4, MyOrderView(), context);
+                      : readMain.onNavigation(4, const MyOrderView(), context);
                   readMain.showBottomNavigationBar();
                   return false;
                 },
@@ -135,7 +135,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
 
                     // child:
                     SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -355,11 +355,13 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     : watch.orderDetails
                                                                 ?.orderStatus ==
                                                             "Delivered"
-                                                        ? Color(0xff39C19D)
+                                                        ? const Color(
+                                                            0xff39C19D)
                                                         : watch.orderDetails
                                                                     ?.orderStatus ==
                                                                 "Confirmed"
-                                                            ? Color(0xff115B7A)
+                                                            ? const Color(
+                                                                0xff115B7A)
                                                             : watch.orderDetails
                                                                         ?.orderStatus ==
                                                                     "Cancelled"
@@ -426,12 +428,14 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     : watch.orderDetails
                                                                 ?.orderStatus ==
                                                             "Delivered"
-                                                        ? Color(0xff39C19D)
+                                                        ? const Color(
+                                                            0xff39C19D)
                                                         ///////
                                                         : watch.orderDetails
                                                                     ?.orderStatus ==
                                                                 "Confirmed"
-                                                            ? Color(0xff115B7A)
+                                                            ? const Color(
+                                                                0xff115B7A)
                                                             /////////
                                                             : watch.orderDetails
                                                                         ?.orderStatus ==
@@ -499,9 +503,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           bottom: 15.w),
                                       decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                           ),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(10))),
                                       child: Row(
                                         mainAxisAlignment:
@@ -521,7 +525,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             "${watch.orderDetails?.deliveryCode}",
                                             style: GoogleFonts.dmSans(
                                               textStyle: TextStyle(
-                                                  color: Color(0xff39C19D),
+                                                  color:
+                                                      const Color(0xff39C19D),
                                                   // letterSpacing: .5,
                                                   fontSize: 22.sp,
                                                   fontWeight: FontWeight.w700),
@@ -759,7 +764,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                           FontWeight.w700),
                                                   children: [
                                                     TextSpan(
-                                                      children: [],
+                                                      children: const [],
                                                       text:
                                                           'Dear customer, as you have chosen the self-pickup option, please collect your ordered products from the shop.',
                                                       recognizer:
@@ -886,7 +891,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                   bottom: 9.w),
                                               // height: 50.h,/
                                               decoration: BoxDecoration(
-                                                  color: Color(0xff115B7A),
+                                                  color:
+                                                      const Color(0xff115B7A),
                                                   // border: Border.all(width: 1, color: Black),
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -1014,7 +1020,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                             RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              side: BorderSide(
+                                              side: const BorderSide(
                                                 color: SplashText,
                                                 // width: 1,
                                               ),
@@ -1091,7 +1097,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       indent: 0,
                                       endIndent: 0,
                                     ),
-                                    OrderProductsListView(),
+                                    const OrderProductsListView(),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -1163,7 +1169,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                               FontWeight.w400),
                                                     ),
                                                   )
-                                                : TextSpan(
+                                                : const TextSpan(
                                                     text: "",
                                                   ),
                                           ]),
@@ -1384,7 +1390,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         // <-- Your width
                                         height: 38.h,
                                         child: PrimaryButton(
-                                          color: Color(0xffD1D1D1),
+                                          color: const Color(0xffD1D1D1),
                                           onTap: () {
                                             readMain.onNavigation(
                                                 0,
@@ -1438,7 +1444,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         // <-- Your width
                                         height: 38.h,
                                         child: PrimaryButton(
-                                          color: Color(0xffD1D1D1),
+                                          color: const Color(0xffD1D1D1),
                                           onTap: () {
                                             readMain.onNavigation(
                                                 0,
@@ -1480,7 +1486,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           left: 19.w, right: 19.w),
                                       margin: EdgeInsets.only(bottom: 20.w),
                                       child: PrimaryButton(
-                                        color: Color(0xffD1D1D1),
+                                        color: const Color(0xffD1D1D1),
                                         onTap: () {
                                           showModalBottomSheet(
                                             backgroundColor: Colors.white,
@@ -1493,7 +1499,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         Radius.circular(30))),
                                             context: context,
                                             builder: (context) {
-                                              return CancelOrderReasonView();
+                                              return const CancelOrderReasonView();
                                             },
                                           );
                                         },
@@ -1523,8 +1529,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                       color: watch.orderDetails
                                                   ?.refundOrderStatus ==
                                               "reject"
-                                          ? Color(0xffFFE8E8)
-                                          : Color(0xffEFFDFF),
+                                          ? const Color(0xffFFE8E8)
+                                          : const Color(0xffEFFDFF),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -1559,7 +1565,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                         ?.refundOrderStatus ==
                                                                     "reject"
                                                                 ? Colors.red
-                                                                : Color(
+                                                                : const Color(
                                                                     0xff115B7A))),
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 12.w),
@@ -1593,7 +1599,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                       ?.refundOrderStatus ==
                                                                   "reject"
                                                               ? Colors.red
-                                                              : Color(
+                                                              : const Color(
                                                                   0xff115B7A)),
                                                 )),
                                               ),
@@ -1855,7 +1861,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                   children: [
                                                     Expanded(
                                                         child: PrimaryButton(
-                                                      color: Color(0xff39C19D),
+                                                      color: const Color(
+                                                          0xff39C19D),
                                                       onTap: () {
                                                         read.updateRefundStatus(
                                                             "received",
@@ -1866,7 +1873,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     SizedBox(width: 12.w),
                                                     Expanded(
                                                         child: PrimaryButton(
-                                                      color: Color(0xffFF6258),
+                                                      color: const Color(
+                                                          0xffFF6258),
                                                       onTap: () {
                                                         read.updateRefundStatus(
                                                             "not_received",
@@ -1915,7 +1923,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     EdgeInsets.only(top: 5.w),
                                                 height: 4.w,
                                                 width: 4.w,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
@@ -1942,7 +1950,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     EdgeInsets.only(top: 6.w),
                                                 height: 4.w,
                                                 width: 4.w,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
@@ -1979,7 +1987,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           right: 15.w),
                                       // height: ScreenUtil().screenHeight,
                                       width: ScreenUtil().screenWidth,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Color(0xffFFE8E8)),
                                       child: Column(
                                         crossAxisAlignment:
@@ -2049,12 +2057,12 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                               watch.orderDetails
                                                       ?.shopDeliveredCustomerPaymentStatus ==
                                                   "received"
-                                          ? Color(0xffEFFDFF)
+                                          ? const Color(0xffEFFDFF)
                                           : watch.orderDetails
                                                       ?.refundOrderStatus ==
                                                   "reject"
-                                              ? Color(0xffFFE8E8)
-                                              : Color(0xffEFFDFF),
+                                              ? const Color(0xffFFE8E8)
+                                              : const Color(0xffEFFDFF),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -2085,7 +2093,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     ?.shopDeliveredCustomerPaymentStatus ==
                                                                 "received"
                                                             ? Colors.green
-                                                            : Color(
+                                                            : const Color(
                                                                 0xff115B7A))),
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 12.w),
@@ -2114,7 +2122,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                   ?.shopDeliveredCustomerPaymentStatus ==
                                                               "received"
                                                           ? Colors.green
-                                                          : Color(0xff115B7A)),
+                                                          : const Color(
+                                                              0xff115B7A)),
                                                 )),
                                               ),
                                             ],
@@ -2214,7 +2223,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                     color:
                                                                         Black1),
                                                               )
-                                                            : Text("")
+                                                            : const Text("")
                                                       ],
                                                     )
                                                   : Container(),
@@ -2240,7 +2249,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                   children: [
                                                     Expanded(
                                                         child: PrimaryButton(
-                                                      color: Color(0xff39C19D),
+                                                      color: const Color(
+                                                          0xff39C19D),
                                                       onTap: () {
                                                         read.updateDeliveredRefundStatus(
                                                             "received",
@@ -2251,7 +2261,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     SizedBox(width: 12.w),
                                                     Expanded(
                                                         child: PrimaryButton(
-                                                      color: Color(0xffFF6258),
+                                                      color: const Color(
+                                                          0xffFF6258),
                                                       onTap: () {
                                                         read.updateDeliveredRefundStatus(
                                                             "not_received",
@@ -2302,7 +2313,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     EdgeInsets.only(top: 5.w),
                                                 height: 4.w,
                                                 width: 4.w,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
@@ -2329,7 +2340,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     EdgeInsets.only(top: 6.w),
                                                 height: 4.w,
                                                 width: 4.w,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Colors.black,
                                                   shape: BoxShape.circle,
                                                 ),
@@ -2366,8 +2377,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                           color: watch.orderDetails
                                                       ?.refundOrderStatus ==
                                                   "reject"
-                                              ? Color(0xffFFE8E8)
-                                              : Color(0xffEFFDFF),
+                                              ? const Color(0xffFFE8E8)
+                                              : const Color(0xffEFFDFF),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -2400,7 +2411,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                         ?.shopDeliveredCustomerPaymentStatus ==
                                                                     "received"
                                                                 ? Colors.green
-                                                                : Color(
+                                                                : const Color(
                                                                     0xff115B7A))),
                                                     padding:
                                                         EdgeInsets.symmetric(
@@ -2430,7 +2441,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                       ?.shopDeliveredCustomerPaymentStatus ==
                                                                   "received"
                                                               ? Colors.green
-                                                              : Color(
+                                                              : const Color(
                                                                   0xff115B7A)),
                                                     )),
                                                   ),
@@ -2519,8 +2530,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         Expanded(
                                                             child:
                                                                 PrimaryButton(
-                                                          color:
-                                                              Color(0xff39C19D),
+                                                          color: const Color(
+                                                              0xff39C19D),
                                                           onTap: () {
                                                             read.updateDeliveredRefundStatus(
                                                                 "received",
@@ -2532,8 +2543,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         Expanded(
                                                             child:
                                                                 PrimaryButton(
-                                                          color:
-                                                              Color(0xffFF6258),
+                                                          color: const Color(
+                                                              0xffFF6258),
                                                           onTap: () {
                                                             read.updateDeliveredRefundStatus(
                                                                 "not_received",
@@ -2567,7 +2578,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         top: 5.w),
                                                     height: 4.w,
                                                     width: 4.w,
-                                                    decoration: BoxDecoration(
+                                                    decoration:
+                                                        const BoxDecoration(
                                                       color: Colors.black,
                                                       shape: BoxShape.circle,
                                                     ),
@@ -2595,7 +2607,8 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                         top: 6.w),
                                                     height: 4.w,
                                                     width: 4.w,
-                                                    decoration: BoxDecoration(
+                                                    decoration:
+                                                        const BoxDecoration(
                                                       color: Colors.black,
                                                       shape: BoxShape.circle,
                                                     ),
@@ -2678,7 +2691,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                     padding: EdgeInsets.only(
                                                         left: 19.w),
                                                     child: Text(
-                                                      'Your Feedback',
+                                                      'Your Feedbasssck',
                                                       style:
                                                           GoogleFonts.poppins(
                                                         textStyle: TextStyle(
@@ -2721,8 +2734,9 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                       child: ElevatedButton(
                                                         style: ElevatedButton
                                                             .styleFrom(
-                                                          primary:
-                                                              Color(0xff39C19D),
+                                                          backgroundColor:
+                                                              const Color(
+                                                                  0xff39C19D),
                                                           // onPrimary: Colors.white,
                                                           // shadowColor: Colors.greenAccent,
                                                           elevation: 3,
@@ -2769,7 +2783,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                         // ?
                                         ListView.builder(
                                             physics:
-                                                NeverScrollableScrollPhysics(),
+                                                const NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount:
                                                 watch.reviewList?.length ?? 0,
@@ -2810,7 +2824,7 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                 width: 50.0,
                                                                 height: 50.0,
                                                                 decoration:
-                                                                    BoxDecoration(
+                                                                    const BoxDecoration(
                                                                   shape: BoxShape
                                                                       .circle,
                                                                   image:
@@ -2849,10 +2863,10 @@ class _OrderDeliveryViewState extends State<OrderDeliveryView> {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Container(
-                                                                    margin: EdgeInsets
-                                                                        .only(
-                                                                            left:
-                                                                                10),
+                                                                    margin: const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            10),
                                                                     child: Text(
                                                                       "${element?.customerName}",
                                                                       style: GoogleFonts

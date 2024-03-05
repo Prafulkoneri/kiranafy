@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/add_update_unit_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/edit_unit_product_category_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/add_update_unit_product_category_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/new/edit_unit_product_category_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/add_unit_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -558,8 +556,8 @@ class AddEditUnitController extends ChangeNotifier {
     LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.addUpadteUnitProductCategory}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.addUpadteUnitProductCategory);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['action_type'] = actionType.toString();
     request.fields['product_id'] = productId;
@@ -576,9 +574,9 @@ class AddEditUnitController extends ChangeNotifier {
     if (fileImage1.path != "") {
       File imageFile = fileImage1;
       var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile(
+      var multipartFile = http.MultipartFile(
           "unit_based_product_image_1_path", stream, length,
           filename: basename(imageFile.path));
       newList.add(multipartFile);
@@ -586,9 +584,9 @@ class AddEditUnitController extends ChangeNotifier {
     if (fileImage2.path != "") {
       File imageFile = fileImage2;
       var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile(
+      var multipartFile = http.MultipartFile(
           "unit_based_product_image_2_path", stream, length,
           filename: basename(imageFile.path));
       newList.add(multipartFile);
@@ -596,9 +594,9 @@ class AddEditUnitController extends ChangeNotifier {
     if (fileImage3.path != "") {
       File imageFile = fileImage3;
       var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var multipartFile = new http.MultipartFile(
+      var multipartFile = http.MultipartFile(
           "unit_based_product_image_3_path", stream, length,
           filename: basename(imageFile.path));
       newList.add(multipartFile);

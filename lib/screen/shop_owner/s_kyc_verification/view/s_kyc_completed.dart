@@ -12,6 +12,8 @@ import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
 class KycCompletedView extends StatefulWidget {
+  const KycCompletedView({super.key});
+
   @override
   State<KycCompletedView> createState() => _KycCompletedViewState();
 }
@@ -62,7 +64,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                       "Congratulations!",
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Color(0xff20BF55),
+                            color: const Color(0xff20BF55),
                             // height: 1.5,
 
                             // letterSpacing: .05,
@@ -79,7 +81,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Color(0xff181725),
+                            color: const Color(0xff181725),
                             // height: 1.5,
 
                             // letterSpacing: .05,
@@ -96,7 +98,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Color(0xff181725),
+                            color: const Color(0xff181725),
                             // height: 1.5,
 
                             // letterSpacing: .05,
@@ -118,7 +120,7 @@ class _KycCompletedViewState extends State<KycCompletedView> {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SSubscriptionScreenView(
+                                builder: (context) => const SSubscriptionScreenView(
                                       loggedIn: false,
                                   routeName: "kyc",
                                     )),

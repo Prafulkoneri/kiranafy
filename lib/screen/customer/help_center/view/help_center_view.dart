@@ -41,7 +41,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
             onBackBtnPressed: () {
               readMain.onNavigation(
                   4,
-                  ProfileScreenView(
+                  const ProfileScreenView(
                     isRefreshed: false,
                     // refresh: false,
                   ),
@@ -66,13 +66,13 @@ class _HelpCenterViewState extends State<HelpCenterView> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : watch.ticketList?.isNotEmpty == true
                 ? WillPopScope(
                     onWillPop: () async {
                       readMain.onNavigation(
                           4,
-                          ProfileScreenView(
+                          const ProfileScreenView(
                             isRefreshed: false,
                             // refresh: false,
                           ),
@@ -81,7 +81,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                     },
                     child: Container(
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         padding: EdgeInsets.only(bottom: 100.w),
                         itemCount: watch.ticketList?.length ?? 0,
                         itemBuilder: (context, index) {
@@ -190,7 +190,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                                                         ///////
                                                         : element?.ticketStatus ==
                                                                 "Ongoing"
-                                                            ? Color(0xffFF961C)
+                                                            ? const Color(0xffFF961C)
                                                             ///////
                                                             : element?.ticketStatus ==
                                                                     "Closed"
@@ -210,7 +210,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                                         SizedBox(
                                           height: 9.h,
                                         ),
-                                        Divider(),
+                                        const Divider(),
                                         SizedBox(
                                           height: 13.h,
                                         ),

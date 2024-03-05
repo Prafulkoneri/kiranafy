@@ -363,14 +363,14 @@ class _MyVouchersViewState extends State<MyVouchersView> {
           return false;
         },
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               watch.myvoucherListData?.isNotEmpty == true
                   ? ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       // physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: watch.myvoucherListData?.length ?? 0,
@@ -447,7 +447,7 @@ class _MyVouchersViewState extends State<MyVouchersView> {
                                           height: 62.h,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Padding(
@@ -462,7 +462,7 @@ class _MyVouchersViewState extends State<MyVouchersView> {
                                           space: 3.0,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 19,
                                       ),
                                       Column(
@@ -534,7 +534,7 @@ class _MyVouchersViewState extends State<MyVouchersView> {
                                                             8)),
                                                 child: Row(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: 58.w,
                                                       child: Text(
                                                         "${element?.uniqueNo}",
@@ -580,7 +580,7 @@ class _MyVouchersViewState extends State<MyVouchersView> {
                                                           top: 7.w,
                                                           bottom: 6.w),
                                                       decoration: BoxDecoration(
-                                                          color: Color(
+                                                          color: const Color(
                                                                   0xff39C19D)
                                                               .withOpacity(0.5),
                                                           border: Border.all(
@@ -610,11 +610,11 @@ class _MyVouchersViewState extends State<MyVouchersView> {
                                                           top: 7.w,
                                                           bottom: 6.w),
                                                       decoration: BoxDecoration(
-                                                          color: Color(
+                                                          color: const Color(
                                                                   0xffFEE6E3)
                                                               .withOpacity(0.5),
                                                           border: Border.all(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xffEC1E24)),
                                                           borderRadius:
                                                               BorderRadius

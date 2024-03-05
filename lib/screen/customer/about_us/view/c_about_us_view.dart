@@ -17,6 +17,7 @@ class CAboutUsView extends StatefulWidget {
 }
 
 class _CAboutUsViewState extends State<CAboutUsView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<CmsController>().initState(context);
@@ -52,7 +53,7 @@ class _CAboutUsViewState extends State<CAboutUsView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(

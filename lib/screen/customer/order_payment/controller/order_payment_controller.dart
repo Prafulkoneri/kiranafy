@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/cart/controller/cart_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/c_place_order_model.dart';
 import 'package:local_supper_market/screen/customer/order_payment/model/order_payment_model.dart';
 import 'package:local_supper_market/screen/customer/order_payment/repository/c_place_order_repo.dart';

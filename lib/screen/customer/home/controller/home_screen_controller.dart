@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_supper_market/screen/customer/home/model/banner_model.dart';
@@ -14,7 +13,6 @@ import 'package:local_supper_market/screen/customer/near_shops/model/all_near_sh
 import 'package:local_supper_market/screen/customer/near_shops/repository/shop_as_per_pincode_all_near_shops.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreenController extends ChangeNotifier {
   BannerRepo bannerRepo = BannerRepo();
@@ -82,7 +80,7 @@ class HomeScreenController extends ChangeNotifier {
         bannerData = result.data;
         int imageLength = bannerData?.length ?? 0;
         if (bannerData!.isNotEmpty) {
-          Timer.periodic(Duration(seconds: 8), (Timer timer) {
+          Timer.periodic(const Duration(seconds: 8), (Timer timer) {
             if (_currentPage < imageLength - 1) {
               _currentPage + 1;
             } else {
@@ -136,7 +134,7 @@ class HomeScreenController extends ChangeNotifier {
       print(response.body);
       final result = AllCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         print("77777777");
         print(result.categoriesFirstList);
         print("77777777");
@@ -267,7 +265,7 @@ class HomeScreenController extends ChangeNotifier {
       // Utils.showPrimarySnackbar(context, "coupon code copid",
       //     type: SnackType.success);
     });
-    Timer(Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 3), () async {
       isOfferCopied = false;
       notifyListeners();
     });

@@ -8,7 +8,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/customer/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
@@ -50,7 +49,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
           child: PrimaryAppBar(
             onBackBtnPressed: () {
               Navigator.pop(context);
-              readMain.onNavigation(4, HelpCenterView(), context);
+              readMain.onNavigation(4, const HelpCenterView(), context);
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(
@@ -63,13 +62,13 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
 
             : Column(
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Container(
                         margin:
                             EdgeInsets.only(left: 19.w, top: 20.h, right: 19.w),
@@ -145,7 +144,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                   : watch.ticketDetails
                                                               ?.ticketStatus ==
                                                           "Ongoing"
-                                                      ? Color(0xffFF961C)
+                                                      ? const Color(0xffFF961C)
                                                       ///////
                                                       : watch.ticketDetails
                                                                   ?.ticketStatus ==
@@ -164,7 +163,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  Divider(),
+                                  const Divider(),
                                   SizedBox(
                                     height: 13.h,
                                   ),
@@ -210,7 +209,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                             ),
                             ListView.builder(
                               reverse: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: watch.ticketRepliesList?.length ?? 0,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
@@ -219,7 +218,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                   margin: EdgeInsets.only(bottom: 5.w),
                                   decoration: BoxDecoration(
                                     color: element?.type == "customer"
-                                        ? Color(0xff44B8CA)
+                                        ? const Color(0xff44B8CA)
                                         : Colors.white,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
@@ -247,7 +246,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                               MainAxisAlignment.start,
                                           children: [
                                             element?.profileImagePath == ""
-                                                ? Container(
+                                                ? SizedBox(
                                                     height: 37.w,
                                                     width: 37.w,
                                                     child: Image.asset(
@@ -255,7 +254,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                       fit: BoxFit.cover,
                                                     ),
                                                   )
-                                                : Container(
+                                                : SizedBox(
                                                     height: 37.w,
                                                     width: 37.w,
                                                     child: AppNetworkImages(
@@ -264,7 +263,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 6,
                                             ),
                                             Column(
@@ -284,7 +283,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                                             FontWeight.w700),
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5,
                                                 ),
                                                 Text(
@@ -304,7 +303,7 @@ class _CustomerSupportViewState extends State<CustomerSupportView> {
                                             ),
                                           ],
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Color(0xff319FB0),
                                           thickness: 1,
                                         ),

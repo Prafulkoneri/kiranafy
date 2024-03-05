@@ -41,11 +41,11 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                 // height: MediaQuery.of(context).size.height * 0.50,
                 // height: 563.h,
                 // width: 390.w,
-                decoration: new BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(25.0),
-                    topRight: const Radius.circular(25.0),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25.0),
+                    topRight: Radius.circular(25.0),
                   ),
                 ),
                 child: Column(
@@ -61,7 +61,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    Divider(),
+                    const Divider(),
                     SizedBox(
                       height: 22.h,
                     ),
@@ -70,7 +70,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16.sp,
-                          color: Color(0xff575574)),
+                          color: const Color(0xff575574)),
                     ),
                     SizedBox(
                       height: 15.h,
@@ -101,7 +101,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16.sp,
-                          color: Color(0xff575574)),
+                          color: const Color(0xff575574)),
                     ),
                     SizedBox(
                       height: 11.h,
@@ -117,7 +117,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16.sp,
-                          color: Color(0xff575574)),
+                          color: const Color(0xff575574)),
                     ),
                     SizedBox(
                       height: 10.h,
@@ -135,7 +135,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                       fontSize: 20.sp,
                       height: 50.w,
                       text: "Submit",
-                      color: Color(0xff4689EC),
+                      color: const Color(0xff4689EC),
                       onTap: () {
                         read.createTicket(context);
                       },
@@ -164,7 +164,7 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                 child: Container(
                   height: 50.w,
                   width: 50.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
@@ -191,10 +191,11 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                   color: Colors.red,
                   width: ScreenUtil().screenWidth,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Text(
-                          "${watch.errorMsgForRaiseTicket}",
+                          watch.errorMsgForRaiseTicket,
                           style:
                               TextStyle(color: Colors.white, fontSize: 14.sp),
                         ),
@@ -217,7 +218,6 @@ class _RaiseTicketViewState extends State<RaiseTicketView> {
                         ],
                       ),
                     ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
                 ),
               )),

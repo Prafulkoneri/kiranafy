@@ -1,14 +1,11 @@
 // import 'package:connectivity/connectivity.dart';
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
@@ -67,7 +64,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
       body: watch.isLoading
           ? const Loader()
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -92,7 +89,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               readMain.onNavigation(
                                   0,
-                                  NotificationsScreenView(route: "dashboard"),
+                                  const NotificationsScreenView(route: "dashboard"),
                                   context);
                               readMain.hideBottomNavigationBar();
                             },
@@ -125,7 +122,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           Align(
                             child: watch.dashBoardData?.bannerImages!.isEmpty ??
                                     true
-                                ? Container(
+                                ? SizedBox(
                                     height:
                                         Platform.isAndroid ? 180.0.h : 190.h,
                                     child: Image.asset(
@@ -152,22 +149,22 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               element?.imagesPath == ""
-                                                  ? Container(
+                                                  ? SizedBox(
                                                       height: 180.w,
                                                       child: Image.asset(
                                                         "assets/images/nearshop2.png",
                                                         height: 180.w,
                                                         fit: BoxFit.fill,
                                                       ))
-                                                  : Container(
+                                                  : SizedBox(
                                                       height: 180.w,
+                                                      width: ScreenUtil()
+                                                          .screenWidth,
                                                       child: AppNetworkImages(
                                                           imageUrl: element
                                                                   ?.imagesPath ??
                                                               "",
                                                           fit: BoxFit.cover),
-                                                      width: ScreenUtil()
-                                                          .screenWidth,
                                                     ),
                                             ],
                                           );
@@ -186,7 +183,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              stops: [
+                              stops: const [
                                 0.1,
                                 0.9,
                               ],
@@ -207,14 +204,14 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                 children: [
                                   Flexible(
                                     child: DashBoardShopName(
-                                      text: '${watch.shopName}',
+                                      text: watch.shopName,
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
                                       readMain.onNavigation(
                                           0,
-                                          ShopReviewScreenView(
+                                          const ShopReviewScreenView(
                                             fromDashBoard: true,
                                           ),
                                           context);
@@ -230,7 +227,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                       // width: 55.w,
                                       decoration: BoxDecoration(
                                         color: yellow,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(15)),
                                       ),
                                       child: Row(
@@ -305,7 +302,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         text: '${watch.address} ',
                                       ),
                                       ShopAddress(
-                                        text: '${watch.pincode}',
+                                        text: watch.pincode,
                                       ),
                                     ],
                                   ),
@@ -318,7 +315,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               onTap: () {
                                 readMain.onNavigation(
                                     0,
-                                    SEditProfileView(
+                                    const SEditProfileView(
                                       fromDashBoard: true,
                                     ),
                                     context);
@@ -347,7 +344,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 10.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Customer',
                       ),
                     ),
@@ -362,7 +359,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               readMain.onNavigation(
                                   0,
-                                  CustomerListView(
+                                  const CustomerListView(
                                     isRefresh: true,
                                     fromPage: "dashboardProduct",
                                   ),
@@ -394,7 +391,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.totalCustomersOrderedCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Total Customer\n Ordered',
                                   ),
                                 ],
@@ -410,7 +407,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               readMain.onNavigation(
                                   0,
-                                  CustomerListView(
+                                  const CustomerListView(
                                     isRefresh: true,
                                     fromPage: "dashboardFavCustomer",
                                   ),
@@ -445,7 +442,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.customersLinkedToShops}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Customer Linked to\nShop',
                                   ),
                                 ],
@@ -461,7 +458,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Active Offer',
                       ),
                     ),
@@ -488,7 +485,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   text:
                                       '${watch.dashBoardData?.shopOwnerActiveProductsCouponsCount}',
                                 ),
-                                ShopDashBoard(
+                                const ShopDashBoard(
                                   text: 'Product Offer',
                                 ),
                               ],
@@ -503,7 +500,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               readMain.onNavigation(
                                   3,
-                                  ShopCouponsView(
+                                  const ShopCouponsView(
                                     isNavFromDashBoard: true,
                                     isRefresh: true,
                                   ),
@@ -538,7 +535,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.shopOwnerActiveCouponsCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Coupons',
                                   ),
                                 ],
@@ -554,7 +551,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Product',
                       ),
                     ),
@@ -568,7 +565,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                           child: GestureDetector(
                             onTap: () {
                               readMain.onNavigation(
-                                  0, SSCategoryListView(), context);
+                                  0, const SSCategoryListView(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -604,7 +601,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.categoriesCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Category',
                                   ),
                                 ],
@@ -620,7 +617,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {
                               // read.onProductSelect(context);
                               readMain.onNavigation(
-                                  0, SSCategoryListView(), context);
+                                  0, const SSCategoryListView(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -655,7 +652,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.productsCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Products',
                                   ),
                                 ],
@@ -685,7 +682,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   .contains("seasonal_products")) {
                                 readMain.onNavigation(
                                     0,
-                                    ShopSeasonalRecommandedOfferProductsView(
+                                    const ShopSeasonalRecommandedOfferProductsView(
                                       selectedProduct: "seasonal",
                                       isRefresh: true,
                                     ),
@@ -735,7 +732,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.seasonalProductsCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Seasonal',
                                   ),
                                 ],
@@ -766,7 +763,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   .contains("fullfill_craving_products")) {
                                 readMain.onNavigation(
                                     0,
-                                    ShopSeasonalRecommandedOfferProductsView(
+                                    const ShopSeasonalRecommandedOfferProductsView(
                                       selectedProduct: "fullFill",
                                       isRefresh: true,
                                     ),
@@ -815,7 +812,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.fullfillYourCravingsProductsCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Fulfil your cravings',
                                   ),
                                 ],
@@ -833,7 +830,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 30.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Orders',
                       ),
                     ),
@@ -867,7 +864,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                   text:
                                       '${watch.dashBoardData?.totalOrdersCount}',
                                 ),
-                                ShopDashBoard(
+                                const ShopDashBoard(
                                   text: 'Total Orders',
                                 ),
                               ],
@@ -883,7 +880,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               readOrderStatus.onTabClicked(0);
                               readMain.onNavigation(
                                   1,
-                                  SOrderStatusView(
+                                  const SOrderStatusView(
                                       selectedIndex: 0, isFromOrderView: false),
                                   context);
                               // Navigator.pushAndRemoveUntil(
@@ -913,7 +910,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.pendingOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Pending',
                                   ),
                                 ],
@@ -930,7 +927,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               readOrderStatus.onTabClicked(1);
                               readMain.onNavigation(
                                   1,
-                                  SOrderStatusView(
+                                  const SOrderStatusView(
                                       selectedIndex: 1, isFromOrderView: false),
                                   context);
                               // Navigator.pushAndRemoveUntil(
@@ -961,7 +958,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.confirmedOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Confirmed',
                                   ),
                                 ],
@@ -989,7 +986,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               readOrderStatus.onTabClicked(2);
                               readMain.onNavigation(
                                   1,
-                                  SOrderStatusView(
+                                  const SOrderStatusView(
                                       selectedIndex: 2, isFromOrderView: false),
                                   context);
                               // Navigator.pushAndRemoveUntil(
@@ -1023,7 +1020,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.inprocessOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'In process',
                                   ),
                                 ],
@@ -1040,7 +1037,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               readOrderStatus.onTabClicked(3);
                               readMain.onNavigation(
                                   1,
-                                  SOrderStatusView(
+                                  const SOrderStatusView(
                                       selectedIndex: 3, isFromOrderView: false),
                                   context);
                               // Navigator.pushAndRemoveUntil(
@@ -1081,7 +1078,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.deliveredOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Delivered',
                                   ),
                                 ],
@@ -1098,7 +1095,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               readOrderStatus.onTabClicked(4);
                               readMain.onNavigation(
                                   1,
-                                  SOrderStatusView(
+                                  const SOrderStatusView(
                                       selectedIndex: 4, isFromOrderView: false),
                                   context);
                               // Navigator.pushAndRemoveUntil(
@@ -1139,7 +1136,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.cancelledOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Cancelled',
                                   ),
                                 ],
@@ -1156,7 +1153,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 20.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Refund',
                       ),
                     ),
@@ -1172,7 +1169,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("pending");
                               readMain.onNavigation(
-                                  0, SPaymentRefundList(), context);
+                                  0, const SPaymentRefundList(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1204,7 +1201,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             .toString() ??
                                         "0",
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Pending Refund',
                                   ),
                                 ],
@@ -1221,7 +1218,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               watchRefundOrderList
                                   .onNavigationFromDashboard("completed");
                               readMain.onNavigation(
-                                  0, SPaymentRefundList(), context);
+                                  0, const SPaymentRefundList(), context);
                               // Navigator.pushAndRemoveUntil(
                               //   context,
                               //   MaterialPageRoute(
@@ -1252,7 +1249,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             .toString() ??
                                         "0",
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Refunded',
                                   ),
                                 ],
@@ -1268,7 +1265,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 19.0.w, top: 20.w, bottom: 10.w),
-                      child: DashBoardSideHeading(
+                      child: const DashBoardSideHeading(
                         text: 'Business',
                       ),
                       //  Text(DashBoardSideHeading
@@ -1470,7 +1467,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                     text:
                                         '${watch.dashBoardData?.totalRefundAmountPending}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Pending Refund Amount',
                                   ),
                                 ],
@@ -1526,7 +1523,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         '${watch.dashBoardData?.totalRefundAmountAccept}',
                                     // '${watch.dashBoardData?.deliveredOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Refunded\nAmount',
                                   ),
                                 ],
@@ -1579,7 +1576,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                         '${watch.dashBoardData?.cancelledAmount}',
                                     // '${watch.dashBoardData?.cancelledOrdersCount}',
                                   ),
-                                  ShopDashBoard(
+                                  const ShopDashBoard(
                                     text: 'Cancelled Amount',
                                   ),
                                 ],
@@ -1605,7 +1602,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               onTap: () {
                                 readMain.onNavigation(
                                     0,
-                                    SMySubscriptionView(
+                                    const SMySubscriptionView(
                                       screenName: "dashboard",
                                     ),
                                     context);
@@ -1664,7 +1661,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Container(
+                                              SizedBox(
                                                 width:
                                                     ScreenUtil().screenWidth /
                                                         1.13.w,
@@ -1695,7 +1692,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                                   .circular(
                                                                       7.w),
                                                           color:
-                                                              Color(0xff000000)
+                                                              const Color(0xff000000)
                                                                   .withOpacity(
                                                                       0.35),
                                                         ),
@@ -1729,7 +1726,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                               SizedBox(
                                                 height: 7.w,
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width:
                                                     ScreenUtil().screenWidth /
                                                         1.13.w,
@@ -1778,7 +1775,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                               onTap: () {
                                 readMain.onNavigation(
                                     0,
-                                    SMySubscriptionView(
+                                    const SMySubscriptionView(
                                       screenName: "dashboard",
                                     ),
                                     context);
@@ -1806,9 +1803,9 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                 end: Alignment.topCenter,
                                                 begin: Alignment.bottomCenter,
                                                 colors: <Color>[
-                                                  Color(0xff4EC0FA)
+                                                  const Color(0xff4EC0FA)
                                                       .withOpacity(1),
-                                                  Color(0xff32DFAC)
+                                                  const Color(0xff32DFAC)
                                                       .withOpacity(1),
                                                 ]),
 
@@ -1839,7 +1836,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Container(
+                                              SizedBox(
                                                 width:
                                                     ScreenUtil().screenWidth /
                                                         1.13.w,
@@ -1870,7 +1867,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                                   .circular(
                                                                       7.w),
                                                           color:
-                                                              Color(0xff000000)
+                                                              const Color(0xff000000)
                                                                   .withOpacity(
                                                                       0.35),
                                                         ),
@@ -1904,7 +1901,7 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                               SizedBox(
                                                 height: 7.w,
                                               ),
-                                              Container(
+                                              SizedBox(
                                                 width:
                                                     ScreenUtil().screenWidth /
                                                         1.13.w,

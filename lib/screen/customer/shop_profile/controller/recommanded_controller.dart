@@ -75,11 +75,11 @@ class SAllRecommandedProductsController extends ChangeNotifier {
         recommandedProducts.clear();
         // recommandedProducts = data?.recommandedProducts;
         recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
-        int recommandedProductLength = recommandedProducts?.length ?? 0;
+        int recommandedProductLength = recommandedProducts.length ?? 0;
         isRecommandedProductAdded =
             List<bool>.filled(recommandedProductLength, false, growable: true);
         for (int i = 0; i < recommandedProductLength; i++) {
-          if (recommandedProducts?[i].addToCartCheck == "yes") {
+          if (recommandedProducts[i].addToCartCheck == "yes") {
             isRecommandedProductAdded.insert(i, true);
           } else {
             isRecommandedProductAdded.insert(i, false);
@@ -184,11 +184,11 @@ class SAllRecommandedProductsController extends ChangeNotifier {
         // recommandedProducts.clear();
         // recommandedProducts = data?.recommandedProducts;
         recommandedProducts.addAll(result.data?.recommandedProducts ?? []);
-        int recommandedProductLength = recommandedProducts?.length ?? 0;
+        int recommandedProductLength = recommandedProducts.length ?? 0;
         isRecommandedProductAdded =
             List<bool>.filled(recommandedProductLength, false, growable: true);
         for (int i = 0; i < recommandedProductLength; i++) {
-          if (recommandedProducts?[i].addToCartCheck == "yes") {
+          if (recommandedProducts[i].addToCartCheck == "yes") {
             isRecommandedProductAdded.insert(i, true);
           } else {
             isRecommandedProductAdded.insert(i, false);

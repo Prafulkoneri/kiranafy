@@ -15,6 +15,7 @@ import 'package:local_supper_market/screen/shop_owner/s_auth/view/shop_sign_in_v
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_kyc_verification/view/s_kyc_verification_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
+import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,7 +28,7 @@ class ShopSignInController extends ChangeNotifier {
   bool isVerifyChecked = false;
   TextEditingController mobController = TextEditingController();
   // OtpFieldController otpController = OtpFieldController();
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationID = "";
   String countryCode = "+91";
   String message = "";
@@ -36,6 +37,7 @@ class ShopSignInController extends ChangeNotifier {
   bool isNewShopBtnEnabled = false;
   String kycVerificationStatus = "";
   String shopRegistrationStatus = "";
+  String subscreptionPurches = "";
   bool isOtpErrorVisible = false;
 
   void onOtpSubmitPressed(context) async {
@@ -115,9 +117,11 @@ class ShopSignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           print(response.body);
           kycVerificationStatus = result.kycUploaded ?? "";
+          subscreptionPurches = result.subscription ?? "";
           shopRegistrationStatus = result.registrationCompleted ?? "";
 
           print(kycVerificationStatus);
+          print(subscreptionPurches);
           print(result.kycUploaded);
           print(result.registrationCompleted);
           if (result.registrationCompleted == "yes") {
@@ -192,7 +196,7 @@ class ShopSignInController extends ChangeNotifier {
         //     type: SnackType.error);
         notifyListeners();
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       print("888");
       showOtpErrorMsg();
       print("888");
@@ -261,15 +265,30 @@ class ShopSignInController extends ChangeNotifier {
         pref.setString('mobileNo', result.mobileNo ?? "");
         pref.setString('status', 'numberRegistered');
         print(pref.getString('status'));
-        if (kycVerificationStatus == "no" && shopRegistrationStatus == "yes") {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+        if (kycVerificationStatus == "no" &&
+            shopRegistrationStatus == "yes" &&
+            subscreptionPurches == "no") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SKycVerificationView()));
+        } else if (kycVerificationStatus == "yes" &&
+            shopRegistrationStatus == "yes" &&
+            subscreptionPurches == "no") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SSubscriptionScreenView(
+                        loggedIn: true,
+                      )));
         } else {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ShopRegistrationView()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ShopRegistrationView()));
         }
-        isLoginBtnEnabled=false;
-        isVerifyChecked=false;
+        isLoginBtnEnabled = false;
+        isVerifyChecked = false;
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,
@@ -296,7 +315,7 @@ class ShopSignInController extends ChangeNotifier {
 
   Future<void> onLogin(context) async {
     print("fcmtoken");
-    print("fcmToken${fcmToken}");
+    print("fcmToken$fcmToken");
     SharedPreferences pref = await SharedPreferences.getInstance();
     shopLoginRepo.shopLogin(loginReqModel).then((response) {
       log(response.body);
@@ -304,24 +323,34 @@ class ShopSignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         pref.setString("successToken", result.successToken?.token ?? "");
         pref.setString("status", "loggedIn");
-        if (kycVerificationStatus == "no" && shopRegistrationStatus == "yes") {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SKycVerificationView()));
-        }
-          else {
+        if (kycVerificationStatus == "no" &&
+            shopRegistrationStatus == "yes" &&
+            subscreptionPurches == "no") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SKycVerificationView()));
+        } else if (kycVerificationStatus == "yes" &&
+            shopRegistrationStatus == "yes" &&
+            subscreptionPurches == "no") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SSubscriptionScreenView(
+                        loggedIn: true,
+                      )));
+        } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    SMainScreenView(
-                        index: 0,
-                        screenName: ShopDashBoardView(
-                          refresh: true,
-                        ))),
-                (Route<dynamic> route) => false,
+                builder: (context) => const SMainScreenView(
+                    index: 0,
+                    screenName: ShopDashBoardView(
+                      refresh: true,
+                    ))),
+            (Route<dynamic> route) => false,
           );
         }
-
       } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -343,7 +372,7 @@ class ShopSignInController extends ChangeNotifier {
     isOtpErrorVisible = true;
     notifyListeners();
     print(isOtpErrorVisible);
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       print("duration");
       isOtpErrorVisible = false;
       notifyListeners();

@@ -74,7 +74,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
             context: context,
             builder: (context) {
               // using a scaffold helps to more easily position the FAB
-              return AddressListSheetView();
+              return const AddressListSheetView();
             });
       }
     });
@@ -124,7 +124,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -140,7 +140,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
               child: StackLoader(
                 showLoader: watch.isStackLoaderVisible,
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -201,7 +201,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       SizedBox(
                                         width: 8.w,
                                       ),
-                                      Container(
+                                      SizedBox(
                                           width: 200.w,
                                           child: ShopAddress(
                                             text:
@@ -355,7 +355,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                              color: Color(0xff03C9CC),
+                                              color: const Color(0xff03C9CC),
                                               width: 1.w,
                                             ),
                                           ),
@@ -401,7 +401,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
-                                              color: Color(0xff03C9CC),
+                                              color: const Color(0xff03C9CC),
                                               width: 1.w,
                                             ),
                                           ),
@@ -434,7 +434,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: watch.customerAddress?.length ?? 0,
                             itemBuilder: (context, index) {
                               final element = watch.customerAddress![index];
@@ -450,10 +450,10 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                       context: context,
                                       builder: (context) {
                                         // using a scaffold helps to more easily position the FAB
-                                        return AddressListSheetView();
+                                        return const AddressListSheetView();
                                       });
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: double.infinity,
                                   child: element.addressId ==
                                           int.parse(watch.addressGroupValue)
@@ -505,7 +505,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                         // ),
                                                       ],
                                                     ),
-                                                    Icon(Icons
+                                                    const Icon(Icons
                                                         .keyboard_arrow_down_outlined),
                                                   ],
                                                 ),
@@ -613,7 +613,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               context: context,
                               builder: (context) {
                                 // using a scaffold helps to more easily position the FAB
-                                return ExpectedDeliveryDateSheetView();
+                                return const ExpectedDeliveryDateSheetView();
                               });
                         },
                         child: Container(
@@ -624,7 +624,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           decoration: BoxDecoration(
                               border: Border.all(color: grey3),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                                  const BorderRadius.all(Radius.circular(20))),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -759,7 +759,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                     context: context,
                                                     builder: (context) {
                                                       // using a scaffold helps to more easily position the FAB
-                                                      return ExpectedDeliveryDateSheetView();
+                                                      return const ExpectedDeliveryDateSheetView();
                                                     });
                                               },
                                               child: SvgPicture.asset(
@@ -850,7 +850,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                     context: context,
                                     builder: (context) {
                                       // using a scaffold helps to more easily position the FAB
-                                      return CouponsListSheetView();
+                                      return const CouponsListSheetView();
                                     });
                               },
                               child: Container(
@@ -903,6 +903,29 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                   width: 200.w,
                                   height: 34.w,
                                   child: TextField(
+                                    readOnly: true,
+                                    onTap: () {
+                                      if (watch.finalCouponList!.isEmpty) {
+                                        Utils.showPrimarySnackbar(
+                                            context, "No Coupons Found",
+                                            type: SnackType.error);
+                                        return;
+                                      }
+                                      showModalBottomSheet(
+                                          backgroundColor: Colors.white,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(30),
+                                                  topRight:
+                                                      Radius.circular(30))),
+                                          context: context,
+                                          builder: (context) {
+                                            // using a scaffold helps to more easily position the FAB
+                                            return const CouponsListSheetView();
+                                          });
+                                      //Your code here
+                                    },
                                     controller: watch.couponCodeController,
                                     decoration: InputDecoration(
                                       fillColor: grey4,
@@ -1105,7 +1128,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     },
                                                                     child:
                                                                         Container(
-                                                                      decoration: BoxDecoration(
+                                                                      decoration: const BoxDecoration(
                                                                           // color: Colors.white,
                                                                           // boxShadow: [
                                                                           //   BoxShadow(
@@ -1163,7 +1186,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                                 )),
                                                                                           ),
                                                                                         )
-                                                                                      : Container(
+                                                                                      : SizedBox(
                                                                                           width: 60.w,
                                                                                           height: 20.h,
                                                                                         ),
@@ -1176,7 +1199,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   element.productImagePath == ""
-                                                                                      ? Container(
+                                                                                      ? SizedBox(
                                                                                           height: 55.w,
                                                                                           width: 55.w,
                                                                                           child: Image.asset(
@@ -1184,7 +1207,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                             fit: BoxFit.cover,
                                                                                           ),
                                                                                         )
-                                                                                      : Container(
+                                                                                      : SizedBox(
                                                                                           height: 60.w,
                                                                                           width: 60.w,
                                                                                           child: Image.network(
@@ -1235,7 +1258,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                   ),
                                                                                   Row(
                                                                                     children: [
-                                                                                      element.mrpPrice != "" ? Text('\u{20B9}${element.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                                      element.mrpPrice != "" ? Text('\u{20B9}${element.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : const Text(""),
                                                                                       SizedBox(
                                                                                         width: 5.w,
                                                                                       ),
@@ -1252,7 +1275,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                                     fontWeight: FontWeight.w500),
                                                                                               ),
                                                                                             )
-                                                                                          : Text(""),
+                                                                                          : const Text(""),
                                                                                     ],
                                                                                   ),
                                                                                 ],
@@ -1447,7 +1470,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                     child:
                                                                         Container(
                                                                       decoration:
-                                                                          BoxDecoration(),
+                                                                          const BoxDecoration(),
                                                                       child:
                                                                           Card(
                                                                         shape: RoundedRectangleBorder(
@@ -1495,7 +1518,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                                 )),
                                                                                           ),
                                                                                         )
-                                                                                      : Container(
+                                                                                      : SizedBox(
                                                                                           width: 60.w,
                                                                                           height: 20.h,
                                                                                         ),
@@ -1508,7 +1531,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   element.productImagePath == ""
-                                                                                      ? Container(
+                                                                                      ? SizedBox(
                                                                                           height: 55.w,
                                                                                           width: 55.w,
                                                                                           child: Image.asset(
@@ -1516,7 +1539,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                             fit: BoxFit.cover,
                                                                                           ),
                                                                                         )
-                                                                                      : Container(
+                                                                                      : SizedBox(
                                                                                           height: 60.w,
                                                                                           width: 60.w,
                                                                                           child: Image.network(
@@ -1567,7 +1590,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                   ),
                                                                                   Row(
                                                                                     children: [
-                                                                                      element.mrpPrice != "" ? Text('\u{20B9}${element.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                                      element.mrpPrice != "" ? Text('\u{20B9}${element.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : const Text(""),
                                                                                       SizedBox(
                                                                                         width: 5.w,
                                                                                       ),
@@ -1584,7 +1607,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                                                                     fontWeight: FontWeight.w500),
                                                                                               ),
                                                                                             )
-                                                                                          : Text(""),
+                                                                                          : const Text(""),
                                                                                     ],
                                                                                   ),
                                                                                 ],
@@ -1714,7 +1737,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                       : Container();
                                                 }),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                             ],
@@ -1735,8 +1758,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                         .withOpacity(0.1),
                                                     shape: BoxShape.circle,
                                                   ),
-                                                  child: Center(
-                                                    child: Container(
+                                                  child: const Center(
+                                                    child: SizedBox(
                                                       width: 20,
                                                       height: 20,
                                                       child:
@@ -1784,7 +1807,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                               indent: 0,
                               endIndent: 0,
                             ),
-                            OrderProducts(),
+                            const OrderProducts(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -1847,7 +1870,7 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                                                   fontWeight: FontWeight.w400),
                                             ),
                                           )
-                                        : TextSpan(text: ""),
+                                        : const TextSpan(text: ""),
                                   ]),
                                 ),
                                 Text(

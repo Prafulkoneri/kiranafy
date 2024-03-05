@@ -303,7 +303,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
     final watch = context.watch<OnBoardingController>();
     return Scaffold(
       body: watch.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Stack(
@@ -398,7 +398,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                               // physics: CustomPageViewScrollPhysics(),
                               // physics: NeverScrollableScrollPhysics(),
 
-                              physics: ClampingScrollPhysics(),
+                              physics: const ClampingScrollPhysics(),
 
                               scrollDirection: Axis.horizontal,
                               controller: watch.pageController,
@@ -428,7 +428,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                       style: TextStyle(
                                           fontSize: 30.sp,
                                           fontWeight: FontWeight.w700,
-                                          color: Color(0xff006F94),
+                                          color: const Color(0xff006F94),
                                           letterSpacing: 0.5),
                                     ),
                                     SizedBox(
@@ -442,7 +442,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                                         style: TextStyle(
                                             fontSize: 15.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: Color(0xff263238)),
+                                            color: const Color(0xff263238)),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -474,7 +474,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                               ),
                               Expanded(
                                 child: PrimaryButton(
-                                  color: Color(0xff4EEFC1),
+                                  color: const Color(0xff4EEFC1),
                                   onTap: () {
                                     read.onCustomerBtnPressed(context);
                                   },
@@ -487,7 +487,7 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
                               ),
                               Expanded(
                                 child: PrimaryButton(
-                                  color: Color(0xff4689EC),
+                                  color: const Color(0xff4689EC),
                                   onTap: () {
                                     read.onShopOwnerBtnPressed(context);
                                   },

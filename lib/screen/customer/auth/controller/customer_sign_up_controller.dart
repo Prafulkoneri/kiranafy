@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/auth/model/customer_sign_up_model.dart';
 import 'package:local_supper_market/screen/customer/auth/model/mobile_number_check_model.dart';
@@ -23,7 +22,7 @@ class CustomerSignUpController extends ChangeNotifier {
   CustomerSignUpRepo customerSignUpRepo = CustomerSignUpRepo();
   MobileNumberCheckRepo mobileNumberCheckRepo = MobileNumberCheckRepo();
   bool isOtpErrorVisible = false;
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isVerifyChecked = false; //terms
   String countryCode = "+91";
   // bool isNextBtnEnabled = false;
@@ -101,7 +100,7 @@ class CustomerSignUpController extends ChangeNotifier {
         showOtpErrorMsg();
         notifyListeners();
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // print("888");
       // print(e.message);
       showOtpErrorMsg();
@@ -138,7 +137,7 @@ class CustomerSignUpController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => MainScreenView(
+              builder: (context) => const MainScreenView(
                   index: 0,
                   screenName: HomeScreenView(
                     refreshPage: true,
@@ -213,7 +212,7 @@ class CustomerSignUpController extends ChangeNotifier {
     isOtpErrorVisible = true;
     notifyListeners();
     print(isOtpErrorVisible);
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       print("duration");
       isOtpErrorVisible = false;
       notifyListeners();

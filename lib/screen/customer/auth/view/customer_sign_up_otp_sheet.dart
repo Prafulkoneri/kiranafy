@@ -1,7 +1,5 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -67,7 +65,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
         Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.white),
           child: Material(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0)),
               child: Container(
@@ -96,7 +94,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                         child: Text(
                           "We have sent SMS to :\n ${watch.mobileController.text.isNotEmpty ? watch.mobileController.text.substring(0, 3) : ""} XXX XX XX",
                           style: GoogleFonts.inter(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 color: Black,
                                 letterSpacing: .5,
                                 fontSize: 18,
@@ -110,7 +108,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                         length: 6,
                         width: MediaQuery.of(context).size.width,
                         fieldWidth: 50,
-                        style: TextStyle(fontSize: 17),
+                        style: const TextStyle(fontSize: 17),
                         textFieldAlignment: MainAxisAlignment.spaceAround,
                         fieldStyle: FieldStyle.underline,
                         onChanged: (String code) {
@@ -131,7 +129,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                         height: 60,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Button,
+                            backgroundColor: Button,
                             // onPrimary: Colors.white,
                             // shadowColor: Colors.greenAccent,
                             elevation: 3,
@@ -196,6 +194,7 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                 color: Colors.red,
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -221,7 +220,6 @@ class _CustomerSignUpOtpState extends State<CustomerSignUpOtp> {
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

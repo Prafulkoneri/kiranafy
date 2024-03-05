@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/network/end_points.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/add_update_unit_product_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/model/new_model/edit_unit_product_category_model.dart';
 
 class AddUpdateUnitProductCategoryRepo {
   Future<http.Response> addUpdateUnitProductCategory(

@@ -602,7 +602,6 @@
 //   }
 // }
 
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -612,7 +611,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/auth/view/customer_sign_in_view.dart';
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_my_subscription/view/s_my_subscription_plans_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
@@ -773,13 +771,13 @@ class Utils {
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor: Color(0xffFFFFFF),
+            backgroundColor: const Color(0xffFFFFFF),
             // shape: ,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
 
             // scrollable: true,
-            child: Container(
+            child: SizedBox(
               height: 205.h,
               // width: 400.w,
               child: Column(
@@ -791,7 +789,7 @@ class Utils {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.dmSans(
                         textStyle: TextStyle(
-                            color: Color(0xff006F94),
+                            color: const Color(0xff006F94),
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w700),
                       ),
@@ -816,13 +814,13 @@ class Utils {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        CustomerSignInView()));
+                                        const CustomerSignInView()));
                           },
                           child: Container(
                             padding: EdgeInsets.only(
                                 left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
                             decoration: BoxDecoration(
-                                color: Color(0xff39C19D),
+                                color: const Color(0xff39C19D),
                                 borderRadius: BorderRadius.circular(8)),
                             child: Text(
                               "Go",
@@ -850,7 +848,7 @@ class Utils {
                             padding: EdgeInsets.only(
                                 left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
                             decoration: BoxDecoration(
-                                color: Color(0xffEC7074),
+                                color: const Color(0xffEC7074),
                                 // border: Border.all(width: 1, color: Black),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Column(
@@ -889,13 +887,13 @@ class Utils {
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor: Color(0xffFFFFFF),
+            backgroundColor: const Color(0xffFFFFFF),
             // shape: ,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
 
             // scrollable: true,
-            child: Container(
+            child: SizedBox(
               height: 320.h,
               // width: 400.w,
               child: Column(
@@ -907,11 +905,11 @@ class Utils {
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 1,
-                            color: Color(0xff000000).withOpacity(0.15)),
+                            color: const Color(0xff000000).withOpacity(0.15)),
                         borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.only(
                         left: 82.w, right: 78.w, top: 30, bottom: 19),
-                    child: Image(
+                    child: const Image(
                       image: AssetImage(
                         "assets/images/subscription_delete.png",
                       ),
@@ -950,7 +948,7 @@ class Utils {
                           "•",
                           style: TextStyle(fontSize: 20.sp),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Flexible(
@@ -1001,7 +999,7 @@ class Utils {
                         Navigator.pop(context);
                         readMainScreen.onNavigation(
                             0,
-                            SSubscriptionScreenView(
+                            const SSubscriptionScreenView(
                                 loggedIn: true, routeName: "dashboard"),
                             context);
                         readMainScreen.hideBottomNavigationBar();
@@ -1139,7 +1137,7 @@ class Utils {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+        MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
   }
 
   static ScaffoldFeatureController showPrimarySnackbar(
@@ -1213,6 +1211,6 @@ class Utils {
 
 extension StringExtension on String {
   String capitalize() {
-    return "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }

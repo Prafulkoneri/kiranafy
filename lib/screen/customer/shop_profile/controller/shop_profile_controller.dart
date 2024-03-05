@@ -8,15 +8,11 @@ import 'package:local_supper_market/screen/customer/cart/model/add_product_to_ca
 import 'package:local_supper_market/screen/customer/cart/model/cart_item_quantity_model.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/add_product_to_cart_repo.dart';
 import 'package:local_supper_market/screen/customer/cart/repository/cart_item_quantity_repo.dart';
-import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/add_fav_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/model/remove_fav_shop_model.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/add_fav_shop_repo.dart';
 import 'package:local_supper_market/screen/customer/near_shops/repository/remove_fav_shop_repo.dart';
-import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_category_view.dart';
-import 'package:local_supper_market/screen/customer/near_shops/view/all_near_shops_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/remove_item_cart_model.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/model/shop_coupons_model.dart';
@@ -184,13 +180,13 @@ class ShopProfileViewController extends ChangeNotifier {
 
         int imageLength = bannerImageData?.length ?? 0;
         if (bannerImageData!.isNotEmpty) {
-          Timer.periodic(Duration(seconds: 5), (Timer timer) {
+          Timer.periodic(const Duration(seconds: 5), (Timer timer) {
             print(_currentPage);
             if (_currentPage < imageLength - 1) {
               _currentPage++;
               pageController.nextPage(
                 // _currentPage,
-                duration: Duration(milliseconds: 350),
+                duration: const Duration(milliseconds: 350),
                 curve: Curves.easeIn,
               );
               print("still going");
@@ -199,7 +195,7 @@ class ShopProfileViewController extends ChangeNotifier {
               pageController.animateToPage(
                 // _currentPage,
                 _currentPage,
-                duration: Duration(milliseconds: 350),
+                duration: const Duration(milliseconds: 350),
                 curve: Curves.easeIn,
               );
               print("should stop");
@@ -247,7 +243,7 @@ class ShopProfileViewController extends ChangeNotifier {
   }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {

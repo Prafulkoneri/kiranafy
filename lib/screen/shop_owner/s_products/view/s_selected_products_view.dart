@@ -79,7 +79,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(0, SSCategoryListView(), context);
+              readMain.onNavigation(0, const SSCategoryListView(), context);
               // Navigator.pushAndRemoveUntil(
               //   context,
               //   MaterialPageRoute(
@@ -104,13 +104,13 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
             ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
-                  readMain.onNavigation(0, SSCategoryListView(), context);
+                  readMain.onNavigation(0, const SSCategoryListView(), context);
                   return false;
                 },
                 child: SingleChildScrollView(
                   //  physics: AlwaysScrollableScrollPhysics(),
                   controller: scrollController,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Padding(
                     padding: EdgeInsets.only(
                       right: 19.0.w,
@@ -289,7 +289,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           //  watch.selectedProductList?.length ?? 0,
                                           shrinkWrap: true,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             final element =
                                                 watch.productsFromAdmins[index];
@@ -306,8 +306,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .withOpacity(
                                                                     0.09),
                                                             blurRadius: 5,
-                                                            offset: Offset(
-                                                                -.0, 5.0),
+                                                            offset:
+                                                                const Offset(
+                                                                    -.0, 5.0),
                                                             spreadRadius: 0),
                                                       ],
                                                       borderRadius:
@@ -322,7 +323,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   //     border: Border.all(width: 1, color: Black1)),
                                                   child: ListTileTheme(
                                                     contentPadding:
-                                                        EdgeInsets.all(0),
+                                                        const EdgeInsets.all(0),
                                                     dense: true,
                                                     horizontalTitleGap: -8,
                                                     minLeadingWidth: 0,
@@ -332,8 +333,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                       children: [
                                                         ExpansionTile(
                                                           trailing:
-                                                              SizedBox.shrink(),
-                                                          title: Container(
+                                                              const SizedBox
+                                                                  .shrink(),
+                                                          title: SizedBox(
                                                             width: ScreenUtil()
                                                                 .screenWidth,
                                                             child: Row(
@@ -357,7 +359,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                               fit: BoxFit.cover,
                                                                             )
                                                                           : Image(
-                                                                              image: AssetImage(
+                                                                              image: const AssetImage(
                                                                                 "assets/images/image_not_found.png",
                                                                               ),
                                                                               height: 61.h,
@@ -413,7 +415,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                             print(
                                                                               element.productName,
                                                                             );
-                                                                            //                                                                          print(
+                                                                            //                                                             print(
                                                                             // productUnitId: "",                                                                            );
                                                                             // return;
                                                                             readMainScreen.onNavigation(
@@ -479,7 +481,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                                 bottom: 5.w),
                                                                             decoration:
                                                                                 BoxDecoration(
-                                                                              color: Color(0xff39C19D),
+                                                                              color: const Color(0xff39C19D),
                                                                               borderRadius: BorderRadius.circular(50),
                                                                             ),
                                                                             child:
@@ -536,7 +538,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           child:
                                                                               Container(
                                                                             padding:
-                                                                                EdgeInsets.all(8),
+                                                                                const EdgeInsets.all(8),
                                                                             decoration:
                                                                                 BoxDecoration(boxShadow: [
                                                                               BoxShadow(
@@ -568,7 +570,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           child:
                                                                               Container(
                                                                             padding:
-                                                                                EdgeInsets.all(8),
+                                                                                const EdgeInsets.all(8),
                                                                             decoration:
                                                                                 BoxDecoration(boxShadow: [
                                                                               BoxShadow(
@@ -601,6 +603,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ],
                                                             ),
                                                           ),
+                                                          tilePadding:
+                                                              EdgeInsets.zero,
                                                           children: [
                                                             Container(
                                                               padding: EdgeInsets
@@ -613,7 +617,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           11.w),
                                                               child: Column(
                                                                 children: [
-                                                                  Divider(),
+                                                                  const Divider(),
                                                                   Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -680,7 +684,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     shrinkWrap:
                                                                         true,
                                                                     physics:
-                                                                        NeverScrollableScrollPhysics(),
+                                                                        const NeverScrollableScrollPhysics(),
                                                                     itemBuilder:
                                                                         (context,
                                                                             int) {
@@ -757,8 +761,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ),
                                                             ),
                                                           ],
-                                                          tilePadding:
-                                                              EdgeInsets.zero,
                                                           // child:
                                                         ),
                                                       ],
@@ -781,7 +783,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                           //  watch.selectedProductList?.length ?? 0,
                                           shrinkWrap: true,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           itemBuilder: (context, index) {
                                             final element =
                                                 watch.customProducts[index];
@@ -798,8 +800,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                 .withOpacity(
                                                                     0.09),
                                                             blurRadius: 5,
-                                                            offset: Offset(
-                                                                -.0, 5.0),
+                                                            offset:
+                                                                const Offset(
+                                                                    -.0, 5.0),
                                                             spreadRadius: 0),
                                                       ],
                                                       borderRadius:
@@ -814,7 +817,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                   //     border: Border.all(width: 1, color: Black1)),
                                                   child: ListTileTheme(
                                                     contentPadding:
-                                                        EdgeInsets.all(0),
+                                                        const EdgeInsets.all(0),
                                                     dense: true,
                                                     horizontalTitleGap: -8,
                                                     minLeadingWidth: 0,
@@ -824,8 +827,9 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                       children: [
                                                         ExpansionTile(
                                                           trailing:
-                                                              SizedBox.shrink(),
-                                                          title: Container(
+                                                              const SizedBox
+                                                                  .shrink(),
+                                                          title: SizedBox(
                                                             width: ScreenUtil()
                                                                 .screenWidth,
                                                             child: Row(
@@ -849,7 +853,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                               fit: BoxFit.cover,
                                                                             )
                                                                           : Image(
-                                                                              image: AssetImage(
+                                                                              image: const AssetImage(
                                                                                 "assets/images/image_not_found.png",
                                                                               ),
                                                                               height: 61.h,
@@ -972,7 +976,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                                 bottom: 5.w),
                                                                             decoration:
                                                                                 BoxDecoration(
-                                                                              color: Color(0xff39C19D),
+                                                                              color: const Color(0xff39C19D),
                                                                               borderRadius: BorderRadius.circular(50),
                                                                             ),
                                                                             child:
@@ -1021,7 +1025,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           child:
                                                                               Container(
                                                                             padding:
-                                                                                EdgeInsets.all(8),
+                                                                                const EdgeInsets.all(8),
                                                                             decoration:
                                                                                 BoxDecoration(boxShadow: [
                                                                               BoxShadow(
@@ -1053,7 +1057,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           child:
                                                                               Container(
                                                                             padding:
-                                                                                EdgeInsets.all(8),
+                                                                                const EdgeInsets.all(8),
                                                                             decoration:
                                                                                 BoxDecoration(boxShadow: [
                                                                               BoxShadow(
@@ -1086,6 +1090,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ],
                                                             ),
                                                           ),
+                                                          tilePadding:
+                                                              EdgeInsets.zero,
                                                           children: [
                                                             Container(
                                                               padding: EdgeInsets
@@ -1098,7 +1104,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                           11.w),
                                                               child: Column(
                                                                 children: [
-                                                                  Divider(),
+                                                                  const Divider(),
                                                                   Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1165,7 +1171,7 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                                     shrinkWrap:
                                                                         true,
                                                                     physics:
-                                                                        NeverScrollableScrollPhysics(),
+                                                                        const NeverScrollableScrollPhysics(),
                                                                     itemBuilder:
                                                                         (context,
                                                                             int) {
@@ -1242,8 +1248,6 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                                               ),
                                                             ),
                                                           ],
-                                                          tilePadding:
-                                                              EdgeInsets.zero,
                                                           // child:
                                                         ),
                                                       ],
@@ -1305,8 +1309,8 @@ class _SSelectedProductViewState extends State<SSelectedProductView> {
                                 color: Colors.black.withOpacity(0.1),
                                 shape: BoxShape.circle,
                               ),
-                              child: Center(
-                                child: Container(
+                              child: const Center(
+                                child: SizedBox(
                                   width: 20,
                                   height: 20,
                                   child: CircularProgressIndicator(

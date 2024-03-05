@@ -63,13 +63,13 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
             : WillPopScope(
           onWillPop: ()async{
             print("hello");
-            readMainScreen.onNavigation(0,ShopDashBoardView(refresh: false), context);
+            readMainScreen.onNavigation(0,const ShopDashBoardView(refresh: false), context);
             return false;
           },
               child: Column(
                   children: [
                     TabBar(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       // indicatorSize: TabBarIndicatorSize.tab,
                       // controller: tabController,
                       splashBorderRadius: BorderRadius.circular(20),
@@ -91,7 +91,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                       fontWeight: watch.selectedIndex == 0
                                           ? FontWeight.w700
                                           : FontWeight.w400,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   height: 10.w,
@@ -100,7 +100,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                     ? Container(
                                         height: 6.w,
                                         decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(5.w),
                                                 topRight: Radius.circular(5.w))),
@@ -121,7 +121,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                       fontWeight: watch.selectedIndex == 1
                                           ? FontWeight.w700
                                           : FontWeight.w400,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   height: 10.w,
@@ -130,7 +130,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                     ? Container(
                                         height: 6.w,
                                         decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(5.w),
                                                 topRight: Radius.circular(5.w))),
@@ -151,7 +151,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                       fontWeight: watch.selectedIndex == 2
                                           ? FontWeight.w700
                                           : FontWeight.w400,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   height: 10.w,
@@ -160,7 +160,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                     ? Container(
                                         height: 6.w,
                                         decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(5.w),
                                                 topRight: Radius.circular(5.w))),
@@ -181,7 +181,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                       fontWeight: watch.selectedIndex == 3
                                           ? FontWeight.w700
                                           : FontWeight.w400,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   height: 10.w,
@@ -190,7 +190,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                     ? Container(
                                         height: 6.w,
                                         decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(5.w),
                                                 topRight: Radius.circular(5.w))),
@@ -211,7 +211,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                       fontWeight: watch.selectedIndex == 4
                                           ? FontWeight.w700
                                           : FontWeight.w400,
-                                      color: Color(0xff3A3A3A)),
+                                      color: const Color(0xff3A3A3A)),
                                 ),
                                 SizedBox(
                                   height: 10.w,
@@ -220,7 +220,7 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                                     ? Container(
                                         height: 6.w,
                                         decoration: BoxDecoration(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(5.w),
                                                 topRight: Radius.circular(5.w))),
@@ -238,37 +238,37 @@ class _SOrderStatusViewState extends State<SOrderStatusView>
                     Expanded(
                       child: ListView(
                         shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         children: [
                           IndexedStack(
+                            index: watch.selectedIndex,
                             children: <Widget>[
                               Visibility(
-                                child: SPendingOrdersView(),
                                 maintainState: true,
                                 visible: watch.selectedIndex == 0,
+                                child: const SPendingOrdersView(),
                               ),
                               Visibility(
-                                child: SConfirmedOrdersView(),
                                 maintainState: true,
                                 visible: watch.selectedIndex == 1,
+                                child: const SConfirmedOrdersView(),
                               ),
                               Visibility(
-                                child: SInProcessOrderView(),
                                 maintainState: true,
                                 visible: watch.selectedIndex == 2,
+                                child: const SInProcessOrderView(),
                               ),
                               Visibility(
-                                child: SDeliveredOrderView(),
                                 maintainState: true,
                                 visible: watch.selectedIndex == 3,
+                                child: const SDeliveredOrderView(),
                               ),
                               Visibility(
-                                child: SCancelledOrdersView(),
                                 maintainState: true,
                                 visible: watch.selectedIndex == 4,
+                                child: const SCancelledOrdersView(),
                               ),
                             ],
-                            index: watch.selectedIndex,
                           ),
                         ],
                       ),

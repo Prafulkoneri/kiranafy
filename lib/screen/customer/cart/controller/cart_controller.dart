@@ -43,8 +43,8 @@ class CartListController extends ChangeNotifier {
       print(response.statusCode);
       if (response.statusCode == 200) {
         cartList = result.cartData?.cartList;
-        final readMain=   Provider.of<MainScreenController>(context,
-            listen: false);
+        final readMain =
+            Provider.of<MainScreenController>(context, listen: false);
         readMain.getCartCount(cartList?.length);
         showLoader(false);
         notifyListeners();

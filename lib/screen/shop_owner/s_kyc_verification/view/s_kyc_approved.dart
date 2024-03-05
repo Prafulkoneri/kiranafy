@@ -9,8 +9,9 @@ import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:provider/provider.dart';
 
-
 class KycApprovedView extends StatefulWidget {
+  const KycApprovedView({super.key});
+
   @override
   State<KycApprovedView> createState() => _KycApprovedViewState();
 }
@@ -57,7 +58,7 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                     "Congratulations!",
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          color: Color(0xff20BF55),
+                          color: const Color(0xff20BF55),
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w400),
                     ),
@@ -70,7 +71,7 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          color: Color(0xff181725),
+                          color: const Color(0xff181725),
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w400),
                     ),
@@ -88,7 +89,8 @@ class _KycApprovedViewState extends State<KycApprovedView> {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SShopConfigurationView(
+                              builder: (context) =>
+                                  const SShopConfigurationView(
                                     initialShopConfigration: true,
                                   )),
                           (Route<dynamic> route) => false,

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,8 @@ import 'package:local_supper_market/widget/textfield.dart';
 enum LoginScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET } //otp
 
 class ShopSignInView extends StatefulWidget {
+  const ShopSignInView({super.key});
+
   @override
   State<ShopSignInView> createState() => _ShopSignInViewState();
 }
@@ -71,7 +72,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
         FocusScope.of(context).unfocus();
       },
       child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -215,7 +216,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                     fontWeight: FontWeight.w400),
                                 children: [
                                   TextSpan(
-                                    children: [],
+                                    children: const [],
                                     text: 'Terms of Service',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
@@ -264,7 +265,7 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                         ///////////////Login//////////////
                         Expanded(
                           child: PrimaryButton(
-                            color: Color(0xff4689EC),
+                            color: const Color(0xff4689EC),
                             onTap: () async {
                               //otp vrification
                               await read.onLoginClick(context).then((value) {
@@ -278,13 +279,13 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                                 showModalBottomSheet(
                                   backgroundColor: Colors.white,
                                   isScrollControlled: true,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(30),
                                           topRight: Radius.circular(30))),
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return OtpShopBottomSheetView();
+                                    return const OtpShopBottomSheetView();
                                   },
                                 );
                               });
@@ -319,17 +320,17 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                               await showModalBottomSheet(
                                 backgroundColor: Colors.white,
                                 isScrollControlled: true,
-                                shape: RoundedRectangleBorder(
+                                shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(30),
                                         topRight: Radius.circular(30))),
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return OtpShopBottomSheetView();
+                                  return const OtpShopBottomSheetView();
                                 },
                               );
                             },
-                            textColor: Color(0xff4689EC),
+                            textColor: const Color(0xff4689EC),
                             text: "New Shop",
                           ),
                         ),

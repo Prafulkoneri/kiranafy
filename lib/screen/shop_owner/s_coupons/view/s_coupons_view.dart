@@ -57,7 +57,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
             onBackBtnPressed: () {
               readMain.onNavigation(
                   4,
-                  SAccountScreenView(
+                  const SAccountScreenView(
                     refresh: false,
                   ),
                   context);
@@ -70,7 +70,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                 if (widget.isNavFromDashBoard == true) {
                   readMain.onNavigation(
                       3,
-                      SAddCouponsView(
+                      const SAddCouponsView(
                         isEditCoupon: false,
                         isNavFromDashboard: true,
                       ),
@@ -89,7 +89,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                 } else {
                   readMain.onNavigation(
                       4,
-                      SAddCouponsView(
+                      const SAddCouponsView(
                         isEditCoupon: false,
                         isNavFromDashboard: false,
                       ),
@@ -120,10 +120,10 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
               onWillPop: () async {
                 widget.isNavFromDashBoard == true
                     ? readMain.onNavigation(
-                        0, ShopDashBoardView(refresh: false), context)
+                        0, const ShopDashBoardView(refresh: false), context)
                     : readMain.onNavigation(
                         4,
-                        SAccountScreenView(
+                        const SAccountScreenView(
                           refresh: false,
                         ),
                         context);
@@ -133,7 +133,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                 children: [
                   Expanded(
                       child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: watch.couponsListData?.isNotEmpty == true
                         ? Container(
                             // height: 125.h,
@@ -141,7 +141,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                             child: ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 // physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: watch.couponsListData?.length ?? 0,
@@ -249,7 +249,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                             context: context,
                                                             builder: (context) {
                                                               // using a scaffold helps to more easily position the FAB
-                                                              return SCouponsDetailView();
+                                                              return const SCouponsDetailView();
                                                             });
                                                       },
                                                       child: SvgPicture.asset(
@@ -359,7 +359,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           10.0),
-                                                              side: BorderSide(
+                                                              side: const BorderSide(
                                                                   width: 1,
                                                                   color:
                                                                       SplashText),
@@ -513,16 +513,16 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                       (context) {
                                                                     return Dialog(
                                                                       backgroundColor:
-                                                                          Color(
+                                                                          const Color(
                                                                               0xffFFFFFF),
                                                                       // shape: ,
-                                                                      shape: RoundedRectangleBorder(
+                                                                      shape: const RoundedRectangleBorder(
                                                                           borderRadius:
                                                                               BorderRadius.all(Radius.circular(10))),
 
                                                                       // scrollable: true,
                                                                       child:
-                                                                          Container(
+                                                                          SizedBox(
                                                                         height:
                                                                             205.h,
                                                                         // width: 400.w,
@@ -536,7 +536,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                                 "Do you really want to delete coupon ? ",
                                                                                 textAlign: TextAlign.center,
                                                                                 style: GoogleFonts.dmSans(
-                                                                                  textStyle: TextStyle(color: Color(0xff006F94), fontSize: 20.sp, fontWeight: FontWeight.w700),
+                                                                                  textStyle: TextStyle(color: const Color(0xff006F94), fontSize: 20.sp, fontWeight: FontWeight.w700),
                                                                                 ),
                                                                               ),
                                                                             ),
@@ -557,7 +557,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                                     },
                                                                                     child: Container(
                                                                                       padding: EdgeInsets.only(left: 24.w, right: 24.w, top: 9.w, bottom: 9.w),
-                                                                                      decoration: BoxDecoration(color: Color(0xff39C19D), borderRadius: BorderRadius.circular(8)),
+                                                                                      decoration: BoxDecoration(color: const Color(0xff39C19D), borderRadius: BorderRadius.circular(8)),
                                                                                       child: Text(
                                                                                         "Yes",
                                                                                         textAlign: TextAlign.center,
@@ -583,7 +583,7 @@ class _ShopCouponsViewState extends State<ShopCouponsView> {
                                                                                     child: Container(
                                                                                       padding: EdgeInsets.only(left: 14.w, right: 15.w, top: 9.w, bottom: 9.w),
                                                                                       decoration: BoxDecoration(
-                                                                                          color: Color(0xffEC7074),
+                                                                                          color: const Color(0xffEC7074),
                                                                                           // border: Border.all(width: 1, color: Black),
                                                                                           borderRadius: BorderRadius.circular(10)),
                                                                                       child: Column(

@@ -66,13 +66,13 @@ class _ShopOrderViewState extends State<ShopOrderView> {
           onBackBtnPressed: () {
             if (widget.route == "notification") {
               readMainScreen.onNavigation(
-                  0, NotificationsScreenView(route: ""), context);
+                  0, const NotificationsScreenView(route: ""), context);
               readMainScreen.hideBottomNavigationBar();
             }
             if (widget.route == "customerDetails") {
               readMainScreen.onNavigation(
                   0,
-                  CustomerDetailView(
+                  const CustomerDetailView(
                     screenName: "",
                   ),
                   context);
@@ -80,7 +80,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             }
             ////////////////////
             if (widget.route == "paymentsScreen") {
-              readMainScreen.onNavigation(2, SPaymentsView(), context);
+              readMainScreen.onNavigation(2, const SPaymentsView(), context);
               readMainScreen.showBottomNavigationBar();
             }
             ////////////////////
@@ -94,7 +94,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             if (widget.route == "paymentRefund") {
               readMainScreen.onNavigation(
                   0,
-                  SPaymentRefundList(
+                  const SPaymentRefundList(
                     isNavFromAccounts: false,
                   ),
                   context);
@@ -103,7 +103,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
             if (widget.route == "shopReview") {
               readMainScreen.onNavigation(
                   0,
-                  ShopReviewScreenView(
+                  const ShopReviewScreenView(
                     fromDashBoard: true,
                   ),
                   context);
@@ -121,7 +121,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                   onWillPop: () async {
                     if (widget.route == "notification") {
                       readMainScreen.onNavigation(
-                          0, NotificationsScreenView(route: ""), context);
+                          0, const NotificationsScreenView(route: ""), context);
                       readMainScreen.hideBottomNavigationBar();
                     }
                     if (widget.route == "orderStatus") {
@@ -134,7 +134,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     if (widget.route == "paymentRefund") {
                       readMainScreen.onNavigation(
                           0,
-                          SPaymentRefundList(
+                          const SPaymentRefundList(
                             isNavFromAccounts: false,
                           ),
                           context);
@@ -143,7 +143,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                     return false;
                   },
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -193,7 +193,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
-                                                  side: BorderSide(
+                                                  side: const BorderSide(
                                                     color: Colors.red,
                                                     // width: 1,
                                                   ),
@@ -238,7 +238,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      side: BorderSide(
+                                                      side: const BorderSide(
                                                         color:
                                                             Color(0xffE4C400),
                                                         // width: 1,
@@ -254,7 +254,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
                                                         color:
-                                                            Color(0xffE4C400),
+                                                            const Color(0xffE4C400),
                                                         // letterSpacing: .5,
                                                         fontSize: 12.sp,
                                                         fontWeight:
@@ -287,7 +287,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
-                                                          side: BorderSide(
+                                                          side: const BorderSide(
                                                             color: Color(
                                                                 0xff39C19D),
                                                             // width: 1,
@@ -300,7 +300,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       "${watch.orderDetails?.orderStatus}",
                                                       style: GoogleFonts.dmSans(
                                                         textStyle: TextStyle(
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xff39C19D),
                                                             // letterSpacing: .5,
                                                             fontSize: 12.sp,
@@ -337,7 +337,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           10),
-                                                              side: BorderSide(
+                                                              side: const BorderSide(
                                                                 color: Color(
                                                                     0xff39C19D),
                                                                 // width: 1,
@@ -352,7 +352,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               .dmSans(
                                                             textStyle:
                                                                 TextStyle(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xff39C19D),
                                                                     // letterSpacing: .5,
                                                                     fontSize:
@@ -391,7 +391,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           .circular(
                                                                               10),
                                                                   side:
-                                                                      BorderSide(
+                                                                      const BorderSide(
                                                                     color: Color(
                                                                         0xff39C19D),
                                                                     // width: 1,
@@ -406,7 +406,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   .dmSans(
                                                                 textStyle:
                                                                     TextStyle(
-                                                                        color: Color(
+                                                                        color: const Color(
                                                                             0xff39C19D),
                                                                         // letterSpacing: .5,
                                                                         fontSize: 12
@@ -446,7 +446,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           BorderRadius.circular(
                                                                               10),
                                                                       side:
-                                                                          BorderSide(
+                                                                          const BorderSide(
                                                                         // color: Color(
                                                                         //     0xff39C19D),
                                                                         // width: 1,
@@ -497,7 +497,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           borderRadius:
                                                                               BorderRadius.circular(10),
                                                                           side:
-                                                                              BorderSide(
+                                                                              const BorderSide(
                                                                             color:
                                                                                 Color(0xff39C19D),
                                                                             // width: 1,
@@ -512,7 +512,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       style: GoogleFonts
                                                                           .dmSans(
                                                                         textStyle: TextStyle(
-                                                                            color: Color(0xff39C19D),
+                                                                            color: const Color(0xff39C19D),
                                                                             // letterSpacing: .5,
                                                                             fontSize: 12.sp,
                                                                             fontWeight: FontWeight.w500),
@@ -541,7 +541,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                               MaterialStateProperty.all(
                                                                             RoundedRectangleBorder(
                                                                               borderRadius: BorderRadius.circular(10),
-                                                                              side: BorderSide(
+                                                                              side: const BorderSide(
                                                                                 color: Color(0xff39C19D),
                                                                                 // width: 1,
                                                                               ),
@@ -556,7 +556,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                           style:
                                                                               GoogleFonts.dmSans(
                                                                             textStyle: TextStyle(
-                                                                                color: Color(0xff39C19D),
+                                                                                color: const Color(0xff39C19D),
                                                                                 // letterSpacing: .5,
                                                                                 fontSize: 12.sp,
                                                                                 fontWeight: FontWeight.w500),
@@ -583,7 +583,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                               shape: MaterialStateProperty.all(
                                                                                 RoundedRectangleBorder(
                                                                                   borderRadius: BorderRadius.circular(10),
-                                                                                  side: BorderSide(
+                                                                                  side: const BorderSide(
                                                                                     color: Color(0xff39C19D),
                                                                                     // width: 1,
                                                                                   ),
@@ -597,7 +597,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                               "${watch.orderDetails?.orderStatus}",
                                                                               style: GoogleFonts.dmSans(
                                                                                 textStyle: TextStyle(
-                                                                                    color: Color(0xff39C19D),
+                                                                                    color: const Color(0xff39C19D),
                                                                                     // letterSpacing: .5,
                                                                                     fontSize: 12.sp,
                                                                                     fontWeight: FontWeight.w500),
@@ -829,7 +829,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                 fontWeight: FontWeight.w700),
                                             children: [
                                               TextSpan(
-                                                children: [],
+                                                children: const [],
                                                 text:
                                                     'This is a Self- Pickup Order, the customer will collect the ordered products from your shop.',
                                                 recognizer:
@@ -1107,7 +1107,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         context,
                                                                     builder:
                                                                         (context) {
-                                                                      return OrderDeliveryCodeView();
+                                                                      return const OrderDeliveryCodeView();
                                                                     },
                                                                   );
                                                                 },
@@ -1211,7 +1211,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         30))),
                                                     context: context,
                                                     builder: (context) {
-                                                      return cancelOrderFiltterView();
+                                                      return const cancelOrderFiltterView();
                                                     },
                                                   );
                                                 },
@@ -1222,7 +1222,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       bottom: 9.w,
                                                       right: 40.w),
                                                   decoration: BoxDecoration(
-                                                      color: Color(0xffEC7074),
+                                                      color: const Color(0xffEC7074),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               8)),
@@ -1284,7 +1284,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       .w700),
                                                           children: [
                                                             TextSpan(
-                                                              children: [],
+                                                              children: const [],
                                                               text:
                                                                   'Before confirming order, please check if all products are available in stock.\nIncase if any product is unavailable, please uncheck below',
                                                               recognizer:
@@ -1325,7 +1325,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     // height: 1.5,
-                                                    color: Color(0xff000000),
+                                                    color: const Color(0xff000000),
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
@@ -1340,7 +1340,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     // height: 1.5,
-                                                    color: Color(0xff000000),
+                                                    color: const Color(0xff000000),
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
@@ -1432,7 +1432,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     // height: 1.5,
-                                                    color: Color(0xff000000),
+                                                    color: const Color(0xff000000),
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
@@ -1447,7 +1447,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               style: GoogleFonts.dmSans(
                                                 textStyle: TextStyle(
                                                     // height: 1.5,
-                                                    color: Color(0xff000000),
+                                                    color: const Color(0xff000000),
                                                     // letterSpacing: .05,
                                                     // overflow: TextOverflow.ellipsis,
                                                     fontSize: 15.sp,
@@ -1548,7 +1548,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 indent: 0,
                                 endIndent: 0,
                               ),
-                              ShopOrderProducts(),
+                              const ShopOrderProducts(),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -1616,7 +1616,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         FontWeight.w400),
                                               ),
                                             )
-                                          : TextSpan(
+                                          : const TextSpan(
                                               text: "",
                                             ),
                                     ]),
@@ -1793,12 +1793,12 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             top: 2.w,
                                             bottom: 2.w),
                                         decoration: BoxDecoration(
-                                          color: Color(0xff39C19D)
+                                          color: const Color(0xff39C19D)
                                               .withOpacity(0.3),
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           border: Border.all(
-                                            color: Color(0xff39C19D),
+                                            color: const Color(0xff39C19D),
                                             style: BorderStyle.solid,
                                           ),
                                         ),
@@ -1884,7 +1884,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                         style: TextStyle(
                                             fontSize: 15.sp,
                                             fontWeight: FontWeight.w700,
-                                            color: Color(0xffE80000)),
+                                            color: const Color(0xffE80000)),
                                       )),
                                   SizedBox(
                                     height: 5.h,
@@ -1903,7 +1903,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               ),
                                               Expanded(
                                                   child: PrimaryButton(
-                                                color: Color(0xff39C19D),
+                                                color: const Color(0xff39C19D),
                                                 onTap: () {
                                                   read.onRefundAccept();
                                                   // read.updateRefundStatus("received", context);
@@ -1928,7 +1928,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               SizedBox(width: 12.w),
                                               Expanded(
                                                   child: PrimaryButton(
-                                                color: Color(0xffFF6258),
+                                                color: const Color(0xffFF6258),
                                                 onTap: () {
                                                   read.onRefundReject();
                                                   // read.updateRefundStatus("not_received", context);
@@ -1963,7 +1963,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                           ? Container(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 17.w),
-                                              color: Color(0xffEFFDFF),
+                                              color: const Color(0xffEFFDFF),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2019,7 +2019,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     .circular(
                                                                         5.w),
                                                             border: Border.all(
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0xff115B7A))),
                                                         padding: EdgeInsets
                                                             .symmetric(
@@ -2052,7 +2052,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff115B7A)),
                                                         )),
                                                       ),
@@ -2207,7 +2207,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     height: 27.w,
                                                   ),
                                                   PrimaryButton(
-                                                      color: Color(0xff39C19D),
+                                                      color: const Color(0xff39C19D),
                                                       onTap: () {
                                                         read.shopRefundUpdate(
                                                             context);
@@ -2227,7 +2227,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               ? Container(
                                                   padding: EdgeInsets.symmetric(
                                                       horizontal: 17.w),
-                                                  color: Color(0xffEFFDFF),
+                                                  color: const Color(0xffEFFDFF),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -2283,7 +2283,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         .circular(5
                                                                             .w),
                                                                 border: Border.all(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xff115B7A))),
                                                             padding: EdgeInsets
                                                                 .symmetric(
@@ -2313,7 +2313,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff115B7A)),
                                                             )),
                                                           ),
@@ -2347,7 +2347,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       ),
                                                       PrimaryButton(
                                                           color:
-                                                              Color(0xff39C19D),
+                                                              const Color(0xff39C19D),
                                                           onTap: () {
                                                             read.shopRefundUpdate(
                                                                 context);
@@ -2367,7 +2367,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 17.w),
-                                                      color: Color(0xffEFFDFF),
+                                                      color: const Color(0xffEFFDFF),
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -2445,7 +2445,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         BorderRadius.circular(5
                                                                             .w),
                                                                     border: Border.all(
-                                                                        color: Color(
+                                                                        color: const Color(
                                                                             0xff115B7A))),
                                                                 padding: EdgeInsets
                                                                     .symmetric(
@@ -2470,7 +2470,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
-                                                                      color: Color(
+                                                                      color: const Color(
                                                                           0xff115B7A)),
                                                                 )),
                                                               ),
@@ -2575,7 +2575,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   horizontal:
                                                                       17.w),
                                                           color:
-                                                              Color(0xffFFE8E8),
+                                                              const Color(0xffFFE8E8),
                                                           child: Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -2656,7 +2656,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                           ? Container(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 17.w),
-                                              color: Color(0xffEFFDFF),
+                                              color: const Color(0xffEFFDFF),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2712,7 +2712,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                     .circular(
                                                                         5.w),
                                                             border: Border.all(
-                                                                color: Color(
+                                                                color: const Color(
                                                                     0xff115B7A))),
                                                         padding: EdgeInsets
                                                             .symmetric(
@@ -2745,7 +2745,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff115B7A)),
                                                         )),
                                                       ),
@@ -2918,7 +2918,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                     height: 27.w,
                                                   ),
                                                   PrimaryButton(
-                                                      color: Color(0xff39C19D),
+                                                      color: const Color(0xff39C19D),
                                                       onTap: () {
                                                         read.shopRefundUpdate(
                                                             context);
@@ -2937,7 +2937,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               ? Container(
                                                   padding: EdgeInsets.symmetric(
                                                       horizontal: 17.w),
-                                                  color: Color(0xffEFFDFF),
+                                                  color: const Color(0xffEFFDFF),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -3019,7 +3019,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                         .circular(5
                                                                             .w),
                                                                 border: Border.all(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                         0xff115B7A))),
                                                             padding: EdgeInsets
                                                                 .symmetric(
@@ -3049,7 +3049,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                       0xff115B7A)),
                                                             )),
                                                           ),
@@ -3154,7 +3154,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 17.w),
-                                                      color: Color(0xffFFE8E8),
+                                                      color: const Color(0xffFFE8E8),
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -3236,7 +3236,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 // height: ScreenUtil().screenHeight,
                                 width: ScreenUtil().screenWidth,
                                 decoration:
-                                    BoxDecoration(color: Color(0xffFFE8E8)),
+                                    const BoxDecoration(color: Color(0xffFFE8E8)),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -3302,7 +3302,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                 watch.totalRefundAmount != "0"
                             ? Container(
                                 padding: EdgeInsets.symmetric(horizontal: 17.w),
-                                color: Color(0xffEFFDFF),
+                                color: const Color(0xffEFFDFF),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -3342,7 +3342,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               borderRadius:
                                                   BorderRadius.circular(5.w),
                                               border: Border.all(
-                                                  color: Color(0xff115B7A))),
+                                                  color: const Color(0xff115B7A))),
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 12.w),
                                           child: Center(
@@ -3351,7 +3351,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             style: TextStyle(
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w500,
-                                                color: Color(0xff115B7A)),
+                                                color: const Color(0xff115B7A)),
                                           )),
                                         ),
                                       ],
@@ -3383,7 +3383,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                     ? Container(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 17.w),
-                                        color: Color(0xffEFFDFF),
+                                        color: const Color(0xffEFFDFF),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -3428,7 +3428,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                           BorderRadius.circular(
                                                               5.w),
                                                       border: Border.all(
-                                                          color: Color(
+                                                          color: const Color(
                                                               0xff115B7A))),
                                                   padding: EdgeInsets.symmetric(
                                                       horizontal: 12.w),
@@ -3444,7 +3444,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         color:
-                                                            Color(0xff115B7A)),
+                                                            const Color(0xff115B7A)),
                                                   )),
                                                 ),
                                               ],
@@ -3556,7 +3556,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                               height: 27.w,
                                             ),
                                             PrimaryButton(
-                                                color: Color(0xff39C19D),
+                                                color: const Color(0xff39C19D),
                                                 onTap: () {
                                                   read.shopDeliveredRefundUpdate(
                                                       context);
@@ -3583,7 +3583,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                             margin: EdgeInsets.only(top: 5.w),
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 17.w),
-                                            color: Color(0xffEFFDFF),
+                                            color: const Color(0xffEFFDFF),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -3665,7 +3665,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                                   .circular(
                                                                       5.w),
                                                           border: Border.all(
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff115B7A))),
                                                       padding:
                                                           EdgeInsets.symmetric(
@@ -3681,7 +3681,7 @@ class _ShopOrderViewState extends State<ShopOrderView> {
                                                             fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xff115B7A)),
                                                       )),
                                                     ),

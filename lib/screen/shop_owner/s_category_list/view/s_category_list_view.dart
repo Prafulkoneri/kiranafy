@@ -41,7 +41,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           onBackBtnPressed: () {
             readMainScreen.onNavigation(
                 0,
-                ShopDashBoardView(
+                const ShopDashBoardView(
                   refresh: true,
                 ),
                 context);
@@ -59,7 +59,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
           title: "Categories",
           action: SvgPicture.asset("assets/icons/addressadd.svg"),
           onActionTap: () {
-            readMainScreen.onNavigation(0, SSelectCategoryView(), context);
+            readMainScreen.onNavigation(0, const SSelectCategoryView(), context);
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(
@@ -76,14 +76,14 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
               onWillPop: () async {
                 readMainScreen.onNavigation(
                     0,
-                    ShopDashBoardView(
+                    const ShopDashBoardView(
                       refresh: true,
                     ),
                     context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: RefreshIndicator(
                   onRefresh: () async {
                     // readMainScreen.onNavigation(
@@ -99,7 +99,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                               horizontal: 19.w, vertical: 15.w),
                           itemCount: watch.selectedCategoriesList?.length ?? 0,
                           shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (BuildContext, index) {
                             final element =
                                 watch.selectedCategoriesList?[index];
@@ -136,7 +136,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                                 .withOpacity(0.03.w),
                                             blurRadius: 5,
                                             spreadRadius: 0,
-                                            offset: Offset(5, 6)),
+                                            offset: const Offset(5, 6)),
                                       ],
                                       border: Border.all(
                                           color:
@@ -150,7 +150,7 @@ class _SSCategoryListViewState extends State<SSCategoryListView> {
                                         left: 13.w),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: 46.w,
                                           height: 46.w,
                                           // width: 55.w,

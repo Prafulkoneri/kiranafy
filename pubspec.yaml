@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_native_splash: ^2.2.19
+  # flutter_native_splash: ^2.2.19
   google_fonts: ^4.0.3
   flutter_onboarding_slider: ^1.0.9
   flutter_screenutil: ^5.7.0
@@ -99,6 +99,7 @@ dependencies:
   flutter_lints: ^2.0.0
   dropdown_search: ^5.0.6
   flutter_animated_button:
+  expand_tap_area: ^1.1.1
  
 dev_dependencies:
   flutter_test:

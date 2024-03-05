@@ -1,15 +1,10 @@
 import 'package:local_supper_market/screen/shop_owner/Offer_seasonal_recommanded/view/offer_seasonal_recommanded.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:local_supper_market/network/end_points.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/custom_product_data_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/edit_admin_custom_product_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_admin_product_model.dart';
@@ -17,8 +12,6 @@ import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_cu
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/edit_admin_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_custom_product_data_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_admin_product_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_custom_product_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -153,7 +146,7 @@ class EditAdminProductController extends ChangeNotifier {
 
   onUnitDataSelect(value, index) {
     unitList.insert(index, value.toString());
-    print("unitList${unitList}");
+    print("unitList$unitList");
     notifyListeners();
   }
 
@@ -366,7 +359,7 @@ class EditAdminProductController extends ChangeNotifier {
     mrpCardController.add(TextEditingController());
     offerCardController.add(TextEditingController());
     unitList.add("");
-    print("unitList${unitList}");
+    print("unitList$unitList");
     switchCardValue.add(true);
     imagefiles1.add(XFile(""));
     imagefiles2.add(XFile(""));

@@ -29,11 +29,13 @@ class CustomerAdsView extends StatefulWidget {
 }
 
 class _CustomerAdsViewState extends State<CustomerAdsView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<customerAdscontroller>().initState();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<customerAdscontroller>();
@@ -165,7 +167,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                     ),
                                     textButtonTheme: TextButtonThemeData(
                                       style: TextButton.styleFrom(
-                                        primary: const Color(
+                                        foregroundColor: const Color(
                                             0xff1767B1), // button text color
                                       ),
                                     ),
@@ -199,7 +201,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                       ),
                                       textButtonTheme: TextButtonThemeData(
                                         style: TextButton.styleFrom(
-                                          primary: const Color(
+                                          foregroundColor: const Color(
                                               0xff1767B1), // button text color
                                         ),
                                       ),
@@ -218,7 +220,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                 read.onToDateSelected(date);
                               }
                             },
-                            child: Container(
+                            child: SizedBox(
                               width: 15.h,
                               height: 17.w,
                               child: Center(
@@ -233,7 +235,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        UpdateProfile(text: "Ads Plan"),
+                        const UpdateProfile(text: "Ads Plan"),
                         // Text(
                         //   "Ads Plan",
                         //   style: GoogleFonts.dmSans(
@@ -259,7 +261,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            AccountScreen(text: '7 days')
+                            const AccountScreen(text: '7 days')
                             // Text(
                             //   '7 days',
                             //   style: GoogleFonts.dmSans(
@@ -287,7 +289,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            AccountScreen(text: '15 days')
+                            const AccountScreen(text: '15 days')
                             // Text(
                             //   '15 days',
                             //   style: GoogleFonts.dmSans(
@@ -315,7 +317,7 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            AccountScreen(text: '30 days')
+                            const AccountScreen(text: '30 days')
                             // Text(
                             //   '30 days',
                             //   style: GoogleFonts.dmSans(
@@ -343,13 +345,13 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                             SizedBox(
                               width: 10.w,
                             ),
-                            AccountScreen(text: '60 days')
+                            const AccountScreen(text: '60 days')
                           ],
                         ),
                         SizedBox(
                           height: 19.h,
                         ),
-                        UpdateProfile(text: "Ads Content"),
+                        const UpdateProfile(text: "Ads Content"),
                         // Text(
                         //   "Ads Content",
                         //   style: GoogleFonts.dmSans(
@@ -400,19 +402,23 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                         Column(
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.only(left: 6.w,),
+                              padding: EdgeInsets.only(
+                                left: 6.w,
+                              ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  Text(
+                                    "•",
+                                    style: TextStyle(fontSize: 20.sp),
+                                  ),
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
                                     child: Container(
                                       padding: EdgeInsets.only(top: 5.w),
                                       child: Text(
-
                                         // softWrap: true,
                                         // maxLines: 3,//
                                         "For pricing and further details, Local Supermart will contact you within 48 hours.",
@@ -495,8 +501,11 @@ class _CustomerAdsViewState extends State<CustomerAdsView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  Text(
+                                    "•",
+                                    style: TextStyle(fontSize: 20.sp),
+                                  ),
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(

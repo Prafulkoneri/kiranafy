@@ -25,6 +25,7 @@ class shopPromotionRequestView extends StatefulWidget {
 
 class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
 
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<shopPromotionController>().initState();
@@ -44,7 +45,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
             onBackBtnPressed: () {
               readMainScreen.onNavigation(
                   4,
-                  SAccountScreenView(
+                  const SAccountScreenView(
                     refresh: false,
                   ),
                   context);
@@ -58,14 +59,14 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
             onWillPop: () async {
               readMainScreen.onNavigation(
                   4,
-                  SAccountScreenView(
+                  const SAccountScreenView(
                     refresh: false,
                   ),
                   context);
               return false;
             },
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Container(
@@ -93,7 +94,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                               builder: (BuildContext, child) {
                                 return Theme(
                                   data: Theme.of(context).copyWith(
-                                    colorScheme: ColorScheme.light(
+                                    colorScheme: const ColorScheme.light(
                                       primary: Color(0xff1767B1),
                                       // <-- SEE HERE
                                       onPrimary: Colors.white,
@@ -102,7 +103,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                     ),
                                     textButtonTheme: TextButtonThemeData(
                                       style: TextButton.styleFrom(
-                                        primary: Color(
+                                        foregroundColor: const Color(
                                             0xff1767B1), // button text color
                                       ),
                                     ),
@@ -127,7 +128,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 builder: (BuildContext, child) {
                                   return Theme(
                                     data: Theme.of(context).copyWith(
-                                      colorScheme: ColorScheme.light(
+                                      colorScheme: const ColorScheme.light(
                                         primary: Color(0xff1767B1),
                                         // <-- SEE HERE
                                         onPrimary: Colors.white,
@@ -136,7 +137,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                       ),
                                       textButtonTheme: TextButtonThemeData(
                                         style: TextButton.styleFrom(
-                                          primary: Color(
+                                          foregroundColor: const Color(
                                               0xff1767B1), // button text color
                                         ),
                                       ),
@@ -155,7 +156,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 read.onToDateSelected(date);
                               }
                             },
-                            child: Container(
+                            child: SizedBox(
                               width: 15.h,
                               height: 17.w,
                               child: Center(
@@ -295,7 +296,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                         Text(
                           "Ads Content",
                           style: GoogleFonts.dmSans(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 color: Black,
                                 // letterSpacing: .5,
                                 fontSize: 14,
@@ -319,7 +320,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                             fontSize: 20.sp,
                             height: 50.w,
                             text: "Submit",
-                            color: Color(0xff4689ec),
+                            color: const Color(0xff4689ec),
                             onTap: () {
                               watch.promotionRequestForm(context);
                             }),
@@ -382,7 +383,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
@@ -416,7 +417,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
@@ -445,7 +446,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
@@ -473,7 +474,7 @@ class _shopPromotionRequestViewState extends State<shopPromotionRequestView> {
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("•",style: TextStyle(fontSize: 20.sp),),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(

@@ -18,7 +18,6 @@ import 'package:local_supper_market/screen/shop_owner/s_edit_profile/model/shop_
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_edit_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_edit_profile/repository/shop_update_profile_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -301,7 +300,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     print(fromDashBoard);
     if (fromDashBoard ?? true) {
       final read=Provider.of<SMainScreenController>(context,listen: false);
-      read.onNavigation(0, ShopDashBoardView(
+      read.onNavigation(0, const ShopDashBoardView(
         refresh: false,
       ), context);
       // Navigator.pushAndRemoveUntil(
@@ -317,7 +316,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       return;
     } else {
       final read=Provider.of<SMainScreenController>(context,listen: false);
-      read.onNavigation(4, SAccountScreenView(
+      read.onNavigation(4, const SAccountScreenView(
         refresh: false,
       ), context);
       // Navigator.pushAndRemoveUntil(
@@ -368,7 +367,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
         final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(4, SAccountScreenView(
+        read.onNavigation(4, const SAccountScreenView(
           refresh: true,
         ), context);
         // Navigator.pushAndRemoveUntil(
@@ -560,7 +559,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
       print(response.body);
       final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         countryDataList = result.countryData;
         notifyListeners();
       } else {
@@ -850,8 +849,8 @@ class ShopEditProfileDetailController extends ChangeNotifier {
     // LoadingOverlay.of(context).show();
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.shopUpdateAccountDetails}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.shopUpdateAccountDetails);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['shop_name'] = shopNameController.text;
     request.fields['shop_owner_name'] = ownerNameController.text;
@@ -877,9 +876,9 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         File imageFile = images[i];
         print(imageFile);
         var stream =
-            new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+            http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
         var length = await imageFile.length();
-        var multipartFile = new http.MultipartFile(
+        var multipartFile = http.MultipartFile(
             "shop_banner_image_path[$i]", stream, length,
             filename: basename(imageFile.path));
         newList.add(multipartFile);
@@ -905,7 +904,7 @@ class ShopEditProfileDetailController extends ChangeNotifier {
         fileImage3 = File("");
         fileImage4 = File("");
         final read=Provider.of(context,listen: false);
-        read.onNavigation(4,SAccountScreenView(
+        read.onNavigation(4,const SAccountScreenView(
           refresh: true,
         ), context);
         // Navigator.pushAndRemoveUntil(

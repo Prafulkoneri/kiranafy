@@ -36,6 +36,7 @@ class AddAddressView extends StatefulWidget {
 class _AddAddressViewState extends State<AddAddressView> {
   final TextEditingController controller = TextEditingController();
 
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<AddAddressController>().initState(
@@ -102,14 +103,14 @@ class _AddAddressViewState extends State<AddAddressView> {
       //   child: Text('Flutter Demo'),
       // ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 read.onBackBtnPressed(context, widget.cartId, widget.shopId);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   width: ScreenUtil().screenWidth,
                   padding: EdgeInsets.symmetric(horizontal: 19.w),

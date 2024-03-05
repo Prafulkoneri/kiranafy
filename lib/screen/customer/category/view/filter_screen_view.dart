@@ -148,7 +148,7 @@ class _FilterScreenViewState extends State<FilterScreenView> {
                 height: 35.h,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Button,
+                    backgroundColor: Button,
                     // onPrimary: Colors.white,
                     // shadowColor: Colors.greenAccent,
                     elevation: 3,

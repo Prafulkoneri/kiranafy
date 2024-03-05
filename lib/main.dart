@@ -128,11 +128,11 @@ Future<void> initNotification(context) async {
   showNotificationWithImage();
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
-  final IOSInitializationSettings initializationSettingsIOS =
+  const IOSInitializationSettings initializationSettingsIOS =
       IOSInitializationSettings();
-  final MacOSInitializationSettings initializationSettingsMacOS =
+  const MacOSInitializationSettings initializationSettingsMacOS =
       MacOSInitializationSettings();
-  final InitializationSettings initializationSettings = InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS);
@@ -184,7 +184,7 @@ Future<void> initNotification(context) async {
 }
 
 Future<void> showNotificationWithImage() async {
-  final bigPictureStyleInformation = BigPictureStyleInformation(
+  const bigPictureStyleInformation = BigPictureStyleInformation(
     FilePathAndroidBitmap('your_image_path'),
     contentTitle: 'Notification with Image',
     summaryText: 'This is an example of a notification with an image.',
@@ -199,7 +199,7 @@ void main() async {
   // // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   if (Platform.isIOS) {
     await Firebase.initializeApp(
-        options: FirebaseOptions(
+        options: const FirebaseOptions(
             apiKey: "AIzaSyBaOZbarFqV16r_fceIjrSAlNtgvddAFgg",
             appId: "1:110985117622:ios:1a970d32e1e8e861868b17",
             messagingSenderId: "110985117622",
@@ -304,7 +304,7 @@ void main() async {
 
         // ChangeNotifierProvider(create: (_) => ConnectivityProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -346,7 +346,7 @@ class _MyAppState extends State<MyApp> {
       }
       if (message?.data["notification_type"] == "order") {
         if (message?.data["user_type"] == "customer") {
-          context.read<MainScreenController>()..onInititalMessage(message);
+          context.read<MainScreenController>().onInititalMessage(message);
         } else {
           context
               .read<SMainScreenController>()
@@ -452,6 +452,15 @@ class _MyAppState extends State<MyApp> {
             .read<SMainScreenController>()
             .onOrderTypeNotification(context, message.data["redirect_id"]);
       }
+      ///////////////////////////////////////////////////////
+      if (message.data["notification_type"] == "voucher") {
+        if (message.data["user_type"] == "customer") {
+          context.read<MainScreenController>().onCustomVoucherTypeNotification(
+                context,
+              );
+        }
+      }
+      /////////////////////////////////////
     });
 
     // fireBaseApi();
@@ -461,7 +470,7 @@ class _MyAppState extends State<MyApp> {
 
 /////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails(
+    const android = AndroidNotificationDetails(
       '0',
       'Adun Accounts',
       channelDescription: 'channel description',
@@ -469,12 +478,12 @@ class _MyAppState extends State<MyApp> {
       styleInformation: BigTextStyleInformation(''),
       icon: '',
     );
-    final iOS = IOSNotificationDetails();
-    final platform = NotificationDetails(android: android, iOS: iOS);
+    const iOS = IOSNotificationDetails();
+    const platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
         0, // notification id
-        "${fileName}",
+        "$fileName",
         'Download complete.',
         platform,
         payload: '$savePath');
@@ -541,7 +550,7 @@ class _MyAppState extends State<MyApp> {
                             fontFamily: 'dm_sans_regular',
                           ),
                           debugShowCheckedModeBanner: false,
-                          home: SplashScreen(),
+                          home: const SplashScreen(),
                           // initialRoute: '/',
                           //   routes: {
                           //       '/':(context)=>SplashScreen(),

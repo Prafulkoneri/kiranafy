@@ -66,7 +66,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
       body: watch.isLoading
           ? const Loader()
           : SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Container(
@@ -87,7 +87,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                            color: Color(0xff115B7A),
+                                            color: const Color(0xff115B7A),
                                             width: 2.w)),
                                     child: ClipOval(
                                       child: AppNetworkImages(
@@ -157,7 +157,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                       width: 7.w,
                                     ),
                                     Text(
-                                      '${watch.customerDetails?.mobileNumber ?? ""}',
+                                      watch.customerDetails?.mobileNumber ?? "",
                                       style: TextStyle(
                                           color: black,
                                           letterSpacing: .5,
@@ -245,7 +245,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                           ),
                           // padding: const EdgeInsets.all(3.0),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xffEFEFEF)),
+                            border: Border.all(color: const Color(0xffEFEFEF)),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(20.0)),
                           ),
@@ -278,17 +278,17 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                                 BorderRadius.circular(10),
                                             side: BorderSide(
                                               color:
-                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?Color(0xff39C19D):
+                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?const Color(0xff39C19D):
                                               element?.orderStatus=="Refund" && (element?.shopOwnerCancelledStatus=="YES" || element?.customerCancelledStatus=="YES")?Colors.red:
                                               element?.orderStatus ==
                                                       "Pending"
                                                   ? Yellow
                                                   : element?.orderStatus ==
                                                           "Delivered"
-                                                      ? Color(0xff39C19D)
+                                                      ? const Color(0xff39C19D)
                                                       : element?.orderStatus ==
                                                               "Confirmed"
-                                                          ? Color(0xff115B7A)
+                                                          ? const Color(0xff115B7A)
                                                           : element?.orderStatus ==
                                                                   "Cancelled"
                                                               ? Colors.red
@@ -300,7 +300,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                                                           "Packing"
                                                                       ? Colors
                                                                           .brown
-                                                                      : Color(
+                                                                      : const Color(
                                                                           0xff39C19D),
                                               // width: 1,
                                             ),
@@ -327,7 +327,7 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                           textStyle: TextStyle(
                                               color:
 
-                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?Color(0xff39C19D):
+                                              element?.orderStatus=="Refund" && element?.shopOwnerCancelledStatus=="NO" && element?.customerCancelledStatus=="NO"?const Color(0xff39C19D):
                                               element?.orderStatus=="Refund" && (element?.shopOwnerCancelledStatus=="YES" || element?.customerCancelledStatus=="YES")?Colors.red:
                                               element?.orderStatus ==
                                                       "Pending"
@@ -335,11 +335,11 @@ class _CustomerDetailViewState extends State<CustomerDetailView> {
                                                   ///////
                                                   : element?.orderStatus ==
                                                           "Delivered"
-                                                      ? Color(0xff39C19D)
+                                                      ? const Color(0xff39C19D)
                                                       ///////
                                                       : element?.orderStatus ==
                                                               "Confirmed"
-                                                          ? Color(0xff115B7A)
+                                                          ? const Color(0xff115B7A)
                                                           /////////
                                                           : element?.orderStatus ==
                                                                   "Cancelled"

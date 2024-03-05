@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/get_bank_account_model.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/model/update_account_detail.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/repository/get_bank_account_detail_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/bank_account_details/repository/update_add_bank_account_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -60,11 +58,9 @@ class SBankAccountController extends ChangeNotifier {
 
         showLoader(false);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
       }
@@ -144,10 +140,13 @@ class SBankAccountController extends ChangeNotifier {
         // planToStartController.clear();
         // adsContentController.clear();
         LoadingOverlay.of(context).hide();
-        final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(4,SAccountScreenView(
-          refresh: false,
-        ), context);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
+        read.onNavigation(
+            4,
+            const SAccountScreenView(
+              refresh: false,
+            ),
+            context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(

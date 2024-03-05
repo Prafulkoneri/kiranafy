@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,11 +15,11 @@ Widget CouponsBottomSheet(context) {
         // height: MediaQuery.of(context).size.height * 0.50,
         height: 300.h,
         width: 390.w,
-        decoration: new BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: new BorderRadius.only(
-            topLeft: const Radius.circular(25.0),
-            topRight: const Radius.circular(25.0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25.0),
+            topRight: Radius.circular(25.0),
           ),
         ),
         child: Column(
@@ -158,7 +157,7 @@ Widget CouponsBottomSheet(context) {
                         width: 17.w,
                         height: 17.h,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6.27,
                       ),
                       Text(
@@ -186,7 +185,7 @@ Widget CouponsBottomSheet(context) {
                         width: 17.w,
                         height: 17.h,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6.27,
                       ),
                       Flexible(
@@ -218,7 +217,7 @@ Widget CouponsBottomSheet(context) {
                         width: 17.w,
                         height: 17.h,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6.27,
                       ),
                       Text(
@@ -245,7 +244,7 @@ Widget CouponsBottomSheet(context) {
                         width: 17.w,
                         height: 17.h,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6.27,
                       ),
                       Text(
@@ -275,7 +274,7 @@ Widget CouponsBottomSheet(context) {
                           height: 17.h,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6.27,
                       ),
                       Flexible(
@@ -317,7 +316,7 @@ Widget CouponsBottomSheet(context) {
             child: Container(
               height: 50.w,
               width: 50.w,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.black,
               ),

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'dart:typed_data';
 
 Future<Uint8List?> compressFile(File file) async {

@@ -23,7 +23,7 @@ class _ShopCategoryState extends State<ShopCategory> {
     final readMain = context.read<MainScreenController>();
     return SizedBox(
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         child: Column(
@@ -35,7 +35,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.horizontal,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: watch.categoryFirstList.length ?? 0,
                       itemBuilder: (BuildContext, index) {
@@ -65,6 +65,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
@@ -74,7 +75,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     // margin: EdgeInsets.only(right: 10.h),
                                     decoration: BoxDecoration(
                                         color: CategoryOne,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10))),
                                     height: 50.h,
                                     width: 70.w,
@@ -106,7 +107,6 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     ),
                                   ),
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.center,
                               ),
                             ],
                           ),
@@ -121,7 +121,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.horizontal,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: watch.categorySecondList.length ?? 0,
                       itemBuilder: (BuildContext, index) {
@@ -156,6 +156,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
@@ -165,7 +166,7 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     // margin: EdgeInsets.only(right: 10.h),
                                     decoration: BoxDecoration(
                                         color: CategoryOne,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10))),
                                     height: 50.h,
                                     width: 70.w,
@@ -201,7 +202,6 @@ class _ShopCategoryState extends State<ShopCategory> {
                                     ),
                                   ),
                                 ],
-                                crossAxisAlignment: CrossAxisAlignment.center,
                               ),
                               // SizedBox(
                               //   width: 10.w,

@@ -37,7 +37,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14.sp,
-                    color: Color(0xff3A3A3A)),
+                    color: const Color(0xff3A3A3A)),
               )
             : Container(),
         widget.titleHeader != null
@@ -84,7 +84,7 @@ class _CDropDownFieldState extends State<CDropDownField> {
           iconStyleData: IconStyleData(
             icon: Padding(
               padding: EdgeInsets.only(right: 5.w),
-              child: Icon(
+              child: const Icon(
                 Icons.keyboard_arrow_down_outlined,
                 color: Color(0xff3A3A3A),
               ),
@@ -151,7 +151,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: widget.titleSize ?? 14.sp,
-                    color: Color(0xff3A3A3A)),
+                    color: const Color(0xff3A3A3A)),
               )
             : Container(),
         widget.titleHeader != null
@@ -171,10 +171,10 @@ class _SDropDownFieldState extends State<SDropDownField> {
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               //Add more decoration as you want here
               //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
             ),
@@ -183,7 +183,7 @@ class _SDropDownFieldState extends State<SDropDownField> {
               widget.hint ?? "",
               style: TextStyle(
                   fontSize: widget.hintSize ?? 16.sp,
-                  color: Color(0xffB7B7B7),
+                  color: const Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400),
             ),
             items: widget.items,
@@ -266,7 +266,7 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: widget.titleSize ?? 14.sp,
-              color: Color(0xff3A3A3A)),
+              color: const Color(0xff3A3A3A)),
         )
             : Container(),
         widget.titleHeader != null
@@ -329,10 +329,10 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               //Add more decoration as you want here
               //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
             ),
@@ -341,7 +341,7 @@ class _SearchDropDownFieldState extends State<SearchDropDownField> {
               widget.hint ?? "",
               style: TextStyle(
                   fontSize: widget.hintSize ?? 16.sp,
-                  color: Color(0xffB7B7B7),
+                  color: const Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400),
             ),
             items: widget.items,
@@ -425,7 +425,7 @@ class _SecondarySDropDownFieldState extends State<SecondarySDropDownField> {
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: widget.titleSize ?? 14.sp,
-                    color: Color(0xff3A3A3A)),
+                    color: const Color(0xff3A3A3A)),
               )
             : Container(),
         widget.titleHeader != null
@@ -450,10 +450,10 @@ class _SecondarySDropDownFieldState extends State<SecondarySDropDownField> {
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6.w),
-                  borderSide: BorderSide(color: Color(0xffEFEFEF))),
+                  borderSide: const BorderSide(color: Color(0xffEFEFEF))),
               //Add more decoration as you want here
               //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
             ),
@@ -462,7 +462,7 @@ class _SecondarySDropDownFieldState extends State<SecondarySDropDownField> {
               widget.hint ?? "",
               style: TextStyle(
                   fontSize: widget.hintSize ?? 16.sp,
-                  color: Color(0xffB7B7B7),
+                  color: const Color(0xffB7B7B7),
                   fontWeight: FontWeight.w400),
             ),
             items: widget.items,

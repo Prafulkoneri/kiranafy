@@ -58,7 +58,7 @@ class _AllCouponsState extends State<AllCoupons> {
                 context: context,
                 builder: (BuildContext context) {
                   return StatefulBuilder(builder: (context, setState) {
-                    return CouponFiltter();
+                    return const CouponFiltter();
                   });
                 },
               );
@@ -72,21 +72,21 @@ class _AllCouponsState extends State<AllCoupons> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
-                    0, HomeScreenView(refreshPage: false), context);
+                    0, const HomeScreenView(refreshPage: false), context);
                 return false;
               },
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 50.h,
                     child: ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         // physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: watch.filterCouponList?.length ?? 0,
@@ -184,13 +184,13 @@ class _AllCouponsState extends State<AllCoupons> {
                           false
                       ? Expanded(
                           child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Container(
                             // height: 125.h,
                             // width: 352.w,
                             child: ListView.builder(
                                 scrollDirection: Axis.vertical,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 // physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: watch.allCouponlistdata
@@ -376,7 +376,7 @@ class _AllCouponsState extends State<AllCoupons> {
                                                               BorderRadius
                                                                   .circular(
                                                                       10.0),
-                                                          side: BorderSide(
+                                                          side: const BorderSide(
                                                               width: 1,
                                                               color:
                                                                   SplashText),

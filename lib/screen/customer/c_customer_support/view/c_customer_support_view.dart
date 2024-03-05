@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:local_supper_market/const/color.dart';
@@ -42,11 +40,11 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                           BoxShadow(
                               color: Colors.black.withOpacity(0.04),
                               blurRadius: 5,
-                              offset: Offset(-.0, 5.0),
+                              offset: const Offset(-.0, 5.0),
                               spreadRadius: 0),
                         ],
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 1, color: Color(0xffE2E2E2))),
+                        border: Border.all(width: 1, color: const Color(0xffE2E2E2))),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -94,7 +92,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                                 Text(
                                   'Sep 30, 2021',
                                   style: TextStyle(
-                                      color: Color(0xff5B5B5B),
+                                      color: const Color(0xff5B5B5B),
                                       fontSize: 13.sp,
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -104,7 +102,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                                 Text(
                                   '2:15 AM',
                                   style: TextStyle(
-                                      color: Color(0xff5B5B5B),
+                                      color: const Color(0xff5B5B5B),
                                       fontSize: 13.sp,
                                       fontWeight: FontWeight.w400),
                                 ),
@@ -113,7 +111,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                             Text(
                               'Pending',
                               style: TextStyle(
-                                  color: Color(0xffFF3636),
+                                  color: const Color(0xffFF3636),
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -122,7 +120,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Divider(thickness: 1, color: Color(0xffE2E2E2)),
+                        const Divider(thickness: 1, color: Color(0xffE2E2E2)),
                         SizedBox(
                           height: 15.h,
                         ),
@@ -139,7 +137,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                         Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing.',
                           style: TextStyle(
-                              color: Color(0xff5B5B5B),
+                              color: const Color(0xff5B5B5B),
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w400),
                         ),
@@ -156,7 +154,7 @@ class _CCustomerSupportViewState extends State<CCustomerSupportView> {
                         Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.',
                           style: TextStyle(
-                              color: Color(0xff5B5B5B),
+                              color: const Color(0xff5B5B5B),
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w400),
                         ),

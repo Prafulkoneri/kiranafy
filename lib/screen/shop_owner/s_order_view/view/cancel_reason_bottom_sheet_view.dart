@@ -91,7 +91,7 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                             },
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: Text(
                               "${element?.reason}",
                               // "Product Not Available",
@@ -128,7 +128,7 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                     height: 35.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xff39C19D),
+                        backgroundColor: const Color(0xff39C19D),
                         // onPrimary: Colors.white,
                         // shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -177,6 +177,7 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                 color: Colors.red,
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -202,7 +203,6 @@ class _cancelOrderFiltterViewState extends State<cancelOrderFiltterView> {
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

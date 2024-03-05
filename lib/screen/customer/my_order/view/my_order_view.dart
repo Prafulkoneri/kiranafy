@@ -45,7 +45,7 @@ class _MyOrderViewState extends State<MyOrderView> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                 ),
                 context);
@@ -69,7 +69,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                 context: context,
                 builder: (BuildContext context) {
                   return StatefulBuilder(builder: (context, setState) {
-                    return MyOrderFiltterView();
+                    return const MyOrderFiltterView();
                   });
                 },
               );
@@ -83,12 +83,12 @@ class _MyOrderViewState extends State<MyOrderView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
                     4,
-                    ProfileScreenView(
+                    const ProfileScreenView(
                       isRefreshed: false,
                     ),
                     context);
@@ -97,7 +97,7 @@ class _MyOrderViewState extends State<MyOrderView> {
               child: Container(
                   child: watch.orderList?.isNotEmpty == true
                       ? ListView.builder(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           padding: EdgeInsets.only(bottom: 100.w),
                           shrinkWrap: true,
                           itemCount: watch.myOrdersData?.orderList?.length ?? 0,
@@ -136,8 +136,8 @@ class _MyOrderViewState extends State<MyOrderView> {
                                 // width: 352.w,
                                 decoration: BoxDecoration(
                                   border: Border.all(width: 1, color: grey6),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,10 +179,11 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                         ? Yellow
                                                         : element?.orderStatus ==
                                                                 "Delivered"
-                                                            ? Color(0xff39C19D)
+                                                            ? const Color(
+                                                                0xff39C19D)
                                                             : element?.orderStatus ==
                                                                     "Confirmed"
-                                                                ? Color(
+                                                                ? const Color(
                                                                     0xff115B7A)
                                                                 : element?.orderStatus ==
                                                                         "Cancelled"
@@ -247,11 +248,12 @@ class _MyOrderViewState extends State<MyOrderView> {
                                                         ///////
                                                         : element?.orderStatus ==
                                                                 "Delivered"
-                                                            ? Color(0xff39C19D)
+                                                            ? const Color(
+                                                                0xff39C19D)
                                                             ///////
                                                             : element?.orderStatus ==
                                                                     "Confirmed"
-                                                                ? Color(
+                                                                ? const Color(
                                                                     0xff115B7A)
                                                                 /////////
                                                                 : element?.orderStatus ==

@@ -74,7 +74,7 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                   color: grey1,
                 ),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: watch.cancelReasondata?.length ?? 0,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -91,7 +91,7 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                             },
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: Text(
                               "${element?.reason}",
                               style: TextStyle(
@@ -127,7 +127,7 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                     height: 35.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xff39C19D),
+                        backgroundColor: const Color(0xff39C19D),
                         // onPrimary: Colors.white,
                         // shadowColor: Colors.greenAccent,
                         elevation: 3,
@@ -174,6 +174,7 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                 color: Colors.red,
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -200,7 +201,6 @@ class _cancelOrderFiltterViewState extends State<CancelOrderReasonView> {
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

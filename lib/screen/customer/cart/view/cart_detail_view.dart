@@ -61,13 +61,13 @@ class _CartDetailViewState extends State<CartDetailView> {
                   context: context,
                   builder: (BuildContext context) {
                     return Dialog(
-                      backgroundColor: Color(0xffFFFFFF),
+                      backgroundColor: const Color(0xffFFFFFF),
                       // shape: ,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10))),
 
                       // scrollable: true,
-                      child: Container(
+                      child: SizedBox(
                         height: 205.h,
                         // width: 400.w,
                         child: Column(
@@ -79,7 +79,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.dmSans(
                                   textStyle: TextStyle(
-                                      color: Color(0xff006F94),
+                                      color: const Color(0xff006F94),
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w700),
                                 ),
@@ -111,7 +111,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           top: 9.w,
                                           bottom: 9.w),
                                       decoration: BoxDecoration(
-                                          color: Color(0xff39C19D),
+                                          color: const Color(0xff39C19D),
                                           borderRadius:
                                               BorderRadius.circular(8)),
                                       child: Text(
@@ -143,7 +143,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                           top: 9.w,
                                           bottom: 9.w),
                                       decoration: BoxDecoration(
-                                          color: Color(0xffEC7074),
+                                          color: const Color(0xffEC7074),
                                           // border: Border.all(width: 1, color: Black),
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -178,7 +178,7 @@ class _CartDetailViewState extends State<CartDetailView> {
             },
             onBackBtnPressed: () {
               // Navigator.pop(context);
-              readMain.onNavigation(2, CartScreenView(), context);
+              readMain.onNavigation(2, const CartScreenView(), context);
               readMain.showBottomNavigationBar();
               // Navigator.pushAndRemoveUntil(
               //   context,
@@ -191,12 +191,12 @@ class _CartDetailViewState extends State<CartDetailView> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : watch.shopDetailData == null
                 ? Container()
                 : WillPopScope(
                     onWillPop: () async {
-                      readMain.onNavigation(2, CartScreenView(), context);
+                      readMain.onNavigation(2, const CartScreenView(), context);
                       readMain.showBottomNavigationBar();
                       // Navigator.pushAndRemoveUntil(
                       //   context,
@@ -212,7 +212,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                         children: [
                           Expanded(
                               child: SingleChildScrollView(
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   child: Column(
                                     // mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -298,7 +298,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       SizedBox(
                                                         width: 8.w,
                                                       ),
-                                                      Container(
+                                                      SizedBox(
                                                         width: 200.w,
                                                         child: Text(
                                                           "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
@@ -418,7 +418,8 @@ class _CartDetailViewState extends State<CartDetailView> {
                                         child: ListView.builder(
                                             padding: EdgeInsets.zero,
                                             scrollDirection: Axis.vertical,
-                                            physics: BouncingScrollPhysics(),
+                                            physics:
+                                                const BouncingScrollPhysics(),
                                             // physics: NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount:
@@ -526,8 +527,10 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                     .withOpacity(
                                                                         0.04),
                                                                 blurRadius: 5,
-                                                                offset: Offset(
-                                                                    -.0, 5.0),
+                                                                offset:
+                                                                    const Offset(
+                                                                        -.0,
+                                                                        5.0),
                                                                 spreadRadius:
                                                                     0),
                                                           ],
@@ -542,7 +545,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                             children: [
                                                               element?.productImagePath ==
                                                                       ""
-                                                                  ? Container(
+                                                                  ? SizedBox(
                                                                       width:
                                                                           80.w,
                                                                       height:
@@ -554,7 +557,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                             .cover,
                                                                       ),
                                                                     )
-                                                                  : Container(
+                                                                  : SizedBox(
                                                                       width:
                                                                           80.w,
                                                                       height:
@@ -587,7 +590,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                               Container(
                                                                 height: 70.h,
                                                                 decoration:
-                                                                    BoxDecoration(
+                                                                    const BoxDecoration(
                                                                         border:
                                                                             Border(
                                                                   left:
@@ -721,7 +724,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                         children: [
                                                                           Row(
                                                                             children: [
-                                                                              element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                              element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : const Text(""),
                                                                               SizedBox(
                                                                                 width: 10.w,
                                                                               ),
@@ -927,7 +930,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                       decoration: BoxDecoration(
                                                           border: Border.all(
                                                               width: 1,
-                                                              color: Color(
+                                                              color: const Color(
                                                                       0xff000000)
                                                                   .withOpacity(
                                                                       0.15)),
@@ -940,7 +943,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                           right: 78.w,
                                                           top: 30,
                                                           bottom: 19),
-                                                      child: Image(
+                                                      child: const Image(
                                                         image: AssetImage(
                                                           "assets/images/order_detail_condition.png",
                                                         ),
@@ -992,7 +995,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                 fontSize:
                                                                     20.sp),
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 8,
                                                           ),
                                                           Flexible(
@@ -1036,7 +1039,7 @@ class _CartDetailViewState extends State<CartDetailView> {
                                                                 fontSize:
                                                                     20.sp),
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 8,
                                                           ),
                                                           Flexible(

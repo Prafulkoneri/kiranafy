@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_review/launch_review.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,8 +27,8 @@ class _UpdateViewState extends State<UpdateView> {
             children: [
               Expanded(
                 child: Container(
-                  decoration: new BoxDecoration(
-                      gradient: new LinearGradient(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Color(0xffA9E7E5), Color(0xffFFFFFF)],
@@ -53,7 +52,7 @@ class _UpdateViewState extends State<UpdateView> {
                     left: 42.w, right: 34.w, top: 30.w, bottom: 59.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25.0),
                       topRight: Radius.circular(25.0)),
                   boxShadow: [
@@ -61,7 +60,7 @@ class _UpdateViewState extends State<UpdateView> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -97,7 +96,7 @@ class _UpdateViewState extends State<UpdateView> {
                     PrimaryButton(
                       width: 164.w,
                       borderRadius: 15,
-                      color: Color(0xff4689EC),
+                      color: const Color(0xff4689EC),
                       onTap: () async {
 if(Platform.isAndroid){
   if (await canLaunch(

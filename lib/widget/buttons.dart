@@ -42,17 +42,15 @@ class PrimaryButton extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(borderRadius ?? 8.w),
               border: Border.all(color: borderColor ?? Colors.transparent)),
-          child: leading == null
-              ? Center(
+          child: leading ?? Center(
                   child: child ??
                       Text(
-                        "${text}",
+                        "$text",
                         style: TextStyle(
                             color: textColor ?? Colors.white,
                             fontWeight: fontWeight ?? FontWeight.w700,
                             fontSize: fontSize ?? 14.sp),
-                      ))
-              : leading),
+                      ))),
     );
   }
 }

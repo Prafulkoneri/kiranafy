@@ -67,7 +67,8 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          readMain.onNavigation(0, HomeScreenView(refreshPage: false), context);
+          readMain.onNavigation(
+              0, const HomeScreenView(refreshPage: false), context);
           return false;
         },
         child: SingleChildScrollView(
@@ -296,7 +297,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Edit Profile',
                       ),
                     ],
@@ -344,7 +345,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'My Orders',
                       ),
                     ],
@@ -378,7 +379,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Notifications',
                       ),
                     ],
@@ -411,7 +412,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'My Vouchers',
                       ),
                     ],
@@ -422,7 +423,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () {
                   readMain.onNavigation(
-                      4, ReferAndEarnView(isRefreshed: true), context);
+                      4, const ReferAndEarnView(isRefreshed: true), context);
                   // read.getReferAndEarnDetails(context);
                 },
                 child: Container(
@@ -446,7 +447,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Refer & Earn',
                       ),
                     ],
@@ -487,7 +488,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Favourites',
                       ),
                     ],
@@ -530,7 +531,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 14.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'My Delivery Addresses',
                       ),
                     ],
@@ -569,7 +570,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 14.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Customer Support',
                       ),
                     ],
@@ -601,7 +602,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'About Us',
                       ),
                     ],
@@ -633,7 +634,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'FAQ',
                       ),
                     ],
@@ -671,7 +672,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Share App',
                       ),
                     ],
@@ -711,7 +712,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Privacy Policy',
                       ),
                     ],
@@ -745,7 +746,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Rate Us',
                       ),
                     ],
@@ -791,7 +792,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Settings',
                       ),
                     ],
@@ -835,7 +836,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                       SizedBox(
                         width: 18.w,
                       ),
-                      AccountScreen(
+                      const AccountScreen(
                         text: 'Sign Out',
                       ),
                     ],

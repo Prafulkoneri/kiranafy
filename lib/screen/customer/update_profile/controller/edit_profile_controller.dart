@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/update_profile/model/edit_profile_model.dart';
 import 'package:local_supper_market/screen/customer/update_profile/model/update_profile_model.dart';
 import 'package:local_supper_market/screen/customer/update_profile/repository/edit_profile_repo.dart';
@@ -48,10 +47,10 @@ class UpdateProfileController extends ChangeNotifier {
   int stateId = 0;
   int cityId = 0;
   int areaId = 0;
-  String countryName="";
-  String stateName="";
-  String cityName="";
-  String areaName="";
+  String countryName = "";
+  String stateName = "";
+  String cityName = "";
+  String areaName = "";
   int shopId = 0;
   List? pincodeList;
   String pincode = "";
@@ -71,21 +70,20 @@ class UpdateProfileController extends ChangeNotifier {
   Future<void> initState(
     context,
   ) async {
-     countryName="";
-     stateName="";
-     cityName="";
-     areaName="";
+    countryName = "";
+    stateName = "";
+    cityName = "";
+    areaName = "";
     await getCountryList(context);
     await getCustomerProfileDetails(context);
   }
-  showLoader(value){
-    isLoading=value;
+
+  showLoader(value) {
+    isLoading = value;
     notifyListeners();
   }
 
   Future<void> getCustomerProfileDetails(context) async {
-
-
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getString("successToken"));
     editCustomerProfileRepo
@@ -97,7 +95,7 @@ class UpdateProfileController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final customerProfileDetails = result.customerProfileDetails;
         print(CustomerProfileDetails);
-        log("${response.body}");
+        log(response.body);
         nameController.text = customerProfileDetails?.customerName ?? "";
         mobilrController.text =
             customerProfileDetails?.customerMobileNumber.toString() ?? "";
@@ -126,11 +124,33 @@ class UpdateProfileController extends ChangeNotifier {
         cityList = result.city;
         areaList = result.area;
         pincodeList = result.pincode;
-        countryName=countryList?.where((element) => element.id?.toString().contains(countryId.toString())??false).toList()[0].countryName??"";
-        stateName=stateList?.where((element) => element.id?.toString().contains(stateId.toString())??false).toList()[0].stateName??"";
-        cityName=cityList?.where((element) => element.id?.toString().contains(cityId.toString())??false).toList()[0].cityName??"";
-        areaName=areaList?.where((element) => element.id?.toString().contains(areaId.toString())??false).toList()[0].areaName??"";
-        if (pincodeList?.contains(pincode.toString())==false) {
+        countryName = countryList
+                ?.where((element) =>
+                    element.id?.toString().contains(countryId.toString()) ??
+                    false)
+                .toList()[0]
+                .countryName ??
+            "";
+        stateName = stateList
+                ?.where((element) =>
+                    element.id?.toString().contains(stateId.toString()) ??
+                    false)
+                .toList()[0]
+                .stateName ??
+            "";
+        cityName = cityList
+                ?.where((element) =>
+                    element.id?.toString().contains(cityId.toString()) ?? false)
+                .toList()[0]
+                .cityName ??
+            "";
+        areaName = areaList
+                ?.where((element) =>
+                    element.id?.toString().contains(areaId.toString()) ?? false)
+                .toList()[0]
+                .areaName ??
+            "";
+        if (pincodeList?.contains(pincode.toString()) == false) {
           pincode = "";
         }
         showLoader(false);
@@ -163,22 +183,30 @@ class UpdateProfileController extends ChangeNotifier {
 
 ////////////Country
   void onCountrySelected(value) async {
-    countryName=value;
-    countryId=countryList?.where((element) => element.countryName?.contains(value)??false).toList()[0].id??0;
+    countryName = value;
+    countryId = countryList
+            ?.where((element) => element.countryName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
     print("nhjvwuriuiwbytiuywi");
-    stateName="";
-    cityName="";
-    areaName="";
+    stateName = "";
+    cityName = "";
+    areaName = "";
     print(countryId);
     notifyListeners();
   }
 
   Future<void> onStateSelected(value) async {
-    stateName=value;
-    stateId=stateList?.where((element) => element.stateName?.contains(value)??false).toList()[0].id??0;
+    stateName = value;
+    stateId = stateList
+            ?.where((element) => element.stateName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
     cityId = 0;
-    cityName="";
-    areaName="";
+    cityName = "";
+    areaName = "";
     notifyListeners();
   }
 
@@ -214,10 +242,14 @@ class UpdateProfileController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
-    cityName=value;
-    cityId=cityList?.where((element) => element.cityName?.contains(value)??false).toList()[0].id??0;
+    cityName = value;
+    cityId = cityList
+            ?.where((element) => element.cityName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
     areaId = 0;
-    areaName="";
+    areaName = "";
     notifyListeners();
   }
 
@@ -226,8 +258,12 @@ class UpdateProfileController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    areaName=value;
-    areaId=areaList?.where((element) => element.areaName?.contains(value)??false).toList()[0].id??0;
+    areaName = value;
+    areaId = areaList
+            ?.where((element) => element.areaName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
     pincode = "";
     notifyListeners();
   }
@@ -318,7 +354,7 @@ class UpdateProfileController extends ChangeNotifier {
       print(response.body);
       final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         countryList = result.countryData;
         notifyListeners();
       } else {
@@ -401,15 +437,19 @@ class UpdateProfileController extends ChangeNotifier {
       print(response.body);
       if (response.statusCode == 200) {
         pref.setString("pincode", pincode);
-        final read =
-        Provider.of<MainScreenController>(context, listen: false);
-        read.onNavigation(4,  ProfileScreenView(isRefreshed: true,), context);
+        final read = Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(
+            4,
+            const ProfileScreenView(
+              isRefreshed: true,
+            ),
+            context);
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(
         //       builder: (context) =>
         //           MainScreenView(index: 4, screenName: ProfileScreenView(isRefreshed: true,))),
-          // (Route<dynamic> route) => false,
+        // (Route<dynamic> route) => false,
         // );
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
@@ -514,8 +554,8 @@ class UpdateProfileController extends ChangeNotifier {
   Future uploadImage(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
-    var uri = Uri.parse("${Endpoint.customerUpdateProfile}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.customerUpdateProfile);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['customer_name'] = nameController.text;
     request.fields['customer_country_code'] = countryCode.toString();
@@ -534,19 +574,22 @@ class UpdateProfileController extends ChangeNotifier {
         alernetMobileController.text;
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = fileImage;
-    var stream =
-        new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = new http.MultipartFile(
+    var multipartFile = http.MultipartFile(
         "customer_profile_image_path", stream, length,
         filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
     await request.send().then((response) {
       if (response.statusCode == 200) {
-        final read =
-        Provider.of<MainScreenController>(context, listen: false);
-        read.onNavigation(4,  ProfileScreenView(isRefreshed: true,), context);
+        final read = Provider.of<MainScreenController>(context, listen: false);
+        read.onNavigation(
+            4,
+            const ProfileScreenView(
+              isRefreshed: true,
+            ),
+            context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(

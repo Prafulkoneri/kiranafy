@@ -103,7 +103,7 @@ class CartDetailController extends ChangeNotifier {
         if (cartItemList?.isEmpty == true) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(2, CartScreenView(), context);
+          read.onNavigation(2, const CartScreenView(), context);
           read.showBottomNavigationBar();
         }
         itemCount = result.cartDetailData?.itemCount.toString() ?? "";
@@ -155,7 +155,7 @@ class CartDetailController extends ChangeNotifier {
           Navigator.pop(context);
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(2, CartScreenView(), context);
+          read.onNavigation(2, const CartScreenView(), context);
           read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
           //   context,
@@ -189,7 +189,7 @@ class CartDetailController extends ChangeNotifier {
   }
 
   void launchPhone(String mobNumber, context) async {
-    var number = Uri.parse("tel:${mobNumber}");
+    var number = Uri.parse("tel:$mobNumber");
     if (await canLaunchUrl(number)) {
       await launchUrl(number);
     } else {
@@ -333,7 +333,7 @@ class CartDetailController extends ChangeNotifier {
         if (cartItemList!.isEmpty) {
           final read =
               Provider.of<MainScreenController>(context, listen: false);
-          read.onNavigation(2, CartScreenView(), context);
+          read.onNavigation(2, const CartScreenView(), context);
           read.showBottomNavigationBar();
           // Navigator.pushAndRemoveUntil(
           //   context,

@@ -46,11 +46,11 @@ class _CustomerNotificationsScreenViewState
               onBackBtnPressed: () {
                 if (widget.route == "main") {
                   readMain.onNavigation(
-                      0, HomeScreenView(refreshPage: true), context);
+                      0, const HomeScreenView(refreshPage: true), context);
                 } else {
                   readMain.onNavigation(
                       4,
-                      ProfileScreenView(
+                      const ProfileScreenView(
                         isRefreshed: false,
                       ),
                       context);
@@ -75,14 +75,14 @@ class _CustomerNotificationsScreenViewState
                             context: context,
                             builder: (BuildContext context) {
                               return Dialog(
-                                backgroundColor: Color(0xffFFFFFF),
+                                backgroundColor: const Color(0xffFFFFFF),
                                 // shape: ,
-                                shape: RoundedRectangleBorder(
+                                shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
 
                                 // scrollable: true,
-                                child: Container(
+                                child: SizedBox(
                                   height: 205.h,
                                   // width: 400.w,
                                   child: Column(
@@ -94,7 +94,7 @@ class _CustomerNotificationsScreenViewState
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.dmSans(
                                             textStyle: TextStyle(
-                                                color: Color(0xff006F94),
+                                                color: const Color(0xff006F94),
                                                 fontSize: 20.sp,
                                                 fontWeight: FontWeight.w700),
                                           ),
@@ -125,7 +125,7 @@ class _CustomerNotificationsScreenViewState
                                                     top: 9.w,
                                                     bottom: 9.w),
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xff39C19D),
+                                                    color: const Color(0xff39C19D),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8)),
@@ -159,7 +159,7 @@ class _CustomerNotificationsScreenViewState
                                                     top: 9.w,
                                                     bottom: 9.w),
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xffEC7074),
+                                                    color: const Color(0xffEC7074),
                                                     // border: Border.all(width: 1, color: Black),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -209,12 +209,12 @@ class _CustomerNotificationsScreenViewState
                       )),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
                   readMain.onNavigation(
                       4,
-                      ProfileScreenView(
+                      const ProfileScreenView(
                         isRefreshed: false,
                       ),
                       context);
@@ -223,7 +223,7 @@ class _CustomerNotificationsScreenViewState
                 child: Container(
                     child: watch.notificationList?.isNotEmpty == true
                         ? ListView.builder(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             // padding: EdgeInsets.symmetric(
                             //     vertical: 19.w, horizontal: 19.w),
                             padding: EdgeInsets.only(
@@ -266,7 +266,7 @@ class _CustomerNotificationsScreenViewState
                                       BoxShadow(
                                           color: Colors.black.withOpacity(0.04),
                                           blurRadius: 5,
-                                          offset: Offset(-.0, 5.0),
+                                          offset: const Offset(-.0, 5.0),
                                           spreadRadius: 0),
                                     ],
                                   ),
@@ -281,7 +281,7 @@ class _CustomerNotificationsScreenViewState
                                         SizedBox(
                                           width: 15.2.w,
                                         ),
-                                        VerticalDivider(
+                                        const VerticalDivider(
                                           color: Color(0xffEFEFEF),
                                           thickness: 1,
                                         ),

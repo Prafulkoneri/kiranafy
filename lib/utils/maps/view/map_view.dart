@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +29,11 @@ class MapScreenView extends StatefulWidget {
 
 class _MapScreenViewState extends State<MapScreenView> {
   //get MapView controller to access MapView
-  Completer<GoogleMapController> _googleMapViewController = Completer();
+  final Completer<GoogleMapController> _googleMapViewController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _defaultLatLng;
   late LatLng _draggedLatlng;
-  String _draggedAddress = "";
+  final String _draggedAddress = "";
   TextEditingController searchController = TextEditingController();
   bool isLocationEnabledByUser = false;
 
@@ -77,7 +76,7 @@ class _MapScreenViewState extends State<MapScreenView> {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Container(
+          SizedBox(
               height: 400.w,
               child: _buildBody()),
           !isLocationEnabledByUser
@@ -98,10 +97,11 @@ class _MapScreenViewState extends State<MapScreenView> {
                       color: Colors.red,
                       width: ScreenUtil().screenWidth,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Text(
-                              "${watch.locationErrorMessage}",
+                              watch.locationErrorMessage,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14.sp),
                             ),
@@ -124,7 +124,6 @@ class _MapScreenViewState extends State<MapScreenView> {
                             ],
                           ),
                         ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
                     ),
                   )),
@@ -152,9 +151,9 @@ class _MapScreenViewState extends State<MapScreenView> {
       !isLocationEnabledByUser
           ? Positioned(
               bottom: 0.w,
-              child: _locationEnabled(),
               left: 0.w,
               right: 0.w,
+              child: _locationEnabled(),
             )
           : Container(),
     ]);
@@ -167,7 +166,7 @@ class _MapScreenViewState extends State<MapScreenView> {
           blurRadius: 15.w,
           spreadRadius: 20.w,
           color: Colors.white.withOpacity(0.9),
-          offset: Offset(0, 0),
+          offset: const Offset(0, 0),
         ),
       ]),
       child: Column(
@@ -188,9 +187,9 @@ class _MapScreenViewState extends State<MapScreenView> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: PrimaryButton(
-                color: Color(0xff2388FF),
+                color: const Color(0xff2388FF),
                 onTap: () {
-                  _defaultLatLng = LatLng(11, 104);
+                  _defaultLatLng = const LatLng(11, 104);
                   _draggedLatlng = _defaultLatLng;
                   _cameraPosition = CameraPosition(
                       target: _defaultLatLng,
@@ -216,13 +215,13 @@ class _MapScreenViewState extends State<MapScreenView> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 60.w,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.blue,
         ),
         child: Center(
             child: Text(
           _draggedAddress,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
       ),
     );
@@ -261,10 +260,10 @@ class _MapScreenViewState extends State<MapScreenView> {
                           hintText: "Search location",
                           hintStyle: TextStyle(
                             fontSize: 14.sp,
-                            color: Color(0xffB7B7B7),
+                            color: const Color(0xffB7B7B7),
                             fontWeight: FontWeight.w400,
                           ),
-                          prefixIcon: Container(
+                          prefixIcon: SizedBox(
                             height: 13.3.w,
                             width: 13.3.w,
                             child: Center(
@@ -280,20 +279,20 @@ class _MapScreenViewState extends State<MapScreenView> {
                           fillColor: Colors.white,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffE4E4E4),
                             ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Color(0xffE4E4E4),
                             ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         debounceTime: 800, // default 600 ms,
-                        countries: [
+                        countries: const [
                           "in",
                           "fr"
                         ], // optional by default null is set
@@ -305,7 +304,7 @@ class _MapScreenViewState extends State<MapScreenView> {
                               double.parse(prediction.lng.toString())));
 
                           // this method will return latlng with place detail
-                          print("placeDetails" + prediction.lng.toString());
+                          print("placeDetails${prediction.lng}");
                         }, // this callback is called when isLatLngRequired is true
                         itmClick: (Prediction prediction) {
                           searchController.text =
@@ -382,7 +381,7 @@ class _MapScreenViewState extends State<MapScreenView> {
 
   Widget _getCustomPin() {
     return Center(
-      child: Container(
+      child: SizedBox(
         width: 61.w,
         height: 61.w,
         child: Image.asset("assets/images/map_marker.png"),

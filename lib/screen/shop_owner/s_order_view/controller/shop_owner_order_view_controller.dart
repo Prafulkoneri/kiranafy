@@ -127,7 +127,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
 
   void showLoader(value) {
     isLoading = value;
-    print("loading........${isLoading}");
+    print("loading........$isLoading");
     notifyListeners();
   }
 
@@ -168,7 +168,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
               selectedProductList.insert(i, false);
             }
           }
-          print("selectedProductList${selectedProductList}");
+          print("selectedProductList$selectedProductList");
           if (orderDetails?.shopOwnerRefundStatus == "pending") {
             if (orderDetails?.customerCancelledStatus == "YES" ||
                 orderDetails?.shopOwnerCancelledStatus == "YES") {
@@ -231,7 +231,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           Permission.storage,
           //add more permission to request here.
         ].request();
-        var dir;
+        Directory dir;
         if (Platform.isIOS) {
           dir = await getApplicationDocumentsDirectory();
         } else {
@@ -239,40 +239,36 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           dir = Directory(tempDir.path);
         }
 
-        if (dir != null) {
-          String fullPath =
-              orderinvoicedata?.customerInvoiceList?.invoiceLink.toString() ??
-                  "";
-          List splitPath = fullPath.split("/");
-          print(splitPath);
-          String saveName = splitPath[splitPath.length - 1];
-          print("savename${saveName}");
-          String savePath = dir.path + "/$saveName";
-          print(savePath);
-          fileurl = Endpoint.baseUrl
-                  .toString()
-                  .substring(0, Endpoint.baseUrl.toString().length - 4)
-                  .toString() +
-              "${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
-          //output:  /storage/emulated/0/Download/banner.png
+        String fullPath =
+            orderinvoicedata?.customerInvoiceList?.invoiceLink.toString() ??
+                "";
+        List splitPath = fullPath.split("/");
+        print(splitPath);
+        String saveName = splitPath[splitPath.length - 1];
+        print("savename$saveName");
+        String savePath = "${dir.path}/$saveName";
+        print(savePath);
+        fileurl = "${Endpoint.baseUrl
+                .toString()
+                .substring(0, Endpoint.baseUrl.toString().length - 4)}${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
+        //output:  /storage/emulated/0/Download/banner.png
 
-          try {
-            await Dio().download(fileurl, savePath,
-                onReceiveProgress: (received, total) {
-              if (total != -1) {
-                print((received / total * 100).toStringAsFixed(0) + "%");
-                //you can build progressbar feature too
-              }
-            });
-            print("File is saved to download folder.");
-          } on DioError catch (e) {
-            print(e.message);
-            Utils.showPrimarySnackbar(context, "Invalid Url",
-                type: SnackType.error);
-            return;
-          }
-          _showNotification(saveName, savePath);
+        try {
+          await Dio().download(fileurl, savePath,
+              onReceiveProgress: (received, total) {
+            if (total != -1) {
+              print("${(received / total * 100).toStringAsFixed(0)}%");
+              //you can build progressbar feature too
+            }
+          });
+          print("File is saved to download folder.");
+        } on DioError catch (e) {
+          print(e.message);
+          Utils.showPrimarySnackbar(context, "Invalid Url",
+              type: SnackType.error);
+          return;
         }
+        _showNotification(saveName, savePath);
         print("No permission to read and write.");
         print(directory?.path.toString());
         print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
@@ -296,16 +292,16 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
   }
 
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+    const android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
         icon: '');
-    final iOS = IOSNotificationDetails();
-    final platform = NotificationDetails(android: android, iOS: iOS);
+    const iOS = IOSNotificationDetails();
+    const platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
         0, // notification id
-        "${fileName}",
+        "$fileName",
         'Download complete.',
         platform,
         payload: '$savePath');
@@ -361,7 +357,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         cancelOrderErrorMsg = "Please Enter reason for cancellation";
         isCancelOrderErrorMsgVisible = true;
         notifyListeners();
-        Timer(Duration(seconds: 3), () {
+        Timer(const Duration(seconds: 3), () {
           isCancelOrderErrorMsgVisible = false;
           notifyListeners();
         });
@@ -371,7 +367,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         cancelOrderErrorMsg = "Please Enter reason for cancellation";
         isCancelOrderErrorMsgVisible = true;
         notifyListeners();
-        Timer(Duration(seconds: 3), () {
+        Timer(const Duration(seconds: 3), () {
           isCancelOrderErrorMsgVisible = false;
           notifyListeners();
         });
@@ -418,7 +414,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
           deliveryCodeError = result.message ?? "";
           isDeliveryCodeError = true;
           notifyListeners();
-          Timer(Duration(seconds: 3), () {
+          Timer(const Duration(seconds: 3), () {
             isDeliveryCodeError = false;
             notifyListeners();
           });
@@ -670,7 +666,7 @@ class ShopOwnerOrderViewController extends ChangeNotifier {
         final read = Provider.of<SMainScreenController>(context, listen: false);
         read.onNavigation(
             0,
-            SPaymentRefundList(
+            const SPaymentRefundList(
               isNavFromAccounts: false,
             ),
             context);

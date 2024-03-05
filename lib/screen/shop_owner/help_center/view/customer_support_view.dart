@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/controller/view_ticket_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/help_center/view/help_center_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:local_supper_market/widget/network_image.dart';
@@ -48,7 +46,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMain.onNavigation(4, SHelpCenterView(), context);
+              readMain.onNavigation(4, const SHelpCenterView(), context);
               readMain.showBottomNavigationBar();
               // Navigator.pushAndRemoveUntil(
               //   context,
@@ -67,7 +65,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Container(
                         margin:
                             EdgeInsets.only(left: 19.w, top: 20.h, right: 19.w),
@@ -143,7 +141,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                                   : watch.ticketDetails
                                                               ?.ticketStatus ==
                                                           "Ongoing"
-                                                      ? Color(0xffFF961C)
+                                                      ? const Color(0xffFF961C)
                                                       ///////
                                                       : watch.ticketDetails
                                                                   ?.ticketStatus ==
@@ -162,7 +160,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  Divider(),
+                                  const Divider(),
                                   SizedBox(
                                     height: 13.h,
                                   ),
@@ -208,14 +206,14 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                             ),
                             ListView.builder(
                               reverse: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: watch.ticketRepliesList?.length ?? 0,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 final element = watch.ticketRepliesList?[index];
                                 return Container(
                                   decoration: BoxDecoration(
-                                    color: Color(0xff44B8CA),
+                                    color: const Color(0xff44B8CA),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Container(
@@ -242,7 +240,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                               MainAxisAlignment.start,
                                           children: [
                                             element?.profileImagePath == ""
-                                                ? Container(
+                                                ? SizedBox(
                                                     height: 37.w,
                                                     width: 37.w,
                                                     child: Image.asset(
@@ -250,7 +248,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                                       fit: BoxFit.cover,
                                                     ),
                                                   )
-                                                : Container(
+                                                : SizedBox(
                                                     height: 37.w,
                                                     width: 37.w,
                                                     child: AppNetworkImages(
@@ -259,7 +257,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                                       fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 6,
                                             ),
                                             Column(
@@ -276,7 +274,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                                             FontWeight.w700),
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5,
                                                 ),
                                                 Text(
@@ -293,7 +291,7 @@ class _SCustomerSupportViewState extends State<SCustomerSupportView> {
                                             ),
                                           ],
                                         ),
-                                        Divider(
+                                        const Divider(
                                           color: Color(0xff319FB0),
                                           thickness: 1,
                                         ),

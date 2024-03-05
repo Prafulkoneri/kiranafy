@@ -32,6 +32,7 @@ class SAddCouponsView extends StatefulWidget {
 }
 
 class _SAddCouponsViewState extends State<SAddCouponsView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
@@ -54,7 +55,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
             if (widget.isNavFromDashboard == true) {
               readMain.onNavigation(
                   3,
-                  ShopCouponsView(
+                  const ShopCouponsView(
                     isRefresh: false,
                     isNavFromDashBoard: true,
                   ),
@@ -62,7 +63,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
             } else {
               readMain.onNavigation(
                   4,
-                  ShopCouponsView(
+                  const ShopCouponsView(
                     isRefresh: false,
                     isNavFromDashBoard: false,
                   ),
@@ -78,7 +79,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                 if (widget.isNavFromDashboard == true) {
                   readMain.onNavigation(
                       3,
-                      ShopCouponsView(
+                      const ShopCouponsView(
                         isRefresh: false,
                         isNavFromDashBoard: true,
                       ),
@@ -86,7 +87,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                 } else {
                   readMain.onNavigation(
                       4,
-                      ShopCouponsView(
+                      const ShopCouponsView(
                         isRefresh: false,
                         isNavFromDashBoard: false,
                       ),
@@ -95,7 +96,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: EdgeInsets.only(left: 19.w, right: 19.w, top: 26.w),
                   child: Column(
@@ -110,7 +111,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                           SizedBox(
@@ -122,7 +123,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                         ],
@@ -141,7 +142,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   builder: (BuildContext, child) {
                                     return Theme(
                                       data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
+                                        colorScheme: const ColorScheme.light(
                                           primary: Color(0xff1767B1),
                                           // <-- SEE HERE
                                           onPrimary: Colors.white,
@@ -151,7 +152,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                         ),
                                         textButtonTheme: TextButtonThemeData(
                                           style: TextButton.styleFrom(
-                                            primary: Color(
+                                            foregroundColor: const Color(
                                                 0xff1767B1), // button text color
                                           ),
                                         ),
@@ -171,7 +172,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                 }
                               },
                               controller: watch.fromDateController,
-                              suffix: Container(
+                              suffix: SizedBox(
                                 width: 15.h,
                                 height: 17.w,
                                 child: Center(
@@ -194,7 +195,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                   builder: (BuildContext, child) {
                                     return Theme(
                                       data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
+                                        colorScheme: const ColorScheme.light(
                                           primary: Color(0xff1767B1),
                                           // <-- SEE HERE
                                           onPrimary: Colors.white,
@@ -204,7 +205,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                         ),
                                         textButtonTheme: TextButtonThemeData(
                                           style: TextButton.styleFrom(
-                                            primary: Color(
+                                            foregroundColor: const Color(
                                                 0xff1767B1), // button text color
                                           ),
                                         ),
@@ -230,7 +231,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                     builder: (BuildContext, child) {
                                       return Theme(
                                         data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
+                                          colorScheme: const ColorScheme.light(
                                             primary: Color(0xff1767B1),
                                             // <-- SEE HERE
                                             onPrimary: Colors.white,
@@ -240,7 +241,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                           ),
                                           textButtonTheme: TextButtonThemeData(
                                             style: TextButton.styleFrom(
-                                              primary: Color(
+                                              foregroundColor: const Color(
                                                   0xff1767B1), // button text color
                                             ),
                                           ),
@@ -259,7 +260,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                                     read.onToDateSelected(date);
                                   }
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   width: 15.h,
                                   height: 17.w,
                                   child: Center(
@@ -287,7 +288,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                           SizedBox(
@@ -299,7 +300,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                         ],
@@ -343,7 +344,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                           SizedBox(
@@ -355,7 +356,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xff3A3A3A)),
+                                  color: const Color(0xff3A3A3A)),
                             ),
                           ),
                         ],
@@ -458,7 +459,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                             watch.categoryId != ""
                                 ? SecondarySDropDownField(
                                     suffixIcon: IconButton(
-                                      icon: Icon(Icons.clear),
+                                      icon: const Icon(Icons.clear),
                                       onPressed: () {
                                         read.clearCategory();
                                       },
@@ -510,7 +511,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                             watch.productId != ""
                                 ? SecondarySDropDownField(
                                     suffixIcon: IconButton(
-                                      icon: Icon(Icons.clear),
+                                      icon: const Icon(Icons.clear),
                                       onPressed: () {
                                         read.clearProduct();
                                       },
@@ -570,7 +571,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12.sp,
-                                color: Color(0xff3A3A3A)),
+                                color: const Color(0xff3A3A3A)),
                           ),
                         ],
                       ),
@@ -590,7 +591,7 @@ class _SAddCouponsViewState extends State<SAddCouponsView> {
                         fontSize: 20.sp,
                         height: 50.w,
                         text: "Submit",
-                        color: Color(0xff4689EC),
+                        color: const Color(0xff4689EC),
                         onTap: () {
                           widget.isEditCoupon == true
                               ? read.uploadEditedCouponDetails(

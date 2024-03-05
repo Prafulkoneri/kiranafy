@@ -90,7 +90,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 context: context,
                 builder: (BuildContext context) {
                   return StatefulBuilder(builder: (context, setState) {
-                    return FilterScreenView();
+                    return const FilterScreenView();
                   });
                 },
               );
@@ -136,10 +136,10 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: 10.w),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: splashnone),
+                        borderSide: const BorderSide(width: 1, color: splashnone),
                         borderRadius: BorderRadius.circular(8.w)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: splashnone),
+                        borderSide: const BorderSide(width: 1, color: splashnone),
                         borderRadius: BorderRadius.circular(8.w)),
                     hintText: 'Search your products..',
                     hintStyle: TextStyle(
@@ -166,12 +166,12 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 50.h,
               child: ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   // physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: watch.allCategoryList?.length ?? 0,
@@ -248,20 +248,20 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
             watch.isLoading
                 ? Container(
                     padding: EdgeInsets.only(top: 200.w),
-                    child: Loader(),
+                    child: const Loader(),
                   )
                 : Expanded(
                     child: watch.productList?.isNotEmpty == true ||
                             watch.customProductList?.isNotEmpty == true
                         ? SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: Column(
                               children: [
                                 Container(
                                   child: ListView.builder(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
-                                      physics: BouncingScrollPhysics(),
+                                      physics: const BouncingScrollPhysics(),
                                       // physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       itemCount: watch.productList?.length ?? 0,
@@ -432,7 +432,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                                                             children: [
                                                                               Row(
                                                                                 children: [
-                                                                                  element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : Text(""),
+                                                                                  element?.mrpPrice != "" ? Text('\u{20B9}${element?.mrpPrice}', style: GoogleFonts.dmSans(textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice ? TextStyle(decoration: TextDecoration.lineThrough, color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400) : TextStyle(color: Black1, letterSpacing: .5, fontSize: 12.sp, fontWeight: FontWeight.w400))) : const Text(""),
                                                                                   SizedBox(
                                                                                     width: 10.w,
                                                                                   ),

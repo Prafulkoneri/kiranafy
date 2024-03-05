@@ -10,7 +10,7 @@ class AddCategoryRepo {
       return await http.post(Uri.parse(Endpoint.addCategory),
           body: reqModel.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
     } catch (e) {
       throw Exception(e);

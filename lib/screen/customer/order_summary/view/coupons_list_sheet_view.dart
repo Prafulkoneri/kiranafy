@@ -26,11 +26,11 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
         // ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 17.w),
-          decoration: new BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(25.0),
-              topRight: const Radius.circular(25.0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.0),
+              topRight: Radius.circular(25.0),
             ),
           ),
           child: StackLoader(
@@ -50,12 +50,12 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                         "Get Promo Code",
                         style: TextStyle(
                           fontSize: 20.sp,
-                          color: Color(0xff006F94),
+                          color: const Color(0xff006F94),
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                       InkWell(
-                        child: Icon(Icons.clear),
+                        child: const Icon(Icons.clear),
                         onTap: () {
                           Navigator.pop(context);
                         },
@@ -65,12 +65,12 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                   SizedBox(
                     height: 11.w,
                   ),
-                  Divider(),
+                  const Divider(),
                   SizedBox(
                     height: 15.w,
                   ),
                   ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: watch.finalCouponList?.length,
                       padding: EdgeInsets.zero,
@@ -91,7 +91,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
 
                             decoration: BoxDecoration(
                               color: element?.couponType == "voucher"
-                                  ? Color(0xff39C19D).withOpacity(0.1)
+                                  ? const Color(0xff39C19D).withOpacity(0.1)
                                   : Colors.transparent,
                               border: Border.all(
 
@@ -100,7 +100,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                       // element?.couponType == "voucher"
                                       //     // ? Colors.green
                                       //     // :
-                                      Color(0xff4689EC).withOpacity(0.55.w)),
+                                      const Color(0xff4689EC).withOpacity(0.55.w)),
                               borderRadius: BorderRadius.circular(5.w),
                             ),
                             margin: EdgeInsets.only(bottom: 20.w),
@@ -136,14 +136,14 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                             style: TextStyle(
                                                 fontSize: 15.43.sp,
                                                 fontWeight: FontWeight.w700,
-                                                color: Color(0xff3A3A3A)),
+                                                color: const Color(0xff3A3A3A)),
                                           ),
                                           SizedBox(
                                             height: 5.w,
                                           ),
                                           element?.couponType == "voucher"
-                                              ? Text(
-                                                  "This is a special voucher code you received for referring a shop, check conditions from my voucher section!")
+                                              ? const Text(
+                                                  "This is a special voucher code you received for referring a shop, check conditions from My Vouchers section!")
                                               : Text(
                                                   "Get Up To ${double.parse(element?.couponDiscountPercentage.toString() ?? "0").round()}% OFF | Minimum Order of \u{20B9} ${element?.minOrderAmount}")
                                         ],
@@ -154,7 +154,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                 SizedBox(
                                   height: 15.w,
                                 ),
-                                Divider(),
+                                const Divider(),
                                 SizedBox(
                                   height: 5.w,
                                 ),
@@ -172,7 +172,7 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                         style: TextStyle(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w400,
-                                            color: Color(0xff006F94))),
+                                            color: const Color(0xff006F94))),
                                   ])),
                                 ),
                                 Visibility(
@@ -191,11 +191,11 @@ class _CouponsListSheetViewState extends State<CouponsListSheetView> {
                                       ),
                                       Flexible(
                                         child: Text(
-                                          "${element?.couponTermsAndCondition ?? ""}",
+                                          element?.couponTermsAndCondition ?? "",
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 14.sp,
-                                              color: Color(0xff3A3A3A)
+                                              color: const Color(0xff3A3A3A)
                                                   .withOpacity(0.63)),
                                         ),
                                       ),

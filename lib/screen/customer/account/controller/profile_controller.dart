@@ -20,7 +20,6 @@ import 'package:local_supper_market/screen/customer/update_profile/view/update_p
 import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/model/sign_out_model.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,7 +51,7 @@ class ProfileController extends ChangeNotifier {
   CustomerProfileRepo customerProfileRepo = CustomerProfileRepo(); ////;
   void onEditProfilePressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => UpdateProfileView()));
+        context, MaterialPageRoute(builder: (context) => const UpdateProfileView()));
   }
 
   void onBackPressed(){
@@ -62,7 +61,7 @@ class ProfileController extends ChangeNotifier {
 
   void myOrdersPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyOrderView()));
+        context, MaterialPageRoute(builder: (context) => const MyOrderView()));
   }
 
 
@@ -70,26 +69,26 @@ class ProfileController extends ChangeNotifier {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CustomerNotificationsScreenView()));
+            builder: (context) => const CustomerNotificationsScreenView()));
   }
 
   void favouritesPressed(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MyOrderView()));
+        context, MaterialPageRoute(builder: (context) => const MyOrderView()));
   }
 
   void onLogout(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => OnBoardingScreenView()));
+        MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
   }
 
   void onFavouritesClicked(context) async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CFavouritesView(
+            builder: (context) => const CFavouritesView(
                   selectedIndex: 0,
                 )));
   }
@@ -106,7 +105,7 @@ class ProfileController extends ChangeNotifier {
       );
       if (response.statusCode == 200) {
         customerData = result.data;
-        log("${response.body}");
+        log(response.body);
         notifyListeners();
       } else {
         Utils.showPrimarySnackbar(context, result.message,

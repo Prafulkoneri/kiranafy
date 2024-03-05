@@ -1,5 +1,3 @@
-import 'package:local_supper_market/screen/customer/category/model/product_as_per_category_model.dart';
-import 'package:local_supper_market/screen/customer/shop_profile/model/customer_view_shop_model.dart';
 
 class ProductFilterReqModel {
   String? shopId;

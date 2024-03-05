@@ -279,8 +279,8 @@ class SKycVerificationController extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("successToken").toString();
     print(token);
-    var uri = Uri.parse("${Endpoint.uploadKycVerification}");
-    http.MultipartRequest request = new http.MultipartRequest('POST', uri);
+    var uri = Uri.parse(Endpoint.uploadKycVerification);
+    http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = "Bearer $token";
     request.fields['shop_owner_aadhar_card_no'] = adharCardController.text;
     request.fields['shop_owner_pan_card_no'] = panCardController.text;
@@ -292,20 +292,20 @@ class SKycVerificationController extends ChangeNotifier {
     File imageFile3 = fileImage3;
     File imageFile4 = fileImage4;
     var stream1 =
-        new http.ByteStream(DelegatingStream.typed(imageFile1.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile1.openRead()));
     var stream2 =
-        new http.ByteStream(DelegatingStream.typed(imageFile2.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile2.openRead()));
     var stream3 =
-        new http.ByteStream(DelegatingStream.typed(imageFile3.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile3.openRead()));
     var stream4 =
-        new http.ByteStream(DelegatingStream.typed(imageFile4.openRead()));
+        http.ByteStream(DelegatingStream.typed(imageFile4.openRead()));
     var length1 = await imageFile1.length();
     var length2 = await imageFile2.length();
-    var multipartFile1 = new http.MultipartFile(
+    var multipartFile1 = http.MultipartFile(
         "shop_owner_aadhar_card_image_path", stream1, length1,
         filename: basename(imageFile1.path));
     newList.add(multipartFile1);
-    var multipartFile2 = new http.MultipartFile(
+    var multipartFile2 = http.MultipartFile(
         "shop_owner_pan_card_image_path", stream2, length2,
         filename: basename(imageFile2.path));
     newList.add(multipartFile2);
@@ -313,7 +313,7 @@ class SKycVerificationController extends ChangeNotifier {
     //
     if (imageFile3.path != "") {
       var length3 = await imageFile3.length();
-      var multipartFile3 = new http.MultipartFile(
+      var multipartFile3 = http.MultipartFile(
           "shop_owner_shop_act_image_path", stream3, length3,
           filename: basename(imageFile3.path));
       newList.add(multipartFile3);
@@ -321,7 +321,7 @@ class SKycVerificationController extends ChangeNotifier {
     //
     if (imageFile4.path != "") {
       var length4 = await imageFile4.length();
-      var multipartFile4 = new http.MultipartFile(
+      var multipartFile4 = http.MultipartFile(
           "shop_owner_gst_image_path", stream4, length4,
           filename: basename(imageFile4.path));
       newList.add(multipartFile4);
@@ -335,7 +335,7 @@ class SKycVerificationController extends ChangeNotifier {
     if (response.statusCode == 200) {
       LoadingOverlay.of(context).hide();
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => KycCompletedView()));
+          context, MaterialPageRoute(builder: (context) => const KycCompletedView()));
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString('status', 'kycUploaded');
       Utils.showPrimarySnackbar(context, "Updated Successfully",

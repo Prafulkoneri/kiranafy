@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 // import 'package:telephony/telephony.dart';
 
 class ShopRegistrationView extends StatefulWidget {
-  ShopRegistrationView({super.key});
+  const ShopRegistrationView({super.key});
 
   @override
   State<ShopRegistrationView> createState() => _ShopRegistrationViewState();
@@ -184,7 +184,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         children: [
                           Expanded(
                             child: SearchDropDownField(
-                              textEditingController: watch.countrySearchController,
+                              textEditingController:
+                                  watch.countrySearchController,
                               onChanged: (value) async {
                                 await read.onCountrySelected(value);
                                 await read.getStateList(context);
@@ -209,7 +210,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                           Expanded(
                               child: watch.stateName == ""
                                   ? SearchDropDownField(
-                                textEditingController: watch.stateSearchController,
+                                      textEditingController:
+                                          watch.stateSearchController,
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
                                         await read.getCityList(context);
@@ -217,7 +219,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.stateName.toString(),
+                                                value:
+                                                    item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -229,7 +232,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       hint: "State",
                                     )
                                   : SearchDropDownField(
-                                textEditingController: watch.stateSearchController,
+                                      textEditingController:
+                                          watch.stateSearchController,
                                       value: watch.stateName.toString(),
                                       onChanged: (value) async {
                                         await read.onStateSelected(value);
@@ -238,7 +242,8 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                                       items: watch.stateList
                                           ?.map((item) =>
                                               DropdownMenuItem<String>(
-                                                value: item.stateName.toString(),
+                                                value:
+                                                    item.stateName.toString(),
                                                 child: Text(
                                                   item.stateName ?? "",
                                                   style: TextStyle(
@@ -256,7 +261,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       ),
                       watch.cityName == ""
                           ? SearchDropDownField(
-                        textEditingController: watch.citySearchController,
+                              textEditingController: watch.citySearchController,
                               onChanged: (value) async {
                                 await read.onCitySelected(value);
                                 await read.getAreaList(context);
@@ -275,7 +280,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               hint: "City",
                             )
                           : SearchDropDownField(
-                        textEditingController: watch.citySearchController,
+                              textEditingController: watch.citySearchController,
                               value: watch.cityName.toString(),
                               onChanged: (value) async {
                                 await read.onCitySelected(value);
@@ -299,7 +304,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                       ),
                       watch.areaName == ""
                           ? SearchDropDownField(
-                        textEditingController: watch.areaSearchController,
+                              textEditingController: watch.areaSearchController,
                               onChanged: (value) async {
                                 read.onAreaSelected(value);
                                 read.getPinCodeList(context);
@@ -320,7 +325,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                               hint: "Area",
                             )
                           : SearchDropDownField(
-                        textEditingController: watch.areaSearchController,
+                              textEditingController: watch.areaSearchController,
                               value: watch.areaName.toString(),
                               onChanged: (value) async {
                                 read.onAreaSelected(value);
@@ -415,7 +420,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                             "This UPI ID will be used for payment from customers.",
                             style: TextStyle(
                                 fontSize: 12.sp,
-                                color: Color(0xff3A3A3A),
+                                color: const Color(0xff3A3A3A),
                                 fontWeight: FontWeight.w400),
                           )
                         ],
@@ -431,7 +436,7 @@ class _ShopRegistrationViewState extends State<ShopRegistrationView> {
                         fontSize: 20.sp,
                         height: 45.w,
                         text: "Next",
-                        color: Color(0xff4689EC),
+                        color: const Color(0xff4689EC),
                         onTap: () {
                           print("uicvneuiqboewybte");
                           read.onNextClicked(context);

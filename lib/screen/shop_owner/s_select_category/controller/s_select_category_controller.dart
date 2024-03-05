@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
@@ -110,7 +109,7 @@ class SSelectCategoryController extends ChangeNotifier {
       final result = SAddCategoriesResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         final read =Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(0,SSCategoryListView(), context);
+        read.onNavigation(0,const SSCategoryListView(), context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(

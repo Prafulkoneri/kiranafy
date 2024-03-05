@@ -1,6 +1,4 @@
-import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -12,17 +10,12 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/view/s_dash_board_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_my_subscription/controller/subscription_history_controller.dart';
 import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/s_subscription_view.dart';
-import 'package:http/http.dart' as http;
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/buttons.dart';
 import 'package:local_supper_market/widget/loader.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'dart:typed_data';
 
 class SMySubscriptionView extends StatefulWidget {
   final String? screenName;
@@ -33,6 +26,7 @@ class SMySubscriptionView extends StatefulWidget {
 }
 
 class _SMySubscriptionViewState extends State<SMySubscriptionView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SubscriptionHistoryController>().initState(context);
@@ -55,13 +49,13 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
             widget.screenName == "accounts"
                 ? readMainScreen.onNavigation(
                     4,
-                    SAccountScreenView(
+                    const SAccountScreenView(
                       refresh: false,
                     ),
                     context)
                 : readMainScreen.onNavigation(
                     0,
-                    ShopDashBoardView(
+                    const ShopDashBoardView(
                       refresh: true,
                     ),
                     context);
@@ -86,20 +80,20 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                 widget.screenName == "accounts"
                     ? readMainScreen.onNavigation(
                         4,
-                        SAccountScreenView(
+                        const SAccountScreenView(
                           refresh: false,
                         ),
                         context)
                     : readMainScreen.onNavigation(
                         0,
-                        ShopDashBoardView(
+                        const ShopDashBoardView(
                           refresh: false,
                         ),
                         context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                     // mainAxisAlignment: M,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,9 +289,9 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                                 end: Alignment.topCenter,
                                                 begin: Alignment.bottomCenter,
                                                 colors: <Color>[
-                                                  Color(0xff4EC0FA)
+                                                  const Color(0xff4EC0FA)
                                                       .withOpacity(1),
-                                                  Color(0xff32DFAC)
+                                                  const Color(0xff32DFAC)
                                                       .withOpacity(1),
                                                 ]),
 
@@ -617,7 +611,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                               height: 30.h,
                               width: 109.w,
                               // color: Colors.transparent,
-                              color: Color(0xff4689EC),
+                              color: const Color(0xff4689EC),
                               onTap: () {
                                 readMainScreen.onNavigation(
                                     0,
@@ -647,7 +641,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                         child: Column(children: <Widget>[
                           Table(
                             // defaultColumnWidth: FixedColumnWidth(120.0),
-                            border: TableBorder(
+                            border: const TableBorder(
                                 horizontalInside:
                                     BorderSide(color: Colors.white, width: 5)),
                             children: [
@@ -658,7 +652,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       right: 27.w,
                                       bottom: 10.w,
                                       top: 8.w),
-                                  color: Color(0xff4EEFC1),
+                                  color: const Color(0xff4EEFC1),
                                   child: Text(
                                     "Plan",
                                     overflow: TextOverflow.ellipsis,
@@ -676,7 +670,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       // right: 27.w,
                                       bottom: 10.w,
                                       top: 8.w),
-                                  color: Color(0xff4EEFC1),
+                                  color: const Color(0xff4EEFC1),
                                   child: Text(
                                     "Duration",
                                     //  overflow: TextOverflow.ellipsis,
@@ -694,7 +688,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                       // right: 27.w,
                                       bottom: 10.w,
                                       top: 8.w),
-                                  color: Color(0xff4EEFC1),
+                                  color: const Color(0xff4EEFC1),
                                   child: Text(
                                     "Expiry Date",
                                     overflow: TextOverflow.ellipsis,
@@ -710,7 +704,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                         right: 0.w,
                                         bottom: 10.w,
                                         top: 8.w),
-                                    color: Color(0xff4EEFC1),
+                                    color: const Color(0xff4EEFC1),
                                     child: Center(
                                       child: Text(
                                         "Amount",
@@ -751,7 +745,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
     int length = watch.subscriptionHistory?.length ?? 0;
     for (int i = 0; i < length; i++) {
       rows.add(TableRow(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color(0xffF2F2F2),
           ),
           children: [
@@ -815,7 +809,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                     // right: 27.w,
                     bottom: 10.w,
                     top: 8.w),
-                color: Color(0xffF2F2F2),
+                color: const Color(0xffF2F2F2),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -833,7 +827,7 @@ class _SMySubscriptionViewState extends State<SMySubscriptionView> {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           GestureDetector(

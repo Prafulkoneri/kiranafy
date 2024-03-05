@@ -266,7 +266,7 @@ class _MyOrderFiltterViewState extends State<MyOrderFiltterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
+                      backgroundColor: Colors.red,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,
@@ -301,7 +301,7 @@ class _MyOrderFiltterViewState extends State<MyOrderFiltterView> {
                   height: 35.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Button,
+                      backgroundColor: Button,
                       // onPrimary: Colors.white,
                       // shadowColor: Colors.greenAccent,
                       elevation: 3,

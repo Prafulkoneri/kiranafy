@@ -6,6 +6,8 @@ import 'package:local_supper_market/screen/splash/controller/splash_controller.d
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -25,13 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
       children: [
         Padding(
           padding: EdgeInsets.only(right: 45.w),
-          child: Image(
+          child: const Image(
             image: AssetImage("assets/images/splash1.png"),
           ),
         ),
         Expanded(
           child: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: EdgeInsets.only(
             left: 45.w,
           ),
-          child: Image(
+          child: const Image(
             image: AssetImage("assets/images/splash2.png"),
           ),
         ),

@@ -513,17 +513,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
-import 'package:local_supper_market/screen/shop_owner/s_coupons/view/s_add_coupons_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/controller/new/s_add_edit_unit_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_edit_custom_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/unit_detail_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
@@ -575,7 +570,7 @@ class _AddUnitViewState extends State<AddUnitView> {
     final read = context.read<AddEditUnitController>();
     final readMain = context.read<SMainScreenController>();
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
@@ -640,7 +635,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
                     left: 20.w,
@@ -667,10 +662,10 @@ class _AddUnitViewState extends State<AddUnitView> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 25,
                           ),
-                          Container(
+                          SizedBox(
                             width: 26.w,
                             child: CupertinoSwitch(
                               value: watch.switchValue,
@@ -802,9 +797,9 @@ class _AddUnitViewState extends State<AddUnitView> {
                                           onPressed: () {
                                             read.openCamera1(context);
                                           },
-                                          child: Text("Camera"),
+                                          child: const Text("Camera"),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         ElevatedButton(
@@ -812,7 +807,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             read.openGallery1(context);
                                             Navigator.pop(context);
                                           },
-                                          child: Text("Gallery "),
+                                          child: const Text("Gallery "),
                                         ),
                                       ],
                                     ),
@@ -849,7 +844,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: Color(0xffB3B3B3),
+                                                  color: const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),
@@ -883,9 +878,9 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             read.openCamera2(context);
                                             Navigator.pop(context);
                                           },
-                                          child: Text("Camera"),
+                                          child: const Text("Camera"),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         ElevatedButton(
@@ -893,7 +888,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             read.openGallery2(context);
                                             Navigator.pop(context);
                                           },
-                                          child: Text("Gallery "),
+                                          child: const Text("Gallery "),
                                         ),
                                       ],
                                     ),
@@ -930,7 +925,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: Color(0xffB3B3B3),
+                                                  color: const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),
@@ -964,9 +959,9 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             read.openCamera3(context);
                                             Navigator.pop(context);
                                           },
-                                          child: Text("Camera"),
+                                          child: const Text("Camera"),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 20,
                                         ),
                                         ElevatedButton(
@@ -974,7 +969,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             read.openGallery3(context);
                                             Navigator.pop(context);
                                           },
-                                          child: Text("Gallery "),
+                                          child: const Text("Gallery "),
                                         ),
                                       ],
                                     ),
@@ -1011,7 +1006,7 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: Color(0xffB3B3B3),
+                                                  color: const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),

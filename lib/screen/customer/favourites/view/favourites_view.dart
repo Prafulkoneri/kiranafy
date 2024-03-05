@@ -8,7 +8,6 @@ import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/account/view/profile_screen_view.dart';
 import 'package:local_supper_market/screen/customer/favourites/controller/favourites_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/view/shop_profile_view.dart';
@@ -27,6 +26,7 @@ class CFavouritesView extends StatefulWidget {
 }
 
 class _CFavouritesViewState extends State<CFavouritesView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context
@@ -48,7 +48,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
           onBackBtnPressed: () {
             readMain.onNavigation(
                 4,
-                ProfileScreenView(
+                const ProfileScreenView(
                   isRefreshed: false,
                 ),
                 context);
@@ -66,19 +66,19 @@ class _CFavouritesViewState extends State<CFavouritesView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
                     4,
-                    ProfileScreenView(
+                    const ProfileScreenView(
                       isRefreshed: false,
                     ),
                     context);
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -92,19 +92,19 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                   onTap: () {
                                     read.onFavouriteShopTapped();
                                   },
+                                  color: Colors.transparent,
+                                  borderColor: watch.isFavShopPressed
+                                      ? const Color(0xff39C19D)
+                                      : Colors.transparent,
                                   child: Text(
                                     "Favourite Shop",
                                     style: TextStyle(
                                         color: watch.isFavShopPressed
-                                            ? Color(0xff39C19D)
-                                            : Color(0xff3A3A3A),
+                                            ? const Color(0xff39C19D)
+                                            : const Color(0xff3A3A3A),
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500),
-                                  ),
-                                  color: Colors.transparent,
-                                  borderColor: watch.isFavShopPressed
-                                      ? Color(0xff39C19D)
-                                      : Colors.transparent)),
+                                  ))),
                           SizedBox(
                             width: 20.w,
                           ),
@@ -113,19 +113,19 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                   onTap: () {
                                     read.onFavouriteProductTapped();
                                   },
+                                  color: Colors.transparent,
+                                  borderColor: watch.isFavShopPressed
+                                      ? Colors.transparent
+                                      : const Color(0xff39C19D),
                                   child: Text(
                                     "Favourite Product",
                                     style: TextStyle(
                                         color: watch.isFavShopPressed
-                                            ? Color(0xff3A3A3A)
-                                            : Color(0xff39C19D),
+                                            ? const Color(0xff3A3A3A)
+                                            : const Color(0xff39C19D),
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w500),
-                                  ),
-                                  color: Colors.transparent,
-                                  borderColor: watch.isFavShopPressed
-                                      ? Colors.transparent
-                                      : Color(0xff39C19D))),
+                                  ))),
                         ],
                       ),
                     ),
@@ -166,7 +166,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                 child: SizedBox(
                                   child: ListView.builder(
                                       // scrollDirection: Axis.vertical,p
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       // physics: BouncingScrollPhysics(),
                                       shrinkWrap: true,
                                       itemCount: watch.favShopList?.length ?? 0,
@@ -228,7 +228,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                               image: NetworkImage(
                                                                   '${element?.shopBannerImagePath}'),
                                                               fit: BoxFit.fill)
-                                                          : DecorationImage(
+                                                          : const DecorationImage(
                                                               image: AssetImage(
                                                                   "assets/images/nearshop2.png"),
                                                               fit: BoxFit
@@ -259,7 +259,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                           Alignment.topCenter,
                                                       end: Alignment
                                                           .bottomCenter,
-                                                      stops: [
+                                                      stops: const [
                                                         0.1,
                                                         0.9,
                                                       ],
@@ -280,7 +280,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Row(
+                                                      const Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .end,
@@ -336,7 +336,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                     BoxDecoration(
                                                                   color: yellow,
                                                                   borderRadius:
-                                                                      BorderRadius.all(
+                                                                      const BorderRadius.all(
                                                                           Radius.circular(
                                                                               15)),
                                                                 ),
@@ -462,11 +462,11 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                       GridView.builder(
                                           padding: EdgeInsets.zero,
                                           physics:
-                                              NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: watch.allProduct.length,
                                           gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 2,
                                                   crossAxisSpacing: 20.0,
                                                   mainAxisSpacing: 4.0),
@@ -558,7 +558,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                         children: [
                                                           element.productImagePath ==
                                                                   ""
-                                                              ? Container(
+                                                              ? SizedBox(
                                                                   height: 68.w,
                                                                   width: 68.w,
                                                                   child: Image
@@ -568,7 +568,7 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                         .cover,
                                                                   ),
                                                                 )
-                                                              : Container(
+                                                              : SizedBox(
                                                                   height: 68.w,
                                                                   width: 68.w,
                                                                   child:

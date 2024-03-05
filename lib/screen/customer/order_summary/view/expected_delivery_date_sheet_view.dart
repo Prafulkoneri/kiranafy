@@ -30,11 +30,11 @@ class _ExpectedDeliveryDateSheetViewState
         // ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 17.w),
-          decoration: new BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(25.0),
-              topRight: const Radius.circular(25.0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.0),
+              topRight: Radius.circular(25.0),
             ),
           ),
           child: Column(
@@ -52,7 +52,7 @@ class _ExpectedDeliveryDateSheetViewState
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xff006F94)),
+                        color: const Color(0xff006F94)),
                   ),
                   InkWell(
                     onTap: () {
@@ -61,7 +61,7 @@ class _ExpectedDeliveryDateSheetViewState
                     child: Container(
                       height: 20.w,
                       width: 20.w,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.black,
                       ),
@@ -80,7 +80,7 @@ class _ExpectedDeliveryDateSheetViewState
                 height: 20.w,
               ),
               PrimaryCTextFormField(
-                borderColor: Color(0xff4689EC).withOpacity(0.55.w),
+                borderColor: const Color(0xff4689EC).withOpacity(0.55.w),
                 hintText: "Expected Delivery Date",
                 readOnly: true,
                 onTap: () async {
@@ -88,7 +88,7 @@ class _ExpectedDeliveryDateSheetViewState
                     builder: (BuildContext, child) {
                       return Theme(
                         data: Theme.of(context).copyWith(
-                          colorScheme: ColorScheme.light(
+                          colorScheme: const ColorScheme.light(
                             primary: Color(0xff1767B1),
                             // <-- SEE HERE
                             onPrimary: Colors.white,
@@ -97,7 +97,7 @@ class _ExpectedDeliveryDateSheetViewState
                           ),
                           textButtonTheme: TextButtonThemeData(
                             style: TextButton.styleFrom(
-                              primary: Color(0xff1767B1), // button text color
+                              foregroundColor: const Color(0xff1767B1), // button text color
                             ),
                           ),
                         ),
@@ -116,7 +116,7 @@ class _ExpectedDeliveryDateSheetViewState
                   }
                 },
                 controller: watch.expectedDateController,
-                suffix: Container(
+                suffix: SizedBox(
                   width: 15.h,
                   height: 17.w,
                   child: Center(
@@ -142,7 +142,7 @@ class _ExpectedDeliveryDateSheetViewState
                 style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xff006F94)),
+                    color: const Color(0xff006F94)),
               ),
               SizedBox(
                 height: 20.w,
@@ -163,7 +163,7 @@ class _ExpectedDeliveryDateSheetViewState
                         decoration: BoxDecoration(
                           color: watch.isSlotAvailable[index]?Colors.transparent:Colors.grey.withOpacity(0.3),
                           border: Border.all(
-                              color: !watch.isSlotAvailable[index]?Colors.transparent:Color(0xff4689EC).withOpacity(0.55.w)),
+                              color: !watch.isSlotAvailable[index]?Colors.transparent:const Color(0xff4689EC).withOpacity(0.55.w)),
                           borderRadius: BorderRadius.circular(5.w),
                         ),
                         margin: EdgeInsets.only(bottom: 20.w),
@@ -203,7 +203,7 @@ class _ExpectedDeliveryDateSheetViewState
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xff3A3A3A).withOpacity(0.63)),
+                                  color: const Color(0xff3A3A3A).withOpacity(0.63)),
                             ),
                           ],
                         ),
@@ -223,9 +223,10 @@ class _ExpectedDeliveryDateSheetViewState
                 padding: EdgeInsets.only(
                     top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
                 margin: EdgeInsets.only(bottom: 10.w, left: 10.w, right: 10.w),
-                color: Color(0xFFDC3545),
+                color: const Color(0xFFDC3545),
                 width: ScreenUtil().screenWidth,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -239,7 +240,7 @@ class _ExpectedDeliveryDateSheetViewState
                           onTap: () {
                             read.onDismiss();
                           },
-                          child: Text(
+                          child: const Text(
                             "Dismiss",
                             style: TextStyle(color: Colors.white),
                           ),
@@ -250,7 +251,6 @@ class _ExpectedDeliveryDateSheetViewState
                       ],
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             )),

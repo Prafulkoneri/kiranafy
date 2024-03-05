@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/delivery_address/view/add_address_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/order_summary/controller/order_summary_controller.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/radio_button.dart';
@@ -27,11 +26,11 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
       children: [
         Container(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 17.w),
-            decoration: new BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: new BorderRadius.only(
-                topLeft: const Radius.circular(25.0),
-                topRight: const Radius.circular(25.0),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
               ),
             ),
             child: Column(
@@ -45,7 +44,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xff006F94)),
+                          color: const Color(0xff006F94)),
                     ),
                     InkWell(
                       onTap: () {
@@ -54,7 +53,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                       child: Container(
                         height: 20.w,
                         width: 20.w,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.black,
                         ),
@@ -77,7 +76,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                 ),
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: watch.customerAddress?.length ?? 0,
                     itemBuilder: (BuildContext, index) {
                       final element = watch.customerAddress?[index];
@@ -90,7 +89,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17.sp,
-                                color: Color(0xff040404)),
+                                color: const Color(0xff040404)),
                           ),
                           SizedBox(
                             height: 13.sp,
@@ -106,7 +105,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     color:
-                                        Color(0xff4689EC).withOpacity(0.55.w)),
+                                        const Color(0xff4689EC).withOpacity(0.55.w)),
                                 borderRadius: BorderRadius.circular(5.w),
                               ),
                               margin: EdgeInsets.only(bottom: 20.w),
@@ -128,7 +127,7 @@ class _AddressListSheetViewState extends State<AddressListSheetView> {
                                       style: TextStyle(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w500,
-                                          color: Color(0xff3A3A3A)
+                                          color: const Color(0xff3A3A3A)
                                               .withOpacity(0.63)),
                                     ),
                                   ),

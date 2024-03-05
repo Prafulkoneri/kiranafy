@@ -382,7 +382,6 @@ import 'package:local_supper_market/screen/customer/shop_profile/repository/remo
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ShopAllSeasonalController extends ChangeNotifier {
   String shopId = "";
@@ -595,11 +594,11 @@ class ShopAllSeasonalController extends ChangeNotifier {
         // seasonalProduct.clear();
         // seasonalProduct = data?.seasonalProducts;
         seasonalProduct.addAll(result.data?.seasonalProducts ?? []);
-        int seasonProductLength = seasonalProduct?.length ?? 0;
+        int seasonProductLength = seasonalProduct.length ?? 0;
         isAllSeasonalProductAdded =
             List<bool>.filled(seasonProductLength, false, growable: true);
         for (int i = 0; i < seasonProductLength; i++) {
-          if (seasonalProduct?[i].addToCartCheck == "yes") {
+          if (seasonalProduct[i].addToCartCheck == "yes") {
             isAllSeasonalProductAdded.insert(i, true);
           } else {
             isAllSeasonalProductAdded.insert(i, false);

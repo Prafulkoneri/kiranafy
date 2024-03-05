@@ -20,12 +20,14 @@ class CheckMobNoExistResModel {
   String? message;
   String? kycUploaded;
   String? registrationCompleted;
+  String? subscription;
 
   CheckMobNoExistResModel({
     this.status,
     this.message,
     this.kycUploaded,
     this.registrationCompleted,
+    this.subscription,
   });
 
   CheckMobNoExistResModel.fromJson(Map<String, dynamic> json) {
@@ -33,5 +35,6 @@ class CheckMobNoExistResModel {
     message = json["message"];
     kycUploaded = json["kyc_uploaded"];
     registrationCompleted = json["registration_completed"];
+    subscription = json["subscription"];
   }
 }

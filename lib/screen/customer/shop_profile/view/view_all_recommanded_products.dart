@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/screen/customer/products/controller/product_view_controller.dart';
 import 'package:local_supper_market/screen/customer/products/views/product_screen_view.dart';
 import 'package:local_supper_market/screen/customer/shop_profile/controller/recommanded_controller.dart';
@@ -87,7 +86,7 @@ class _AllRecommandedProductsViewState
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -114,9 +113,9 @@ class _AllRecommandedProductsViewState
                                     top: 20.w,
                                     right: 10.w,
                                     bottom: 100.w),
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount:
-                                    watch.recommandedProducts?.length ?? 0,
+                                    watch.recommandedProducts.length ?? 0,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
@@ -136,7 +135,7 @@ class _AllRecommandedProductsViewState
                                           onTap: () {
                                             readProductViewController
                                                 .updateProductId(
-                                                    element?.id.toString(),
+                                                    element.id.toString(),
                                                     context,
                                                     false);
                                             readMain.onNavigation(
@@ -145,17 +144,17 @@ class _AllRecommandedProductsViewState
                                                     routeName:
                                                         "shopProductView",
                                                     selectedUnitId: element
-                                                        ?.productUnitId
+                                                        .productUnitId
                                                         .toString(),
                                                     categoryId: element
-                                                        ?.categoryId
+                                                        .categoryId
                                                         .toString(),
                                                     // categoryId: watch.categoryId,
                                                     productId:
-                                                        element?.id.toString(),
+                                                        element.id.toString(),
                                                     shopId: widget.shopId,
                                                     productType:
-                                                        element?.productType),
+                                                        element.productType),
                                                 context);
                                             // Navigator.pushAndRemoveUntil(
                                             //   context,
@@ -205,7 +204,7 @@ class _AllRecommandedProductsViewState
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       children: [
-                                                        element?.discountPercentage !=
+                                                        element.discountPercentage !=
                                                                 ""
                                                             ? Container(
                                                                 width: 60.w,
@@ -218,7 +217,7 @@ class _AllRecommandedProductsViewState
                                                                             Radius.circular(5.w))),
                                                                 child: Center(
                                                                   child: Text(
-                                                                      "${element?.discountPercentage} off",
+                                                                      "${element.discountPercentage} off",
                                                                       style: GoogleFonts
                                                                           .dmSans(
                                                                         textStyle: TextStyle(
@@ -232,7 +231,7 @@ class _AllRecommandedProductsViewState
                                                                       )),
                                                                 ),
                                                               )
-                                                            : Container(
+                                                            : SizedBox(
                                                                 width: 60.w,
                                                                 height: 20.h,
                                                               ),
@@ -247,9 +246,9 @@ class _AllRecommandedProductsViewState
                                                         MainAxisAlignment
                                                             .center,
                                                     children: [
-                                                      element?.productImagePath ==
+                                                      element.productImagePath ==
                                                               ""
-                                                          ? Container(
+                                                          ? SizedBox(
                                                               height: 68.w,
                                                               width: 68.w,
                                                               child:
@@ -259,13 +258,13 @@ class _AllRecommandedProductsViewState
                                                                     .cover,
                                                               ),
                                                             )
-                                                          : Container(
+                                                          : SizedBox(
                                                               height: 68.w,
                                                               width: 68.w,
                                                               child:
                                                                   AppNetworkImages(
                                                                 imageUrl:
-                                                                    "${element?.productImagePath}",
+                                                                    "${element.productImagePath}",
                                                                 fit: BoxFit
                                                                     .cover,
                                                               ),
@@ -279,7 +278,7 @@ class _AllRecommandedProductsViewState
                                                     children: [
                                                       Flexible(
                                                         child: Text(
-                                                          "${element?.productName}",
+                                                          "${element.productName}",
                                                           maxLines: 1,
                                                           style: GoogleFonts
                                                               .roboto(
@@ -310,7 +309,7 @@ class _AllRecommandedProductsViewState
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                        "${element?.weight} ${element?.unit}",
+                                                        "${element.weight} ${element.unit}",
                                                         style:
                                                             GoogleFonts.roboto(
                                                           textStyle: TextStyle(
@@ -324,12 +323,12 @@ class _AllRecommandedProductsViewState
                                                       ),
                                                       Row(
                                                         children: [
-                                                          element?.mrpPrice !=
+                                                          element.mrpPrice !=
                                                                   ""
                                                               ? Text(
-                                                                  '\u{20B9}${element?.mrpPrice}',
+                                                                  '\u{20B9}${element.mrpPrice}',
                                                                   style: GoogleFonts.dmSans(
-                                                                      textStyle: element?.offerPrice != "" && element?.offerPrice != element?.mrpPrice
+                                                                      textStyle: element.offerPrice != "" && element.offerPrice != element.mrpPrice
                                                                           ? TextStyle(
                                                                               decoration: TextDecoration
                                                                                   .lineThrough,
@@ -346,17 +345,17 @@ class _AllRecommandedProductsViewState
                                                                               letterSpacing: .5,
                                                                               fontSize: 12.sp,
                                                                               fontWeight: FontWeight.w400)))
-                                                              : Text(""),
+                                                              : const Text(""),
                                                           SizedBox(
                                                             width: 5.w,
                                                           ),
-                                                          element?.offerPrice !=
+                                                          element.offerPrice !=
                                                                       "" &&
-                                                                  element?.offerPrice !=
+                                                                  element.offerPrice !=
                                                                       element
-                                                                          ?.mrpPrice
+                                                                          .mrpPrice
                                                               ? Text(
-                                                                  '\u{20B9}${element?.offerPrice}',
+                                                                  '\u{20B9}${element.offerPrice}',
                                                                   style:
                                                                       GoogleFonts
                                                                           .dmSans(
@@ -369,7 +368,7 @@ class _AllRecommandedProductsViewState
                                                                         fontWeight: FontWeight.w500),
                                                                   ),
                                                                 )
-                                                              : Text(""),
+                                                              : const Text(""),
                                                         ],
                                                       ),
                                                     ],
@@ -575,8 +574,8 @@ class _AllRecommandedProductsViewState
                             color: Colors.black.withOpacity(0.1),
                             shape: BoxShape.circle,
                           ),
-                          child: Center(
-                            child: Container(
+                          child: const Center(
+                            child: SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(

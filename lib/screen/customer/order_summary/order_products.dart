@@ -25,7 +25,7 @@ class _OrderProductsState extends State<OrderProducts> {
       child: ListView.builder(
           padding: EdgeInsets.zero,
           // scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           // physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: watch.cartItemList?.length ?? 0,
@@ -33,12 +33,12 @@ class _OrderProductsState extends State<OrderProducts> {
             final element = watch.cartItemList?[index];
             return Column(
               children: [
-                Container(
+                SizedBox(
                   width: ScreenUtil().screenWidth,
                   child: Row(
                     children: [
                       element?.productImagePath == ""
-                          ? Container(
+                          ? SizedBox(
                               height: 69.w,
                               width: 69.w,
                               child: Image.asset(
@@ -46,7 +46,7 @@ class _OrderProductsState extends State<OrderProducts> {
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : Container(
+                          : SizedBox(
                               height: 69.w,
                               width: 69.w,
                               child: AppNetworkImages(

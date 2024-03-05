@@ -8,7 +8,6 @@ import 'package:local_supper_market/screen/shop_owner/help_center/controller/tic
 import 'package:local_supper_market/screen/shop_owner/help_center/view/customer_support_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/widget/app_bar.dart';
 import 'package:local_supper_market/widget/loader.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,7 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
           preferredSize: Size.fromHeight(60.w),
           child: PrimaryAppBar(
             onBackBtnPressed: () {
-              readMainScreen.onNavigation(4, SAccountScreenView(
+              readMainScreen.onNavigation(4, const SAccountScreenView(
                 refresh: false,
               ), context);
             },
@@ -52,7 +51,7 @@ class _SHelpCenterViewState extends State<SHelpCenterView> {
         body:watch.isLoading?const Loader():
 WillPopScope(
   onWillPop: ()async{
-    readMainScreen.onNavigation(4, SAccountScreenView(
+    readMainScreen.onNavigation(4, const SAccountScreenView(
       refresh: false,
     ), context);
     return false;
@@ -62,7 +61,7 @@ WillPopScope(
           watch.ticketList?.isNotEmpty == true
               ? Container(
                   child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     padding: EdgeInsets.only(bottom: 100.w),
                     itemCount: watch.ticketList?.length ?? 0,
                     itemBuilder: (context, index) {
@@ -159,7 +158,7 @@ WillPopScope(
                                                     ///////
                                                     : element?.ticketStatus ==
                                                             "Ongoing"
-                                                        ? Color(0xffFF961C)
+                                                        ? const Color(0xffFF961C)
                                                         ///////
                                                         : element?.ticketStatus ==
                                                                 "Closed"
@@ -177,7 +176,7 @@ WillPopScope(
                                     SizedBox(
                                       height: 9.h,
                                     ),
-                                    Divider(),
+                                    const Divider(),
                                     SizedBox(
                                       height: 13.h,
                                     ),

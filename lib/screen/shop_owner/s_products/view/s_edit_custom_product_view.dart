@@ -114,7 +114,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                     return false;
                   },
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         Container(
@@ -324,7 +324,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                   Text(
                                     "Product Feature Image",
                                     style: TextStyle(
-                                        color: Color(0xff717171),
+                                        color: const Color(0xff717171),
                                         // letterSpacing: .5,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w500),
@@ -346,9 +346,9 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                             onPressed: () {
                                               read.openCameras(context);
                                             },
-                                            child: Text("Camera"),
+                                            child: const Text("Camera"),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                           ElevatedButton(
@@ -356,7 +356,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                               read.openGallery(context);
                                               Navigator.pop(context);
                                             },
-                                            child: Text("Gallery "),
+                                            child: const Text("Gallery "),
                                           ),
                                         ],
                                       ),
@@ -393,7 +393,7 @@ class _SEditCustomProductViewState extends State<SEditCustomProductView> {
                                               Text(
                                                 "Add Image",
                                                 style: TextStyle(
-                                                    color: Color(0xffB3B3B3),
+                                                    color: const Color(0xffB3B3B3),
                                                     // letterSpacing: .5,
                                                     fontSize: 12.sp,
                                                     fontWeight:

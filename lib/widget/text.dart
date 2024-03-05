@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_supper_market/const/color.dart';
 
+//////Start//////
 class AccountScreen extends StatelessWidget {
   final String text;
 
-  AccountScreen({required this.text});
+  const AccountScreen({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,12 @@ class AccountScreen extends StatelessWidget {
     );
   }
 }
-////////////
+////////////End////////////
 
 class UpdateProfile extends StatelessWidget {
   final String text;
 
-  UpdateProfile({required this.text});
+  const UpdateProfile({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class UpdateProfile extends StatelessWidget {
 class HomeSideHeading extends StatelessWidget {
   final String text;
 
-  HomeSideHeading({required this.text});
+  const HomeSideHeading({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class HomeSideHeading extends StatelessWidget {
 class SettingScreen extends StatelessWidget {
   final String text;
 
-  SettingScreen({required this.text});
+  const SettingScreen({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class NearByShops extends StatelessWidget {
   final String text;
   final double? fontSize;
 
-  NearByShops({required this.text, this.fontSize});
+  const NearByShops({super.key, required this.text, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,7 @@ class NearByShops extends StatelessWidget {
 class NearByShopslocation extends StatelessWidget {
   final String text;
 
-  NearByShopslocation({required this.text});
+  const NearByShopslocation({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,8 @@ class NearByShopslocation extends StatelessWidget {
 class ShopDashBoard extends StatelessWidget {
   final String text;
 
-  ShopDashBoard({
+  const ShopDashBoard({
+    super.key,
     required this.text,
   });
 
@@ -140,7 +142,7 @@ class ShopDashBoard extends StatelessWidget {
 class DashBoardSideHeading extends StatelessWidget {
   final String text;
 
-  DashBoardSideHeading({required this.text});
+  const DashBoardSideHeading({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +163,7 @@ class DashBoardSideHeading extends StatelessWidget {
 class DashBoardCount extends StatelessWidget {
   final String text;
 
-  DashBoardCount({required this.text});
+  const DashBoardCount({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +184,7 @@ class DashBoardCount extends StatelessWidget {
 class DashBoardShopName extends StatelessWidget {
   final String text;
 
-  DashBoardShopName({required this.text});
+  const DashBoardShopName({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +202,7 @@ class DashBoardShopName extends StatelessWidget {
 class ShopRating extends StatelessWidget {
   final String text;
 
-  ShopRating({required this.text});
+  const ShopRating({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +223,7 @@ class ShopRating extends StatelessWidget {
 class ShopAddress extends StatelessWidget {
   final String text;
 
-  ShopAddress({required this.text});
+  const ShopAddress({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +244,7 @@ class ShopAddress extends StatelessWidget {
 class CouponsOneText extends StatelessWidget {
   final String text;
 
-  CouponsOneText({required this.text});
+  const CouponsOneText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +262,7 @@ class CouponsOneText extends StatelessWidget {
 class CouponsTwoText extends StatelessWidget {
   final String text;
 
-  CouponsTwoText({required this.text});
+  const CouponsTwoText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +283,7 @@ class CouponsTwoText extends StatelessWidget {
 class CouponsThreeText extends StatelessWidget {
   final String text;
 
-  CouponsThreeText({required this.text});
+  const CouponsThreeText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +302,7 @@ class CouponsThreeText extends StatelessWidget {
 class CouponsFourText extends StatelessWidget {
   final String text;
 
-  CouponsFourText({required this.text});
+  const CouponsFourText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +321,7 @@ class CouponsFourText extends StatelessWidget {
 class CouponsFiveText extends StatelessWidget {
   final String text;
 
-  CouponsFiveText({required this.text});
+  const CouponsFiveText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -341,7 +343,7 @@ class CouponsFiveText extends StatelessWidget {
 class CouponsTitleText extends StatelessWidget {
   final String text;
 
-  CouponsTitleText({required this.text});
+  const CouponsTitleText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +362,7 @@ class CouponsTitleText extends StatelessWidget {
 class CouponsOff extends StatelessWidget {
   final String text;
 
-  CouponsOff({required this.text});
+  const CouponsOff({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -381,7 +383,7 @@ class CouponsOff extends StatelessWidget {
 class CouponsUpto extends StatelessWidget {
   final String text;
 
-  CouponsUpto({required this.text});
+  const CouponsUpto({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -400,7 +402,7 @@ class CouponsUpto extends StatelessWidget {
 class Couponsode extends StatelessWidget {
   final String text;
 
-  Couponsode({required this.text});
+  const Couponsode({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -416,7 +418,7 @@ class Couponsode extends StatelessWidget {
 class PlaceYourAdd extends StatelessWidget {
   final String text;
 
-  PlaceYourAdd({required this.text});
+  const PlaceYourAdd({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -432,7 +434,7 @@ class PlaceYourAdd extends StatelessWidget {
 class UnitAndWeight extends StatelessWidget {
   final String text;
 
-  UnitAndWeight({required this.text});
+  const UnitAndWeight({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -453,7 +455,7 @@ class UnitAndWeight extends StatelessWidget {
 class ProductName extends StatelessWidget {
   final String text;
 
-  ProductName({required this.text});
+  const ProductName({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -474,7 +476,7 @@ class ProductName extends StatelessWidget {
 class OfferPrice extends StatelessWidget {
   final String text;
 
-  OfferPrice({required this.text});
+  const OfferPrice({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -495,7 +497,7 @@ class OfferPrice extends StatelessWidget {
 class OrderSummery extends StatelessWidget {
   final String text;
 
-  OrderSummery({required this.text});
+  const OrderSummery({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -516,7 +518,7 @@ class OrderSummery extends StatelessWidget {
 class CReview extends StatelessWidget {
   final String text;
 
-  CReview({required this.text});
+  const CReview({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -534,7 +536,7 @@ class CReviewone extends StatelessWidget {
   final String text;
   final double? fontSize;
 
-  CReviewone({required this.text, required this.fontSize});
+  const CReviewone({super.key, required this.text, required this.fontSize});
 
   @override
   Widget build(BuildContext context) {

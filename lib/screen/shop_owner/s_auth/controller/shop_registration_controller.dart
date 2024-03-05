@@ -39,21 +39,21 @@ class ShopRegistrationController extends ChangeNotifier {
   int cityId = 0;
   int areaId = 0;
   int shopId = 0;
-  String countryName="";
-  String stateName="";
-  String cityName="";
-  String areaName="";
+  String countryName = "";
+  String stateName = "";
+  String cityName = "";
+  String areaName = "";
 
   String countryCode = "+91";
   String selectedCountryCode = "";
   String successToken = "";
   String pincode = "";
 
-  Future<void> initState(context) async{
-   countryName="";
-   stateName="";
-   cityName="";
-   areaName="";
+  Future<void> initState(context) async {
+    countryName = "";
+    stateName = "";
+    cityName = "";
+    areaName = "";
     SharedPreferences pref = await SharedPreferences.getInstance();
     mobController.text = pref.getString("mobileNo").toString();
     selectedCountryCode = pref.getString("countryCode").toString();
@@ -64,7 +64,7 @@ class ShopRegistrationController extends ChangeNotifier {
   void onOtpSubmitBtnPressed(context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SKycVerificationView()),
+      MaterialPageRoute(builder: (context) => const SKycVerificationView()),
     );
   }
 
@@ -74,7 +74,7 @@ class ShopRegistrationController extends ChangeNotifier {
       print(response.body);
       final result = GetCountryListResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
-        print("${response.body}");
+        print(response.body);
         countryList = result.countryData;
         notifyListeners();
       } else {
@@ -99,15 +99,19 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onCountrySelected(value) async {
-    countryName=value;
-    countryId=countryList?.where((element) => element.countryName?.contains(value)??false).toList()[0].id??0;
-    stateId=0;
-    cityId=0;
-    areaId=0;
-     stateName="";
-     cityName="";
-     areaName="";
-    pincode="";
+    countryName = value;
+    countryId = countryList
+            ?.where((element) => element.countryName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
+    stateId = 0;
+    cityId = 0;
+    areaId = 0;
+    stateName = "";
+    cityName = "";
+    areaName = "";
+    pincode = "";
 
     notifyListeners();
   }
@@ -142,13 +146,17 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onStateSelected(value) async {
-    stateName=value;
-    stateId=stateList?.where((element) => element.stateName?.contains(value)??false).toList()[0].id??0;
-    cityId=0;
-    areaId=0;
-    cityName="";
-    areaName="";
-    pincode="";
+    stateName = value;
+    stateId = stateList
+            ?.where((element) => element.stateName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
+    cityId = 0;
+    areaId = 0;
+    cityName = "";
+    areaName = "";
+    pincode = "";
     notifyListeners();
   }
 
@@ -187,11 +195,15 @@ class ShopRegistrationController extends ChangeNotifier {
   }
 
   Future<void> onCitySelected(value) async {
-    cityName=value;
-    cityId=cityList?.where((element) => element.cityName?.contains(value)??false).toList()[0].id??0;
-    areaId=0;
-    areaName="";
-    pincode="";
+    cityName = value;
+    cityId = cityList
+            ?.where((element) => element.cityName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
+    areaId = 0;
+    areaName = "";
+    pincode = "";
 
     // cityId = int.parse(value.toString());
     notifyListeners();
@@ -202,8 +214,12 @@ class ShopRegistrationController extends ChangeNotifier {
       );
 
   Future<void> onAreaSelected(value) async {
-    areaName=value;
-    areaId=areaList?.where((element) => element.areaName?.contains(value)??false).toList()[0].id??0;
+    areaName = value;
+    areaId = areaList
+            ?.where((element) => element.areaName?.contains(value) ?? false)
+            .toList()[0]
+            .id ??
+        0;
     notifyListeners();
   }
 
@@ -355,7 +371,7 @@ class ShopRegistrationController extends ChangeNotifier {
       ShopOwnerRegisterReqModel(
           shopName: shopNameController.text,
           shopOwnerName: ownerNameController.text,
-          countryCode: "$countryCode",
+          countryCode: countryCode,
           mobileNo: (mobController.text),
           email: emailIdController.text,
           shopType: shopId == 1 ? "Retailer" : "Wholesaler",
@@ -393,8 +409,10 @@ class ShopRegistrationController extends ChangeNotifier {
           // return;
           LoadingOverlay.of(context).hide();
           notifyListeners();
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SKycVerificationView()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SKycVerificationView()));
         } else {
           LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, result.message,

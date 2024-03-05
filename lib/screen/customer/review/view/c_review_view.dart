@@ -73,7 +73,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 // readMain.onNavigation(
@@ -91,7 +91,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -154,7 +154,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                     SizedBox(
                                       width: 8.w,
                                     ),
-                                    Container(
+                                    SizedBox(
                                         width: 200.w,
                                         child: ShopAddress(
                                           text:
@@ -194,7 +194,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CReview(
+                                const CReview(
                                   text: "All Reviews",
                                 ),
                                 SizedBox(
@@ -202,7 +202,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                 ),
                                 ListView.builder(
                                   shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: watch.reviewList?.length ?? 0,
                                   itemBuilder: (context, index) {
                                     final element = watch.reviewList?[index];
@@ -218,7 +218,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                                 width: 1,
-                                                color: Color(0xffE8E8E8)),
+                                                color: const Color(0xffE8E8E8)),
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             // color: Colors.red,
@@ -235,7 +235,7 @@ class _CReviewScreenViewState extends State<CReviewScreenView> {
                                                           width: 50.0,
                                                           height: 50.0,
                                                           decoration:
-                                                              BoxDecoration(
+                                                              const BoxDecoration(
                                                             shape:
                                                                 BoxShape.circle,
                                                             image:

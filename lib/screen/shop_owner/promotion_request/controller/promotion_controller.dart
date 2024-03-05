@@ -5,7 +5,6 @@ import 'package:local_supper_market/screen/shop_owner/promotion_request/model/pr
 import 'package:local_supper_market/screen/shop_owner/promotion_request/repository/promotion_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -82,7 +81,7 @@ class shopPromotionController extends ChangeNotifier {
         planToStartController.clear();
         adsContentController.clear();
         final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(4, SAccountScreenView(
+        read.onNavigation(4, const SAccountScreenView(
           refresh: true,
         ), context);
         // Navigator.pushAndRemoveUntil(

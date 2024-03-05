@@ -32,7 +32,7 @@ class PrimaryAppBar extends StatelessWidget {
       leading: isBackButtonEnabled ?? true
           ? Container(
               child: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: onBackBtnPressed,
               ),
             )
@@ -61,7 +61,8 @@ class PrimaryAppBar extends StatelessWidget {
       ),
       flexibleSpace: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(40)),
           gradient: LinearGradient(
               end: Alignment.topCenter,
               begin: Alignment.bottomCenter,

@@ -112,7 +112,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
           ),
         ),
         body: watch.isLoading
-            ? Loader()
+            ? const Loader()
             : WillPopScope(
                 onWillPop: () async {
                   readMain.onNavigation(
@@ -128,7 +128,7 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                     children: [
                       Expanded(
                         child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

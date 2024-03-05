@@ -117,13 +117,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
               //             cartId: watch.cartId)));
             } else if (widget.routeName == "homeScreen") {
               readMain.onNavigation(
-                  0, HomeScreenView(refreshPage: false), context);
+                  0, const HomeScreenView(refreshPage: false), context);
             } else if (widget.routeName == "homeScreenBanner") {
               readMain.onNavigation(
-                  0, HomeScreenView(refreshPage: false), context);
+                  0, const HomeScreenView(refreshPage: false), context);
             } else if (widget.routeName == "favouriteProduct") {
               readMain.onNavigation(
-                  4, CFavouritesView(selectedIndex: 1), context);
+                  4, const CFavouritesView(selectedIndex: 1), context);
             } else if (widget.routeName == "categoryView") {
               readMain.onNavigation(
                   1,
@@ -192,10 +192,10 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                   //             cartId: watch.cartId)));
                 } else if (widget.routeName == "homeScreen") {
                   readMain.onNavigation(
-                      0, HomeScreenView(refreshPage: false), context);
+                      0, const HomeScreenView(refreshPage: false), context);
                 } else if (widget.routeName == "favouriteProduct") {
                   readMain.onNavigation(
-                      4, CFavouritesView(selectedIndex: 1), context);
+                      4, const CFavouritesView(selectedIndex: 1), context);
                 } else if (widget.routeName == "categoryView") {
                   readMain.onNavigation(
                       1,
@@ -235,7 +235,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         // borderRadius: BorderRadius.circular(30.w),
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30),
                         ),
@@ -445,15 +445,6 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                             final element =
                                                 watch.unitImages[pagePosition];
                                             return Container(
-                                              child: Center(
-                                                child: AppNetworkImages(
-                                                  showShopImage: true,
-                                                  imageUrl: '${element}',
-                                                  height: 241.w,
-                                                  // width: 102.w,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
                                               margin: EdgeInsets.only(
                                                   left: pagePosition == 0
                                                       ? 19.w
@@ -465,6 +456,15 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                               1
                                                       ? 19.w
                                                       : 10.w),
+                                              child: Center(
+                                                child: AppNetworkImages(
+                                                  showShopImage: true,
+                                                  imageUrl: '$element',
+                                                  height: 241.w,
+                                                  // width: 102.w,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
                                             );
                                           })
                                   : Container(
@@ -507,6 +507,8 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      tapPadding:
+                                      const EdgeInsets.all(35.0);
                                       watch.isFavProduct
                                           ? read.removeFavProduct(context)
                                           : read.addToFavProduct(context);
@@ -607,13 +609,13 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                       margin: EdgeInsets.only(bottom: 18.w),
                                       decoration: BoxDecoration(
                                           color: watch.isUnitImagesAdded[index]
-                                              ? Color(0xffEAFFF1)
+                                              ? const Color(0xffEAFFF1)
                                               : Colors.white,
                                           border: Border.all(
-                                              color:
-                                                  watch.isUnitImagesAdded[index]
-                                                      ? Color(0xff69BB86)
-                                                      : Color(0xffB3B3B3)),
+                                              color: watch
+                                                      .isUnitImagesAdded[index]
+                                                  ? const Color(0xff69BB86)
+                                                  : const Color(0xffB3B3B3)),
                                           borderRadius:
                                               BorderRadius.circular(10.w)),
                                       padding: EdgeInsets.symmetric(
@@ -980,7 +982,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                             watch.productViewData?.similarProducts
                                         ?.isNotEmpty ??
                                     false
-                                ? Container(
+                                ? SizedBox(
                                     height: 210.w,
                                     child: ListView.builder(
                                         physics: const BouncingScrollPhysics(),
@@ -1069,7 +1071,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               )),
                                                                         ),
                                                                       )
-                                                                    : Container(
+                                                                    : SizedBox(
                                                                         width:
                                                                             60.w,
                                                                         height:
@@ -1084,7 +1086,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                               children: [
                                                                 element?.productImagePath ==
                                                                         ""
-                                                                    ? Container(
+                                                                    ? SizedBox(
                                                                         height:
                                                                             89.w,
                                                                         width:
@@ -1096,7 +1098,7 @@ class _ProductScreenViewState extends State<ProductScreenView> {
                                                                               .cover,
                                                                         ),
                                                                       )
-                                                                    : Container(
+                                                                    : SizedBox(
                                                                         height:
                                                                             89.w,
                                                                         width:

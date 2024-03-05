@@ -3,18 +3,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/view/s_accounts_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_main_screen/controller/s_main_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_main_screen/view/s_main_screen_view.dart';
 
 import 'package:local_supper_market/screen/shop_owner/s_products/model/shop_add_product_list_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/model/upload_add_product_model.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_selected_products_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/s_add_product_repo.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/repository/upload_add_products_repo.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_add_product_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_products/view/s_selected_products_view.dart';
-import 'package:local_supper_market/screen/shop_owner/s_products/view/s_custom_products_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
 import 'package:local_supper_market/widget/loaderoverlay.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +130,7 @@ class SAddProductsController extends ChangeNotifier {
         for (int i = 0; i < selectedProductLength; i++) {
           selectedProductsId.add(selectedProductIdData?[i].selectedProductId);
         }
-        print("selectedProductsId${selectedProductsId}");
+        print("selectedProductsId$selectedProductsId");
         for (int i = 0; i < length; i++) {
           if (allAdminProductList[i].selectedByShopOwner == "yes") {
             selectedProduct.insert(i, true);

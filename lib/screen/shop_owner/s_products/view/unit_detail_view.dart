@@ -31,6 +31,7 @@ class UnitDetailView extends StatefulWidget {
 }
 
 class _UnitDetailViewState extends State<UnitDetailView> {
+  @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<SGetProductUnitListController>().initState(
@@ -71,7 +72,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                   return false;
                 },
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       // mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +118,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                 itemCount: watch.unitDetails?.length ?? 0,
                                 //  watch.productDetails?.length ?? 0,
                                 shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 itemBuilder: (BuildContext, index) {
                                   final element = watch.unitDetails?[index];
                                   return Column(
@@ -136,7 +137,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     .withOpacity(0.03.w),
                                                 blurRadius: 5,
                                                 spreadRadius: 0,
-                                                offset: Offset(5, 6)),
+                                                offset: const Offset(5, 6)),
                                           ],
                                           border: Border.all(
                                               color: Colors.black
@@ -160,7 +161,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     fit: BoxFit.fill,
                                                   )
                                                 : Image(
-                                                    image: AssetImage(
+                                                    image: const AssetImage(
                                                       "assets/images/image_not_found.png",
                                                     ),
                                                     height: 60.h,
@@ -179,7 +180,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                     height: 11.h,
                                                   ),
                                                   Container(
-                                                    padding: EdgeInsets.only(),
+                                                    padding: const EdgeInsets.only(),
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -214,9 +215,9 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                                 color: element
                                                                             ?.status ==
                                                                         "active"
-                                                                    ? Color(
+                                                                    ? const Color(
                                                                         0xff39C19D)
-                                                                    : Color(
+                                                                    : const Color(
                                                                         0xffF26674)),
                                                           ),
                                                         ),
@@ -269,7 +270,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                               readMainScreen
                                                                   .onNavigation(
                                                                       0,
-                                                                      await AddUnitView(
+                                                                      AddUnitView(
                                                                         routeName:
                                                                             "unitList",
                                                                         categoryId:
@@ -337,7 +338,7 @@ class _UnitDetailViewState extends State<UnitDetailView> {
                                                             },
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .all(8),
                                                               decoration: BoxDecoration(
                                                                   boxShadow: [

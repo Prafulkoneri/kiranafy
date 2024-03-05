@@ -29,6 +29,7 @@ bool _checkbox = false;
 class _AddProductViewState extends State<AddProductView> {
   ScrollController scrollController = ScrollController();
 
+  @override
   void initState() {
     print("widget.categoryId ${widget.categoryId}");
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -87,7 +88,7 @@ class _AddProductViewState extends State<AddProductView> {
                 },
                 child: SingleChildScrollView(
                   controller: scrollController,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Stack(
                     children: [
                       Column(
@@ -138,7 +139,7 @@ class _AddProductViewState extends State<AddProductView> {
                                       itemCount:
                                           watch.allAdminProductList.length ?? 0,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (BuildContext, index) {
                                         final element =
                                             watch.allAdminProductList[index];
@@ -164,7 +165,7 @@ class _AddProductViewState extends State<AddProductView> {
                                                                 0.03.w),
                                                         blurRadius: 5,
                                                         spreadRadius: 0,
-                                                        offset: Offset(5, 6)),
+                                                        offset: const Offset(5, 6)),
                                                   ],
                                                   border: Border.all(
                                                       color: Colors.black
@@ -187,7 +188,7 @@ class _AddProductViewState extends State<AddProductView> {
                                                             fit: BoxFit.cover,
                                                           )
                                                         : Image(
-                                                            image: AssetImage(
+                                                            image: const AssetImage(
                                                               "assets/images/image_not_found.png",
                                                             ),
                                                             height: 60.h,
@@ -312,8 +313,8 @@ class _AddProductViewState extends State<AddProductView> {
                               color: Colors.black.withOpacity(0.1),
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
-                              child: Container(
+                            child: const Center(
+                              child: SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(

@@ -56,7 +56,7 @@ class PrimaryCTextFormField extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),
+                        color: const Color(0xff3A3A3A)),
                   ),
                 ],
               )
@@ -66,7 +66,7 @@ class PrimaryCTextFormField extends StatelessWidget {
                 height: 10.w,
               )
             : Container(),
-        Container(
+        SizedBox(
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -91,17 +91,17 @@ class PrimaryCTextFormField extends StatelessWidget {
                   TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xffB7B7B7)),
+                      color: const Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
-                  color: borderColor ?? Color(0xffEFEFEF),
+                  color: borderColor ?? const Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: borderColor ?? Color(0xffE0E0E0),
+                  color: borderColor ?? const Color(0xffE0E0E0),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -165,7 +165,7 @@ class PrimarySTextFormField extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),
+                        color: const Color(0xff3A3A3A)),
                   )
                 : Container(),
           ],
@@ -175,7 +175,7 @@ class PrimarySTextFormField extends StatelessWidget {
                 height: 10.w,
               )
             : Container(),
-        Container(
+        SizedBox(
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -202,13 +202,13 @@ class PrimarySTextFormField extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: hintFontSize ?? 16.sp,
                   fontWeight: fontWeight ?? FontWeight.w400,
-                  color: color ?? Color(0xffB7B7B7)),
+                  color: color ?? const Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
                   color: enableBorder ?? false
-                      ? Color(0xffE0E0E0)
-                      : Color(0xffEFEFEF),
+                      ? const Color(0xffE0E0E0)
+                      : const Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -216,8 +216,8 @@ class PrimarySTextFormField extends StatelessWidget {
                 borderSide: BorderSide(
                   width: 1.w,
                   color: enableBorder ?? false
-                      ? Color(0xffE0E0E0)
-                      : Color(0xffEFEFEF),
+                      ? const Color(0xffE0E0E0)
+                      : const Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -260,12 +260,12 @@ class MobileNoTextFormField extends StatelessWidget {
               color: Colors.white,
               border: Border.all(
                   color: enableOrder ?? false
-                      ? Color(0xffE0E0E0)
-                      : Color(0xffEFEFEF))),
+                      ? const Color(0xffE0E0E0)
+                      : const Color(0xffEFEFEF))),
           child: CountryCodePicker(
             enabled: readOnly == true ? false : true,
             flagWidth: 20.w,
-            flagDecoration: BoxDecoration(),
+            flagDecoration: const BoxDecoration(),
             padding: EdgeInsets.zero,
             onChanged: onCountryCodeChanged,
             // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
@@ -277,7 +277,7 @@ class MobileNoTextFormField extends StatelessWidget {
             textStyle: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w400,
-                color: Color(0xffB7B7B7)),
+                color: const Color(0xffB7B7B7)),
           ),
         ),
         SizedBox(
@@ -364,7 +364,7 @@ class PrimarySTextFormFieldShopConfig extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
-                        color: Color(0xff3A3A3A)),
+                        color: const Color(0xff3A3A3A)),
                   )
                 : Container(),
           ],
@@ -374,7 +374,7 @@ class PrimarySTextFormFieldShopConfig extends StatelessWidget {
                 height: 10.w,
               )
             : Container(),
-        Container(
+        SizedBox(
           height: height ?? 48.w,
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -401,13 +401,13 @@ class PrimarySTextFormFieldShopConfig extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: hintFontSize ?? 16.sp,
                   fontWeight: fontWeight ?? FontWeight.w400,
-                  color: color ?? Color(0xffB7B7B7)),
+                  color: color ?? const Color(0xffB7B7B7)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   width: 1.w,
                   color: enableBorder ?? false
-                      ? Color(0xffE0E0E0)
-                      : Color(0xffEFEFEF),
+                      ? const Color(0xffE0E0E0)
+                      : const Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -415,8 +415,8 @@ class PrimarySTextFormFieldShopConfig extends StatelessWidget {
                 borderSide: BorderSide(
                   width: 1.w,
                   color: enableBorder ?? false
-                      ? Color(0xffE0E0E0)
-                      : Color(0xffEFEFEF),
+                      ? const Color(0xffE0E0E0)
+                      : const Color(0xffEFEFEF),
                 ),
                 borderRadius: BorderRadius.circular(5.w),
               ),
@@ -427,3 +427,4 @@ class PrimarySTextFormFieldShopConfig extends StatelessWidget {
     );
   }
 }
+///////////////////NEW/ 2/14/2024/////////////////////////////////////////

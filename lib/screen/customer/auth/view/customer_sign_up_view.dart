@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -219,7 +217,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                       fontWeight: FontWeight.w400),
                                   children: [
                                     TextSpan(
-                                      children: [],
+                                      children: const [],
                                       text: 'our Terms of Service',
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
@@ -289,7 +287,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                         topRight: Radius.circular(30))),
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return CustomerSignUpOtp();
+                                  return const CustomerSignUpOtp();
                                 },
                               );
                             });
@@ -326,7 +324,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          CustomerSignInView()),
+                                          const CustomerSignInView()),
                                 );
                               },
                               child: Text(

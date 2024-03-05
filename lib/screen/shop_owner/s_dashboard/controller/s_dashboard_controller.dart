@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:local_supper_market/screen/on_boarding/view/on_boarding_screen_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_accounts_screen/controller/s_account_screen_controller.dart';
-import 'package:local_supper_market/screen/shop_owner/s_category_list/view/s_category_list_view.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/dash_board_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/model/notification_seen_model.dart';
 import 'package:local_supper_market/screen/shop_owner/s_dashboard/repository/dashboard_repo.dart';
@@ -81,7 +79,7 @@ class SDashBoardController extends ChangeNotifier {
         dashBoardData = result.data;
         int imageLength = dashBoardData?.bannerImages?.length ?? 0;
         if (dashBoardData?.bannerImages!.isNotEmpty ?? true) {
-          Timer.periodic(Duration(seconds: 5), (Timer timer) {
+          Timer.periodic(const Duration(seconds: 5), (Timer timer) {
             if (_currentPage < imageLength - 1) {
               _currentPage++;
             } else {
@@ -89,7 +87,7 @@ class SDashBoardController extends ChangeNotifier {
             }
             pageController.animateToPage(
               _currentPage,
-              duration: Duration(milliseconds: 450),
+              duration: const Duration(milliseconds: 450),
               curve: Curves.easeIn,
             );
           });
@@ -137,7 +135,7 @@ class SDashBoardController extends ChangeNotifier {
       if (response.statusCode == 200) {
         final shopDetails = result.shopDetails;
         print(shopDetails);
-        log("${response.body}");
+        log(response.body);
 
         address = shopDetails?.shopAddress ?? "";
         pincode = shopDetails?.shopPincode.toString() ?? "";

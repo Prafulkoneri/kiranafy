@@ -110,7 +110,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -124,7 +124,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                           Container(
                             height: 48.w,
                             decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xffEFEFEF)),
+                              border: Border.all(color: const Color(0xffEFEFEF)),
                               borderRadius: BorderRadius.circular(6.w),
                             ),
                             child: Row(
@@ -146,7 +146,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.keyboard_arrow_down_outlined,
                                       color: Color(0xffB3B3B3),
                                     ),
@@ -177,7 +177,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   height: 48.w,
                                   decoration: BoxDecoration(
                                     border:
-                                        Border.all(color: Color(0xffEFEFEF)),
+                                        Border.all(color: const Color(0xffEFEFEF)),
                                     borderRadius: BorderRadius.circular(6.w),
                                   ),
                                   child: Row(
@@ -200,7 +200,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.keyboard_arrow_down_outlined,
                                             color: Color(0xffB3B3B3),
                                           ),
@@ -221,7 +221,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                   height: 48.w,
                                   decoration: BoxDecoration(
                                     border:
-                                        Border.all(color: Color(0xffEFEFEF)),
+                                        Border.all(color: const Color(0xffEFEFEF)),
                                     borderRadius: BorderRadius.circular(6.w),
                                   ),
                                   child: Row(
@@ -244,7 +244,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.keyboard_arrow_down_outlined,
                                             color: Color(0xffB3B3B3),
                                           ),
@@ -375,7 +375,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                               Text(
                                 "Product Feature Image",
                                 style: TextStyle(
-                                    color: Color(0xff717171),
+                                    color: const Color(0xff717171),
                                     // letterSpacing: .5,
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w500),
@@ -422,7 +422,7 @@ class _SEditAdminProductViewState extends State<SEditAdminProductView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: Color(0xffB3B3B3),
+                                                  color: const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 22.sp,
                                                   fontWeight: FontWeight.w400),

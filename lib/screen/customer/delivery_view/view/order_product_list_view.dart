@@ -25,7 +25,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
       child: ListView.builder(
           padding: EdgeInsets.zero,
           // scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           // physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           itemCount: watch.orderProductDetails?.length ?? 0,
@@ -34,12 +34,12 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
             return Column(
               children: [
                 element?.status == "active"
-                    ? Container(
+                    ? SizedBox(
                         width: ScreenUtil().screenWidth,
                         child: Row(
                           children: [
                             element?.productImagePath == ""
-                                ? Container(
+                                ? SizedBox(
                                     height: 89.w,
                                     width: 89.w,
                                     child: Image.asset(
@@ -47,7 +47,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                       fit: BoxFit.cover,
                                     ),
                                   )
-                                : Container(
+                                : SizedBox(
                                     height: 89.w,
                                     width: 89.w,
                                     child: AppNetworkImages(
@@ -82,7 +82,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                           ? Text(
                                               "Return",
                                               style: TextStyle(
-                                                  color: Color(0xffFF0000),
+                                                  color: const Color(0xffFF0000),
                                                   fontSize: 13.sp,
                                                   fontWeight: FontWeight.w700),
                                             )
@@ -208,7 +208,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                           child: Row(
                             children: [
                               element?.productImagePath == ""
-                                  ? Container(
+                                  ? SizedBox(
                                       height: 89.w,
                                       width: 89.w,
                                       child: Image.asset(
@@ -216,7 +216,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                         fit: BoxFit.cover,
                                       ),
                                     )
-                                  : Container(
+                                  : SizedBox(
                                       height: 89.w,
                                       width: 89.w,
                                       child: AppNetworkImages(
@@ -254,7 +254,7 @@ class _OrderProductsListViewState extends State<OrderProductsListView> {
                                             ? Text(
                                                 "Return",
                                                 style: TextStyle(
-                                                    color: Color(0xffFF0000),
+                                                    color: const Color(0xffFF0000),
                                                     fontSize: 13.sp,
                                                     fontWeight:
                                                         FontWeight.w700),

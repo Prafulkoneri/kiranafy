@@ -43,18 +43,18 @@ class SubscriptionHistoryController extends ChangeNotifier {
   }
 
   Future<void> _showNotification(fileName, savePath) async {
-    final android = AndroidNotificationDetails('0', 'Adun Accounts',
+    const android = AndroidNotificationDetails('0', 'Adun Accounts',
         channelDescription: 'channel description',
         importance: Importance.max,
         icon: '');
-    final iOS = IOSNotificationDetails();
-    final platform = NotificationDetails(android: android, iOS: iOS);
+    const iOS = IOSNotificationDetails();
+    const platform = NotificationDetails(android: android, iOS: iOS);
 
     print(savePath);
 
     await flutterLocalNotificationsPlugin.show(
         0, // notification id
-        "${fileName}",
+        "$fileName",
         'Download complete.',
         platform,
         payload: '$savePath');
@@ -122,11 +122,9 @@ class SubscriptionHistoryController extends ChangeNotifier {
           ShopConfigrationInvoiceResModel.fromJson(jsonDecode(response.body));
       log(response.body);
     
-      fileurl = Endpoint.baseUrl
+      fileurl = "${Endpoint.baseUrl
               .toString()
-              .substring(0, Endpoint.baseUrl.toString().length - 4)
-              .toString() +
-          "${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
+              .substring(0, Endpoint.baseUrl.toString().length - 4)}${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
       print("FileUrl");
       print(fileurl);
       print("Invoice Link");
@@ -141,7 +139,7 @@ class SubscriptionHistoryController extends ChangeNotifier {
           Permission.storage,
           //add more permission to request here.
         ].request();
-        var dir;
+        Directory dir;
         if (Platform.isIOS) {
           dir = await getApplicationDocumentsDirectory();
         } else {
@@ -149,55 +147,51 @@ class SubscriptionHistoryController extends ChangeNotifier {
           dir = Directory(tempDir.path);
         }
 
-        if (dir != null) {
-          String fullPath = subscriptioninvoicedata
-                  ?.shopInvoiceList?.invoiceLink
-                  .toString() ??
-              "";
-          List splitPath = fullPath.split("/");
-          print(splitPath);
-          String saveName = splitPath[splitPath.length - 1];
-          print("savename${saveName}");
-          String savePath = dir.path + "/$saveName";
-          print(savePath);
-          // fileurl = Endpoint.baseUrl
-          //         .toString()
-          //         .substring(0, Endpoint.baseUrl.toString().length - 4)
-          //         .toString() +
-          //     "${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
-          fileurl = Endpoint.baseUrl
-                  .toString()
-                  .substring(0, Endpoint.baseUrl.toString().length - 4)
-                  .toString() +
-              "${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
-          print("FileUrl");
-          print(fileurl);
-          print("Invoice Link");
-          String invoicePath = subscriptioninvoicedata
-                  ?.shopInvoiceList?.invoiceLink
-                  .toString() ??
-              "";
-          print(
-              subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString());
-          //output:  /storage/emulated/0/Download/banner.png
+        String fullPath = subscriptioninvoicedata
+                ?.shopInvoiceList?.invoiceLink
+                .toString() ??
+            "";
+        List splitPath = fullPath.split("/");
+        print(splitPath);
+        String saveName = splitPath[splitPath.length - 1];
+        print("savename$saveName");
+        String savePath = "${dir.path}/$saveName";
+        print(savePath);
+        // fileurl = Endpoint.baseUrl
+        //         .toString()
+        //         .substring(0, Endpoint.baseUrl.toString().length - 4)
+        //         .toString() +
+        //     "${orderinvoicedata?.customerInvoiceList?.invoiceLink.toString()}";
+        fileurl = "${Endpoint.baseUrl
+                .toString()
+                .substring(0, Endpoint.baseUrl.toString().length - 4)}${subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString()}";
+        print("FileUrl");
+        print(fileurl);
+        print("Invoice Link");
+        String invoicePath = subscriptioninvoicedata
+                ?.shopInvoiceList?.invoiceLink
+                .toString() ??
+            "";
+        print(
+            subscriptioninvoicedata?.shopInvoiceList?.invoiceLink.toString());
+        //output:  /storage/emulated/0/Download/banner.png
 
-          try {
-            await Dio().download(fileurl, savePath,
-                onReceiveProgress: (received, total) {
-              if (total != -1) {
-                print((received / total * 100).toStringAsFixed(0) + "%");
-                //you can build progressbar feature too
-              }
-            });
-            print("File is saved to download folder.");
-          } on DioError catch (e) {
-            print(e.message);
-            Utils.showPrimarySnackbar(context, "Invalid Url",
-                type: SnackType.error);
-            return;
-          }
-          _showNotification(saveName, savePath);
+        try {
+          await Dio().download(fileurl, savePath,
+              onReceiveProgress: (received, total) {
+            if (total != -1) {
+              print("${(received / total * 100).toStringAsFixed(0)}%");
+              //you can build progressbar feature too
+            }
+          });
+          print("File is saved to download folder.");
+        } on DioError catch (e) {
+          print(e.message);
+          Utils.showPrimarySnackbar(context, "Invalid Url",
+              type: SnackType.error);
+          return;
         }
+        _showNotification(saveName, savePath);
         print("No permission to read and write.");
         print(directory?.path.toString());
         print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj");

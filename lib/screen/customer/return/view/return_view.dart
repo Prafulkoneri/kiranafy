@@ -54,7 +54,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
         ),
       ),
       body: watch.isLoading
-          ? Loader()
+          ? const Loader()
           : WillPopScope(
               onWillPop: () async {
                 readMain.onNavigation(
@@ -67,7 +67,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                 return false;
               },
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Container(
                   padding: EdgeInsets.only(
                       left: 19.w, bottom: 17.w, top: 20.w, right: 19.w),
@@ -139,7 +139,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                         color: Color(0xffEFEFEF),
                       ),
@@ -148,7 +148,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                       ),
                       ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: watch.returnproductlistdata
                                 ?.orderProductDetails?.length ??
                             0,
@@ -265,14 +265,14 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                                       )),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               )
                             ],
                           );
                         },
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                         color: Color(0xffEFEFEF),
                       ),
@@ -314,7 +314,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                       SizedBox(
                         height: 15.99.h,
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                         color: Color(0xffEFEFEF),
                       ),
@@ -324,7 +324,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                           Text(
                             "Reason",
                             style: TextStyle(
-                                color: Color(0xff3A3A3A),
+                                color: const Color(0xff3A3A3A),
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -332,7 +332,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                             height: 12.h,
                           ),
                           ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: watch.refundReasonDetails?.length ?? 0,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
@@ -385,7 +385,7 @@ class _CustomerProductReturnViewState extends State<CustomerProductReturnView> {
                             onTap: () {
                               read.submitRefundProduct(context);
                             },
-                            color: Color(0xff39C19D),
+                            color: const Color(0xff39C19D),
                             child: Text(
                               'Submit',
                               style: GoogleFonts.dmSans(

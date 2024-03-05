@@ -7,7 +7,6 @@ import 'package:local_supper_market/screen/customer/coupons/couponsall.dart';
 import 'package:local_supper_market/screen/customer/coupons/view/coupon_all_view.dart';
 import 'package:local_supper_market/screen/customer/home/controller/home_screen_controller.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
-import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +47,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
               ),
               InkWell(
                 onTap: () {
-                  readMainScreen.onNavigation(0, AllCoupons(), context);
+                  readMainScreen.onNavigation(0, const AllCoupons(), context);
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -99,7 +98,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
 
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: List.generate(watch.couponData?.length ?? 0, (index) {
@@ -131,7 +130,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                             width: 9.38.w,
                           ),
                           DottedLine(
-                            dashColor: Color(0xff666666).withOpacity(0.2),
+                            dashColor: const Color(0xff666666).withOpacity(0.2),
                             dashGapLength: 5.w,
                             direction: Axis.vertical,
                             lineLength: 90.w,
@@ -153,7 +152,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(),
+                                const SizedBox(),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   // crossAxisAlignment: CrossAxisAlignment.center,
@@ -274,7 +273,7 @@ class _CouponsScreenState extends State<CouponsScreen> {
                                         RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
-                                          side: BorderSide(
+                                          side: const BorderSide(
                                               width: 1, color: SplashText),
                                         ),
                                       ),

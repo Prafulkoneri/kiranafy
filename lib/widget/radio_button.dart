@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PrimaryRadioButton<T> extends StatelessWidget {
@@ -8,7 +7,7 @@ class PrimaryRadioButton<T> extends StatelessWidget {
   final Widget? title;
   final ValueChanged<T?> onChanged;
 
-  const PrimaryRadioButton({
+  const PrimaryRadioButton({super.key, 
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -49,7 +48,7 @@ class PrimaryRadioButton<T> extends StatelessWidget {
           height: 9.14.w,
           width: 9.14.w,
 
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle
           ),
@@ -69,7 +68,7 @@ class SecondaryRadioButton<T> extends StatelessWidget {
   final Color ?backgroundColor;
   final ValueChanged<T?> onChanged;
 
-  const SecondaryRadioButton({
+  const SecondaryRadioButton({super.key, 
     required this.value,
     this.backgroundColor,
 
@@ -106,7 +105,7 @@ class SecondaryRadioButton<T> extends StatelessWidget {
           color: backgroundColor??Colors.transparent,
           shape: BoxShape.circle,
           border: Border.all(
-            color:outerColor?? Color(0xff03C9CC),
+            color:outerColor?? const Color(0xff03C9CC),
             width: 1.w,
           ),
         ),
@@ -116,7 +115,7 @@ class SecondaryRadioButton<T> extends StatelessWidget {
             width: 9.14.w,
 
             decoration: BoxDecoration(
-                color:innerColor?? Color(0xff03C9CC),
+                color:innerColor?? const Color(0xff03C9CC),
                 shape: BoxShape.circle
             ),
           ):Container(),
@@ -132,7 +131,7 @@ class FilterRadioButton<T> extends StatelessWidget {
   final Widget? title;
   final ValueChanged<T?> onChanged;
 
-  const FilterRadioButton({
+  const FilterRadioButton({super.key, 
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -164,7 +163,7 @@ class FilterRadioButton<T> extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: isSelected?Color(0xff03C9CC):Color(0xffB7B7B7),
+            color: isSelected?const Color(0xff03C9CC):const Color(0xffB7B7B7),
             width: 1.w,
           ),
         ),
@@ -173,7 +172,7 @@ class FilterRadioButton<T> extends StatelessWidget {
             height: 9.14.w,
             width: 9.14.w,
 
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color(0xff03C9CC),
                 shape: BoxShape.circle
             ),
@@ -190,7 +189,7 @@ class OrderSummaryRadioButton<T> extends StatelessWidget {
   final Widget? title;
   final ValueChanged<T?> onChanged;
 
-  const OrderSummaryRadioButton({
+  const OrderSummaryRadioButton({super.key, 
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -220,10 +219,10 @@ class OrderSummaryRadioButton<T> extends StatelessWidget {
         height: 16.w,
         width: 16.w,
         decoration: BoxDecoration(
-          color: Color(0xffD9D9D9),
+          color: const Color(0xffD9D9D9),
           shape: BoxShape.circle,
           border: Border.all(
-            color:isSelected?Color(0xff006F94):Color(0xff000000).withOpacity(0.5),
+            color:isSelected?const Color(0xff006F94):const Color(0xff000000).withOpacity(0.5),
             width: 1.w,
           ),
         ),
@@ -232,7 +231,7 @@ class OrderSummaryRadioButton<T> extends StatelessWidget {
             height: 9.14.w,
             width: 9.14.w,
 
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color:Color(0xff006F94),
                 shape: BoxShape.circle
             ),

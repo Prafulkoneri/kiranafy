@@ -34,7 +34,7 @@ class _StackLoaderState extends State<StackLoader> {
           bottom: 0.w,
           child: widget.showLoader == true
               ? Center(
-                  child: Container(
+                  child: SizedBox(
                     width: 70.w,
                     height: 70.w,
                     child: Image.asset("assets/images/loading-gif.gif"),

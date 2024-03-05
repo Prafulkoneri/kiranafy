@@ -26,7 +26,7 @@ class _FavouriteViewState extends State<FavouriteView> {
           child: Container(
               padding: EdgeInsets.only(
                   left: 13.w, right: 13.w, top: 14.w, bottom: 14.w),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xff23AA49),
               ),

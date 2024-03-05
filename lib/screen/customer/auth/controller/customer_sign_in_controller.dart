@@ -14,8 +14,6 @@ import 'package:local_supper_market/screen/customer/auth/view/customer_sign_up_v
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/views/main_screen_view.dart';
 import 'package:local_supper_market/utils/Utils.dart';
-import 'package:local_supper_market/widget/loaderoverlay.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerSignInController extends ChangeNotifier {
@@ -25,7 +23,7 @@ class CustomerSignInController extends ChangeNotifier {
   CustomerGuestLoginInRepo customerGuestLoginInRepo =
       CustomerGuestLoginInRepo();
   String countryCode = "+91";
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isOtpErrorVisible = false;
   bool isVerifyChecked = false;
   String otpCode = "";
@@ -69,7 +67,7 @@ class CustomerSignInController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => MainScreenView(
+              builder: (context) => const MainScreenView(
                   index: 0,
                   screenName: HomeScreenView(
                     refreshPage: true,
@@ -198,7 +196,7 @@ class CustomerSignInController extends ChangeNotifier {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => MainScreenView(
+              builder: (context) => const MainScreenView(
                     index: 0,
                     screenName: HomeScreenView(refreshPage: true),
                   )),
@@ -235,7 +233,7 @@ class CustomerSignInController extends ChangeNotifier {
         //     "The verification code from SMS/TOTP is invalid. Please check and enter the correct verification code again",
         //     type: SnackType.error);
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       print("888");
       showOtpErrorMsg();
       print("888");
@@ -253,7 +251,7 @@ class CustomerSignInController extends ChangeNotifier {
     isOtpErrorVisible = true;
     notifyListeners();
     print(isOtpErrorVisible);
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       print("duration");
       isOtpErrorVisible = false;
       notifyListeners();

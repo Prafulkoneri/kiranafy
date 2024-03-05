@@ -1,13 +1,11 @@
-import 'package:local_supper_market/main.dart';
-
-class CustomerGuestLoginReqModel{
+class CustomerGuestLoginReqModel {
   String? loginType;
   CustomerGuestLoginReqModel({
     this.loginType,
   });
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> data={};
-    data["login_type"]=loginType;
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    data["login_type"] = loginType;
     return data;
   }
 }
