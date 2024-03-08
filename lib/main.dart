@@ -128,11 +128,11 @@ Future<void> initNotification(context) async {
   showNotificationWithImage();
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('mipmap/ic_launcher');
-  const IOSInitializationSettings initializationSettingsIOS =
+  final IOSInitializationSettings initializationSettingsIOS =
       IOSInitializationSettings();
-  const MacOSInitializationSettings initializationSettingsMacOS =
+  final MacOSInitializationSettings initializationSettingsMacOS =
       MacOSInitializationSettings();
-  const InitializationSettings initializationSettings = InitializationSettings(
+  final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: initializationSettingsMacOS);
@@ -184,7 +184,7 @@ Future<void> initNotification(context) async {
 }
 
 Future<void> showNotificationWithImage() async {
-  const bigPictureStyleInformation = BigPictureStyleInformation(
+  final bigPictureStyleInformation = BigPictureStyleInformation(
     FilePathAndroidBitmap('your_image_path'),
     contentTitle: 'Notification with Image',
     summaryText: 'This is an example of a notification with an image.',
@@ -470,7 +470,7 @@ class _MyAppState extends State<MyApp> {
 
 /////Invoice/////////////////
   Future<void> _showNotification(fileName, savePath) async {
-    const android = AndroidNotificationDetails(
+    final android = AndroidNotificationDetails(
       '0',
       'Adun Accounts',
       channelDescription: 'channel description',
@@ -478,8 +478,8 @@ class _MyAppState extends State<MyApp> {
       styleInformation: BigTextStyleInformation(''),
       icon: '',
     );
-    const iOS = IOSNotificationDetails();
-    const platform = NotificationDetails(android: android, iOS: iOS);
+    final iOS = IOSNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: iOS);
 
     await flutterLocalNotificationsPlugin.show(
         0, // notification id

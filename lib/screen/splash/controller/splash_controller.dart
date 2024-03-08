@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:local_supper_market/screen/customer/home/view/home_screen_view.dart';
 import 'package:local_supper_market/screen/customer/main_screen/controllers/main_screen_controller.dart';
@@ -17,7 +16,6 @@ import 'package:local_supper_market/screen/shop_owner/s_subscription_plans/view/
 import 'package:local_supper_market/screen/update/view/update_view.dart';
 import 'package:local_supper_market/utils/utils.dart';
 import 'package:provider/provider.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

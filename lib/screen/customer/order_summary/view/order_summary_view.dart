@@ -22,8 +22,8 @@ import 'package:local_supper_market/widget/radio_button.dart';
 import 'package:local_supper_market/widget/stack_Loader.dart';
 import 'package:local_supper_market/widget/text.dart';
 import 'package:provider/provider.dart';
-
 import '../order_products.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class OrderSummaryView extends StatefulWidget {
   final String? shopId;
@@ -51,9 +51,15 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
 
   // Group Value for Radio Button.
   int id = 1;
+  Razorpay razorpay = Razorpay();
 
   @override
   void initState() {
+    super.initState();
+    razorpay = new Razorpay();
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, paymentSuccessCallback);
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, paymentErrorCallback);
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, externalWalletCallback);
     print(widget.shopId);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<OrderSummaryController>().initState(
@@ -90,6 +96,38 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
         });
       }
     });
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet was selected
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    razorpay.clear();
+  }
+
+  void openCheckout() {}
+
+  void paymentSuccessCallback(PaymentSuccessResponse response) {
+    debugPrint("Payment Success: ${response.paymentId}");
+  }
+
+  void paymentErrorCallback(PaymentFailureResponse response) {
+    debugPrint("Payment Error: ${response.code} - ${response.message}");
+  }
+
+  void externalWalletCallback(ExternalWalletResponse response) {
+    debugPrint("External Wallet: ${response.walletName}");
   }
 
   @override
@@ -168,148 +206,151 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           //   (Route<dynamic> route) => false,
                           // );
                         },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(left: 17.w, top: 20.w),
-                                child: OrderSummery(
-                                  text: "${watch.shopDetailData?.shopName}",
-                                )),
-                            Container(
-                              padding: EdgeInsets.all(12.w),
-                              // height: 70.h,
-                              // decoration: BoxDecoration(
-                              //   border: Border(
-                              //     // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
-                              //     bottom: BorderSide(width: 1, color: grey2),
-                              //   ),
-                              // ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.only(top: 20.w),
+                                  child: OrderSummery(
+                                    text: "${watch.shopDetailData?.shopName}",
+                                  )),
+                              Container(
+                                // padding: EdgeInsets.all(3.w),
+                                // height: 70.h,
+                                // decoration: BoxDecoration(
+                                //   border: Border(
+                                //     // top: BorderSide(width: 16.0, color: Colors.lightBlue.shade600),
+                                //     bottom: BorderSide(width: 1, color: grey2),
+                                //   ),
+                                // ),
 
-                              // color: Colors.white,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/images/location2.svg',
-                                        width: 23.w,
-                                        height: 28.h,
-                                      ),
-                                      SizedBox(
-                                        width: 8.w,
-                                      ),
-                                      SizedBox(
-                                          width: 200.w,
-                                          child: ShopAddress(
-                                            text:
-                                                "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                          )
-                                          //  Text(
-                                          //   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
-                                          //   "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
-                                          //   style: GoogleFonts.roboto(
-                                          //     textStyle: TextStyle(
-                                          //         color: Black,
-                                          //         // letterSpacing: .5,
-                                          //         fontSize: 13.sp,
-                                          //         fontWeight: FontWeight.w400),
-                                          //   ),
-                                          // ),
-                                          ),
-                                    ],
-                                  ),
-                                  // Row(
-                                  //   children: [
-                                  //     // GestureDetector(
-                                  //     //   onTap: () {
-                                  //     //     read.launchPhone(
-                                  //     // watch.shopDetailData
-                                  //     //         ?.shopOwnerSupportNumber ??
-                                  //     //     "",
-                                  //     //         context);
-                                  //     //   },
-                                  //     //   child: SvgPicture.asset(
-                                  //     //     'assets/images/call.svg',
-                                  //     //     // width: 15.w,
-                                  //     //     // height: 19.h,
-                                  //     //   ),
-                                  //     // ),
-                                  //     InkWell(
-                                  //       onTap: () {
-                                  // read.launchPhone(
-                                  //     watch.shopDetailData
-                                  //             ?.shopOwnerSupportNumber ??
-                                  //         "",
-                                  //     context);
-                                  //       },
-                                  //       child: Container(
-                                  //           padding: EdgeInsets.only(
-                                  //               left: 13.w,
-                                  //               right: 13.w,
-                                  //               top: 14.w,
-                                  //               bottom: 14.w),
-                                  //           decoration: BoxDecoration(
-                                  //             shape: BoxShape.circle,
-                                  //             color: Color(0xff23AA49),
-                                  //           ),
-                                  //           child: SvgPicture.asset(
-                                  //             "assets/icons/new_call.svg",
-                                  //             // width: 26.w,
-                                  //             // height: 14.h,
-                                  //           )),
-                                  //     ),
-                                  //     SizedBox(
-                                  //       width: 13.w,
-                                  //     ),
-                                  //     InkWell(
-                                  //       onTap: () {
-                                  // watch.favAllShop
-                                  //     ? read.removeAllShopFavList(
-                                  //         context,
-                                  //         watch.shopDetailData?.id)
-                                  //     : read.updateAllShopFavList(
-                                  //         context,
-                                  //         watch.shopDetailData?.id);
-                                  //       },
-                                  //       child: watch.favAllShop
-                                  //           ? SvgPicture.asset(
-                                  //               "assets/icons/new_fvrt_selected.svg",
-                                  //               // width: 26.w,
-                                  //               // height: 14.h,
-                                  //             )
-                                  //           : SvgPicture.asset(
-                                  //               "assets/icons/new_fvrt_not_selected.svg",
-                                  //               // width: 26.w,
-                                  //               // height: 14.h,
-                                  //             ),
-                                  //     )
+                                // color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/images/location2.svg',
+                                          width: 23.w,
+                                          height: 28.h,
+                                        ),
+                                        SizedBox(
+                                          width: 8.w,
+                                        ),
+                                        Container(
+                                            width: 200.w,
+                                            child: ShopAddress(
+                                              text:
+                                                  "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                            )
+                                            //  Text(
+                                            //   // "Bhairav Nagar, Vishrantwadi\nPune - 411015",
+                                            //   "${watch.shopDetailData?.shopAddress}\n${watch.shopDetailData?.cityName} - ${watch.shopDetailData?.shopPincode}",
+                                            //   style: GoogleFonts.roboto(
+                                            //     textStyle: TextStyle(
+                                            //         color: Black,
+                                            //         // letterSpacing: .5,
+                                            //         fontSize: 13.sp,
+                                            //         fontWeight: FontWeight.w400),
+                                            //   ),
+                                            // ),
+                                            ),
+                                      ],
+                                    ),
+                                    // Row(
+                                    //   children: [
+                                    //     // GestureDetector(
+                                    //     //   onTap: () {
+                                    //     //     read.launchPhone(
+                                    //     // watch.shopDetailData
+                                    //     //         ?.shopOwnerSupportNumber ??
+                                    //     //     "",
+                                    //     //         context);
+                                    //     //   },
+                                    //     //   child: SvgPicture.asset(
+                                    //     //     'assets/images/call.svg',
+                                    //     //     // width: 15.w,
+                                    //     //     // height: 19.h,
+                                    //     //   ),
+                                    //     // ),
+                                    //     InkWell(
+                                    //       onTap: () {
+                                    // read.launchPhone(
+                                    //     watch.shopDetailData
+                                    //             ?.shopOwnerSupportNumber ??
+                                    //         "",
+                                    //     context);
+                                    //       },
+                                    //       child: Container(
+                                    //           padding: EdgeInsets.only(
+                                    //               left: 13.w,
+                                    //               right: 13.w,
+                                    //               top: 14.w,
+                                    //               bottom: 14.w),
+                                    //           decoration: BoxDecoration(
+                                    //             shape: BoxShape.circle,
+                                    //             color: Color(0xff23AA49),
+                                    //           ),
+                                    //           child: SvgPicture.asset(
+                                    //             "assets/icons/new_call.svg",
+                                    //             // width: 26.w,
+                                    //             // height: 14.h,
+                                    //           )),
+                                    //     ),
+                                    //     SizedBox(
+                                    //       width: 13.w,
+                                    //     ),
+                                    //     InkWell(
+                                    //       onTap: () {
+                                    // watch.favAllShop
+                                    //     ? read.removeAllShopFavList(
+                                    //         context,
+                                    //         watch.shopDetailData?.id)
+                                    //     : read.updateAllShopFavList(
+                                    //         context,
+                                    //         watch.shopDetailData?.id);
+                                    //       },
+                                    //       child: watch.favAllShop
+                                    //           ? SvgPicture.asset(
+                                    //               "assets/icons/new_fvrt_selected.svg",
+                                    //               // width: 26.w,
+                                    //               // height: 14.h,
+                                    //             )
+                                    //           : SvgPicture.asset(
+                                    //               "assets/icons/new_fvrt_not_selected.svg",
+                                    //               // width: 26.w,
+                                    //               // height: 14.h,
+                                    //             ),
+                                    //     )
 
-                                  //   ],
-                                  // ),
-                                  FavouriteView(
-                                    isFvrt: watch.favAllShop,
-                                    onPhoneTap: () {
-                                      read.launchPhone(
-                                          watch.shopDetailData
-                                                  ?.shopOwnerSupportNumber ??
-                                              "",
-                                          context);
-                                    },
-                                    onFvrtTap: () {
-                                      watch.favAllShop
-                                          ? read.removeAllShopFavList(
-                                              context, watch.shopDetailData?.id)
-                                          : read.updateAllShopFavList(context,
-                                              watch.shopDetailData?.id);
-                                    },
-                                  )
-                                ],
+                                    //   ],
+                                    // ),
+                                    FavouriteView(
+                                      isFvrt: watch.favAllShop,
+                                      onPhoneTap: () {
+                                        read.launchPhone(
+                                            watch.shopDetailData
+                                                    ?.shopOwnerSupportNumber ??
+                                                "",
+                                            context);
+                                      },
+                                      onFvrtTap: () {
+                                        watch.favAllShop
+                                            ? read.removeAllShopFavList(context,
+                                                watch.shopDetailData?.id)
+                                            : read.updateAllShopFavList(context,
+                                                watch.shopDetailData?.id);
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Divider(
@@ -2000,7 +2041,9 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
                           width: ScreenUtil().screenWidth,
                           color: SplashText,
                           onTap: () {
+                            print('payment');
                             read.onConfirmOrder(context);
+                            //
                           },
 
                           child: Text(
@@ -2025,3 +2068,8 @@ class _OrderSummaryViewState extends State<OrderSummaryView> {
     );
   }
 }
+
+// ID
+// rzp_test_eujqGBDGqouRnn
+// KEY
+// I51S83abxZQYDBry78LdLg2n

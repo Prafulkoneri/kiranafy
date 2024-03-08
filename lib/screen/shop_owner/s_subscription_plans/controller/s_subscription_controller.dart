@@ -371,6 +371,7 @@ class SSubscriptionController extends ChangeNotifier {
   bool primeCatchy = false;
   String planAmount = "";
   bool isSelectedPaymentUpi = false;
+  bool isSelectedPaymentOnline = false;
   bool isQrCodeSeleted = false;
   double discountPercentage = 0;
   double discountAmount = 0;
@@ -572,8 +573,23 @@ class SSubscriptionController extends ChangeNotifier {
     if (!isSelectedPaymentUpi) {
       isSelectedPaymentUpi = true;
       isQrCodeSeleted = false;
+      isSelectedPaymentOnline = false;
     } else {
       isSelectedPaymentUpi = false;
+      isQrCodeSeleted = false;
+      isSelectedPaymentOnline = false;
+    }
+    notifyListeners();
+  }
+
+  void onPaymentModeSelectedOnline(value) {
+    if (!isSelectedPaymentOnline) {
+      isSelectedPaymentUpi = false;
+      isSelectedPaymentOnline = true;
+      isQrCodeSeleted = false;
+    } else {
+      isSelectedPaymentUpi = false;
+      isSelectedPaymentOnline = false;
       isQrCodeSeleted = false;
     }
     notifyListeners();
@@ -583,9 +599,11 @@ class SSubscriptionController extends ChangeNotifier {
     if (!isQrCodeSeleted) {
       isQrCodeSeleted = true;
       isSelectedPaymentUpi = false;
+      isSelectedPaymentOnline = false;
     } else {
       isSelectedPaymentUpi = false;
       isQrCodeSeleted = false;
+      isSelectedPaymentOnline = false;
     }
     notifyListeners();
   }
