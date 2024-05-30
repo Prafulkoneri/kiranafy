@@ -129,7 +129,8 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                   width: 1,
-                                                  color: const Color(0xffE8E8E8)),
+                                                  color:
+                                                      const Color(0xffE8E8E8)),
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               // color: Colors.red,
@@ -351,8 +352,8 @@ class _ShopReviewScreenViewState extends State<ShopReviewScreenView> {
                                                   // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles tie semper diam ac. Semper arcu ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Euismod sit ipsum neque pulvinar gravidamoles',
                                                   style: GoogleFonts.dmSans(
                                                     textStyle: TextStyle(
-                                                        color:
-                                                            const Color(0xff7C7C7C),
+                                                        color: const Color(
+                                                            0xff7C7C7C),
                                                         // letterSpacing: .5,
                                                         fontSize: 14.sp,
                                                         fontWeight:

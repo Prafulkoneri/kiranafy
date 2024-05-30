@@ -100,7 +100,7 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         height: 150.w,
                       ),
                       Image.asset(
-                        "assets/images/splash4.png",
+                        "assets/images/kiranafy-logo-icon.png",
                         height: 112.w,
                         width: 60.w,
                       ),
@@ -111,23 +111,23 @@ class _CustomerSignUpState extends State<CustomerSignUp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "LOCAL",
+                            "Kirana",
                             style: TextStyle(
-                                fontSize: 20.sp,
+                                fontSize: 25.sp,
                                 fontWeight: FontWeight.w600,
                                 color: SplashText),
                           ),
                           Text(
-                            " SUPERMART",
+                            "fy",
                             style: TextStyle(
-                                fontSize: 20.sp,
+                                fontSize: 25.sp,
                                 fontWeight: FontWeight.w600,
                                 color: SplashText1),
                           ),
                         ],
                       ),
                       Text(
-                        "Hameshase aapke sath....",
+                        "Hamesha Se Aapke Sath....",
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w400,

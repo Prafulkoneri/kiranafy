@@ -1317,10 +1317,10 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
   @override
   void initState() {
     super.initState();
-    _razorpay = Razorpay();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    // _razorpay = Razorpay();
+    // _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    // _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    // _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       context.read<OrderPaymentController>().initState(
           context,
@@ -1364,43 +1364,43 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
     context.read<MainScreenController>().showBottomNavigationBar();
   }
 
-  void _handlePaymentError(PaymentFailureResponse response) {
-    print("Payment Error: ${response.code} - ${response.message}");
-    // Handle payment error
-  }
+  // void _handlePaymentError(PaymentFailureResponse response) {
+  //   print("Payment Error: ${response.code} - ${response.message}");
+  //   // Handle payment error
+  // }
 
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    print("External Wallet: ${response.walletName}");
-    // Handle external wallet
-  }
+  // void _handleExternalWallet(ExternalWalletResponse response) {
+  //   print("External Wallet: ${response.walletName}");
+  //   // Handle external wallet
+  // }
 
   @override
   Widget build(BuildContext context) {
     final watch = context.watch<OrderPaymentController>();
     final read = context.read<OrderPaymentController>();
     final readMain = context.read<MainScreenController>();
-    _openCheckout() {
-      var options = {
-        'key': 'rzp_live_fy46LNuzfXcOnW', // Replace with your actual API key
-        'amount': (int.parse(watch.finalTotalAmount) *
-            100), // Amount in smallest currency unit (e.g., 100 = Rs 1)
-        'name': 'Local Supermart',
-        'description': ' Payment',
-        // 'prefill': {
-        //   'contact': '9036721241',
-        //   'email': 'localsupermarts@gmail.com'
-        // },
-        'external': {
-          'wallets': ['paytm', 'phonepe', 'googlepay'] // Add more wallets here
-        }
-      };
+    // _openCheckout() {
+    //   var options = {
+    //     'key': 'rzp_live_fy46LNuzfXcOnW', // Replace with your actual API key
+    //     'amount': (int.parse(watch.finalTotalAmount) *
+    //         100), // Amount in smallest currency unit (e.g., 100 = Rs 1)
+    //     'name': 'Local Supermart',
+    //     'description': ' Payment',
+    //     // 'prefill': {
+    //     //   'contact': '9036721241',
+    //     //   'email': 'localsupermarts@gmail.com'
+    //     // },
+    //     'external': {
+    //       'wallets': ['paytm', 'phonepe', 'googlepay'] // Add more wallets here
+    //     }
+    //   };
 
-      try {
-        _razorpay.open(options);
-      } catch (e) {
-        print('Error: ${e.toString()}');
-      }
-    }
+    //   try {
+    //     _razorpay.open(options);
+    //   } catch (e) {
+    //     print('Error: ${e.toString()}');
+    //   }
+    // }
 
     return Scaffold(
         appBar: PreferredSize(
@@ -1660,74 +1660,74 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                       ),
                                                     ],
                                                   ),
-                                            SizedBox(
-                                              height: 22.h,
-                                            ),
-                                            watch.finalTotalAmount == "0"
-                                                ? Container()
-                                                : Row(
-                                                    children: [
-                                                      SecondaryRadioButton(
-                                                        value: "online",
-                                                        groupValue:
-                                                            watch.groupValue,
-                                                        // groupValue: watch.radioGroupValue,
-                                                        onChanged: (value) {
-                                                          read.onRadioButtonSelected(
-                                                              value);
-                                                        },
-                                                        // leading: ""
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          var options = {
-                                                            'key':
-                                                                'rzp_test_eujqGBDGqouRnn',
-                                                            'amount': (int
-                                                                    .parse(watch
-                                                                        .finalTotalAmount) *
-                                                                100), // amount in the smallest currency unit
-                                                            // 'amount':1 * 100, // amount in the smallest currency unit
-                                                            'name':
-                                                                'Local Super-Mart',
-                                                            'description':
-                                                                'Test Payment',
-                                                            // 'prefill': {'contact': '1234567890', 'email': 'test@example.com'},
-                                                            'external': {
-                                                              'wallets': [
-                                                                'paytm'
-                                                              ]
-                                                            }
-                                                          };
+                                            // SizedBox(
+                                            //   height: 22.h,
+                                            // ),
+                                            // watch.finalTotalAmount == "0"
+                                            //     ? Container()
+                                            //     : Row(
+                                            //         children: [
+                                            //           SecondaryRadioButton(
+                                            //             value: "online",
+                                            //             groupValue:
+                                            //                 watch.groupValue,
+                                            //             // groupValue: watch.radioGroupValue,
+                                            //             onChanged: (value) {
+                                            //               read.onRadioButtonSelected(
+                                            //                   value);
+                                            //             },
+                                            //             // leading: ""
+                                            //           ),
+                                            //           SizedBox(
+                                            //             width: 10.w,
+                                            //           ),
+                                            //           GestureDetector(
+                                            //             onTap: () {
+                                            //               var options = {
+                                            //                 'key':
+                                            //                     'rzp_test_eujqGBDGqouRnn',
+                                            //                 'amount': (int
+                                            //                         .parse(watch
+                                            //                             .finalTotalAmount) *
+                                            //                     100), // amount in the smallest currency unit
+                                            //                 // 'amount':1 * 100, // amount in the smallest currency unit
+                                            //                 'name':
+                                            //                     'Local Super-Mart',
+                                            //                 'description':
+                                            //                     'Test Payment',
+                                            //                 // 'prefill': {'contact': '1234567890', 'email': 'test@example.com'},
+                                            //                 'external': {
+                                            //                   'wallets': [
+                                            //                     'paytm'
+                                            //                   ]
+                                            //                 }
+                                            //               };
 
-                                                          try {
-                                                            _razorpay
-                                                                .open(options);
-                                                          } catch (e) {
-                                                            debugPrint(
-                                                                'Error: ${e.toString()}');
-                                                          }
-                                                        },
-                                                        child: Text(
-                                                          'Online Payment',
-                                                          style: GoogleFonts
-                                                              .dmSans(
-                                                            textStyle: TextStyle(
-                                                                color: Black,
-                                                                letterSpacing:
-                                                                    .5,
-                                                                fontSize: 14.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                            //               try {
+                                            //                 _razorpay
+                                            //                     .open(options);
+                                            //               } catch (e) {
+                                            //                 debugPrint(
+                                            //                     'Error: ${e.toString()}');
+                                            //               }
+                                            //             },
+                                            //             child: Text(
+                                            //               'Online Payment',
+                                            //               style: GoogleFonts
+                                            //                   .dmSans(
+                                            //                 textStyle: TextStyle(
+                                            //                     color: Black,
+                                            //                     letterSpacing:
+                                            //                         .5,
+                                            //                     fontSize: 14.sp,
+                                            //                     fontWeight:
+                                            //                         FontWeight
+                                            //                             .w700),
+                                            //               ),
+                                            //             ),
+                                            //           ),
+                                            //         ],
+                                            //       ),
                                             SizedBox(
                                               height: 22.h,
                                             ),
@@ -2158,67 +2158,67 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                                                         SizedBox(
                                                           height: 22.h,
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            SecondaryRadioButton(
-                                                              value: "online",
-                                                              groupValue: watch
-                                                                  .groupValue,
-                                                              // groupValue: watch.radioGroupValue,
-                                                              onChanged:
-                                                                  (value) {
-                                                                read.onRadioButtonSelected(
-                                                                    value);
-                                                              },
-                                                              // leading: ""
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10.w,
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap: () {
-                                                                // var options = {
-                                                                //   'key':
-                                                                //       'rzp_test_eujqGBDGqouRnn',
-                                                                //  'amount': (int.parse(watch.finalTotalAmount) * 100), // amount in the smallest currency unit
-                                                                //   // 'amount':1 * 100, // amount in the smallest currency unit
-                                                                //   'name':
-                                                                //       'Local Super-Mart',
-                                                                //   'description':
-                                                                //       'Test Payment',
-                                                                //   // 'prefill': {'contact': '1234567890', 'email': 'test@example.com'},
-                                                                //   'external': {
-                                                                //     'wallets': ['paytm']
-                                                                //   }
-                                                                // };
+                                                        // Row(
+                                                        //   children: [
+                                                        //     SecondaryRadioButton(
+                                                        //       value: "online",
+                                                        //       groupValue: watch
+                                                        //           .groupValue,
+                                                        //       // groupValue: watch.radioGroupValue,
+                                                        //       onChanged:
+                                                        //           (value) {
+                                                        //         read.onRadioButtonSelected(
+                                                        //             value);
+                                                        //       },
+                                                        //       // leading: ""
+                                                        //     ),
+                                                        //     SizedBox(
+                                                        //       width: 10.w,
+                                                        //     ),
+                                                        //     GestureDetector(
+                                                        //       onTap: () {
+                                                        //         // var options = {
+                                                        //         //   'key':
+                                                        //         //       'rzp_test_eujqGBDGqouRnn',
+                                                        //         //  'amount': (int.parse(watch.finalTotalAmount) * 100), // amount in the smallest currency unit
+                                                        //         //   // 'amount':1 * 100, // amount in the smallest currency unit
+                                                        //         //   'name':
+                                                        //         //       'Local Super-Mart',
+                                                        //         //   'description':
+                                                        //         //       'Test Payment',
+                                                        //         //   // 'prefill': {'contact': '1234567890', 'email': 'test@example.com'},
+                                                        //         //   'external': {
+                                                        //         //     'wallets': ['paytm']
+                                                        //         //   }
+                                                        //         // };
 
-                                                                // try {
-                                                                //   _razorpay.open(options);
-                                                                // } catch (e) {
-                                                                //   debugPrint(
-                                                                //       'Error: ${e.toString()}');
-                                                                // }
-                                                              },
-                                                              child: Text(
-                                                                'Online Payment',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .dmSans(
-                                                                  textStyle: TextStyle(
-                                                                      color:
-                                                                          Black,
-                                                                      letterSpacing:
-                                                                          .5,
-                                                                      fontSize:
-                                                                          14.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                        //         // try {
+                                                        //         //   _razorpay.open(options);
+                                                        //         // } catch (e) {
+                                                        //         //   debugPrint(
+                                                        //         //       'Error: ${e.toString()}');
+                                                        //         // }
+                                                        //       },
+                                                        //       child: Text(
+                                                        //         'Online Payment',
+                                                        //         style:
+                                                        //             GoogleFonts
+                                                        //                 .dmSans(
+                                                        //           textStyle: TextStyle(
+                                                        //               color:
+                                                        //                   Black,
+                                                        //               letterSpacing:
+                                                        //                   .5,
+                                                        //               fontSize:
+                                                        //                   14.sp,
+                                                        //               fontWeight:
+                                                        //                   FontWeight
+                                                        //                       .w700),
+                                                        //         ),
+                                                        //       ),
+                                                        //     ),
+                                                        //   ],
+                                                        // ),
                                                         SizedBox(
                                                           height: 22.h,
                                                         ),
@@ -2496,11 +2496,12 @@ class _OrderPaymentViewState extends State<OrderPaymentView> {
                           width: ScreenUtil().screenWidth,
                           color: SplashText,
                           onTap: () async {
-                            if (watch.groupValue == 'online') {
-                              await _openCheckout();
-                            } else {
-                              await read.placeOrder(context);
-                            }
+                            // if (watch.groupValue == 'online') {
+                            //   await _openCheckout();
+                            // } else {
+
+                            await read.placeOrder(context);
+                            // }
                           },
                           child: Text(
                             "Submit Order",

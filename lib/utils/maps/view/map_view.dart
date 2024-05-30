@@ -70,15 +70,13 @@ class _MapScreenViewState extends State<MapScreenView> {
     final watch = context.watch<MainScreenController>();
     final read = context.read<MainScreenController>();
     return WillPopScope(
-     onWillPop: ()async{
-       return false;
-     },
+      onWillPop: () async {
+        return false;
+      },
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          SizedBox(
-              height: 400.w,
-              child: _buildBody()),
+          SizedBox(height: 400.w, child: _buildBody()),
           !isLocationEnabledByUser
               ? Container(
                   height: 0,
@@ -92,8 +90,8 @@ class _MapScreenViewState extends State<MapScreenView> {
                     child: Container(
                       padding: EdgeInsets.only(
                           top: 15.w, bottom: 15.w, left: 10.w, right: 10.w),
-                      margin:
-                          EdgeInsets.only(bottom: 10.w, left: 10.w, right: 10.w),
+                      margin: EdgeInsets.only(
+                          bottom: 10.w, left: 10.w, right: 10.w),
                       color: Colors.red,
                       width: ScreenUtil().screenWidth,
                       child: Row(
@@ -102,8 +100,8 @@ class _MapScreenViewState extends State<MapScreenView> {
                           Expanded(
                             child: Text(
                               watch.locationErrorMessage,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14.sp),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 14.sp),
                             ),
                           ),
                           Row(
@@ -221,7 +219,8 @@ class _MapScreenViewState extends State<MapScreenView> {
         child: Center(
             child: Text(
           _draggedAddress,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         )),
       ),
     );

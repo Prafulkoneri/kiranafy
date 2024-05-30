@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -104,34 +103,34 @@ class _ShopSignInViewState extends State<ShopSignInView> {
                       height: 130.w,
                     ),
                     Image.asset(
-                      "assets/images/splash4.png",
+                      "assets/images/kiranafy-logo-icon.png",
                       height: 112.w,
                       width: 60.w,
                     ),
-                    SizedBox(
-                      height: 5.w,
-                    ),
+                    // SizedBox(
+                    //   height: 5.w,
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "LOCAL",
+                          "Kirana",
                           style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 30.sp,
                               fontWeight: FontWeight.w600,
                               color: SplashText),
                         ),
                         Text(
-                          " SUPERMART",
+                          "fy",
                           style: TextStyle(
-                              fontSize: 20.sp,
+                              fontSize: 30.sp,
                               fontWeight: FontWeight.w600,
                               color: SplashText1),
                         ),
                       ],
                     ),
                     Text(
-                      "Hameshase aapke sath....",
+                      "Hamesha Se Aapke Sath....",
                       style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w400,

@@ -19,13 +19,23 @@ class HeaderView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Image(
+          //   image: const AssetImage(
+          //     "assets/images/logo.png",
+          //   ),
+          //   fit: BoxFit.fill,
+          //   width: 150.w,
+          //   height: 50.w,
+          // ),
+          // kiranafy-logo-verticle
           Image(
             image: const AssetImage(
-              "assets/images/logo.png",
+              "assets/images/kiranafy-logo-verticle_new.png",
+              // "assets/images/kiranafy-logo-verticle.png",
             ),
             fit: BoxFit.fill,
-            width: 150.w,
-            height: 50.w,
+            width: 140.w,
+            height: 40.w,
           ),
           Row(
             children: [

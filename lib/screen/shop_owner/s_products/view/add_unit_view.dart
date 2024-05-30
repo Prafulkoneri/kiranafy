@@ -844,7 +844,8 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: const Color(0xffB3B3B3),
+                                                  color:
+                                                      const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),
@@ -925,7 +926,8 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: const Color(0xffB3B3B3),
+                                                  color:
+                                                      const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),
@@ -1006,7 +1008,8 @@ class _AddUnitViewState extends State<AddUnitView> {
                                             Text(
                                               "Add Image",
                                               style: TextStyle(
-                                                  color: const Color(0xffB3B3B3),
+                                                  color:
+                                                      const Color(0xffB3B3B3),
                                                   // letterSpacing: .5,
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w400),

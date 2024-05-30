@@ -26,7 +26,7 @@ class SAccountCmsPagesView extends StatefulWidget {
 class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
   @override
   Widget build(BuildContext context) {
-    final readMain=context.read<SMainScreenController>();
+    final readMain = context.read<SMainScreenController>();
     // final read = context.read<ProfileController>();
     // final watch = context.watch<ProfileController>();
     return Scaffold(
@@ -35,18 +35,23 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
         child: PrimaryAppBar(
           title: "Accounts",
           onBackBtnPressed: () {
-    readMain.onNavigation(4, const SAccountScreenView(
-                refresh: false,
-              ),context);
-
+            readMain.onNavigation(
+                4,
+                const SAccountScreenView(
+                  refresh: false,
+                ),
+                context);
           },
         ),
       ),
       body: WillPopScope(
-        onWillPop: ()async{
-          readMain.onNavigation(4, const SAccountScreenView(
-            refresh: false,
-          ),context);
+        onWillPop: () async {
+          readMain.onNavigation(
+              4,
+              const SAccountScreenView(
+                refresh: false,
+              ),
+              context);
           return false;
         },
         child: SingleChildScrollView(
@@ -57,9 +62,8 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ),
               GestureDetector(
                 onTap: () {
-    readMain.onNavigation(4, const AboutScreenView(),context);
-    readMain.hideBottomNavigationBar();
-
+                  readMain.onNavigation(4, const AboutScreenView(), context);
+                  readMain.hideBottomNavigationBar();
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 22.w, right: 28.w, top: 16.w),
@@ -103,7 +107,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4,const ShopFAQView(),context);
+                  readMain.onNavigation(4, const ShopFAQView(), context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => ShopFAQView()));
@@ -148,7 +152,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ///////////////////////
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, const PrivacyPolicyView(),context);
+                  readMain.onNavigation(4, const PrivacyPolicyView(), context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(
                   //     context,
@@ -192,7 +196,8 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               ),
               GestureDetector(
                 onTap: () {
-                  readMain.onNavigation(4, const TermsAndConditionView(), context);
+                  readMain.onNavigation(
+                      4, const TermsAndConditionView(), context);
                   readMain.hideBottomNavigationBar();
                   // Navigator.push(
                   //     context,
@@ -239,11 +244,10 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
 
               GestureDetector(
                 onTap: () {
-                  if(Platform.isAndroid){
+                  if (Platform.isAndroid) {
                     Share.share(
-                        'hey! check out this new app https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
-                  }
-                  else{
+                        'hey! check out this new app https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en&gl=US');
+                  } else {
                     Share.share(
                         'hey! check out this new app https://apps.apple.com/us/app/local-supermart/id6451146831');
                   }
@@ -287,7 +291,7 @@ class _SAccountCmsPagesViewState extends State<SAccountCmsPagesView> {
               GestureDetector(
                 onTap: () async {
                   LaunchReview.launch(
-                      androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                      androidAppId: "com.kirana_fy&hl=en&gl=US",
                       iOSAppId: "6451146831");
                 },
                 child: Container(

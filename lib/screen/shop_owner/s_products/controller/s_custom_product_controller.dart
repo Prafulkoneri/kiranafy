@@ -54,11 +54,11 @@ class CustomProductController extends ChangeNotifier {
     showUnderRecommendedProducts = false;
     showUnderSeasonalProducts = false;
     fullFillCravings = false;
-    taxId="";
-    brandId="";
-    categoryId="";
-    productImage=File("");
-    selectedCategory="";
+    taxId = "";
+    brandId = "";
+    categoryId = "";
+    productImage = File("");
+    selectedCategory = "";
     await getCustomProductData(context);
     productImage = File("");
   }
@@ -89,11 +89,14 @@ class CustomProductController extends ChangeNotifier {
           UploadCustomProductResModel.fromJson(jsonDecode(response.body));
       if (response.statusCode == 200) {
         LoadingOverlay.of(context).hide();
-        final read=Provider.of<SMainScreenController>(context,listen: false);
-        read.onNavigation(0, SSelectedProductView(
-          isRefresh: true,
-          categoryId: selectedCategory,
-        ), context);
+        final read = Provider.of<SMainScreenController>(context, listen: false);
+        read.onNavigation(
+            0,
+            SSelectedProductView(
+              isRefresh: true,
+              categoryId: selectedCategory,
+            ),
+            context);
         // Navigator.pushAndRemoveUntil(
         //   context,
         //   MaterialPageRoute(
@@ -109,11 +112,9 @@ class CustomProductController extends ChangeNotifier {
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.success);
         notifyListeners();
-      }
-      else if(response.statusCode == 401){
+      } else if (response.statusCode == 401) {
         Utils().logoutUser(context);
-      }
-      else {
+      } else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, result.message,
             type: SnackType.error);
@@ -269,31 +270,33 @@ class CustomProductController extends ChangeNotifier {
     //multipartFile = new http.MultipartFile("imagefile", stream, length, filename: basename(imageFile.path));
     List<http.MultipartFile> newList = <http.MultipartFile>[];
     File imageFile = productImage;
-    var stream =
-        http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var multipartFile = http.MultipartFile(
-        "product_image_path", stream, length,
+    var multipartFile = http.MultipartFile("product_image_path", stream, length,
         filename: basename(imageFile.path));
     newList.add(multipartFile);
     request.files.addAll(newList);
     print(request.fields);
-    await request.send().then((response)async {
+    await request.send().then((response) async {
       final respStr = await response.stream.bytesToString();
       print("respStr$respStr");
-      var res=jsonDecode(respStr);
+      var res = jsonDecode(respStr);
       print(res["status"]);
       if (response.statusCode == 200) {
         print("sucesss");
-        if(res["status"]==200){
+        if (res["status"] == 200) {
           LoadingOverlay.of(context).hide();
           Utils.showPrimarySnackbar(context, res["message"],
               type: SnackType.success);
-          final read=Provider.of<SMainScreenController>(context,listen: false);
-          read.onNavigation(0, SSelectedProductView(
-            isRefresh: true,
-            categoryId: selectedCategory,
-          ), context);
+          final read =
+              Provider.of<SMainScreenController>(context, listen: false);
+          read.onNavigation(
+              0,
+              SSelectedProductView(
+                isRefresh: true,
+                categoryId: selectedCategory,
+              ),
+              context);
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(
@@ -305,14 +308,11 @@ class CustomProductController extends ChangeNotifier {
           //           ))),
           //       (Route<dynamic> route) => false,
           // );
-
-        }
-        else{
+        } else {
           LoadingOverlay.of(context).hide();
-          Utils.showPrimarySnackbar(context,res["message"],
+          Utils.showPrimarySnackbar(context, res["message"],
               type: SnackType.error);
         }
-
       } else {
         LoadingOverlay.of(context).hide();
         Utils.showPrimarySnackbar(context, res["message"],

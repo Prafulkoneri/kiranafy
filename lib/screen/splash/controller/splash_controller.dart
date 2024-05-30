@@ -55,12 +55,16 @@ class SplashController extends ChangeNotifier {
       print("BearerToken${pref.getString("token")}");
       print(pref.getString("status"));
       if (pref.getString("status") == "numberRegistered") {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const ShopRegistrationView()));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ShopRegistrationView()));
       }
       if (pref.getString("status") == "shopRegistered") {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const SKycVerificationView()));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SKycVerificationView()));
       }
       if (pref.getString("status") == "kycUploaded") {
         Navigator.pushReplacement(
@@ -75,8 +79,8 @@ class SplashController extends ChangeNotifier {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    const SShopConfigurationView(initialShopConfigration: true)));
+                builder: (context) => const SShopConfigurationView(
+                    initialShopConfigration: true)));
       }
       if (pref.getString("status") == "customerLoggedIn") {
         final read = Provider.of<MainScreenController>(context, listen: false);
@@ -93,8 +97,10 @@ class SplashController extends ChangeNotifier {
         );
       }
       if (pref.getString("status") == null) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const OnBoardingScreenView()));
       }
 
       if (isUpdateRequired) {
@@ -119,12 +125,16 @@ class SplashController extends ChangeNotifier {
           );
         }
         if (pref.getString("status") == "numberRegistered") {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const ShopRegistrationView()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ShopRegistrationView()));
         }
         if (pref.getString("status") == "shopRegistered") {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const SKycVerificationView()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SKycVerificationView()));
         }
         if (pref.getString("status") == "kycUploaded") {
           Navigator.pushReplacement(
@@ -139,8 +149,8 @@ class SplashController extends ChangeNotifier {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      const SShopConfigurationView(initialShopConfigration: true)));
+                  builder: (context) => const SShopConfigurationView(
+                      initialShopConfigration: true)));
         }
         if (pref.getString("status") == "loggedIn") {
           Navigator.pushReplacement(
@@ -166,8 +176,10 @@ class SplashController extends ChangeNotifier {
           );
         }
         if (pref.getString("status") == null) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const OnBoardingScreenView()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const OnBoardingScreenView()));
         }
       }
     });
@@ -194,8 +206,7 @@ class SplashController extends ChangeNotifier {
           print("true");
           isUpdateRequired = true;
           notifyListeners();
-        }
-        else {
+        } else {
           isUpdateRequired = false;
         }
         notifyListeners();

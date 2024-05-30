@@ -44,7 +44,6 @@ class SAllRecommandedProductsController extends ChangeNotifier {
     await getAllRecommandedProducts(context, id);
     notifyListeners();
   }
-
   void showLoader(value) {
     isLoading = value;
     notifyListeners();

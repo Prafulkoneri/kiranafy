@@ -60,7 +60,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.w),
         child: PrimaryAppBar(
-          isBackButtonEnabled: false,
+          isBackButtonEnabled: true,
           title: "Profile",
           onActionTap: () {},
         ),
@@ -645,7 +645,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                 onTap: () {
                   if (Platform.isAndroid) {
                     Share.share(
-                        'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                        'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en&gl=US');
                   } else {
                     Share.share(
                         'Find your nearby Kirana Store here and shop online, download the Local Supermart app now https://apps.apple.com/us/app/local-supermart/id6451146831');
@@ -722,7 +722,7 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
               GestureDetector(
                 onTap: () async {
                   LaunchReview.launch(
-                      androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                      androidAppId: "com.kirana_fy&hl=en&gl=US",
                       iOSAppId: "6451146831");
                 },
                 child: Container(

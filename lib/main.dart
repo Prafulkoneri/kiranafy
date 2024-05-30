@@ -96,32 +96,11 @@ final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 String? selectedNotificationPayload;
 
-// class ReceivedNotification {
-//   ReceivedNotification({
-//     required this.id,
-//     required this.title,
-//     required this.body,
-//     required this.image,
-//     required this.payload,
-//   });
-
-//   final int id;
-//   final String title;
-//   final String body;
-//   final String image;
-//   final String payload;
-// }
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("common baby");
 }
-
-// void backgroundFetchHeadlessTask( task) async {
-//   String taskId = task.taskId;
-//   print('[BackgroundFetch] Headless event received.');
-//   BackgroundFetch.finish(taskId);
-// }
 
 Future<void> initNotification(context) async {
   print("helloo init notification");
@@ -142,7 +121,6 @@ Future<void> initNotification(context) async {
     print(payload);
     print("hello allllllll");
 
-    // Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context)=>HomeScreenView(refreshPage: false,)));
     if (payload != null) {
       if (payload.endsWith(".pdf")) {
         print("its a pdf");
@@ -155,9 +133,7 @@ Future<void> initNotification(context) async {
             Provider.of<MainScreenController>(context, listen: false);
 
         var res = jsonDecode(payload);
-        // print("common baby");
-        // print(res["data"]["user_type"]);
-        // print("common baby");
+
         if (res["data"]["notification_type"] == "order") {
           if (res["data"]["user_type"] == "customer") {
             readCustomer.onOrderTypeNotification(
@@ -195,8 +171,7 @@ void main() async {
   print("lets go");
   print("void main");
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
   if (Platform.isIOS) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -212,10 +187,6 @@ void main() async {
   await FireBaseApi().initNotification();
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  // FlutterLocalNotificationsPlugin();
-  // initNotification(navigatorKey.currentState?.context);
 
   runApp(
     MultiProvider(
@@ -358,34 +329,6 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    // FirebaseMessaging.onMessage.listen((message) async {
-    //   @pragma('vm:entry-point')
-    //   final notification = message.notification;
-    //   if (notification == null) return;
-    //   final http.Response response = await http.get(Uri.parse(
-    //       "http://thewowstyle.com/wp-content/uploads/2015/01/nature-images.jpg"));
-    //   BigPictureStyleInformation bigPictureStyleInformation =
-    //   BigPictureStyleInformation(
-    //     ByteArrayAndroidBitmap.fromBase64String(
-    //         base64Encode(response.bodyBytes)),
-    //     largeIcon: ByteArrayAndroidBitmap.fromBase64String(
-    //         base64Encode(response.bodyBytes)),
-    //   );
-    //   // _showNotification();
-    //   _localNotification.show(
-    //       notification.hashCode,
-    //       notification.title,
-    //       notification.body,
-    //       // notification.
-    //       NotificationDetails(
-    //           android: AndroidNotificationDetails(
-    //               androidChannel.id, androidChannel.name,
-    //               channelDescription: androidChannel.description,
-    //               styleInformation: bigPictureStyleInformation,
-    //               icon: '@mipmap/ic_launcher')),
-    //       payload: jsonEncode(message.toMap()));
-    // });
-
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       print("void main");
       print(message.data);
@@ -489,19 +432,6 @@ class _MyAppState extends State<MyApp> {
         payload: '$savePath');
   }
 
-////Invoice/////////////////
-//   void fireBaseApi() async {
-//     await firebaseMessaging.requestPermission();
-//
-//     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-//       print("onMessageOpenedApp: $message");
-//     });
-//     FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
-//       print("onBackgroundMessage: $message");
-//     });
-//   }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -514,8 +444,8 @@ class _MyAppState extends State<MyApp> {
 
     return
         //  ChangeNotifierProvider(
-        //     create: (context) => ConnectivityProvider(),
-        //     child:
+        // create: (context) => ConnectivityProvider(),
+        // child:
         ScreenUtilInit(
             useInheritedMediaQuery: true,
             designSize: const Size(360, 690),
@@ -544,7 +474,7 @@ class _MyAppState extends State<MyApp> {
                               child: child!,
                             );
                           },
-                          title: 'Local Supermart',
+                          title: 'Kiranafy',
                           theme: ThemeData(
                             primarySwatch: Colors.blue,
                             fontFamily: 'dm_sans_regular',
@@ -565,160 +495,3 @@ class _MyAppState extends State<MyApp> {
             );
   }
 }
-// import 'dart:io';
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_share_me/flutter_share_me.dart';
-// import 'package:image_picker/image_picker.dart';
-
-// ///sharing platform
-// enum Share {
-//   facebook,
-//   messenger,
-//   twitter,
-//   whatsapp,
-//   whatsapp_personal,
-//   whatsapp_business,
-//   share_system,
-//   share_instagram,
-//   share_telegram
-// }
-
-// void main() => runApp(MyApp());
-
-// class MyApp extends StatefulWidget {
-//   @override
-//   _MyAppState createState() => _MyAppState();
-// }
-
-// class _MyAppState extends State<MyApp> {
-//   File? file;
-//   ImagePicker picker = ImagePicker();
-//   bool videoEnable = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: const Text('Plugin example app'),
-//         ),
-//         body: Container(
-//           width: double.infinity,
-//           child: Column(
-//             children: <Widget>[
-//               const SizedBox(height: 30),
-//               ElevatedButton(onPressed: pickImage, child: Text('Pick Image')),
-//               ElevatedButton(onPressed: pickVideo, child: Text('Pick Video')),
-//               ElevatedButton(
-//                   onPressed: () => onButtonTap(Share.twitter),
-//                   child: const Text('share to twitter')),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.whatsapp),
-//                 child: const Text('share to WhatsApp'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.whatsapp_business),
-//                 child: const Text('share to WhatsApp Business'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.whatsapp_personal),
-//                 child: const Text('share to WhatsApp Personal'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.facebook),
-//                 child: const Text('share to  FaceBook'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.messenger),
-//                 child: const Text('share to  Messenger'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.share_instagram),
-//                 child: const Text('share to Instagram'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.share_telegram),
-//                 child: const Text('share to Telegram'),
-//               ),
-//               ElevatedButton(
-//                 onPressed: () => onButtonTap(Share.share_system),
-//                 child: const Text('share to System'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-
-//   Future<void> pickImage() async {
-//     final XFile? xFile = await picker.pickImage(source: ImageSource.gallery);
-//     print(xFile);
-//     if (xFile != null) {
-//       file = File(xFile.path);
-//       setState(() {
-//         videoEnable = false;
-//       });
-//     }
-//   }
-
-//   Future<void> pickVideo() async {
-//     final XFile? xFile = await picker.pickVideo(source: ImageSource.gallery);
-//     print(xFile);
-//     if (xFile != null) {
-//       file = File(xFile.path);
-//       setState(() {
-//         videoEnable = true;
-//       });
-//     }
-//   }
-
-//   Future<void> onButtonTap(Share share) async {
-//     String msg =
-//         'Flutter share is great!!\n Check out full example at https://pub.dev/packages/flutter_share_me';
-//     String url = 'https://pub.dev/packages/flutter_share_me';
-
-//     String? response;
-//     final FlutterShareMe flutterShareMe = FlutterShareMe();
-//     switch (share) {
-//       case Share.facebook:
-//         response = await flutterShareMe.shareToFacebook(url: url, msg: msg);
-//         break;
-//       case Share.messenger:
-//         response = await flutterShareMe.shareToMessenger(url: url, msg: msg);
-//         break;
-//       case Share.twitter:
-//         response = await flutterShareMe.shareToTwitter(url: url, msg: msg);
-//         break;
-//       case Share.whatsapp:
-//         if (file != null) {
-//           response = await flutterShareMe.shareToWhatsApp(
-//               imagePath: file!.path,
-//               fileType: videoEnable ? FileType.video : FileType.image);
-//         } else {
-//           response = await flutterShareMe.shareToWhatsApp(msg: msg);
-//         }
-//         break;
-//       case Share.whatsapp_business:
-//         response = await flutterShareMe.shareToWhatsApp(msg: msg);
-//         break;
-//       case Share.share_system:
-//         response = await flutterShareMe.shareToSystem(msg: msg);
-//         break;
-//       case Share.whatsapp_personal:
-//         response = await flutterShareMe.shareWhatsAppPersonalMessage(
-//             message: msg, phoneNumber: 'phone-number-with-country-code');
-//         break;
-//       case Share.share_instagram:
-//         response = await flutterShareMe.shareToInstagram(
-//             filePath: file!.path,
-//             fileType: videoEnable ? FileType.video : FileType.image);
-//         break;
-//       case Share.share_telegram:
-//         response = await flutterShareMe.shareToTelegram(msg: msg);
-//         break;
-//     }
-//     debugPrint(response);
-//   }
-// }

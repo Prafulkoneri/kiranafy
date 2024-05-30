@@ -37,10 +37,20 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(
+                  height: 40.w,
+                ),
+                // Image.asset(
+                //   "assets/images/splash_logo.png",
+                //   height: 227.36.w,
+                //   width: 180.81.w,
+                //   fit: BoxFit.fill,
+                // ),
                 Image.asset(
-                  "assets/images/splash_logo.png",
-                  height: 227.36.w,
-                  width: 180.81.w,
+                  // "assets/images/kiranafy-logo-v14.png",
+                  "assets/images/kiranafy-logo-new.png",
+                  height: 200.36.w,
+                  // width: 180.81.w,
                   fit: BoxFit.fill,
                 ),
               ],

@@ -90,34 +90,63 @@ class _CustomerSignInViewState extends State<CustomerSignInView> {
                     height: 140.w,
                   ),
                   Image.asset(
-                    "assets/images/splash4.png",
+                    "assets/images/kiranafy-logo-icon.png",
                     height: 112.w,
                     width: 60.w,
                   ),
-                  SizedBox(
-                    height: 5.w,
-                  ),
+                  // SizedBox(
+                  //   height: 5.w,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "LOCAL",
+                        "Kirana",
                         style: TextStyle(
-                            fontSize: 20.sp,
+                            // letterSpacing: 2,
+                            fontSize: 25.sp,
                             fontWeight: FontWeight.w600,
                             color: SplashText),
                       ),
                       Text(
-                        " SUPERMART",
+                        "fy",
                         style: TextStyle(
-                            fontSize: 20.sp,
+                            // letterSpacing: 2,
+                            fontSize: 25.sp,
                             fontWeight: FontWeight.w600,
                             color: SplashText1),
                       ),
                     ],
                   ),
+                  // Image.asset(
+                  //   "assets/images/splash4.png",
+                  //   height: 112.w,
+                  //   width: 60.w,
+                  // ),
+                  // SizedBox(
+                  //   height: 5.w,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Text(
+                  //       "LOCAL",
+                  //       style: TextStyle(
+                  //           fontSize: 20.sp,
+                  //           fontWeight: FontWeight.w600,
+                  //           color: SplashText),
+                  //     ),
+                  //     Text(
+                  //       " SUPERMART",
+                  //       style: TextStyle(
+                  //           fontSize: 20.sp,
+                  //           fontWeight: FontWeight.w600,
+                  //           color: SplashText1),
+                  //     ),
+                  //   ],
+                  // ),
                   Text(
-                    "Hameshase aapke sath....",
+                    "Hamesha Se Aapke Sath....",
                     style: TextStyle(
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w400,

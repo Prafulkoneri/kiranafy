@@ -1,4 +1,4 @@
-package com.lsm.local_supper_market
+package com.kirana_fy
 
 import io.flutter.embedding.android.FlutterActivity
 

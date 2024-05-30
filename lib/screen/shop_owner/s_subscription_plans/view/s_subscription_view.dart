@@ -1695,68 +1695,68 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                                     SizedBox(
                                       height: 5.h,
                                     ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      // mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        PrimaryCheckBox(
-                                          value: watch.isSelectedPaymentUpi,
-                                          onChanged: (value) {
-                                            read.onPaymentModeSelected(value);
-                                          },
-                                        ),
-                                        Text(
-                                          'UPI ID - ',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                // letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                        SelectableText(
-                                          'dhanashree203@oksbi ',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                // letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      // mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        PrimaryCheckBox(
-                                            onChanged: (value) {
-                                              read.onOrderedButNotFavSelected(
-                                                  context);
-                                            },
-                                            value: watch.isQrCodeSeleted
-                                            // watch.selectAddonServicesList[
-                                            //     index],
-                                            ),
-                                        Text(
-                                          'QR Code',
-                                          style: GoogleFonts.dmSans(
-                                            textStyle: TextStyle(
-                                                color: Black1,
-                                                // letterSpacing: .5,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    // Row(
+                                    //   crossAxisAlignment:
+                                    //       CrossAxisAlignment.start,
+                                    //   // mainAxisAlignment: MainAxisAlignment.start,
+                                    //   children: [
+                                    //     PrimaryCheckBox(
+                                    //       value: watch.isSelectedPaymentUpi,
+                                    //       onChanged: (value) {
+                                    //         read.onPaymentModeSelected(value);
+                                    //       },
+                                    //     ),
+                                    //     Text(
+                                    //       'UPI ID - ',
+                                    //       style: GoogleFonts.dmSans(
+                                    //         textStyle: TextStyle(
+                                    //             color: Black1,
+                                    //             // letterSpacing: .5,
+                                    //             fontSize: 14.sp,
+                                    //             fontWeight: FontWeight.w400),
+                                    //       ),
+                                    //     ),
+                                    //     SelectableText(
+                                    //       'dhanashree203@oksbi ',
+                                    //       style: GoogleFonts.dmSans(
+                                    //         textStyle: TextStyle(
+                                    //             color: Black1,
+                                    //             // letterSpacing: .5,
+                                    //             fontSize: 14.sp,
+                                    //             fontWeight: FontWeight.w700),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // SizedBox(
+                                    //   height: 10.h,
+                                    // ),
+                                    // Row(
+                                    //   crossAxisAlignment:
+                                    //       CrossAxisAlignment.start,
+                                    //   // mainAxisAlignment: MainAxisAlignment.start,
+                                    //   children: [
+                                    //     PrimaryCheckBox(
+                                    //         onChanged: (value) {
+                                    //           read.onOrderedButNotFavSelected(
+                                    //               context);
+                                    //         },
+                                    //         value: watch.isQrCodeSeleted
+                                    //         // watch.selectAddonServicesList[
+                                    //         //     index],
+                                    //         ),
+                                    //     Text(
+                                    //       'QR Code',
+                                    //       style: GoogleFonts.dmSans(
+                                    //         textStyle: TextStyle(
+                                    //             color: Black1,
+                                    //             // letterSpacing: .5,
+                                    //             fontSize: 14.sp,
+                                    //             fontWeight: FontWeight.w400),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
                                     SizedBox(
                                       height: 10.h,
                                     ),
@@ -1800,74 +1800,74 @@ class _SSubscriptionScreenViewState extends State<SSubscriptionScreenView> {
                               SizedBox(
                                 height: 31.h,
                               ),
-                              Visibility(
-                                visible: watch.isQrCodeSeleted,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "assets/images/new_qrcode.jpg",
-                                      width: 200.w,
-                                    )
-                                  ],
-                                ),
-                              ),
+                              // Visibility(
+                              //   visible: watch.isQrCodeSeleted,
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.center,
+                              //     children: [
+                              //       Image.asset(
+                              //         "assets/images/new_qrcode.jpg",
+                              //         width: 200.w,
+                              //       )
+                              //     ],
+                              //   ),
+                              // ),
                               SizedBox(
                                 height: 20.h,
                               ),
-                              watch.isSelectedPaymentOnline == false
-                                  ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 19.w, right: 19.w),
-                                          child: Text(
-                                            'Payment Transaction ID ',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: Black,
-                                                  letterSpacing: .5,
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 19.w, right: 19.w),
-                                          // height: 48.h,
-                                          // width: 352.w,
-                                          child: PrimarySTextFormField(
-                                            controller:
-                                                watch.transactionIdController,
-                                            hintText: "Enter Transaction ID",
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 19.w, right: 19.w),
-                                          child: Text(
-                                            'Copy and paste your payment successful transaction details on above input box',
-                                            style: GoogleFonts.dmSans(
-                                              textStyle: TextStyle(
-                                                  color: grey8,
-                                                  letterSpacing: .5,
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Container(),
+                              // watch.isSelectedPaymentOnline == false
+                              //     ? Column(
+                              //         crossAxisAlignment:
+                              //             CrossAxisAlignment.start,
+                              //         children: [
+                              //           Container(
+                              //             padding: EdgeInsets.only(
+                              //                 left: 19.w, right: 19.w),
+                              //             child: Text(
+                              //               'Payment Transaction ID ',
+                              //               style: GoogleFonts.dmSans(
+                              //                 textStyle: TextStyle(
+                              //                     color: Black,
+                              //                     letterSpacing: .5,
+                              //                     fontSize: 14.sp,
+                              //                     fontWeight: FontWeight.w500),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //           SizedBox(
+                              //             height: 10.h,
+                              //           ),
+                              //           Container(
+                              //             padding: EdgeInsets.only(
+                              //                 left: 19.w, right: 19.w),
+                              //             // height: 48.h,
+                              //             // width: 352.w,
+                              //             child: PrimarySTextFormField(
+                              //               controller:
+                              //                   watch.transactionIdController,
+                              //               hintText: "Enter Transaction ID",
+                              //             ),
+                              //           ),
+                              //           SizedBox(
+                              //             height: 10.h,
+                              //           ),
+                              //           Container(
+                              //             padding: EdgeInsets.only(
+                              //                 left: 19.w, right: 19.w),
+                              //             child: Text(
+                              //               'Copy and paste your payment successful transaction details on above input box',
+                              //               style: GoogleFonts.dmSans(
+                              //                 textStyle: TextStyle(
+                              //                     color: grey8,
+                              //                     letterSpacing: .5,
+                              //                     fontSize: 12.sp,
+                              //                     fontWeight: FontWeight.w500),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       )
+                              //     : Container(),
                               SizedBox(
                                 height: 31.h,
                               ),

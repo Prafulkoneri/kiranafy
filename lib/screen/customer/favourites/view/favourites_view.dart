@@ -166,7 +166,8 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                 child: SizedBox(
                                   child: ListView.builder(
                                       // scrollDirection: Axis.vertical,p
-                                      physics: const NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       // physics: BouncingScrollPhysics(),
                                       shrinkWrap: true,
                                       itemCount: watch.favShopList?.length ?? 0,
@@ -335,10 +336,10 @@ class _CFavouritesViewState extends State<CFavouritesView> {
                                                                 decoration:
                                                                     BoxDecoration(
                                                                   color: yellow,
-                                                                  borderRadius:
-                                                                      const BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              15)),
+                                                                  borderRadius: const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          15)),
                                                                 ),
                                                                 child: Row(
                                                                   mainAxisAlignment:

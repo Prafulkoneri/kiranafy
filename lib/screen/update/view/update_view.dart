@@ -98,25 +98,25 @@ class _UpdateViewState extends State<UpdateView> {
                       borderRadius: 15,
                       color: const Color(0xff4689EC),
                       onTap: () async {
-if(Platform.isAndroid){
-  if (await canLaunch(
-      "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN")) {
-    await launch(
-        "https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN");
-  } else {
-    throw 'Could not launch https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en-IN';
-  }
-
-}else{
-  await launch( "https://apps.apple.com/app/id6451146831");
-}
+                        if (Platform.isAndroid) {
+                          if (await canLaunch(
+                              "https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en-IN")) {
+                            await launch(
+                                "https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en-IN");
+                          } else {
+                            throw 'Could not launch https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en-IN';
+                          }
+                        } else {
+                          await launch(
+                              "https://apps.apple.com/app/id6451146831");
+                        }
 
                         // LaunchReview.launch(
                         //     androidAppId:
-                        //         "com.lsm.local_supper_market&hl=en&gl=US",
+                        //         "com.kirana_fy&hl=en&gl=US",
                         //     iOSAppId: "585027354");
                         // LaunchReview.launch(
-                        //     androidAppId: "com.lsm.local_supper_market&hl=en&gl=US",
+                        //     androidAppId: "com.kirana_fy&hl=en&gl=US",
                         //     iOSAppId: "6451146831");
                       },
                       textColor: Colors.white,

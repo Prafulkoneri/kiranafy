@@ -78,18 +78,20 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                             onTap: () {},
                             child: Image(
                               image: const AssetImage(
-                                "assets/images/logo.png",
+                                // "assets/images/kiranafy-logo-verticle.png",
+                                "assets/images/kiranafy-logo-verticle_new.png",
                               ),
                               fit: BoxFit.fill,
-                              width: 150.w,
-                              height: 50.w,
+                              width: 140.w,
+                              height: 40.w,
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
                               readMain.onNavigation(
                                   0,
-                                  const NotificationsScreenView(route: "dashboard"),
+                                  const NotificationsScreenView(
+                                      route: "dashboard"),
                                   context);
                               readMain.hideBottomNavigationBar();
                             },
@@ -1691,10 +1693,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                               BorderRadius
                                                                   .circular(
                                                                       7.w),
-                                                          color:
-                                                              const Color(0xff000000)
-                                                                  .withOpacity(
-                                                                      0.35),
+                                                          color: const Color(
+                                                                  0xff000000)
+                                                              .withOpacity(
+                                                                  0.35),
                                                         ),
                                                         child: Row(
                                                           // mainAxisAlignment:
@@ -1866,10 +1868,10 @@ class _ShopDashBoardViewState extends State<ShopDashBoardView> {
                                                               BorderRadius
                                                                   .circular(
                                                                       7.w),
-                                                          color:
-                                                              const Color(0xff000000)
-                                                                  .withOpacity(
-                                                                      0.35),
+                                                          color: const Color(
+                                                                  0xff000000)
+                                                              .withOpacity(
+                                                                  0.35),
                                                         ),
                                                         child: Row(
                                                           // mainAxisAlignment:

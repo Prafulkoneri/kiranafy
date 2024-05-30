@@ -243,7 +243,7 @@ class _ReferAndEarnViewState extends State<ReferAndEarnView> {
                         onPress: () {
                           if (Platform.isAndroid) {
                             Share.share(
-                                'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount. https://play.google.com/store/apps/details?id=com.lsm.local_supper_market&hl=en&gl=US');
+                                'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount. https://play.google.com/store/apps/details?id=com.kirana_fy&hl=en&gl=US');
                           } else {
                             Share.share(
                                 'I’m inviting you to register and list your shop on Local Supermart, an online platform where customers can buy online from your kirana shop. Here’s my referral code -${watch.referAndEarnCouponDetails?.customerReferralCode}- just enter it where you select the subscription plan and get a discount on the plan amount https://apps.apple.com/us/app/local-supermart/id6451146831');
